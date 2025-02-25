@@ -4,7 +4,7 @@ on:
     - cron: '0 5 * * *'
 jobs:
   sync-files:
-    if: github.repository == 'micronaut-projects/micronaut-project-template'
+    if: github.repository == 'micronaut-projects/micronaut-projectgen'
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false

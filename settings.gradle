@@ -9,13 +9,14 @@ plugins {
     id 'io.micronaut.build.shared.settings' version '7.3.2'
 }
 
-rootProject.name = 'project-template-parent'
+rootProject.name = 'projectgen'
 
-include 'project-template'
-include 'project-template-bom'
+include 'projectgen-core'
+include 'projectgen-bom'
 
 enableFeaturePreview 'TYPESAFE_PROJECT_ACCESSORS'
 
 micronautBuild {
     importMicronautCatalog()
+    importMicronautCatalog("micronaut-serde")
 }
