@@ -1,9 +1,0 @@
-plugins {
-    id 'io.micronaut.build.internal.projectgen-base'
-    id "io.micronaut.build.internal.module"
-}
-micronautBuild {
-    binaryCompatibility {
-        enabled = false
-    }
-}
