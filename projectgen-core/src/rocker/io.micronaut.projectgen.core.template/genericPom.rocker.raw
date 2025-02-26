@@ -1,0 +1,25 @@
+@import io.micronaut.projectgen.core.buildtools.maven.ParentPom
+@import io.micronaut.projectgen.core.buildtools.maven.MavenBuild
+@import io.micronaut.projectgen.core.buildtools.maven.MavenDependency
+@import io.micronaut.projectgen.core.buildtools.Property;
+@args (ParentPom parentPom, MavenBuild mavenBuild)
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+@if (parentPom != null) {
+@io.micronaut.projectgen.core.template.parentPom.template(parentPom)
+}
+  <artifactId>@mavenBuild.getArtifactId()</artifactId>
+@io.micronaut.projectgen.core.template.mavenProperties.template(mavenBuild.getProperties())
+  <dependencies>
+@for (MavenDependency f : mavenBuild.getDependencies(false)) {
+@io.micronaut.projectgen.core.template.mavenDependency.template(f.getGroupId(), f.getArtifactId(), f.getMavenScope().toString(), f.getVersion(), false, f.getExclusions())
+}
+  </dependencies>
+  <build>
+    <plugins>
+@mavenBuild.renderPlugins(6)
+    </plugins>
+  </build>
+</project>

@@ -1,0 +1,56 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.validation
+displayName: Adds Micronaut Validation dependencies
+recipeList:
+  - io.micronaut.starter.feature.validation.documentation.micronaut
+  - io.micronaut.starter.feature.dependencies.jakarta.validation.api
+  - io.micronaut.starter.feature.dependencies.gradle.micronaut.validation.processor
+  - io.micronaut.starter.feature.dependencies.maven.micronaut.validation.processor
+  - io.micronaut.starter.feature.dependencies.micronaut.validation
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.validation.documentation.micronaut
+displayName: Append a link to the Micronaut Validation documentation in the README.md
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-validation/latest/guide/
+      appendNewline: true
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.dependencies.jakarta.validation.api
+displayName: Adds Jakarta Validation API as a compile dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: jakarta.validation
+      artifactId: jakarta.validation-api
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.dependencies.micronaut.validation
+displayName: Adds Micronaut Validation dependency to a Gradle or Maven Build
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.validation
+      artifactId: micronaut-validation
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.dependencies.maven.micronaut.validation.processor
+displayName: Adds Micronaut Validation annotation Processor to the Maven compiler plugin
+recipeList:
+  - org.openrewrite.maven.AddAnnotationProcessor:
+      groupId: io.micronaut.validation
+      artifactId: micronaut-validation-processor
+      version: ${micronaut.validation.version}
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.dependencies.gradle.micronaut.validation.processor
+displayName: Adds Micronaut Validation Processor dependency to a Gradle Build
+recipeList:
+  - org.openrewrite.gradle.AddDependency:
+      groupId: io.micronaut.validation
+      artifactId: micronaut-validation-processor
+      configuration: annotationProcessor

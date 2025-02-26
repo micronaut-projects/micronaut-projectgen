@@ -17,7 +17,12 @@ package io.micronaut.projectgen.core.options;
 
 /**
  * Include Defaults.
+ * @param <T> type
  */
 public interface IncludesDefaults<T> {
+    /**
+     *
+     * @return Defaults
+     */
     T getDefaults();
 }

@@ -1,17 +1,30 @@
 [versions]
 micronaut = "4.8.4"
+rewrite-recipe-bom = "3.2.0"
 micronaut-docs = "2.0.0"
 micronaut-test = "4.7.0"
 groovy = "4.0.24"
 spock = "2.3-groovy-4.0"
+apache-commons-compress = "1.27.1"
 
 micronaut-serialization = "2.14.0"
+micronaut-sourcegen = "1.7.0"
+rocker = "2.1.0"
 
 [libraries]
 # Core
 micronaut-core = { module = 'io.micronaut:micronaut-core-bom', version.ref = 'micronaut' }
 micronaut-serde = { module = "io.micronaut.serde:micronaut-serde-bom", version.ref = "micronaut-serialization" }
-
+micronaut-sourcegen = { module = "io.micronaut.sourcegen:micronaut-sourcegen-bom", version.ref = "micronaut-sourcegen" }
+rocker-runtime = { module = "com.fizzed:rocker-runtime", version.ref = "rocker" }
+apache-commons-compress = { module = "org.apache.commons:commons-compress", version.ref = "apache-commons-compress" }
+rewrite-recipe-bom = { module = "org.openrewrite.recipe:rewrite-recipe-bom", version.ref = "rewrite-recipe-bom" }
+rewrite-core = { module = "org.openrewrite:rewrite-core" }
+rewrite-properties = { module = "org.openrewrite:rewrite-properties" }
+rewrite-gradle = { module = "org.openrewrite:rewrite-gradle" }
+rewrite-java-dependencies = { module = "org.openrewrite.recipe:rewrite-java-dependencies" }
+rewrite-maven = { module = "org.openrewrite:rewrite-maven" }
+rewrite-java = { module = "org.openrewrite:rewrite-java" }
 [bundles]
 
 [plugins]

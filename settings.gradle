@@ -13,10 +13,15 @@ rootProject.name = 'projectgen'
 
 include 'projectgen-core'
 include 'projectgen-bom'
+include 'projectgen-openrewrite'
+include 'projectgen-springboot'
+include 'starter-openrewrite'
 
 enableFeaturePreview 'TYPESAFE_PROJECT_ACCESSORS'
 
 micronautBuild {
+    useStandardizedProjectNames=true
     importMicronautCatalog()
     importMicronautCatalog("micronaut-serde")
+    importMicronautCatalog("micronaut-sourcegen")
 }

@@ -1,7 +1,5 @@
 package io.micronaut.projectgen.core.options;
 
-import io.micronaut.projectgen.core.Project;
-import io.micronaut.projectgen.core.utils.NameUtils;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;

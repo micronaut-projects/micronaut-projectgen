@@ -16,8 +16,8 @@
 package io.micronaut.projectgen.core.utils;
 
 import io.micronaut.core.util.StringUtils;
-import io.micronaut.projectgen.core.Project;
-import io.micronaut.projectgen.core.ProjectIdentifier;
+import io.micronaut.projectgen.core.generator.Project;
+import io.micronaut.projectgen.core.generator.ProjectIdentifier;
 
 import java.util.*;
 import java.util.regex.Pattern;

@@ -1,0 +1,5 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.openrewrite.recipes.FindApplicationProperties
+recipeList:
+  - org.openrewrite.FindSourceFiles:
+      filePattern: "**/application.properties"

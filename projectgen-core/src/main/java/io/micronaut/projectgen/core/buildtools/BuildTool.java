@@ -16,7 +16,7 @@
 package io.micronaut.projectgen.core.buildtools;
 
 import io.micronaut.core.annotation.NonNull;
-import io.micronaut.projectgen.core.Project;
+import io.micronaut.projectgen.core.generator.Project;
 import  io.micronaut.projectgen.core.buildtools.gradle.GradleDsl;
 
 import java.util.List;

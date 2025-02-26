@@ -1,0 +1,82 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.liquibase
+displayName: Adds Micronaut liquibase dependency in the compile classpath
+recipeList:
+  - io.micronaut.starter.feature.liquibase.configuration
+  - io.micronaut.starter.feature.liquibase.dependencies
+  - io.micronaut.starter.feature.liquibase.file.create.xml.changelog
+  - io.micronaut.starter.feature.liquibase.file.create.xml.changeset
+  - io.micronaut.starter.feature.liquibase.documentation.thirdparty
+  - io.micronaut.starter.feature.liquibase.documentation.micronaut
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.liquibase.documentation.thirdparty
+displayName: Append a link to the Micronaut Liquibase documentation in the README.md
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://www.liquibase.org/
+      appendNewline: true
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.liquibase.documentation.micronaut
+displayName: Append a link to the Micronaut Liquibase documentation in the README.md
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-liquibase/latest/guide/index.html
+      appendNewline: true
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.liquibase.file.create.xml.changelog
+displayName: Adds a Liquibase Changelog referencing a changeset
+recipeList:
+  - org.openrewrite.xml.CreateXmlFile:
+      relativeFileName: src/main/resources/db/liquibase-changelog.xml
+      fileContents: >
+        <?xml version="1.0" encoding="UTF-8"?>
+        <databaseChangeLog
+          xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                 http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+          <include file="changelog/01-schema.xml" relativeToChangelogFile="true"/>
+        </databaseChangeLog>
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.liquibase.file.create.xml.changeset
+displayName: Adds an empty Liquibase Changeset
+recipeList:
+  - org.openrewrite.xml.CreateXmlFile:
+      relativeFileName: src/main/resources/db/changelog/01-schema.xml
+      fileContents: >
+        <?xml version="1.0" encoding="UTF-8"?>
+
+        <databaseChangeLog
+          xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                 http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+          <changeSet id="01" author="username">
+          </changeSet>
+        </databaseChangeLog>
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.liquibase.configuration
+displayName: Adds Micronaut liquibase configuration
+preconditions:
+  - io.micronaut.starter.openrewrite.recipes.FindApplicationProperties
+recipeList:
+  - org.openrewrite.properties.AddProperty:
+      property: liquibase.datasources.default.change-log
+      value: classpath:db/liquibase-changelog.xml
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.liquibase.dependencies
+displayName: Adds Micronaut liquibase dependency in the compile classpath
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.liquibase
+      artifactId: micronaut-liquibase
+      configuration: implementation
+      scope: compile

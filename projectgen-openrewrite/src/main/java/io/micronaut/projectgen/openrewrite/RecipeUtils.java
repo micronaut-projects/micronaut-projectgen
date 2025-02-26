@@ -13,35 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.projectgen.core;
+package io.micronaut.projectgen.openrewrite;
+
+import io.micronaut.core.annotation.Internal;
+import org.openrewrite.Recipe;
 
 /**
- * Project Identifier.
+ * Utils class to work with {@link Recipe}.
  */
-public class ProjectIdentifier {
-    private final String packageName;
-    private final String name;
-
-    public ProjectIdentifier(String packageName, String name) {
-        packageName = packageName.replaceAll("\\.*$", "");
-        this.packageName = packageName;
-        this.name = name;
+@Internal
+public final class RecipeUtils {
+    private RecipeUtils() {
     }
 
-    /**
-     *
-     * @return Package Name
-     */
-    public String getPackageName() {
-        return packageName;
+    public static Recipe resolveRecipe(Recipe recipe) {
+        return recipe instanceof Recipe.DelegatingRecipe delegatingRecipe
+                ? delegatingRecipe.getDelegate()
+                : recipe;
     }
-
-    /**
-     *
-     * @return Project Name
-     */
-    public String getName() {
-        return name;
-    }
-
 }
