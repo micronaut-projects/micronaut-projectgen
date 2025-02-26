@@ -31,10 +31,6 @@ import java.util.Map;
 public class DefaultRepositoryResolver implements RepositoryResolver {
     private Map<String, Repository> repositories = new HashMap<>();
 
-    public DefaultRepositoryResolver() {
-        addRepository(new MavenCentral());
-    }
-
     @Override
     @NonNull
     public List<Repository> resolveRepositories(@NonNull GeneratorContext generatorContext) {

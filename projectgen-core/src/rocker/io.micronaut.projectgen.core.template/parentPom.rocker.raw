@@ -1,7 +1,6 @@
+@option discardLogicWhitespace=true
 @import io.micronaut.projectgen.core.buildtools.maven.ParentPom
-
 @args (ParentPom parentPom)
-
   <parent>
      <groupId>@(parentPom.groupId())</groupId>
      <artifactId>@(parentPom.artifactId())</artifactId>

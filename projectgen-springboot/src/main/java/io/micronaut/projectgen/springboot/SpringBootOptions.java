@@ -23,6 +23,8 @@ import java.util.*;
 
 /**
  * Options for generating a project.
+ * @param group
+ * @param version
  * @param operatingSystem Operating System
  * @param name name
  * @param packageName packageName
@@ -35,6 +37,8 @@ import java.util.*;
  */
 @Builder
 public record SpringBootOptions(
+    String group,
+    String version,
     OperatingSystem operatingSystem,
     String name,
     String packageName,

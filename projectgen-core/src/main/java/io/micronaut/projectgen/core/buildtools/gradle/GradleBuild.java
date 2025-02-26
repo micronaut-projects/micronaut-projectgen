@@ -166,8 +166,14 @@ public class GradleBuild {
      */
     @NonNull
     public String renderRepositories() {
-        return WritableUtils.renderWritableList(repositories.stream()
-            .map(Writable.class::cast).collect(Collectors.toList()), 4);
+        String result = WritableUtils.renderWritableList(repositories.stream()
+            .map(Writable.class::cast)
+            .toList(), 4);
+
+        if (result.endsWith("\n")) {
+            return result.substring(0, result.lastIndexOf("\n"));
+        }
+        return result;
     }
 
     /**

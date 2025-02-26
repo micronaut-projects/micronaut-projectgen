@@ -38,7 +38,7 @@ import java.util.Set;
 /**
  * Gradle Feature.
  */
-@Requires(property = "micronaut.starter.feature.gradle.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
+@Requires(property = "micronaut.projectgen.core.features.gradle.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Gradle implements BuildFeature {
     private static final String SLASH = "/";
@@ -57,7 +57,6 @@ public class Gradle implements BuildFeature {
     private static final String WRAPPER_PROPS = GRADLE + SLASH  + GRADLE_VERSION + SLASH + WRAPPER_PROPS_PATH;
     private static final String GRADLEW = GRADLE + SLASH  + GRADLE_VERSION + SLASH + GRADLEW_PATH;
     private static final String GRADLEW_BAT = GRADLE + SLASH  + GRADLE_VERSION + SLASH + GRADLEW_BAT_PATH;
-    private static final String DEFAULT_VERSION = "0.1";
     private static final String NAME_GRADLE_WRAPPER_JAR = "gradleWrapperJar";
     private static final String NAME_GRADLE_WRAPPER_PROPERTIES = "gradleWrapperProperties";
     private static final String NAME_GRADLE_WRAPPER = "gradleWrapper";
@@ -108,7 +107,11 @@ public class Gradle implements BuildFeature {
     protected void generateBuildFiles(GeneratorContext generatorContext) {
         BuildTool buildTool = generatorContext.getOptions().buildTools().stream().filter(BuildTool::isGradle).findFirst().orElseThrow();
         GradleBuild build = createBuild(generatorContext);
-        RockerModel rockerModel = genericBuildGradle.template(generatorContext.getProject(), build, generatorContext.getFeatures().mainClass().orElse(null), DEFAULT_VERSION, generatorContext.getProject().getPackageName());
+        RockerModel rockerModel = genericBuildGradle.template(generatorContext.getProject(),
+            build,
+            generatorContext.getFeatures().mainClass().orElse(null),
+            generatorContext.getOptions().version(),
+            StringUtils.isNotEmpty(generatorContext.getOptions().group()) ? generatorContext.getOptions().group() : generatorContext.getProject().getPackageName());
         generatorContext.addTemplate(NAME_BUILD_GRADLE,
             new RockerTemplate(Template.ROOT, buildTool.getBuildFileName(), rockerModel));
         addSettingsFile(buildTool, generatorContext, build);

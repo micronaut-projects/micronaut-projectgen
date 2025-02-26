@@ -1,3 +1,4 @@
+@option discardLogicWhitespace=true
 @import io.micronaut.projectgen.core.buildtools.maven.ParentPom
 @import io.micronaut.projectgen.core.buildtools.maven.MavenBuild
 @import io.micronaut.projectgen.core.buildtools.maven.MavenDependency
@@ -10,7 +11,15 @@
 @if (parentPom != null) {
 @io.micronaut.projectgen.core.template.parentPom.template(parentPom)
 }
+@if (mavenBuild.getGroupId() != null) {
+  <groupId>@mavenBuild.getGroupId()</groupId>
+}
+@if (mavenBuild.getArtifactId() != null) {
   <artifactId>@mavenBuild.getArtifactId()</artifactId>
+}
+@if (mavenBuild.getVersion() != null) {
+  <version>@mavenBuild.getVersion()</version>
+}
 @io.micronaut.projectgen.core.template.mavenProperties.template(mavenBuild.getProperties())
   <dependencies>
 @for (MavenDependency f : mavenBuild.getDependencies(false)) {

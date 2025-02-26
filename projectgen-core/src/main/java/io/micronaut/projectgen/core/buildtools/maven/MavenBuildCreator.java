@@ -17,6 +17,7 @@ package io.micronaut.projectgen.core.buildtools.maven;
 
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.order.OrderUtil;
+import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.buildtools.*;
 import io.micronaut.projectgen.core.buildtools.dependencies.Coordinate;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
@@ -80,7 +81,11 @@ public class MavenBuildCreator {
             .sorted(OrderUtil.COMPARATOR)
             .toList();
 
-        return new MavenBuild(generatorContext.getProject().getName(),
+        return new MavenBuild(generatorContext.getOptions().group(),
+            StringUtils.isNotEmpty(generatorContext.getOptions().artifact())
+                ? generatorContext.getOptions().artifact()
+                : generatorContext.getProject().getName(),
+            generatorContext.getOptions().version(),
             annotationProcessorsCoordinates,
             testAnnotationProcessorsCoordinates,
             dependencies,

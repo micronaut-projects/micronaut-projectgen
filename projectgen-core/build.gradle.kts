@@ -16,6 +16,7 @@ dependencies {
 rocker {
     configurations {
         create("main") {
+            optimize.set(true)
             templateDir.set(file("src/rocker"))
             outputDir.set(file("src/generated/rocker"))
         }
@@ -27,3 +28,12 @@ spotless {
         targetExclude("src/**/*.rocker.raw")
     }
 }
+
+val generateCoordinateUtils = tasks.register<io.micronaut.projectgen.coordinates.CoordinatesSourceGenerator>("generateCoordinateUtils") {
+    packageName.set("io.micronaut.projectgen.build.dependencies")
+    outputDirectory.set(layout.buildDirectory.dir("generated-sources/coordinates"))
+    versionCatalog.set(project.extensions.getByType<VersionCatalogsExtension>().named("templateLibs"))
+    lineSeparator.set(System.lineSeparator())
+}
+
+sourceSets["main"].java.srcDir(generateCoordinateUtils)

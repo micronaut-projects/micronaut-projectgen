@@ -75,6 +75,11 @@ public class Maven implements BuildFeature {
         return true;
     }
 
+    @Override
+    public String getThirdPartyDocumentation() {
+        return "https://maven.apache.org/guides/index.html";
+    }
+
     /**
      *
      * @param generatorContext Generator Context

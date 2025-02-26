@@ -1,3 +1,4 @@
+@option discardLogicWhitespace=true
 @import io.micronaut.projectgen.core.generator.Project
 @import io.micronaut.projectgen.core.buildtools.gradle.GradleBuild
 @import io.micronaut.projectgen.core.buildtools.gradle.GradlePlugin
@@ -10,22 +11,16 @@
 import @(settingsImport)
 }
 }
-
 @gradleBuild.renderSettingsPluginsManagement()
-
 @if(!gradleBuild.getSettingsPlugins().isEmpty()) {
 plugins {
 @for (GradlePlugin gradlePlugin : gradleBuild.getSettingsPlugins()) {
     id("@gradlePlugin.getId()") @(gradlePlugin.getVersion() != null ? "version(\"" + gradlePlugin.getVersion() + "\")" : "")
 }
 }
-
 }
-
 @gradleBuild.renderSettingsExtensions()
-
 rootProject.name="@project.getName()"
-
 @if (hasMultiProjectFeature || moduleNames.size() > 1) {
 @for (String moduleName : moduleNames) {
 include("@moduleName")

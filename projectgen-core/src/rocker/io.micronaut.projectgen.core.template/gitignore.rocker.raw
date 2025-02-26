@@ -1,0 +1,10 @@
+@option discardLogicWhitespace=true
+@import io.micronaut.projectgen.core.feature.gitignore.GitIgnoreGroup
+@import java.util.List
+@args(List<GitIgnoreGroup> groups)
+@for (GitIgnoreGroup group : groups) {
+### @(group.name()) ###
+@for (String entry : group.entries()) {
+@(entry)
+}
+}

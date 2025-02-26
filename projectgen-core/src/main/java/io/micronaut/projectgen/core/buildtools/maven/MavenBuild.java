@@ -56,10 +56,20 @@ public class MavenBuild {
     private final List<MavenRepository> repositories;
 
     @NonNull
+    private final String groupId;
+
+    @NonNull
     private final String artifactId;
 
-    public MavenBuild(String artifactId) {
-        this(artifactId,
+    @NonNull
+    private final String version;
+
+    public MavenBuild(String groupId,
+                      String artifactId,
+                      String version) {
+        this(groupId,
+            artifactId,
+            version,
             Collections.emptyList(),
             Collections.emptyList(),
             Collections.emptyList(),
@@ -71,11 +81,15 @@ public class MavenBuild {
             Collections.emptyList());
     }
 
-    public MavenBuild(@NonNull String artifactId,
+    public MavenBuild(@NonNull String groupId,
+                      @NonNull String artifactId,
+                      @NonNull String version,
                       @NonNull List<MavenDependency> dependencies,
                       @NonNull List<MavenPlugin> plugins,
                       @NonNull List<MavenRepository> repositories) {
-        this(artifactId,
+        this(groupId,
+            artifactId,
+            version,
             Collections.emptyList(),
             Collections.emptyList(),
             dependencies,
@@ -87,7 +101,9 @@ public class MavenBuild {
             Collections.emptyList());
     }
 
-    public MavenBuild(@NonNull String artifactId,
+    public MavenBuild(@NonNull String groupId,
+                      @NonNull String artifactId,
+                      @NonNull String version,
                       @NonNull List<DependencyCoordinate> annotationProcessors,
                       @NonNull List<DependencyCoordinate> testAnnotationProcessors,
                       @NonNull List<MavenDependency> dependencies,
@@ -97,7 +113,9 @@ public class MavenBuild {
                       @NonNull MavenCombineAttribute annotationProcessorCombineAttribute,
                       @NonNull MavenCombineAttribute testAnnotationProcessorCombineAttribute,
                       @NonNull Collection<Profile> profiles) {
+        this.groupId = groupId;
         this.artifactId = artifactId;
+        this.version = version;
         this.annotationProcessors = annotationProcessors;
         this.testAnnotationProcessors = testAnnotationProcessors;
         this.dependencies = dependencies;
@@ -111,11 +129,29 @@ public class MavenBuild {
 
     /**
      *
+     * @return Group ID
+     */
+    @NonNull
+    public String getGroupId() {
+        return groupId;
+    }
+
+    /**
+     *
      * @return Artifact ID
      */
     @NonNull
     public String getArtifactId() {
         return artifactId;
+    }
+
+    /**
+     *
+     * @return version
+     */
+    @NonNull
+    public String getVersion() {
+        return version;
     }
 
     /**

@@ -16,24 +16,14 @@
 package io.micronaut.projectgen.core.buildtools.maven;
 
 import io.micronaut.core.annotation.NonNull;
-import io.micronaut.projectgen.core.feature.DefaultFeature;
 import io.micronaut.projectgen.core.feature.Feature;
-import io.micronaut.projectgen.core.options.Options;
-import io.micronaut.projectgen.core.utils.OptionUtils;
-
-import java.util.Set;
 
 /**
  * A feature which defines a ParentPom.
  */
-public interface ParentPomFeature extends DefaultFeature {
+public interface ParentPomFeature extends Feature {
     @NonNull
     ParentPom getParentPom();
-
-    @Override
-    default boolean shouldApply(String applicationType, Options options, Set<Feature> selectedFeatures) {
-        return supports(applicationType) && OptionUtils.hasMavenBuildTool(options);
-    }
 
     @Override
     default boolean supports(String applicationType) {

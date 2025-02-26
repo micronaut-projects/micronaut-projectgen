@@ -79,4 +79,28 @@ public interface Options {
      * @return Java Version
      */
     JdkVersion javaVersion();
+
+    /**
+     *
+     * @return artifact
+     */
+    default String artifact() {
+        return null;
+    }
+
+    /**
+     *
+     * @return group
+     */
+    default String group() {
+        return null;
+    }
+
+    /**
+     *
+     * @return Version
+     */
+    default String version() {
+        return null;
+    }
 }

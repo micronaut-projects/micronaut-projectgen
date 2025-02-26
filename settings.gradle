@@ -14,6 +14,8 @@ rootProject.name = 'projectgen'
 include 'projectgen-core'
 include 'projectgen-bom'
 include 'projectgen-openrewrite'
+include 'projectgen-test'
+include 'projectgen-features-gradle'
 include 'projectgen-springboot'
 include 'starter-openrewrite'
 
@@ -24,4 +26,11 @@ micronautBuild {
     importMicronautCatalog()
     importMicronautCatalog("micronaut-serde")
     importMicronautCatalog("micronaut-sourcegen")
+}
+dependencyResolutionManagement {
+    versionCatalogs {
+        templateLibs {
+            from(files("gradle/templates.versions.toml"))
+        }
+    }
 }
