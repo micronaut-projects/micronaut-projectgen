@@ -1,0 +1,9 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.feature.micronaut-serde-jackson
+displayName: Adds Micronaut Serialization Jackson dependency in the compile classpath
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.serde
+      artifactId: micronaut-serde-jackson
+      configuration: implementation
+      scope: compile

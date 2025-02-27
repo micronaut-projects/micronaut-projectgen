@@ -7,17 +7,17 @@ import com.fizzed.rocker.RockerContent;
 import com.fizzed.rocker.RockerOutput;
 import com.fizzed.rocker.runtime.DefaultRockerTemplate;
 import com.fizzed.rocker.runtime.PlainTextUnloadedClassLoader;
-// import @ [1:1]
-import java.util.List;
 // import @ [2:1]
-import java.util.Set;
+import java.util.List;
 // import @ [3:1]
-import java.util.Map;
+import java.util.Set;
 // import @ [4:1]
-import io.micronaut.projectgen.core.buildtools.Dockerfile;
+import java.util.Map;
 // import @ [5:1]
-import io.micronaut.projectgen.core.buildtools.BuildTool;
+import io.micronaut.projectgen.core.buildtools.Dockerfile;
 // import @ [6:1]
+import io.micronaut.projectgen.core.buildtools.BuildTool;
+// import @ [7:1]
 import io.micronaut.projectgen.core.buildtools.gradle.GradleDsl;
 
 /*
@@ -33,39 +33,39 @@ public class micronautGradle extends com.fizzed.rocker.runtime.DefaultRockerMode
     static public String getHeaderHash() { return "-606872362"; }
     static public String[] getArgumentNames() { return new String[] { "dsl", "build", "javaVersion", "dockerfile", "dockerfileNative", "dockerBuilderImages", "dockerBuilderNativeImages", "runtime", "testRuntime", "aotVersion", "incremental", "packageName", "additionalTestResourceModules", "sharedTestResources", "aotKeys", "lambdaRuntimeMainClass", "ignoredAutomaticDependencies" }; }
 
-    // argument @ [7:2]
+    // argument @ [8:2]
     private GradleDsl dsl;
-    // argument @ [7:2]
+    // argument @ [8:2]
     private BuildTool build;
-    // argument @ [7:2]
+    // argument @ [8:2]
     private String javaVersion;
-    // argument @ [7:2]
+    // argument @ [8:2]
     private Dockerfile dockerfile;
-    // argument @ [7:2]
+    // argument @ [8:2]
     private Dockerfile dockerfileNative;
-    // argument @ [7:2]
+    // argument @ [8:2]
     private List<String> dockerBuilderImages;
-    // argument @ [7:2]
+    // argument @ [8:2]
     private List<String> dockerBuilderNativeImages;
-    // argument @ [7:2]
+    // argument @ [8:2]
     private String runtime;
-    // argument @ [7:2]
+    // argument @ [8:2]
     private String testRuntime;
-    // argument @ [7:2]
+    // argument @ [8:2]
     private String aotVersion;
-    // argument @ [7:2]
+    // argument @ [8:2]
     private boolean incremental;
-    // argument @ [7:2]
+    // argument @ [8:2]
     private String packageName;
-    // argument @ [7:2]
+    // argument @ [8:2]
     private List<String> additionalTestResourceModules;
-    // argument @ [7:2]
+    // argument @ [8:2]
     private boolean sharedTestResources;
-    // argument @ [7:2]
+    // argument @ [8:2]
     private Map<String,String> aotKeys;
-    // argument @ [7:2]
+    // argument @ [8:2]
     private String lambdaRuntimeMainClass;
-    // argument @ [7:2]
+    // argument @ [8:2]
     private Set<String> ignoredAutomaticDependencies;
 
     public micronautGradle dsl(GradleDsl dsl) {
@@ -250,58 +250,48 @@ public class micronautGradle extends com.fizzed.rocker.runtime.DefaultRockerMode
 
     static public class Template extends com.fizzed.rocker.runtime.DefaultRockerTemplate {
 
-        // \nmicronaut {\n
+        // micronaut {\n
         static private final byte[] PLAIN_TEXT_0_0;
-        // \n
+        //     ignoredAutomaticDependencies.add(\"
         static private final byte[] PLAIN_TEXT_1_0;
-        // \n    ignoredAutomaticDependencies.add(\"
-        static private final byte[] PLAIN_TEXT_2_0;
         // \")\n
+        static private final byte[] PLAIN_TEXT_2_0;
+        //     runtime(\"
         static private final byte[] PLAIN_TEXT_3_0;
-        // \n    runtime(\"
+        //     testRuntime(\"
         static private final byte[] PLAIN_TEXT_4_0;
-        // \n    testRuntime(\"
+        //     nativeLambda {\n        lambdaRuntimeClassName = \"
         static private final byte[] PLAIN_TEXT_5_0;
-        // \n    nativeLambda {\n        lambdaRuntimeClassName = \"
-        static private final byte[] PLAIN_TEXT_6_0;
         // \"\n    }\n
+        static private final byte[] PLAIN_TEXT_6_0;
+        //     processing {\n        incremental(true)\n        annotations(\"
         static private final byte[] PLAIN_TEXT_7_0;
-        // \n    processing {\n        incremental(true)\n        annotations(\"
-        static private final byte[] PLAIN_TEXT_8_0;
         // .*\")\n    }\n
+        static private final byte[] PLAIN_TEXT_8_0;
+        //     testResources {\n
         static private final byte[] PLAIN_TEXT_9_0;
-        // \n    testResources {\n        
+        //         additionalModules.add(\"
         static private final byte[] PLAIN_TEXT_10_0;
-        // \n            
+        //         sharedServer = true\n
         static private final byte[] PLAIN_TEXT_11_0;
-        // \n        additionalModules.add(\"
+        //     }\n
         static private final byte[] PLAIN_TEXT_12_0;
-        // \")\n            
+        // \n
         static private final byte[] PLAIN_TEXT_13_0;
-        // \n        
+        // }\n\n
         static private final byte[] PLAIN_TEXT_14_0;
-        // \n        sharedServer = true\n        
+        // dockerBuildNative {\n    images = [\n
         static private final byte[] PLAIN_TEXT_15_0;
-        // \n    }\n
+        //         \"
         static private final byte[] PLAIN_TEXT_16_0;
-        // \n}\n\n
-        static private final byte[] PLAIN_TEXT_17_0;
-        // \n\n
-        static private final byte[] PLAIN_TEXT_18_0;
-        // \ndockerBuildNative {\n    images = [\n    
-        static private final byte[] PLAIN_TEXT_19_0;
-        // \n        \"
-        static private final byte[] PLAIN_TEXT_20_0;
         // \"
-        static private final byte[] PLAIN_TEXT_21_0;
+        static private final byte[] PLAIN_TEXT_17_0;
         // ,
-        static private final byte[] PLAIN_TEXT_22_0;
-        // \n    
-        static private final byte[] PLAIN_TEXT_23_0;
-        // \n    ]\n}\n
-        static private final byte[] PLAIN_TEXT_24_0;
-        // \ndockerBuild {\n    images = [\n    
-        static private final byte[] PLAIN_TEXT_25_0;
+        static private final byte[] PLAIN_TEXT_18_0;
+        //     ]\n}\n
+        static private final byte[] PLAIN_TEXT_19_0;
+        // dockerBuild {\n    images = [\n
+        static private final byte[] PLAIN_TEXT_20_0;
 
         static {
             PlainTextUnloadedClassLoader loader = PlainTextUnloadedClassLoader.tryLoad(micronautGradle.class.getClassLoader(), micronautGradle.class.getName() + "$PlainText", "UTF-8");
@@ -326,46 +316,41 @@ public class micronautGradle extends com.fizzed.rocker.runtime.DefaultRockerMode
             PLAIN_TEXT_18_0 = loader.tryGet("PLAIN_TEXT_18_0");
             PLAIN_TEXT_19_0 = loader.tryGet("PLAIN_TEXT_19_0");
             PLAIN_TEXT_20_0 = loader.tryGet("PLAIN_TEXT_20_0");
-            PLAIN_TEXT_21_0 = loader.tryGet("PLAIN_TEXT_21_0");
-            PLAIN_TEXT_22_0 = loader.tryGet("PLAIN_TEXT_22_0");
-            PLAIN_TEXT_23_0 = loader.tryGet("PLAIN_TEXT_23_0");
-            PLAIN_TEXT_24_0 = loader.tryGet("PLAIN_TEXT_24_0");
-            PLAIN_TEXT_25_0 = loader.tryGet("PLAIN_TEXT_25_0");
         }
 
-        // argument @ [7:2]
+        // argument @ [8:2]
         protected final GradleDsl dsl;
-        // argument @ [7:2]
+        // argument @ [8:2]
         protected final BuildTool build;
-        // argument @ [7:2]
+        // argument @ [8:2]
         protected final String javaVersion;
-        // argument @ [7:2]
+        // argument @ [8:2]
         protected final Dockerfile dockerfile;
-        // argument @ [7:2]
+        // argument @ [8:2]
         protected final Dockerfile dockerfileNative;
-        // argument @ [7:2]
+        // argument @ [8:2]
         protected final List<String> dockerBuilderImages;
-        // argument @ [7:2]
+        // argument @ [8:2]
         protected final List<String> dockerBuilderNativeImages;
-        // argument @ [7:2]
+        // argument @ [8:2]
         protected final String runtime;
-        // argument @ [7:2]
+        // argument @ [8:2]
         protected final String testRuntime;
-        // argument @ [7:2]
+        // argument @ [8:2]
         protected final String aotVersion;
-        // argument @ [7:2]
+        // argument @ [8:2]
         protected final boolean incremental;
-        // argument @ [7:2]
+        // argument @ [8:2]
         protected final String packageName;
-        // argument @ [7:2]
+        // argument @ [8:2]
         protected final List<String> additionalTestResourceModules;
-        // argument @ [7:2]
+        // argument @ [8:2]
         protected final boolean sharedTestResources;
-        // argument @ [7:2]
+        // argument @ [8:2]
         protected final Map<String,String> aotKeys;
-        // argument @ [7:2]
+        // argument @ [8:2]
         protected final String lambdaRuntimeMainClass;
-        // argument @ [7:2]
+        // argument @ [8:2]
         protected final Set<String> ignoredAutomaticDependencies;
 
         public Template(micronautGradle model) {
@@ -395,370 +380,320 @@ public class micronautGradle extends com.fizzed.rocker.runtime.DefaultRockerMode
 
         @Override
         protected void __doRender() throws IOException, RenderingException {
-            // PlainText @ [25:2]
-            __internal.aboutToExecutePosInTemplate(25, 2);
+            // PlainText @ [26:2]
+            __internal.aboutToExecutePosInTemplate(26, 2);
             __internal.writeValue(PLAIN_TEXT_0_0);
-            // IfBlockBegin @ [27:1]
-            __internal.aboutToExecutePosInTemplate(27, 1);
+            // IfBlockBegin @ [28:1]
+            __internal.aboutToExecutePosInTemplate(28, 1);
             if (ignoredAutomaticDependencies != null) {
-                // PlainText @ [27:44]
-                __internal.aboutToExecutePosInTemplate(27, 44);
-                __internal.writeValue(PLAIN_TEXT_1_0);
-                // ForBlockBegin @ [28:1]
-                __internal.aboutToExecutePosInTemplate(28, 1);
+                // ForBlockBegin @ [29:1]
+                __internal.aboutToExecutePosInTemplate(29, 1);
                 try {
                     final com.fizzed.rocker.runtime.IterableForIterator<String> __forIterator0 = new com.fizzed.rocker.runtime.IterableForIterator<String>(ignoredAutomaticDependencies);
                     while (__forIterator0.hasNext()) {
                         final String ignoredAutomaticDependency = __forIterator0.next();
                         try {
-                            // PlainText @ [28:74]
-                            __internal.aboutToExecutePosInTemplate(28, 74);
-                            __internal.writeValue(PLAIN_TEXT_2_0);
-                            // EvalExpression @ [29:39]
-                            __internal.aboutToExecutePosInTemplate(29, 39);
+                            // PlainText @ [29:74]
+                            __internal.aboutToExecutePosInTemplate(29, 74);
+                            __internal.writeValue(PLAIN_TEXT_1_0);
+                            // EvalExpression @ [30:39]
+                            __internal.aboutToExecutePosInTemplate(30, 39);
                             __internal.renderValue((ignoredAutomaticDependency), false);
-                            // PlainText @ [29:68]
-                            __internal.aboutToExecutePosInTemplate(29, 68);
-                            __internal.writeValue(PLAIN_TEXT_3_0);
-                            // ForBlockEnd @ [28:1]
-                            __internal.aboutToExecutePosInTemplate(28, 1);
+                            // PlainText @ [30:68]
+                            __internal.aboutToExecutePosInTemplate(30, 68);
+                            __internal.writeValue(PLAIN_TEXT_2_0);
+                            // ForBlockEnd @ [29:1]
+                            __internal.aboutToExecutePosInTemplate(29, 1);
                         } catch (com.fizzed.rocker.runtime.ContinueException e) {
                             // support for continuing for loops
                         }
-                    } // for end @ [28:1]
+                    } // for end @ [29:1]
                 } catch (com.fizzed.rocker.runtime.BreakException e) {
                     // support for breaking for loops
                 }
-                // PlainText @ [30:2]
-                __internal.aboutToExecutePosInTemplate(30, 2);
-                __internal.writeValue(PLAIN_TEXT_1_0);
-                // IfBlockEnd @ [27:1]
-                __internal.aboutToExecutePosInTemplate(27, 1);
-            } // if end @ [27:1]
-            // PlainText @ [31:2]
-            __internal.aboutToExecutePosInTemplate(31, 2);
-            __internal.writeValue(PLAIN_TEXT_1_0);
-            // IfBlockBegin @ [32:1]
-            __internal.aboutToExecutePosInTemplate(32, 1);
+                // IfBlockEnd @ [28:1]
+                __internal.aboutToExecutePosInTemplate(28, 1);
+            } // if end @ [28:1]
+            // IfBlockBegin @ [33:1]
+            __internal.aboutToExecutePosInTemplate(33, 1);
             if (runtime != null) {
-                // PlainText @ [32:23]
-                __internal.aboutToExecutePosInTemplate(32, 23);
-                __internal.writeValue(PLAIN_TEXT_4_0);
-                // EvalExpression @ [33:14]
-                __internal.aboutToExecutePosInTemplate(33, 14);
+                // PlainText @ [33:23]
+                __internal.aboutToExecutePosInTemplate(33, 23);
+                __internal.writeValue(PLAIN_TEXT_3_0);
+                // EvalExpression @ [34:14]
+                __internal.aboutToExecutePosInTemplate(34, 14);
                 __internal.renderValue((runtime), false);
-                // PlainText @ [33:24]
-                __internal.aboutToExecutePosInTemplate(33, 24);
-                __internal.writeValue(PLAIN_TEXT_3_0);
-                // IfBlockEnd @ [32:1]
-                __internal.aboutToExecutePosInTemplate(32, 1);
-            } // if end @ [32:1]
-            // PlainText @ [34:2]
-            __internal.aboutToExecutePosInTemplate(34, 2);
-            __internal.writeValue(PLAIN_TEXT_1_0);
-            // IfBlockBegin @ [35:1]
-            __internal.aboutToExecutePosInTemplate(35, 1);
+                // PlainText @ [34:24]
+                __internal.aboutToExecutePosInTemplate(34, 24);
+                __internal.writeValue(PLAIN_TEXT_2_0);
+                // IfBlockEnd @ [33:1]
+                __internal.aboutToExecutePosInTemplate(33, 1);
+            } // if end @ [33:1]
+            // IfBlockBegin @ [36:1]
+            __internal.aboutToExecutePosInTemplate(36, 1);
             if (testRuntime != null) {
-                // PlainText @ [35:27]
-                __internal.aboutToExecutePosInTemplate(35, 27);
-                __internal.writeValue(PLAIN_TEXT_5_0);
-                // EvalExpression @ [36:18]
-                __internal.aboutToExecutePosInTemplate(36, 18);
+                // PlainText @ [36:27]
+                __internal.aboutToExecutePosInTemplate(36, 27);
+                __internal.writeValue(PLAIN_TEXT_4_0);
+                // EvalExpression @ [37:18]
+                __internal.aboutToExecutePosInTemplate(37, 18);
                 __internal.renderValue((testRuntime), false);
-                // PlainText @ [36:32]
-                __internal.aboutToExecutePosInTemplate(36, 32);
-                __internal.writeValue(PLAIN_TEXT_3_0);
-                // IfBlockEnd @ [35:1]
-                __internal.aboutToExecutePosInTemplate(35, 1);
-            } // if end @ [35:1]
-            // PlainText @ [37:2]
-            __internal.aboutToExecutePosInTemplate(37, 2);
-            __internal.writeValue(PLAIN_TEXT_1_0);
-            // IfBlockBegin @ [38:1]
-            __internal.aboutToExecutePosInTemplate(38, 1);
+                // PlainText @ [37:32]
+                __internal.aboutToExecutePosInTemplate(37, 32);
+                __internal.writeValue(PLAIN_TEXT_2_0);
+                // IfBlockEnd @ [36:1]
+                __internal.aboutToExecutePosInTemplate(36, 1);
+            } // if end @ [36:1]
+            // IfBlockBegin @ [39:1]
+            __internal.aboutToExecutePosInTemplate(39, 1);
             if (lambdaRuntimeMainClass != null) {
-                // PlainText @ [38:38]
-                __internal.aboutToExecutePosInTemplate(38, 38);
-                __internal.writeValue(PLAIN_TEXT_6_0);
-                // EvalExpression @ [40:35]
-                __internal.aboutToExecutePosInTemplate(40, 35);
+                // PlainText @ [39:38]
+                __internal.aboutToExecutePosInTemplate(39, 38);
+                __internal.writeValue(PLAIN_TEXT_5_0);
+                // EvalExpression @ [41:35]
+                __internal.aboutToExecutePosInTemplate(41, 35);
                 __internal.renderValue((lambdaRuntimeMainClass), false);
-                // PlainText @ [40:60]
-                __internal.aboutToExecutePosInTemplate(40, 60);
-                __internal.writeValue(PLAIN_TEXT_7_0);
-                // IfBlockEnd @ [38:1]
-                __internal.aboutToExecutePosInTemplate(38, 1);
-            } // if end @ [38:1]
-            // PlainText @ [42:2]
-            __internal.aboutToExecutePosInTemplate(42, 2);
-            __internal.writeValue(PLAIN_TEXT_1_0);
-            // IfBlockBegin @ [43:1]
-            __internal.aboutToExecutePosInTemplate(43, 1);
+                // PlainText @ [41:60]
+                __internal.aboutToExecutePosInTemplate(41, 60);
+                __internal.writeValue(PLAIN_TEXT_6_0);
+                // IfBlockEnd @ [39:1]
+                __internal.aboutToExecutePosInTemplate(39, 1);
+            } // if end @ [39:1]
+            // IfBlockBegin @ [44:1]
+            __internal.aboutToExecutePosInTemplate(44, 1);
             if (incremental) {
-                // PlainText @ [43:19]
-                __internal.aboutToExecutePosInTemplate(43, 19);
-                __internal.writeValue(PLAIN_TEXT_8_0);
-                // EvalExpression @ [46:22]
-                __internal.aboutToExecutePosInTemplate(46, 22);
+                // PlainText @ [44:19]
+                __internal.aboutToExecutePosInTemplate(44, 19);
+                __internal.writeValue(PLAIN_TEXT_7_0);
+                // EvalExpression @ [47:22]
+                __internal.aboutToExecutePosInTemplate(47, 22);
                 __internal.renderValue((packageName), false);
-                // PlainText @ [46:36]
-                __internal.aboutToExecutePosInTemplate(46, 36);
-                __internal.writeValue(PLAIN_TEXT_9_0);
-                // IfBlockEnd @ [43:1]
-                __internal.aboutToExecutePosInTemplate(43, 1);
-            } // if end @ [43:1]
-            // PlainText @ [48:2]
-            __internal.aboutToExecutePosInTemplate(48, 2);
-            __internal.writeValue(PLAIN_TEXT_1_0);
-            // IfBlockBegin @ [49:1]
-            __internal.aboutToExecutePosInTemplate(49, 1);
+                // PlainText @ [47:36]
+                __internal.aboutToExecutePosInTemplate(47, 36);
+                __internal.writeValue(PLAIN_TEXT_8_0);
+                // IfBlockEnd @ [44:1]
+                __internal.aboutToExecutePosInTemplate(44, 1);
+            } // if end @ [44:1]
+            // IfBlockBegin @ [50:1]
+            __internal.aboutToExecutePosInTemplate(50, 1);
             if (additionalTestResourceModules != null || sharedTestResources) {
-                // PlainText @ [49:69]
-                __internal.aboutToExecutePosInTemplate(49, 69);
-                __internal.writeValue(PLAIN_TEXT_10_0);
-                // IfBlockBegin @ [51:9]
-                __internal.aboutToExecutePosInTemplate(51, 9);
+                // PlainText @ [50:69]
+                __internal.aboutToExecutePosInTemplate(50, 69);
+                __internal.writeValue(PLAIN_TEXT_9_0);
+                // IfBlockBegin @ [52:9]
+                __internal.aboutToExecutePosInTemplate(52, 9);
                 if (additionalTestResourceModules != null) {
-                    // PlainText @ [51:53]
-                    __internal.aboutToExecutePosInTemplate(51, 53);
-                    __internal.writeValue(PLAIN_TEXT_11_0);
-                    // ForBlockBegin @ [52:13]
-                    __internal.aboutToExecutePosInTemplate(52, 13);
+                    // ForBlockBegin @ [53:13]
+                    __internal.aboutToExecutePosInTemplate(53, 13);
                     try {
                         final com.fizzed.rocker.runtime.IterableForIterator<String> __forIterator1 = new com.fizzed.rocker.runtime.IterableForIterator<String>(additionalTestResourceModules);
                         while (__forIterator1.hasNext()) {
                             final String module = __forIterator1.next();
                             try {
-                                // PlainText @ [52:67]
-                                __internal.aboutToExecutePosInTemplate(52, 67);
-                                __internal.writeValue(PLAIN_TEXT_12_0);
-                                // ValueExpression @ [53:32]
-                                __internal.aboutToExecutePosInTemplate(53, 32);
+                                // PlainText @ [53:67]
+                                __internal.aboutToExecutePosInTemplate(53, 67);
+                                __internal.writeValue(PLAIN_TEXT_10_0);
+                                // ValueExpression @ [54:32]
+                                __internal.aboutToExecutePosInTemplate(54, 32);
                                 __internal.renderValue(module, false);
-                                // PlainText @ [53:39]
-                                __internal.aboutToExecutePosInTemplate(53, 39);
-                                __internal.writeValue(PLAIN_TEXT_13_0);
-                                // ForBlockEnd @ [52:13]
-                                __internal.aboutToExecutePosInTemplate(52, 13);
+                                // PlainText @ [54:39]
+                                __internal.aboutToExecutePosInTemplate(54, 39);
+                                __internal.writeValue(PLAIN_TEXT_2_0);
+                                // ForBlockEnd @ [53:13]
+                                __internal.aboutToExecutePosInTemplate(53, 13);
                             } catch (com.fizzed.rocker.runtime.ContinueException e) {
                                 // support for continuing for loops
                             }
-                        } // for end @ [52:13]
+                        } // for end @ [53:13]
                     } catch (com.fizzed.rocker.runtime.BreakException e) {
                         // support for breaking for loops
                     }
-                    // PlainText @ [54:14]
-                    __internal.aboutToExecutePosInTemplate(54, 14);
-                    __internal.writeValue(PLAIN_TEXT_14_0);
-                    // IfBlockEnd @ [51:9]
-                    __internal.aboutToExecutePosInTemplate(51, 9);
-                } // if end @ [51:9]
-                // PlainText @ [55:10]
-                __internal.aboutToExecutePosInTemplate(55, 10);
-                __internal.writeValue(PLAIN_TEXT_14_0);
-                // IfBlockBegin @ [56:9]
-                __internal.aboutToExecutePosInTemplate(56, 9);
+                    // IfBlockEnd @ [52:9]
+                    __internal.aboutToExecutePosInTemplate(52, 9);
+                } // if end @ [52:9]
+                // IfBlockBegin @ [57:9]
+                __internal.aboutToExecutePosInTemplate(57, 9);
                 if (sharedTestResources) {
-                    // PlainText @ [56:35]
-                    __internal.aboutToExecutePosInTemplate(56, 35);
-                    __internal.writeValue(PLAIN_TEXT_15_0);
-                    // IfBlockEnd @ [56:9]
-                    __internal.aboutToExecutePosInTemplate(56, 9);
-                } // if end @ [56:9]
-                // PlainText @ [58:10]
-                __internal.aboutToExecutePosInTemplate(58, 10);
-                __internal.writeValue(PLAIN_TEXT_16_0);
-                // IfBlockEnd @ [49:1]
-                __internal.aboutToExecutePosInTemplate(49, 1);
-            } // if end @ [49:1]
-            // PlainText @ [60:2]
-            __internal.aboutToExecutePosInTemplate(60, 2);
-            __internal.writeValue(PLAIN_TEXT_1_0);
-            // IfBlockBegin @ [61:1]
-            __internal.aboutToExecutePosInTemplate(61, 1);
+                    // PlainText @ [57:35]
+                    __internal.aboutToExecutePosInTemplate(57, 35);
+                    __internal.writeValue(PLAIN_TEXT_11_0);
+                    // IfBlockEnd @ [57:9]
+                    __internal.aboutToExecutePosInTemplate(57, 9);
+                } // if end @ [57:9]
+                // PlainText @ [59:10]
+                __internal.aboutToExecutePosInTemplate(59, 10);
+                __internal.writeValue(PLAIN_TEXT_12_0);
+                // IfBlockEnd @ [50:1]
+                __internal.aboutToExecutePosInTemplate(50, 1);
+            } // if end @ [50:1]
+            // IfBlockBegin @ [62:1]
+            __internal.aboutToExecutePosInTemplate(62, 1);
             if (aotVersion != null) {
-                // PlainText @ [61:26]
-                __internal.aboutToExecutePosInTemplate(61, 26);
-                __internal.writeValue(PLAIN_TEXT_1_0);
-                // ValueExpression @ [62:1]
-                __internal.aboutToExecutePosInTemplate(62, 1);
+                // ValueExpression @ [63:1]
+                __internal.aboutToExecutePosInTemplate(63, 1);
                 __internal.renderValue(io.micronaut.projectgen.micronaut.template.aotExtension.template(aotKeys), false);
-                // PlainText @ [62:75]
-                __internal.aboutToExecutePosInTemplate(62, 75);
-                __internal.writeValue(PLAIN_TEXT_1_0);
-                // IfBlockEnd @ [61:1]
-                __internal.aboutToExecutePosInTemplate(61, 1);
-            } // if end @ [61:1]
-            // PlainText @ [63:2]
-            __internal.aboutToExecutePosInTemplate(63, 2);
-            __internal.writeValue(PLAIN_TEXT_17_0);
-            // IfBlockBegin @ [66:1]
-            __internal.aboutToExecutePosInTemplate(66, 1);
+                // PlainText @ [63:75]
+                __internal.aboutToExecutePosInTemplate(63, 75);
+                __internal.writeValue(PLAIN_TEXT_13_0);
+                // IfBlockEnd @ [62:1]
+                __internal.aboutToExecutePosInTemplate(62, 1);
+            } // if end @ [62:1]
+            // PlainText @ [64:2]
+            __internal.aboutToExecutePosInTemplate(64, 2);
+            __internal.writeValue(PLAIN_TEXT_14_0);
+            // IfBlockBegin @ [67:1]
+            __internal.aboutToExecutePosInTemplate(67, 1);
             if (dockerfile != null) {
-                // PlainText @ [66:26]
-                __internal.aboutToExecutePosInTemplate(66, 26);
-                __internal.writeValue(PLAIN_TEXT_1_0);
-                // ValueExpression @ [67:1]
-                __internal.aboutToExecutePosInTemplate(67, 1);
+                // ValueExpression @ [68:1]
+                __internal.aboutToExecutePosInTemplate(68, 1);
                 __internal.renderValue(dockerfileExtension.template(dsl, dockerfile), false);
-                // PlainText @ [67:47]
-                __internal.aboutToExecutePosInTemplate(67, 47);
-                __internal.writeValue(PLAIN_TEXT_1_0);
-                // IfBlockEnd @ [66:1]
-                __internal.aboutToExecutePosInTemplate(66, 1);
-            } // if end @ [66:1]
-            // PlainText @ [68:2]
-            __internal.aboutToExecutePosInTemplate(68, 2);
-            __internal.writeValue(PLAIN_TEXT_18_0);
-            // IfBlockBegin @ [70:1]
-            __internal.aboutToExecutePosInTemplate(70, 1);
+                // PlainText @ [68:47]
+                __internal.aboutToExecutePosInTemplate(68, 47);
+                __internal.writeValue(PLAIN_TEXT_13_0);
+                // IfBlockEnd @ [67:1]
+                __internal.aboutToExecutePosInTemplate(67, 1);
+            } // if end @ [67:1]
+            // PlainText @ [69:2]
+            __internal.aboutToExecutePosInTemplate(69, 2);
+            __internal.writeValue(PLAIN_TEXT_13_0);
+            // IfBlockBegin @ [71:1]
+            __internal.aboutToExecutePosInTemplate(71, 1);
             if (dockerfileNative != null) {
-                // PlainText @ [70:32]
-                __internal.aboutToExecutePosInTemplate(70, 32);
-                __internal.writeValue(PLAIN_TEXT_1_0);
-                // ValueExpression @ [71:1]
-                __internal.aboutToExecutePosInTemplate(71, 1);
+                // ValueExpression @ [72:1]
+                __internal.aboutToExecutePosInTemplate(72, 1);
                 __internal.renderValue(dockerfileNativeExtension.template(dsl, dockerfileNative), false);
-                // PlainText @ [71:59]
-                __internal.aboutToExecutePosInTemplate(71, 59);
-                __internal.writeValue(PLAIN_TEXT_1_0);
-                // IfBlockEnd @ [70:1]
-                __internal.aboutToExecutePosInTemplate(70, 1);
-            } // if end @ [70:1]
-            // PlainText @ [72:2]
-            __internal.aboutToExecutePosInTemplate(72, 2);
-            __internal.writeValue(PLAIN_TEXT_18_0);
-            // IfBlockBegin @ [74:1]
-            __internal.aboutToExecutePosInTemplate(74, 1);
+                // PlainText @ [72:59]
+                __internal.aboutToExecutePosInTemplate(72, 59);
+                __internal.writeValue(PLAIN_TEXT_13_0);
+                // IfBlockEnd @ [71:1]
+                __internal.aboutToExecutePosInTemplate(71, 1);
+            } // if end @ [71:1]
+            // PlainText @ [73:2]
+            __internal.aboutToExecutePosInTemplate(73, 2);
+            __internal.writeValue(PLAIN_TEXT_13_0);
+            // IfBlockBegin @ [75:1]
+            __internal.aboutToExecutePosInTemplate(75, 1);
             if (dockerBuilderNativeImages != null) {
-                // PlainText @ [74:41]
-                __internal.aboutToExecutePosInTemplate(74, 41);
-                __internal.writeValue(PLAIN_TEXT_19_0);
-                // ForBlockBegin @ [77:5]
-                __internal.aboutToExecutePosInTemplate(77, 5);
+                // PlainText @ [75:41]
+                __internal.aboutToExecutePosInTemplate(75, 41);
+                __internal.writeValue(PLAIN_TEXT_15_0);
+                // ForBlockBegin @ [78:5]
+                __internal.aboutToExecutePosInTemplate(78, 5);
                 try {
                     for (int i = 0; i < dockerBuilderNativeImages.size(); i++) {
                         try {
-                            // PlainText @ [77:66]
-                            __internal.aboutToExecutePosInTemplate(77, 66);
-                            __internal.writeValue(PLAIN_TEXT_20_0);
-                            // EvalExpression @ [78:10]
-                            __internal.aboutToExecutePosInTemplate(78, 10);
+                            // PlainText @ [78:66]
+                            __internal.aboutToExecutePosInTemplate(78, 66);
+                            __internal.writeValue(PLAIN_TEXT_16_0);
+                            // EvalExpression @ [79:10]
+                            __internal.aboutToExecutePosInTemplate(79, 10);
                             __internal.renderValue((dockerBuilderNativeImages.get(i)), false);
-                            // PlainText @ [78:45]
-                            __internal.aboutToExecutePosInTemplate(78, 45);
-                            __internal.writeValue(PLAIN_TEXT_21_0);
-                            // IfBlockBegin @ [78:46]
-                            __internal.aboutToExecutePosInTemplate(78, 46);
+                            // PlainText @ [79:45]
+                            __internal.aboutToExecutePosInTemplate(79, 45);
+                            __internal.writeValue(PLAIN_TEXT_17_0);
+                            // IfBlockBegin @ [79:46]
+                            __internal.aboutToExecutePosInTemplate(79, 46);
                             if (i < (dockerBuilderNativeImages.size() -1)) {
-                                // PlainText @ [78:95]
-                                __internal.aboutToExecutePosInTemplate(78, 95);
-                                __internal.writeValue(PLAIN_TEXT_22_0);
-                                // IfBlockEnd @ [78:46]
-                                __internal.aboutToExecutePosInTemplate(78, 46);
-                            } // if end @ [78:46]
-                            // PlainText @ [78:97]
-                            __internal.aboutToExecutePosInTemplate(78, 97);
-                            __internal.writeValue(PLAIN_TEXT_23_0);
-                            // ForBlockEnd @ [77:5]
-                            __internal.aboutToExecutePosInTemplate(77, 5);
+                                // PlainText @ [79:95]
+                                __internal.aboutToExecutePosInTemplate(79, 95);
+                                __internal.writeValue(PLAIN_TEXT_18_0);
+                                // IfBlockEnd @ [79:46]
+                                __internal.aboutToExecutePosInTemplate(79, 46);
+                            } // if end @ [79:46]
+                            // PlainText @ [79:97]
+                            __internal.aboutToExecutePosInTemplate(79, 97);
+                            __internal.writeValue(PLAIN_TEXT_13_0);
+                            // ForBlockEnd @ [78:5]
+                            __internal.aboutToExecutePosInTemplate(78, 5);
                         } catch (com.fizzed.rocker.runtime.ContinueException e) {
                             // support for continuing for loops
                         }
-                    } // for end @ [77:5]
+                    } // for end @ [78:5]
                 } catch (com.fizzed.rocker.runtime.BreakException e) {
                     // support for breaking for loops
                 }
-                // PlainText @ [79:6]
-                __internal.aboutToExecutePosInTemplate(79, 6);
-                __internal.writeValue(PLAIN_TEXT_24_0);
-                // IfBlockEnd @ [74:1]
-                __internal.aboutToExecutePosInTemplate(74, 1);
-            } // if end @ [74:1]
-            // PlainText @ [82:2]
-            __internal.aboutToExecutePosInTemplate(82, 2);
-            __internal.writeValue(PLAIN_TEXT_18_0);
-            // IfBlockBegin @ [84:1]
-            __internal.aboutToExecutePosInTemplate(84, 1);
+                // PlainText @ [80:6]
+                __internal.aboutToExecutePosInTemplate(80, 6);
+                __internal.writeValue(PLAIN_TEXT_19_0);
+                // IfBlockEnd @ [75:1]
+                __internal.aboutToExecutePosInTemplate(75, 1);
+            } // if end @ [75:1]
+            // PlainText @ [83:2]
+            __internal.aboutToExecutePosInTemplate(83, 2);
+            __internal.writeValue(PLAIN_TEXT_13_0);
+            // IfBlockBegin @ [85:1]
+            __internal.aboutToExecutePosInTemplate(85, 1);
             if (dockerBuilderImages != null) {
-                // PlainText @ [84:35]
-                __internal.aboutToExecutePosInTemplate(84, 35);
-                __internal.writeValue(PLAIN_TEXT_25_0);
-                // ForBlockBegin @ [87:5]
-                __internal.aboutToExecutePosInTemplate(87, 5);
+                // PlainText @ [85:35]
+                __internal.aboutToExecutePosInTemplate(85, 35);
+                __internal.writeValue(PLAIN_TEXT_20_0);
+                // ForBlockBegin @ [88:5]
+                __internal.aboutToExecutePosInTemplate(88, 5);
                 try {
                     for (int i = 0; i < dockerBuilderImages.size(); i++) {
                         try {
-                            // PlainText @ [87:60]
-                            __internal.aboutToExecutePosInTemplate(87, 60);
-                            __internal.writeValue(PLAIN_TEXT_20_0);
-                            // EvalExpression @ [88:10]
-                            __internal.aboutToExecutePosInTemplate(88, 10);
+                            // PlainText @ [88:60]
+                            __internal.aboutToExecutePosInTemplate(88, 60);
+                            __internal.writeValue(PLAIN_TEXT_16_0);
+                            // EvalExpression @ [89:10]
+                            __internal.aboutToExecutePosInTemplate(89, 10);
                             __internal.renderValue((dockerBuilderImages.get(i)), false);
-                            // PlainText @ [88:39]
-                            __internal.aboutToExecutePosInTemplate(88, 39);
-                            __internal.writeValue(PLAIN_TEXT_21_0);
-                            // IfBlockBegin @ [88:40]
-                            __internal.aboutToExecutePosInTemplate(88, 40);
+                            // PlainText @ [89:39]
+                            __internal.aboutToExecutePosInTemplate(89, 39);
+                            __internal.writeValue(PLAIN_TEXT_17_0);
+                            // IfBlockBegin @ [89:40]
+                            __internal.aboutToExecutePosInTemplate(89, 40);
                             if (i < (dockerBuilderImages.size() -1)) {
-                                // PlainText @ [88:83]
-                                __internal.aboutToExecutePosInTemplate(88, 83);
-                                __internal.writeValue(PLAIN_TEXT_22_0);
-                                // IfBlockEnd @ [88:40]
-                                __internal.aboutToExecutePosInTemplate(88, 40);
-                            } // if end @ [88:40]
-                            // PlainText @ [88:85]
-                            __internal.aboutToExecutePosInTemplate(88, 85);
-                            __internal.writeValue(PLAIN_TEXT_23_0);
-                            // ForBlockEnd @ [87:5]
-                            __internal.aboutToExecutePosInTemplate(87, 5);
+                                // PlainText @ [89:83]
+                                __internal.aboutToExecutePosInTemplate(89, 83);
+                                __internal.writeValue(PLAIN_TEXT_18_0);
+                                // IfBlockEnd @ [89:40]
+                                __internal.aboutToExecutePosInTemplate(89, 40);
+                            } // if end @ [89:40]
+                            // PlainText @ [89:85]
+                            __internal.aboutToExecutePosInTemplate(89, 85);
+                            __internal.writeValue(PLAIN_TEXT_13_0);
+                            // ForBlockEnd @ [88:5]
+                            __internal.aboutToExecutePosInTemplate(88, 5);
                         } catch (com.fizzed.rocker.runtime.ContinueException e) {
                             // support for continuing for loops
                         }
-                    } // for end @ [87:5]
+                    } // for end @ [88:5]
                 } catch (com.fizzed.rocker.runtime.BreakException e) {
                     // support for breaking for loops
                 }
-                // PlainText @ [89:6]
-                __internal.aboutToExecutePosInTemplate(89, 6);
-                __internal.writeValue(PLAIN_TEXT_24_0);
-                // IfBlockEnd @ [84:1]
-                __internal.aboutToExecutePosInTemplate(84, 1);
-            } // if end @ [84:1]
-            // PlainText @ [92:2]
-            __internal.aboutToExecutePosInTemplate(92, 2);
-            __internal.writeValue(PLAIN_TEXT_1_0);
+                // PlainText @ [90:6]
+                __internal.aboutToExecutePosInTemplate(90, 6);
+                __internal.writeValue(PLAIN_TEXT_19_0);
+                // IfBlockEnd @ [85:1]
+                __internal.aboutToExecutePosInTemplate(85, 1);
+            } // if end @ [85:1]
         }
     }
 
     private static class PlainText {
 
-        static private final String PLAIN_TEXT_0_0 = "\nmicronaut {\n";
-        static private final String PLAIN_TEXT_1_0 = "\n";
-        static private final String PLAIN_TEXT_2_0 = "\n    ignoredAutomaticDependencies.add(\"";
-        static private final String PLAIN_TEXT_3_0 = "\")\n";
-        static private final String PLAIN_TEXT_4_0 = "\n    runtime(\"";
-        static private final String PLAIN_TEXT_5_0 = "\n    testRuntime(\"";
-        static private final String PLAIN_TEXT_6_0 = "\n    nativeLambda {\n        lambdaRuntimeClassName = \"";
-        static private final String PLAIN_TEXT_7_0 = "\"\n    }\n";
-        static private final String PLAIN_TEXT_8_0 = "\n    processing {\n        incremental(true)\n        annotations(\"";
-        static private final String PLAIN_TEXT_9_0 = ".*\")\n    }\n";
-        static private final String PLAIN_TEXT_10_0 = "\n    testResources {\n        ";
-        static private final String PLAIN_TEXT_11_0 = "\n            ";
-        static private final String PLAIN_TEXT_12_0 = "\n        additionalModules.add(\"";
-        static private final String PLAIN_TEXT_13_0 = "\")\n            ";
-        static private final String PLAIN_TEXT_14_0 = "\n        ";
-        static private final String PLAIN_TEXT_15_0 = "\n        sharedServer = true\n        ";
-        static private final String PLAIN_TEXT_16_0 = "\n    }\n";
-        static private final String PLAIN_TEXT_17_0 = "\n}\n\n";
-        static private final String PLAIN_TEXT_18_0 = "\n\n";
-        static private final String PLAIN_TEXT_19_0 = "\ndockerBuildNative {\n    images = [\n    ";
-        static private final String PLAIN_TEXT_20_0 = "\n        \"";
-        static private final String PLAIN_TEXT_21_0 = "\"";
-        static private final String PLAIN_TEXT_22_0 = ",";
-        static private final String PLAIN_TEXT_23_0 = "\n    ";
-        static private final String PLAIN_TEXT_24_0 = "\n    ]\n}\n";
-        static private final String PLAIN_TEXT_25_0 = "\ndockerBuild {\n    images = [\n    ";
+        static private final String PLAIN_TEXT_0_0 = "micronaut {\n";
+        static private final String PLAIN_TEXT_1_0 = "    ignoredAutomaticDependencies.add(\"";
+        static private final String PLAIN_TEXT_2_0 = "\")\n";
+        static private final String PLAIN_TEXT_3_0 = "    runtime(\"";
+        static private final String PLAIN_TEXT_4_0 = "    testRuntime(\"";
+        static private final String PLAIN_TEXT_5_0 = "    nativeLambda {\n        lambdaRuntimeClassName = \"";
+        static private final String PLAIN_TEXT_6_0 = "\"\n    }\n";
+        static private final String PLAIN_TEXT_7_0 = "    processing {\n        incremental(true)\n        annotations(\"";
+        static private final String PLAIN_TEXT_8_0 = ".*\")\n    }\n";
+        static private final String PLAIN_TEXT_9_0 = "    testResources {\n";
+        static private final String PLAIN_TEXT_10_0 = "        additionalModules.add(\"";
+        static private final String PLAIN_TEXT_11_0 = "        sharedServer = true\n";
+        static private final String PLAIN_TEXT_12_0 = "    }\n";
+        static private final String PLAIN_TEXT_13_0 = "\n";
+        static private final String PLAIN_TEXT_14_0 = "}\n\n";
+        static private final String PLAIN_TEXT_15_0 = "dockerBuildNative {\n    images = [\n";
+        static private final String PLAIN_TEXT_16_0 = "        \"";
+        static private final String PLAIN_TEXT_17_0 = "\"";
+        static private final String PLAIN_TEXT_18_0 = ",";
+        static private final String PLAIN_TEXT_19_0 = "    ]\n}\n";
+        static private final String PLAIN_TEXT_20_0 = "dockerBuild {\n    images = [\n";
 
     }
 

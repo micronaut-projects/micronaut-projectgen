@@ -19,6 +19,7 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.buildtools.gradle.GradlePlugin;
+import io.micronaut.projectgen.core.buildtools.gradle.GradleSpecificFeature;
 import io.micronaut.projectgen.core.feature.BuildPluginFeature;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.options.Options;
@@ -30,7 +31,7 @@ import jakarta.inject.Singleton;
  */
 @Requires(property = "micronaut.starter.feature.shade.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class ShadePlugin implements BuildPluginFeature {
+public class ShadePlugin implements BuildPluginFeature, GradleSpecificFeature {
 
     @NonNull
     @Override
@@ -74,7 +75,7 @@ public class ShadePlugin implements BuildPluginFeature {
     }
 
     @Override
-    public String getThirdPartyDocumentation() {
+    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
         return "https://plugins.gradle.org/plugin/com.github.johnrengelman.shadow";
     }
 }

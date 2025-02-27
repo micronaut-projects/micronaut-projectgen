@@ -19,14 +19,14 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.buildtools.gradle.GradlePlugin;
 import io.micronaut.projectgen.core.buildtools.gradle.GradleSpecificFeature;
+import io.micronaut.projectgen.core.feature.BuildPluginFeature;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import jakarta.inject.Singleton;
 
 @Requires(property = "micronaut.projectgen.features.gradle.plugin.java", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class JavaGradlePlugin implements GradleSpecificFeature {
+public class JavaGradlePlugin implements GradleSpecificFeature, BuildPluginFeature {
     private static final String GRADLE_PLUGIN_JAVA_ID = "java";
 
     @Override
@@ -50,13 +50,8 @@ public class JavaGradlePlugin implements GradleSpecificFeature {
     }
 
     @Override
-    public String getThirdPartyDocumentation() {
+    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
         return "https://docs.gradle.org/current/userguide/java_plugin.html";
-    }
-
-    @Override
-    public boolean supports(Options options) {
-        return true;
     }
 
     @Override

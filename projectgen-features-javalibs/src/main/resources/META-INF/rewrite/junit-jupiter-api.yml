@@ -1,0 +1,9 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.feature.javalibs.junit-jupiter-api
+displayName: Adds JUnit Jupiter Engine dependency in the test classpath
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: org.junit.jupiter
+      artifactId: junit-jupiter-api
+      configuration: testImplementation
+      scope: test

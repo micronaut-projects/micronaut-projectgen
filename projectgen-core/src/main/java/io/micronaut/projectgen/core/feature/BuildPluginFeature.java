@@ -15,6 +15,9 @@
  */
 package io.micronaut.projectgen.core.feature;
 
+/**
+ * Feature contributing a build plugin.
+ */
 public interface BuildPluginFeature extends Feature  {
     @Override
     default int getOrder() {

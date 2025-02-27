@@ -36,16 +36,16 @@ public class CompositeFeatureValidator implements FeatureValidator {
     }
 
     @Override
-    public void validatePreProcessing(Options options, String applicationType, Set<Feature> features) {
+    public void validatePreProcessing(Options options, Set<Feature> features) {
         for (FeatureValidator featureValidator: featureValidators) {
-            featureValidator.validatePreProcessing(options, applicationType, features);
+            featureValidator.validatePreProcessing(options, features);
         }
     }
 
     @Override
-    public void validatePostProcessing(Options options, String applicationType, Set<Feature> features) {
+    public void validatePostProcessing(Options options, Set<Feature> features) {
         for (FeatureValidator featureValidator: featureValidators) {
-            featureValidator.validatePostProcessing(options, applicationType, features);
+            featureValidator.validatePostProcessing(options, features);
         }
     }
 }

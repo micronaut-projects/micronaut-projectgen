@@ -17,12 +17,12 @@ package io.micronaut.projectgen.features.gradle;
 
 import io.micronaut.projectgen.core.buildtools.gradle.GradlePlugin;
 import io.micronaut.projectgen.core.buildtools.gradle.GradleSpecificFeature;
+import io.micronaut.projectgen.core.feature.BuildPluginFeature;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.options.Options;
 import jakarta.inject.Singleton;
 
 @Singleton
-public class KotlinGradlePlugin implements GradleSpecificFeature {
+public class KotlinGradlePlugin implements GradleSpecificFeature, BuildPluginFeature {
     @Override
     public String getName() {
         return "kotlin-gradle-plugin";
@@ -34,18 +34,13 @@ public class KotlinGradlePlugin implements GradleSpecificFeature {
     }
 
     @Override
-    public String getThirdPartyDocumentation() {
+    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
         return "https://plugins.gradle.org/plugin/org.jetbrains.kotlin.jvm";
     }
 
     @Override
     public boolean isVisible() {
         return false;
-    }
-
-    @Override
-    public boolean supports(Options options) {
-        return true;
     }
 
     @Override

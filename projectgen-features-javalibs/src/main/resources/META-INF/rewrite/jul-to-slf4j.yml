@@ -1,0 +1,9 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.feature.javalibs.jul-to-slf4j
+displayName: Adds Logback Classic dependency in the compile classpath
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: org.slf4j
+      artifactId: jul-to-slf4j
+      configuration: implementation
+      scope: compile

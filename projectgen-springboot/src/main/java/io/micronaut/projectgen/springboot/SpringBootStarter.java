@@ -17,7 +17,6 @@ package io.micronaut.projectgen.springboot;
 
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.options.Options;
 import jakarta.inject.Singleton;
 
 /**
@@ -46,10 +45,5 @@ public class SpringBootStarter implements Feature {
     public void apply(GeneratorContext generatorContext) {
         generatorContext.addDependency(SpringBootDependencies.DEPENDENCY_SPRINGBOOT_STARTER);
         generatorContext.addDependency(SpringBootDependencies.DEPENDENCY_SPRINGBOOT_STARTER_TEST);
-    }
-
-    @Override
-    public boolean supports(Options options) {
-        return true;
     }
 }

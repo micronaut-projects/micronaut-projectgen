@@ -21,16 +21,12 @@ import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.buildtools.RepositoryResolver;
 import io.micronaut.projectgen.core.feature.BuildFeature;
-import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.core.rocker.RockerTemplate;
 import io.micronaut.projectgen.core.template.BinaryTemplate;
 import io.micronaut.projectgen.core.template.Template;
 import io.micronaut.projectgen.core.template.URLTemplate;
-import io.micronaut.projectgen.core.utils.OptionUtils;
 import jakarta.inject.Singleton;
-import java.util.Set;
 import io.micronaut.projectgen.core.template.genericPom;
 
 /**
@@ -64,18 +60,12 @@ public class Maven implements BuildFeature {
     }
 
     @Override
-    public boolean shouldApply(Options options,
-                               Set<Feature> selectedFeatures) {
-        return OptionUtils.hasMavenBuildTool(options);
-    }
-
-    @Override
     public boolean isMaven() {
         return true;
     }
 
     @Override
-    public String getThirdPartyDocumentation() {
+    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
         return "https://maven.apache.org/guides/index.html";
     }
 

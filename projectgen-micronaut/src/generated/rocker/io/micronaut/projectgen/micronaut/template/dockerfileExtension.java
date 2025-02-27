@@ -7,9 +7,9 @@ import com.fizzed.rocker.RockerContent;
 import com.fizzed.rocker.RockerOutput;
 import com.fizzed.rocker.runtime.DefaultRockerTemplate;
 import com.fizzed.rocker.runtime.PlainTextUnloadedClassLoader;
-// import @ [1:1]
-import io.micronaut.projectgen.core.buildtools.gradle.GradleDsl;
 // import @ [2:1]
+import io.micronaut.projectgen.core.buildtools.gradle.GradleDsl;
+// import @ [3:1]
 import io.micronaut.projectgen.core.buildtools.Dockerfile;
 
 /*
@@ -25,9 +25,9 @@ public class dockerfileExtension extends com.fizzed.rocker.runtime.DefaultRocker
     static public String getHeaderHash() { return "1715534742"; }
     static public String[] getArgumentNames() { return new String[] { "dsl", "dockerfile" }; }
 
-    // argument @ [3:2]
+    // argument @ [4:2]
     private GradleDsl dsl;
-    // argument @ [3:2]
+    // argument @ [4:2]
     private Dockerfile dockerfile;
 
     public dockerfileExtension dsl(GradleDsl dsl) {
@@ -64,22 +64,20 @@ public class dockerfileExtension extends com.fizzed.rocker.runtime.DefaultRocker
 
         // \n
         static private final byte[] PLAIN_TEXT_0_0;
-        // \n    baseImage = \"
+        //     baseImage = \"
         static private final byte[] PLAIN_TEXT_1_0;
         // \"\n
         static private final byte[] PLAIN_TEXT_2_0;
-        // \n    args(\n    
+        //     args(\n
         static private final byte[] PLAIN_TEXT_3_0;
-        // \n        \"
+        //         \"
         static private final byte[] PLAIN_TEXT_4_0;
         // \"
         static private final byte[] PLAIN_TEXT_5_0;
         // ,
         static private final byte[] PLAIN_TEXT_6_0;
-        // \n    
+        //     )\n
         static private final byte[] PLAIN_TEXT_7_0;
-        // \n    )\n
-        static private final byte[] PLAIN_TEXT_8_0;
 
         static {
             PlainTextUnloadedClassLoader loader = PlainTextUnloadedClassLoader.tryLoad(dockerfileExtension.class.getClassLoader(), dockerfileExtension.class.getName() + "$PlainText", "UTF-8");
@@ -91,12 +89,11 @@ public class dockerfileExtension extends com.fizzed.rocker.runtime.DefaultRocker
             PLAIN_TEXT_5_0 = loader.tryGet("PLAIN_TEXT_5_0");
             PLAIN_TEXT_6_0 = loader.tryGet("PLAIN_TEXT_6_0");
             PLAIN_TEXT_7_0 = loader.tryGet("PLAIN_TEXT_7_0");
-            PLAIN_TEXT_8_0 = loader.tryGet("PLAIN_TEXT_8_0");
         }
 
-        // argument @ [3:2]
+        // argument @ [4:2]
         protected final GradleDsl dsl;
-        // argument @ [3:2]
+        // argument @ [4:2]
         protected final Dockerfile dockerfile;
 
         public Template(dockerfileExtension model) {
@@ -111,112 +108,94 @@ public class dockerfileExtension extends com.fizzed.rocker.runtime.DefaultRocker
 
         @Override
         protected void __doRender() throws IOException, RenderingException {
-            // PlainText @ [3:44]
-            __internal.aboutToExecutePosInTemplate(3, 44);
-            __internal.writeValue(PLAIN_TEXT_0_0);
-            // IfBlockBegin @ [4:1]
-            __internal.aboutToExecutePosInTemplate(4, 1);
+            // IfBlockBegin @ [5:1]
+            __internal.aboutToExecutePosInTemplate(5, 1);
             if (dsl == GradleDsl.GROOVY) {
-                // PlainText @ [4:32]
-                __internal.aboutToExecutePosInTemplate(4, 32);
-                __internal.writeValue(PLAIN_TEXT_0_0);
-                // ValueExpression @ [5:1]
-                __internal.aboutToExecutePosInTemplate(5, 1);
-                __internal.renderValue(raw("tasks.named(\"dockerfile\") {\n"), false);
-                // PlainText @ [5:40]
-                __internal.aboutToExecutePosInTemplate(5, 40);
-                __internal.writeValue(PLAIN_TEXT_0_0);
-                // IfBlockElse @ [6:1]
+                // ValueExpression @ [6:1]
                 __internal.aboutToExecutePosInTemplate(6, 1);
-            } else { // else @ [6:1]
-                // PlainText @ [6:9]
-                __internal.aboutToExecutePosInTemplate(6, 9);
+                __internal.renderValue(raw("tasks.named(\"dockerfile\") {\n"), false);
+                // PlainText @ [6:40]
+                __internal.aboutToExecutePosInTemplate(6, 40);
                 __internal.writeValue(PLAIN_TEXT_0_0);
-                // ValueExpression @ [7:1]
+                // IfBlockElse @ [7:1]
                 __internal.aboutToExecutePosInTemplate(7, 1);
+            } else { // else @ [7:1]
+                // ValueExpression @ [8:1]
+                __internal.aboutToExecutePosInTemplate(8, 1);
                 __internal.renderValue(raw("tasks.named<io.micronaut.gradle.docker.MicronautDockerfile>(\"dockerfile\") {\n"), false);
-                // PlainText @ [7:88]
-                __internal.aboutToExecutePosInTemplate(7, 88);
+                // PlainText @ [8:88]
+                __internal.aboutToExecutePosInTemplate(8, 88);
                 __internal.writeValue(PLAIN_TEXT_0_0);
-                // IfBlockEnd @ [4:1]
-                __internal.aboutToExecutePosInTemplate(4, 1);
-            } // if end @ [4:1]
-            // PlainText @ [8:2]
-            __internal.aboutToExecutePosInTemplate(8, 2);
-            __internal.writeValue(PLAIN_TEXT_0_0);
-            // IfBlockBegin @ [9:1]
-            __internal.aboutToExecutePosInTemplate(9, 1);
+                // IfBlockEnd @ [5:1]
+                __internal.aboutToExecutePosInTemplate(5, 1);
+            } // if end @ [5:1]
+            // IfBlockBegin @ [10:1]
+            __internal.aboutToExecutePosInTemplate(10, 1);
             if (dockerfile.getBaseImage() != null) {
-                // PlainText @ [9:41]
-                __internal.aboutToExecutePosInTemplate(9, 41);
+                // PlainText @ [10:41]
+                __internal.aboutToExecutePosInTemplate(10, 41);
                 __internal.writeValue(PLAIN_TEXT_1_0);
-                // EvalExpression @ [10:18]
-                __internal.aboutToExecutePosInTemplate(10, 18);
+                // EvalExpression @ [11:18]
+                __internal.aboutToExecutePosInTemplate(11, 18);
                 __internal.renderValue((dockerfile.getBaseImage()), false);
-                // PlainText @ [10:46]
-                __internal.aboutToExecutePosInTemplate(10, 46);
+                // PlainText @ [11:46]
+                __internal.aboutToExecutePosInTemplate(11, 46);
                 __internal.writeValue(PLAIN_TEXT_2_0);
-                // IfBlockEnd @ [9:1]
-                __internal.aboutToExecutePosInTemplate(9, 1);
-            } // if end @ [9:1]
-            // PlainText @ [11:2]
-            __internal.aboutToExecutePosInTemplate(11, 2);
-            __internal.writeValue(PLAIN_TEXT_0_0);
-            // IfBlockBegin @ [12:1]
-            __internal.aboutToExecutePosInTemplate(12, 1);
+                // IfBlockEnd @ [10:1]
+                __internal.aboutToExecutePosInTemplate(10, 1);
+            } // if end @ [10:1]
+            // IfBlockBegin @ [13:1]
+            __internal.aboutToExecutePosInTemplate(13, 1);
             if (dockerfile.getArgs() != null) {
-                // PlainText @ [12:37]
-                __internal.aboutToExecutePosInTemplate(12, 37);
+                // PlainText @ [13:37]
+                __internal.aboutToExecutePosInTemplate(13, 37);
                 __internal.writeValue(PLAIN_TEXT_3_0);
-                // ForBlockBegin @ [14:5]
-                __internal.aboutToExecutePosInTemplate(14, 5);
+                // ForBlockBegin @ [15:5]
+                __internal.aboutToExecutePosInTemplate(15, 5);
                 try {
                     for (int i = 0; i < dockerfile.getArgs().size(); i++) {
                         try {
-                            // PlainText @ [14:61]
-                            __internal.aboutToExecutePosInTemplate(14, 61);
+                            // PlainText @ [15:61]
+                            __internal.aboutToExecutePosInTemplate(15, 61);
                             __internal.writeValue(PLAIN_TEXT_4_0);
-                            // EvalExpression @ [15:10]
-                            __internal.aboutToExecutePosInTemplate(15, 10);
+                            // EvalExpression @ [16:10]
+                            __internal.aboutToExecutePosInTemplate(16, 10);
                             __internal.renderValue((dockerfile.getArgs().get(i)), false);
-                            // PlainText @ [15:40]
-                            __internal.aboutToExecutePosInTemplate(15, 40);
+                            // PlainText @ [16:40]
+                            __internal.aboutToExecutePosInTemplate(16, 40);
                             __internal.writeValue(PLAIN_TEXT_5_0);
-                            // IfBlockBegin @ [15:41]
-                            __internal.aboutToExecutePosInTemplate(15, 41);
+                            // IfBlockBegin @ [16:41]
+                            __internal.aboutToExecutePosInTemplate(16, 41);
                             if (i < (dockerfile.getArgs().size() -1)) {
-                                // PlainText @ [15:85]
-                                __internal.aboutToExecutePosInTemplate(15, 85);
+                                // PlainText @ [16:85]
+                                __internal.aboutToExecutePosInTemplate(16, 85);
                                 __internal.writeValue(PLAIN_TEXT_6_0);
-                                // IfBlockEnd @ [15:41]
-                                __internal.aboutToExecutePosInTemplate(15, 41);
-                            } // if end @ [15:41]
-                            // PlainText @ [15:87]
-                            __internal.aboutToExecutePosInTemplate(15, 87);
-                            __internal.writeValue(PLAIN_TEXT_7_0);
-                            // ForBlockEnd @ [14:5]
-                            __internal.aboutToExecutePosInTemplate(14, 5);
+                                // IfBlockEnd @ [16:41]
+                                __internal.aboutToExecutePosInTemplate(16, 41);
+                            } // if end @ [16:41]
+                            // PlainText @ [16:87]
+                            __internal.aboutToExecutePosInTemplate(16, 87);
+                            __internal.writeValue(PLAIN_TEXT_0_0);
+                            // ForBlockEnd @ [15:5]
+                            __internal.aboutToExecutePosInTemplate(15, 5);
                         } catch (com.fizzed.rocker.runtime.ContinueException e) {
                             // support for continuing for loops
                         }
-                    } // for end @ [14:5]
+                    } // for end @ [15:5]
                 } catch (com.fizzed.rocker.runtime.BreakException e) {
                     // support for breaking for loops
                 }
-                // PlainText @ [16:6]
-                __internal.aboutToExecutePosInTemplate(16, 6);
-                __internal.writeValue(PLAIN_TEXT_8_0);
-                // IfBlockEnd @ [12:1]
-                __internal.aboutToExecutePosInTemplate(12, 1);
-            } // if end @ [12:1]
-            // PlainText @ [18:2]
-            __internal.aboutToExecutePosInTemplate(18, 2);
-            __internal.writeValue(PLAIN_TEXT_0_0);
-            // ValueExpression @ [19:1]
-            __internal.aboutToExecutePosInTemplate(19, 1);
+                // PlainText @ [17:6]
+                __internal.aboutToExecutePosInTemplate(17, 6);
+                __internal.writeValue(PLAIN_TEXT_7_0);
+                // IfBlockEnd @ [13:1]
+                __internal.aboutToExecutePosInTemplate(13, 1);
+            } // if end @ [13:1]
+            // ValueExpression @ [20:1]
+            __internal.aboutToExecutePosInTemplate(20, 1);
             __internal.renderValue(raw("}\n"), false);
-            // PlainText @ [19:12]
-            __internal.aboutToExecutePosInTemplate(19, 12);
+            // PlainText @ [20:12]
+            __internal.aboutToExecutePosInTemplate(20, 12);
             __internal.writeValue(PLAIN_TEXT_0_0);
         }
     }
@@ -224,14 +203,13 @@ public class dockerfileExtension extends com.fizzed.rocker.runtime.DefaultRocker
     private static class PlainText {
 
         static private final String PLAIN_TEXT_0_0 = "\n";
-        static private final String PLAIN_TEXT_1_0 = "\n    baseImage = \"";
+        static private final String PLAIN_TEXT_1_0 = "    baseImage = \"";
         static private final String PLAIN_TEXT_2_0 = "\"\n";
-        static private final String PLAIN_TEXT_3_0 = "\n    args(\n    ";
-        static private final String PLAIN_TEXT_4_0 = "\n        \"";
+        static private final String PLAIN_TEXT_3_0 = "    args(\n";
+        static private final String PLAIN_TEXT_4_0 = "        \"";
         static private final String PLAIN_TEXT_5_0 = "\"";
         static private final String PLAIN_TEXT_6_0 = ",";
-        static private final String PLAIN_TEXT_7_0 = "\n    ";
-        static private final String PLAIN_TEXT_8_0 = "\n    )\n";
+        static private final String PLAIN_TEXT_7_0 = "    )\n";
 
     }
 

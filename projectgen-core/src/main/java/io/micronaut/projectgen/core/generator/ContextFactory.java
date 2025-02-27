@@ -74,8 +74,8 @@ public class ContextFactory {
             }
         }
         DefaultFeature.forEach(availableFeatures.getAllFeatures(), options, features, features::add);
-        featureValidator.validatePreProcessing(options, applicationType, features);
-        return new FeatureContext(options, applicationType, operatingSystem, features);
+        featureValidator.validatePreProcessing(options, features);
+        return new FeatureContext(options, features);
     }
 
     /**
@@ -96,12 +96,10 @@ public class ContextFactory {
 
         Set<Feature> featureList = featureContext.getFinalFeatures(consoleOutput);
 
-        featureValidator.validatePostProcessing(featureContext.getOptions(), featureContext.getApplicationType(), featureList);
+        featureValidator.validatePostProcessing(featureContext.getOptions(), featureList);
 
         return new GeneratorContext(project,
-            featureContext.getApplicationType(),
             featureContext.getOptions(),
-            featureContext.getOperatingSystem(),
             featureList,
             coordinateResolver,
             recipeFetcher);

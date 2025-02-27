@@ -17,13 +17,13 @@ package io.micronaut.projectgen.features.gradle;
 
 import io.micronaut.projectgen.core.buildtools.gradle.GradlePlugin;
 import io.micronaut.projectgen.core.buildtools.gradle.GradleSpecificFeature;
+import io.micronaut.projectgen.core.feature.BuildPluginFeature;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import jakarta.inject.Singleton;
 
 @Singleton
-public class GroovyGradlePlugin implements GradleSpecificFeature {
+public class GroovyGradlePlugin implements GradleSpecificFeature, BuildPluginFeature {
     public static final GradlePlugin GROOVY_GRADLE_PLUGIN = GradlePlugin.builder().id("groovy").build();
 
     @Override
@@ -32,18 +32,13 @@ public class GroovyGradlePlugin implements GradleSpecificFeature {
     }
 
     @Override
-    public String getThirdPartyDocumentation() {
+    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
         return "https://docs.gradle.org/current/userguide/groovy_plugin.html";
     }
 
     @Override
     public String getName() {
         return "groovy-gradle-plugin";
-    }
-
-    @Override
-    public boolean supports(Options options) {
-        return true;
     }
 
     @Override

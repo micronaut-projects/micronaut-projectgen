@@ -1,0 +1,24 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.feature.micronaut-serde-processor
+displayName: Adds Micronaut Serialization Annotation Processor
+recipeList:
+  - io.micronaut.feature.micronaut-serde-processor.dependencies.maven.processor
+  - io.micronaut.feature.micronaut-serde-processor.dependencies.gradle.processor
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.feature.micronaut-serde-processor.dependencies.maven.processor
+displayName: Adds Micronaut Serialization annotation Processor to the Maven compiler plugin
+recipeList:
+  - org.openrewrite.maven.AddAnnotationProcessor:
+      groupId: io.micronaut.serde
+      artifactId: micronaut-serde-processor
+      version: ${micronaut.serialization.version}
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.feature.micronaut-serde-processor.dependencies.gradle.processor
+displayName: Adds Micronaut Serialization annotation Processor dependency to a Gradle Build
+recipeList:
+  - org.openrewrite.gradle.AddDependency:
+      groupId: io.micronaut.serde
+      artifactId: micronaut-serde-processor
+      configuration: annotationProcessor

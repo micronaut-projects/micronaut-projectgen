@@ -23,7 +23,7 @@ import java.util.Set;
  */
 public interface FeatureValidator {
 
-    void validatePreProcessing(Options options, String applicationType, Set<Feature> features);
+    void validatePreProcessing(Options options, Set<Feature> features);
 
-    void validatePostProcessing(Options options, String applicationType, Set<Feature> features);
+    void validatePostProcessing(Options options, Set<Feature> features);
 }

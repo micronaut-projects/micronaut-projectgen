@@ -1,0 +1,9 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.feature.javalibs.logback-classic
+displayName: Adds Logback Classic dependency in the compile classpath
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: ch.qos.logback
+      artifactId: logback-classic
+      configuration: runtimeOnly
+      scope: runtime

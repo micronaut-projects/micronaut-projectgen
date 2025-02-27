@@ -15,12 +15,14 @@
  */
 package io.micronaut.projectgen.core.feature;
 
+import io.micronaut.projectgen.core.generator.GeneratorContext;
+
 /**
  * KSP Feature.
  */
 public interface KotlinSymbolProcessingFeature extends Feature {
     @Override
-    default String getThirdPartyDocumentation() {
+    default String getThirdPartyDocumentation(GeneratorContext generatorContext) {
         return "https://kotlinlang.org/docs/ksp-overview.html";
     }
 }

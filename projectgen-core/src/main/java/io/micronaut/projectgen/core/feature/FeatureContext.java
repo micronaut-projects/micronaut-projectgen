@@ -15,7 +15,6 @@
  */
 package io.micronaut.projectgen.core.feature;
 
-import io.micronaut.core.annotation.Nullable;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.io.ConsoleOutput;
 import io.micronaut.projectgen.core.options.*;
@@ -36,8 +35,6 @@ import static java.util.stream.Collectors.toSet;
  */
 public class FeatureContext {
 
-    private final String applicationType;
-    private final OperatingSystem operatingSystem;
     private final Set<Feature> selectedFeatures;
     private final Options options;
     private final List<Feature> features = new ArrayList<>();
@@ -45,11 +42,7 @@ public class FeatureContext {
     private ListIterator<Feature> iterator;
 
     public FeatureContext(Options options,
-                          String applicationType,
-                          @Nullable OperatingSystem operatingSystem,
                           Set<Feature> selectedFeatures) {
-        this.applicationType = applicationType;
-        this.operatingSystem = operatingSystem;
         this.selectedFeatures = selectedFeatures;
         this.options = options;
     }
@@ -131,22 +124,6 @@ public class FeatureContext {
      */
     public Options getOptions() {
         return options;
-    }
-
-    /**
-     *
-     * @return Application Type
-     */
-    public String getApplicationType() {
-        return applicationType;
-    }
-
-    /**
-     *
-     * @return Operating System
-     */
-    public OperatingSystem getOperatingSystem() {
-        return operatingSystem;
     }
 
     /**

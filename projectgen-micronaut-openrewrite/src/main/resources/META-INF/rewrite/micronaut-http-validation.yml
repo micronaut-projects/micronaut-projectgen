@@ -1,0 +1,24 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.feature.micronaut-http-validation
+displayName: Adds Micronaut HTTP Validation Annotation Processor
+recipeList:
+  - io.micronaut.feature.micronaut-http-validation.dependencies.maven.processor
+  - io.micronaut.feature.micronaut-http-validation.dependencies.gradle.processor
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.feature.micronaut-http-validation.dependencies.maven.processor
+displayName: Adds Micronaut HTTP Validation annotation Processor to the Maven compiler plugin
+recipeList:
+  - org.openrewrite.maven.AddAnnotationProcessor:
+      groupId: io.micronaut
+      artifactId: micronaut-http-validation
+      version: ${micronaut.core.version}
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.feature.micronaut-http-validation.dependencies.gradle.processor
+displayName: Adds Micronaut HTTP Validation Processor dependency to a Gradle Build
+recipeList:
+  - org.openrewrite.gradle.AddDependency:
+      groupId: io.micronaut
+      artifactId: micronaut-http-validation
+      configuration: annotationProcessor

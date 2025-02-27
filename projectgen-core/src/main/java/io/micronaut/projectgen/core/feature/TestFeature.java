@@ -15,16 +15,12 @@
  */
 package io.micronaut.projectgen.core.feature;
 
-import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.core.options.TestFramework;
-
-import java.util.Set;
 
 /**
  * Test feature.
  */
-public interface TestFeature extends DefaultFeature {
+public interface TestFeature extends Feature {
 
     @Override
     default boolean isVisible() {
@@ -35,13 +31,6 @@ public interface TestFeature extends DefaultFeature {
     default int getOrder() {
         return FeaturePhase.TEST.getOrder();
     }
-
-    @Override
-    default void apply(GeneratorContext generatorContext) {
-        doApply(generatorContext);
-    }
-
-    void doApply(GeneratorContext generatorContext);
 
     TestFramework getTestFramework();
 
@@ -59,20 +48,5 @@ public interface TestFeature extends DefaultFeature {
 
     default boolean isKoTest() {
         return getTestFramework() == TestFramework.KOTEST;
-    }
-
-    @Override
-    default boolean shouldApply(Options options,
-                                Set<Feature> selectedFeatures) {
-        TestFramework selectedTest = options.testFramework();
-        if (selectedTest == null) {
-            selectedTest = options.language().getDefaults().getTest();
-        }
-        return supports(options) && selectedTest == getTestFramework();
-    }
-
-    @Override
-    default boolean supports(Options options) {
-        return true;
     }
 }

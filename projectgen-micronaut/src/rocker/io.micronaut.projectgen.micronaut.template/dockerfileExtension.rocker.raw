@@ -1,3 +1,4 @@
+@option discardLogicWhitespace=true
 @import io.micronaut.projectgen.core.buildtools.gradle.GradleDsl
 @import io.micronaut.projectgen.core.buildtools.Dockerfile
 @args(GradleDsl dsl, Dockerfile dockerfile)

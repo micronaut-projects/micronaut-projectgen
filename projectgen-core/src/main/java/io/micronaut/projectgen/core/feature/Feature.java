@@ -122,7 +122,9 @@ public interface Feature extends Named, Ordered, Described {
      * @param options Options
      * @return True if the feature can be selected by the user
      */
-    boolean supports(Options options);
+    default boolean supports(Options options) {
+        return true;
+    }
 
     /**
      * Some features should not be visible to the user because they are a common parent of other
@@ -144,29 +146,11 @@ public interface Feature extends Named, Ordered, Described {
 
     /**
      *
-     * @return Returns a link to Micronaut documentation about the feature. eg. https://micronaut-projects.github.io/micronaut-cache/latest/guide/index.html#hazelcast
-     */
-    @Nullable
-    default String getMicronautDocumentation() {
-        return getMicronautDocumentation(null);
-    }
-
-    /**
-     *
      * @param generatorContext Generator Context
-     * @return Returns a link to Micronaut documentation about the feature. eg. https://micronaut-projects.github.io/micronaut-cache/latest/guide/index.html#hazelcast
+     * @return Returns a link to Framework documentation about the feature. eg. https://micronaut-projects.github.io/micronaut-cache/latest/guide/index.html#hazelcast
      */
     @Nullable
-    default String getMicronautDocumentation(GeneratorContext generatorContext) {
-        return null;
-    }
-
-    /**
-     *
-     * @return Returns a link to third party. E.g. https://hazelcast.org
-     */
-    @Nullable
-    default String getThirdPartyDocumentation() {
+    default String getFrameworkDocumentation(GeneratorContext generatorContext) {
         return null;
     }
 
@@ -176,6 +160,6 @@ public interface Feature extends Named, Ordered, Described {
      */
     @Nullable
     default String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return getMicronautDocumentation(generatorContext);
+        return null;
     }
 }

@@ -20,11 +20,10 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
+import io.micronaut.projectgen.core.buildtools.Property;
 import io.micronaut.projectgen.core.buildtools.RepositoryResolver;
 import io.micronaut.projectgen.core.feature.BuildFeature;
-import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.core.rocker.RockerTemplate;
 import io.micronaut.projectgen.core.template.BinaryTemplate;
 import io.micronaut.projectgen.core.template.Template;
@@ -33,7 +32,8 @@ import jakarta.inject.Singleton;
 import io.micronaut.projectgen.core.template.genericBuildGradle;
 import io.micronaut.projectgen.core.template.gradleProperties;
 import io.micronaut.projectgen.core.template.settingsGradle;
-import java.util.Set;
+
+import java.util.List;
 
 /**
  * Gradle Feature.
@@ -86,17 +86,12 @@ public class Gradle implements BuildFeature {
     public void apply(GeneratorContext generatorContext) {
         addGradleInitFiles(generatorContext);
         generateBuildFiles(generatorContext);
+        addGradleProperties(generatorContext);
     }
 
     @Override
     public boolean isGradle() {
         return true;
-    }
-
-    @Override
-    public boolean shouldApply(Options options,
-                               Set<Feature> selectedFeatures) {
-        return options.buildTools().stream().anyMatch(BuildTool::isGradle);
     }
 
     /**
@@ -142,7 +137,10 @@ public class Gradle implements BuildFeature {
      * @param generatorContext  Generator Context
      */
     protected void addGradleProperties(GeneratorContext generatorContext) {
-        generatorContext.addTemplate("projectProperties", new RockerTemplate(Template.ROOT, GRADLE_PROPERTIES, gradleProperties.template(generatorContext.getBuildProperties().getProperties())));
+        List<Property> properties = generatorContext.getBuildProperties().getProperties();
+        if (!properties.isEmpty()) {
+            generatorContext.addTemplate("projectProperties", new RockerTemplate(Template.ROOT, GRADLE_PROPERTIES, gradleProperties.template(properties)));
+        }
     }
 
     /**

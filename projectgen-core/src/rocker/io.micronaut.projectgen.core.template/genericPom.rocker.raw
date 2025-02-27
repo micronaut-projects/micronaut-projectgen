@@ -21,6 +21,9 @@
   <version>@mavenBuild.getVersion()</version>
 }
 @io.micronaut.projectgen.core.template.mavenProperties.template(mavenBuild.getProperties())
+  <repositories>
+@mavenBuild.renderRepositories(4)
+  </repositories>
   <dependencies>
 @for (MavenDependency f : mavenBuild.getDependencies(false)) {
 @io.micronaut.projectgen.core.template.mavenDependency.template(f.getGroupId(), f.getArtifactId(), f.getMavenScope().toString(), f.getVersion(), false, f.getExclusions())

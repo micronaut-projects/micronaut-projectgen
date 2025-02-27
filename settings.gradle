@@ -12,13 +12,14 @@ plugins {
 rootProject.name = 'projectgen'
 
 include 'projectgen-core'
+include 'projectgen-features-javalibs'
 include 'projectgen-bom'
 include 'projectgen-openrewrite'
 include 'projectgen-test'
 include 'projectgen-features-gradle'
 include 'projectgen-springboot'
 include 'projectgen-micronaut'
-include 'starter-openrewrite'
+include 'projectgen-micronaut-openrewrite'
 
 enableFeaturePreview 'TYPESAFE_PROJECT_ACCESSORS'
 

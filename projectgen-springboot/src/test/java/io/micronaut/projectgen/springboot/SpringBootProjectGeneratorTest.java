@@ -22,29 +22,32 @@ import static org.junit.jupiter.api.Assertions.*;
 class SpringBootProjectGeneratorTest {
 
     @Test
-    void testGenerateSpringBootProject(ProjectGenerator projectGenerator) throws Exception {
-        Options options = SpringBootOptionsBuilder.builder()
-            .group("com.example")
-            .version("0.0.1-SNAPSHOT")
-            .name("demo")
-            .packageName("com.example.demo")
-            .javaVersion(JdkVersion.JDK_21)
-            .buildTools(List.of(BuildTool.GRADLE, BuildTool.MAVEN))
-            .language(Language.JAVA)
-            .features(Collections.emptyList())
-            .framework("spring-boot")
-            .build();
+    void testGenerateSpringBootMavenProject(ProjectGenerator projectGenerator) throws Exception {
         MapOutputHandler outputHandler = new MapOutputHandler();
+        Options options = createOptions(List.of(BuildTool.MAVEN));
         projectGenerator.generate(options, outputHandler);
         Map<String, String> project = outputHandler.getProject();
-
         Set<String> expected = Set.of(
             ".gitignore",
             "pom.xml",
             "mvnw",
             "mvnw.bat",
             ".mvn/wrapper/maven-wrapper.jar",
-            ".mvn/wrapper/maven-wrapper.properties",
+            ".mvn/wrapper/maven-wrapper.properties"
+        );
+        Set<String> keys = project.keySet();
+        assertEquals(expected, keys);
+    }
+
+    @Test
+    void testGenerateSpringBootGradleProject(ProjectGenerator projectGenerator) throws Exception {
+        MapOutputHandler outputHandler = new MapOutputHandler();
+        Options options = createOptions(List.of(BuildTool.GRADLE));
+        projectGenerator.generate(options, outputHandler);
+        Map<String, String> project = outputHandler.getProject();
+
+        Set<String> expected = Set.of(
+            ".gitignore",
             "settings.gradle",
             "build.gradle",
             "gradlew",
@@ -53,10 +56,7 @@ class SpringBootProjectGeneratorTest {
             "gradle/wrapper/gradle-wrapper.properties"
         );
         Set<String> keys = project.keySet();
-        for (String path : expected) {
-            assertTrue(keys.contains(path));
-        }
-        assertEquals(expected.size(), project.keySet().size());
+        assertEquals(expected, keys);
         String buildGradle = project.get("build.gradle");
         System.out.println(buildGradle);
         String settingsGradle = project.get("settings.gradle");
@@ -67,8 +67,21 @@ class SpringBootProjectGeneratorTest {
         assertTrue(verifier.hasBuildPlugin("io.spring.dependency-management"));
         assertTrue(verifier.hasDependency("org.springframework.boot", "spring-boot-starter", Scope.COMPILE));
         assertTrue(verifier.hasDependency("org.springframework.boot", "spring-boot-starter-test", Scope.TEST));
-
         String pomXml = project.get("pom.xml");
         String gitignore = project.get(".gitignore");
+    }
+
+    private static Options createOptions(List<BuildTool> buildTools) {
+        return SpringBootOptionsBuilder.builder()
+            .group("com.example")
+            .version("0.0.1-SNAPSHOT")
+            .name("demo")
+            .packageName("com.example.demo")
+            .javaVersion(JdkVersion.JDK_21)
+            .buildTools(buildTools)
+            .language(Language.JAVA)
+            .features(Collections.emptyList())
+            .framework("spring-boot")
+            .build();
     }
 }

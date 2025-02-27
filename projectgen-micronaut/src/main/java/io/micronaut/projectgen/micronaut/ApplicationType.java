@@ -27,6 +27,7 @@ public enum ApplicationType implements Named {
 
     DEFAULT("Micronaut Application", "A Micronaut Application"),
     CLI("Micronaut CLI Application", "A Command Line Application"),
+    LIBRARY("Micronaut Library Application", "A Micronaut Java Library"),
     FUNCTION("Micronaut Serverless Function", "A Function Application for Serverless"),
     GRPC("Micronaut gRPC Application", "A gRPC Application"),
     MESSAGING("Micronaut Messaging Application", "A Messaging-Driven Application");

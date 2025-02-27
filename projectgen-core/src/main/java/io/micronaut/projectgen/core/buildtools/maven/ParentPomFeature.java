@@ -17,7 +17,6 @@ package io.micronaut.projectgen.core.buildtools.maven;
 
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.projectgen.core.feature.Feature;
-import io.micronaut.projectgen.core.options.Options;
 
 /**
  * A feature which defines a ParentPom.
@@ -26,8 +25,4 @@ public interface ParentPomFeature extends Feature {
     @NonNull
     ParentPom getParentPom();
 
-    @Override
-    default boolean supports(Options options) {
-        return true;
-    }
 }

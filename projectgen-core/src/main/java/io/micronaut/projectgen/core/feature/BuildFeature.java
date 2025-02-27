@@ -15,12 +15,10 @@
  */
 package io.micronaut.projectgen.core.feature;
 
-import io.micronaut.projectgen.core.options.Options;
-
 /**
  * Build Feature.
  */
-public interface BuildFeature extends DefaultFeature {
+public interface BuildFeature extends Feature {
 
     @Override
     default boolean isVisible() {
@@ -30,11 +28,6 @@ public interface BuildFeature extends DefaultFeature {
     @Override
     default int getOrder() {
         return FeaturePhase.BUILD.getOrder();
-    }
-
-    @Override
-    default boolean supports(Options options) {
-        return true;
     }
 
     default boolean isGradle() {

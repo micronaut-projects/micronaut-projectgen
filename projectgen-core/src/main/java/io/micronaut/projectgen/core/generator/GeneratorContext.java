@@ -39,16 +39,7 @@ import io.micronaut.projectgen.core.rocker.TestRockerModelProvider;
 import io.micronaut.projectgen.core.template.Template;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -58,38 +49,31 @@ import java.util.stream.Collectors;
  * @since 1.0.0
  */
 public class GeneratorContext implements DependencyContext {
-
+    public static final String ROOT_PROJECT = "ROOT";
     private final Project project;
-    private final OperatingSystem operatingSystem;
-
     private final BuildProperties buildProperties = new BuildProperties();
-    private final ApplicationConfiguration configuration = new ApplicationConfiguration();
-    private final Map<String, ApplicationConfiguration> applicationEnvironmentConfiguration = new LinkedHashMap<>();
-    private final Map<String, BootstrapConfiguration> bootstrapEnvironmentConfiguration = new LinkedHashMap<>();
-    private final BootstrapConfiguration bootstrapConfiguration = new BootstrapConfiguration();
-    private final Set<Configuration> otherConfiguration = new HashSet<>();
+    private final Map<String, ApplicationConfiguration> configuration = new LinkedHashMap<>();
+    private final Map<String, Map<String, ApplicationConfiguration>> applicationEnvironmentConfiguration = new LinkedHashMap<>();
+    private final Map<String, Map<String, BootstrapConfiguration>> bootstrapEnvironmentConfiguration = new LinkedHashMap<>();
+    private final Map<String, BootstrapConfiguration> bootstrapConfiguration = new LinkedHashMap<>();
+    private final Map<String, Set<Configuration>> otherConfiguration = new LinkedHashMap<>();
 
     private final Map<String, Template> templates = new LinkedHashMap<>();
     private final List<Writable> helpTemplates = new ArrayList<>(8);
-    private final String command;
     private final Features features;
     private final Options options;
     private final CoordinateResolver coordinateResolver;
     private final DependencyContext dependencyContext;
     private final Set<Profile> profiles = new HashSet<>();
-    private final Set<BuildPlugin> buildPlugins = new HashSet<>();
+    private final Map<String, Set<BuildPlugin>> buildPlugins = new LinkedHashMap<>();
     private final RecipeFetcher recipeFetcher;
 
     public GeneratorContext(Project project,
-                            String type,
                             Options options,
-                            @Nullable OperatingSystem operatingSystem,
                             Set<Feature> features,
                             CoordinateResolver coordinateResolver,
                             RecipeFetcher recipeFetcher) {
-        this.command = type;
         this.project = project;
-        this.operatingSystem = operatingSystem;
         this.features = new Features(this, features, options);
         this.options = options;
         this.coordinateResolver = coordinateResolver;
@@ -143,16 +127,50 @@ public class GeneratorContext implements DependencyContext {
     /**
      * @return The configuration
      */
-    @NonNull public ApplicationConfiguration getConfiguration() {
-        return configuration;
+    @NonNull
+    public ApplicationConfiguration getConfiguration() {
+        return getConfigurationByModule(ROOT_PROJECT);
     }
 
     /**
-     * @param env Environment
+     * @param module Module
      * @return The configuration
      */
-    @Nullable public ApplicationConfiguration getConfiguration(String env) {
-        return applicationEnvironmentConfiguration.get(env);
+    @NonNull
+    public ApplicationConfiguration getConfigurationByModule(String module) {
+        ApplicationConfiguration applicationConfiguration = configuration.get(module);
+        if (applicationConfiguration == null) {
+            applicationConfiguration = new ApplicationConfiguration();
+            configuration.put(ROOT_PROJECT, applicationConfiguration);
+        }
+        return applicationConfiguration;
+    }
+
+    /**
+     *
+     * @param environment Environment
+     * @return application configuration
+     */
+    @NonNull
+    public ApplicationConfiguration getConfigurationByEnvironment(String environment) {
+        return getConfigurationByModuleAndEnvironment(ROOT_PROJECT, environment);
+    }
+
+    /**
+     * @param module module
+     * @param environment Environment
+     * @return application configuration
+     */
+    @Nullable
+    public ApplicationConfiguration getConfigurationByModuleAndEnvironment(String module, String environment) {
+        Map<String, ApplicationConfiguration> environmentConfigurationMap = applicationEnvironmentConfiguration
+            .computeIfAbsent(module, k -> new LinkedHashMap<>());
+        ApplicationConfiguration applicationConfiguration = environmentConfigurationMap.get(environment);
+        if (applicationConfiguration == null) {
+            applicationConfiguration = new ApplicationConfiguration();
+            environmentConfigurationMap.put(environment, applicationConfiguration);
+        }
+        return applicationConfiguration;
     }
 
     /**
@@ -160,8 +178,69 @@ public class GeneratorContext implements DependencyContext {
      * @param env Environment
      * @return whether it has configuration for a particular environment
      */
-    public boolean hasConfigurationEnvironment(@NonNull String env) {
-        return applicationEnvironmentConfiguration.containsKey(env);
+    public boolean hasConfigurationByEnvironment(@NonNull String env) {
+        return hasConfigurationByModuleAndEnvironment(ROOT_PROJECT, env);
+    }
+
+    /**
+     *
+     * @param module module
+     * @param env Environment
+     * @return whether it has configuration for a particular environment
+     */
+    public boolean hasConfigurationByModuleAndEnvironment(@NonNull String module, @NonNull String env) {
+        Map<String, ApplicationConfiguration> configurationMap = applicationEnvironmentConfiguration.get(module);
+        if (configurationMap == null) {
+            return false;
+        }
+        ApplicationConfiguration applicationConfiguration = configurationMap.get(env);
+        if (applicationConfiguration == null) {
+            return false;
+        }
+        return applicationConfiguration.containsKey(env);
+    }
+
+    /**
+     * @param env Environment
+     * @return The configuration
+     */
+    @Nullable
+    public BootstrapConfiguration getBootstrapConfigurationByEnvironment(String env) {
+        return getBootstrapConfigurationByModuleAndEnvironment(ROOT_PROJECT, env);
+    }
+
+    /**
+     * @param module Module
+     * @param env Environment
+     * @return The configuration
+     */
+    @Nullable
+    public BootstrapConfiguration getBootstrapConfigurationByModuleAndEnvironment(String module, String env) {
+        Map<String, BootstrapConfiguration> configurationMap = bootstrapEnvironmentConfiguration.computeIfAbsent(module, k -> new LinkedHashMap<>());
+        BootstrapConfiguration bootstrapConfiguration = configurationMap.get(env);
+        if (bootstrapConfiguration == null) {
+            bootstrapConfiguration = new BootstrapConfiguration();
+            configurationMap.put(env, bootstrapConfiguration);
+        }
+        return bootstrapConfiguration;
+    }
+
+    /**
+     *
+     * @param module Module
+     * @param env Environment
+     * @param defaultConfig Default Configuration
+     * @return Application Configuration
+     */
+    @NonNull
+    public ApplicationConfiguration getConfigurationByModuleEnvironmentOrDefaultConfig(String module, String env, ApplicationConfiguration defaultConfig) {
+        Map<String, ApplicationConfiguration> configurationMap = applicationEnvironmentConfiguration.get(module);
+        if (configurationMap == null) {
+            configurationMap = new LinkedHashMap<>();
+            configurationMap.put(module, defaultConfig);
+            return defaultConfig;
+        }
+        return configurationMap.computeIfAbsent(env, key -> defaultConfig);
     }
 
     /**
@@ -170,16 +249,9 @@ public class GeneratorContext implements DependencyContext {
      * @param defaultConfig Default Configuration
      * @return Application Configuration
      */
-    @NonNull public ApplicationConfiguration getConfiguration(String env, ApplicationConfiguration defaultConfig) {
-        return applicationEnvironmentConfiguration.computeIfAbsent(env, key -> defaultConfig);
-    }
-
-    /**
-     * @param env Environment
-     * @return The configuration
-     */
-    @Nullable public BootstrapConfiguration getBootstrapConfiguration(String env) {
-        return bootstrapEnvironmentConfiguration.get(env);
+    @NonNull
+    public ApplicationConfiguration getConfigurationByEnvironmentOrDefaultConfig(String env, ApplicationConfiguration defaultConfig) {
+        return getConfigurationByModuleEnvironmentOrDefaultConfig(ROOT_PROJECT, env, defaultConfig);
     }
 
     /**
@@ -188,15 +260,38 @@ public class GeneratorContext implements DependencyContext {
      * @param defaultConfig Bootstrap Configuration
      * @return Bootstrap configuration
      */
-    @NonNull public BootstrapConfiguration getBootstrapConfiguration(String env, BootstrapConfiguration defaultConfig) {
-        return bootstrapEnvironmentConfiguration.computeIfAbsent(env, key -> defaultConfig);
+    @NonNull
+    public BootstrapConfiguration getBootstrapConfigurationByEnvironmentOrDefaultConfig(String env, BootstrapConfiguration defaultConfig) {
+        return getBootstrapConfigurationByModuleAndEnvironmentOrDefaultConfig(ROOT_PROJECT, env, defaultConfig);
+    }
+
+    /**
+     * @param module Module
+     * @param env environment
+     * @param defaultConfig Bootstrap Configuration
+     * @return Bootstrap configuration
+     */
+    @NonNull
+    public BootstrapConfiguration getBootstrapConfigurationByModuleAndEnvironmentOrDefaultConfig(String module,
+                                                                                                 String env,
+                                                                                                 BootstrapConfiguration defaultConfig) {
+        return bootstrapEnvironmentConfiguration.computeIfAbsent(module, k -> new LinkedHashMap<>())
+            .computeIfAbsent(env, key -> defaultConfig);
     }
 
     /**
      * @return The bootstrap config
      */
     @NonNull public BootstrapConfiguration getBootstrapConfiguration() {
-        return bootstrapConfiguration;
+        return getBootstrapConfigurationByModule(ROOT_PROJECT);
+    }
+
+    /**
+     * @param module Module
+     * @return The bootstrap config
+     */
+    @NonNull public BootstrapConfiguration getBootstrapConfigurationByModule(String module) {
+        return bootstrapConfiguration.computeIfAbsent(module, k -> new BootstrapConfiguration());
     }
 
     /**
@@ -204,7 +299,20 @@ public class GeneratorContext implements DependencyContext {
      * @param configuration Configuration
      */
     public void addConfiguration(@NonNull Configuration configuration) {
-        otherConfiguration.add(configuration);
+        addConfigurationByModule(ROOT_PROJECT, configuration);
+    }
+
+    /**
+     * @param module Module
+     * @param configuration Configuration
+     */
+    public void addConfigurationByModule(String module, @NonNull Configuration configuration) {
+        Set<Configuration> configurations = otherConfiguration.get(module);
+        if (configurations == null) {
+            configurations = new LinkedHashSet<>();
+            otherConfiguration.put(module, configurations);
+        }
+        configurations.add(configuration);
     }
 
     /**
@@ -213,12 +321,36 @@ public class GeneratorContext implements DependencyContext {
      */
     @NonNull
     public Set<Configuration> getAllConfigurations() {
+        return getAllConfigurationsByModule(ROOT_PROJECT);
+    }
+
+    /**
+     * @param module Module
+     * @return All Configurations
+     */
+    @NonNull
+    public Set<Configuration> getAllConfigurationsByModule(String module) {
         Set<Configuration> allConfigurations = new HashSet<>();
-        allConfigurations.add(configuration);
-        allConfigurations.add(bootstrapConfiguration);
-        allConfigurations.addAll(applicationEnvironmentConfiguration.values());
-        allConfigurations.addAll(bootstrapEnvironmentConfiguration.values());
-        allConfigurations.addAll(otherConfiguration);
+        ApplicationConfiguration applicationConfiguration = configuration.get(module);
+        if (applicationConfiguration != null) {
+            allConfigurations.add(applicationConfiguration);
+        }
+        BootstrapConfiguration bootstrapConfig = bootstrapConfiguration.get(module);
+        if (bootstrapConfig != null) {
+            allConfigurations.add(bootstrapConfig);
+        }
+        Map<String, ApplicationConfiguration> environmentConfigMap = applicationEnvironmentConfiguration.get(module);
+        if (environmentConfigMap != null) {
+            allConfigurations.addAll(environmentConfigMap.values());
+        }
+        Map<String, BootstrapConfiguration> bootstrapConfigurationMap = bootstrapEnvironmentConfiguration.get(module);
+        if (bootstrapConfigurationMap != null) {
+            allConfigurations.addAll(bootstrapConfigurationMap.values());
+        }
+        Set<Configuration> configurations = otherConfiguration.get(module);
+        if (configurations != null) {
+            allConfigurations.addAll(configurations);
+        }
         return allConfigurations;
     }
 
@@ -243,6 +375,10 @@ public class GeneratorContext implements DependencyContext {
         return options.language();
     }
 
+    /**
+     *
+     * @return Options
+     */
     @NonNull
     public Options getOptions() {
         return options;
@@ -264,13 +400,6 @@ public class GeneratorContext implements DependencyContext {
     }
 
     /**
-     * @return The application type
-     */
-    @NonNull public String getApplicationType() {
-        return command;
-    }
-
-    /**
      * @return The selected features
      */
     @NonNull public Features getFeatures() {
@@ -282,13 +411,6 @@ public class GeneratorContext implements DependencyContext {
      */
     @NonNull public JdkVersion getJdkVersion() {
         return options.javaVersion();
-    }
-
-    /**
-     * @return The current OS
-     */
-    @Nullable public OperatingSystem getOperatingSystem() {
-        return operatingSystem;
     }
 
     /**
@@ -414,11 +536,17 @@ public class GeneratorContext implements DependencyContext {
      * @param buildPlugin Build plugin
      */
     public void addBuildPlugin(BuildPlugin buildPlugin) {
+        addBuildPluginByModule(ROOT_PROJECT, buildPlugin);
+    }
+
+    public void addBuildPluginByModule(String module, BuildPlugin buildPlugin) {
+        Set<BuildPlugin> plugins = buildPlugins.computeIfAbsent(module, k -> new HashSet<>());
         if (buildPlugin.requiresLookup()) {
-            this.buildPlugins.add(buildPlugin.resolved(coordinateResolver));
+            plugins.add(buildPlugin.resolved(coordinateResolver));
         } else {
-            this.buildPlugins.add(buildPlugin);
+            plugins.add(buildPlugin);
         }
+
     }
 
     /**
@@ -451,7 +579,19 @@ public class GeneratorContext implements DependencyContext {
      * @return Build plugins
      */
     public Set<BuildPlugin> getBuildPlugins() {
-        return buildPlugins;
+        return getBuildPluginsByModule(ROOT_PROJECT);
+    }
+
+    /**
+     * @param module Module
+     * @return Build plugins
+     */
+    public Set<BuildPlugin> getBuildPluginsByModule(String module) {
+        Set<BuildPlugin> plugins = buildPlugins.get(module);
+        if (plugins == null) {
+            return Collections.emptySet();
+        }
+        return plugins;
     }
 
     /**

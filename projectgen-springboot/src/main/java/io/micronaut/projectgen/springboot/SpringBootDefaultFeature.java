@@ -18,6 +18,8 @@ package io.micronaut.projectgen.springboot;
 import io.micronaut.projectgen.core.buildtools.MavenCentral;
 import io.micronaut.projectgen.core.buildtools.Repository;
 import io.micronaut.projectgen.core.buildtools.RequiresRepository;
+import io.micronaut.projectgen.core.buildtools.gradle.Gradle;
+import io.micronaut.projectgen.core.buildtools.maven.Maven;
 import io.micronaut.projectgen.core.feature.DefaultFeature;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.feature.FeatureContext;
@@ -27,6 +29,9 @@ import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.projectgen.features.gradle.GroovyGradlePlugin;
 import io.micronaut.projectgen.features.gradle.JavaGradlePlugin;
 import io.micronaut.projectgen.features.gradle.KotlinGradlePlugin;
+import io.micronaut.projectgen.springboot.gradle.SpringBootGradlePlugin;
+import io.micronaut.projectgen.springboot.gradle.SpringDependencyManagementGradlePlugin;
+import io.micronaut.projectgen.springboot.maven.SpringBootMavenPlugin;
 import jakarta.inject.Singleton;
 
 import java.util.List;
@@ -37,6 +42,8 @@ import java.util.Set;
  */
 @Singleton
 public class SpringBootDefaultFeature implements DefaultFeature, RequiresRepository {
+    private final Gradle gradle;
+    private final Maven maven;
     private final SpringBootGradlePlugin springBootGradlePlugin;
     private final JavaGradlePlugin javaGradlePlugin;
     private final SpringDependencyManagementGradlePlugin springDependencyManagementGradlePlugin;
@@ -47,13 +54,17 @@ public class SpringBootDefaultFeature implements DefaultFeature, RequiresReposit
     private final SpringBootMavenPlugin springBootMavenPlugin;
     private final GitIgnore gitIgnore;
 
-    public SpringBootDefaultFeature(SpringBootGradlePlugin springBootGradlePlugin,
+    public SpringBootDefaultFeature(Gradle gradle,
+                                    Maven maven,
+                                    SpringBootGradlePlugin springBootGradlePlugin,
                                     JavaGradlePlugin javaGradlePlugin,
                                     SpringDependencyManagementGradlePlugin springDependencyManagementGradlePlugin,
                                     SpringBootStarter springBootStarter,
                                     KotlinGradlePlugin kotlinGradlePlugin,
                                     GroovyGradlePlugin groovyGradlePlugin,
                                     SpringBootParentPomFeature springBootParentPomFeature, SpringBootMavenPlugin springBootMavenPlugin, GitIgnore gitIgnore) {
+        this.gradle = gradle;
+        this.maven = maven;
         this.springBootGradlePlugin = springBootGradlePlugin;
         this.javaGradlePlugin = javaGradlePlugin;
         this.springDependencyManagementGradlePlugin = springDependencyManagementGradlePlugin;
@@ -74,6 +85,7 @@ public class SpringBootDefaultFeature implements DefaultFeature, RequiresReposit
     public void processSelectedFeatures(FeatureContext featureContext) {
         featureContext.addFeatureIfNotPresent(GitIgnore.class, gitIgnore);
         if (OptionUtils.hasGradleBuildTool(featureContext.getOptions())) {
+            featureContext.addFeatureIfNotPresent(Gradle.class, gradle);
             switch (featureContext.getOptions().language()) {
                 case JAVA:
                     featureContext.addFeatureIfNotPresent(JavaGradlePlugin.class, javaGradlePlugin);
@@ -92,6 +104,7 @@ public class SpringBootDefaultFeature implements DefaultFeature, RequiresReposit
             featureContext.addFeatureIfNotPresent(SpringBootStarter.class, springBootStarter);
         }
         if (OptionUtils.hasMavenBuildTool(featureContext.getOptions())) {
+            featureContext.addFeatureIfNotPresent(Maven.class, maven);
             featureContext.addFeatureIfNotPresent(SpringBootParentPomFeature.class, springBootParentPomFeature);
             featureContext.addFeatureIfNotPresent(SpringBootMavenPlugin.class, springBootMavenPlugin);
         }
@@ -105,11 +118,6 @@ public class SpringBootDefaultFeature implements DefaultFeature, RequiresReposit
     @Override
     public boolean isVisible() {
         return false;
-    }
-
-    @Override
-    public boolean supports(Options options) {
-        return true;
     }
 
     @Override
