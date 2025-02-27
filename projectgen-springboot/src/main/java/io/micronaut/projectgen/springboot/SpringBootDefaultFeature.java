@@ -66,8 +66,8 @@ public class SpringBootDefaultFeature implements DefaultFeature, RequiresReposit
     }
 
     @Override
-    public boolean shouldApply(String applicationType, Options options, Set<Feature> selectedFeatures) {
-        return options.framework().equals(getTargetFramework());
+    public boolean shouldApply(Options options, Set<Feature> selectedFeatures) {
+        return options instanceof SpringBootOptions;
     }
 
     @Override
@@ -98,11 +98,6 @@ public class SpringBootDefaultFeature implements DefaultFeature, RequiresReposit
     }
 
     @Override
-    public String getTargetFramework() {
-        return "spring-boot";
-    }
-
-    @Override
     public String getName() {
         return "spring boot";
     }
@@ -113,7 +108,7 @@ public class SpringBootDefaultFeature implements DefaultFeature, RequiresReposit
     }
 
     @Override
-    public boolean supports(String applicationType) {
+    public boolean supports(Options options) {
         return true;
     }
 

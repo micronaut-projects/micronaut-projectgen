@@ -94,8 +94,7 @@ public class Gradle implements BuildFeature {
     }
 
     @Override
-    public boolean shouldApply(String applicationType,
-                               Options options,
+    public boolean shouldApply(Options options,
                                Set<Feature> selectedFeatures) {
         return options.buildTools().stream().anyMatch(BuildTool::isGradle);
     }

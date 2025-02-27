@@ -64,8 +64,7 @@ public class Maven implements BuildFeature {
     }
 
     @Override
-    public boolean shouldApply(String applicationType,
-                               Options options,
+    public boolean shouldApply(Options options,
                                Set<Feature> selectedFeatures) {
         return OptionUtils.hasMavenBuildTool(options);
     }

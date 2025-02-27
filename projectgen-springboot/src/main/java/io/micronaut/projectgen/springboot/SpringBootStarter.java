@@ -17,6 +17,7 @@ package io.micronaut.projectgen.springboot;
 
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.options.Options;
 import jakarta.inject.Singleton;
 
 /**
@@ -48,7 +49,7 @@ public class SpringBootStarter implements Feature {
     }
 
     @Override
-    public boolean supports(String applicationType) {
+    public boolean supports(Options options) {
         return true;
     }
 }

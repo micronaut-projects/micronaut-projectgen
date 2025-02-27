@@ -29,7 +29,7 @@ import java.util.Set;
 public interface DefaultConfigurationFeature extends ConfigurationFeature, DefaultFeature {
 
     @Override
-    default boolean shouldApply(String applicationType, Options options, Set<Feature> selectedFeatures) {
+    default boolean shouldApply(Options options, Set<Feature> selectedFeatures) {
         return selectedFeatures.stream().noneMatch(ConfigurationFeature.class::isInstance);
     }
 }

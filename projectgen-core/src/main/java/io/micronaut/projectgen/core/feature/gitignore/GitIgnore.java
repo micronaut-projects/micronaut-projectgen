@@ -17,12 +17,16 @@ package io.micronaut.projectgen.core.feature.gitignore;
 
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.core.rocker.RockerTemplate;
 import jakarta.inject.Singleton;
 import io.micronaut.projectgen.core.template.gitignore;
 
 import java.util.List;
 
+/**
+ * Creates a .gitignore file.
+ */
 @Singleton
 public class GitIgnore implements Feature {
     private final List<ContributesGitIgnoreEntries> contributesGitIgnoreEntries;
@@ -37,7 +41,7 @@ public class GitIgnore implements Feature {
     }
 
     @Override
-    public boolean supports(String applicationType) {
+    public boolean supports(Options options) {
         return true;
     }
 

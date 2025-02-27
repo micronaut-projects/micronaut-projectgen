@@ -17,6 +17,7 @@ include 'projectgen-openrewrite'
 include 'projectgen-test'
 include 'projectgen-features-gradle'
 include 'projectgen-springboot'
+include 'projectgen-micronaut'
 include 'starter-openrewrite'
 
 enableFeaturePreview 'TYPESAFE_PROJECT_ACCESSORS'

@@ -18,6 +18,7 @@ package io.micronaut.projectgen.features.gradle;
 import io.micronaut.projectgen.core.buildtools.gradle.GradlePlugin;
 import io.micronaut.projectgen.core.buildtools.gradle.GradleSpecificFeature;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import jakarta.inject.Singleton;
 
@@ -41,7 +42,7 @@ public class GroovyGradlePlugin implements GradleSpecificFeature {
     }
 
     @Override
-    public boolean supports(String applicationType) {
+    public boolean supports(Options options) {
         return true;
     }
 

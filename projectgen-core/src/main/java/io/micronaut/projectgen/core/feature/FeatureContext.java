@@ -103,14 +103,6 @@ public class FeatureContext {
 
     /**
      *
-     * @return Framework
-     */
-    public String getFramework() {
-        return options.framework();
-    }
-
-    /**
-     *
      * @return Test framework
      */
     public TestFramework getTestFramework() {

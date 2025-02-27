@@ -20,6 +20,9 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Contributes .gitignore entries for MacOS.
+ */
 @Singleton
 public class MacOsGitIgnore implements ContributesGitIgnoreEntries {
     private static final List<String> ENTRIES = List.of(".DS_Store");

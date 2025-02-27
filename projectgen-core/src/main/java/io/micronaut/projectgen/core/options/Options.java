@@ -15,7 +15,6 @@
  */
 package io.micronaut.projectgen.core.options;
 
-import io.micronaut.core.annotation.Nullable;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
 import java.util.*;
 
@@ -27,7 +26,9 @@ public interface Options {
      *
      * @return Operating System
      */
-    OperatingSystem operatingSystem();
+    default OperatingSystem operatingSystem() {
+        return null;
+    }
 
     /**
      *
@@ -46,15 +47,6 @@ public interface Options {
      * @return Features
      */
     List<String> features();
-
-    /**
-     *
-     * @return Framework
-     */
-    @Nullable
-    default String framework() {
-        return null;
-    }
 
     /**
      *

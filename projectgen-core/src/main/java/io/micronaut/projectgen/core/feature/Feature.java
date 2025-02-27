@@ -22,6 +22,7 @@ import io.micronaut.core.naming.Described;
 import io.micronaut.core.naming.Named;
 import io.micronaut.core.order.Ordered;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.options.Options;
 
 /**
  * A feature is a class that affects the outcome of a generated
@@ -82,7 +83,7 @@ public interface Feature extends Named, Ordered, Described {
 
     /**
      * If this method is called for a given feature then that feature was explicitly selected
-     * or was included by default as a result of {@link DefaultFeature#shouldApply(ApplicationType, io.micronaut.starter.options.Options, java.util.Set)}.
+     * or was included by default as a result of {@link DefaultFeature#shouldApply(io.micronaut.starter.options.Options, java.util.Set)}.
      *
      * This method can be implemented to allow features to modify the list of features
      * that will apply to the project. The methods {@link FeatureContext#addFeature(Feature)}
@@ -98,7 +99,7 @@ public interface Feature extends Named, Ordered, Described {
 
     /**
      * If this method is called for a given feature that means the feature was explicitly selected,
-     * included by default as a result of {@link DefaultFeature#shouldApply(ApplicationType, io.micronaut.starter.options.Options, java.util.Set)},
+     * included by default as a result of {@link DefaultFeature#shouldApply(io.micronaut.starter.options.Options, java.util.Set)},
      * or added explicitly by another feature through {@link FeatureContext#addFeature(Feature)}.
      *
      * At this point the feature list is set and cannot change.
@@ -118,10 +119,10 @@ public interface Feature extends Named, Ordered, Described {
      * application types. This method is not used for determining if a default feature
      * should be applied.
      *
-     * @param applicationType The application type
+     * @param options Options
      * @return True if the feature can be selected by the user
      */
-    boolean supports(String applicationType);
+    boolean supports(Options options);
 
     /**
      * Some features should not be visible to the user because they are a common parent of other

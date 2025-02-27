@@ -62,18 +62,17 @@ public interface TestFeature extends DefaultFeature {
     }
 
     @Override
-    default boolean shouldApply(String applicationType,
-                                Options options,
+    default boolean shouldApply(Options options,
                                 Set<Feature> selectedFeatures) {
         TestFramework selectedTest = options.testFramework();
         if (selectedTest == null) {
             selectedTest = options.language().getDefaults().getTest();
         }
-        return supports(applicationType) && selectedTest == getTestFramework();
+        return supports(options) && selectedTest == getTestFramework();
     }
 
     @Override
-    default boolean supports(String applicationType) {
+    default boolean supports(Options options) {
         return true;
     }
 }

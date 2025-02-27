@@ -20,6 +20,7 @@ import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.buildtools.maven.MavenPlugin;
 import io.micronaut.projectgen.core.buildtools.maven.MavenSpecificFeature;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import jakarta.inject.Singleton;
 
@@ -53,7 +54,7 @@ public class SpringBootMavenPlugin implements MavenSpecificFeature {
     }
 
     @Override
-    public boolean supports(String applicationType) {
+    public boolean supports(Options options) {
         return true;
     }
 

@@ -15,6 +15,8 @@
  */
 package io.micronaut.projectgen.core.feature;
 
+import io.micronaut.projectgen.core.options.Options;
+
 /**
  * Build Feature.
  */
@@ -31,7 +33,7 @@ public interface BuildFeature extends DefaultFeature {
     }
 
     @Override
-    default boolean supports(String applicationType) {
+    default boolean supports(Options options) {
         return true;
     }
 

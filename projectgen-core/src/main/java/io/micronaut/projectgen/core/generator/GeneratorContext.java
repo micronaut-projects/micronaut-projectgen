@@ -257,14 +257,6 @@ public class GeneratorContext implements DependencyContext {
     }
 
     /**
-     * @return The framework
-     */
-    @NonNull
-    public String getFramework() {
-        return options.framework();
-    }
-
-    /**
      * @return The project
      */
     @NonNull public Project getProject() {

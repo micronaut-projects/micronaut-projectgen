@@ -73,7 +73,7 @@ public class ContextFactory {
                 throw new IllegalArgumentException("The requested feature does not exist: " + name);
             }
         }
-        DefaultFeature.forEach(availableFeatures.getAllFeatures(), applicationType, options, features, features::add);
+        DefaultFeature.forEach(availableFeatures.getAllFeatures(), options, features, features::add);
         featureValidator.validatePreProcessing(options, applicationType, features);
         return new FeatureContext(options, applicationType, operatingSystem, features);
     }

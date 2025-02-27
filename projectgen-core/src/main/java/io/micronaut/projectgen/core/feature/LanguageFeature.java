@@ -15,6 +15,8 @@
  */
 package io.micronaut.projectgen.core.feature;
 
+import io.micronaut.projectgen.core.options.Options;
+
 /**
  * Language Feature.
  */
@@ -43,7 +45,7 @@ public interface LanguageFeature extends DefaultFeature {
     }
 
     @Override
-    default boolean supports(String applicationType) {
+    default boolean supports(Options options) {
         return true;
     }
 }

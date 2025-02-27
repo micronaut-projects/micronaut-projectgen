@@ -41,30 +41,18 @@ public interface DefaultFeature extends Feature {
      * addition to the set is based on the identity of the feature instance and
      * all features are singletons.
      *
-     * @param applicationType  The application type
      * @param options          The options
      * @param selectedFeatures The features manually selected by the user
      * @return True if the feature should apply
      */
-    boolean shouldApply(String applicationType,
-                        Options options,
+    boolean shouldApply(Options options,
                         Set<Feature> selectedFeatures);
 
-    /**
-     *
-     * @return target framework
-     */
-    default String getTargetFramework() {
-        return null;
-    }
-
-    static void forEach(Stream<Feature> featureStream, String applicationType, Options options, Set<Feature> features, Consumer<Feature> featureConsumer) {
+    static void forEach(Stream<Feature> featureStream, Options options, Set<Feature> features, Consumer<Feature> featureConsumer) {
         featureStream
             .filter(DefaultFeature.class::isInstance)
             .sorted(OrderUtil.COMPARATOR.reversed())
-            .filter(f -> ((DefaultFeature) f).shouldApply(applicationType, options, features) && (
-                f instanceof BuildFeature || ((DefaultFeature) f).getTargetFramework().equals(options.framework())
-            ))
+            .filter(f -> ((DefaultFeature) f).shouldApply(options, features))
             .forEach(featureConsumer);
     }
 }
