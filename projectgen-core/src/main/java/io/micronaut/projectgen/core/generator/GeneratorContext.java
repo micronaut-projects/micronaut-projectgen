@@ -387,6 +387,15 @@ public class GeneratorContext implements DependencyContext {
     /**
      * @return The test framework
      */
+    @Deprecated(forRemoval = true)
+    @NonNull
+    public BuildTool getBuildTool() {
+        return options.getBuildTool();
+    }
+
+    /**
+     * @return The test framework
+     */
     @NonNull
     public TestFramework getTestFramework() {
         return options.testFramework();

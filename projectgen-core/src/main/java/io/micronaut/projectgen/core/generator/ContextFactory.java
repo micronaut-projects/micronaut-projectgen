@@ -20,7 +20,6 @@ import io.micronaut.projectgen.core.buildtools.dependencies.CoordinateResolver;
 import io.micronaut.projectgen.core.feature.*;
 import io.micronaut.projectgen.core.io.ConsoleOutput;
 import io.micronaut.projectgen.core.openrewrite.RecipeFetcher;
-import io.micronaut.projectgen.core.options.OperatingSystem;
 import io.micronaut.projectgen.core.options.Options;
 import jakarta.inject.Singleton;
 import java.util.Collections;
@@ -54,16 +53,12 @@ public class ContextFactory {
      *
      * @param availableFeatures Available Features
      * @param selectedFeatures Selected Features
-     * @param applicationType Application Type
      * @param options Options
-     * @param operatingSystem Operating System
      * @return Feature Context
      */
     public FeatureContext createFeatureContext(AvailableFeatures availableFeatures,
                                                List<String> selectedFeatures,
-                                               String applicationType,
-                                               Options options,
-                                               @Nullable OperatingSystem operatingSystem) {
+                                               Options options) {
         final Set<Feature> features = Collections.newSetFromMap(new IdentityHashMap<>(8));
         for (String name: selectedFeatures) {
             Feature feature = availableFeatures.findFeature(name, true).orElse(null);

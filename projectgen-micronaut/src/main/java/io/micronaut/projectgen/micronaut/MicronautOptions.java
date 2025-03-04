@@ -15,6 +15,7 @@
  */
 package io.micronaut.projectgen.micronaut;
 
+import io.micronaut.core.util.CollectionUtils;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.options.*;
 
@@ -239,6 +240,18 @@ public final class MicronautOptions implements Options {
          * @return build MicronautOptions
          */
         public MicronautOptions build() {
+            if (applicationType == null) {
+                applicationType = ApplicationType.DEFAULT;
+            }
+            if (CollectionUtils.isEmpty(buildTools)) {
+                buildTools = List.of(BuildTool.GRADLE_KOTLIN);
+            }
+            if (language == null) {
+                language = Language.JAVA;
+            }
+            if (testFramework == null) {
+                testFramework = language.getDefaults().getTest();
+            }
             return new MicronautOptions(applicationType,
                 javaVersion,
                 name,

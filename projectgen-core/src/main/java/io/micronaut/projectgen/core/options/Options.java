@@ -66,6 +66,11 @@ public interface Options {
      */
     List<BuildTool> buildTools();
 
+    default BuildTool getBuildTool() {
+        List<BuildTool> tools = buildTools();
+        return tools.isEmpty() ? null : tools.get(0);
+    }
+
     /**
      *
      * @return Java Version

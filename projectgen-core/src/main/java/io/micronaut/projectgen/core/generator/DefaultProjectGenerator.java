@@ -16,19 +16,16 @@
 package io.micronaut.projectgen.core.generator;
 
 import io.micronaut.context.BeanContext;
-import io.micronaut.core.annotation.Nullable;
-import io.micronaut.core.util.StringUtils;
-import io.micronaut.inject.qualifiers.Qualifiers;
 import io.micronaut.projectgen.core.feature.AvailableFeatures;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.projectgen.core.io.ConsoleOutput;
 import io.micronaut.projectgen.core.io.OutputHandler;
-import io.micronaut.projectgen.core.options.OperatingSystem;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.core.template.RenderResult;
 import io.micronaut.projectgen.core.template.Template;
 import io.micronaut.projectgen.core.template.TemplateRenderer;
 import io.micronaut.projectgen.core.utils.NameUtils;
+import jakarta.inject.Provider;
 import jakarta.inject.Singleton;
 
 import java.util.ArrayList;
@@ -50,32 +47,18 @@ public class DefaultProjectGenerator implements ProjectGenerator {
     }
 
     @Override
-    public void generate(String applicationType,
-                         Project project,
-                         Options options,
-                         @Nullable OperatingSystem operatingSystem,
-                         List<String> selectedFeatures,
-                         OutputHandler outputHandler,
-                         ConsoleOutput consoleOutput) throws Exception {
+    public void generate(Options options, OutputHandler outputHandler, ConsoleOutput consoleOutput, Provider<AvailableFeatures> availableFeaturesProvider) throws Exception {
 
-        GeneratorContext generatorContext = createGeneratorContext(
-                applicationType,
-                project,
-                options,
-                operatingSystem,
-                selectedFeatures,
-                consoleOutput
-        );
+        String applicationType = null;
+        Project project = NameUtils.parse(options.name());
+        List<String> selectedFeatures = options.features();
 
-        generate(applicationType, project, outputHandler, generatorContext);
-    }
+        AvailableFeatures availableFeatures = availableFeaturesProvider == null
+            ? beanContext.getBean(AvailableFeatures.class)
+            : availableFeaturesProvider.get();
+        FeatureContext featureContext = contextFactory.createFeatureContext(availableFeatures, selectedFeatures, options);
+        GeneratorContext generatorContext = contextFactory.createGeneratorContext(project, featureContext, consoleOutput);
 
-    @Override
-    public void generate(
-            String applicationType,
-            Project project,
-            OutputHandler outputHandler,
-            GeneratorContext generatorContext) throws Exception {
         List<String> features = new ArrayList<>(generatorContext.getFeatures().size());
         features.addAll(generatorContext.getFeatures());
         features.sort(Comparator.comparing(Function.identity()));
@@ -90,37 +73,6 @@ public class DefaultProjectGenerator implements ProjectGenerator {
                 }
             }
         }
-    }
-
-    @Override
-    public GeneratorContext createGeneratorContext(
-            String applicationType,
-            Project project,
-            Options options,
-            @Nullable OperatingSystem operatingSystem,
-            List<String> selectedFeatures,
-            ConsoleOutput consoleOutput) {
-        AvailableFeatures availableFeatures = StringUtils.isEmpty(applicationType)
-            ? beanContext.getBean(AvailableFeatures.class)
-            : beanContext.getBean(AvailableFeatures.class, Qualifiers.byName(applicationType));
-        FeatureContext featureContext = contextFactory.createFeatureContext(availableFeatures, selectedFeatures, applicationType, options, operatingSystem);
-        return contextFactory.createGeneratorContext(project, featureContext, consoleOutput);
-    }
-
-    @Override
-    public void generate(Options options, OutputHandler outputHandler, ConsoleOutput consoleOutput) throws Exception {
-
-        String applicationType = null;
-        Project project = NameUtils.parse(options.name());
-        OperatingSystem operatingSystem = options.operatingSystem();
-        List<String> selectedFeatures = options.features();
-        generate(applicationType,
-            project,
-            options,
-            operatingSystem,
-            selectedFeatures,
-            outputHandler,
-            consoleOutput);
 
     }
 }

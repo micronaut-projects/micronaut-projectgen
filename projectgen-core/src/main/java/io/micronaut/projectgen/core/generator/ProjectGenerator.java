@@ -18,12 +18,11 @@ package io.micronaut.projectgen.core.generator;
 import io.micronaut.context.annotation.DefaultImplementation;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.annotation.Nullable;
+import io.micronaut.projectgen.core.feature.AvailableFeatures;
 import io.micronaut.projectgen.core.io.ConsoleOutput;
 import io.micronaut.projectgen.core.io.OutputHandler;
-import io.micronaut.projectgen.core.options.OperatingSystem;
 import io.micronaut.projectgen.core.options.Options;
-
-import java.util.List;
+import jakarta.inject.Provider;
 
 /**
  * Project Generator API.
@@ -31,31 +30,17 @@ import java.util.List;
 @DefaultImplementation(DefaultProjectGenerator.class)
 public interface ProjectGenerator {
 
-    void generate(String applicationType,
-                  Project project,
-                  Options options,
-                  @Nullable OperatingSystem operatingSystem,
-                  List<String> selectedFeatures,
-                  OutputHandler outputHandler,
-                  ConsoleOutput consoleOutput) throws Exception;
-
-    void generate(
-            String applicationType,
-            Project project,
-            OutputHandler outputHandler,
-            GeneratorContext generatorContext) throws Exception;
-
-    GeneratorContext createGeneratorContext(
-            String applicationType,
-            Project project,
-            Options options,
-            @Nullable OperatingSystem operatingSystem,
-            List<String> selectedFeatures,
-            ConsoleOutput consoleOutput);
-
     default void generate(@NonNull Options options, @NonNull OutputHandler outputHandler) throws Exception {
-        generate(options, outputHandler, ConsoleOutput.NOOP);
+        generate(options, outputHandler, ConsoleOutput.NOOP, null);
     }
 
-    void generate(@NonNull Options options, @NonNull OutputHandler outputHandler, ConsoleOutput consoleOutput) throws Exception;
+    default void generate(@NonNull Options options, @NonNull OutputHandler outputHandler, @Nullable Provider<AvailableFeatures> availableFeaturesProvider) throws Exception {
+        generate(options, outputHandler, ConsoleOutput.NOOP, availableFeaturesProvider);
+    }
+
+    default void generate(@NonNull Options options, @NonNull OutputHandler outputHandler, ConsoleOutput consoleOutput) throws Exception {
+        generate(options, outputHandler, consoleOutput, null);
+    }
+
+    void generate(@NonNull Options options, @NonNull OutputHandler outputHandler, ConsoleOutput consoleOutput, @Nullable Provider<AvailableFeatures> availableFeaturesProvider) throws Exception;
 }
