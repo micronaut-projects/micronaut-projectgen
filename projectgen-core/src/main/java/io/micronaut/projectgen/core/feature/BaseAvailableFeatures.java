@@ -17,7 +17,6 @@ package io.micronaut.projectgen.core.feature;
 
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.annotation.Nullable;
-import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 
 import java.util.*;
@@ -33,7 +32,6 @@ import java.util.stream.Stream;
 public class BaseAvailableFeatures implements AvailableFeatures {
     private final Map<String, Feature> features;
 
-    @Inject
     public BaseAvailableFeatures(List<Feature> features) {
         this(features, f -> true);
     }
