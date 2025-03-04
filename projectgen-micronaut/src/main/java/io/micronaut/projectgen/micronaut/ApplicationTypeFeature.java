@@ -22,6 +22,7 @@ import io.micronaut.projectgen.core.buildtools.gradle.Gradle;
 import io.micronaut.projectgen.core.feature.ConfigurationFeature;
 import io.micronaut.projectgen.core.feature.DefaultFeature;
 import io.micronaut.projectgen.core.feature.FeatureContext;
+import io.micronaut.projectgen.core.feature.LoggingFeature;
 import io.micronaut.projectgen.core.feature.config.Properties;
 import io.micronaut.projectgen.core.feature.gitignore.GitIgnore;
 import io.micronaut.projectgen.core.options.TestFramework;
@@ -58,7 +59,7 @@ public abstract class ApplicationTypeFeature implements DefaultFeature, Requires
     public void processSelectedFeatures(FeatureContext featureContext) {
         featureContext.addFeatureIfNotPresent(GitIgnore.class, gitIgnore);
         featureContext.addFeatureIfNotPresent(ConfigurationFeature.class, properties);
-        featureContext.addFeatureIfNotPresent(Logback.class, logback);
+        featureContext.addFeatureIfNotPresent(LoggingFeature.class, logback);
         if (featureContext.getOptions().testFramework() == null ||
             featureContext.getOptions().testFramework() == TestFramework.JUNIT) {
             featureContext.addFeatureIfNotPresent(MicronautTestJunit5.class, micronautTestJunit5);
