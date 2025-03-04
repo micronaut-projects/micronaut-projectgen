@@ -16,6 +16,7 @@
 package io.micronaut.projectgen.micronaut;
 
 import io.micronaut.core.util.CollectionUtils;
+import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.options.*;
 
@@ -240,6 +241,12 @@ public final class MicronautOptions implements Options {
          * @return build MicronautOptions
          */
         public MicronautOptions build() {
+            if (StringUtils.isEmpty(name)) {
+                this.name = "demo";
+            }
+            if (StringUtils.isEmpty(packageName)) {
+                this.packageName = "com.example";
+            }
             if (applicationType == null) {
                 applicationType = ApplicationType.DEFAULT;
             }

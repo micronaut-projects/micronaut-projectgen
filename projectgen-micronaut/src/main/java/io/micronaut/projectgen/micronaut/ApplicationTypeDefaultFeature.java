@@ -21,7 +21,6 @@ import io.micronaut.projectgen.core.feature.*;
 import io.micronaut.projectgen.core.feature.config.Properties;
 import io.micronaut.projectgen.core.feature.gitignore.GitIgnore;
 import io.micronaut.projectgen.core.options.Options;
-import io.micronaut.projectgen.core.options.TestFramework;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.projectgen.features.gradle.GroovyGradlePlugin;
 import io.micronaut.projectgen.features.gradle.JavaGradlePlugin;
@@ -32,6 +31,7 @@ import io.micronaut.projectgen.micronaut.features.AppName;
 import io.micronaut.projectgen.micronaut.features.MicronautAot;
 import io.micronaut.projectgen.micronaut.features.serde.MicronautSerdeJackson;
 import io.micronaut.projectgen.micronaut.features.test.MicronautTestJunit5;
+import io.micronaut.projectgen.micronaut.features.test.MicronautTestSpock;
 import io.micronaut.projectgen.micronaut.features.validation.MicronautHttpValidation;
 import io.micronaut.projectgen.micronaut.gradle.MicronautApplicationGradlePluginFeature;
 import io.micronaut.projectgen.micronaut.maven.MicronautParentPomFeature;
@@ -44,17 +44,13 @@ import java.util.Set;
 @Singleton
 public class ApplicationTypeDefaultFeature extends ApplicationTypeFeature {
     private final Maven maven;
-    private final Properties properties;
     private final AppName appName;
-    private final Logback logback;
-    private final MicronautTestJunit5 micronautTestJunit5;
     private final MicronautHttpValidation micronautHttpValidation;
     private final MicronautApplicationGradlePluginFeature micronautApplicationGradlePlugin;
     private final JavaGradlePlugin javaGradlePlugin;
     private final KotlinGradlePlugin kotlinGradlePlugin;
     private final GroovyGradlePlugin groovyGradlePlugin;
     private final MicronautAot micronautAot;
-    private final GitIgnore gitIgnore;
     private final ShadePlugin shadePlugin;
     private final JsonFeature serializationFeature;
     private final MicronautParentPomFeature micronautParentPomFeature;
@@ -66,6 +62,7 @@ public class ApplicationTypeDefaultFeature extends ApplicationTypeFeature {
                                          AppName appName,
                                          Logback logback,
                                          MicronautTestJunit5 micronautTestJunit5,
+                                         MicronautTestSpock micronautTestSpock,
                                          MicronautHttpValidation micronautHttpValidation,
                                          MicronautApplicationGradlePluginFeature micronautApplicationGradlePlugin,
                                          JavaGradlePlugin javaGradlePlugin,
@@ -76,19 +73,15 @@ public class ApplicationTypeDefaultFeature extends ApplicationTypeFeature {
                                          ShadePlugin shadePlugin,
                                          MicronautSerdeJackson serializationFeature,
                                          MicronautParentPomFeature micronautParentPomFeature) {
-        super(gradle);
+        super(gradle, micronautTestJunit5, micronautTestSpock, properties, logback, gitIgnore);
         this.maven = maven;
-        this.properties = properties;
         this.appName = appName;
-        this.logback = logback;
-        this.micronautTestJunit5 = micronautTestJunit5;
         this.micronautHttpValidation = micronautHttpValidation;
         this.micronautApplicationGradlePlugin = micronautApplicationGradlePlugin;
         this.javaGradlePlugin = javaGradlePlugin;
         this.kotlinGradlePlugin = kotlinGradlePlugin;
         this.groovyGradlePlugin = groovyGradlePlugin;
         this.micronautAot = micronautAot;
-        this.gitIgnore = gitIgnore;
         this.shadePlugin = shadePlugin;
         this.serializationFeature = serializationFeature;
         this.micronautParentPomFeature = micronautParentPomFeature;
@@ -102,14 +95,8 @@ public class ApplicationTypeDefaultFeature extends ApplicationTypeFeature {
     @Override
     public void processSelectedFeatures(FeatureContext featureContext) {
         super.processSelectedFeatures(featureContext);
-        if (featureContext.getOptions().testFramework() == null ||
-            featureContext.getOptions().testFramework() == TestFramework.JUNIT) {
-            featureContext.addFeatureIfNotPresent(MicronautTestJunit5.class, micronautTestJunit5);
-        }
-        featureContext.addFeatureIfNotPresent(ConfigurationFeature.class, properties);
+
         featureContext.addFeatureIfNotPresent(AppName.class, appName);
-        featureContext.addFeatureIfNotPresent(GitIgnore.class, gitIgnore);
-        featureContext.addFeatureIfNotPresent(Logback.class, logback);
         featureContext.addFeatureIfNotPresent(MicronautHttpValidation.class, micronautHttpValidation);
         featureContext.addFeatureIfNotPresent(JsonFeature.class, serializationFeature);
         if (OptionUtils.hasGradleBuildTool(featureContext.getOptions())) {

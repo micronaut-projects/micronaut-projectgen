@@ -19,20 +19,52 @@ import io.micronaut.projectgen.core.buildtools.MavenCentral;
 import io.micronaut.projectgen.core.buildtools.Repository;
 import io.micronaut.projectgen.core.buildtools.RequiresRepository;
 import io.micronaut.projectgen.core.buildtools.gradle.Gradle;
+import io.micronaut.projectgen.core.feature.ConfigurationFeature;
 import io.micronaut.projectgen.core.feature.DefaultFeature;
 import io.micronaut.projectgen.core.feature.FeatureContext;
+import io.micronaut.projectgen.core.feature.config.Properties;
+import io.micronaut.projectgen.core.feature.gitignore.GitIgnore;
+import io.micronaut.projectgen.core.options.TestFramework;
 import io.micronaut.projectgen.core.utils.OptionUtils;
+import io.micronaut.projectgen.javalibs.logging.Logback;
+import io.micronaut.projectgen.micronaut.features.test.MicronautTestJunit5;
+import io.micronaut.projectgen.micronaut.features.test.MicronautTestSpock;
+
 import java.util.List;
 
 public abstract class ApplicationTypeFeature implements DefaultFeature, RequiresRepository {
     private final Gradle gradle;
+    private final MicronautTestJunit5 micronautTestJunit5;
+    private final MicronautTestSpock micronautTestSpock;
+    private final Properties properties;
+    private final Logback logback;
+    private final GitIgnore gitIgnore;
 
-    protected ApplicationTypeFeature(Gradle gradle) {
+    protected ApplicationTypeFeature(Gradle gradle,
+                                     MicronautTestJunit5 micronautTestJunit5,
+                                     MicronautTestSpock micronautTestSpock,
+                                     Properties properties,
+                                     Logback logback,
+                                     GitIgnore gitIgnore) {
         this.gradle = gradle;
+        this.micronautTestJunit5 = micronautTestJunit5;
+        this.micronautTestSpock = micronautTestSpock;
+        this.properties = properties;
+        this.logback = logback;
+        this.gitIgnore = gitIgnore;
     }
 
     @Override
     public void processSelectedFeatures(FeatureContext featureContext) {
+        featureContext.addFeatureIfNotPresent(GitIgnore.class, gitIgnore);
+        featureContext.addFeatureIfNotPresent(ConfigurationFeature.class, properties);
+        featureContext.addFeatureIfNotPresent(Logback.class, logback);
+        if (featureContext.getOptions().testFramework() == null ||
+            featureContext.getOptions().testFramework() == TestFramework.JUNIT) {
+            featureContext.addFeatureIfNotPresent(MicronautTestJunit5.class, micronautTestJunit5);
+        } else if (featureContext.getOptions().testFramework() == TestFramework.SPOCK) {
+            featureContext.addFeatureIfNotPresent(MicronautTestSpock.class, micronautTestSpock);
+        }
         if (OptionUtils.hasGradleBuildTool(featureContext.getOptions())) {
             featureContext.addFeatureIfNotPresent(Gradle.class, gradle);
         }

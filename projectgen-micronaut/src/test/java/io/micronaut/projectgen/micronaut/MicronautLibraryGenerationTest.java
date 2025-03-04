@@ -25,6 +25,7 @@ class MicronautLibraryGenerationTest {
         projectGenerator.generate(options, outputHandler);
         Map<String, String> project = outputHandler.getProject();
         Set<String> expected = new HashSet<>(Set.of(
+            ".gitignore",
             "config/spotless.license.java",
             "gradle.properties",
             "LICENSE",
@@ -33,12 +34,11 @@ class MicronautLibraryGenerationTest {
             "gradlew",
             "gradlew.bat",
             "gradle/wrapper/gradle-wrapper.jar",
-            "gradle/wrapper/gradle-wrapper.properties"
+            "gradle/wrapper/gradle-wrapper.properties",
+            "src/main/resources/logback.xml"
         ));
         assertEquals(expected.stream().sorted().toList(), project.keySet().stream().sorted().toList());
-
         assertTrue(project.get("LICENSE").contains("Apache License"));
-        System.out.println(project.get("build.gradle"));
     }
 
     private static Options createOptions() {

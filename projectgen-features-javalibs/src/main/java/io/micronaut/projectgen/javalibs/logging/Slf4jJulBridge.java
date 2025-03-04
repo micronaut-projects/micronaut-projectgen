@@ -16,13 +16,12 @@
 package io.micronaut.projectgen.javalibs.logging;
 
 import io.micronaut.core.annotation.NonNull;
-import io.micronaut.projectgen.core.feature.LoggingFeature;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import jakarta.inject.Singleton;
 
 @Singleton
-public class Slf4jJulBridge implements OpenRewriteFeature, LoggingFeature {
+public class Slf4jJulBridge implements OpenRewriteFeature {
     @Override
     public String getRecipeName() {
         return "io.micronaut.feature.javalibs.jul-to-slf4j";
@@ -37,6 +36,11 @@ public class Slf4jJulBridge implements OpenRewriteFeature, LoggingFeature {
     @Override
     public String getTitle() {
         return "SLF4J JUL Bridge";
+    }
+
+    @Override
+    public String getCategory() {
+        return "Logging";
     }
 
     @Override

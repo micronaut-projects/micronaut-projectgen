@@ -21,10 +21,15 @@ import io.micronaut.projectgen.core.buildtools.gradle.SigningGradlePlugin;
 import io.micronaut.projectgen.core.buildtools.gradle.SpotlessGradlePlugin;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.feature.FeatureContext;
+import io.micronaut.projectgen.core.feature.config.Properties;
+import io.micronaut.projectgen.core.feature.gitignore.GitIgnore;
 import io.micronaut.projectgen.core.feature.license.Apache2LicenseFeature;
 import io.micronaut.projectgen.core.feature.license.LicenseFeature;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.core.utils.OptionUtils;
+import io.micronaut.projectgen.javalibs.logging.Logback;
+import io.micronaut.projectgen.micronaut.features.test.MicronautTestJunit5;
+import io.micronaut.projectgen.micronaut.features.test.MicronautTestSpock;
 import io.micronaut.projectgen.micronaut.gradle.MicronautLibraryGradlePlugin;
 import jakarta.inject.Singleton;
 
@@ -40,10 +45,16 @@ public class ApplicationTypeLibraryFeature extends ApplicationTypeFeature {
 
     public ApplicationTypeLibraryFeature(Apache2LicenseFeature license,
                                          Gradle gradle,
+                                         MicronautTestJunit5 micronautTestJunit5,
+                                         MicronautTestSpock micronautTestSpock,
                                          MicronautLibraryGradlePlugin micronautLibraryGradlePlugin,
                                          MavenPublishGradlePlugin mavenPublishGradlePlugin,
-                                         SigningGradlePlugin signingGradlePlugin, SpotlessGradlePlugin spotlessGradlePlugin) {
-        super(gradle);
+                                         SigningGradlePlugin signingGradlePlugin,
+                                         SpotlessGradlePlugin spotlessGradlePlugin,
+                                         Properties properties,
+                                         Logback logback,
+                                         GitIgnore gitIgnore) {
+        super(gradle, micronautTestJunit5, micronautTestSpock, properties, logback, gitIgnore);
         this.license = license;
         this.micronautLibraryGradlePlugin = micronautLibraryGradlePlugin;
         this.mavenPublishGradlePlugin = mavenPublishGradlePlugin;
