@@ -259,6 +259,9 @@ public final class MicronautOptions implements Options {
             if (testFramework == null) {
                 testFramework = language.getDefaults().getTest();
             }
+            if (javaVersion == null) {
+                javaVersion = JdkVersion.JDK_21;
+            }
             return new MicronautOptions(applicationType,
                 javaVersion,
                 name,
