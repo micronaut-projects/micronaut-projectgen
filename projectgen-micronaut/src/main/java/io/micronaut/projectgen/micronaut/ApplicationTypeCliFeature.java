@@ -15,28 +15,58 @@
  */
 package io.micronaut.projectgen.micronaut;
 
+import io.micronaut.core.annotation.Nullable;
 import io.micronaut.projectgen.core.buildtools.gradle.Gradle;
-import io.micronaut.projectgen.core.feature.Feature;
+import io.micronaut.projectgen.core.feature.*;
 import io.micronaut.projectgen.core.feature.config.Properties;
 import io.micronaut.projectgen.core.feature.gitignore.GitIgnore;
+import io.micronaut.projectgen.core.options.Language;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.javalibs.logging.Logback;
 import io.micronaut.projectgen.micronaut.features.test.MicronautTestJunit5;
 import io.micronaut.projectgen.micronaut.features.test.MicronautTestSpock;
 import jakarta.inject.Singleton;
 
+import java.util.List;
 import java.util.Set;
 
 @Singleton
 public class ApplicationTypeCliFeature extends ApplicationTypeFeature {
+    @Nullable
+    private final JavaApplicationFeature javaApplicationFeature;
+    @Nullable
+    private final KotlinApplicationFeature kotlinApplicationFeature;
+    @Nullable
+    private final GroovyApplicationFeature groovyApplicationFeature;
 
     public ApplicationTypeCliFeature(Gradle gradle,
                                      MicronautTestJunit5 micronautTestJunit5,
                                      MicronautTestSpock micronautTestSpock,
                                      Properties properties,
                                      Logback logback,
-                                     GitIgnore gitIgnore) {
+                                     GitIgnore gitIgnore,
+                                     List<JavaApplicationFeature> javaApplicationFeatures,
+                                     List<KotlinApplicationFeature> kotlinApplicationFeatures,
+                                     List<GroovyApplicationFeature> groovyApplicationFeatures) {
         super(gradle, micronautTestJunit5, micronautTestSpock, properties, logback, gitIgnore);
+        Options options = MicronautOptions.builder().applicationType(ApplicationType.CLI).build();
+        this.javaApplicationFeature = javaApplicationFeatures.stream().filter(f -> f.supports(options)).findFirst().orElse(null);
+        this.kotlinApplicationFeature = kotlinApplicationFeatures.stream().filter(f -> f.supports(options)).findFirst().orElse(null);
+        this.groovyApplicationFeature = groovyApplicationFeatures.stream().filter(f -> f.supports(options)).findFirst().orElse(null);
+    }
+
+    @Override
+    public void processSelectedFeatures(FeatureContext featureContext) {
+        super.processSelectedFeatures(featureContext);
+        if (featureContext.getOptions().language() == Language.JAVA && javaApplicationFeature != null) {
+            featureContext.addFeatureIfNotPresent(JavaApplicationFeature.class, javaApplicationFeature);
+        }
+        if (featureContext.getOptions().language() == Language.KOTLIN && kotlinApplicationFeature != null) {
+            featureContext.addFeatureIfNotPresent(KotlinApplicationFeature.class, kotlinApplicationFeature);
+        }
+        if (featureContext.getOptions().language() == Language.GROOVY && groovyApplicationFeature != null) {
+            featureContext.addFeatureIfNotPresent(GroovyApplicationFeature.class, groovyApplicationFeature);
+        }
     }
 
     @Override

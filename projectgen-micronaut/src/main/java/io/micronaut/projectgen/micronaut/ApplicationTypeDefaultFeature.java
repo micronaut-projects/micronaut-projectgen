@@ -15,11 +15,13 @@
  */
 package io.micronaut.projectgen.micronaut;
 
+import io.micronaut.core.annotation.Nullable;
 import io.micronaut.projectgen.core.buildtools.gradle.Gradle;
 import io.micronaut.projectgen.core.buildtools.maven.Maven;
 import io.micronaut.projectgen.core.feature.*;
 import io.micronaut.projectgen.core.feature.config.Properties;
 import io.micronaut.projectgen.core.feature.gitignore.GitIgnore;
+import io.micronaut.projectgen.core.options.Language;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.projectgen.features.gradle.GroovyGradlePlugin;
@@ -36,6 +38,8 @@ import io.micronaut.projectgen.micronaut.features.validation.MicronautHttpValida
 import io.micronaut.projectgen.micronaut.gradle.MicronautApplicationGradlePluginFeature;
 import io.micronaut.projectgen.micronaut.maven.MicronautParentPomFeature;
 import jakarta.inject.Singleton;
+
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -54,6 +58,12 @@ public class ApplicationTypeDefaultFeature extends ApplicationTypeFeature {
     private final ShadePlugin shadePlugin;
     private final JsonFeature serializationFeature;
     private final MicronautParentPomFeature micronautParentPomFeature;
+    @Nullable
+    private final JavaApplicationFeature javaApplicationFeature;
+    @Nullable
+    private final KotlinApplicationFeature kotlinApplicationFeature;
+    @Nullable
+    private final GroovyApplicationFeature groovyApplicationFeature;
 
     @SuppressWarnings("ParameterNumber")
     public ApplicationTypeDefaultFeature(Gradle gradle,
@@ -72,7 +82,10 @@ public class ApplicationTypeDefaultFeature extends ApplicationTypeFeature {
                                          GitIgnore gitIgnore,
                                          ShadePlugin shadePlugin,
                                          MicronautSerdeJackson serializationFeature,
-                                         MicronautParentPomFeature micronautParentPomFeature) {
+                                         MicronautParentPomFeature micronautParentPomFeature,
+                                         List<JavaApplicationFeature> javaApplicationFeatures,
+                                         List<KotlinApplicationFeature> kotlinApplicationFeatures,
+                                         List<GroovyApplicationFeature> groovyApplicationFeatures) {
         super(gradle, micronautTestJunit5, micronautTestSpock, properties, logback, gitIgnore);
         this.maven = maven;
         this.appName = appName;
@@ -85,6 +98,10 @@ public class ApplicationTypeDefaultFeature extends ApplicationTypeFeature {
         this.shadePlugin = shadePlugin;
         this.serializationFeature = serializationFeature;
         this.micronautParentPomFeature = micronautParentPomFeature;
+        Options options = MicronautOptions.builder().applicationType(ApplicationType.DEFAULT).build();
+        this.javaApplicationFeature = javaApplicationFeatures.stream().filter(f -> f.supports(options)).findFirst().orElse(null);
+        this.kotlinApplicationFeature = kotlinApplicationFeatures.stream().filter(f -> f.supports(options)).findFirst().orElse(null);
+        this.groovyApplicationFeature = groovyApplicationFeatures.stream().filter(f -> f.supports(options)).findFirst().orElse(null);
     }
 
     @Override
@@ -95,8 +112,18 @@ public class ApplicationTypeDefaultFeature extends ApplicationTypeFeature {
     @Override
     public void processSelectedFeatures(FeatureContext featureContext) {
         super.processSelectedFeatures(featureContext);
+        if (featureContext.getOptions().language() == Language.JAVA && javaApplicationFeature != null) {
+            featureContext.addFeatureIfNotPresent(JavaApplicationFeature.class, javaApplicationFeature);
+        }
+        if (featureContext.getOptions().language() == Language.KOTLIN && kotlinApplicationFeature != null) {
+            featureContext.addFeatureIfNotPresent(KotlinApplicationFeature.class, kotlinApplicationFeature);
+        }
+        if (featureContext.getOptions().language() == Language.GROOVY && groovyApplicationFeature != null) {
+            featureContext.addFeatureIfNotPresent(GroovyApplicationFeature.class, groovyApplicationFeature);
+        }
 
         featureContext.addFeatureIfNotPresent(AppName.class, appName);
+
         featureContext.addFeatureIfNotPresent(MicronautHttpValidation.class, micronautHttpValidation);
         featureContext.addFeatureIfNotPresent(JsonFeature.class, serializationFeature);
         if (OptionUtils.hasGradleBuildTool(featureContext.getOptions())) {
