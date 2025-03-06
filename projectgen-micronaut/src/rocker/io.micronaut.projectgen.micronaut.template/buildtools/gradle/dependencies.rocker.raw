@@ -1,0 +1,19 @@
+@import io.micronaut.projectgen.micronaut.ApplicationType
+@import io.micronaut.projectgen.core.generator.Project
+@import io.micronaut.projectgen.core.buildtools.gradle.GradleBuild
+@import io.micronaut.projectgen.core.buildtools.gradle.GradleDependency
+@import io.micronaut.projectgen.micronaut.template.buildtools.gradle.dependency
+@import io.micronaut.projectgen.core.feature.Features
+
+@args (
+ApplicationType applicationType,
+Project project,
+Features features,
+GradleBuild gradleBuild
+)
+
+dependencies {
+@for (GradleDependency dependency : gradleBuild.getDependencies()) {
+    @dependency.toSnippet()
+}
+}

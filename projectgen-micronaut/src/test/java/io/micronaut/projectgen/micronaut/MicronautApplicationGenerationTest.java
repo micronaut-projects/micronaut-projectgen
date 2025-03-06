@@ -23,13 +23,16 @@ import static org.junit.jupiter.api.Assertions.*;
 class MicronautApplicationGenerationTest {
     private static final Set<String> EXPECT_FILES_FOR_BOTH = Set.of(
         ".gitignore",
+        "README.md",
         "src/main/resources/logback.xml",
-        "src/main/resources/application.properties"
+        "src/main/resources/application.properties",
+        "src/main/java/demo/Application.java",
+        "src/test/java/demo/DemoTest.java"
     );
 
     @Test
-    void generateMicronautMavenApplication(ProjectGenerator projectGenerator) throws Exception {
-        Options options = createOptions(List.of(BuildTool.MAVEN));
+    void generateMicronautMavenApplication(MicronautProjectGenerator projectGenerator) throws Exception {
+        MicronautOptions options = createOptions(List.of(BuildTool.MAVEN));
         MapOutputHandler outputHandler = new MapOutputHandler();
         projectGenerator.generate(options, outputHandler);
         Map<String, String> project = outputHandler.getProject();
@@ -47,8 +50,8 @@ class MicronautApplicationGenerationTest {
     }
 
     @Test
-    void generateMicronautGradleApplication(ProjectGenerator projectGenerator) throws Exception {
-        Options options = createOptions(List.of(BuildTool.GRADLE));
+    void generateMicronautGradleApplication(MicronautProjectGenerator projectGenerator) throws Exception {
+        MicronautOptions options = createOptions(List.of(BuildTool.GRADLE));
         MapOutputHandler outputHandler = new MapOutputHandler();
         projectGenerator.generate(options, outputHandler);
         Map<String, String> project = outputHandler.getProject();
@@ -62,7 +65,7 @@ class MicronautApplicationGenerationTest {
             "gradle/wrapper/gradle-wrapper.properties"
         ));
         expected.addAll(EXPECT_FILES_FOR_BOTH);
-        assertEquals(expected, project.keySet());
+        assertEquals(expected.stream().sorted().toList(), project.keySet().stream().sorted().toList());
         InputStream gradlePropertiesInputStream = new ByteArrayInputStream(project.get("gradle.properties").getBytes(StandardCharsets.UTF_8));
         Properties gradleProperties = new Properties();
         gradleProperties.load(gradlePropertiesInputStream);
@@ -86,7 +89,7 @@ class MicronautApplicationGenerationTest {
 
     }
 
-    private static Options createOptions(List<BuildTool> buildTools) {
+    private static MicronautOptions createOptions(List<BuildTool> buildTools) {
         return MicronautOptions.builder()
             .applicationType(ApplicationType.DEFAULT)
             .name("demo")

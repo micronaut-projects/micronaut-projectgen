@@ -1,0 +1,9 @@
+@import io.micronaut.projectgen.core.generator.Project
+@import io.micronaut.projectgen.core.feature.Features
+
+@args (
+Project project,
+Features features,
+String buildCommand
+)
+

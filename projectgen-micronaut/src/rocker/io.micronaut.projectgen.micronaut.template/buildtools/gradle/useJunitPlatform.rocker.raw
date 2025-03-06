@@ -1,0 +1,12 @@
+@import io.micronaut.projectgen.core.buildtools.gradle.GradleDsl;
+@args(GradleDsl dsl)
+
+@if(dsl == GradleDsl.KOTLIN) {
+tasks.withType<Test> {
+    useJUnitPlatform()
+}
+} else {
+tasks.named('test') {
+    useJUnitPlatform()
+}
+}

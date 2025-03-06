@@ -19,8 +19,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class MicronautLibraryGenerationTest {
 
     @Test
-    void generateMicronautLibrary(ProjectGenerator projectGenerator) throws Exception {
-        Options options = createOptions();
+    void generateMicronautLibrary(MicronautProjectGenerator projectGenerator) throws Exception {
+        MicronautOptions options = createOptions();
         MapOutputHandler outputHandler = new MapOutputHandler();
         projectGenerator.generate(options, outputHandler);
         Map<String, String> project = outputHandler.getProject();
@@ -29,6 +29,7 @@ class MicronautLibraryGenerationTest {
             "config/spotless.license.java",
             "gradle.properties",
             "LICENSE",
+            "README.md",
             "settings.gradle",
             "build.gradle",
             "gradlew",
@@ -41,7 +42,7 @@ class MicronautLibraryGenerationTest {
         assertTrue(project.get("LICENSE").contains("Apache License"));
     }
 
-    private static Options createOptions() {
+    private static MicronautOptions createOptions() {
         return MicronautOptions.builder()
             .applicationType(ApplicationType.LIBRARY)
             .name("demo")

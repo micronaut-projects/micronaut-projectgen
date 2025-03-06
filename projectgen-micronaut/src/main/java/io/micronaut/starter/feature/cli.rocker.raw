@@ -1,0 +1,23 @@
+@import io.micronaut.projectgen.core.options.Language
+@import io.micronaut.projectgen.core.options.TestFramework
+@import io.micronaut.projectgen.core.buildtools.BuildTool
+@import io.micronaut.projectgen.core.generator.Project
+@import io.micronaut.projectgen.micronaut.ApplicationType
+@import java.util.List
+
+
+@args (
+Language language,
+TestFramework testFramework,
+BuildTool buildTool,
+Project project,
+List<String> features,
+ApplicationType applicationType
+)
+
+applicationType: @applicationType.getName()
+defaultPackage: @project.getPackageName()
+testFramework: @testFramework.getName()
+sourceLanguage: @language.getName()
+buildTool: @buildTool.getName()
+features: @features.toString()

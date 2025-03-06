@@ -1,0 +1,81 @@
+/*
+ * Copyright 2017-2022 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package io.micronaut.starter.feature.function;
+
+import com.fizzed.rocker.RockerModel;
+import io.micronaut.core.annotation.NonNull;
+import io.micronaut.core.annotation.Nullable;
+import io.micronaut.core.order.OrderUtil;
+import io.micronaut.projectgen.micronaut.ApplicationType;
+import io.micronaut.projectgen.core.generator.Project;
+import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.feature.Feature;
+import io.micronaut.projectgen.micronaut.MicronautOptions;
+import io.micronaut.starter.feature.function.awslambda.DefaultAwsLambdaHandlerProvider;
+import io.micronaut.projectgen.micronaut.template.function.handlerReadme;
+import io.micronaut.starter.feature.aws.AwsFeature;
+
+/**
+ * Interface to be implemented by features which require the user to define a Handler Class. e.g. {@link io.micronaut.starter.feature.function.awslambda.AwsLambda}
+ * @author Sergio del Amo
+ */
+public interface HandlerClassFeature extends Feature, AwsFeature {
+    /**
+     *
+     * @param feature Feature
+     * @param generatorContext Generator Context
+     * @param documentationLink A link to documentation
+     * @return a Rocker Model
+     */
+    static RockerModel readmeRockerModel(@NonNull HandlerClassFeature feature,
+                                          @NonNull GeneratorContext generatorContext,
+                                          @Nullable DocumentationLink documentationLink) {
+        ApplicationType applicationType = generatorContext.getOptions() instanceof MicronautOptions mnOptions
+                ? mnOptions.applicationType() : null;
+        return handlerReadme.template(feature,
+                applicationType,
+                generatorContext.getProject(),
+                documentationLink);
+    }
+
+    @NonNull
+    default String handlerClass(@NonNull GeneratorContext generatorContext) {
+        ApplicationType applicationType = generatorContext.getOptions() instanceof MicronautOptions mnOptions
+                ? mnOptions.applicationType() : null;
+        return handlerClass(applicationType, generatorContext.getProject());
+    }
+
+    /**
+     *
+     * @param applicationType Type of application
+     * @param project Project
+     * @return The handler class
+     */
+    @NonNull
+    String handlerClass(@NonNull ApplicationType applicationType, @NonNull Project project);
+
+    @NonNull
+    static String resolveHandler(@NonNull GeneratorContext generatorContext) {
+        return generatorContext.getFeatures()
+                .getFeatures()
+                .stream()
+                .filter(f -> (f instanceof HandlerClassFeature))
+                .sorted(OrderUtil.REVERSE_COMPARATOR)
+                .map(f -> ((HandlerClassFeature) f).handlerClass(generatorContext))
+                .findFirst()
+                .orElseGet(() -> DefaultAwsLambdaHandlerProvider.MICRONAUT_LAMBDA_HANDLER);
+    }
+}

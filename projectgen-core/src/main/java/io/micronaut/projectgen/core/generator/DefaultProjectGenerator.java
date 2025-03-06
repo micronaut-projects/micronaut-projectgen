@@ -48,8 +48,6 @@ public class DefaultProjectGenerator implements ProjectGenerator {
 
     @Override
     public void generate(Options options, OutputHandler outputHandler, ConsoleOutput consoleOutput, Provider<AvailableFeatures> availableFeaturesProvider) throws Exception {
-
-        String applicationType = null;
         Project project = NameUtils.parse(options.name());
         List<String> selectedFeatures = options.features();
 
