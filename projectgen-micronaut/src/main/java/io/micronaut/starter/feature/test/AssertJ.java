@@ -18,6 +18,7 @@ package io.micronaut.starter.feature.test;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
@@ -26,7 +27,7 @@ import jakarta.inject.Singleton;
 
 @Requires(property = "micronaut.starter.feature.assertj.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class AssertJ implements JunitCompanionFeature {
+public class AssertJ implements JunitCompanionFeature, OpenRewriteFeature {
 
     @Override
     @NonNull
@@ -46,20 +47,12 @@ public class AssertJ implements JunitCompanionFeature {
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        generatorContext.addDependency(Dependency.builder()
-                .groupId("org.assertj")
-                .artifactId("assertj-core")
-                .test());
+    public String getRecipeName() {
+        return "io.micronaut.starter.feature.assertj";
     }
 
     @Override
     public String getCategory() {
         return Category.DEV_TOOLS;
-    }
-
-    @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://assertj.github.io/doc/";
     }
 }
