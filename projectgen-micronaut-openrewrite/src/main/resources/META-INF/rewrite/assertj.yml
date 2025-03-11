@@ -1,0 +1,25 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.assertj
+displayName: Add AssertJ dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.assertj.dependencies
+  - io.micronaut.starter.feature.assertj.documentation.thirdparty
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.assertj.dependencies
+displayName: Add AssertJ dependency in the test scope
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: org.assertj
+      artifactId: assertj-core
+      configuration: testImplementation
+      scope: test
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.assertj.documentation.thirdparty
+displayName: Append a link to the AssertJ Website
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://assertj.github.io/doc/
+      appendNewline: true
