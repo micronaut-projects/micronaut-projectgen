@@ -20,6 +20,7 @@ include 'projectgen-features-gradle'
 include 'projectgen-features-maven'
 include 'projectgen-springboot'
 include 'projectgen-micronaut'
+include 'projectgen-quarkus'
 include 'projectgen-micronaut-openrewrite'
 
 enableFeaturePreview 'TYPESAFE_PROJECT_ACCESSORS'

@@ -58,9 +58,7 @@ class SpringBootProjectGeneratorTest {
         Set<String> keys = project.keySet();
         assertEquals(expected, keys);
         String buildGradle = project.get("build.gradle");
-        System.out.println(buildGradle);
         String settingsGradle = project.get("settings.gradle");
-        System.out.println(settingsGradle);
         BuildTestVerifier verifier = BuildTestVerifier.of(buildGradle, options);
         assertTrue(verifier.hasBuildPlugin("java"));
         assertTrue(verifier.hasBuildPlugin("org.springframework.boot"));
