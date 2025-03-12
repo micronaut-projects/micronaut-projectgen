@@ -17,19 +17,18 @@ package io.micronaut.starter.feature.acme;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.MicronautOptions;
 import io.micronaut.projectgen.micronaut.ApplicationType;
-import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.starter.feature.Category;
-import io.micronaut.projectgen.core.feature.Feature;
 
+import io.micronaut.starter.feature.test.JunitCompanionFeature;
 import jakarta.inject.Singleton;
 
 @Requires(property = "micronaut.starter.feature.acme.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class Acme implements Feature {
+public class Acme implements JunitCompanionFeature, OpenRewriteFeature {
 
     @Override
     public String getName() {
@@ -46,20 +45,8 @@ public class Acme implements Feature {
         return "Adds support for ACME (Automated Certificate Management Environment)";
     }
 
-    @Override
-    public void apply(GeneratorContext generatorContext) {
-        generatorContext.getConfiguration().put("micronaut.server.ssl.enabled", "true");
-        generatorContext.getConfiguration().put("acme.enabled", "true");
-        generatorContext.getConfiguration().put("acme.tos-agree", "true");
-        generatorContext.addDependency(Dependency.builder()
-                .groupId("io.micronaut.acme")
-                .artifactId("micronaut-acme")
-                .compile());
-    }
-
-    @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-acme/latest/guide/index.html";
+    public String getRecipeName() {
+        return "io.micronaut.starter.feature.acme";
     }
 
     @Override
