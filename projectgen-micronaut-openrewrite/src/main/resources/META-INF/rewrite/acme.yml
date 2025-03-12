@@ -1,0 +1,41 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.acme
+displayName: Add Acme dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.acme.configuration
+  - io.micronaut.starter.feature.acme.dependencies
+  - io.micronaut.starter.feature.acme.documentation.thirdparty
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.acme.dependencies
+displayName: Add Acme dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.acme
+      artifactId: micronaut-acme
+      configuration: implementation
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.acme.documentation.thirdparty
+displayName: Append a link to the Acme Website
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-acme/latest/guide/index.html
+      appendNewline: true
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.acme.configuration
+displayName: Adds Acme configuration
+preconditions:
+  - io.micronaut.starter.openrewrite.recipes.FindApplicationProperties
+recipeList:
+  - org.openrewrite.properties.AddProperty:
+      property: micronaut.server.ssl.enabled
+      value: true
+  - org.openrewrite.properties.AddProperty:
+      property: acme.enabled
+      value: true
+  - org.openrewrite.properties.AddProperty:
+      property: acme.tos-agree
+      value: true
