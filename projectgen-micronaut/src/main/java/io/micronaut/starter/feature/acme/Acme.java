@@ -22,13 +22,11 @@ import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.MicronautOptions;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.starter.feature.Category;
-
-import io.micronaut.starter.feature.test.JunitCompanionFeature;
 import jakarta.inject.Singleton;
 
 @Requires(property = "micronaut.starter.feature.acme.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class Acme implements JunitCompanionFeature, OpenRewriteFeature {
+public class Acme implements OpenRewriteFeature {
 
     @Override
     public String getName() {
