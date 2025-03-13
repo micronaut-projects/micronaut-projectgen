@@ -13,31 +13,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.projectgen.quarkus.features.buildtools.gradle;
+package io.micronaut.projectgen.quarkus.features;
 
-import io.micronaut.projectgen.core.buildtools.gradle.GradlePlugin;
-import io.micronaut.projectgen.core.buildtools.gradle.GradleSpecificFeature;
-import io.micronaut.projectgen.core.feature.BuildPluginFeature;
+import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.quarkus.features.QuarkusBom;
 import jakarta.inject.Singleton;
 
 @Singleton
-public class QuarkusGradlePlugin implements GradleSpecificFeature, BuildPluginFeature {
-    private static final GradlePlugin QUARKUS_GRADLE_PLUGIN = GradlePlugin.of("io.quarkus", QuarkusBom.ARTIFACT_ID_QUARKUS_BOM);
+public class QuarkusBom implements QuarkusFeature {
+    public static final String ARTIFACT_ID_QUARKUS_BOM = "quarkus-bom";
+    private static final Dependency DEPENDENCY_QUARKUS_BOM = Dependency.builder()
+        .lookupArtifactId(ARTIFACT_ID_QUARKUS_BOM)
+        .pom()
+        .compile()
+        .build();
 
     @Override
-    public String getName() {
-        return "quarkus-gradle-plugin";
+    public boolean isVisible() {
+        return false;
     }
 
     @Override
-    public String getDescription() {
-        return "Quarkus Gradle Plugin";
+    public String getName() {
+        return ARTIFACT_ID_QUARKUS_BOM;
     }
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        generatorContext.addBuildPlugin(QUARKUS_GRADLE_PLUGIN);
+        generatorContext.addDependency(DEPENDENCY_QUARKUS_BOM);
     }
 }

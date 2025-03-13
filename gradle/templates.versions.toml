@@ -64,8 +64,9 @@ micronaut-starter-aws-cdk = "4.6.3"
 graaljs = "24.0.2"  # Once this is bumped past 24.1, you should be able to remove the disabling of Loom in the config properties in the React feature.
 frontend-maven-plugin = "1.15.0"
 liquibase-slf4j = "5.0.0"
-
+quarkus-bom  = "3.19.2"
 [libraries]
+quarkus-bom = { module = "io.quarkus.platform:quarkus-bom", version.ref = "quarkus-bom" }
 spring-boot-starter-parent = { module = "org.springframework.boot:spring-boot-starter-parent", version.ref = "spring-boot-starter-parent" }
 spring-dependency-management-plugin = { module = "io.spring.gradle:dependency-management-plugin", version.ref = "spring-dependency-management-plugin" }
 spring-boot-gradle-plugin = { module = "org.springframework.boot:spring-boot-gradle-plugin", version.ref = "spring-boot-gradle-plugin" }

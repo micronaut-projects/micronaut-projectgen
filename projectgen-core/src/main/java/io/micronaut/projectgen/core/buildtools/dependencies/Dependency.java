@@ -205,7 +205,7 @@ public final class Dependency implements Coordinate {
             false,
             annotationProcessorPriority,
             order,
-            coordinate.isPom(),
+            pom,
             Collections.emptyList(),
             Collections.emptyList());
     }

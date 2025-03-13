@@ -39,6 +39,7 @@ class GradleQuarkusProjectGeneratorTest {
         BuildTestVerifier verifier = BuildTestVerifier.of(buildGradle, options);
         assertTrue(verifier.hasBuildPlugin("java"));
         assertTrue(verifier.hasBuildPlugin("io.quarkus"));
+        assertTrue(verifier.hasBom("io.quarkus.platform", "quarkus-bom", Scope.COMPILE));
         assertTrue(verifier.hasDependency("io.quarkus", "quarkus-rest", Scope.COMPILE));
         assertTrue(verifier.hasDependency("io.quarkus", "quarkus-arc", Scope.COMPILE));
         assertTrue(verifier.hasDependency("io.quarkus", "quarkus-junit5", Scope.TEST));

@@ -25,6 +25,7 @@ import io.micronaut.projectgen.core.options.TestFramework;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.projectgen.features.gradle.JavaGradlePlugin;
 import io.micronaut.projectgen.quarkus.features.QuarkusArc;
+import io.micronaut.projectgen.quarkus.features.QuarkusBom;
 import io.micronaut.projectgen.quarkus.features.QuarkusJunit5;
 import io.micronaut.projectgen.quarkus.features.QuarkusRest;
 import io.micronaut.projectgen.quarkus.features.buildtools.gradle.QuarkusGradlePlugin;
@@ -41,6 +42,7 @@ public class QuarkusDefaultFeature implements DefaultFeature {
     private final QuarkusArc quarkusArc;
     private final QuarkusRest quarkusRest;
     private final QuarkusJunit5 quarkusJunit5;
+    private final QuarkusBom quarkusBom;
 
     public QuarkusDefaultFeature(Gradle gradle,
                                  GitIgnore gitIgnore,
@@ -48,7 +50,8 @@ public class QuarkusDefaultFeature implements DefaultFeature {
                                  QuarkusGradlePlugin quarkusGradlePlugin,
                                  QuarkusArc quarkusArc,
                                  QuarkusRest quarkusRest,
-                                 QuarkusJunit5 quarkusJunit5) {
+                                 QuarkusJunit5 quarkusJunit5,
+                                 QuarkusBom quarkusBom) {
         this.gradle = gradle;
         this.gitIgnore = gitIgnore;
         this.javaGradlePlugin = javaGradlePlugin;
@@ -56,6 +59,7 @@ public class QuarkusDefaultFeature implements DefaultFeature {
         this.quarkusArc = quarkusArc;
         this.quarkusRest = quarkusRest;
         this.quarkusJunit5 = quarkusJunit5;
+        this.quarkusBom = quarkusBom;
     }
 
     @Override
@@ -76,6 +80,7 @@ public class QuarkusDefaultFeature implements DefaultFeature {
         }
         featureContext.addFeatureIfNotPresent(QuarkusArc.class, quarkusArc);
         featureContext.addFeatureIfNotPresent(QuarkusRest.class, quarkusRest);
+        featureContext.addFeatureIfNotPresent(QuarkusBom.class, quarkusBom);
     }
 
     @Override
