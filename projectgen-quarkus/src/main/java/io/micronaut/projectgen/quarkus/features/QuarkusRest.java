@@ -25,6 +25,11 @@ public class QuarkusRest implements QuarkusFeature {
         QuarkusFeature.compileDependency("quarkus-rest");
 
     @Override
+    public String getTitle() {
+        return "RESTEasy JAX-RS";
+    }
+
+    @Override
     public String getName() {
         return "quarkus-rest";
     }
