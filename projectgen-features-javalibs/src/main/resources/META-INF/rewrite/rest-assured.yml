@@ -1,0 +1,18 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.feature.javalibs.rest-assured
+displayName: Adds REST Assured dependency in the test classpath
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.rest-assured
+      artifactId: rest-assured
+      configuration: testImplementation
+      scope: test
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.feature.javalibs.rest-assured.documentation.thirdparty
+displayName: Append a link to the REST Assured Website
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://rest-assured.io
+      appendNewline: true

@@ -17,7 +17,11 @@ class GradleQuarkusProjectGeneratorTest {
     @Test
     void testGenerateQuarkusGradleProject(QuarkusProjectGenerator projectGenerator) throws Exception {
         MapOutputHandler outputHandler = new MapOutputHandler();
-        QuarkusOptions options = QuarkusOptions.builder().buildTool(BuildTool.GRADLE_KOTLIN).build();
+        QuarkusOptions options = QuarkusOptions.builder()
+            .buildTool(BuildTool.GRADLE_KOTLIN)
+            .feature("rest-assured")
+            .feature("quarkus-junit5-mockito")
+            .build();
         projectGenerator.generate(options, outputHandler);
         Map<String, String> project = outputHandler.getProject();
 
@@ -43,6 +47,9 @@ class GradleQuarkusProjectGeneratorTest {
         assertTrue(verifier.hasDependency("io.quarkus", "quarkus-rest", Scope.COMPILE));
         assertTrue(verifier.hasDependency("io.quarkus", "quarkus-arc", Scope.COMPILE));
         assertTrue(verifier.hasDependency("io.quarkus", "quarkus-junit5", Scope.TEST));
+        assertTrue(verifier.hasDependency("io.rest-assured", "rest-assured", Scope.TEST));
+        assertTrue(verifier.hasDependency("io.quarkus", "quarkus-junit5-mockito", Scope.TEST));
+
     }
 
 }

@@ -20,32 +20,32 @@ import io.micronaut.projectgen.core.generator.GeneratorContext;
 import jakarta.inject.Singleton;
 
 @Singleton
-public class QuarkusArc implements QuarkusFeature {
-    private static final Dependency DEPENDENCY_QUARKUS_ARC =
-        QuarkusFeature.compileDependency("quarkus-arc");
+public class QuarkusMockito implements QuarkusFeature {
+
+    private static final Dependency DEPENDENCY_QUARKUS_JUNIT_MOCKITO =
+        Dependency.builder()
+            .groupId("io.quarkus")
+            .artifactId("quarkus-junit5-mockito")
+            .test()
+            .build();
 
     @Override
     public String getTitle() {
-        return "CDI";
-    }
-
-    @Override
-    public String getDescription() {
-        return "It enables core dependency injection capabilities";
+        return "Quarkus JUnit 5 Mockito";
     }
 
     @Override
     public String getName() {
-        return "quarkus-arc";
+        return "quarkus-junit5-mockito";
     }
 
     @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://quarkus.io/guides/cdi-reference";
+    public String getDescription() {
+        return "Utilities, classes, and annotations that make Mockito easier to use within Quarkus";
     }
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        generatorContext.addDependency(DEPENDENCY_QUARKUS_ARC);
+        generatorContext.addDependency(DEPENDENCY_QUARKUS_JUNIT_MOCKITO);
     }
 }
