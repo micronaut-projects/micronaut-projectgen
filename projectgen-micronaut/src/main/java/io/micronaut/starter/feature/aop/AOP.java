@@ -27,7 +27,7 @@ public class AOP implements OpenRewriteFeature {
 
     @Override
     public String getName() {
-        return "aop";
+        return "micronaut-aop";
     }
 
     @Override

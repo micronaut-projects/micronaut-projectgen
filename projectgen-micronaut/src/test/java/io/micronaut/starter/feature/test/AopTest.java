@@ -15,7 +15,7 @@ class AopTest {
 
     @Test
     void aopFeaturesAddsTheDependency(MicronautProjectGenerator micronautProjectGenerator) throws Exception {
-        MicronautOptions options = MicronautOptions.builder().feature("aop").build();
+        MicronautOptions options = MicronautOptions.builder().feature("micronaut-aop").build();
         Map<String, String> project = generateProject(micronautProjectGenerator, options);
         String buildGradle = project.get("build.gradle.kts");
         assertNotNull(buildGradle);
@@ -25,7 +25,7 @@ class AopTest {
 
     @Test
     void aopFeaturesAddsTheLinkInReadmeFile(MicronautProjectGenerator micronautProjectGenerator) throws Exception {
-        MicronautOptions options = MicronautOptions.builder().feature("aop").build();
+        MicronautOptions options = MicronautOptions.builder().feature("micronaut-aop").build();
         Map<String, String> project = generateProject(micronautProjectGenerator, options);
         String readme = project.get("README.md");
         assertNotNull(readme);
