@@ -22,9 +22,9 @@ import static org.junit.jupiter.api.Assertions.*;
 class SpringBootProjectGeneratorTest {
 
     @Test
-    void testGenerateSpringBootMavenProject(ProjectGenerator projectGenerator) throws Exception {
+    void testGenerateSpringBootMavenProject(SpringBootProjectGenerator projectGenerator) throws Exception {
         MapOutputHandler outputHandler = new MapOutputHandler();
-        Options options = createOptions(List.of(BuildTool.MAVEN));
+        SpringBootOptions options = createOptions(List.of(BuildTool.MAVEN));
         projectGenerator.generate(options, outputHandler);
         Map<String, String> project = outputHandler.getProject();
         Set<String> expected = Set.of(
@@ -40,9 +40,9 @@ class SpringBootProjectGeneratorTest {
     }
 
     @Test
-    void testGenerateSpringBootGradleProject(ProjectGenerator projectGenerator) throws Exception {
+    void testGenerateSpringBootGradleProject(SpringBootProjectGenerator projectGenerator) throws Exception {
         MapOutputHandler outputHandler = new MapOutputHandler();
-        Options options = createOptions(List.of(BuildTool.GRADLE));
+        SpringBootOptions options = createOptions(List.of(BuildTool.GRADLE));
         projectGenerator.generate(options, outputHandler);
         Map<String, String> project = outputHandler.getProject();
 
@@ -69,17 +69,15 @@ class SpringBootProjectGeneratorTest {
         String gitignore = project.get(".gitignore");
     }
 
-    private static Options createOptions(List<BuildTool> buildTools) {
-        return SpringBootOptionsBuilder.builder()
+    private static SpringBootOptions createOptions(List<BuildTool> buildTools) {
+        return SpringBootOptions.builder()
             .group("com.example")
-            .version("0.0.1-SNAPSHOT")
             .name("demo")
             .packageName("com.example.demo")
             .javaVersion(JdkVersion.JDK_21)
             .buildTools(buildTools)
             .language(Language.JAVA)
             .features(Collections.emptyList())
-            .framework("spring-boot")
             .build();
     }
 }

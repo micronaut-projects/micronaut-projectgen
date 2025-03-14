@@ -3,5 +3,6 @@ introduction:
 releaseHistory: Release History
 micronautProjectGeneration: Micronaut Project Generation
 openrewriteIntegration: OpenRewrite Integration
+springBootProjectGeneration: Spring Boot Project Generation
 repository: Repository
 
