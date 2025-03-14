@@ -1,0 +1,5 @@
+To generate a https://micronaut.io[Micronaut] application add the following dependencies:
+
+dependency:micronaut-projectgen-micronaut[groupId=io.micronaut.projectgen]
+
+To generate a Micronaut application, inject a bean of type api:projectgen.micronaut.MicronautProjectGenerator[]

@@ -1,0 +1,9 @@
+To use OpenRewrite integration your features should implement api:projectgen.core.openrewrite.OpenRewriteFeature[]
+
+To run a list of OpenRewrite recipes in a Maven build which adds the https://github.com/openrewrite/rewrite-maven-plugin[OpenRewrite Maven Plugin] add the following dependency:
+
+dependency:micronaut-projectgen-runner-maven[groupId=io.micronaut.projectgen]
+
+To run a list of OpenRewrite recipes in a Gradle build which adds the https://github.com/openrewrite/rewrite-gradle-plugin[OpenRewrite Gradle Plugin] add the following dependency:
+
+dependency:micronaut-projectgen-runner-gradle[groupId=io.micronaut.projectgen]
