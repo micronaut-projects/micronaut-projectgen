@@ -17,28 +17,17 @@ package io.micronaut.starter.feature.aop;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
-import io.micronaut.projectgen.micronaut.ApplicationType;
-import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
-import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.feature.Category;
-import io.micronaut.projectgen.core.feature.Feature;
 import jakarta.inject.Singleton;
 
 @Requires(property = "micronaut.starter.feature.micronaut.aop.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class AOP implements Feature {
-    public static final String NAME = "micronaut-aop";
-
-    private static final Dependency MICRONAUT_AOP_DEPENDENCY = MicronautDependencyUtils
-            .coreDependency()
-            .artifactId("micronaut-aop")
-            .compile()
-            .build();
+public class AOP implements OpenRewriteFeature {
 
     @Override
     public String getName() {
-        return NAME;
+        return "micronaut-aop";
     }
 
     @Override
@@ -56,13 +45,7 @@ public class AOP implements Feature {
         return Category.API;
     }
 
-    @Override
-    public void apply(GeneratorContext generatorContext) {
-        generatorContext.addDependency(MICRONAUT_AOP_DEPENDENCY);
-    }
-
-        @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://docs.micronaut.io/latest/guide/index.html#aop";
+    public String getRecipeName() {
+        return "io.micronaut.starter.feature.aop";
     }
 }
