@@ -11,7 +11,9 @@ micronaut-sourcegen = "1.7.0"
 rocker = "2.1.0"
 snakeyaml = "2.4"
 typesafeconfig = "1.4.3"
-
+maven-plugin-api = "3.9.9"
+maven-invoker = "3.3.0"
+gradle-tooling-api = "8.12"
 [libraries]
 micronaut-core = { module = 'io.micronaut:micronaut-core-bom', version.ref = 'micronaut' }
 micronaut-serde = { module = "io.micronaut.serde:micronaut-serde-bom", version.ref = "micronaut-serialization" }
@@ -27,6 +29,9 @@ rewrite-gradle = { module = "org.openrewrite:rewrite-gradle" }
 rewrite-java-dependencies = { module = "org.openrewrite.recipe:rewrite-java-dependencies" }
 rewrite-maven = { module = "org.openrewrite:rewrite-maven" }
 rewrite-java = { module = "org.openrewrite:rewrite-java" }
+maven-invoker = { module = "org.apache.maven.shared:maven-invoker", version.ref = "maven-invoker" }
+gradle-tooling-api = { module = "org.gradle:gradle-tooling-api", version.ref = "gradle-tooling-api" }
 [bundles]
 
 [plugins]
+

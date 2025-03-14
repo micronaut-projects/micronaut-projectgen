@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.starter.feature.aop;
+package io.micronaut.projectgen.micronaut.features.aop;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
