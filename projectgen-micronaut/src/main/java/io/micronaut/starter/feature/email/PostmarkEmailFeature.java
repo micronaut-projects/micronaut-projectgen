@@ -17,17 +17,17 @@ package io.micronaut.starter.feature.email;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
-import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.util.StringUtils;
-import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import jakarta.inject.Singleton;
 
 @Requires(property = "micronaut.starter.feature.email.postmark.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class PostmarkEmailFeature extends EmailFeature {
+public class PostmarkEmailFeature implements OpenRewriteFeature {
 
-    public PostmarkEmailFeature(TemplateEmailFeature templateEmailFeature) {
-        super(templateEmailFeature);
+    @Override
+    public String getName() {
+        return "email-postmark";
     }
 
     @Override
@@ -42,19 +42,7 @@ public class PostmarkEmailFeature extends EmailFeature {
     }
 
     @Override
-    public String getModule() {
-        return "postmark";
-    }
+    public String getRecipeName(){return "io.micronaut.starter.feature.email-postmark";}
 
-    @Override
-    @Nullable
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-email/latest/guide/index.html#postmark";
-    }
 
-    @Override
-    @Nullable
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://postmarkapp.com";
-    }
 }
