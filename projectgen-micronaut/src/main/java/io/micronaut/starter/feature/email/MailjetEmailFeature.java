@@ -25,7 +25,15 @@ import jakarta.inject.Singleton;
 
 @Requires(property = "micronaut.starter.feature.email.mailjet.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class MailjetEmailFeature implements OpenRewriteFeature {
+public class MailjetEmailFeature extends EmailFeature {
+    MailjetEmailFeature(TemplateEmailFeature templateEmailFeature) {
+        super(templateEmailFeature);
+    }
+
+    @Override
+    String getModule() {
+        return "mailjet";
+    }
 
     @Override
     public String getName() {

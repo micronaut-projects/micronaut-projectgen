@@ -4,10 +4,11 @@ displayName: Add Amazon-ses-email dependency and link to README
 recipeList:
   - io.micronaut.starter.feature.amazon-ses-email.dependencies
   - io.micronaut.starter.feature.amazon-ses-email.documentation.thirdparty
+  - io.micronaut.starter.feature.amazon-ses-email.documentation.micronaut
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.amazon-ses-email.dependencies
-displayName: Add Amazon-ses-email dependency
+displayName: Add Micronaut Email Amazon SES dependency
 recipeList:
   - org.openrewrite.java.dependencies.AddDependency:
       groupId: io.micronaut.email
@@ -15,13 +16,18 @@ recipeList:
       configuration: implementation
 ---
 type: specs.openrewrite.org/v1beta/recipe
-name: io.micronaut.starter.feature.amazon-ses-email.documentation.thirdparty
-displayName: Append link to the Amazon-ses-email Website
+name: io.micronaut.starter.feature.amazon-ses-email.documentation.micronaut
+displayName: Append link to the Micronaut Email SES documentation
 recipeList:
   - org.openrewrite.text.AppendToTextFile:
       relativeFileName: README.md
       content: https://micronaut-projects.github.io/micronaut-email/latest/guide/index.html#ses
       appendNewline: true
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.amazon-ses-email.documentation.thirdparty
+displayName: Append link to the Amazon SES Website
+recipeList:
   - org.openrewrite.text.AppendToTextFile:
       relativeFileName: README.md
       content: https://aws.amazon.com/ses/

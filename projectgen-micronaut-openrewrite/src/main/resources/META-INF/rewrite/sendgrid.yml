@@ -4,6 +4,7 @@ displayName: Add Email-sendgrid dependency and link to README
 recipeList:
   - io.micronaut.starter.feature.email-sendgrid.dependencies
   - io.micronaut.starter.feature.email-sendgrid.documentation.thirdparty
+  - io.micronaut.starter.feature.email-sendgrid.documentation.micronaut
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.email-sendgrid.dependencies
@@ -20,10 +21,14 @@ displayName: Append link to the Email-sendgrid Website
 recipeList:
   - org.openrewrite.text.AppendToTextFile:
       relativeFileName: README.md
-      content: https://micronaut-projects.github.io/micronaut-email/latest/guide/index.html#sendgrid
-      appendNewline: true
-  - org.openrewrite.text.AppendToTextFile:
-      relativeFileName: README.md
       content: https://docs.sendgrid.com/for-developers
       appendNewline: true
-
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.email-sendgrid.documentation.micronaut
+displayName: Append link to the Email-sendgrid Website
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-email/latest/guide/index.html#sendgrid
+      appendNewline: true

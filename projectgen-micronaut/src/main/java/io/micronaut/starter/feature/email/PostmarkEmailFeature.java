@@ -23,7 +23,15 @@ import jakarta.inject.Singleton;
 
 @Requires(property = "micronaut.starter.feature.email.postmark.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class PostmarkEmailFeature implements OpenRewriteFeature {
+public class PostmarkEmailFeature extends EmailFeature {
+    PostmarkEmailFeature(TemplateEmailFeature templateEmailFeature) {
+        super(templateEmailFeature);
+    }
+
+    @Override
+    String getModule() {
+        return "postmark";
+    }
 
     @Override
     public String getName() {
@@ -42,7 +50,7 @@ public class PostmarkEmailFeature implements OpenRewriteFeature {
     }
 
     @Override
-    public String getRecipeName(){return "io.micronaut.starter.feature.email-postmark";}
-
-
+    public String getRecipeName() {
+        return "io.micronaut.starter.feature.email-postmark";
+    }
 }

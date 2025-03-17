@@ -23,7 +23,16 @@ import jakarta.inject.Singleton;
 
 @Requires(property = "micronaut.starter.feature.email.javamail.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class JavamailFeature implements OpenRewriteFeature {
+public class JavamailFeature extends EmailFeature {
+
+    JavamailFeature(TemplateEmailFeature templateEmailFeature) {
+        super(templateEmailFeature);
+    }
+
+    @Override
+    String getModule() {
+        return "javamail";
+    }
 
     @Override
     public String getName() {
@@ -42,7 +51,7 @@ public class JavamailFeature implements OpenRewriteFeature {
     }
 
     @Override
-    public String getRecipeName(){return "io.micronaut.starter.feature.email-javamail";}
-
-
+    public String getRecipeName() {
+        return "io.micronaut.starter.feature.email-javamail";
+    }
 }

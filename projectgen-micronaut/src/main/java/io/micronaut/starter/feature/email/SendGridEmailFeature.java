@@ -23,7 +23,15 @@ import jakarta.inject.Singleton;
 
 @Requires(property = "micronaut.starter.feature.email.sendgrid.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class SendGridEmailFeature implements OpenRewriteFeature {
+public class SendGridEmailFeature extends EmailFeature {
+    SendGridEmailFeature(TemplateEmailFeature templateEmailFeature) {
+        super(templateEmailFeature);
+    }
+
+    @Override
+    String getModule() {
+        return "sendgrid";
+    }
 
     @Override
     public String getName() {return "email-sendgrid";}
@@ -40,6 +48,7 @@ public class SendGridEmailFeature implements OpenRewriteFeature {
     }
 
    @Override
-    public String getRecipeName(){return "io.micronaut.starter.feature.email-sendgrid";}
-
+    public String getRecipeName() {
+        return "io.micronaut.starter.feature.email-sendgrid";
+    }
 }

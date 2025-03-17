@@ -4,6 +4,7 @@ displayName: Add Email-javamail dependency and link to README
 recipeList:
   - io.micronaut.starter.feature.email-javamail.dependencies
   - io.micronaut.starter.feature.email-javamail.documentation.thirdparty
+  - io.micronaut.starter.feature.email-javamail.documentation.micronaut
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.email-javamail.dependencies
@@ -15,13 +16,18 @@ recipeList:
       configuration: implementation
 ---
 type: specs.openrewrite.org/v1beta/recipe
-name: io.micronaut.starter.feature.email-javamail.documentation.thirdparty
-displayName: Append link to the Email-javamail Website
+name: io.micronaut.starter.feature.email-javamail.documentation.micronaut
+displayName: Append link to Micronaut Email Javamail documentation
 recipeList:
   - org.openrewrite.text.AppendToTextFile:
       relativeFileName: README.md
       content: https://micronaut-projects.github.io/micronaut-email/latest/guide/index.html#javamail
       appendNewline: true
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.email-javamail.documentation.thirdparty
+displayName: Append link to Jakarta Mail Specification
+recipeList:
   - org.openrewrite.text.AppendToTextFile:
       relativeFileName: README.md
       content: https://jakartaee.github.io/mail-api/

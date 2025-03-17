@@ -1,9 +1,10 @@
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.email-postmark
-displayName: Add Email-postmark dependency and link to README
+displayName: Add Micronaut Email Postmark dependency and link to README
 recipeList:
   - io.micronaut.starter.feature.email-postmark.dependencies
   - io.micronaut.starter.feature.email-postmark.documentation.thirdparty
+  - io.micronaut.starter.feature.email-postmark.documentation.micronaut
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.email-postmark.dependencies
@@ -15,13 +16,18 @@ recipeList:
       configuration: implementation
 ---
 type: specs.openrewrite.org/v1beta/recipe
-name: io.micronaut.starter.feature.email-postmark.documentation.thirdparty
-displayName: Append link to the Email-postmark Website
+name: io.micronaut.starter.feature.email-postmark.documentation.micronaut
+displayName: Append link to Micronaut Email Postmark documentation
 recipeList:
   - org.openrewrite.text.AppendToTextFile:
       relativeFileName: README.md
       content: https://micronaut-projects.github.io/micronaut-email/latest/guide/index.html#postmark
       appendNewline: true
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.email-postmark.documentation.thirdparty
+displayName: Append link to the Email-postmark Website
+recipeList:
   - org.openrewrite.text.AppendToTextFile:
       relativeFileName: README.md
       content: https://postmarkapp.com
