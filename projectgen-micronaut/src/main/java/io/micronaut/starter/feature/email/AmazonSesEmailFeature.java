@@ -17,17 +17,25 @@ package io.micronaut.starter.feature.email;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
-import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.util.StringUtils;
-import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import jakarta.inject.Singleton;
 
 @Requires(property = "micronaut.starter.feature.email.amazon.ses.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class AmazonSesEmailFeature extends EmailFeature {
-
     public AmazonSesEmailFeature(TemplateEmailFeature templateEmailFeature) {
         super(templateEmailFeature);
+    }
+
+    @Override
+    String getModule() {
+        return "amazon-ses";
+    }
+
+    @Override
+    public String getName() {
+        return "email-amazon-ses";
     }
 
     @Override
@@ -42,19 +50,7 @@ public class AmazonSesEmailFeature extends EmailFeature {
     }
 
     @Override
-    public String getModule() {
-        return "amazon-ses";
-    }
-
-    @Override
-    @Nullable
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-email/latest/guide/index.html#ses";
-    }
-
-    @Override
-    @Nullable
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://aws.amazon.com/ses/";
+    public String getRecipeName(){
+        return "io.micronaut.starter.feature.amazon-ses-email";
     }
 }

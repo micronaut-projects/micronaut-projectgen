@@ -20,14 +20,24 @@ import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import jakarta.inject.Singleton;
 
 @Requires(property = "micronaut.starter.feature.email.mailjet.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class MailjetEmailFeature extends EmailFeature {
-
-    public MailjetEmailFeature(TemplateEmailFeature templateEmailFeature) {
+    MailjetEmailFeature(TemplateEmailFeature templateEmailFeature) {
         super(templateEmailFeature);
+    }
+
+    @Override
+    String getModule() {
+        return "mailjet";
+    }
+
+    @Override
+    public String getName() {
+        return "email-mailjet";
     }
 
     @Override
@@ -42,18 +52,6 @@ public class MailjetEmailFeature extends EmailFeature {
     }
 
     @Override
-    public String getModule() {
-        return "mailjet";
-    }
+    public String getRecipeName(){return "io.micronaut.starter.feature.email-mailjet";}
 
-    @Override
-    @Nullable
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-email/latest/guide/index.html#mailjet";
-    }
-
-    @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://www.mailjet.com";
-    }
 }

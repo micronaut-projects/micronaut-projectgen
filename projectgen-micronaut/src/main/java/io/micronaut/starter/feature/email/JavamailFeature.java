@@ -17,24 +17,26 @@ package io.micronaut.starter.feature.email;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
-import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.util.StringUtils;
-import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import jakarta.inject.Singleton;
 
 @Requires(property = "micronaut.starter.feature.email.javamail.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class JavamailFeature extends EmailFeature {
 
-    private static final Dependency ECLIPSE_ANGUS = Dependency.builder()
-            .groupId("org.eclipse.angus")
-            .artifactId("angus-mail")
-            .runtime()
-            .build();
-
-    public JavamailFeature(TemplateEmailFeature templateEmailFeature) {
+    JavamailFeature(TemplateEmailFeature templateEmailFeature) {
         super(templateEmailFeature);
+    }
+
+    @Override
+    String getModule() {
+        return "javamail";
+    }
+
+    @Override
+    public String getName() {
+        return "email-javamail";
     }
 
     @Override
@@ -49,25 +51,7 @@ public class JavamailFeature extends EmailFeature {
     }
 
     @Override
-    public String getModule() {
-        return "javamail";
-    }
-
-    @Override
-    public void apply(GeneratorContext generatorContext) {
-        super.apply(generatorContext);
-        generatorContext.addDependency(ECLIPSE_ANGUS);
-    }
-
-    @Override
-    @Nullable
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-email/latest/guide/index.html#javamail";
-    }
-
-    @Override
-    @Nullable
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://jakartaee.github.io/mail-api/";
+    public String getRecipeName() {
+        return "io.micronaut.starter.feature.email-javamail";
     }
 }

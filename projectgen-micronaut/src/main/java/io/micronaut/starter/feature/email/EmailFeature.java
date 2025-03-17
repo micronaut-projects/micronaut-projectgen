@@ -16,6 +16,7 @@
 package io.micronaut.starter.feature.email;
 
 import io.micronaut.core.annotation.NonNull;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
@@ -24,9 +25,7 @@ import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.starter.feature.view.ViewFeature;
 
-abstract class EmailFeature implements Feature {
-
-    static final String MICRONAUT_EMAIL_GROUP_ID = "io.micronaut.email";
+abstract class EmailFeature implements OpenRewriteFeature {
 
     private final TemplateEmailFeature templateEmailFeature;
 
@@ -45,16 +44,6 @@ abstract class EmailFeature implements Feature {
     @NonNull
     public String getName() {
         return "email-" + getModule();
-    }
-
-    @Override
-    public void apply(GeneratorContext generatorContext) {
-        generatorContext.addDependency(Dependency.builder()
-                .compile()
-                .groupId(MICRONAUT_EMAIL_GROUP_ID)
-                .artifactId("micronaut-email-" + getModule())
-                .build()
-        );
     }
 
     @Override
