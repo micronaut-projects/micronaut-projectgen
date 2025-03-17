@@ -13,10 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.projectgen.micronaut.acme;
+package io.micronaut.projectgen.micronaut.features.acme;
 
 import io.micronaut.context.annotation.Requires;
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.starter.feature.server.Netty;
 import io.micronaut.projectgen.core.feature.FeatureValidator;
