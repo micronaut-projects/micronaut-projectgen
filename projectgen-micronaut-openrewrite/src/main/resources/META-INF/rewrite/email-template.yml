@@ -1,0 +1,14 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.email-template
+displayName: Add Email-template dependency
+recipeList:
+  - io.micronaut.starter.feature.email-template.dependencies
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.email-template.dependencies
+displayName: Add Email-template dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.email
+      artifactId: micronaut-email-template
+      configuration: implementation
