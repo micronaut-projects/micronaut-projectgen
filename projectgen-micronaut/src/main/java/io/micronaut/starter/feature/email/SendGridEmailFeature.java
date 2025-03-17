@@ -17,18 +17,16 @@ package io.micronaut.starter.feature.email;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
-import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.util.StringUtils;
-import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import jakarta.inject.Singleton;
 
 @Requires(property = "micronaut.starter.feature.email.sendgrid.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class SendGridEmailFeature extends EmailFeature {
+public class SendGridEmailFeature implements OpenRewriteFeature {
 
-    public SendGridEmailFeature(TemplateEmailFeature templateEmailFeature) {
-        super(templateEmailFeature);
-    }
+    @Override
+    public String getName() {return "email-sendgrid";}
 
     @Override
     @NonNull
@@ -41,20 +39,7 @@ public class SendGridEmailFeature extends EmailFeature {
         return "Sendgrid Email";
     }
 
-    @Override
-    public String getModule() {
-        return "sendgrid";
-    }
+   @Override
+    public String getRecipeName(){return "io.micronaut.starter.feature.email-sendgrid";}
 
-    @Override
-    @Nullable
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-email/latest/guide/index.html#sendgrid";
-    }
-
-    @Override
-    @Nullable
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://docs.sendgrid.com/for-developers";
-    }
 }
