@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Micronaut Options.
+ * SpringBoot Options.
  */
 public final class SpringBootOptions implements Options {
     private JdkVersion javaVersion;
