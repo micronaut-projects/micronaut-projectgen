@@ -24,7 +24,7 @@ public class JavaMailTest {
     }
 
     @Test
-    void javaMailSesEmailFeaturesAddsTheLinkInReadmeFile(MicronautProjectGenerator micronautProjectGenerator) throws Exception {
+    void javaMailFeaturesAddsTheLinkInReadmeFile(MicronautProjectGenerator micronautProjectGenerator) throws Exception {
         MicronautOptions options = MicronautOptions.builder().feature("email-javamail").build();
         Map<String, String> project = generateProject(micronautProjectGenerator, options);
         String readme = project.get("README.md");
