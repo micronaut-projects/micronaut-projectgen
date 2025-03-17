@@ -1,0 +1,29 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.email-mailjet
+displayName: Add Email-mailjet dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.email-mailjet.dependencies
+  - io.micronaut.starter.feature.email-mailjet.documentation.thirdparty
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.email-mailjet.dependencies
+displayName: Add Email-mailjet dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.email
+      artifactId: micronaut-email-mailjet
+      configuration: implementation
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.email-mailjet.documentation.thirdparty
+displayName: Append link to the Email-mailjet Website
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-email/latest/guide/index.html#mailjet
+      appendNewline: true
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://www.mailjet.com
+      appendNewline: true
+
