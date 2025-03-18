@@ -1,0 +1,14 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.langchain4j-store-neo4j
+displayName: Add Neo4j  Langchain4j dependency
+recipeList:
+  - io.micronaut.starter.feature.langchain4j-store-neo4j
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.langchain4j-store-neo4j
+displayName: Add langchain4j-store-neo4j dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.langchain4j
+      artifactId: micronaut-langchain4j-store-neo4j
+      configuration: implementation

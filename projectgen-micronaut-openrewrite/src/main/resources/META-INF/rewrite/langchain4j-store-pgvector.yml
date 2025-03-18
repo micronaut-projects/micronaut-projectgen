@@ -1,0 +1,60 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.langchain4j-store-pgvector
+displayName: Add Pgvector Langchain4j dependency
+recipeList:
+  - io.micronaut.starter.feature.langchain4j-store-pgvector
+  - io.micronaut.starter.feature.jdbc-hikari
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.langchain4j-store-pgvector
+displayName: Add langchain4j-store-pgvector dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.langchain4j
+      artifactId: micronaut-langchain4j-store-pgvector
+      configuration: implementation
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.jdbc-hikari
+displayName: Add jdbc-hikari dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.jdbc-hikari.dependencies
+  - io.micronaut.starter.feature.jdbc-hikari.configuration
+  - io.micronaut.starter.feature.jdbc-hikari.documentation.micronaut
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.jdbc-hikari.dependencies
+displayName: Add jdbc-hikari dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.sql
+      artifactId: micronaut-jdbc-hikari
+      configuration: implementation
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.jdbc-hikari.documentation.micronaut
+displayName: Append a link to Micronaut Jdbc Hikari documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-sql/latest/guide/index.html#jdbc
+      appendNewline: true
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.jdbc-hikari.configuration
+displayName: Add Jdbc Hikari configuration
+preconditions:
+  - io.micronaut.starter.openrewrite.recipes.FindApplicationProperties
+recipeList:
+  - org.openrewrite.properties.AddProperty:
+      property: datasources.default.url
+      value: dbc\:h2\:mem\:devDb;LOCK_TIMEOUT\=10000;DB_CLOSE_ON_EXIT\=FALSE
+  - org.openrewrite.properties.AddProperty:
+      property: datasources.default.username
+      value: sa
+  - org.openrewrite.properties.AddProperty:
+      property: datasources.default.password
+      value:
+  - org.openrewrite.properties.AddProperty:
+      property: datasources.default.driver-class-name
+      value: org.h2.Driver

@@ -17,25 +17,19 @@ package io.micronaut.starter.feature.langchain4j.embeddedstore;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
-import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
-import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.feature.langchain4j.Langchain4jEmbeddedStore;
 import jakarta.inject.Singleton;
 
 @Requires(property = "micronaut.starter.feature.langchain4j.store.elasticsearch.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class ElasticSearchLangchain4jEmbeddedStore implements Langchain4jEmbeddedStore {
+public class ElasticSearchLangchain4jEmbeddedStore implements  OpenRewriteFeature {
     private static final String NAME = "langchain4j-store-elasticsearch";
-    private static final String ARTIFACT_ID_MICRONAUT_LANGCHAIN_4_J_STORE_ELASTICSEARCH = "micronaut-langchain4j-store-elasticsearch";
-    private static final Dependency DEPENDENCY_MICRONAUT_LANGCHAIN4J_STORE_ELASTICSEARCH = MicronautDependencyUtils.langchain4j()
-            .artifactId(ARTIFACT_ID_MICRONAUT_LANGCHAIN_4_J_STORE_ELASTICSEARCH)
-            .compile()
-            .build();
+
 
     @Override
     public String getTitle() {
-        return "Elastic Search" + Langchain4jEmbeddedStore.super.getTitle();
+        return "Elastic Search Langchain4j Embedded Store";
     }
 
     @Override
@@ -44,8 +38,8 @@ public class ElasticSearchLangchain4jEmbeddedStore implements Langchain4jEmbedde
     }
 
     @Override
-    public void addDependencies(GeneratorContext generatorContext) {
-        Langchain4jEmbeddedStore.super.addDependencies(generatorContext);
-        generatorContext.addDependency(DEPENDENCY_MICRONAUT_LANGCHAIN4J_STORE_ELASTICSEARCH);
+    public String getRecipeName() {
+        return "io.micronaut.starter.feature.langchain4j-store-elasticsearch";
     }
+
 }

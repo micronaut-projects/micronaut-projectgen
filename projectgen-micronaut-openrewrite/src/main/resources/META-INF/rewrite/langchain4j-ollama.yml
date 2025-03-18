@@ -1,0 +1,14 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.langchain4j-ollama
+displayName: Add Ollama Langchain4j dependency
+recipeList:
+  - io.micronaut.starter.feature.langchain4j-ollama
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.langchain4j-ollama
+displayName: Add langchain4j-ollama dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.langchain4j
+      artifactId: micronaut-langchain4j-ollama
+      configuration: implementation
