@@ -35,9 +35,5 @@ public interface Langchain4jEmbeddedStore extends Langchain4jFeature {
     default String getCategory() {
         return Category.EMBEDDED_STORE;
     }
-
-    @Override
-    default void addDependencies(GeneratorContext generatorContext) {
-        Langchain4jFeature.super.addDependencies(generatorContext);
-    }
+    
 }

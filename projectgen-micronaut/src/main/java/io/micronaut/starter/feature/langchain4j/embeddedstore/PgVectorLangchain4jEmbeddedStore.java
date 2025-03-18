@@ -53,8 +53,7 @@ public class PgVectorLangchain4jEmbeddedStore implements Langchain4jEmbeddedStor
     }
 
     @Override
-    public void addDependencies(GeneratorContext generatorContext) {
-        Langchain4jEmbeddedStore.super.addDependencies(generatorContext);
+    public void apply(GeneratorContext generatorContext) {
         generatorContext.addDependency(DEPENDENCY_MICRONAUT_LANGCHAIN4J_STORE_PGVECTOR);
     }
 

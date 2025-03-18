@@ -44,8 +44,7 @@ public class AzureLangchain4jLanguageModel implements Langchain4jLanguageModel {
     }
 
     @Override
-    public void addDependencies(GeneratorContext generatorContext) {
-        Langchain4jLanguageModel.super.addDependencies(generatorContext);
-            generatorContext.addDependency(DEPENDENCY_MICRONAUT_LANGCHAIN4J_AZURE);
+    public void apply(GeneratorContext generatorContext) {
+        generatorContext.addDependency(DEPENDENCY_MICRONAUT_LANGCHAIN4J_AZURE);
     }
 }

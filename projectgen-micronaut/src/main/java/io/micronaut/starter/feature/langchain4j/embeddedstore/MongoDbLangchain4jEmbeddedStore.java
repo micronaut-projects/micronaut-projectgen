@@ -44,8 +44,7 @@ public class MongoDbLangchain4jEmbeddedStore implements Langchain4jEmbeddedStore
     }
 
     @Override
-    public void addDependencies(GeneratorContext generatorContext) {
-        Langchain4jEmbeddedStore.super.addDependencies(generatorContext);
+    public void apply(GeneratorContext generatorContext) {
         generatorContext.addDependency(DEPENDENCY_MICRONAUT_LANGCHAIN4J_STORE_MONGODB_ATLAS);
     }
 }

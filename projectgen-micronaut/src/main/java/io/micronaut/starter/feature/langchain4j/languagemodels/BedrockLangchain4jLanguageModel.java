@@ -44,8 +44,7 @@ public class BedrockLangchain4jLanguageModel implements Langchain4jLanguageModel
     }
 
     @Override
-    public void addDependencies(GeneratorContext generatorContext) {
-        Langchain4jLanguageModel.super.addDependencies(generatorContext);
+    public void apply(GeneratorContext generatorContext) {
             generatorContext.addDependency(DEPENDENCY_MICRONAUT_LANGCHAIN4J_BEDROCK);
     }
 }

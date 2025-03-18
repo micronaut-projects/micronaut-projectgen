@@ -44,8 +44,7 @@ public class GoogleAiGeminiLangchain4jLanguageModel implements Langchain4jLangua
     }
 
     @Override
-    public void addDependencies(GeneratorContext generatorContext) {
-        Langchain4jLanguageModel.super.addDependencies(generatorContext);
+    public void apply(GeneratorContext generatorContext) {
             generatorContext.addDependency(DEPENDENCY_MICRONAUT_LANGCHAIN4J_GOOGLEAI_GEMINI);
     }
 }

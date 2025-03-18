@@ -44,8 +44,7 @@ public class OpenSearchLangchain4jEmbeddedStore implements Langchain4jEmbeddedSt
     }
 
     @Override
-    public void addDependencies(GeneratorContext generatorContext) {
-        Langchain4jEmbeddedStore.super.addDependencies(generatorContext);
+    public void apply(GeneratorContext generatorContext) {
         generatorContext.addDependency(DEPENDENCY_MICRONAUT_LANGCHAIN4J_STORE_OPENSEARCH);
     }
 }

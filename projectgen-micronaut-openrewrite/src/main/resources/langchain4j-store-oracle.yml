@@ -1,0 +1,16 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.langchain4j-store-oracle
+displayName: Add Oracle Langchain4j dependency
+recipeList:
+  - io.micronaut.starter.feature.langchain4j-store-oracle
+  - io.micronaut.starter.feature.jdbc-hikari
+  - io.micronaut.starter.feature.langchain4j.processor
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.langchain4j-store-oracle
+displayName: Add langchain4j-store-oracle dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.langchain4j
+      artifactId: micronaut-langchain4j-store-oracle
+      configuration: implementation

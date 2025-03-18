@@ -15,22 +15,7 @@
  */
 package io.micronaut.starter.feature.langchain4j;
 
-import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
-import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import io.micronaut.projectgen.core.feature.Feature;
 
 public interface Langchain4jFeature extends Feature {
-    String ARTIFACT_ID_MICRONAUT_LANGCHAIN4J_PROCESSOR = "micronaut-langchain4j-processor";
-    Dependency DEPENDENCY_MICRONAUT_LANGCHAIN4J_PROCESSOR = MicronautDependencyUtils.langchain4j()
-        .artifactId(ARTIFACT_ID_MICRONAUT_LANGCHAIN4J_PROCESSOR)
-        .annotationProcessor()
-        .build();
-
-
-
-    default void addDependencies(GeneratorContext generatorContext) {
-        generatorContext.addDependency(DEPENDENCY_MICRONAUT_LANGCHAIN4J_PROCESSOR);
-    }
-
 }

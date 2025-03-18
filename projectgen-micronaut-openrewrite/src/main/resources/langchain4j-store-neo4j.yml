@@ -3,6 +3,7 @@ name: io.micronaut.starter.feature.langchain4j-store-neo4j
 displayName: Add Neo4j  Langchain4j dependency
 recipeList:
   - io.micronaut.starter.feature.langchain4j-store-neo4j
+  - io.micronaut.starter.feature.langchain4j.processor
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.langchain4j-store-neo4j

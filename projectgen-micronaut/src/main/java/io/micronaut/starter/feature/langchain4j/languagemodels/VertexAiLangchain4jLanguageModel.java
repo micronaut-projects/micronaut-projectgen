@@ -44,8 +44,7 @@ public class VertexAiLangchain4jLanguageModel implements Langchain4jLanguageMode
     }
 
     @Override
-    public void addDependencies(GeneratorContext generatorContext) {
-        Langchain4jLanguageModel.super.addDependencies(generatorContext);
+    public void apply(GeneratorContext generatorContext) {
             generatorContext.addDependency(DEPENDENCY_MICRONAUT_LANGCHAIN4J_VERTEXAI);
     }
 }

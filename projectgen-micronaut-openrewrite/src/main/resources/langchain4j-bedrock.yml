@@ -3,6 +3,7 @@ name: io.micronaut.starter.feature.langchain4j-bedrock
 displayName: Add Bedrock Langchain4j dependency
 recipeList:
   - io.micronaut.starter.feature.langchain4j-bedrock
+  - io.micronaut.starter.feature.langchain4j.processor
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.langchain4j-bedrock

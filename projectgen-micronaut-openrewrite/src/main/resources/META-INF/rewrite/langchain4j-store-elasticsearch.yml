@@ -3,6 +3,8 @@ name: io.micronaut.starter.feature.langchain4j-store-elasticsearch
 displayName: Add Elastic Search Langchain4j dependency
 recipeList:
   - io.micronaut.starter.feature.langchain4j-store-elasticsearch.dependencies
+  - io.micronaut.starter.feature.langchain4j.processor
+  - io.micronaut.starter.feature.langchain4j.processor
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.langchain4j-store-elasticsearch.dependencies

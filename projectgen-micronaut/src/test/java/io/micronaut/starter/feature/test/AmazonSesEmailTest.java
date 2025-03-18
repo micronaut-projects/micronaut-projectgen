@@ -13,31 +13,27 @@ import static org.junit.jupiter.api.Assertions.*;
 @MicronautTest(startApplication = false)
 class AmazonSesEmailTest {
 
+    private static final MicronautOptions OPTIONS = MicronautOptions.builder().feature("email-amazon-ses").build();
+
     @Test
     void amazonSesEmailFeaturesAddsTheDependency(MicronautProjectGenerator micronautProjectGenerator) throws Exception {
-        MicronautOptions options = MicronautOptions.builder().feature("email-amazon-ses").build();
-        Map<String, String> project = generateProject(micronautProjectGenerator, options);
+        MapOutputHandler outputHandler = new MapOutputHandler();
+        micronautProjectGenerator.generate(OPTIONS, outputHandler);
+        Map<String, String> project = outputHandler.getProject();
         String buildGradle = project.get("build.gradle.kts");
         assertNotNull(buildGradle);
-        BuildTestVerifier verifier = BuildTestVerifier.of(buildGradle, options);
+        BuildTestVerifier verifier = BuildTestVerifier.of(buildGradle, OPTIONS);
         assertTrue(verifier.hasDependency("io.micronaut.email", "micronaut-email-amazon-ses"));
     }
 
     @Test
     void amazonSesEmailFeaturesAddsTheLinkInReadmeFile(MicronautProjectGenerator micronautProjectGenerator) throws Exception {
-        MicronautOptions options = MicronautOptions.builder().feature("email-amazon-ses").build();
-        Map<String, String> project = generateProject(micronautProjectGenerator, options);
+        MapOutputHandler outputHandler = new MapOutputHandler();
+        micronautProjectGenerator.generate(OPTIONS, outputHandler);
+        Map<String, String> project = outputHandler.getProject();
         String readme = project.get("README.md");
         assertNotNull(readme);
         assertTrue(readme.contains("https://micronaut-projects.github.io/micronaut-email/latest/guide/index.html#ses"));
         assertTrue(readme.contains("https://aws.amazon.com/ses/"));
-
-    }
-
-    private static Map<String, String> generateProject(MicronautProjectGenerator micronautProjectGenerator,
-                                                       MicronautOptions options) throws Exception {
-        MapOutputHandler outputHandler = new MapOutputHandler();
-        micronautProjectGenerator.generate(options, outputHandler);
-        return outputHandler.getProject();
     }
 }

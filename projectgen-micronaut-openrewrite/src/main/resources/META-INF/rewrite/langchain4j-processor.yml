@@ -1,0 +1,23 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.langchain4j.processor
+displayName: Adds Micronaut Langchain4j Annotation Processor
+recipeList:
+  - io.micronaut.starter.feature.langchain4j.processor.maven
+  - io.micronaut.starter.feature.langchain4j.processor.gradle
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.langchain4j.processor.maven
+displayName: Adds Micronaut Langchain4j annotation Processor to the Maven compiler plugin
+recipeList:
+  - org.openrewrite.maven.AddAnnotationProcessor:
+      groupId: io.micronaut.langchain4j
+      artifactId: micronaut-langchain4j-processor
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.langchain4j.processor.gradle
+displayName: Adds Micronaut Langchain4j Processor dependency to a Gradle Build
+recipeList:
+  - org.openrewrite.gradle.AddDependency:
+      groupId: io.micronaut.langchain4j
+      artifactId: micronaut-langchain4j-processor
+      configuration: annotationProcessor

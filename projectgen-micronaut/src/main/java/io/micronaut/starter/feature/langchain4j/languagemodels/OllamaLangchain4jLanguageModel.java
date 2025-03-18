@@ -50,8 +50,7 @@ public class OllamaLangchain4jLanguageModel implements Langchain4jLanguageModel 
     }
 
     @Override
-    public void addDependencies(GeneratorContext generatorContext) {
-        Langchain4jLanguageModel.super.addDependencies(generatorContext);
+    public void apply(GeneratorContext generatorContext) {
         generatorContext.addDependency(DEPENDENCY_MICRONAUT_LANGCHAIN4J_OLLAMA);
         if (generatorContext.hasFeature(TestResources.class)) {
             generatorContext.addDependency(DEPENDENCY_MICRONAUT_LANGCHAIN4J_OLLAMA_TESTRESOURCES);
