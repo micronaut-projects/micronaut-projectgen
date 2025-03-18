@@ -23,13 +23,13 @@ import jakarta.inject.Singleton;
 
 @Requires(property = "micronaut.starter.feature.langchain4j.store.elasticsearch.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class ElasticSearchLangchain4jEmbeddedStore implements  OpenRewriteFeature {
+public class ElasticSearchLangchain4jEmbeddedStore implements OpenRewriteFeature, Langchain4jEmbeddedStore {
     private static final String NAME = "langchain4j-store-elasticsearch";
 
 
     @Override
     public String getTitle() {
-        return "Elastic Search Langchain4j Embedded Store";
+        return "Elastic Search Langchain4j"+ Langchain4jEmbeddedStore.super.getTitle();
     }
 
     @Override

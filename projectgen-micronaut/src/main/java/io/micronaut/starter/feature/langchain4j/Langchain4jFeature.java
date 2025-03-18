@@ -27,10 +27,7 @@ public interface Langchain4jFeature extends Feature {
         .annotationProcessor()
         .build();
 
-    @Override
-    default void apply(GeneratorContext generatorContext) {
-        addDependencies(generatorContext);
-    }
+
 
     default void addDependencies(GeneratorContext generatorContext) {
         generatorContext.addDependency(DEPENDENCY_MICRONAUT_LANGCHAIN4J_PROCESSOR);
