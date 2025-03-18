@@ -27,7 +27,7 @@ class Lanchain4jTest {
 
     @ParameterizedTest
     @MethodSource("laghcain4JArguments")
-    void lanchain4JDependencies(String feature) throws Exception {
+    void lanchain4JDependencies(String feature, String groupId, String artifactId) throws Exception {
         MicronautOptions options = MicronautOptions.builder().feature(feature).build();
         MapOutputHandler outputHandler = new MapOutputHandler();
         micronautProjectGenerator.generate(options, outputHandler);
@@ -37,11 +37,12 @@ class Lanchain4jTest {
         System.out.println(buildGradle);
         BuildTestVerifier verifier = BuildTestVerifier.of(buildGradle, options);
         assertTrue(verifier.hasAnnotationProcessor("io.micronaut.langchain4j", "micronaut-langchain4j-processor"));
+        assertTrue(verifier.hasDependency(groupId, artifactId));
     }
 
     private static Stream<Arguments> laghcain4JArguments() {
         return Stream.of(
-            Arguments.of("langchain4j-store-elasticsearch")//,
+            Arguments.of("langchain4j-store-elasticsearch", "io.micronaut.langchain4j", "micronaut-langchain4j-store-elasticsearch")//,
 //            Arguments.of("langchain4j-store-mongodb-atlas"),
 //            Arguments.of("langchain4j-store-neo4j"),
 //            Arguments.of("langchain4j-store-opensearch"),
