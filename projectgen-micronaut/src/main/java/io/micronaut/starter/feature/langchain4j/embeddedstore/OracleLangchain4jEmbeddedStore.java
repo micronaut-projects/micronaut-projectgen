@@ -39,7 +39,7 @@ public class OracleLangchain4jEmbeddedStore implements Langchain4jEmbeddedStore,
 
     @Override
     public String getTitle() {
-        return "Elastic Search" + Langchain4jEmbeddedStore.super.getTitle();
+        return "Oracle" + Langchain4jEmbeddedStore.super.getTitle();
     }
 
     @Override
