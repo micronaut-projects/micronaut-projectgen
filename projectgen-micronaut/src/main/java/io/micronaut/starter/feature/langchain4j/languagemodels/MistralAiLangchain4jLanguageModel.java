@@ -19,19 +19,15 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import io.micronaut.starter.feature.langchain4j.Langchain4jLanguageModel;
 import jakarta.inject.Singleton;
 
 @Requires(property = "micronaut.starter.feature.langchain4j.mistralai.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class MistralAiLangchain4jLanguageModel implements Langchain4jLanguageModel {
+public class MistralAiLangchain4jLanguageModel implements Langchain4jLanguageModel, OpenRewriteFeature {
     private static final String NAME = "langchain4j-mistralai";
-    private static final String ARTIFACT_ID_MICRONAUT_LANGCHAIN_4_J_MISTRAL_AI = "micronaut-langchain4j-mistralai";
-    private static final Dependency DEPENDENCY_MICRONAUT_LANGCHAIN4J_MISTRAL_AI = MicronautDependencyUtils.langchain4j()
-            .artifactId(ARTIFACT_ID_MICRONAUT_LANGCHAIN_4_J_MISTRAL_AI)
-            .compile()
-            .build();
 
     @Override
     public String getTitle() {
@@ -44,7 +40,7 @@ public class MistralAiLangchain4jLanguageModel implements Langchain4jLanguageMod
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-            generatorContext.addDependency(DEPENDENCY_MICRONAUT_LANGCHAIN4J_MISTRAL_AI);
+    public String getRecipeName(){
+        return "io.micronaut.starter.feature.langchain4j-mistralai";
     }
 }
