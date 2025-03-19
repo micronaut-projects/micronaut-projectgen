@@ -3,7 +3,6 @@ name: io.micronaut.starter.feature.langchain4j-store-pgvector
 displayName: Add Pgvector Langchain4j dependency
 recipeList:
   - io.micronaut.starter.feature.langchain4j-store-pgvector
-  - io.micronaut.starter.feature.jdbc-hikari
   - io.micronaut.starter.feature.langchain4j.processor
 ---
 type: specs.openrewrite.org/v1beta/recipe

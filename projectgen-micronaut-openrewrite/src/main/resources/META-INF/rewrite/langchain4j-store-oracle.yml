@@ -3,7 +3,6 @@ name: io.micronaut.starter.feature.langchain4j-store-oracle
 displayName: Add Oracle Langchain4j dependency
 recipeList:
   - io.micronaut.starter.feature.langchain4j-store-oracle.dependencies
-  - io.micronaut.starter.feature.jdbc-hikari
   - io.micronaut.starter.feature.langchain4j.processor
 ---
 type: specs.openrewrite.org/v1beta/recipe
