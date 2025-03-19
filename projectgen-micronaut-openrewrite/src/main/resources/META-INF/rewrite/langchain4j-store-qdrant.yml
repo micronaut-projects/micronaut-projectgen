@@ -2,11 +2,12 @@ type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.langchain4j-store-qdrant
 displayName: Add Qdrant Langchain4j dependency
 recipeList:
-  - io.micronaut.starter.feature.langchain4j-store-qdrant
+  - io.micronaut.starter.feature.langchain4j-store-qdrant.dependencies
   - io.micronaut.starter.feature.langchain4j.processor
+  - io.micronaut.starter.feature.langchain4j-qdrant-testresource
 ---
 type: specs.openrewrite.org/v1beta/recipe
-name: io.micronaut.starter.feature.langchain4j-store-qdrant
+name: io.micronaut.starter.feature.langchain4j-store-qdrant.dependencies
 displayName: Add langchain4j-store-qdrant dependency
 recipeList:
   - org.openrewrite.java.dependencies.AddDependency:
