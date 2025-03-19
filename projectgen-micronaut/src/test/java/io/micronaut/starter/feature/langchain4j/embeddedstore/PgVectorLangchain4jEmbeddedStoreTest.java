@@ -46,8 +46,8 @@ class Lanchain4jTest {
             Arguments.of("langchain4j-store-mongodb-atlas","io.micronaut.langchain4j", "micronaut-langchain4j-store-mongodb-atlas"),
             Arguments.of("langchain4j-store-neo4j", "io.micronaut.langchain4j", "micronaut-langchain4j-store-neo4j"),
             Arguments.of("langchain4j-store-opensearch", "io.micronaut.langchain4j", "micronaut-langchain4j-store-opensearch"),
-            Arguments.of("langchain4j-store-oracle", "io.micronaut.langchain4j", "micronaut-langchain4j-store-oracle")
-//            Arguments.of("langchain4j-store-pgvector"),
+            Arguments.of("langchain4j-store-oracle", "io.micronaut.langchain4j", "micronaut-langchain4j-store-oracle"),
+            Arguments.of("langchain4j-store-pgvector", "io.micronaut.langchain4j", "micronaut-langchain4j-store-pgvector")
 //            Arguments.of("langchain4j-store-qdrant"),
 //            Arguments.of("langchain4j-anthropic"),
 //            Arguments.of("langchain4j-azure"),

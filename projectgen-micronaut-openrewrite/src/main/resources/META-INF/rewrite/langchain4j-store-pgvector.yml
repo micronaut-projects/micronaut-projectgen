@@ -2,11 +2,11 @@ type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.langchain4j-store-pgvector
 displayName: Add Pgvector Langchain4j dependency
 recipeList:
-  - io.micronaut.starter.feature.langchain4j-store-pgvector
+  - io.micronaut.starter.feature.langchain4j-store-pgvector.dependencies
   - io.micronaut.starter.feature.langchain4j.processor
 ---
 type: specs.openrewrite.org/v1beta/recipe
-name: io.micronaut.starter.feature.langchain4j-store-pgvector
+name: io.micronaut.starter.feature.langchain4j-store-pgvector.dependencies
 displayName: Add langchain4j-store-pgvector dependency
 recipeList:
   - org.openrewrite.java.dependencies.AddDependency:
