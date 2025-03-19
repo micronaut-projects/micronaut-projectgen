@@ -48,8 +48,8 @@ class Lanchain4jTest {
             Arguments.of("langchain4j-store-opensearch", "io.micronaut.langchain4j", "micronaut-langchain4j-store-opensearch"),
             Arguments.of("langchain4j-store-oracle", "io.micronaut.langchain4j", "micronaut-langchain4j-store-oracle"),
             Arguments.of("langchain4j-store-pgvector", "io.micronaut.langchain4j", "micronaut-langchain4j-store-pgvector"),
-            Arguments.of("langchain4j-store-qdrant", "io.micronaut.langchain4j", "micronaut-langchain4j-store-qdrant")
-//            Arguments.of("langchain4j-anthropic"),
+            Arguments.of("langchain4j-store-qdrant", "io.micronaut.langchain4j", "micronaut-langchain4j-store-qdrant"),
+            Arguments.of("langchain4j-anthropic", "io.micronaut.langchain4j", "micronaut-langchain4j-anthropic")
 //            Arguments.of("langchain4j-azure"),
 //            Arguments.of("langchain4j-bedrock"),
 //            Arguments.of("langchain4j-googleai-gemini"),
