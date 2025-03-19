@@ -52,8 +52,8 @@ class Lanchain4jTest {
             Arguments.of("langchain4j-anthropic", "io.micronaut.langchain4j", "micronaut-langchain4j-anthropic"),
             Arguments.of("langchain4j-azure", "io.micronaut.langchain4j", "micronaut-langchain4j-azure"),
             Arguments.of("langchain4j-bedrock", "io.micronaut.langchain4j", "micronaut-langchain4j-bedrock"),
-            Arguments.of("langchain4j-googleai-gemini", "io.micronaut.langchain4j", "micronaut-langchain4j-googleai-gemini")
-//            Arguments.of("langchain4j-hugging-face"),
+            Arguments.of("langchain4j-googleai-gemini", "io.micronaut.langchain4j", "micronaut-langchain4j-googleai-gemini"),
+            Arguments.of("langchain4j-hugging-face", "io.micronaut.langchain4j", "micronaut-langchain4j-hugging-face")
 //            Arguments.of("langchain4j-mistralai"),
 //            Arguments.of("langchain4j-ollama"),
 //            Arguments.of("langchain4j-openai"),
