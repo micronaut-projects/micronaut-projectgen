@@ -43,8 +43,8 @@ class Lanchain4jTest {
     private static Stream<Arguments> laghcain4JArguments() {
         return Stream.of(
             Arguments.of("langchain4j-store-elasticsearch", "io.micronaut.langchain4j", "micronaut-langchain4j-store-elasticsearch"),
-            Arguments.of("langchain4j-store-mongodb-atlas","io.micronaut.langchain4j", "micronaut-langchain4j-store-mongodb-atlas")
-//            Arguments.of("langchain4j-store-neo4j"),
+            Arguments.of("langchain4j-store-mongodb-atlas","io.micronaut.langchain4j", "micronaut-langchain4j-store-mongodb-atlas"),
+            Arguments.of("langchain4j-store-neo4j", "io.micronaut.langchain4j", "micronaut-langchain4j-store-neo4j")
 //            Arguments.of("langchain4j-store-opensearch"),
 //            Arguments.of("langchain4j-store-oracle"),
 //            Arguments.of("langchain4j-store-pgvector"),
