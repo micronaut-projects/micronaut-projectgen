@@ -1,19 +1,15 @@
 package io.micronaut.starter.feature.langchain4j.embeddedstore;
 
 import io.micronaut.projectgen.core.io.MapOutputHandler;
-import io.micronaut.projectgen.core.options.Language;
-import io.micronaut.projectgen.core.options.TestFramework;
 import io.micronaut.projectgen.micronaut.MicronautOptions;
 import io.micronaut.projectgen.micronaut.MicronautProjectGenerator;
 import io.micronaut.projectgen.test.BuildTestVerifier;
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
 import jakarta.inject.Inject;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
@@ -34,10 +30,9 @@ class Lanchain4jTest {
         Map<String, String> project = outputHandler.getProject();
         String buildGradle = project.get("build.gradle.kts");
         assertNotNull(buildGradle);
-        System.out.println(buildGradle);
         BuildTestVerifier verifier = BuildTestVerifier.of(buildGradle, options);
-        assertTrue(verifier.hasAnnotationProcessor("io.micronaut.langchain4j", "micronaut-langchain4j-processor"));
-        assertTrue(verifier.hasDependency(groupId, artifactId));
+        assertTrue(verifier.hasAnnotationProcessor("io.micronaut.langchain4j", "micronaut-langchain4j-processor"), buildGradle);
+        assertTrue(verifier.hasDependency(groupId, artifactId), buildGradle);
     }
 
     private static Stream<Arguments> laghcain4JArguments() {
