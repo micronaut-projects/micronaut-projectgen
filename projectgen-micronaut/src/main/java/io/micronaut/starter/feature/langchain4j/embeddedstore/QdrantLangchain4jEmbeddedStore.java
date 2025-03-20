@@ -29,6 +29,11 @@ import jakarta.inject.Singleton;
 @Singleton
 public class QdrantLangchain4jEmbeddedStore implements Langchain4jEmbeddedStore, OpenRewriteFeature {
     private static final String NAME = "langchain4j-store-qdrant";
+    private static final String ARTIFACT_ID_MICRONAUT_LANGCHAIN_4_J_QDRANT_TESTRESOURCES = "micronaut-langchain4j-qdrant-testresource";
+    private static final Dependency DEPENDENCY_MICRONAUT_LANGCHAIN4J_QDRANT_TESTRESOURCES = MicronautDependencyUtils.langchain4j()
+        .artifactId(ARTIFACT_ID_MICRONAUT_LANGCHAIN_4_J_QDRANT_TESTRESOURCES)
+        .testResourcesService()
+        .build();
 
     @Override
     public String getTitle() {
@@ -43,5 +48,13 @@ public class QdrantLangchain4jEmbeddedStore implements Langchain4jEmbeddedStore,
     @Override
     public String getRecipeName() {
         return "io.micronaut.starter.feature.langchain4j-store-qdrant";
+    }
+
+    @Override
+    public void apply(GeneratorContext generatorContext) {
+        OpenRewriteFeature.super.apply(generatorContext);
+        if (generatorContext.hasFeature(TestResources.class)) {
+            generatorContext.addDependency(DEPENDENCY_MICRONAUT_LANGCHAIN4J_QDRANT_TESTRESOURCES);
+        }
     }
 }

@@ -1,5 +1,6 @@
 package io.micronaut.starter.feature.langchain4j.embeddedstore;
 
+import io.micronaut.projectgen.core.buildtools.Scope;
 import io.micronaut.projectgen.core.io.MapOutputHandler;
 import io.micronaut.projectgen.micronaut.MicronautOptions;
 import io.micronaut.projectgen.micronaut.MicronautProjectGenerator;
@@ -24,7 +25,7 @@ class Lanchain4jTest {
     @ParameterizedTest
     @MethodSource("laghcain4JArguments")
     void lanchain4JDependencies(String feature, String groupId, String artifactId, boolean hikari) throws Exception {
-        MicronautOptions options = MicronautOptions.builder().feature(feature).build();
+        MicronautOptions options = MicronautOptions.builder().feature(feature).feature("test-resources").build();
         MapOutputHandler outputHandler = new MapOutputHandler();
         micronautProjectGenerator.generate(options, outputHandler);
         Map<String, String> project = outputHandler.getProject();
@@ -35,6 +36,12 @@ class Lanchain4jTest {
         assertTrue(verifier.hasDependency(groupId, artifactId), buildGradle);
         if (hikari) {
             assertTrue(verifier.hasDependency("io.micronaut.sql", "micronaut-jdbc-hikari"), buildGradle);
+        }
+        if (feature.equals("langchain4j-ollama")) {
+            assertTrue(verifier.hasDependency("io.micronaut.langchain4j", "micronaut-langchain4j-ollama-testresources", Scope.TEST_RESOURCES_SERVICE), buildGradle);
+        }
+        if (feature.equals("langchain4j-store-qdrant")) {
+            assertTrue(verifier.hasDependency("io.micronaut.langchain4j", "micronaut-langchain4j-qdrant-testresource", Scope.TEST_RESOURCES_SERVICE), buildGradle);
         }
     }
 

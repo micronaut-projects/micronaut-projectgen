@@ -29,6 +29,11 @@ import jakarta.inject.Singleton;
 @Singleton
 public class OllamaLangchain4jLanguageModel implements Langchain4jLanguageModel, OpenRewriteFeature {
     private static final String NAME = "langchain4j-ollama";
+    private static final String ARTIFACT_ID_MICRONAUT_LANGCHAIN_4_J_OLLAMA_TESTRESOURCES = "micronaut-langchain4j-ollama-testresources";
+    private static final Dependency DEPENDENCY_MICRONAUT_LANGCHAIN4J_OLLAMA_TESTRESOURCES = MicronautDependencyUtils.langchain4j()
+        .artifactId(ARTIFACT_ID_MICRONAUT_LANGCHAIN_4_J_OLLAMA_TESTRESOURCES)
+        .testResourcesService()
+        .build();
 
     @Override
     public String getTitle() {
@@ -43,5 +48,13 @@ public class OllamaLangchain4jLanguageModel implements Langchain4jLanguageModel,
     @Override
     public String getRecipeName() {
         return "io.micronaut.starter.feature.langchain4j-ollama";
+    }
+
+    @Override
+    public void apply(GeneratorContext generatorContext) {
+        OpenRewriteFeature.super.apply(generatorContext);
+        if (generatorContext.hasFeature(TestResources.class)) {
+            generatorContext.addDependency(DEPENDENCY_MICRONAUT_LANGCHAIN4J_OLLAMA_TESTRESOURCES);
+        }
     }
 }
