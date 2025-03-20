@@ -29,9 +29,4 @@ public interface Langchain4jLanguageModel extends Langchain4jFeature {
     default String getCategory() {
         return Category.LANGUAGE_MODEL;
     }
-
-    @Override
-    default void addDependencies(GeneratorContext generatorContext) {
-        Langchain4jFeature.super.addDependencies(generatorContext);
-    }
 }

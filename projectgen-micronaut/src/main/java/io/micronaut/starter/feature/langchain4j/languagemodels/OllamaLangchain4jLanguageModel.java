@@ -1,5 +1,5 @@
 /*
- * Copyright 2017-2024 original authors
+ * Copyright 2017-2025 original authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import io.micronaut.starter.feature.langchain4j.Langchain4jLanguageModel;
 import io.micronaut.starter.feature.testresources.TestResources;
@@ -26,18 +27,13 @@ import jakarta.inject.Singleton;
 
 @Requires(property = "micronaut.starter.feature.langchain4j.ollama.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class OllamaLangchain4jLanguageModel implements Langchain4jLanguageModel {
+public class OllamaLangchain4jLanguageModel implements Langchain4jLanguageModel, OpenRewriteFeature {
     private static final String NAME = "langchain4j-ollama";
-    private static final String ARTIFACT_ID_MICRONAUT_LANGCHAIN_4_J_OLLAMA = "micronaut-langchain4j-ollama";
-    private static final Dependency DEPENDENCY_MICRONAUT_LANGCHAIN4J_OLLAMA = MicronautDependencyUtils.langchain4j()
-            .artifactId(ARTIFACT_ID_MICRONAUT_LANGCHAIN_4_J_OLLAMA)
-            .compile()
-            .build();
     private static final String ARTIFACT_ID_MICRONAUT_LANGCHAIN_4_J_OLLAMA_TESTRESOURCES = "micronaut-langchain4j-ollama-testresources";
     private static final Dependency DEPENDENCY_MICRONAUT_LANGCHAIN4J_OLLAMA_TESTRESOURCES = MicronautDependencyUtils.langchain4j()
-            .artifactId(ARTIFACT_ID_MICRONAUT_LANGCHAIN_4_J_OLLAMA_TESTRESOURCES)
-            .testResourcesService()
-            .build();
+        .artifactId(ARTIFACT_ID_MICRONAUT_LANGCHAIN_4_J_OLLAMA_TESTRESOURCES)
+        .testResourcesService()
+        .build();
 
     @Override
     public String getTitle() {
@@ -50,9 +46,13 @@ public class OllamaLangchain4jLanguageModel implements Langchain4jLanguageModel 
     }
 
     @Override
-    public void addDependencies(GeneratorContext generatorContext) {
-        Langchain4jLanguageModel.super.addDependencies(generatorContext);
-        generatorContext.addDependency(DEPENDENCY_MICRONAUT_LANGCHAIN4J_OLLAMA);
+    public String getRecipeName() {
+        return "io.micronaut.starter.feature.langchain4j-ollama";
+    }
+
+    @Override
+    public void apply(GeneratorContext generatorContext) {
+        OpenRewriteFeature.super.apply(generatorContext);
         if (generatorContext.hasFeature(TestResources.class)) {
             generatorContext.addDependency(DEPENDENCY_MICRONAUT_LANGCHAIN4J_OLLAMA_TESTRESOURCES);
         }

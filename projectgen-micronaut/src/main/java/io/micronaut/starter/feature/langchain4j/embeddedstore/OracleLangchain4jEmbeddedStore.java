@@ -19,6 +19,7 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.starter.feature.database.jdbc.Hikari;
@@ -28,14 +29,8 @@ import jakarta.inject.Singleton;
 
 @Requires(property = "micronaut.starter.feature.langchain4j.store.oracle.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class OracleLangchain4jEmbeddedStore implements Langchain4jEmbeddedStore {
+public class OracleLangchain4jEmbeddedStore implements Langchain4jEmbeddedStore, OpenRewriteFeature {
     private static final String NAME = "langchain4j-store-oracle";
-    private static final String ARTIFACT_ID_MICRONAUT_LANGCHAIN_4_J_STORE_ORACLE = "micronaut-langchain4j-store-oracle";
-    private static final Dependency DEPENDENCY_MICRONAUT_LANGCHAIN4J_STORE_ORACLE = MicronautDependencyUtils.langchain4j()
-            .artifactId(ARTIFACT_ID_MICRONAUT_LANGCHAIN_4_J_STORE_ORACLE)
-            .compile()
-            .build();
-
     private final Hikari hikari;
 
     public OracleLangchain4jEmbeddedStore(Hikari hikari) {
@@ -44,7 +39,7 @@ public class OracleLangchain4jEmbeddedStore implements Langchain4jEmbeddedStore 
 
     @Override
     public String getTitle() {
-        return "Elastic Search" + Langchain4jEmbeddedStore.super.getTitle();
+        return "Oracle" + Langchain4jEmbeddedStore.super.getTitle();
     }
 
     @Override
@@ -53,9 +48,8 @@ public class OracleLangchain4jEmbeddedStore implements Langchain4jEmbeddedStore 
     }
 
     @Override
-    public void addDependencies(GeneratorContext generatorContext) {
-        Langchain4jEmbeddedStore.super.addDependencies(generatorContext);
-        generatorContext.addDependency(DEPENDENCY_MICRONAUT_LANGCHAIN4J_STORE_ORACLE);
+    public String getRecipeName() {
+        return "io.micronaut.starter.feature.langchain4j-store-oracle";
     }
 
     @Override

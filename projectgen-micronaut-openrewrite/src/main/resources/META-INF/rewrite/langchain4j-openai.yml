@@ -1,0 +1,16 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.langchain4j-openai
+displayName: Add Openai Langchain4j dependency
+recipeList:
+  - io.micronaut.starter.feature.langchain4j-openai.dependencies
+  - io.micronaut.starter.feature.langchain4j.processor
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.langchain4j-openai.dependencies
+displayName: Add langchain4j-openai dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.langchain4j
+      artifactId: micronaut-langchain4j-openai
+      configuration: implementation
+      scope: compile
