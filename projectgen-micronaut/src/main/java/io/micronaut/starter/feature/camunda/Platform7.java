@@ -29,7 +29,7 @@ import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.starter.feature.database.DatabaseDriverFeature;
 import io.micronaut.starter.feature.server.Jetty;
 import io.micronaut.starter.feature.server.Netty;
-import io.micronaut.starter.feature.test.AssertJ;
+import io.micronaut.projectgen.micronaut.features.test.AssertJ;
 import jakarta.inject.Singleton;
 
 @Requires(property = "micronaut.starter.feature.camunda.platform7.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
