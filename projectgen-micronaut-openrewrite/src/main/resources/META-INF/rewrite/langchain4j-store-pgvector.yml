@@ -13,4 +13,5 @@ recipeList:
       groupId: io.micronaut.langchain4j
       artifactId: micronaut-langchain4j-store-pgvector
       configuration: implementation
+      scope: compile
 

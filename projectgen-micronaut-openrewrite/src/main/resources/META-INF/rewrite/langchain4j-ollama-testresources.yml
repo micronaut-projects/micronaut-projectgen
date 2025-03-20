@@ -21,3 +21,4 @@ recipeList:
       groupId: io.micronaut.langchain4j
       artifactId: micronaut-langchain4j-ollama-testresource
       configuration: implementation
+      scope: compile

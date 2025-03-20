@@ -14,3 +14,4 @@ recipeList:
       groupId: io.micronaut.langchain4j
       artifactId: micronaut-langchain4j-store-qdrant
       configuration: implementation
+      scope: compile

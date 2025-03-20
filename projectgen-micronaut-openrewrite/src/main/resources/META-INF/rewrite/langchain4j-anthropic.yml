@@ -13,3 +13,4 @@ recipeList:
       groupId: io.micronaut.langchain4j
       artifactId: micronaut-langchain4j-anthropic
       configuration: implementation
+      scope: compile
