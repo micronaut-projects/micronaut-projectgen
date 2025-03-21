@@ -13,19 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.starter.feature.test;
+package io.micronaut.projectgen.micronaut.features.test;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.feature.*;
-import io.micronaut.projectgen.core.utils.OptionUtils;
-import io.micronaut.projectgen.micronaut.ApplicationType;
-import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.options.Language;
 import io.micronaut.projectgen.core.options.Options;
+import io.micronaut.starter.feature.test.MockingFeature;
 import jakarta.inject.Singleton;
 
 import java.util.Set;
@@ -34,15 +32,8 @@ import java.util.function.Supplier;
 
 @Requires(property = "micronaut.starter.feature.mockk.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class Mockk implements MockingFeature, DefaultFeature {
-    public static final String ARTIFACT_ID_MOCKK = "mockk";
+public class Mockk implements MockingFeature, DefaultFeature, OpenRewriteFeature {
     public static final String NAME_MOCKK = "mockk";
-    public static final String GROUP_ID_IO_MOCKK = "io.mockk";
-    public static final Dependency DEPENDENCY_MOCKK = Dependency.builder()
-            .groupId(GROUP_ID_IO_MOCKK)
-            .artifactId(ARTIFACT_ID_MOCKK)
-            .test()
-            .build();
 
     @Override
     @NonNull
@@ -62,16 +53,8 @@ public class Mockk implements MockingFeature, DefaultFeature {
     }
 
     @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://mockk.io";
-    }
-
-    @Override
-    public void apply(GeneratorContext generatorContext) {
-        // Only for Maven, these dependencies are applied by the Micronaut Gradle Plugin
-        if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())) {
-            generatorContext.addDependency(DEPENDENCY_MOCKK);
-        }
+    public String getRecipeName(){
+        return "io.micronaut.starter.feature.mockk";
     }
 
     @Override
@@ -92,7 +75,7 @@ public class Mockk implements MockingFeature, DefaultFeature {
                                                    Class<U> nullFeature,
                                                    Predicate<U> nullFeatureTest) {
         T suppliedValue = supplier.get();
-        return suppliedValue != null 
+        return suppliedValue != null
                 ? nonNull.test(suppliedValue)
                 : selectedFeatures.stream()
                     .filter(nullFeature::isInstance)

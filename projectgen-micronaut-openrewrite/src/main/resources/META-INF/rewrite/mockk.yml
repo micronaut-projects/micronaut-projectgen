@@ -1,0 +1,25 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.mockk
+displayName: Add mockk dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.mockk.dependencies
+  - io.micronaut.starter.feature.mockk.documentation.thirdparty
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.mockk.dependencies
+displayName: Add mockk dependency in the test scope
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.mockk
+      artifactId: mockk
+      configuration: testImplementation
+      scope: test
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.mockk.documentation.thirdparty
+displayName: Append a link to the mockk Website
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://mockk.io
+      appendNewline: true
