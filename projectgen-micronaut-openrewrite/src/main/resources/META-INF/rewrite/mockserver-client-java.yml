@@ -1,0 +1,25 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.mockserver-client-java
+displayName: Add Mockserver dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.mockserver-client-java.dependencies
+  - io.micronaut.starter.feature.mockserver-client-java.documentation.thirdparty
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.mockserver-client-java.dependencies
+displayName: Add Mockserver dependency in the test scope
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: org.mock-server
+      artifactId: mockserver-client-java
+      configuration: testImplementation
+      scope: test
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.mockserver-client-java.documentation.thirdparty
+displayName: Append a link to the Mockserver Website
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://www.mock-server.com/mock_server/mockserver_clients.html#java-mockserver-client
+      appendNewline: true
