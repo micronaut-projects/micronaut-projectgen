@@ -13,29 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.starter.feature.test;
+package io.micronaut.projectgen.micronaut.features.test;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
-import io.micronaut.projectgen.micronaut.ApplicationType;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.starter.feature.Category;
 
+import io.micronaut.starter.feature.test.JunitCompanionFeature;
 import jakarta.inject.Singleton;
 
 @Requires(property = "micronaut.starter.feature.hamcrest.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class Hamcrest  implements JunitCompanionFeature {
-    public static final String GROUP_ID_HAMCREST = "org.hamcrest";
+public class Hamcrest  implements JunitCompanionFeature, OpenRewriteFeature {
     public static final String FEATURE_HAMCREST = "hamcrest";
-    public static final String ARTIFACT_ID_HAMCREST = "hamcrest";
-    public static final Dependency DEPENDENCY_HAMCREST = Dependency.builder()
-            .groupId(GROUP_ID_HAMCREST)
-            .artifactId(ARTIFACT_ID_HAMCREST)
-            .test()
-            .build();
 
     @Override
     @NonNull
@@ -65,7 +58,7 @@ public class Hamcrest  implements JunitCompanionFeature {
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        generatorContext.addDependency(Hamcrest.DEPENDENCY_HAMCREST);
+    public String getRecipeName() {
+        return "io.micronaut.starter.feature.hamcrest";
     }
 }

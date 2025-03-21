@@ -1,0 +1,25 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.hamcrest
+displayName: Add Hamcrest dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.hamcrest.dependencies
+  - io.micronaut.starter.feature.hamcrest.documentation.thirdparty
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.hamcrest.dependencies
+displayName: Add Hamcrest dependency in the test scope
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: org.hamcrest
+      artifactId: hamcrest
+      configuration: testImplementation
+      scope: test
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.hamcrest.documentation.thirdparty
+displayName: Append a link to the Hamcrest Website
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://hamcrest.org/JavaHamcrest/
+      appendNewline: true
