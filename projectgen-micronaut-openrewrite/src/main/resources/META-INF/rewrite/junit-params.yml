@@ -1,0 +1,25 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.junit-params
+displayName: Add JunitParams dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.junit-params.dependencies
+  - io.micronaut.starter.feature.junit-params.documentation.thirdparty
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.junit-params.dependencies
+displayName: Add JunitParams dependency in the test scope
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: org.junit.jupiter
+      artifactId: junit-jupiter-params
+      configuration: testImplementation
+      scope: test
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.junit-params.documentation.thirdparty
+displayName: Append a link to the JunitParams Website
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://junit.org/junit5/docs/current/user-guide/#writing-tests-parameterized-tests
+      appendNewline: true

@@ -13,20 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.starter.feature.test;
+package io.micronaut.projectgen.micronaut.features.test;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
-import io.micronaut.projectgen.micronaut.ApplicationType;
-import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.feature.Category;
+import io.micronaut.starter.feature.test.JunitCompanionFeature;
 import jakarta.inject.Singleton;
 
 @Requires(property = "micronaut.starter.feature.junit.params.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class JunitParams implements JunitCompanionFeature {
+public class JunitParams implements JunitCompanionFeature, OpenRewriteFeature {
 
     @Override
     @NonNull
@@ -51,20 +50,7 @@ public class JunitParams implements JunitCompanionFeature {
     }
 
     @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://junit.org/junit5/docs/current/user-guide/#writing-tests-parameterized-tests";
-    }
-
-    @Override
-    public void apply(GeneratorContext generatorContext) {
-        addDependency(generatorContext);
-    }
-
-    protected void addDependency(GeneratorContext generatorContext) {
-        generatorContext.addDependency(Dependency.builder()
-                .groupId("org.junit.jupiter")
-                .artifactId("junit-jupiter-params")
-                .test()
-        );
+    public String getRecipeName(){
+        return "io.micronaut.starter.feature.junit-params";
     }
 }
