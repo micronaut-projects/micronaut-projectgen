@@ -13,22 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.starter.feature.test;
+package io.micronaut.projectgen.micronaut.features.test;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
-import io.micronaut.projectgen.micronaut.ApplicationType;
-import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.feature.Category;
-import io.micronaut.projectgen.core.feature.Feature;
 import jakarta.inject.Singleton;
 
 @Requires(property = "micronaut.starter.feature.micronaut.test.rest.assured.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class MicronautRestAssured implements Feature {
-    private static final String ARTIFACT_ID_MICRONAUT_TEST_REST_ASSURED = "micronaut-test-rest-assured";
+public class MicronautRestAssured implements OpenRewriteFeature {
 
     @NonNull
     @Override
@@ -48,24 +44,12 @@ public class MicronautRestAssured implements Feature {
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        generatorContext.addDependency(MicronautDependencyUtils.testDependency()
-                .artifactId(ARTIFACT_ID_MICRONAUT_TEST_REST_ASSURED)
-                .test());
+    public String getRecipeName() {
+        return "io.micronaut.starter.feature.micronaut-test-rest-assured";
     }
 
     @Override
     public String getCategory() {
         return Category.DEV_TOOLS;
-    }
-
-    @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-test/latest/guide/#restAssured";
-    }
-
-    @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://rest-assured.io/#docs";
     }
 }

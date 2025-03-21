@@ -1,0 +1,36 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.micronaut-test-rest-assured
+displayName: Add Micronaut-Test REST-assured dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.micronaut-test-rest-assured.dependencies
+  - io.micronaut.starter.feature.micronaut-test-rest-assured.documentation.thirdparty
+  - io.micronaut.starter.feature.micronaut-test-rest-assured.documentation.micronaut
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.micronaut-test-rest-assured.dependencies
+displayName: Add Micronaut-Test REST-assured dependency in the test scope
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.test
+      artifactId: micronaut-test-rest-assured
+      configuration: testImplementation
+      scope: test
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.micronaut-test-rest-assured.documentation.micronaut
+displayName: Append a link to the Micronaut-Test REST-assured Documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-test/latest/guide/#restAssured
+      appendNewline: true
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.micronaut-test-rest-assured.documentation.thirdparty
+displayName: Append a link to the Micronaut-Test REST-assured Website
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://rest-assured.io/#docs
+      appendNewline: true
+
