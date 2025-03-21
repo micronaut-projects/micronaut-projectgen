@@ -53,11 +53,6 @@ public class Hamcrest  implements JunitCompanionFeature, OpenRewriteFeature {
     }
 
     @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://hamcrest.org/JavaHamcrest/";
-    }
-
-    @Override
     public String getRecipeName() {
         return "io.micronaut.starter.feature.hamcrest";
     }
