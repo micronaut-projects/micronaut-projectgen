@@ -1,0 +1,25 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.localstack
+displayName: Add LocalStack dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.localstack.dependencies
+  - io.micronaut.starter.feature.localstack.documentation.thirdparty
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.localstack.dependencies
+displayName: Add LocalStack dependency in the test scope
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: org.testcontainers
+      artifactId: localstack
+      configuration: testImplementation
+      scope: test
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.localstack.documentation.thirdparty
+displayName: Append a link to the LocalStack Website
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://www.testcontainers.org/modules/localstack/
+      appendNewline: true

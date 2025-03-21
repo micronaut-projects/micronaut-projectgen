@@ -13,16 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.starter.feature.test;
+package io.micronaut.projectgen.micronaut.features.test;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
-import io.micronaut.projectgen.micronaut.ApplicationType;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.starter.feature.Category;
-import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.starter.feature.database.TestContainers;
 import io.micronaut.starter.feature.messaging.jms.SQS;
@@ -37,7 +36,7 @@ import jakarta.inject.Singleton;
  */
 @Requires(property = "micronaut.starter.feature.localstack.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class LocalStack implements Feature, ContributingTestContainerArtifactId {
+public class LocalStack implements OpenRewriteFeature, ContributingTestContainerArtifactId {
 
     public static final String ARTIFACT_ID_LOCALSTACK = "localstack";
     private final TestContainers testContainers;
@@ -69,11 +68,6 @@ public class LocalStack implements Feature, ContributingTestContainerArtifactId 
     }
 
     @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://www.testcontainers.org/modules/localstack/";
-    }
-
-    @Override
     public void processSelectedFeatures(FeatureContext featureContext) {
         if (!featureContext.isPresent(TestContainers.class)) {
             featureContext.addFeature(testContainers);
@@ -94,5 +88,10 @@ public class LocalStack implements Feature, ContributingTestContainerArtifactId 
     @Override
     public String testContainersArtifactId() {
         return ARTIFACT_ID_LOCALSTACK;
+    }
+
+    @Override
+    public String getRecipeName(){
+        return "io.micronaut.starter.feature.localstack";
     }
 }
