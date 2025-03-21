@@ -13,29 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.starter.feature.test;
+package io.micronaut.projectgen.micronaut.features.test;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
-import io.micronaut.projectgen.micronaut.ApplicationType;
-import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.feature.Category;
+import io.micronaut.starter.feature.test.JunitCompanionFeature;
 import jakarta.inject.Singleton;
 
 @Requires(property = "micronaut.starter.feature.junit.platform.suite.engine.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class JunitPlatformSuiteEngine implements JunitCompanionFeature {
+public class JunitPlatformSuiteEngine implements JunitCompanionFeature, OpenRewriteFeature {
 
     public static final String NAME = "junit-platform-suite-engine";
-
-    private static final String ARTIFACT_ID_JUNIT_PLATFORM_SUITE_ENGINE = "junit-platform-suite-engine";
-    private static final String GROUP_ID_ORG_JUNIT_PLATFORM = "org.junit.platform";
-    public static final Dependency.Builder DEPENDENCY_JUNIT_PLATFORM_SUITE_ENGINE = Dependency.builder()
-            .groupId(GROUP_ID_ORG_JUNIT_PLATFORM)
-            .artifactId(ARTIFACT_ID_JUNIT_PLATFORM_SUITE_ENGINE)
-            .test();
 
     @Override
     @NonNull
@@ -60,16 +52,7 @@ public class JunitPlatformSuiteEngine implements JunitCompanionFeature {
     }
 
     @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://junit.org/junit5/docs/current/user-guide/#junit-platform-suite-engine-setup";
-    }
-
-    @Override
-    public void apply(GeneratorContext generatorContext) {
-        addDependencies(generatorContext);
-    }
-
-    protected void addDependencies(GeneratorContext generatorContext) {
-        generatorContext.addDependency(DEPENDENCY_JUNIT_PLATFORM_SUITE_ENGINE);
+    public String getRecipeName(){
+        return "io.micronaut.starter.feature.junit-platform-suite-engine";
     }
 }
