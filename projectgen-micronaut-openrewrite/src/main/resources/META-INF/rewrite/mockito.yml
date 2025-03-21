@@ -1,6 +1,6 @@
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.mockito
-displayName: Add Mockito dependency in the test configuration
+displayName: Add Mockito dependency in the test configuration and link to README
 recipeList:
   - io.micronaut.starter.feature.mockito.dependencies
   - io.micronaut.starter.feature.mockito.documentation.thirdparty
