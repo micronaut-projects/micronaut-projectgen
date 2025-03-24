@@ -25,6 +25,8 @@ import io.micronaut.starter.feature.Category;
 import io.micronaut.starter.feature.test.JunitCompanionFeature;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.hamcrest.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Hamcrest  implements JunitCompanionFeature, OpenRewriteFeature {
@@ -53,7 +55,7 @@ public class Hamcrest  implements JunitCompanionFeature, OpenRewriteFeature {
     }
 
     @Override
-    public String getRecipeName() {
-        return "io.micronaut.starter.feature.hamcrest";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.hamcrest");
     }
 }

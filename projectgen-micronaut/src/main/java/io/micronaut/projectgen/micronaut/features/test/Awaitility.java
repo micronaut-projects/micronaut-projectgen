@@ -13,26 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.starter.feature.test;
+package io.micronaut.projectgen.micronaut.features.test;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
-import io.micronaut.projectgen.micronaut.ApplicationType;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.starter.feature.Category;
-import io.micronaut.projectgen.core.feature.Feature;
-import io.micronaut.projectgen.core.options.Language;
 import jakarta.inject.Singleton;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Requires(property = "micronaut.starter.feature.awaitility.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class Awaitility implements Feature {
-
-    private static final String AWAITILITY_ARTIFACT_ID = "awaitility";
-    private static final String AWAITILITY_GROOVY_ARTIFACT_ID = "awaitility-groovy";
-    private static final String AWAITILITY_KOTLIN_ARTIFACT_ID = "awaitility-kotlin";
+public class Awaitility implements OpenRewriteFeature {
 
     @Override
     @NonNull
@@ -52,28 +48,19 @@ public class Awaitility implements Feature {
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        generatorContext.addDependency(Dependency.builder()
-                .lookupArtifactId(getArtifactForLanguage(generatorContext.getLanguage()))
-                .test());
-    }
-
-    @Override
     public String getCategory() {
         return Category.DEV_TOOLS;
     }
 
     @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://github.com/awaitility/awaitility";
-    }
-
-    private String getArtifactForLanguage(Language language) {
-        switch (language) {
-            case JAVA: return AWAITILITY_ARTIFACT_ID;
-            case GROOVY: return AWAITILITY_GROOVY_ARTIFACT_ID;
-            case KOTLIN: return AWAITILITY_KOTLIN_ARTIFACT_ID;
-            default: throw new IllegalArgumentException("Unsupported language " + language);
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        List<String> recipes = new ArrayList<>();
+        switch (generatorContext.getOptions().language()) {
+            case JAVA -> recipes.add("io.micronaut.starter.feature.awaitility.dependencies.java");
+            case KOTLIN -> recipes.add("io.micronaut.starter.feature.awaitility.dependencies.kotlin");
+            case GROOVY -> recipes.add("io.micronaut.starter.feature.awaitility.dependencies.groovy");
         }
+        recipes.add("io.micronaut.starter.feature.awaitility.documentation.thirdparty");
+        return recipes;
     }
 }

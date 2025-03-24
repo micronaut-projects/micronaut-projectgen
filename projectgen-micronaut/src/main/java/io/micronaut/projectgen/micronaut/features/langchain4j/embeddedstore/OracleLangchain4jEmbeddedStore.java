@@ -17,12 +17,15 @@ package io.micronaut.projectgen.micronaut.features.langchain4j.embeddedstore;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.starter.feature.database.jdbc.Hikari;
 import io.micronaut.starter.feature.database.jdbc.JdbcFeature;
 import io.micronaut.projectgen.micronaut.features.langchain4j.Langchain4jEmbeddedStore;
 import jakarta.inject.Singleton;
+
+import java.util.List;
 
 @Requires(property = "micronaut.starter.feature.langchain4j.store.oracle.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
@@ -45,8 +48,8 @@ public class OracleLangchain4jEmbeddedStore implements Langchain4jEmbeddedStore,
     }
 
     @Override
-    public String getRecipeName() {
-        return "io.micronaut.starter.feature.langchain4j-store-oracle";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.langchain4j-store-oracle");
     }
 
     @Override

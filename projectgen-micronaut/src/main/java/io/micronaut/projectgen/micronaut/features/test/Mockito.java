@@ -18,10 +18,13 @@ package io.micronaut.projectgen.micronaut.features.test;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.feature.test.JunitCompanionFeature;
 import io.micronaut.starter.feature.test.MockingFeature;
 import jakarta.inject.Singleton;
+
+import java.util.List;
 
 @Requires(property = "micronaut.starter.feature.mockito.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
@@ -43,7 +46,7 @@ public class Mockito implements MockingFeature, JunitCompanionFeature, OpenRewri
         return "Mockito test mocking framework for JUnit";
     }
 
-    public String getRecipeName(){
-        return "io.micronaut.starter.feature.mockito";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.mockito");
     }
 }

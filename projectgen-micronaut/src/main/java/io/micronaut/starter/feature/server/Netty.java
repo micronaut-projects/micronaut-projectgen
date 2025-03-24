@@ -34,7 +34,7 @@ import java.util.Set;
 
 @Requires(property = "micronaut.starter.feature.netty.server.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class Netty extends AbstractMicronautServerFeature implements DefaultFeature {
+public class Netty extends AbstractMicronautServerFeature {
 
     @Override
     public String getName() {
@@ -49,12 +49,6 @@ public class Netty extends AbstractMicronautServerFeature implements DefaultFeat
     @Override
     public String getDescription() {
         return "Adds support for a Netty server";
-    }
-
-    @Override
-    public boolean shouldApply(Options options, Set<Feature> selectedFeatures) {
-        return options instanceof MicronautOptions mnOptions && mnOptions.applicationType() == ApplicationType.DEFAULT &&
-                selectedFeatures.stream().noneMatch(f -> f instanceof ServerFeature || f instanceof FunctionFeature);
     }
 
     @Override

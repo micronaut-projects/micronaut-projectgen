@@ -18,10 +18,13 @@ package io.micronaut.projectgen.micronaut.features.test;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.feature.Category;
 import io.micronaut.starter.feature.test.JunitCompanionFeature;
 import jakarta.inject.Singleton;
+
+import java.util.List;
 
 @Requires(property = "micronaut.starter.feature.junit.platform.suite.engine.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
@@ -52,7 +55,7 @@ public class JunitPlatformSuiteEngine implements JunitCompanionFeature, OpenRewr
     }
 
     @Override
-    public String getRecipeName(){
-        return "io.micronaut.starter.feature.junit-platform-suite-engine";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.junit-platform-suite-engine");
     }
 }

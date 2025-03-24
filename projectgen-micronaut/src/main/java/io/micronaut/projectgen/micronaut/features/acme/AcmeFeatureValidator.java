@@ -29,15 +29,15 @@ import java.util.Set;
 public class AcmeFeatureValidator implements FeatureValidator {
     @Override
     public void validatePreProcessing(Options options, Set<Feature> features) {
+
+    }
+
+    @Override
+    public void validatePostProcessing(Options options, Set<Feature> features) {
         if (features.stream().anyMatch(Acme.class::isInstance)) {
             if (features.stream().noneMatch(Netty.class::isInstance)) {
                 throw new IllegalArgumentException("Acme only supports Netty");
             }
         }
-    }
-
-    @Override
-    public void validatePostProcessing(Options options, Set<Feature> features) {
-
     }
 }

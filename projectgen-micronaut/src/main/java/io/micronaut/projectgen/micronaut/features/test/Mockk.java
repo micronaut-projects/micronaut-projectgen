@@ -28,6 +28,7 @@ import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.starter.feature.test.MockingFeature;
 import jakarta.inject.Singleton;
 
+import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
@@ -55,8 +56,8 @@ public class Mockk implements MockingFeature, DefaultFeature, OpenRewriteFeature
     }
 
     @Override
-    public String getRecipeName(){
-        return "io.micronaut.starter.feature.mockk";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.mockk");
     }
 
     @Override
@@ -93,10 +94,14 @@ public class Mockk implements MockingFeature, DefaultFeature, OpenRewriteFeature
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        generatorContext.addConfigurationByRecipeName(getRecipeName());
+        for (String recipeName : getRecipes(generatorContext)) {
+            generatorContext.addConfigurationByRecipeName(recipeName);
+        }
         // Only for Maven, these dependencies are applied by the Micronaut Gradle Plugin
         if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())) {
-            generatorContext.addDependenciesByRecipeName(getRecipeName());
+            for (String recipeName : getRecipes(generatorContext)) {
+                generatorContext.addDependenciesByRecipeName(recipeName);
+            }
         }
     }
 }

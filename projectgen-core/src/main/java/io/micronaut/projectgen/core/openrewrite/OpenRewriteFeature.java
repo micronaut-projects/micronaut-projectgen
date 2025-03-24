@@ -18,17 +18,27 @@ package io.micronaut.projectgen.core.openrewrite;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 /**
  * A feature backed by an OpenRewrite recipe.
  */
 public interface OpenRewriteFeature extends Feature {
 
-    String getRecipeName();
+    List<String> getRecipes(GeneratorContext generatorContext);
 
     @Override
     default void apply(GeneratorContext generatorContext) {
-        generatorContext.addConfigurationByRecipeName(getRecipeName());
-        generatorContext.addDependenciesByRecipeName(getRecipeName());
+        for (String recipeName : getRecipes(generatorContext)) {
+            generatorContext.addConfigurationByRecipeName(recipeName);
+            generatorContext.addDependenciesByRecipeName(recipeName);
+        }
+
     }
 
     @Override
@@ -36,7 +46,11 @@ public interface OpenRewriteFeature extends Feature {
         if (gc == null) {
             return null;
         }
-        return gc.findFrameworkDocumentationByRecipeName(getRecipeName()).orElse(null);
+        return getRecipes(gc).stream()
+            .map(recipeName -> gc.findFrameworkDocumentationByRecipeName(recipeName).orElse(null))
+            .filter(Objects::nonNull)
+            .findFirst()
+            .orElse(null);
     }
 
     @Override
@@ -44,6 +58,10 @@ public interface OpenRewriteFeature extends Feature {
         if (gc == null) {
             return null;
         }
-        return gc.findThirdPartyDocumentationByRecipeName(getRecipeName()).orElse(null);
+        return getRecipes(gc).stream()
+            .map(recipeName -> gc.findThirdPartyDocumentationByRecipeName(recipeName).orElse(null))
+            .filter(Objects::nonNull)
+            .findFirst()
+            .orElse(null);
     }
 }
