@@ -25,6 +25,7 @@ import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.micronaut.MicronautOptions;
+import io.micronaut.projectgen.micronaut.features.test.Mockito;
 import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.starter.feature.agorapulse.AgoraPulseFeature;
@@ -49,7 +50,6 @@ import io.micronaut.projectgen.micronaut.template.agorapulse.worker.fallbackEmai
 import io.micronaut.projectgen.micronaut.template.agorapulse.worker.fallbackEmailDigestServiceJava;
 import io.micronaut.projectgen.micronaut.template.agorapulse.worker.fallbackEmailDigestServiceKotlin;
 import io.micronaut.starter.feature.test.Awaitility;
-import io.micronaut.starter.feature.test.Mockito;
 import io.micronaut.projectgen.core.options.Language;
 import io.micronaut.projectgen.core.options.TestFramework;
 import jakarta.inject.Singleton;
