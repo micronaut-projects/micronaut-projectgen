@@ -13,32 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.starter.feature.test;
+package io.micronaut.projectgen.micronaut.features.test;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
-import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.util.StringUtils;
-import io.micronaut.projectgen.micronaut.ApplicationType;
-import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.feature.Category;
-import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.starter.feature.testcontainers.ContributingTestContainerArtifactId;
 import jakarta.inject.Singleton;
 
 @Requires(property = "micronaut.starter.feature.mockserver.client.java.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class MockServerClient implements Feature, ContributingTestContainerArtifactId {
-
+public class MockServerClient implements OpenRewriteFeature {
     public static final String NAME = "mockserver-client-java";
-    public static final String ARTIFACT_ID_MOCKSERVER_CLIENT_JAVA = "mockserver-client-java";
-
-    public static final Dependency DEPENDENCY_MOCKSERVER_CLIENT_JAVA = Dependency.builder()
-            .lookupArtifactId(ARTIFACT_ID_MOCKSERVER_CLIENT_JAVA)
-            .test()
-            .build();
-    public static final String TEST_CONTAINERS_ARTIFACT_ID_MOCKSERVER = "mockserver";
 
     @Override
     @NonNull
@@ -62,22 +50,7 @@ public class MockServerClient implements Feature, ContributingTestContainerArtif
     }
 
     @Override
-    @Nullable
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://www.mock-server.com/mock_server/mockserver_clients.html#java-mockserver-client";
-    }
-
-    @Override
-    public void apply(GeneratorContext generatorContext) {
-        addDependencies(generatorContext);
-    }
-
-    protected void addDependencies(GeneratorContext generatorContext) {
-        generatorContext.addDependency(DEPENDENCY_MOCKSERVER_CLIENT_JAVA);
-    }
-
-    @Override
-    public String testContainersArtifactId() {
-        return TEST_CONTAINERS_ARTIFACT_ID_MOCKSERVER;
+    public String getRecipeName() {
+        return "io.micronaut.starter.feature.mockserver-client-java";
     }
 }

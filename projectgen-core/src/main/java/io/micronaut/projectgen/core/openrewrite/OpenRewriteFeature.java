@@ -29,7 +29,6 @@ public interface OpenRewriteFeature extends Feature {
     default void apply(GeneratorContext generatorContext) {
         generatorContext.addConfigurationByRecipeName(getRecipeName());
         generatorContext.addDependenciesByRecipeName(getRecipeName());
-        generatorContext.addConfigurationByRecipeName(getRecipeName());
     }
 
     @Override

@@ -13,50 +13,47 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.starter.feature.test;
+package io.micronaut.projectgen.micronaut.features.test;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
+import io.micronaut.starter.feature.Category;
+
+import io.micronaut.starter.feature.test.JunitCompanionFeature;
 import jakarta.inject.Singleton;
 
-@Requires(property = "micronaut.starter.feature.mockito.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
+@Requires(property = "micronaut.starter.feature.hamcrest.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class Mockito implements MockingFeature,  JunitCompanionFeature {
-    public static final String GROUP_ID_MOCKITO = "org.mockito";
-    public static final String ARTIFACT_ID_MOCKITO_CORE = "mockito-core";
-    public static final Dependency DEPENDENCY_MOCKITO_CORE = Dependency.builder()
-            .groupId(GROUP_ID_MOCKITO)
-            .artifactId(ARTIFACT_ID_MOCKITO_CORE)
-            .test()
-            .build();
+public class Hamcrest  implements JunitCompanionFeature, OpenRewriteFeature {
+    public static final String FEATURE_HAMCREST = "hamcrest";
 
     @Override
     @NonNull
     public String getName() {
-        return "mockito";
+        return FEATURE_HAMCREST;
     }
 
     @Override
     public String getTitle() {
-        return "Mockito Framework";
+        return "Hamcrest";
     }
 
     @Override
     @NonNull
     public String getDescription() {
-        return "Mockito test mocking framework for JUnit";
+        return "Hamcrest matchers for JUnit";
     }
 
     @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://site.mockito.org";
+    public String getCategory() {
+        return Category.DEV_TOOLS;
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        generatorContext.addDependency(DEPENDENCY_MOCKITO_CORE);
+    public String getRecipeName() {
+        return "io.micronaut.starter.feature.hamcrest";
     }
 }

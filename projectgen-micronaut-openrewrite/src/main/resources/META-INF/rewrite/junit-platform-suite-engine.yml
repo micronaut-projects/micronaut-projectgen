@@ -1,0 +1,25 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.junit-platform-suite-engine
+displayName: Add JUnit Platform Suite Engine dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.junit-platform-suite-engine.dependencies
+  - io.micronaut.starter.feature.junit-platform-suite-engine.documentation.thirdparty
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.junit-platform-suite-engine.dependencies
+displayName: Add JUnit Platform Suite Engine dependency in the test scope
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: org.junit.platform
+      artifactId: junit-platform-suite-engine
+      configuration: testImplementation
+      scope: test
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.junit-platform-suite-engine.documentation.thirdparty
+displayName: Append a link to the JUnit Platform Suite Engine Website
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://junit.org/junit5/docs/current/user-guide/#junit-platform-suite-engine-setup
+      appendNewline: true
