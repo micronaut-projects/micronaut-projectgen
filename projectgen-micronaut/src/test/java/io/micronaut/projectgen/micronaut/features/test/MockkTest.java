@@ -20,7 +20,7 @@ class MockkTest {
         String buildGradle = project.get("build.gradle.kts");
         assertNotNull(buildGradle);
         BuildTestVerifier verifier = BuildTestVerifier.of(buildGradle, options);
-        assertTrue(verifier.hasDependency("io.mockk", "mockk", Scope.TEST));
+        assertFalse(verifier.hasDependency("io.mockk", "mockk", Scope.TEST)); // mock dependencies are applied by the Micronaut Gradle Plugin
     }
 
     @Test
