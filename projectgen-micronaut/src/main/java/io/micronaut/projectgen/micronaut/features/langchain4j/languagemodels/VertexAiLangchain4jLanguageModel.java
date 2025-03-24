@@ -17,9 +17,12 @@ package io.micronaut.projectgen.micronaut.features.langchain4j.languagemodels;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.micronaut.features.langchain4j.Langchain4jLanguageModel;
 import jakarta.inject.Singleton;
+
+import java.util.List;
 
 @Requires(property = "micronaut.starter.feature.langchain4j.vertexai.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
@@ -37,7 +40,7 @@ public class VertexAiLangchain4jLanguageModel implements Langchain4jLanguageMode
     }
 
     @Override
-    public String getRecipeName(){
-        return "io.micronaut.starter.feature.langchain4j-vertexai";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.langchain4j-vertexai");
     }
 }

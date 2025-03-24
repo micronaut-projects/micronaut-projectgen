@@ -17,12 +17,15 @@ package io.micronaut.projectgen.micronaut.features.acme;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.MicronautOptions;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.starter.feature.Category;
 import jakarta.inject.Singleton;
+
+import java.util.List;
 
 @Requires(property = "micronaut.starter.feature.acme.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
@@ -43,8 +46,8 @@ public class Acme implements OpenRewriteFeature {
         return "Adds support for ACME (Automated Certificate Management Environment)";
     }
 
-    public String getRecipeName() {
-        return "io.micronaut.starter.feature.acme";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.acme");
     }
 
     @Override

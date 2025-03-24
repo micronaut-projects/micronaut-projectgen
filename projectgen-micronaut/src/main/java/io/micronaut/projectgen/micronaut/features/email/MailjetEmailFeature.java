@@ -23,6 +23,8 @@ import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.email.mailjet.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class MailjetEmailFeature extends EmailFeature {
@@ -52,6 +54,7 @@ public class MailjetEmailFeature extends EmailFeature {
     }
 
     @Override
-    public String getRecipeName(){return "io.micronaut.starter.feature.email-mailjet";}
-
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.email-mailjet");
+    }
 }

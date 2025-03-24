@@ -1,0 +1,10 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.awaitility.dependencies.groovy
+displayName: Add Awaitility dependency in the test configuration
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: org.awaitility
+      artifactId: awaitility-groovy
+      version: 4.3.0
+      configuration: testImplementation
+      scope: test

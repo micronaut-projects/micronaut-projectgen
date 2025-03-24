@@ -17,9 +17,12 @@ package io.micronaut.projectgen.micronaut.features.aop;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.feature.Category;
 import jakarta.inject.Singleton;
+
+import java.util.List;
 
 @Requires(property = "micronaut.starter.feature.micronaut.aop.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
@@ -45,7 +48,7 @@ public class AOP implements OpenRewriteFeature {
         return Category.API;
     }
 
-    public String getRecipeName() {
-        return "io.micronaut.starter.feature.aop";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.aop");
     }
 }

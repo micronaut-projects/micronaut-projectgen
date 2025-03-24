@@ -37,6 +37,10 @@ import io.micronaut.projectgen.micronaut.features.test.MicronautTestSpock;
 import io.micronaut.projectgen.micronaut.features.validation.MicronautHttpValidation;
 import io.micronaut.projectgen.micronaut.gradle.MicronautApplicationGradlePluginFeature;
 import io.micronaut.projectgen.micronaut.maven.MicronautParentPomFeature;
+import io.micronaut.starter.feature.function.FunctionFeature;
+import io.micronaut.starter.feature.lang.kotlin.KotlinApplication;
+import io.micronaut.starter.feature.server.Netty;
+import io.micronaut.starter.feature.server.ServerFeature;
 import jakarta.inject.Singleton;
 
 import java.util.List;
@@ -49,6 +53,7 @@ import java.util.Set;
 public class ApplicationTypeDefaultFeature extends ApplicationTypeFeature {
     private final Maven maven;
     private final AppName appName;
+    private final Netty netty;
     private final MicronautHttpValidation micronautHttpValidation;
     private final MicronautApplicationGradlePluginFeature micronautApplicationGradlePlugin;
     private final JavaGradlePlugin javaGradlePlugin;
@@ -61,7 +66,7 @@ public class ApplicationTypeDefaultFeature extends ApplicationTypeFeature {
     @Nullable
     private final JavaApplicationFeature javaApplicationFeature;
     @Nullable
-    private final KotlinApplicationFeature kotlinApplicationFeature;
+    private final KotlinApplication kotlinApplication;
     @Nullable
     private final GroovyApplicationFeature groovyApplicationFeature;
 
@@ -72,7 +77,7 @@ public class ApplicationTypeDefaultFeature extends ApplicationTypeFeature {
                                          AppName appName,
                                          Logback logback,
                                          MicronautTestJunit5 micronautTestJunit5,
-                                         MicronautTestSpock micronautTestSpock,
+                                         MicronautTestSpock micronautTestSpock, Netty netty,
                                          MicronautHttpValidation micronautHttpValidation,
                                          MicronautApplicationGradlePluginFeature micronautApplicationGradlePlugin,
                                          JavaGradlePlugin javaGradlePlugin,
@@ -84,11 +89,12 @@ public class ApplicationTypeDefaultFeature extends ApplicationTypeFeature {
                                          MicronautSerdeJackson serializationFeature,
                                          MicronautParentPomFeature micronautParentPomFeature,
                                          List<JavaApplicationFeature> javaApplicationFeatures,
-                                         List<KotlinApplicationFeature> kotlinApplicationFeatures,
+                                         List<KotlinApplication> kotlinApplications,
                                          List<GroovyApplicationFeature> groovyApplicationFeatures) {
         super(gradle, micronautTestJunit5, micronautTestSpock, properties, logback, gitIgnore);
         this.maven = maven;
         this.appName = appName;
+        this.netty = netty;
         this.micronautHttpValidation = micronautHttpValidation;
         this.micronautApplicationGradlePlugin = micronautApplicationGradlePlugin;
         this.javaGradlePlugin = javaGradlePlugin;
@@ -100,7 +106,7 @@ public class ApplicationTypeDefaultFeature extends ApplicationTypeFeature {
         this.micronautParentPomFeature = micronautParentPomFeature;
         Options options = MicronautOptions.builder().applicationType(ApplicationType.DEFAULT).build();
         this.javaApplicationFeature = javaApplicationFeatures.stream().filter(f -> f.supports(options)).findFirst().orElse(null);
-        this.kotlinApplicationFeature = kotlinApplicationFeatures.stream().filter(f -> f.supports(options)).findFirst().orElse(null);
+        this.kotlinApplication = kotlinApplications.stream().filter(f -> f.supports(options)).findFirst().orElse(null);
         this.groovyApplicationFeature = groovyApplicationFeatures.stream().filter(f -> f.supports(options)).findFirst().orElse(null);
     }
 
@@ -112,11 +118,15 @@ public class ApplicationTypeDefaultFeature extends ApplicationTypeFeature {
     @Override
     public void processSelectedFeatures(FeatureContext featureContext) {
         super.processSelectedFeatures(featureContext);
+
+        if (featureContext.getSelectedFeatures().stream().noneMatch(f -> f instanceof ServerFeature || f instanceof FunctionFeature)) {
+            featureContext.addFeatureIfNotPresent(ServerFeature.class, netty);
+        }
         if (featureContext.getOptions().language() == Language.JAVA && javaApplicationFeature != null) {
             featureContext.addFeatureIfNotPresent(JavaApplicationFeature.class, javaApplicationFeature);
         }
-        if (featureContext.getOptions().language() == Language.KOTLIN && kotlinApplicationFeature != null) {
-            featureContext.addFeatureIfNotPresent(KotlinApplicationFeature.class, kotlinApplicationFeature);
+        if (featureContext.getOptions().language() == Language.KOTLIN && kotlinApplication != null) {
+            featureContext.addFeatureIfNotPresent(KotlinApplicationFeature.class, kotlinApplication);
         }
         if (featureContext.getOptions().language() == Language.GROOVY && groovyApplicationFeature != null) {
             featureContext.addFeatureIfNotPresent(GroovyApplicationFeature.class, groovyApplicationFeature);

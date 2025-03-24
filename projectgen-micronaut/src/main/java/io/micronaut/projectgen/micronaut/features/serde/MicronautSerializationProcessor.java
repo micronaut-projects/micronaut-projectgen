@@ -15,8 +15,11 @@
  */
 package io.micronaut.projectgen.micronaut.features.serde;
 
+import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import jakarta.inject.Singleton;
+
+import java.util.List;
 
 /**
  * Micronaut Serialization Processor.
@@ -24,8 +27,8 @@ import jakarta.inject.Singleton;
 @Singleton
 public class MicronautSerializationProcessor implements OpenRewriteFeature {
     @Override
-    public String getRecipeName() {
-        return "io.micronaut.feature.micronaut-serde-processor";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.feature.micronaut-serde-processor");
     }
 
     @Override

@@ -26,6 +26,8 @@ import io.micronaut.projectgen.core.rocker.RockerTemplate;
 import jakarta.inject.Singleton;
 import io.micronaut.projectgen.javalibs.template.logback;
 
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.logback.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Logback implements LoggingFeature, OpenRewriteFeature {
@@ -50,8 +52,8 @@ public class Logback implements LoggingFeature, OpenRewriteFeature {
     }
 
     @Override
-    public String getRecipeName() {
-        return "io.micronaut.feature.javalibs.logback-classic";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.feature.javalibs.logback-classic");
     }
 
     @Override

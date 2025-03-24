@@ -19,7 +19,6 @@ asciidoctor-gradle-jvm = "3.3.2"
 asciidoctor-maven-plugin = "2.2.6"
 asciidoctorj = "2.5.13"
 asciidoctorj-diagram = "2.3.1"
-awaitility = "4.2.2"
 azure-functions-gradle-plugin = "1.15.0"
 azure-functions-maven-plugin = "1.36.0"
 bom-opentelemetry = "1.14.0-alpha"
@@ -85,9 +84,6 @@ asciidoctor-gradle-jvm = { module = "org.asciidoctor:asciidoctor-gradle-jvm", ve
 asciidoctor-maven-plugin = { module = "org.asciidoctor:asciidoctor-maven-plugin", version.ref = "asciidoctor-maven-plugin" }
 asciidoctorj = { module = "org.asciidoctor:asciidoctorj", version.ref = "asciidoctorj" }
 asciidoctorj-diagram = { module = "org.asciidoctor:asciidoctorj-diagram", version.ref = "asciidoctorj-diagram" }
-awaitility = { module = "org.awaitility:awaitility", version.ref = "awaitility" }
-awaitility-groovy = { module = "org.awaitility:awaitility-groovy", version.ref = "awaitility" }
-awaitility-kotlin = { module = "org.awaitility:awaitility-kotlin", version.ref = "awaitility" }
 azure-functions-gradle-plugin = { module = "com.microsoft.azure:azure-functions-gradle-plugin", version.ref = "azure-functions-gradle-plugin" }
 azure-functions-maven-plugin = { module = "com.microsoft.azure:azure-functions-maven-plugin", version.ref = "azure-functions-maven-plugin" }
 bom-kotlin = { module = "org.jetbrains.kotlin:kotlin-bom", version.ref = "kotlin" }

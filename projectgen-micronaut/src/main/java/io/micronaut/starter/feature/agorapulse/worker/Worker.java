@@ -49,7 +49,7 @@ import io.micronaut.projectgen.micronaut.template.agorapulse.worker.emailDigestS
 import io.micronaut.projectgen.micronaut.template.agorapulse.worker.fallbackEmailDigestServiceGroovy;
 import io.micronaut.projectgen.micronaut.template.agorapulse.worker.fallbackEmailDigestServiceJava;
 import io.micronaut.projectgen.micronaut.template.agorapulse.worker.fallbackEmailDigestServiceKotlin;
-import io.micronaut.starter.feature.test.Awaitility;
+import io.micronaut.projectgen.micronaut.features.test.Awaitility;
 import io.micronaut.projectgen.core.options.Language;
 import io.micronaut.projectgen.core.options.TestFramework;
 import jakarta.inject.Singleton;

@@ -28,6 +28,8 @@ import io.micronaut.starter.feature.messaging.jms.SQS;
 import io.micronaut.starter.feature.testcontainers.ContributingTestContainerArtifactId;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 /**
  * Adds support for <a href="https://localstack.cloud/">LocalStack</a>.
  *
@@ -87,7 +89,7 @@ public class LocalStack implements OpenRewriteFeature {
 
 
     @Override
-    public String getRecipeName(){
-        return "io.micronaut.starter.feature.localstack";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.localstack");
     }
 }

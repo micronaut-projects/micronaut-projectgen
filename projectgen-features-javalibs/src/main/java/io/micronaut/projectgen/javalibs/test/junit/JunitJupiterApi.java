@@ -15,14 +15,17 @@
  */
 package io.micronaut.projectgen.javalibs.test.junit;
 
+import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import jakarta.inject.Singleton;
+
+import java.util.List;
 
 @Singleton
 public class JunitJupiterApi implements OpenRewriteFeature {
     @Override
-    public String getRecipeName() {
-        return "io.micronaut.feature.javalibs.junit-jupiter-api";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.feature.javalibs.junit-jupiter-api");
     }
 
     @Override

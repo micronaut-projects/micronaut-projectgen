@@ -25,6 +25,8 @@ import io.micronaut.projectgen.javalibs.test.junit.JunitJupiterApi;
 import io.micronaut.projectgen.javalibs.test.junit.JunitJupiterEngine;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 /**
  * Micronaut Test JUnit 5.
  */
@@ -71,7 +73,7 @@ public class MicronautTestJunit5 implements TestFeature, OpenRewriteFeature {
     }
 
     @Override
-    public String getRecipeName() {
-        return "io.micronaut.starter.feature.micronaut-test-junit5";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.micronaut-test-junit5");
     }
 }

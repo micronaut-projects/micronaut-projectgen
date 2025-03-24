@@ -26,6 +26,8 @@ import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.Feature;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.email.template.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class TemplateEmailFeature implements OpenRewriteFeature {
@@ -53,7 +55,7 @@ public class TemplateEmailFeature implements OpenRewriteFeature {
     }
 
    @Override
-    public String getRecipeName() {
-        return "io.micronaut.starter.feature.email-template";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.email-template");
     }
 }

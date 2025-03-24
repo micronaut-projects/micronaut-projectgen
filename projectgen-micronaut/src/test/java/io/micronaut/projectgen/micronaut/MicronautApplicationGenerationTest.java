@@ -71,7 +71,7 @@ class MicronautApplicationGenerationTest {
         gradleProperties.load(gradlePropertiesInputStream);
         assertNotNull(gradleProperties.get("micronautVersion"));
         String buildGradle = project.get("build.gradle");
-        System.out.println(buildGradle);
+        assertTrue(buildGradle.contains("runtime(\"netty\")"), buildGradle);
         String settingsGradle = project.get("settings.gradle");
         BuildTestVerifier verifier = BuildTestVerifier.of(buildGradle, options);
         assertTrue(verifier.hasBuildPlugin("java"));

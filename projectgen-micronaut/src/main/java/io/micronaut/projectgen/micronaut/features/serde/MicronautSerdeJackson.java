@@ -17,8 +17,11 @@ package io.micronaut.projectgen.micronaut.features.serde;
 
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.projectgen.core.feature.JsonFeature;
+import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import jakarta.inject.Singleton;
+
+import java.util.List;
 
 /**
  * Micronaut Serialization Jackson.
@@ -53,7 +56,7 @@ public class MicronautSerdeJackson implements OpenRewriteFeature, JsonFeature {
     }
 
     @Override
-    public String getRecipeName() {
-        return "io.micronaut.feature.micronaut-serde-jackson";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.feature.micronaut-serde-jackson");
     }
 }

@@ -25,6 +25,8 @@ import io.micronaut.projectgen.micronaut.features.langchain4j.Langchain4jEmbedde
 import io.micronaut.starter.feature.testresources.TestResources;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.langchain4j.store.qdrant.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class QdrantLangchain4jEmbeddedStore implements Langchain4jEmbeddedStore, OpenRewriteFeature {
@@ -46,8 +48,8 @@ public class QdrantLangchain4jEmbeddedStore implements Langchain4jEmbeddedStore,
     }
 
     @Override
-    public String getRecipeName() {
-        return "io.micronaut.starter.feature.langchain4j-store-qdrant";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.langchain4j-store-qdrant");
     }
 
     @Override
