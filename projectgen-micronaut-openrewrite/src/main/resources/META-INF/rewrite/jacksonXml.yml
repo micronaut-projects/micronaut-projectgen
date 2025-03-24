@@ -1,0 +1,35 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.jackson-xml
+displayName: Add JacksonXml dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.jackson-xml.dependencies
+  - io.micronaut.starter.feature.jackson-xml.documentation.micronaut
+  - io.micronaut.starter.feature.jackson-xml.documentation.thirdparty
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.jackson-xml.dependencies
+displayName: Add JacksonXml dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.xml
+      artifactId: micronaut-jackson-xml
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.jackson-xml.documentation.micronaut
+displayName: Append a link to Micronaut JacksonXml documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-jackson-xml/latest/guide/index.html
+      appendNewline: true
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.jackson-xml.documentation.thirdparty
+displayName: Append a link to JacksonXml Website
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://github.com/FasterXML/jackson-dataformat-xml
+      appendNewline: true
