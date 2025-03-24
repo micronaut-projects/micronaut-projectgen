@@ -12,7 +12,7 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.*;
 
 @MicronautTest(startApplication = false)
-public class MockserverTest {
+class MockserverClientTest {
     @Test
     void mockserverFeaturesAddsTheDependency(MicronautProjectGenerator micronautProjectGenerator) throws Exception {
         MicronautOptions options = MicronautOptions.builder().feature("mockserver-client-java").build();

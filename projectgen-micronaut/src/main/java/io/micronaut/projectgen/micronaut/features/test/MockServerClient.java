@@ -25,11 +25,8 @@ import jakarta.inject.Singleton;
 
 @Requires(property = "micronaut.starter.feature.mockserver.client.java.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class MockServerClient implements OpenRewriteFeature, ContributingTestContainerArtifactId {
-
+public class MockServerClient implements OpenRewriteFeature {
     public static final String NAME = "mockserver-client-java";
-
-    public static final String TEST_CONTAINERS_ARTIFACT_ID_MOCKSERVER = "mockserver";
 
     @Override
     @NonNull
@@ -55,10 +52,5 @@ public class MockServerClient implements OpenRewriteFeature, ContributingTestCon
     @Override
     public String getRecipeName() {
         return "io.micronaut.starter.feature.mockserver-client-java";
-    }
-
-    @Override
-    public String testContainersArtifactId() {
-        return TEST_CONTAINERS_ARTIFACT_ID_MOCKSERVER;
     }
 }
