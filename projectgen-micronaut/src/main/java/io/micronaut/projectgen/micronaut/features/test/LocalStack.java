@@ -36,9 +36,8 @@ import jakarta.inject.Singleton;
  */
 @Requires(property = "micronaut.starter.feature.localstack.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class LocalStack implements OpenRewriteFeature, ContributingTestContainerArtifactId {
+public class LocalStack implements OpenRewriteFeature {
 
-    public static final String ARTIFACT_ID_LOCALSTACK = "localstack";
     private final TestContainers testContainers;
 
     public LocalStack(TestContainers testContainers) {
@@ -76,6 +75,7 @@ public class LocalStack implements OpenRewriteFeature, ContributingTestContainer
 
     @Override
     public void apply(GeneratorContext generatorContext) {
+        OpenRewriteFeature.super.apply(generatorContext);
         // SQS pulls this in transitively so this is not required
         if (!generatorContext.isFeaturePresent(SQS.class)) {
             generatorContext.addDependency(Dependency.builder()
@@ -85,10 +85,6 @@ public class LocalStack implements OpenRewriteFeature, ContributingTestContainer
         }
     }
 
-    @Override
-    public String testContainersArtifactId() {
-        return ARTIFACT_ID_LOCALSTACK;
-    }
 
     @Override
     public String getRecipeName(){

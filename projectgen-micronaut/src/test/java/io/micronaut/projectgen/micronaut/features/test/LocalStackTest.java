@@ -20,7 +20,7 @@ class LocalStackTest {
         String buildGradle = project.get("build.gradle.kts");
         assertNotNull(buildGradle);
         BuildTestVerifier verifier = BuildTestVerifier.of(buildGradle, options);
-        assertTrue(verifier.hasDependency("org.testcontainers", "localstack", Scope.TEST));
+        assertTrue(verifier.hasDependency("org.testcontainers", "localstack", Scope.TEST), buildGradle);
     }
 
     @Test
