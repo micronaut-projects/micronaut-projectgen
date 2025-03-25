@@ -17,7 +17,6 @@ package io.micronaut.starter.feature.build;
 
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.projectgen.core.utils.OptionUtils;
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.gradle.GradlePlugin;
 import io.micronaut.starter.feature.Category;
@@ -25,11 +24,10 @@ import io.micronaut.projectgen.core.feature.OneOfFeature;
 import io.micronaut.starter.feature.database.JpaFeature;
 import io.micronaut.projectgen.core.feature.LanguageFeature;
 import io.micronaut.projectgen.core.feature.TestFeature;
-import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.options.JdkVersion;
 import io.micronaut.projectgen.core.options.Language;
 import io.micronaut.projectgen.core.options.TestFramework;
-import io.micronaut.starter.template.StringTemplate;
+import io.micronaut.projectgen.core.template.StringTemplate;
 
 import java.util.stream.Collectors;
 

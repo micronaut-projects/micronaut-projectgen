@@ -5,13 +5,15 @@ plugins {
 dependencies {
     annotationProcessor(mnSourcegen.micronaut.sourcegen.generator.java)
     implementation(mnSourcegen.micronaut.sourcegen.annotations)
-    implementation(libs.rocker.runtime)
+    api(libs.rocker.runtime)
     implementation(libs.apache.commons.compress)
     annotationProcessor(mnSerde.micronaut.serde.processor)
     implementation(mnSerde.micronaut.serde.jackson)
     testImplementation(mnTest.micronaut.test.junit5)
     testRuntimeOnly(mnTest.junit.jupiter.engine)
     testImplementation(mnTest.junit.jupiter.params)
+    compileOnly(libs.snakeyaml)
+    compileOnly(libs.typesafeconfig)
 }
 rocker {
     configurations {

@@ -32,7 +32,7 @@ import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.projectgen.core.feature.FeaturePredicate;
-import io.micronaut.starter.feature.KotlinSpecificFeature;
+import io.micronaut.projectgen.core.feature.KotlinSpecificFeature;
 import io.micronaut.projectgen.micronaut.template.kotlin.applicationKotlin;
 import io.micronaut.projectgen.micronaut.template.kotlin.homeRouteKotlin;
 import io.micronaut.projectgen.micronaut.template.kotlin.jacksonFeatureKotlin;

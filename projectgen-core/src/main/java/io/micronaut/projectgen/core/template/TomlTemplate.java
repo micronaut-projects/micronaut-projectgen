@@ -13,10 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.starter.template;
+package io.micronaut.projectgen.core.template;
 
 import io.micronaut.projectgen.core.feature.config.Configuration;
-import io.micronaut.projectgen.core.template.DefaultTemplate;
 
 import java.io.BufferedWriter;
 import java.io.IOException;

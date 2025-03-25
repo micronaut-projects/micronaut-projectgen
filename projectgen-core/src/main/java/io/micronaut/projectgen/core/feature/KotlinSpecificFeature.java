@@ -13,9 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.starter.feature;
+package io.micronaut.projectgen.core.feature;
 
-import io.micronaut.projectgen.core.feature.LanguageSpecificFeature;
 import io.micronaut.projectgen.core.options.Language;
 
 /**

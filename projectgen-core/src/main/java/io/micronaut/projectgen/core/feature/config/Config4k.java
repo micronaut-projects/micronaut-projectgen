@@ -13,17 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.starter.feature.config;
+package io.micronaut.projectgen.core.feature.config;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.feature.*;
-import io.micronaut.projectgen.core.feature.config.Configuration;
-import io.micronaut.projectgen.micronaut.ApplicationType;
-import io.micronaut.starter.feature.KotlinSpecificFeature;
 import io.micronaut.projectgen.core.options.Language;
-import io.micronaut.starter.template.Config4kTemplate;
+import io.micronaut.projectgen.core.template.Config4kTemplate;
 import io.micronaut.projectgen.core.template.Template;
 import jakarta.inject.Singleton;
 

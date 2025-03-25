@@ -13,9 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.starter.template;
-
-import io.micronaut.projectgen.core.template.DefaultTemplate;
+package io.micronaut.projectgen.core.template;
 
 import java.io.IOException;
 import java.io.OutputStream;

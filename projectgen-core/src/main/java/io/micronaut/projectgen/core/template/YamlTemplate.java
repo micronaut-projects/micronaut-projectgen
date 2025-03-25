@@ -13,9 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.starter.template;
+package io.micronaut.projectgen.core.template;
 
-import io.micronaut.projectgen.core.template.DefaultTemplate;
 import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.Yaml;
 

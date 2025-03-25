@@ -13,12 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.starter.template;
+package io.micronaut.projectgen.core.template;
 
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 import com.typesafe.config.ConfigRenderOptions;
-import io.micronaut.projectgen.core.template.DefaultTemplate;
 
 import java.io.IOException;
 import java.io.OutputStream;

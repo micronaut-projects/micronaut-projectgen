@@ -19,7 +19,6 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.util.StringUtils;
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.Feature;
@@ -29,7 +28,7 @@ import io.micronaut.projectgen.core.feature.config.Configuration;
 import io.micronaut.starter.feature.database.r2dbc.R2dbc;
 import io.micronaut.starter.feature.testcontainers.ContributingTestContainerDependency;
 import io.micronaut.projectgen.core.options.TestFramework;
-import io.micronaut.starter.template.StringTemplate;
+import io.micronaut.projectgen.core.template.StringTemplate;
 import jakarta.inject.Singleton;
 
 import java.util.Optional;
