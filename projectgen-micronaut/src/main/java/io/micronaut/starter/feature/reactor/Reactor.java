@@ -18,29 +18,18 @@ package io.micronaut.starter.feature.reactor;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
-import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.starter.feature.other.HttpClient;
 import io.micronaut.starter.feature.reactive.ReactiveFeature;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.reactor.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class Reactor implements ReactiveFeature {
-
-    public static final Dependency MICRONAUT_REACTOR_DEPENDENCY = MicronautDependencyUtils.reactorDependency()
-            .artifactId("micronaut-reactor")
-            .compile()
-            .build();
-
-    public static final Dependency MICROMETER_CONTEXT_PROPOGRATION_DEPENDENCY = Dependency.builder()
-            .groupId("io.micrometer")
-            .artifactId("context-propagation")
-            .compile()
-            .build();
+public class Reactor implements ReactiveFeature, OpenRewriteFeature {
 
     private final ReactorHttpClient reactorHttpClient;
 
@@ -65,11 +54,6 @@ public class Reactor implements ReactiveFeature {
     }
 
     @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-reactor/snapshot/guide/index.html";
-    }
-
-    @Override
     public void processSelectedFeatures(FeatureContext featureContext) {
         if (featureContext.isPresent(HttpClient.class)) {
             featureContext.addFeature(reactorHttpClient);
@@ -77,8 +61,7 @@ public class Reactor implements ReactiveFeature {
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        generatorContext.addDependency(MICRONAUT_REACTOR_DEPENDENCY);
-        generatorContext.addDependency(MICROMETER_CONTEXT_PROPOGRATION_DEPENDENCY);
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.reactor");
     }
 }

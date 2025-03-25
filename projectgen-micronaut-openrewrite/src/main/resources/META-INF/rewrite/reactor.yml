@@ -1,0 +1,27 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.reactor
+displayName: Add Reactor dependency and a link to README
+recipeList:
+  - io.micronaut.starter.feature.reactor.dependencies
+  - io.micronaut.starter.feature.reactor.documentation.micronaut
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.reactor.dependencies
+displayName: Add Reactor dependencies
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.reactor
+      artifactId: micronaut-reactor
+      configuration: implementation
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micrometer
+      artifactId: context-propagation
+      configuration: implementation
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.reactor.documentation.micronaut
+displayName: Append a link to Micronaut Reactor Documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-reactor/snapshot/guide/index.html
