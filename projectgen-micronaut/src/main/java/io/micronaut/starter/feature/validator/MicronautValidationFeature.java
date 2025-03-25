@@ -19,31 +19,17 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
-import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import jakarta.inject.Singleton;
+
+import java.util.List;
 
 import static io.micronaut.starter.build.dependencies.MicronautDependencyUtils.GROUP_ID_IO_MICRONAUT_VALIDATION;
 
 @Requires(property = "micronaut.starter.feature.validation.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class MicronautValidationFeature implements ValidationFeature {
+public class MicronautValidationFeature implements ValidationFeature, OpenRewriteFeature {
     public static final String NAME = "validation";
-    public static final String ARTIFACT_ID_MICRONAUT_VALIDATION_PROCESSOR = "micronaut-validation-processor";
-
-    public static final String ARTIFACT_ID_MICRONAUT_VALIDATION = "micronaut-validation";
-    private static final Dependency MICRONAUT_VALIDATION_COMPILE = MicronautDependencyUtils
-            .validationDependency()
-            .artifactId(ARTIFACT_ID_MICRONAUT_VALIDATION)
-            .compile()
-            .build();
-
-    private static final String ARTIFACT_ID_VALIDATION_API = "jakarta.validation-api";
-    private static final String VALIDATION_VERSION_MAVEN_PROPERTY = "micronaut.validation.version";
-    private static final Dependency.Builder DEPENDENCY_VALIDATION_API = Dependency.builder()
-            .groupId("jakarta.validation")
-            .artifactId(ARTIFACT_ID_VALIDATION_API)
-            .compile();
 
     @Override
     @NonNull
@@ -63,25 +49,7 @@ public class MicronautValidationFeature implements ValidationFeature {
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        addDependencies(generatorContext);
-    }
-
-    @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-validation/latest/guide/";
-    }
-
-    protected void addDependencies(GeneratorContext generatorContext) {
-        generatorContext.addDependency(MICRONAUT_VALIDATION_COMPILE);
-        generatorContext.addDependency(micronautValidationProcessor(generatorContext).build());
-        generatorContext.addDependency(DEPENDENCY_VALIDATION_API);
-    }
-
-    public static Dependency.Builder micronautValidationProcessor(GeneratorContext generatorContext) {
-        return MicronautDependencyUtils.annotationProcessor(generatorContext.getBuildTool(),
-                GROUP_ID_IO_MICRONAUT_VALIDATION,
-                ARTIFACT_ID_MICRONAUT_VALIDATION_PROCESSOR,
-                VALIDATION_VERSION_MAVEN_PROPERTY);
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.validation");
     }
 }
