@@ -20,6 +20,7 @@ import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import io.micronaut.starter.feature.reactive.ReactiveHttpClientFeature;
 import jakarta.inject.Singleton;
@@ -29,12 +30,7 @@ import java.util.List;
 
 @Requires(property = "micronaut.starter.feature.reactor.http.client.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class ReactorHttpClient implements ReactiveHttpClientFeature {
-    public static final String ARTIFACT_ID_MICRONAUT_REACTOR_HTTP_CLIENT = "micronaut-reactor-http-client";
-    public static final Dependency DEPENDENCY_MICRONAUT_REACTOR_HTTP_CLIENT = MicronautDependencyUtils.reactorDependency()
-            .artifactId(ARTIFACT_ID_MICRONAUT_REACTOR_HTTP_CLIENT)
-            .compile()
-            .build();
+public class ReactorHttpClient implements OpenRewriteFeature {
 
     @NonNull
     @Override
@@ -54,7 +50,7 @@ public class ReactorHttpClient implements ReactiveHttpClientFeature {
     }
 
     @Override
-    public List<Dependency> getDependencies(GeneratorContext generatorContext) {
-        return Collections.singletonList(DEPENDENCY_MICRONAUT_REACTOR_HTTP_CLIENT);
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.reactor-http-client");
     }
 }
