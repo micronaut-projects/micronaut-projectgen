@@ -19,18 +19,14 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
-import io.micronaut.starter.feature.k8s.KubernetesClient;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import jakarta.inject.Singleton;
+
+import java.util.List;
 
 @Requires(property = "micronaut.starter.feature.discovery.kubernetes.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class DiscoveryKubernetes implements DiscoveryFeature {
-    private static final Dependency DEPENDENCY_MICRONAUT_DISCOVERY_K8S = Dependency.builder()
-            .groupId(KubernetesClient.MICRONAUT_KUBERNETES_GROUP_ID)
-            .artifactId("micronaut-kubernetes-discovery-client")
-            .compile()
-            .build();
+public class DiscoveryKubernetes implements DiscoveryFeature, OpenRewriteFeature {
 
     @NonNull
     @Override
@@ -48,15 +44,14 @@ public class DiscoveryKubernetes implements DiscoveryFeature {
         return "Adds support for Service Discovery with Kubernetes";
     }
 
-    @Override
-    public void apply(GeneratorContext generatorContext) {
-        generatorContext.getBootstrapConfiguration().put("kubernetes.client.discovery.mode", "endpoint");
-        generatorContext.getBootstrapConfiguration().put("kubernetes.client.discovery.mode-configuration.endpoint.watch.enabled", true);
-        generatorContext.addDependency(DEPENDENCY_MICRONAUT_DISCOVERY_K8S);
-    }
+//    @Override
+//    public void apply(GeneratorContext generatorContext) {
+//        generatorContext.getBootstrapConfiguration().put("kubernetes.client.discovery.mode", "endpoint");
+//        generatorContext.getBootstrapConfiguration().put("kubernetes.client.discovery.mode-configuration.endpoint.watch.enabled", true);
+//    }
 
     @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-kubernetes/latest/guide/#service-discovery";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.discovery-kubernetes");
     }
 }
