@@ -20,7 +20,7 @@ class DiscoveryClientTest {
         String buildGradle = project.get("build.gradle.kts");
         assertNotNull(buildGradle);
         BuildTestVerifier verifier = BuildTestVerifier.of(buildGradle, options);
-        assertTrue(verifier.hasDependency("io.micronaut", "micronaut-discovery-client"), buildGradle);
+        assertTrue(verifier.hasDependency("io.micronaut.discovery", "micronaut-discovery-client"), buildGradle);
     }
 
     @Test
