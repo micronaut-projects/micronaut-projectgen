@@ -10,7 +10,7 @@ name: io.micronaut.starter.feature.discovery-client.dependencies
 displayName: Add Discovery Client Dependency
 recipeList:
   - org.openrewrite.java.dependencies.AddDependency:
-      groupId: io.micronaut
+      groupId: io.micronaut.discovery
       artifactId: micronaut-discovery-client
       configuration: implementation
 ---
