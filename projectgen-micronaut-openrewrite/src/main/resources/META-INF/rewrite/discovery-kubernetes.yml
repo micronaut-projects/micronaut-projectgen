@@ -4,6 +4,7 @@ displayName: Add Discovery Kubernetes Dependency and a link to README
 recipeList:
   - io.micronaut.starter.feature.discovery-kubernetes.dependencies
   - io.micronaut.starter.feature.discovery-kubernetes.documentation.micronaut
+  - io.micronaut.starter.feature.discovery-kubernetes.configuration
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.discovery-kubernetes.dependencies
@@ -13,6 +14,19 @@ recipeList:
       groupId: io.micronaut.kubernetes
       artifactId: micronaut-kubernetes-discovery-client
       configuration: implementation
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.discovery-kubernetes.configuration
+displayName: Adds Discovery Kubernetes configuration
+preconditions:
+  - io.micronaut.starter.openrewrite.recipes.FindBootstrapProperties
+recipeList:
+  - org.openrewrite.properties.AddProperty:
+      property: kubernetes.client.discovery.mode
+      value: endpoint
+  - org.openrewrite.properties.AddProperty:
+      property: kubernetes.client.discovery.mode-configuration.endpoint.watch.enabled
+      value: true
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.discovery-kubernetes.documentation.micronaut

@@ -26,14 +26,20 @@ import io.micronaut.projectgen.core.openrewrite.RecipeFetcher;
 import jakarta.inject.Singleton;
 import org.openrewrite.Recipe;
 import org.openrewrite.RecipeException;
+import org.openrewrite.config.DeclarativeRecipe;
 import org.openrewrite.config.Environment;
 import org.openrewrite.maven.AddAnnotationProcessor;
 import org.openrewrite.properties.AddProperty;
+
+import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.Properties;
 import java.util.function.Function;
+import java.util.function.Predicate;
+
 import static io.micronaut.projectgen.openrewrite.RecipeUtils.resolveRecipe;
 
 /**
@@ -44,6 +50,8 @@ import static io.micronaut.projectgen.openrewrite.RecipeUtils.resolveRecipe;
  */
 @Singleton
 public class DefaultRecipeFetcher implements RecipeFetcher {
+    private static final String PRECONDITION_FIND_BOOTSTRAP_PROPERTIES = "io.micronaut.starter.openrewrite.recipes.FindBootstrapProperties";
+    private static final String PRECONDITION_FIND_APPLICATION_PROPERTIES = "io.micronaut.starter.openrewrite.recipes.FindApplicationProperties";
     private final Environment env;
 
     /**
@@ -82,6 +90,17 @@ public class DefaultRecipeFetcher implements RecipeFetcher {
         try {
             var recipe = env.activateRecipes(recipeName);
             return findProperties(recipe);
+        } catch (RecipeException e) {
+            throw new ConfigurationException("Error activating recipe: " + recipeName, e);
+        }
+    }
+
+    @Override
+    @NonNull
+    public Optional<Properties> findBootstrapPropertiesByRecipeName(@NonNull String recipeName) {
+        try {
+            var recipe = env.activateRecipes(recipeName);
+            return findBootstrapProperties(recipe);
         } catch (RecipeException e) {
             throw new ConfigurationException("Error activating recipe: " + recipeName, e);
         }
@@ -222,15 +241,41 @@ public class DefaultRecipeFetcher implements RecipeFetcher {
     }
 
     @NonNull
+    private Optional<Properties> findBootstrapProperties(@NonNull Recipe recipe) {
+        return findProperties(recipe, r -> r.getName().equals(PRECONDITION_FIND_BOOTSTRAP_PROPERTIES));
+    }
+
+    // there is no getter https://github.com/openrewrite/rewrite/pull/5222
+    private List<Recipe> getPreconditions(DeclarativeRecipe declarativeRecipe) {
+        try {
+            Field preconditionsField = DeclarativeRecipe.class.getDeclaredField("preconditions");
+            preconditionsField.setAccessible(true);
+            return (List<Recipe>) preconditionsField.get(declarativeRecipe);
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            return Collections.emptyList();
+        }
+    }
+
+    @NonNull
     private Optional<Properties> findProperties(@NonNull Recipe recipe) {
+        return findProperties(recipe, r -> r.getName().equals(PRECONDITION_FIND_APPLICATION_PROPERTIES));
+    }
+
+    @NonNull
+    private Optional<Properties> findProperties(@NonNull Recipe recipe, Predicate<Recipe> precondition) {
         Recipe resolvedRecipe = resolveRecipe(recipe);
         Properties properties = new Properties();
         for (Recipe r : resolvedRecipe.getRecipeList()) {
             Recipe resolvedRecipeChild = resolveRecipe(r);
             if (resolvedRecipeChild instanceof AddProperty addProperty) {
-                properties.put(addProperty.getProperty(), addProperty.getValue());
+                if (resolvedRecipe instanceof DeclarativeRecipe declarativeRecipe) {
+                    List<Recipe> preconditionRecipes = getPreconditions(declarativeRecipe);
+                    if (preconditionRecipes.stream().anyMatch(precondition::test)) {
+                        properties.put(addProperty.getProperty(), addProperty.getValue());
+                    }
+                }
             }
-            Optional<Properties> nestedPropertiesOptional = findProperties(resolvedRecipeChild);
+            Optional<Properties> nestedPropertiesOptional = findProperties(resolvedRecipeChild, precondition);
             if (nestedPropertiesOptional.isPresent()) {
                 Properties nestedProperties = nestedPropertiesOptional.get();
                 nestedProperties.forEach(properties::putIfAbsent);

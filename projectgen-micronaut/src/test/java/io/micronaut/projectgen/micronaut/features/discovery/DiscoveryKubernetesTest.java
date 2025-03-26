@@ -1,12 +1,15 @@
 package io.micronaut.projectgen.micronaut.features.discovery;
 
+import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.io.MapOutputHandler;
 import io.micronaut.projectgen.micronaut.MicronautOptions;
 import io.micronaut.projectgen.micronaut.MicronautProjectGenerator;
 import io.micronaut.projectgen.test.BuildTestVerifier;
+import io.micronaut.projectgen.test.ConfigurationUtils;
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
 import org.junit.jupiter.api.Test;
 import java.util.Map;
+import java.util.Properties;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -20,6 +23,10 @@ class DiscoveryKubernetesTest {
         assertNotNull(buildGradle);
         BuildTestVerifier verifier = BuildTestVerifier.of(buildGradle, options);
         assertTrue(verifier.hasDependency("io.micronaut.kubernetes", "micronaut-kubernetes-discovery-client"), buildGradle);
+
+        Properties bootstrapProperties = ConfigurationUtils.loadBootstrapProperties(project);
+        assertEquals("endpoint", bootstrapProperties.getProperty("kubernetes.client.discovery.mode"));
+        assertEquals(StringUtils.TRUE, bootstrapProperties.getProperty("kubernetes.client.discovery.mode-configuration.endpoint.watch.enabled"));
     }
 
     @Test

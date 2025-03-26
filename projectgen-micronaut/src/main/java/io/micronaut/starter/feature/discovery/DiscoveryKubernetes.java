@@ -44,12 +44,6 @@ public class DiscoveryKubernetes implements DiscoveryFeature, OpenRewriteFeature
         return "Adds support for Service Discovery with Kubernetes";
     }
 
-//    @Override
-//    public void apply(GeneratorContext generatorContext) {
-//        generatorContext.getBootstrapConfiguration().put("kubernetes.client.discovery.mode", "endpoint");
-//        generatorContext.getBootstrapConfiguration().put("kubernetes.client.discovery.mode-configuration.endpoint.watch.enabled", true);
-//    }
-
     @Override
     public List<String> getRecipes(GeneratorContext generatorContext) {
         return List.of("io.micronaut.starter.feature.discovery-kubernetes");
