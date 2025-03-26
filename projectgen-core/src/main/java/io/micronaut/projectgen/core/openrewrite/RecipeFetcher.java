@@ -40,4 +40,6 @@ public interface RecipeFetcher {
     @NonNull
     List<FileContents> findAllFilesByRecipeName(@NonNull String recipe);
 
+    @NonNull
+    Optional<Properties> findBootstrapPropertiesByRecipeName(@NonNull String recipeName);
 }

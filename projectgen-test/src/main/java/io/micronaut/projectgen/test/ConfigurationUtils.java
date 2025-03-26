@@ -31,6 +31,11 @@ public final class ConfigurationUtils {
         return loadProperties(Objects.requireNonNull(applicationProperties));
     }
 
+    public static Properties loadBootstrapProperties(Map<String, String> project) throws Exception {
+        String applicationProperties = project.get("src/main/resources/bootstrap.properties");
+        return loadProperties(Objects.requireNonNull(applicationProperties));
+    }
+
     public static Properties loadProperties(String propertiesString) throws Exception {
         Properties properties = new Properties();
         try (InputStream inputStream = new ByteArrayInputStream(propertiesString.getBytes(StandardCharsets.UTF_8))) {
