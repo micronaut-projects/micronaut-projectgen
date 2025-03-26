@@ -1,0 +1,24 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.discovery-client
+displayName: Add Discovery Client Dependency and a link to README
+recipeList:
+  - io.micronaut.starter.feature.discovery-client.dependencies
+  - io.micronaut.starter.feature.discovery-client.documentation.micronaut
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.discovery-client.dependencies
+displayName: Add Discovery Client Dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut
+      artifactId: micronaut-discovery-client
+      configuration: implementation
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.discovery-client.documentation.micronaut
+displayName: Append a link to Micronaut Discovery Client Documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-discovery-client/latest/guide/
+      appendNewline: true
