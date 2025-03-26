@@ -42,13 +42,6 @@ public interface OpenTelemetryFeature extends Feature  {
         return TRACING;
     }
 
-    @Override
-    default String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-tracing/latest/guide/#opentelemetry";
-    }
 
-    @Override
-    default String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://opentelemetry.io";
-    }
+
 }
