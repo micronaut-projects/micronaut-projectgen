@@ -15,6 +15,7 @@ recipeList:
       groupId: io.opentelemetry
       artifactId: opentelemetry-exporter-logging
       configuration: implementation
+      scope: compile
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.tracing-opentelemetry-exporter-logging.configuration

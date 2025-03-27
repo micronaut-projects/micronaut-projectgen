@@ -14,6 +14,7 @@ recipeList:
       groupId: io.micronaut.acme
       artifactId: micronaut-acme
       configuration: implementation
+      scope: compile
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.acme.documentation.thirdparty

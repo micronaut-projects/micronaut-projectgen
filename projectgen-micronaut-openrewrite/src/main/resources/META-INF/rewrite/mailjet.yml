@@ -14,6 +14,7 @@ recipeList:
       groupId: io.micronaut.email
       artifactId: micronaut-email-mailjet
       configuration: implementation
+      scope: compile
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.email-mailjet.documentation.micronaut
