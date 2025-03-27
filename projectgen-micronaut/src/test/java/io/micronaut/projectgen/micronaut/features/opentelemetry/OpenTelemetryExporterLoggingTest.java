@@ -42,7 +42,7 @@ class OpenTelemetryExporterLoggingTest {
         String readme = project.get("README.md");
         assertNotNull(readme);
         assertTrue(readme.contains("https://micronaut-projects.github.io/micronaut-tracing/latest/guide/#opentelemetry"));
-//        assertTrue(readme.contains("https://opentelemetry.io"));
+        assertTrue(readme.contains("https://opentelemetry.io"));
     }
 
     private static Map<String, String> generateProject(MicronautProjectGenerator micronautProjectGenerator,
