@@ -1,0 +1,8 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.object-storage.micronaut.documentation
+displayName: Append a link to Micronaut Object Storage Documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-object-storage/latest/guide/
+      appendNewline: true

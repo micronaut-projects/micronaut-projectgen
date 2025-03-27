@@ -19,8 +19,11 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.feature.function.azure.AzureCloudFeature;
 import jakarta.inject.Singleton;
+import java.util.List;
+
 
 /**
  * Azure implementation of {@link ObjectStorageFeature}.
@@ -30,7 +33,7 @@ import jakarta.inject.Singleton;
  */
 @Requires(property = "micronaut.starter.feature.object.storage.azure.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class ObjectStorageAzure implements CloudObjectStorageFeature, AzureCloudFeature {
+public class ObjectStorageAzure implements CloudObjectStorageFeature, AzureCloudFeature, OpenRewriteFeature {
 
     @Override
     @NonNull
@@ -39,7 +42,8 @@ public class ObjectStorageAzure implements CloudObjectStorageFeature, AzureCloud
     }
 
     @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://azure.microsoft.com/en-gb/services/storage/blobs/";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.object-storage-azure");
     }
+
 }
