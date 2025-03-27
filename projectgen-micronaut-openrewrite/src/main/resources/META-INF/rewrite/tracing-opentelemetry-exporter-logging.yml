@@ -4,8 +4,8 @@ displayName: Add Tracing Opentelemetry Exporter Logging dependency and configura
 recipeList:
   - io.micronaut.starter.feature.tracing-opentelemetry-exporter-logging.dependencies
   - io.micronaut.starter.feature.tracing-opentelemetry-exporter-logging.configuration
-  - io.micronaut.starter.feature.tracing-opentelemetry-exporter-logging.micronaut.documentation
-  - io.micronaut.starter.feature.tracing-opentelemetry-exporter-logging.documentation.thirdparty
+  - io.micronaut.starter.feature.opentelemetry.documentation.thirdparty
+  - io.micronaut.starter.feature.opentelemetry.micronaut.documentation
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.tracing-opentelemetry-exporter-logging.dependencies
@@ -26,16 +26,4 @@ recipeList:
   - org.openrewrite.properties.AddProperty:
       property: otel.traces.exporter
       value: logging
----
-type: specs.openrewrite.org/v1beta/recipe
-name: io.micronaut.starter.feature.tracing-opentelemetry-exporter-logging.micronaut.documentation
-displayName: Append a link to micronaut opentelemetry documentation
-recipeList:
-  - io.micronaut.starter.feature.opentelemetry.micronaut.documentation
----
-type: specs.openrewrite.org/v1beta/recipe
-name: io.micronaut.starter.feature.tracing-opentelemetry-exporter-logging.documentation.thirdparty
-displayName: Append a link to opentelemetry Website
-recipeList:
-  - io.micronaut.starter.feature.opentelemetry.documentation.thirdparty
 
