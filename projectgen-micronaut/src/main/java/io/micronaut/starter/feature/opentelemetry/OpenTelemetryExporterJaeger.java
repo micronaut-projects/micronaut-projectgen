@@ -19,13 +19,15 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import jakarta.inject.Singleton;
 
+import java.util.List;
 import java.util.Locale;
 
 @Requires(property = "micronaut.starter.feature.tracing.opentelemetry.exporter.jaeger.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class OpenTelemetryExporterJaeger extends OpenTelemetryExporterFeature {
+public class OpenTelemetryExporterJaeger extends OpenTelemetryExporterFeature implements OpenRewriteFeature {
     private static final String EXPORTER_JAEGER = "Jaeger";
 
     @NonNull
@@ -46,8 +48,8 @@ public class OpenTelemetryExporterJaeger extends OpenTelemetryExporterFeature {
     }
 
     @Override
-    protected void addConfiguration(GeneratorContext generatorContext) {
-        super.addConfiguration(generatorContext);
-        generatorContext.getConfiguration().put("otel.exporter.otlp.endpoint", "http://localhost:4317");
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.tracing-opentelemetry-exporter-jaeger");
     }
+
 }
