@@ -19,8 +19,11 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.feature.function.gcp.GcpCloudFeature;
 import jakarta.inject.Singleton;
+
+import java.util.List;
 
 /**
  * Google Cloud implementation of {@link ObjectStorageFeature}.
@@ -30,7 +33,7 @@ import jakarta.inject.Singleton;
  */
 @Requires(property = "micronaut.starter.feature.object.storage.gcp.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class ObjectStorageGcp implements CloudObjectStorageFeature, GcpCloudFeature {
+public class ObjectStorageGcp implements CloudObjectStorageFeature, GcpCloudFeature, OpenRewriteFeature {
 
     @Override
     @NonNull
@@ -39,7 +42,7 @@ public class ObjectStorageGcp implements CloudObjectStorageFeature, GcpCloudFeat
     }
 
     @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://cloud.google.com/storage";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.object-storage-gcp");
     }
 }
