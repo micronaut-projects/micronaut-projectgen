@@ -4,5 +4,5 @@ displayName: Append a link to Micronaut Opentelemetry Documentation
 recipeList:
   - org.openrewrite.text.AppendToTextFile:
       relativeFileName: README.md
-      content: http://localhost/micronaut-tracing/guide/index.html#opentelemetry
+      content: https://micronaut-projects.github.io/micronaut-tracing/latest/guide/#opentelemetry
       appendNewline: true

@@ -70,7 +70,7 @@ public abstract class OpenTelemetryExporterFeature implements OpenTelemetryFeatu
 
     @Override
     public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "http://localhost/micronaut-tracing/guide/index.html#opentelemetry";
+        return "https://micronaut-projects.github.io/micronaut-tracing/latest/guide/#opentelemetry";
     }
 
     @NonNull
