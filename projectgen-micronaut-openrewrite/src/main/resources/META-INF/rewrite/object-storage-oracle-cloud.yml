@@ -1,0 +1,26 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.object-storage-oracle-cloud
+displayName: Add Object Storage Oracle Cloud dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.object-storage-oracle-cloud.dependencies
+  - io.micronaut.starter.feature.object-storage.micronaut.documentation
+  - io.micronaut.starter.feature.object-storage-oracle-cloud.documentation.thirdparty
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.object-storage-oracle-cloud.dependencies
+displayName: Add Object Storage Oracle Cloud dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.objectstorage
+      artifactId: micronaut-object-storage-oracle-cloud
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.object-storage-oracle-cloud.documentation.thirdparty
+displayName: Append a link to Oracle Cloud Website
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://www.oracle.com/cloud/storage/object-storage/
+      appendNewline: true

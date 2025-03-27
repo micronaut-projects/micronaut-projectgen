@@ -20,9 +20,12 @@ import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.micronaut.template.function.oraclefunction.OracleCloudFeature;
 import io.micronaut.starter.feature.oraclecloud.OracleCloudSdk;
 import jakarta.inject.Singleton;
+
+import java.util.List;
 
 /**
  * Oracle Cloud implementation of {@link ObjectStorageFeature}.
@@ -32,7 +35,7 @@ import jakarta.inject.Singleton;
  */
 @Requires(property = "micronaut.starter.feature.object.storage.oracle.cloud.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class ObjectStorageOracleCloud implements CloudObjectStorageFeature, OracleCloudFeature {
+public class ObjectStorageOracleCloud implements CloudObjectStorageFeature, OracleCloudFeature, OpenRewriteFeature {
 
     private final OracleCloudSdk oracleCloudSdk;
 
@@ -54,7 +57,8 @@ public class ObjectStorageOracleCloud implements CloudObjectStorageFeature, Orac
     }
 
     @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://www.oracle.com/cloud/storage/object-storage/";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.object-storage-oracle-cloud");
     }
+
 }
