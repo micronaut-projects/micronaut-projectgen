@@ -1,0 +1,28 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.tracing-opentelemetry-zipkin
+displayName: Add Tracing Opentelemetry Zipkin dependency and configuration
+recipeList:
+  - io.micronaut.starter.feature.tracing-opentelemetry-zipkin.dependencies
+  - io.micronaut.starter.feature.tracing-opentelemetry-zipkin.configuration
+  - io.micronaut.starter.feature.opentelemetry.documentation.thirdparty
+  - io.micronaut.starter.feature.opentelemetry.micronaut.documentation
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.tracing-opentelemetry-zipkin.dependencies
+displayName: Add Tracing Opentelemetry  Zipkin dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.opentelemetry
+      artifactId: opentelemetry-exporter-zipkin
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.tracing-opentelemetry-zipkin.configuration
+displayName: Add Tracing Opentelemetry Zipkin configuration
+preconditions:
+  - io.micronaut.starter.openrewrite.recipes.FindApplicationProperties
+recipeList:
+  - org.openrewrite.properties.AddProperty:
+      property: otel.traces.exporter
+      value: zipkin
