@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.starter.feature.objectstorage;
+package io.micronaut.projectgen.micronaut.features.objectstorage;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
@@ -21,44 +21,44 @@ import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
-import io.micronaut.projectgen.micronaut.template.function.oraclefunction.OracleCloudFeature;
-import io.micronaut.starter.feature.oraclecloud.OracleCloudSdk;
+import io.micronaut.starter.feature.aws.AwsCloudFeature;
+import io.micronaut.starter.feature.aws.AwsV2Sdk;
 import jakarta.inject.Singleton;
 
 import java.util.List;
 
 /**
- * Oracle Cloud implementation of {@link ObjectStorageFeature}.
+ * AWS implementation of {@link ObjectStorageFeature}.
  *
  * @author Álvaro Sánchez-Mariscal
  * @since 3.7.0
  */
-@Requires(property = "micronaut.starter.feature.object.storage.oracle.cloud.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
+@Requires(property = "micronaut.starter.feature.object.storage.aws.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class ObjectStorageOracleCloud implements CloudObjectStorageFeature, OracleCloudFeature, OpenRewriteFeature {
+public class ObjectStorageAws implements CloudObjectStorageFeature, AwsCloudFeature, OpenRewriteFeature {
 
-    private final OracleCloudSdk oracleCloudSdk;
+    private final AwsV2Sdk awsV2Sdk;
 
-    public ObjectStorageOracleCloud(OracleCloudSdk oracleCloudSdk) {
-        this.oracleCloudSdk = oracleCloudSdk;
+    public ObjectStorageAws(AwsV2Sdk awsV2Sdk) {
+        this.awsV2Sdk = awsV2Sdk;
     }
 
     @Override
     @NonNull
     public String getCloudProvider() {
-        return "Oracle Cloud";
+        return getCloud().name();
     }
 
     @Override
     public void processSelectedFeatures(FeatureContext featureContext) {
-        if (!featureContext.isPresent(OracleCloudSdk.class)) {
-            featureContext.addFeature(oracleCloudSdk);
+        if (!featureContext.isPresent(AwsV2Sdk.class)) {
+            featureContext.addFeature(awsV2Sdk);
         }
     }
 
     @Override
     public List<String> getRecipes(GeneratorContext generatorContext) {
-        return List.of("io.micronaut.starter.feature.object-storage-oracle-cloud");
+        return List.of("io.micronaut.starter.feature.object-storage-aws");
     }
 
 }

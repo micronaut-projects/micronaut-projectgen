@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.starter.feature.objectstorage;
+package io.micronaut.projectgen.micronaut.features.objectstorage;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
@@ -47,7 +47,7 @@ public class ObjectStorageLocal implements ObjectStorageFeature, OpenRewriteFeat
 
     @Override
     public List<String> getRecipes(GeneratorContext generatorContext) {
-        return List.of("io.micronaut.starter.feature.object-storage-local.dependencies");
+        return List.of("io.micronaut.starter.feature.object-storage-local");
     }
 
 }
