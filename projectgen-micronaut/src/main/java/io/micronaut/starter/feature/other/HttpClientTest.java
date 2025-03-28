@@ -39,11 +39,11 @@ import jakarta.inject.Singleton;
 import java.util.Set;
 
 import static io.micronaut.starter.feature.httpclient.HttpClientJdk.ARTIFACT_ID_MICRONAUT_HTTP_CLIENT_JDK;
-import static io.micronaut.starter.feature.other.HttpClient.ARTIFACT_ID_MICRONAUT_HTTP_CLIENT;
 
 @Requires(property = "micronaut.starter.feature.http.client.test.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class HttpClientTest implements DefaultFeature {
+    public static final String ARTIFACT_ID_MICRONAUT_HTTP_CLIENT = "micronaut-http-client";
 
     private static final Dependency DEPENDENCY_MICRONAUT_HTTP_CLIENT_TEST = MicronautDependencyUtils.coreDependency()
             .artifactId(ARTIFACT_ID_MICRONAUT_HTTP_CLIENT)

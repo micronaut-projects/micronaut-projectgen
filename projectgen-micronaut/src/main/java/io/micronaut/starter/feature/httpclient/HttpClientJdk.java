@@ -20,6 +20,7 @@ import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import jakarta.inject.Singleton;
 
@@ -28,18 +29,18 @@ import java.util.List;
 
 @Requires(property = "micronaut.starter.feature.http.client.jdk.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class HttpClientJdk implements HttpClientFeature {
+public class HttpClientJdk implements HttpClientFeature, OpenRewriteFeature {
     public static final String NAME = "http-client-jdk";
 
     public static final String ARTIFACT_ID_MICRONAUT_HTTP_CLIENT_JDK = "micronaut-http-client-jdk";
     private static final Dependency.Builder MICRONAUT_HTTP_CLIENT_JDK = MicronautDependencyUtils.coreDependency()
-            .artifactId(ARTIFACT_ID_MICRONAUT_HTTP_CLIENT_JDK);
+        .artifactId(ARTIFACT_ID_MICRONAUT_HTTP_CLIENT_JDK);
     public static final Dependency DEPENDENCY_MICRONAUT_HTTP_CLIENT_JDK = MICRONAUT_HTTP_CLIENT_JDK
-            .compile()
-            .build();
+        .compile()
+        .build();
     public static final Dependency DEPENDENCY_MICRONAUT_HTTP_CLIENT_JDK_COMPILE_ONLY = MICRONAUT_HTTP_CLIENT_JDK
-            .compileOnly()
-            .build();
+        .compileOnly()
+        .build();
 
     @Override
     public String getName() {
@@ -57,18 +58,8 @@ public class HttpClientJdk implements HttpClientFeature {
     }
 
     @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://docs.micronaut.io/latest/guide/index.html#jdkHttpClient";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.http-client-jdk");
     }
 
-    @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://openjdk.org/groups/net/httpclient/intro.html";
-    }
-
-    @Override
-    @NonNull
-    public List<Dependency> getDependencies(@NonNull GeneratorContext generatorContext) {
-        return Collections.singletonList(DEPENDENCY_MICRONAUT_HTTP_CLIENT_JDK);
-    }
 }

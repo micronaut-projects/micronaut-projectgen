@@ -35,15 +35,5 @@ public interface HttpClientFeature  extends OneOfFeature {
         return Category.CLIENT;
     }
 
-    @Override
-    default void apply(GeneratorContext generatorContext) {
-        addDependencies(generatorContext);
-    }
 
-    default void addDependencies(GeneratorContext generatorContext) {
-        getDependencies(generatorContext).forEach(generatorContext::addDependency);
-    }
-
-    @NonNull
-    List<Dependency> getDependencies(@NonNull GeneratorContext generatorContext);
 }

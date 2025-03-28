@@ -20,6 +20,7 @@ import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import io.micronaut.starter.feature.httpclient.HttpClientFeature;
 import jakarta.inject.Singleton;
@@ -29,13 +30,9 @@ import java.util.List;
 
 @Requires(property = "micronaut.starter.feature.http.client.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class HttpClient implements HttpClientFeature {
+public class HttpClient implements HttpClientFeature, OpenRewriteFeature {
     public static final String NAME = "http-client";
-    public static final String ARTIFACT_ID_MICRONAUT_HTTP_CLIENT = "micronaut-http-client";
-    public static final Dependency DEPENDENCY_MICRONAUT_HTTP_CLIENT = MicronautDependencyUtils.coreDependency()
-            .artifactId(ARTIFACT_ID_MICRONAUT_HTTP_CLIENT)
-            .compile()
-            .build();
+
 
     @Override
     public String getName() {
@@ -53,13 +50,8 @@ public class HttpClient implements HttpClientFeature {
     }
 
     @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://docs.micronaut.io/latest/guide/index.html#nettyHttpClient";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.http-client");
     }
 
-    @Override
-    @NonNull
-    public List<Dependency> getDependencies(@NonNull GeneratorContext generatorContext) {
-        return Collections.singletonList(DEPENDENCY_MICRONAUT_HTTP_CLIENT);
-    }
 }
