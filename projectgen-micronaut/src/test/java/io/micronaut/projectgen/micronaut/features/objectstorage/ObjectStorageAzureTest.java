@@ -1,5 +1,6 @@
 package io.micronaut.projectgen.micronaut.features.objectstorage;
 
+import io.micronaut.projectgen.core.buildtools.Scope;
 import io.micronaut.projectgen.core.io.MapOutputHandler;
 import io.micronaut.projectgen.micronaut.MicronautOptions;
 import io.micronaut.projectgen.micronaut.MicronautProjectGenerator;
@@ -19,7 +20,7 @@ class ObjectStorageAzureTest {
         String buildGradle = project.get("build.gradle.kts");
         assertNotNull(buildGradle);
         BuildTestVerifier verifier = BuildTestVerifier.of(buildGradle, options);
-        assertTrue(verifier.hasDependency("io.micronaut.objectstorage", "micronaut-object-storage-azure"), buildGradle);
+        assertTrue(verifier.hasDependency("io.micronaut.objectstorage", "micronaut-object-storage-azure", Scope.COMPILE), buildGradle);
     }
 
     @Test
