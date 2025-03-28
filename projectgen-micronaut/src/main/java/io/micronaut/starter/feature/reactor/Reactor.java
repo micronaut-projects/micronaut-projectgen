@@ -21,7 +21,7 @@ import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.feature.FeatureContext;
-import io.micronaut.starter.feature.other.HttpClient;
+import io.micronaut.projectgen.micronaut.features.httpclient.HttpClient;
 import io.micronaut.starter.feature.reactive.ReactiveFeature;
 import jakarta.inject.Singleton;
 
