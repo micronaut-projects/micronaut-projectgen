@@ -23,8 +23,8 @@ import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.projectgen.core.feature.config.ApplicationConfiguration;
-import io.micronaut.starter.feature.httpclient.HttpClientFeature;
-import io.micronaut.starter.feature.other.HttpClient;
+import io.micronaut.projectgen.micronaut.features.httpclient.HttpClientFeature;
+import io.micronaut.projectgen.micronaut.features.httpclient.HttpClient;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 

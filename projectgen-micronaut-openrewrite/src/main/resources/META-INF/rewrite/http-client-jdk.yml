@@ -17,6 +17,26 @@ recipeList:
       scope: compile
 ---
 type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.http-client-jdk.dependencies.compileonly
+displayName: Add Http Client Jdk dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut
+      artifactId: micronaut-http-client-jdk
+      configuration: compileOnly
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.http-client-jdk.dependencies.test
+displayName: Add Http Client Jdk dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut
+      artifactId: micronaut-http-client-jdk
+      configuration: test
+      scope: test
+---
+type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.http-client-jdk.micronaut.documentation
 displayName: Append a link to Micronaut Http Client Jdk documentation
 recipeList:

@@ -13,55 +13,40 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.starter.feature.reactor;
+package io.micronaut.projectgen.micronaut.features.httpclient;
 
 import io.micronaut.context.annotation.Requires;
-import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
-import io.micronaut.projectgen.core.feature.FeatureContext;
-import io.micronaut.projectgen.micronaut.features.httpclient.HttpClient;
-import io.micronaut.starter.feature.reactive.ReactiveFeature;
 import jakarta.inject.Singleton;
 
 import java.util.List;
 
-@Requires(property = "micronaut.starter.feature.reactor.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
+@Requires(property = "micronaut.starter.feature.http.client.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class Reactor implements ReactiveFeature, OpenRewriteFeature {
+public class HttpClient implements HttpClientFeature, OpenRewriteFeature {
+    public static final String NAME = "http-client";
 
-    private final ReactorHttpClient reactorHttpClient;
 
-    public Reactor(ReactorHttpClient reactorHttpClient) {
-        this.reactorHttpClient = reactorHttpClient;
-    }
-
-    @NonNull
     @Override
     public String getName() {
-        return "reactor";
+        return NAME;
     }
 
     @Override
     public String getTitle() {
-        return "Reactor";
+        return "HTTP Client";
     }
 
     @Override
     public String getDescription() {
-        return "Adds Reactive support using Project Reactor";
-    }
-
-    @Override
-    public void processSelectedFeatures(FeatureContext featureContext) {
-        if (featureContext.isPresent(HttpClient.class)) {
-            featureContext.addFeature(reactorHttpClient);
-        }
+        return "Adds support for the Micronaut HTTP client";
     }
 
     @Override
     public List<String> getRecipes(GeneratorContext generatorContext) {
-        return List.of("io.micronaut.starter.feature.reactor");
+        return List.of("io.micronaut.starter.feature.http-client");
     }
+
 }

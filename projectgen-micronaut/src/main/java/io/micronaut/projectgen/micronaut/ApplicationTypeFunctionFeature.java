@@ -17,10 +17,13 @@ package io.micronaut.projectgen.micronaut;
 
 import io.micronaut.projectgen.core.buildtools.gradle.Gradle;
 import io.micronaut.projectgen.core.feature.Feature;
+import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.projectgen.core.feature.config.Properties;
 import io.micronaut.projectgen.core.feature.gitignore.GitIgnore;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.javalibs.logging.Logback;
+import io.micronaut.projectgen.micronaut.features.httpclient.HttpClientFeature;
+import io.micronaut.projectgen.micronaut.features.httpclient.HttpClientTest;
 import io.micronaut.projectgen.micronaut.features.test.MicronautTestJunit5;
 import io.micronaut.projectgen.micronaut.features.test.MicronautTestSpock;
 import jakarta.inject.Singleton;
@@ -29,19 +32,33 @@ import java.util.Set;
 
 @Singleton
 public class ApplicationTypeFunctionFeature extends ApplicationTypeFeature {
+    private HttpClientTest httpClientTest;
 
     public ApplicationTypeFunctionFeature(Gradle gradle,
                                           MicronautTestJunit5 micronautTestJunit5,
                                           MicronautTestSpock micronautTestSpock,
                                           Properties properties,
                                           Logback logback,
-                                          GitIgnore gitIgnore) {
+                                          GitIgnore gitIgnore,
+                                          HttpClientTest httpClientTest) {
         super(gradle, micronautTestJunit5, micronautTestSpock, properties, logback, gitIgnore);
+
+        this.httpClientTest = httpClientTest;
     }
 
     @Override
     public boolean shouldApply(Options options, Set<Feature> selectedFeatures) {
         return options instanceof MicronautOptions micronautOptions && micronautOptions.applicationType() == ApplicationType.FUNCTION;
+    }
+
+
+    @Override
+    public void processSelectedFeatures(FeatureContext featureContext) {
+        super.processSelectedFeatures(featureContext);
+
+        if (!featureContext.isPresent(HttpClientFeature.class)) {
+            featureContext.addFeatureIfNotPresent(HttpClientFeature.class, httpClientTest);
+        }
     }
 
     @Override

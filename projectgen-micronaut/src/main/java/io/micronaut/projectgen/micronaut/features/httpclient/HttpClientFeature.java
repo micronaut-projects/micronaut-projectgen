@@ -13,16 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.starter.feature.httpclient;
+package io.micronaut.projectgen.micronaut.features.httpclient;
 
-import io.micronaut.core.annotation.NonNull;
-import io.micronaut.projectgen.micronaut.ApplicationType;
-import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.OneOfFeature;
-
-import java.util.List;
 
 public interface HttpClientFeature  extends OneOfFeature {
     @Override

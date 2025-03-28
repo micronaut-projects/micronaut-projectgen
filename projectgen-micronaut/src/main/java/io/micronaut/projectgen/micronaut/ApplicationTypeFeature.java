@@ -28,6 +28,8 @@ import io.micronaut.projectgen.core.feature.gitignore.GitIgnore;
 import io.micronaut.projectgen.core.options.TestFramework;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.projectgen.javalibs.logging.Logback;
+import io.micronaut.projectgen.micronaut.features.httpclient.HttpClientFeature;
+import io.micronaut.projectgen.micronaut.features.httpclient.HttpClientTest;
 import io.micronaut.projectgen.micronaut.features.test.MicronautTestJunit5;
 import io.micronaut.projectgen.micronaut.features.test.MicronautTestSpock;
 

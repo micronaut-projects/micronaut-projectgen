@@ -64,8 +64,8 @@ import io.micronaut.projectgen.micronaut.template.function.awslambda.homeControl
 import io.micronaut.projectgen.micronaut.template.function.awslambda.homeControllerKotlinJunit;
 import io.micronaut.projectgen.micronaut.template.function.awslambda.homeControllerSpock;
 import io.micronaut.starter.feature.graalvm.GraalVM;
-import io.micronaut.starter.feature.httpclient.HttpClientFeature;
-import io.micronaut.starter.feature.httpclient.HttpClientJdk;
+import io.micronaut.projectgen.micronaut.features.httpclient.HttpClientFeature;
+import io.micronaut.projectgen.micronaut.features.httpclient.HttpClientJdk;
 import io.micronaut.projectgen.features.gradle.ShadePlugin;
 import io.micronaut.starter.feature.security.SecurityFeature;
 import io.micronaut.starter.options.DefaultTestRockerModelProvider;
