@@ -1,0 +1,25 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.jax-rs-security
+displayName: Add JaxRs Security dependency and a link to README
+recipeList:
+  - io.micronaut.starter.feature.jax-rs-security.dependencies
+  - io.micronaut.starter.feature.jax-rs-security.micronaut.documentation
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.jax-rs-security.dependencies
+displayName: Add JaxRs Security dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.jaxrs
+      artifactId: micronaut-jaxrs-server-security
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.jax-rs-security.micronaut.documentation
+displayName: Append a link to micronaut JaxRs security documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-jaxrs/latest/guide/index.html
+      appendNewline: true

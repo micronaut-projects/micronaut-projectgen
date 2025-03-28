@@ -17,6 +17,7 @@ package io.micronaut.starter.feature.jaxrs;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
@@ -27,10 +28,11 @@ import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.starter.feature.server.MicronautServerDependent;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.jax.rs.security.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class JaxRsSecurity implements Feature, MicronautServerDependent {
-    private static final String ARTIFACT_ID_MICRONAUT_JAXRS_SERVER_SECURITY = "micronaut-jaxrs-server-security";
+public class JaxRsSecurity implements OpenRewriteFeature, MicronautServerDependent {
 
     @Override
     public String getName() {
@@ -53,14 +55,6 @@ public class JaxRsSecurity implements Feature, MicronautServerDependent {
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        generatorContext.addDependency(MicronautDependencyUtils.jaxrsDependency()
-                .artifactId(ARTIFACT_ID_MICRONAUT_JAXRS_SERVER_SECURITY)
-                .versionProperty("micronaut.jaxrs.version")
-                .compile());
-    }
-
-    @Override
     public boolean supports(Options options) {
         return options instanceof MicronautOptions mnOptions && mnOptions.applicationType() == ApplicationType.DEFAULT;
     }
@@ -71,7 +65,8 @@ public class JaxRsSecurity implements Feature, MicronautServerDependent {
     }
 
     @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-jaxrs/latest/guide/index.html";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.jax-rs-security");
     }
+
 }
