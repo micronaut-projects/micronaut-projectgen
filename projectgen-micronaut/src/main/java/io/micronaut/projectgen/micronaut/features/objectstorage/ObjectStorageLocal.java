@@ -13,20 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.starter.feature.objectstorage;
+package io.micronaut.projectgen.micronaut.features.objectstorage;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.feature.Category;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.object.storage.local.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class ObjectStorageLocal implements ObjectStorageFeature {
+public class ObjectStorageLocal implements ObjectStorageFeature, OpenRewriteFeature {
     private static final String LOCAL = "Local";
     private static final String DESCRIPTION = " This feature adds a local implementation to save to a folder in your computer which you may want to use during testing and development.";
-    private static final String URL = "https://micronaut-projects.github.io/micronaut-object-storage/latest/guide/index.html#local";
 
     @Override
     public String getCloudProvider() {
@@ -44,7 +46,8 @@ public class ObjectStorageLocal implements ObjectStorageFeature {
     }
 
     @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return URL;
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.object-storage-local");
     }
+
 }

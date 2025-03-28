@@ -1,0 +1,26 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.object-storage-gcp
+displayName: Add Object Storage Gcp dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.object-storage-gcp.dependencies
+  - io.micronaut.starter.feature.object-storage.micronaut.documentation
+  - io.micronaut.starter.feature.object-storage-gcp.documentation.thirdparty
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.object-storage-gcp.dependencies
+displayName: Add Object Storage Gcp dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.objectstorage
+      artifactId: micronaut-object-storage-gcp
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.object-storage-gcp.documentation.thirdparty
+displayName: Append a link to Gcp Website
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://cloud.google.com/storage
+      appendNewline: true

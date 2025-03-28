@@ -1,0 +1,25 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.object-storage-local
+displayName: Add Object Storage Azure dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.object-storage-local.dependencies
+  - io.micronaut.starter.feature.object-storage-local.documentation
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.object-storage-local.dependencies
+displayName: Add Object Storage Azure dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.objectstorage
+      artifactId: micronaut-object-storage-local
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.object-storage-local.documentation
+displayName: Append a link to Micronaut Object Storage Local documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-object-storage/latest/guide/index.html#local
+      appendNewline: true
