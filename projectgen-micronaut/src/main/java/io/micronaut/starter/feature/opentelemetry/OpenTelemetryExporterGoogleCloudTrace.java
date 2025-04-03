@@ -29,8 +29,6 @@ import java.util.List;
 @Singleton
 public class OpenTelemetryExporterGoogleCloudTrace extends OpenTelemetryExporterFeature implements OpenRewriteFeature {
 
-    private static final String GOOGLE_CLOUD_TRACE = "google_cloud_trace";
-
     @Override
     @NonNull
     protected String exporterName() {
@@ -38,14 +36,7 @@ public class OpenTelemetryExporterGoogleCloudTrace extends OpenTelemetryExporter
     }
 
     @Override
-    @NonNull
-    protected String exporterValue() {
-        return GOOGLE_CLOUD_TRACE;
-    }
-
-    @Override
     public List<String> getRecipes(GeneratorContext generatorContext) {
         return List.of("io.micronaut.starter.feature.tracing-opentelemetry-exporter-gcp");
     }
-
 }
