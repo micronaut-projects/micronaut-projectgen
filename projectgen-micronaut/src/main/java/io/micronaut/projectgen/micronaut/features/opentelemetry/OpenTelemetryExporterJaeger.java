@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.starter.feature.opentelemetry;
+package io.micronaut.projectgen.micronaut.features.opentelemetry;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
@@ -23,25 +23,27 @@ import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import jakarta.inject.Singleton;
 
 import java.util.List;
+import java.util.Locale;
 
-@Requires(property = "micronaut.starter.feature.tracing.opentelemetry.exporter.logging.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
+@Requires(property = "micronaut.starter.feature.tracing.opentelemetry.exporter.jaeger.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class OpenTelemetryExporterLogging extends OpenTelemetryExporterFeature implements OpenRewriteFeature {
-    private static final String EXPORTER_LOGGING = "Logging";
+public class OpenTelemetryExporterJaeger extends OpenTelemetryExporterFeature implements OpenRewriteFeature {
+    private static final String EXPORTER_JAEGER = "Jaeger";
+
+    @NonNull
+    @Override
+    public String getTitle() {
+        return "OpenTelemetry Exporter " + EXPORTER_JAEGER;
+    }
 
     @NonNull
     public String exporterName() {
-        return EXPORTER_LOGGING;
-    }
-
-    @Override
-    public boolean isVisible() {
-        return true;
+        return EXPORTER_JAEGER.toLowerCase(Locale.ROOT);
     }
 
     @Override
     public List<String> getRecipes(GeneratorContext generatorContext) {
-        return List.of("io.micronaut.starter.feature.tracing-opentelemetry-exporter-logging");
+        return List.of("io.micronaut.starter.feature.tracing-opentelemetry-exporter-jaeger");
     }
 
 }

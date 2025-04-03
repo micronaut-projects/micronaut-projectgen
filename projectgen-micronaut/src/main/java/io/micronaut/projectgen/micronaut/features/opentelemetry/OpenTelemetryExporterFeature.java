@@ -13,11 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.starter.feature.opentelemetry;
+package io.micronaut.projectgen.micronaut.features.opentelemetry;
 
 import io.micronaut.core.annotation.NonNull;
-import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
+
 import java.util.Locale;
 
 public abstract class OpenTelemetryExporterFeature implements OpenTelemetryFeature {

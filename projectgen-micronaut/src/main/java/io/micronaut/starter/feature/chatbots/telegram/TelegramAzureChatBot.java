@@ -30,7 +30,7 @@ import io.micronaut.starter.feature.function.azure.AzureBuildCommandUtils;
 import io.micronaut.starter.feature.function.azure.AzureCloudFeature;
 import io.micronaut.starter.feature.function.azure.AzureMicronautRuntimeFeature;
 import io.micronaut.starter.feature.function.azure.AzureRawFunction;
-import io.micronaut.starter.feature.validator.MicronautValidationFeature;
+import io.micronaut.projectgen.micronaut.features.validator.MicronautValidationFeature;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.rocker.RockerTemplate;
 import jakarta.inject.Singleton;

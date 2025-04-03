@@ -29,7 +29,7 @@ import io.micronaut.projectgen.micronaut.template.chatbots.basecamp.controllerGr
 import io.micronaut.projectgen.micronaut.template.chatbots.basecamp.controllerJavaJunit;
 import io.micronaut.projectgen.micronaut.template.chatbots.basecamp.controllerKotlinJunit;
 import io.micronaut.projectgen.micronaut.template.chatbots.basecamp.controllerReadme;
-import io.micronaut.starter.feature.validator.MicronautValidationFeature;
+import io.micronaut.projectgen.micronaut.features.validator.MicronautValidationFeature;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.options.TestFramework;
 import io.micronaut.projectgen.core.rocker.RockerTemplate;

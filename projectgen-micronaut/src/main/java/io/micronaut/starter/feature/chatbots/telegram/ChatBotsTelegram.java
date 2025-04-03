@@ -32,7 +32,7 @@ import io.micronaut.projectgen.micronaut.template.chatbots.telegram.finalCommand
 import io.micronaut.projectgen.micronaut.template.chatbots.telegram.mockAboutCommandJson;
 import io.micronaut.projectgen.micronaut.template.chatbots.telegram.telegramReadme;
 import io.micronaut.projectgen.micronaut.template.chatbots.telegram.about;
-import io.micronaut.starter.feature.validator.MicronautValidationFeature;
+import io.micronaut.projectgen.micronaut.features.validator.MicronautValidationFeature;
 import io.micronaut.projectgen.core.options.TestFramework;
 import io.micronaut.projectgen.core.rocker.RockerTemplate;
 

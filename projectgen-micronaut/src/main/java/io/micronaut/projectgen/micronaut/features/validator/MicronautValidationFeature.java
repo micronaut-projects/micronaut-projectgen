@@ -1,5 +1,5 @@
 /*
- * Copyright 2017-2022 original authors
+ * Copyright 2017-2023 original authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.starter.feature.opentelemetry;
+package io.micronaut.projectgen.micronaut.features.validator;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
@@ -24,37 +24,30 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
-@Requires(property = "micronaut.starter.feature.tracing.opentelemetry.zipkin.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
+@Requires(property = "micronaut.starter.feature.validation.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class OpenTelemetryZipkin extends AbstractOpenTelemetry implements OpenRewriteFeature {
-    public OpenTelemetryZipkin(OpenTelemetry otel,
-                               OpenTelemetryHttp otelHttp,
-                               OpenTelemetryAnnotations otelAnnotations,
-                               OpenTelemetryGrpc openTelemetryGrpc,
-                               OpenTelemetryExporterZipkin openTelemetryExporterZipkin) {
-        super(otel, otelHttp, otelAnnotations, openTelemetryGrpc, openTelemetryExporterZipkin);
-    }
+public class MicronautValidationFeature implements ValidationFeature, OpenRewriteFeature {
+    public static final String NAME = "validation";
 
     @Override
     @NonNull
     public String getName() {
-        return super.getName() + "zipkin";
+        return NAME;
     }
 
     @Override
     public String getTitle() {
-        return "OpenTelemetry Zipkin";
+        return "Micronaut Validation";
     }
 
     @Override
     @NonNull
     public String getDescription() {
-        return "It adds Micronaut integration with OpenTelemetry and sets Zipkin as the exporter.";
+        return "Adds support for Micronaut Validation";
     }
 
     @Override
     public List<String> getRecipes(GeneratorContext generatorContext) {
-        return List.of("io.micronaut.starter.feature.tracing-opentelemetry-zipkin");
+        return List.of("io.micronaut.starter.feature.validation");
     }
-
 }

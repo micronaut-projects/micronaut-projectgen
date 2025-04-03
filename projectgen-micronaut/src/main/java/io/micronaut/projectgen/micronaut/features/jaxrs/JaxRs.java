@@ -1,5 +1,5 @@
 /*
- * Copyright 2017-2022 original authors
+ * Copyright 2017-2023 original authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.starter.feature.jaxrs;
+package io.micronaut.projectgen.micronaut.features.jaxrs;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
@@ -22,36 +22,46 @@ import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.micronaut.MicronautOptions;
-import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import io.micronaut.starter.feature.Category;
-import io.micronaut.projectgen.core.feature.Feature;
+import io.micronaut.projectgen.core.feature.FeatureContext;
+import io.micronaut.starter.feature.security.SecurityFeature;
 import io.micronaut.starter.feature.server.MicronautServerDependent;
 import jakarta.inject.Singleton;
 
 import java.util.List;
 
-@Requires(property = "micronaut.starter.feature.jax.rs.security.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
+@Requires(property = "micronaut.starter.feature.jax.rs.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class JaxRsSecurity implements OpenRewriteFeature, MicronautServerDependent {
+public class JaxRs implements OpenRewriteFeature, MicronautServerDependent {
+
+    public static final String NAME = "jax-rs";
+
+    private final JaxRsSecurity jaxRsSecurity;
+
+    public JaxRs(JaxRsSecurity jaxRsSecurity) {
+        this.jaxRsSecurity = jaxRsSecurity;
+    }
 
     @Override
     public String getName() {
-        return "jax-rs-security";
+        return NAME;
     }
 
     @Override
     public String getTitle() {
-        return "JAX-RS Micronaut Security support";
+        return "JAX-RS support";
     }
 
     @Override
     public String getDescription() {
-        return "Integrates Micronaut Security with JAX-RS";
+        return "Adds support for using JAX-RS annotations";
     }
 
     @Override
-    public boolean isVisible() {
-        return false;
+    public void processSelectedFeatures(FeatureContext featureContext) {
+        if (featureContext.isPresent(SecurityFeature.class)) {
+            featureContext.addFeature(jaxRsSecurity);
+        }
     }
 
     @Override
@@ -66,7 +76,7 @@ public class JaxRsSecurity implements OpenRewriteFeature, MicronautServerDepende
 
     @Override
     public List<String> getRecipes(GeneratorContext generatorContext) {
-        return List.of("io.micronaut.starter.feature.jax-rs-security");
+        return List.of("io.micronaut.starter.feature.jax-rs");
     }
 
 }

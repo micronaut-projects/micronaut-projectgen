@@ -18,7 +18,6 @@ package io.micronaut.starter.feature.aws;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.starter.feature.Category;
@@ -37,8 +36,8 @@ import io.micronaut.projectgen.micronaut.template.aws.ciawsregionconditionJava;
 import io.micronaut.projectgen.micronaut.template.aws.ciawsregionconditionKotlin;
 import io.micronaut.projectgen.core.feature.config.ApplicationConfiguration;
 import io.micronaut.projectgen.core.feature.config.Configuration;
-import io.micronaut.starter.feature.validator.MicronautValidationFeature;
-import io.micronaut.starter.feature.validator.ValidationFeature;
+import io.micronaut.projectgen.micronaut.features.validator.MicronautValidationFeature;
+import io.micronaut.projectgen.micronaut.features.validator.ValidationFeature;
 import jakarta.inject.Singleton;
 
 @Requires(property = "micronaut.starter.feature.dynamodb.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)

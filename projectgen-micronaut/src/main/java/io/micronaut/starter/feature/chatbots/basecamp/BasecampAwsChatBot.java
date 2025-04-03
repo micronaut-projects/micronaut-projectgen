@@ -33,7 +33,7 @@ import io.micronaut.projectgen.micronaut.template.chatbots.basecamp.awsCdkReadme
 import io.micronaut.projectgen.micronaut.template.chatbots.basecamp.awsReadme;
 import io.micronaut.starter.feature.function.HandlerClassFeature;
 import io.micronaut.starter.feature.function.awslambda.AwsLambda;
-import io.micronaut.starter.feature.validator.MicronautValidationFeature;
+import io.micronaut.projectgen.micronaut.features.validator.MicronautValidationFeature;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.rocker.RockerTemplate;
 import jakarta.inject.Singleton;
