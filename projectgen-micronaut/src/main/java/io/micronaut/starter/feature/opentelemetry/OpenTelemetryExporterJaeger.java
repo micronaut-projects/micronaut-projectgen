@@ -32,19 +32,13 @@ public class OpenTelemetryExporterJaeger extends OpenTelemetryExporterFeature im
 
     @NonNull
     @Override
-    public String getName() {
-        return "tracing-opentelemetry-exporter-" + EXPORTER_JAEGER.toLowerCase(Locale.ROOT);
-    }
-
-    @NonNull
-    @Override
     public String getTitle() {
         return "OpenTelemetry Exporter " + EXPORTER_JAEGER;
     }
 
     @NonNull
     public String exporterName() {
-        return OpenTelemetryExporterOtlp.EXPORTER_OTLP;
+        return EXPORTER_JAEGER.toLowerCase(Locale.ROOT);
     }
 
     @Override
