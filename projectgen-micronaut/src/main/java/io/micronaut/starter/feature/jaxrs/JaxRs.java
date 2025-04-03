@@ -17,6 +17,7 @@ package io.micronaut.starter.feature.jaxrs;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
@@ -30,18 +31,14 @@ import io.micronaut.starter.feature.security.SecurityFeature;
 import io.micronaut.starter.feature.server.MicronautServerDependent;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.jax.rs.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class JaxRs implements Feature, MicronautServerDependent {
+public class JaxRs implements OpenRewriteFeature, MicronautServerDependent {
 
-    public static final String MICRONAUT_JAXRS_VERSION = "micronaut.jaxrs.version";
-    public static final String MICRONAUT_JAXRS_PROCESSOR = "micronaut-jaxrs-processor";
     public static final String NAME = "jax-rs";
-    private static final String ARTIFACT_ID_MICRONAUT_JAXRS_SERVER = "micronaut-jaxrs-server";
-    private static final Dependency DEPENDENCY_JAXRS_SERVER_COMPILE = MicronautDependencyUtils.jaxrsDependency()
-            .artifactId(ARTIFACT_ID_MICRONAUT_JAXRS_SERVER)
-            .compile()
-            .build();
+
     private final JaxRsSecurity jaxRsSecurity;
 
     public JaxRs(JaxRsSecurity jaxRsSecurity) {
@@ -71,23 +68,6 @@ public class JaxRs implements Feature, MicronautServerDependent {
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        addDependencies(generatorContext);
-    }
-
-    protected void addDependencies(GeneratorContext generatorContext) {
-        generatorContext.addDependency(MicronautDependencyUtils.annotationProcessor(generatorContext.getBuildTool(),
-                MicronautDependencyUtils.GROUP_ID_MICRONAUT_JAXRS,
-                MICRONAUT_JAXRS_PROCESSOR,
-                MICRONAUT_JAXRS_VERSION));
-        generatorContext.addDependency(MicronautDependencyUtils.testAnnotationProcessor(generatorContext.getBuildTool(),
-                MicronautDependencyUtils.GROUP_ID_MICRONAUT_JAXRS,
-                MICRONAUT_JAXRS_PROCESSOR,
-                MICRONAUT_JAXRS_VERSION));
-        generatorContext.addDependency(DEPENDENCY_JAXRS_SERVER_COMPILE);
-    }
-
-    @Override
     public boolean supports(Options options) {
         return options instanceof MicronautOptions mnOptions && mnOptions.applicationType() == ApplicationType.DEFAULT;
     }
@@ -98,7 +78,8 @@ public class JaxRs implements Feature, MicronautServerDependent {
     }
 
     @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-jaxrs/latest/guide/index.html";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.jax-rs");
     }
+
 }
