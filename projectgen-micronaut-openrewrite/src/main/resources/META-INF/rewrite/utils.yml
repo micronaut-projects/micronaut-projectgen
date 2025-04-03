@@ -3,3 +3,9 @@ name: io.micronaut.starter.openrewrite.recipes.FindApplicationProperties
 recipeList:
   - org.openrewrite.FindSourceFiles:
       filePattern: "**/application.properties"
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.openrewrite.recipes.FindBootstrapProperties
+recipeList:
+  - org.openrewrite.FindSourceFiles:
+      filePattern: "**/bootstrap.properties"

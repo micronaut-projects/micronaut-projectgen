@@ -40,9 +40,8 @@ import io.micronaut.projectgen.micronaut.template.awslambdacustomruntime.functio
 import io.micronaut.starter.feature.function.FunctionFeature;
 import io.micronaut.starter.feature.function.awslambda.AwsLambda;
 import io.micronaut.starter.feature.graalvm.GraalVM;
-import io.micronaut.starter.feature.httpclient.HttpClientFeature;
-import io.micronaut.starter.feature.httpclient.HttpClientJdk;
-import jakarta.inject.Inject;
+import io.micronaut.projectgen.micronaut.features.httpclient.HttpClientFeature;
+import io.micronaut.projectgen.micronaut.features.httpclient.HttpClientJdk;
 import jakarta.inject.Provider;
 import jakarta.inject.Singleton;
 

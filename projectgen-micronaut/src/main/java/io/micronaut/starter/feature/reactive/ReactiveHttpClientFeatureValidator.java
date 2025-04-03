@@ -15,9 +15,8 @@
  */
 package io.micronaut.starter.feature.reactive;
 
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.feature.Feature;
-import io.micronaut.starter.feature.httpclient.HttpClientJdk;
+import io.micronaut.projectgen.micronaut.features.httpclient.HttpClientJdk;
 import io.micronaut.projectgen.core.feature.FeatureValidator;
 import io.micronaut.projectgen.core.options.Options;
 import jakarta.inject.Singleton;

@@ -1,0 +1,55 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.http-client-jdk
+displayName: Add Http Client Jdk dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.http-client-jdk.dependencies
+  - io.micronaut.starter.feature.http-client-jdk.micronaut.documentation
+  - io.micronaut.starter.feature.http-client-jdk.documentation.thirdparty
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.http-client-jdk.dependencies
+displayName: Add Http Client Jdk dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut
+      artifactId: micronaut-http-client-jdk
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.http-client-jdk.dependencies.compileonly
+displayName: Add Http Client Jdk dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut
+      artifactId: micronaut-http-client-jdk
+      configuration: compileOnly
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.http-client-jdk.dependencies.test
+displayName: Add Http Client Jdk dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut
+      artifactId: micronaut-http-client-jdk
+      configuration: test
+      scope: test
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.http-client-jdk.micronaut.documentation
+displayName: Append a link to Micronaut Http Client Jdk documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://docs.micronaut.io/latest/guide/index.html#jdkHttpClient
+      appendNewline: true
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.http-client-jdk.documentation.thirdparty
+displayName: Append a link to Http Client Jdk Website
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://openjdk.org/groups/net/httpclient/intro.html
+      appendNewline: true

@@ -1,0 +1,24 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.discovery-core
+displayName: Add Discovery Core Dependency and a link to README
+recipeList:
+  - io.micronaut.starter.feature.discovery-core.dependencies
+  - io.micronaut.starter.feature.discovery-core.documentation.micronaut
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.discovery-core.dependencies
+displayName: Add Discovery Core Dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut
+      artifactId: micronaut-discovery-core
+      configuration: implementation
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.discovery-core.documentation.micronaut
+displayName: Append a link to Micronaut Discovery Core Documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-discovery-client/latest/guide/
+      appendNewline: true

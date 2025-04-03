@@ -13,16 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.starter.feature.objectstorage;
+package io.micronaut.projectgen.micronaut.features.objectstorage;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.feature.aws.AwsCloudFeature;
 import io.micronaut.starter.feature.aws.AwsV2Sdk;
 import jakarta.inject.Singleton;
+
+import java.util.List;
 
 /**
  * AWS implementation of {@link ObjectStorageFeature}.
@@ -32,7 +35,7 @@ import jakarta.inject.Singleton;
  */
 @Requires(property = "micronaut.starter.feature.object.storage.aws.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class ObjectStorageAws implements CloudObjectStorageFeature, AwsCloudFeature {
+public class ObjectStorageAws implements CloudObjectStorageFeature, AwsCloudFeature, OpenRewriteFeature {
 
     private final AwsV2Sdk awsV2Sdk;
 
@@ -54,7 +57,8 @@ public class ObjectStorageAws implements CloudObjectStorageFeature, AwsCloudFeat
     }
 
     @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://aws.amazon.com/s3/";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.object-storage-aws");
     }
+
 }

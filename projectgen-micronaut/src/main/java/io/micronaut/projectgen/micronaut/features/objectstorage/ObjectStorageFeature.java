@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.starter.feature.objectstorage;
+package io.micronaut.projectgen.micronaut.features.objectstorage;
 
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.naming.NameUtils;
@@ -34,11 +34,6 @@ public interface ObjectStorageFeature extends Feature {
     String PREAMBLE = "Micronaut Object Storage provides a uniform API to create, read and delete objects in the major cloud providers.";
 
     @Override
-    default String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-object-storage/latest/guide/";
-    }
-
-    @Override
     @NonNull
     default String getName() {
         return "object-storage-" + NameUtils.hyphenate(getCloudProvider());
@@ -53,14 +48,6 @@ public interface ObjectStorageFeature extends Feature {
     @NonNull
     default String getDescription() {
         return PREAMBLE + " This feature adds the " + getCloudProvider() + " implementation";
-    }
-
-    @Override
-    default void apply(GeneratorContext generatorContext) {
-        generatorContext.addDependency(Dependency.builder()
-                .groupId("io.micronaut.objectstorage")
-                .artifactId("micronaut-object-storage-" + NameUtils.hyphenate(getCloudProvider()))
-                .compile());
     }
 
     /**

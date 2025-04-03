@@ -19,11 +19,14 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.feature.FeatureContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import jakarta.inject.Singleton;
+
+import java.util.List;
 
 @Requires(property = "micronaut.starter.feature.discovery.eureka.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class Eureka implements DiscoveryFeature {
+public class Eureka implements DiscoveryFeature, OpenRewriteFeature {
     private final DiscoveryClient discoveryClient;
 
     public Eureka(DiscoveryClient discoveryClient) {
@@ -51,13 +54,7 @@ public class Eureka implements DiscoveryFeature {
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        generatorContext.getConfiguration().put("eureka.client.registration.enabled", true);
-        generatorContext.getConfiguration().put("eureka.client.defaultZone", "${EUREKA_HOST:localhost}:${EUREKA_PORT:8761}");
-    }
-
-    @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://docs.micronaut.io/latest/guide/index.html#serviceDiscoveryEureka";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.eureka");
     }
 }

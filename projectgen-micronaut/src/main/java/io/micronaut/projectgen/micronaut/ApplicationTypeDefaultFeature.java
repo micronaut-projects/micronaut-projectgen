@@ -31,6 +31,8 @@ import io.micronaut.projectgen.features.gradle.ShadePlugin;
 import io.micronaut.projectgen.javalibs.logging.Logback;
 import io.micronaut.projectgen.micronaut.features.AppName;
 import io.micronaut.projectgen.micronaut.features.MicronautAot;
+import io.micronaut.projectgen.micronaut.features.httpclient.HttpClientFeature;
+import io.micronaut.projectgen.micronaut.features.httpclient.HttpClientTest;
 import io.micronaut.projectgen.micronaut.features.serde.MicronautSerdeJackson;
 import io.micronaut.projectgen.micronaut.features.test.MicronautTestJunit5;
 import io.micronaut.projectgen.micronaut.features.test.MicronautTestSpock;
@@ -69,6 +71,7 @@ public class ApplicationTypeDefaultFeature extends ApplicationTypeFeature {
     private final KotlinApplication kotlinApplication;
     @Nullable
     private final GroovyApplicationFeature groovyApplicationFeature;
+    private HttpClientTest httpClientTest;
 
     @SuppressWarnings("ParameterNumber")
     public ApplicationTypeDefaultFeature(Gradle gradle,
@@ -90,7 +93,8 @@ public class ApplicationTypeDefaultFeature extends ApplicationTypeFeature {
                                          MicronautParentPomFeature micronautParentPomFeature,
                                          List<JavaApplicationFeature> javaApplicationFeatures,
                                          List<KotlinApplication> kotlinApplications,
-                                         List<GroovyApplicationFeature> groovyApplicationFeatures) {
+                                         List<GroovyApplicationFeature> groovyApplicationFeatures,
+                                         HttpClientTest httpClientTest) {
         super(gradle, micronautTestJunit5, micronautTestSpock, properties, logback, gitIgnore);
         this.maven = maven;
         this.appName = appName;
@@ -108,6 +112,7 @@ public class ApplicationTypeDefaultFeature extends ApplicationTypeFeature {
         this.javaApplicationFeature = javaApplicationFeatures.stream().filter(f -> f.supports(options)).findFirst().orElse(null);
         this.kotlinApplication = kotlinApplications.stream().filter(f -> f.supports(options)).findFirst().orElse(null);
         this.groovyApplicationFeature = groovyApplicationFeatures.stream().filter(f -> f.supports(options)).findFirst().orElse(null);
+        this.httpClientTest = httpClientTest;
     }
 
     @Override
@@ -157,6 +162,10 @@ public class ApplicationTypeDefaultFeature extends ApplicationTypeFeature {
         if (OptionUtils.hasMavenBuildTool(featureContext.getOptions())) {
             featureContext.addFeatureIfNotPresent(Maven.class, maven);
             featureContext.addFeatureIfNotPresent(MicronautParentPomFeature.class, micronautParentPomFeature);
+        }
+
+        if (!featureContext.isPresent(HttpClientFeature.class)) {
+            featureContext.addFeatureIfNotPresent(HttpClientFeature.class, httpClientTest);
         }
     }
 

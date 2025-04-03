@@ -722,6 +722,19 @@ public class GeneratorContext implements DependencyContext {
     /**
      *
      * @param recipeName recipe Name
+     */
+    public void addBootstrapConfigurationByRecipeName(@NonNull String recipeName) {
+        Configuration config = getBootstrapConfiguration();
+        recipeFetcher.findBootstrapPropertiesByRecipeName(recipeName).ifPresent(properties -> {
+            for (Map.Entry<Object, Object> entry : properties.entrySet()) {
+                config.addNested(entry.getKey().toString(), entry.getValue());
+            }
+        });
+    }
+
+    /**
+     *
+     * @param recipeName recipe Name
      * @return documentation
      */
     public Optional<String> findFrameworkDocumentationByRecipeName(@NonNull String recipeName) {

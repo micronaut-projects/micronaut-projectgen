@@ -13,33 +13,37 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.starter.feature.objectstorage;
+package io.micronaut.projectgen.micronaut.features.objectstorage;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.starter.feature.function.gcp.GcpCloudFeature;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
+import io.micronaut.starter.feature.function.azure.AzureCloudFeature;
 import jakarta.inject.Singleton;
+import java.util.List;
+
 
 /**
- * Google Cloud implementation of {@link ObjectStorageFeature}.
+ * Azure implementation of {@link ObjectStorageFeature}.
  *
  * @author Álvaro Sánchez-Mariscal
  * @since 3.7.0
  */
-@Requires(property = "micronaut.starter.feature.object.storage.gcp.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
+@Requires(property = "micronaut.starter.feature.object.storage.azure.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class ObjectStorageGcp implements CloudObjectStorageFeature, GcpCloudFeature {
+public class ObjectStorageAzure implements CloudObjectStorageFeature, AzureCloudFeature, OpenRewriteFeature {
 
     @Override
     @NonNull
     public String getCloudProvider() {
-        return getCloud().name();
+        return StringUtils.capitalize(getCloud().name().toLowerCase());
     }
 
     @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://cloud.google.com/storage";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.object-storage-azure");
     }
+
 }
