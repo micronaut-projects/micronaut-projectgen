@@ -1,5 +1,6 @@
 package io.micronaut.projectgen.micronaut.features.opentelemetry;
 
+import io.micronaut.projectgen.core.buildtools.Scope;
 import io.micronaut.projectgen.core.io.MapOutputHandler;
 import io.micronaut.projectgen.micronaut.MicronautOptions;
 import io.micronaut.projectgen.micronaut.MicronautProjectGenerator;
@@ -31,7 +32,7 @@ class OpenTelemetryExporterOtlpTest {
         String buildGradle = project.get("build.gradle.kts");
         assertNotNull(buildGradle);
         BuildTestVerifier verifier = BuildTestVerifier.of(buildGradle, options);
-        assertTrue(verifier.hasDependency("io.opentelemetry", "opentelemetry-exporter-otlp"),buildGradle);
+        assertTrue(verifier.hasDependency("io.opentelemetry", "opentelemetry-exporter-otlp", Scope.COMPILE),buildGradle);
     }
 
     @Test

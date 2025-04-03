@@ -1,6 +1,7 @@
 package io.micronaut.projectgen.micronaut.features.opentelemetry;
 
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.buildtools.Scope;
 import io.micronaut.projectgen.core.io.MapOutputHandler;
 import io.micronaut.projectgen.micronaut.MicronautOptions;
 import io.micronaut.projectgen.micronaut.MicronautProjectGenerator;
@@ -32,7 +33,7 @@ class OpenTelemetryExporterLoggingTest {
         String buildGradle = project.get("build.gradle.kts");
         assertNotNull(buildGradle);
         BuildTestVerifier verifier = BuildTestVerifier.of(buildGradle, options);
-        assertTrue(verifier.hasDependency("io.opentelemetry", "opentelemetry-exporter-logging"),buildGradle);
+        assertTrue(verifier.hasDependency("io.opentelemetry", "opentelemetry-exporter-logging", Scope.COMPILE),buildGradle);
     }
 
     @Test
