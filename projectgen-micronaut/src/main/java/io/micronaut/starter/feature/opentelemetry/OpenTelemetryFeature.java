@@ -41,7 +41,4 @@ public interface OpenTelemetryFeature extends Feature  {
     default String getCategory() {
         return TRACING;
     }
-
-
-
 }

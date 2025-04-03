@@ -24,20 +24,13 @@ import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.feature.aws.AwsV2Sdk;
 import jakarta.inject.Singleton;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Requires(property = "micronaut.starter.feature.tracing.opentelemetry.xray.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class OpenTelemetryXray extends AbstractOpenTelemetry implements OpenRewriteFeature {
     public static final String NAME = "tracing-opentelemetry-xray";
-    private static final Dependency.Builder OPEN_TELEMETRY_INSTRUMENTATION_AWS_SDK =
-            OpenTelemetryDependencyUtils.openTelemetryInstrumentationDependency()
-                    .artifactId("opentelemetry-aws-sdk-2.2")
-                    .compile();
-
-    private static final Dependency.Builder OPEN_TELEMETRY_BOM_ALPHA = Dependency.builder()
-            .lookupArtifactId("opentelemetry-instrumentation-bom-alpha")
-            .compile();
 
     public OpenTelemetryXray(OpenTelemetry otel,
                              OpenTelemetryHttp otelHttp,
@@ -65,16 +58,12 @@ public class OpenTelemetryXray extends AbstractOpenTelemetry implements OpenRewr
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        if (generatorContext.getFeatures().isFeaturePresent(AwsV2Sdk.class)) {
-            generatorContext.addDependency(OPEN_TELEMETRY_BOM_ALPHA);
-            generatorContext.addDependency(OPEN_TELEMETRY_INSTRUMENTATION_AWS_SDK);
-        }
-    }
-
-    @Override
     public List<String> getRecipes(GeneratorContext generatorContext) {
-        return List.of("io.micronaut.starter.feature.tracing-opentelemetry-xray");
+        List<String> recipes = new ArrayList<>();
+        recipes.add("io.micronaut.starter.feature.tracing-opentelemetry-xray");
+        if (generatorContext.getFeatures().isFeaturePresent(AwsV2Sdk.class)) {
+            recipes.add("io.opentelemetry.instrumentation.opentelemetry-aws-sdk-2.2.dependency");
+        }
+        return recipes;
     }
-
 }

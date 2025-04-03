@@ -21,7 +21,6 @@ asciidoctorj = "2.5.13"
 asciidoctorj-diagram = "2.3.1"
 azure-functions-gradle-plugin = "1.15.0"
 azure-functions-maven-plugin = "1.36.0"
-bom-opentelemetry = "1.14.0-alpha"
 bpm-assert = "7.21.0"
 bpm-micronaut = "2.18.1"
 buildless = "1.0.0-rc2"
@@ -87,7 +86,6 @@ asciidoctorj-diagram = { module = "org.asciidoctor:asciidoctorj-diagram", versio
 azure-functions-gradle-plugin = { module = "com.microsoft.azure:azure-functions-gradle-plugin", version.ref = "azure-functions-gradle-plugin" }
 azure-functions-maven-plugin = { module = "com.microsoft.azure:azure-functions-maven-plugin", version.ref = "azure-functions-maven-plugin" }
 bom-kotlin = { module = "org.jetbrains.kotlin:kotlin-bom", version.ref = "kotlin" }
-bom-opentelemetry-instrumentation = { module = "io.opentelemetry.instrumentation:opentelemetry-instrumentation-bom-alpha", version.ref = "bom-opentelemetry" }
 bpm-assert = { module = "org.camunda.bpm:camunda-bpm-assert", version.ref = "bpm-assert" }
 bpm-micronaut = { module = "info.novatec:micronaut-camunda-bpm-feature", version.ref = "bpm-micronaut" }
 camunda-micronaut-client = { module = "info.novatec:micronaut-camunda-external-client-feature", version.ref = "camunda-micronaut-client" }
