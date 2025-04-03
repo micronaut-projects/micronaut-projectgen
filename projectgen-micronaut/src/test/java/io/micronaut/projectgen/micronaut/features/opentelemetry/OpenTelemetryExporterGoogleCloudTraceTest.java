@@ -1,5 +1,6 @@
 package io.micronaut.projectgen.micronaut.features.opentelemetry;
 
+import io.micronaut.projectgen.core.buildtools.Scope;
 import io.micronaut.projectgen.core.io.MapOutputHandler;
 import io.micronaut.projectgen.micronaut.MicronautOptions;
 import io.micronaut.projectgen.micronaut.MicronautProjectGenerator;
@@ -31,7 +32,7 @@ class OpenTelemetryExporterGoogleCloudTraceTest {
         String buildGradle = project.get("build.gradle.kts");
         assertNotNull(buildGradle);
         BuildTestVerifier verifier = BuildTestVerifier.of(buildGradle, options);
-//        assertTrue(verifier.hasDependency("com.google.cloud.opentelemetry", "exporter-auto"),buildGradle);
+        assertTrue(verifier.hasDependency("com.google.cloud.opentelemetry", "exporter-auto", Scope.COMPILE),buildGradle);
     }
 
     @Test
