@@ -21,7 +21,7 @@ class JaxRsTest {
         assertNotNull(buildGradle);
         BuildTestVerifier verifier = BuildTestVerifier.of(buildGradle, options);
         assertTrue(verifier.hasDependency("io.micronaut.jaxrs", "micronaut-jaxrs-server", Scope.COMPILE), buildGradle);
-        assertTrue(verifier.hasDependency("io.micronaut.jaxrs", "micronaut-jaxrs-processor", Scope.ANNOTATION_PROCESSOR), buildGradle);
+        assertTrue(verifier.hasAnnotationProcessor("io.micronaut.jaxrs", "micronaut-jaxrs-processor"), buildGradle);
 
     }
 
