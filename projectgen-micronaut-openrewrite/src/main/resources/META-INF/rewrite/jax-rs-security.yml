@@ -21,5 +21,5 @@ displayName: Append a link to micronaut JaxRs security documentation
 recipeList:
   - org.openrewrite.text.AppendToTextFile:
       relativeFileName: README.md
-      content: https://micronaut-projects.github.io/micronaut-jaxrs/latest/guide/index.html
+      content: https://micronaut-projects.github.io/micronaut-jaxrs/latest/guide/index.html#_securitycontext_and_micronaut_security
       appendNewline: true
