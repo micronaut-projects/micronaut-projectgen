@@ -20,30 +20,14 @@ import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import jakarta.inject.Singleton;
+
+import java.util.List;
 
 @Requires(property = "micronaut.starter.feature.tracing.opentelemetry.exporter.gcp.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class OpenTelemetryExporterGoogleCloudTrace extends OpenTelemetryExporterFeature {
-
-    private static final Dependency DEPENDENCY_OTEL_EXPORTER_GOOGLE_CLOUD_TRACE =
-            Dependency.builder()
-                    .groupId("com.google.cloud.opentelemetry")
-                    .artifactId("exporter-auto")
-                    .compile()
-                    .build();
-
-    private static final String GOOGLE_CLOUD_TRACE = "google_cloud_trace";
-
-    @Override
-    public void apply(GeneratorContext generatorContext) {
-        super.apply(generatorContext);
-    }
-
-    @NonNull
-    protected Dependency exporterDependency() {
-        return DEPENDENCY_OTEL_EXPORTER_GOOGLE_CLOUD_TRACE;
-    }
+public class OpenTelemetryExporterGoogleCloudTrace extends OpenTelemetryExporterFeature implements OpenRewriteFeature {
 
     @Override
     @NonNull
@@ -52,8 +36,7 @@ public class OpenTelemetryExporterGoogleCloudTrace extends OpenTelemetryExporter
     }
 
     @Override
-    @NonNull
-    protected String exporterValue() {
-        return GOOGLE_CLOUD_TRACE;
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.tracing-opentelemetry-exporter-gcp");
     }
 }

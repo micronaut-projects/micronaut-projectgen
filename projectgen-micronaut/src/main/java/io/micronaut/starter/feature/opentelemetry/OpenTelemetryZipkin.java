@@ -18,11 +18,15 @@ package io.micronaut.starter.feature.opentelemetry;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import jakarta.inject.Singleton;
+
+import java.util.List;
 
 @Requires(property = "micronaut.starter.feature.tracing.opentelemetry.zipkin.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class OpenTelemetryZipkin extends AbstractOpenTelemetry {
+public class OpenTelemetryZipkin extends AbstractOpenTelemetry implements OpenRewriteFeature {
     public OpenTelemetryZipkin(OpenTelemetry otel,
                                OpenTelemetryHttp otelHttp,
                                OpenTelemetryAnnotations otelAnnotations,
@@ -47,4 +51,10 @@ public class OpenTelemetryZipkin extends AbstractOpenTelemetry {
     public String getDescription() {
         return "It adds Micronaut integration with OpenTelemetry and sets Zipkin as the exporter.";
     }
+
+    @Override
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.tracing-opentelemetry-zipkin");
+    }
+
 }

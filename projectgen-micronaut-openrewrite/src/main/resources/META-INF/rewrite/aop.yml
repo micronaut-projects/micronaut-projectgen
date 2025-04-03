@@ -13,6 +13,7 @@ recipeList:
       groupId: io.micronaut
       artifactId: micronaut-aop
       configuration: implementation
+      scope: compile
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.aop.documentation.thirdparty

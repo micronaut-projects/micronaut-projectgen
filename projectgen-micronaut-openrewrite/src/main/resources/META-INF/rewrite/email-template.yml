@@ -12,3 +12,4 @@ recipeList:
       groupId: io.micronaut.email
       artifactId: micronaut-email-template
       configuration: implementation
+      scope: compile

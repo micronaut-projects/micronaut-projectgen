@@ -45,39 +45,6 @@ public abstract class OpenTelemetryExporterFeature implements OpenTelemetryFeatu
         return "Adds the open telemetry exporter depedendency for " + exporterName();
     }
 
-    @Override
-    public void apply(GeneratorContext generatorContext) {
-        generatorContext.addDependency(exporterDependency());
-        addConfiguration(generatorContext);
-    }
-
-    protected void addConfiguration(GeneratorContext generatorContext) {
-        generatorContext.getConfiguration().addCommaSeparatedValue("otel.traces.exporter", exporterValue());
-    }
-
-    @NonNull
-    protected String exporterValue() {
-        return exporterName().toLowerCase(Locale.ROOT);
-    }
-
-    @NonNull
-    protected Dependency exporterDependency() {
-        return OpenTelemetryDependencyUtils.openTelemetryDependency()
-                .artifactId(exporterArtifactId())
-                .compile()
-                .build();
-    }
-
-    @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-tracing/latest/guide/#opentelemetry";
-    }
-
     @NonNull
     protected abstract String exporterName();
-
-    @NonNull
-    protected String exporterArtifactId() {
-        return "opentelemetry-exporter-"  + exporterName().toLowerCase(Locale.ROOT);
-    }
 }

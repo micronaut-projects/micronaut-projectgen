@@ -20,38 +20,17 @@ import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.feature.aws.AwsV2Sdk;
 import jakarta.inject.Singleton;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.tracing.opentelemetry.xray.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class OpenTelemetryXray extends AbstractOpenTelemetry {
+public class OpenTelemetryXray extends AbstractOpenTelemetry implements OpenRewriteFeature {
     public static final String NAME = "tracing-opentelemetry-xray";
-    private static final Dependency.Builder OPEN_TELEMETRY_INSTRUMENTATION_AWS_SDK =
-            OpenTelemetryDependencyUtils.openTelemetryInstrumentationDependency()
-                    .artifactId("opentelemetry-aws-sdk-2.2")
-                    .compile();
-    private static final String GROUP_ID_IO_OPENTELEMETRY_CONTRIB = "io.opentelemetry.contrib";
-    private static final Dependency OPEN_TELEMETRY_CONTRIB_XRAY = Dependency.builder()
-            .groupId(GROUP_ID_IO_OPENTELEMETRY_CONTRIB)
-            .artifactId("opentelemetry-aws-xray")
-            .compile()
-            .build();
-    private static final String ARTIFACT_ID_OPENTELEMETRY_AWS_RESOURCES = "opentelemetry-aws-resources";
-    private static final String ARTIFACT_ID_OPENTELEMETRY_AWS_XRAY_PROPAGATOR = "opentelemetry-aws-xray-propagator";
-    private static final Dependency OPEN_TELEMETRY_CONTRIB_XRAY_RESOURCES = Dependency.builder()
-            .groupId(GROUP_ID_IO_OPENTELEMETRY_CONTRIB)
-            .artifactId(ARTIFACT_ID_OPENTELEMETRY_AWS_RESOURCES)
-            .compile()
-            .build();
-    private static final Dependency OPEN_TELEMETRY_CONTRIB_XRAY_PROPAGATOR = Dependency.builder()
-            .groupId(GROUP_ID_IO_OPENTELEMETRY_CONTRIB)
-            .artifactId(ARTIFACT_ID_OPENTELEMETRY_AWS_XRAY_PROPAGATOR)
-            .compile()
-            .build();
-    private static final Dependency.Builder OPEN_TELEMETRY_BOM_ALPHA = Dependency.builder()
-            .lookupArtifactId("opentelemetry-instrumentation-bom-alpha")
-            .compile();
 
     public OpenTelemetryXray(OpenTelemetry otel,
                              OpenTelemetryHttp otelHttp,
@@ -79,19 +58,12 @@ public class OpenTelemetryXray extends AbstractOpenTelemetry {
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        generatorContext.addDependency(OPEN_TELEMETRY_CONTRIB_XRAY);
-        generatorContext.addDependency(OPEN_TELEMETRY_CONTRIB_XRAY_RESOURCES);
-        generatorContext.addDependency(OPEN_TELEMETRY_CONTRIB_XRAY_PROPAGATOR);
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        List<String> recipes = new ArrayList<>();
+        recipes.add("io.micronaut.starter.feature.tracing-opentelemetry-xray");
         if (generatorContext.getFeatures().isFeaturePresent(AwsV2Sdk.class)) {
-            generatorContext.addDependency(OPEN_TELEMETRY_BOM_ALPHA);
-            generatorContext.addDependency(OPEN_TELEMETRY_INSTRUMENTATION_AWS_SDK);
+            recipes.add("io.opentelemetry.instrumentation.opentelemetry-aws-sdk-2.2.dependency");
         }
-        generatorContext.getConfiguration().addCommaSeparatedValue("otel.traces.propagator", "tracecontext, baggage, xray");
-    }
-
-    @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://docs.aws.amazon.com/xray/latest/devguide/aws-xray.html";
+        return recipes;
     }
 }
