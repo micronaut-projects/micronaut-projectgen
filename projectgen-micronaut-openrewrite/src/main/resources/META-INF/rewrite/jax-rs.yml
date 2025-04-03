@@ -1,30 +1,43 @@
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.jax-rs
-displayName: Add JaxRs dependency and a link to README
+displayName: Add JAX-RS dependency and a link to README
 recipeList:
-  - io.micronaut.starter.feature.jax-rs.dependencies
+  - io.micronaut.starter.feature.jax-rs.dependencies.server
+  - io.micronaut.starter.feature.jax-rs.dependencies.maven.processor
+  - io.micronaut.starter.feature.jax-rs.dependencies.gradle.processor
   - io.micronaut.starter.feature.jax-rs.micronaut.documentation
 ---
 type: specs.openrewrite.org/v1beta/recipe
-name: io.micronaut.starter.feature.jax-rs.dependencies
-displayName: Add JaxRs dependency
+name: io.micronaut.starter.feature.jax-rs.dependencies.server
+displayName: Add Micronaut JAX-RS Server dependency
 recipeList:
   - org.openrewrite.java.dependencies.AddDependency:
       groupId: io.micronaut.jaxrs
       artifactId: micronaut-jaxrs-server
       configuration: implementation
       scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.jax-rs.dependencies.maven.processor
+displayName: Adds JAX-RS annotation Processor to the Maven compiler plugin
+recipeList:
+  - org.openrewrite.maven.AddAnnotationProcessor:
+      groupId: io.micronaut.jaxrs
+      artifactId: micronaut-jaxrs-processor
+      version: ${micronaut.jaxrs.version}
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.jax-rs.dependencies.gradle.processor
+displayName: Adds JAX-RS annotation Processor dependency to a Gradle Build
+recipeList:
   - org.openrewrite.gradle.AddDependency:
       groupId: io.micronaut.jaxrs
       artifactId: micronaut-jaxrs-processor
       configuration: annotationProcessor
-  - org.openrewrite.maven.AddAnnotationProcessor:
-      groupId: io.micronaut.jaxrs
-      artifactId: micronaut-jaxrs-processor
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.jax-rs.micronaut.documentation
-displayName: Append a link to micronaut JaxRs documentation
+displayName: Append a link to micronaut JAX-RS documentation
 recipeList:
   - org.openrewrite.text.AppendToTextFile:
       relativeFileName: README.md
