@@ -1,0 +1,46 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.flyway
+displayName: Add Flyway dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.flyway.dependencies
+  - io.micronaut.starter.feature.flyway.micronaut.documentation
+  - io.micronaut.starter.feature.flyway.documentation.thirdparty
+  - io.micronaut.starter.feature.flyway.configuration
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.flyway.dependencies
+displayName: Add Flyway dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.flyway
+      artifactId: micronaut-flyway
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.flyway.micronaut.documentation
+displayName: Append link to Micronaut Flyway Documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-flyway/latest/guide/index.html
+      appendNewline: true
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.flyway.documentation.thirdparty
+displayName: Append link to Flyway Website
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://flywaydb.org/
+      appendNewline: true
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.flyway.configuration
+displayName: Add Flyway Configuration
+preconditions:
+  - io.micronaut.starter.openrewrite.recipes.FindApplicationProperties
+recipeList:
+  - org.openrewrite.properties.AddProperty:
+      property: flyway.datasources.default.enabled
+      value: true

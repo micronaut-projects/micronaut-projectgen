@@ -18,50 +18,23 @@ package io.micronaut.starter.feature.migration;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
-import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.feature.database.MariaDB;
 import io.micronaut.starter.feature.database.MySQL;
 import io.micronaut.starter.feature.database.Oracle;
 import io.micronaut.starter.feature.database.PostgreSQL;
 import io.micronaut.starter.feature.database.SQLServer;
-import io.micronaut.starter.feature.oraclecloud.OracleCloudAutonomousDatabase;
-import io.micronaut.starter.util.VersionInfo;
 import jakarta.inject.Singleton;
 
-import java.util.Map;
-import java.util.Optional;
+import java.util.ArrayList;
+import java.util.List;
 
 @Requires(property = "micronaut.starter.feature.flyway.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class Flyway implements MigrationFeature {
+public class Flyway implements MigrationFeature, OpenRewriteFeature {
 
     public static final String NAME = "flyway";
-    public static final String ARTIFACT_ID_MICRONAUT_FLYWAY = "micronaut-flyway";
-    public static final String GROUP_ID_FLYWAYDB = "org.flywaydb";
-
-    public static final String ARTIFACT_ID_FLYWAY_MYSQL = "flyway-mysql";
-    public static final String ARTIFACT_ID_FLYWAY_SQLSERVER = "flyway-sqlserver";
-    public static final String ARTIFACT_ID_FLYWAY_ORACLE = "flyway-database-oracle";
     //https://documentation.red-gate.com/fd/oracle-184127602.html
-    public static final String ARTIFACT_ID_FLYWAY_POSTGRESQL = "flyway-database-postgresql";
-    public static final Dependency.Builder DEPENDENCY_FLYWAY_MYSQL = Dependency.builder()
-            .groupId(GROUP_ID_FLYWAYDB)
-            .artifactId(ARTIFACT_ID_FLYWAY_MYSQL)
-            .runtime();
-
-    public static final Dependency.Builder DEPENDENCY_FLYWAY_ORACLE = Dependency.builder()
-            .groupId(GROUP_ID_FLYWAYDB)
-            .artifactId(ARTIFACT_ID_FLYWAY_ORACLE)
-            .runtime();
-    public static final Dependency.Builder DEPENDENCY_FLYWAY_POSTGRESQL = Dependency.builder()
-            .groupId(GROUP_ID_FLYWAYDB)
-            .artifactId(ARTIFACT_ID_FLYWAY_POSTGRESQL)
-            .runtime();
-    public static final Dependency.Builder DEPENDENCY_FLYWAY_SQLSERVER = Dependency.builder()
-            .groupId(GROUP_ID_FLYWAYDB)
-            .artifactId(ARTIFACT_ID_FLYWAY_SQLSERVER)
-            .runtime();
 
     @Override
     public String getName() {
@@ -79,41 +52,23 @@ public class Flyway implements MigrationFeature {
     }
 
     @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://flywaydb.org/";
-    }
-
-    @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-flyway/latest/guide/index.html";
-    }
-
-    @Override
-    public void apply(GeneratorContext generatorContext) {
-        addDependencies(generatorContext);
-        generatorContext.getConfiguration().addNested("flyway.datasources.default.enabled", true);
-    }
-
-    protected void addDependencies(GeneratorContext generatorContext) {
-        generatorContext.addDependency(MicronautDependencyUtils.flywayDependency()
-                .artifactId(ARTIFACT_ID_MICRONAUT_FLYWAY)
-                .compile());
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        List<String> recipes = new ArrayList<>();
+        recipes.add("io.micronaut.starter.feature.flyway");
         if (generatorContext.isFeaturePresent(MySQL.class) || generatorContext.isFeaturePresent(MariaDB.class)) {
-            generatorContext.addDependency(DEPENDENCY_FLYWAY_MYSQL);
+            recipes.add("io.micronaut.starter.feature.flyway-mysql");
         }
         if (generatorContext.isFeaturePresent(SQLServer.class)) {
-            generatorContext.addDependency(DEPENDENCY_FLYWAY_SQLSERVER);
+            recipes.add("io.micronaut.starter.feature.flyway-sqlserver");
         }
-        if (generatorContext.isFeaturePresent(Oracle.class) || generatorContext.isFeaturePresent(OracleCloudAutonomousDatabase.class)) {
-            generatorContext.addDependency(DEPENDENCY_FLYWAY_ORACLE);
+        if (generatorContext.isFeaturePresent(Oracle.class)) {
+            recipes.add("io.micronaut.starter.feature.flyway-database-oracle");
         }
         if (generatorContext.isFeaturePresent(PostgreSQL.class)) {
-            Map.Entry<String, String> version = VersionInfo.getDependencyVersion("micronaut.flyway");
-            Optional<Integer> majorVersion = VersionInfo.getMajorVersion(version.getValue());
-            if (majorVersion.isPresent() && majorVersion.get() >= 7) { // 7 is the first major of Micronaut Flyway version which includes flyway 10
-                generatorContext.addDependency(DEPENDENCY_FLYWAY_POSTGRESQL);
-            }
+            recipes.add("io.micronaut.starter.feature.flyway-database-postgresql");
         }
+        return recipes;
     }
+
 }
 

@@ -1,0 +1,9 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.flyway-sqlserver
+displayName: Add Flyway Sqlserver dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: org.flywaydb
+      artifactId: flyway-sqlserver
+      configuration: implementation
+      scope: runtime

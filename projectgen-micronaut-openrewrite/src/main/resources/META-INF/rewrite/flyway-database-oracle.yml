@@ -1,0 +1,9 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.flyway-database-oracle
+displayName: Add Flyway Database Oracle dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: org.flywaydb
+      artifactId: flyway-database-oracle
+      configuration: implementation
+      scope: runtime
