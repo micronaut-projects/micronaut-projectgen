@@ -39,12 +39,6 @@ public interface MicrometerRegistryFeature extends Feature {
         return NameUtils.getNaturalName(io.micronaut.core.naming.NameUtils.dehyphenate(getName()));
     }
 
-    @Override
-    default void apply(GeneratorContext generatorContext) {
-        addDependencies(generatorContext);
-        addConfiguration(generatorContext);
-    }
-
     default void addDependencies(@NonNull GeneratorContext generatorContext) {
         generatorContext.addDependency(micrometerDependency());
     }

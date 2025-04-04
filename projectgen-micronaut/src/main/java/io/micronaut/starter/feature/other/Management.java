@@ -17,20 +17,21 @@ package io.micronaut.starter.feature.other;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.micronaut.MicronautOptions;
-import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import io.micronaut.starter.feature.Category;
-import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.starter.feature.server.MicronautServerDependent;
 
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.management.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class Management implements Feature, MicronautServerDependent {
+public class Management implements OpenRewriteFeature, MicronautServerDependent {
 
     @Override
     public String getName() {
@@ -58,14 +59,8 @@ public class Management implements Feature, MicronautServerDependent {
     }
 
     @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://docs.micronaut.io/latest/guide/index.html#management";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.management");
     }
 
-    @Override
-    public void apply(GeneratorContext generatorContext) {
-        generatorContext.addDependency(MicronautDependencyUtils.coreDependency()
-                .artifactId("micronaut-management")
-                .compile());
-    }
 }

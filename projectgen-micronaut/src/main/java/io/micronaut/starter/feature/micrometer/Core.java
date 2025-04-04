@@ -17,6 +17,7 @@ package io.micronaut.starter.feature.micrometer;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
@@ -26,19 +27,12 @@ import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.starter.feature.database.r2dbc.R2dbcFeature;
 import jakarta.inject.Singleton;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.micrometer.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class Core implements Feature {
-    private static final Dependency MICRONAUT_MICROMETER_CORE = MicronautDependencyUtils.micrometerDependency()
-            .artifactId("micronaut-micrometer-core")
-            .compile()
-            .build();
-
-    private static final Dependency R2DBC_POOL = Dependency.builder()
-            .groupId("io.r2dbc")
-            .artifactId("r2dbc-pool")
-            .runtime()
-            .build();
+public class Core implements OpenRewriteFeature {
 
     @Override
     public String getName() {
@@ -61,11 +55,13 @@ public class Core implements Feature {
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        generatorContext.getConfiguration().put("micronaut.metrics.enabled", true);
-        generatorContext.addDependency(MICRONAUT_MICROMETER_CORE);
-        if (generatorContext.hasFeature(R2dbcFeature.class)) {
-            generatorContext.addDependency(R2DBC_POOL);
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        List<String> recipes = new ArrayList<>();
+        recipes.add("io.micronaut.starter.feature.micrometer-core");
+        if(generatorContext.isFeaturePresent(R2dbcFeature.class)) {
+            recipes.add("io.micronaut.starter.feature.r2dbc-pool");
         }
+        return recipes;
     }
+
 }
