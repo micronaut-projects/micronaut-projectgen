@@ -17,7 +17,8 @@ import static org.junit.jupiter.api.Assertions.*;
 class AwsParameterStoreTest {
     @Test
     void awsParameterStoreFeaturesAddsTheDependency(MicronautProjectGenerator micronautProjectGenerator) throws Exception {
-        MicronautOptions options = MicronautOptions.builder().feature("aws-parameter-store").build();
+        String name = "foo";
+        MicronautOptions options = MicronautOptions.builder().name(name).feature("aws-parameter-store").build();
         Map<String, String> project = generateProject(micronautProjectGenerator, options);
         String buildGradle = project.get("build.gradle.kts");
         assertNotNull(buildGradle);
@@ -25,6 +26,7 @@ class AwsParameterStoreTest {
         assertTrue(verifier.hasDependency("io.micronaut.aws", "micronaut-aws-parameter-store"), buildGradle);
 
         Properties bootstrapProperties = ConfigurationUtils.loadBootstrapProperties(project);
+        assertEquals(name, bootstrapProperties.getProperty("micronaut.application.name"));
         assertEquals(StringUtils.TRUE, bootstrapProperties.getProperty("micronaut.config-client.enabled"));
         assertEquals(StringUtils.FALSE, bootstrapProperties.getProperty("aws.distributed-configuration.search-active-environments"));
         assertEquals(StringUtils.TRUE, bootstrapProperties.getProperty("aws.client.system-manager.parameterstore.enabled"));
