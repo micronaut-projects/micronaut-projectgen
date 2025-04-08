@@ -1,0 +1,9 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.flyway-mysql
+displayName: Add Flyway Mysql dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: org.flywaydb
+      artifactId: flyway-mysql
+      configuration: runtimeOnly
+      scope: runtime

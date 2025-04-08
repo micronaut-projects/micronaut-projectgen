@@ -15,6 +15,8 @@
  */
 package io.micronaut.projectgen.core.generator;
 
+import io.micronaut.projectgen.core.openrewrite.FileContents;
+import io.micronaut.projectgen.core.template.StringTemplate;
 import io.micronaut.projectgen.core.template.Writable;
 import io.micronaut.projectgen.core.template.markdownLink;
 import com.fizzed.rocker.RockerModel;
@@ -748,5 +750,11 @@ public class GeneratorContext implements DependencyContext {
      */
     public Optional<String> findThirdPartyDocumentationByRecipeName(@NonNull String recipeName) {
         return recipeFetcher.findThirdPartyDocumentationByRecipeName(recipeName);
+    }
+
+    public void addTemplatesByRecipeName(String recipeName) {
+        for (FileContents fileContents : recipeFetcher.findAllFilesByRecipeName(recipeName)) {
+            addTemplate(fileContents.relativeFileName(), new StringTemplate(fileContents.relativeFileName(), fileContents.fileContents()));
+        }
     }
 }
