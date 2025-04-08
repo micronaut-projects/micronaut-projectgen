@@ -1,0 +1,57 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.aws-parameter-store
+displayName: Add Aws Parameter Store dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.aws-parameter-store.dependencies
+  - io.micronaut.starter.feature.aws-parameter-store.configurations
+  - io.micronaut.starter.feature.aws-parameter-store.micronaut.documentation
+  - io.micronaut.starter.feature.aws-parameter-store.documentation.thirdparty
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.aws-parameter-store.dependencies
+displayName: Add Aws Parameter Store dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.aws
+      artifactId: micronaut-aws-parameter-store
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.aws-parameter-store.configurations
+displayName: Add Aws Parameter Store Configuration
+preconditions:
+  - io.micronaut.starter.openrewrite.recipes.FindBootstrapProperties
+recipeList:
+  - org.openrewrite.properties.AddProperty:
+      property: micronaut.config-client.enabled
+      value: true
+  - org.openrewrite.properties.AddProperty:
+      property: aws.distributed-configuration.search-active-environments
+      value: false
+  - org.openrewrite.properties.AddProperty:
+      property: aws.client.system-manager.parameterstore.enabled
+      value: true
+  - org.openrewrite.properties.AddProperty:
+      property: aws.distributed-configuration.search-common-application
+      value: false
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.aws-parameter-store.micronaut.documentation
+displayName: Append a link to Micronaut Aws Parameter Store documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-aws/latest/guide/index.html#parametersStore
+      appendNewline: true
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.aws-parameter-store.documentation.thirdparty
+displayName: Append a link to Aws Parameter Store Website
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html
+      appendNewline: true
+
+
