@@ -69,6 +69,5 @@ public class Flyway implements MigrationFeature, OpenRewriteFeature {
         }
         return recipes;
     }
-
 }
 

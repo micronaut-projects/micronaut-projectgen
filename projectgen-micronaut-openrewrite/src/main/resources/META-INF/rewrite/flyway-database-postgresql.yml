@@ -5,5 +5,5 @@ recipeList:
   - org.openrewrite.java.dependencies.AddDependency:
       groupId: org.flywaydb
       artifactId: flyway-database-postgresql
-      configuration: implementation
+      configuration: runtimeOnly
       scope: runtime
