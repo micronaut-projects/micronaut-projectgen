@@ -1,0 +1,36 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.micrometer-ganglia
+displayName: Add Micrometer Ganglia dependency and configuration
+recipeList:
+  - io.micronaut.starter.feature.micrometer-ganglia.dependencies
+  - io.micronaut.starter.feature.micrometer-ganglia.configuration
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.micrometer-ganglia.dependencies
+displayName: Add Micrometer Ganglia dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.micrometer
+      artifactId: micronaut-micrometer-registry-ganglia
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.micrometer-ganglia.configuration
+displayName: Add Micrometer Ganglia configuration
+preconditions:
+  - io.micronaut.starter.openrewrite.recipes.FindApplicationProperties
+recipeList:
+  - org.openrewrite.properties.AddProperty:
+      property: micronaut.metrics.export.ganglia.enabled
+      value: true
+  - org.openrewrite.properties.AddProperty:
+      property: micronaut.metrics.export.ganglia.protocolVersion
+      value: 3.1
+  - org.openrewrite.properties.AddProperty:
+      property: micronaut.metrics.export.ganglia.step
+      value: PT1M
+  - org.openrewrite.properties.AddProperty:
+      property: micronaut.metrics.enabled
+      value: true
+
