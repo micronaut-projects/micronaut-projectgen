@@ -1,0 +1,36 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.micrometer-datadog
+displayName: Add Micrometer Datadog dependency and configuration
+recipeList:
+  - io.micronaut.starter.feature.micrometer-datadog.dependencies
+  - io.micronaut.starter.feature.micrometer-datadog.configuration
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.micrometer-datadog.dependencies
+displayName: Add Micrometer Datadog dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.micrometer
+      artifactId: micronaut-micrometer-registry-datadog
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.micrometer-datadog.configuration
+displayName: Add Micrometer Datadog configuration
+preconditions:
+  - io.micronaut.starter.openrewrite.recipes.FindApplicationProperties
+recipeList:
+  - org.openrewrite.properties.AddProperty:
+      property: micronaut.metrics.export.datadog.enabled
+      value: true
+  - org.openrewrite.properties.AddProperty:
+      property: micronaut.metrics.export.datadog.step
+      value: PT1M
+  - org.openrewrite.properties.AddProperty:
+      property: micronaut.metrics.export.datadog.apiKey
+      value: ${DATADOG_APIKEY}
+  - org.openrewrite.properties.AddProperty:
+      property: micronaut.metrics.enabled
+      value: true
+
