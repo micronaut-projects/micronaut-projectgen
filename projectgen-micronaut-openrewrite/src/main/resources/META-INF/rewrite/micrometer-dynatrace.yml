@@ -1,0 +1,42 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.micrometer-dynatrace
+displayName: Add Micronaut Dynatrace dependency and configuration
+recipeList:
+  - io.micronaut.starter.feature.micrometer-dynatrace.dependencies
+  - io.micronaut.starter.feature.micrometer-dynatrace.configuration
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.micrometer-dynatrace.dependencies
+displayName: Add Micronaut Dynatrace dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.micrometer
+      artifactId: micronaut-micrometer-registry-dynatrace
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.micrometer-dynatrace.configuration
+displayName: Add Micronaut Dynatrace configuration
+preconditions:
+  - io.micronaut.starter.openrewrite.recipes.FindApplicationProperties
+recipeList:
+  - org.openrewrite.properties.AddProperty:
+      property: micronaut.metrics.export.dynatrace.enabled
+      value: true
+  - org.openrewrite.properties.AddProperty:
+      property: micronaut.metrics.export.dynatrace.apiToken
+      value: ${DYNATRACE_DEVICE_API_TOKEN}
+  - org.openrewrite.properties.AddProperty:
+      property: micronaut.metrics.export.dynatrace.uri
+      value: ${DYNATRACE_DEVICE_URI}
+  - org.openrewrite.properties.AddProperty:
+      property: micronaut.metrics.export.dynatrace.deviceId
+      value: ${DYNATRACE_DEVICE_ID}
+  - org.openrewrite.properties.AddProperty:
+      property: micronaut.metrics.export.dynatrace.step
+      value: PT1M
+  - org.openrewrite.properties.AddProperty:
+      property: micronaut.metrics.enabled
+      value:  true
+
