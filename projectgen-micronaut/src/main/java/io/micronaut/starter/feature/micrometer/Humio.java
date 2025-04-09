@@ -18,12 +18,15 @@ package io.micronaut.starter.feature.micrometer;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.feature.other.Management;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.micrometer.humio.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class Humio extends MicrometerFeature implements MicrometerRegistryFeature {
+public class Humio extends MicrometerFeature implements MicrometerRegistryFeature, OpenRewriteFeature {
 
     public Humio(Core core, Management management) {
         super(core, management);
@@ -35,9 +38,8 @@ public class Humio extends MicrometerFeature implements MicrometerRegistryFeatur
     }
 
     @Override
-    public void addConfiguration(GeneratorContext generatorContext) {
-        generatorContext.getConfiguration().put(EXPORT_PREFIX + ".humio.enabled", true);
-        generatorContext.getConfiguration().put(EXPORT_PREFIX + ".humio.step", "PT1M");
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.micrometer-humio");
     }
 
     @Override
