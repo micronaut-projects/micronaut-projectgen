@@ -18,12 +18,15 @@ package io.micronaut.starter.feature.micrometer;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.feature.other.Management;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.micrometer.signalfx.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class Signalfx extends MicrometerFeature implements MicrometerRegistryFeature {
+public class Signalfx extends MicrometerFeature implements MicrometerRegistryFeature, OpenRewriteFeature {
 
     public Signalfx(Core core, Management management) {
         super(core, management);
@@ -35,10 +38,8 @@ public class Signalfx extends MicrometerFeature implements MicrometerRegistryFea
     }
 
     @Override
-    public void addConfiguration(GeneratorContext generatorContext) {
-        generatorContext.getConfiguration().put(EXPORT_PREFIX + ".signalfx.enabled", true);
-        generatorContext.getConfiguration().put(EXPORT_PREFIX + ".signalfx.accessToken", "${SIGNALFX_API_TOKEN}");
-        generatorContext.getConfiguration().put(EXPORT_PREFIX + ".signalfx.step", "PT1M");
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.micrometer-signalfx");
     }
 
     @Override
