@@ -1,0 +1,39 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.micrometer-prometheus-pushgateway
+displayName: Add Micrometer Prometheus PushGateway dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.micrometer-prometheus-pushgateway.dependencies
+  - io.micronaut.starter.feature.micrometer-prometheus-pushgateway.configuration
+  - io.micronaut.starter.feature.micrometer-prometheus-pushgateway.micronaut.documentation
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.micrometer-prometheus-pushgateway.dependencies
+displayName: Add Micrometer Prometheus PushGateway dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.micrometer
+      artifactId: micronaut-micrometer-registry-prometheus-pushgateway
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.micrometer-prometheus-pushgateway.configuration
+displayName: Add Micrometer Prometheus PushGateway configuration
+preconditions:
+  - io.micronaut.starter.openrewrite.recipes.FindApplicationProperties
+recipeList:
+  - org.openrewrite.properties.AddProperty:
+      property: micronaut.metrics.export.prometheus.pushgateway.enabled
+      value: true
+  - org.openrewrite.properties.AddProperty:
+      property: micronaut.metrics.enabled
+      value: true
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.micrometer-prometheus-pushgateway.micronaut.documentation
+displayName: Append a link to Micronaut Prometheus PushGateway Documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-micrometer/latest/guide/#metricsAndReportersPrometheusPushGateway
+      appendNewline: true
