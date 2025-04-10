@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @MicronautTest(startApplication = false)
 class MicrometerObservationHttpTest {
     @Test
-    void micrometerObservationCHttponfiguration(MicronautProjectGenerator micronautProjectGenerator) throws Exception {
+    void micrometerObservationCHttpConfiguration(MicronautProjectGenerator micronautProjectGenerator) throws Exception {
         MicronautOptions options = MicronautOptions.builder().feature("micrometer-observation-http").build();
         Map<String, String> project = generateProject(micronautProjectGenerator, options);
         Properties applicationProperties = ConfigurationUtils.loadApplicationProperties(project);
