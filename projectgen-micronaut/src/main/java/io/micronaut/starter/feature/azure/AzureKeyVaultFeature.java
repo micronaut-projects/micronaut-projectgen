@@ -19,12 +19,15 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.micronaut.features.config.MicronautDistributedConfigurationFeature;
 import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.starter.feature.discovery.DiscoveryClient;
 import io.micronaut.projectgen.core.feature.DistributedConfigFeature;
 import jakarta.inject.Singleton;
+
+import java.util.List;
 
 /**
  * Azure Key Vault Feature.
@@ -34,12 +37,8 @@ import jakarta.inject.Singleton;
  */
 @Requires(property = "micronaut.starter.feature.azure.key.vault.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class AzureKeyVaultFeature implements MicronautDistributedConfigurationFeature {
-    private static final String ARTIFACT_ID_MICRONAUT_AZURE_SECRET_MANAGER = "micronaut-azure-secret-manager";
-    private static final Dependency KEY_VAULT_DEPENDENCY = MicronautDependencyUtils.azureDependency()
-            .artifactId(ARTIFACT_ID_MICRONAUT_AZURE_SECRET_MANAGER)
-            .compile()
-            .build();
+public class AzureKeyVaultFeature implements MicronautDistributedConfigurationFeature, OpenRewriteFeature {
+
     private final DiscoveryClient discoveryClient;
 
     public AzureKeyVaultFeature(DiscoveryClient discoveryClient) {
@@ -69,22 +68,8 @@ public class AzureKeyVaultFeature implements MicronautDistributedConfigurationFe
     }
 
     @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-azure/latest/guide/#azureKeyVault";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.azure-key-vault");
     }
 
-    @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://azure.microsoft.com/en-us/services/key-vault/#product-overview";
-    }
-
-    @Override
-    public void apply(GeneratorContext generatorContext) {
-        addDependencies(generatorContext);
-        populateBootstrapForDistributedConfiguration(generatorContext);
-    }
-
-    protected void addDependencies(GeneratorContext generatorContext) {
-        generatorContext.addDependency(KEY_VAULT_DEPENDENCY);
-    }
 }
