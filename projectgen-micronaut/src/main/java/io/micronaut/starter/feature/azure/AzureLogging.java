@@ -18,6 +18,7 @@ package io.micronaut.starter.feature.azure;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
@@ -25,20 +26,16 @@ import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.starter.feature.function.azure.AzureCloudFeature;
 import jakarta.inject.Singleton;
+
+import java.util.List;
+
 import static io.micronaut.starter.feature.Category.LOGGING;
 
 @Requires(property = "micronaut.starter.feature.azure.logging.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class AzureLogging implements AzureCloudFeature, Feature {
+public class AzureLogging implements AzureCloudFeature, OpenRewriteFeature {
 
     public static final String NAME = "azure-logging";
-
-    private static final String ARTIFACT_ID_MICRONAUT_AZURE_LOGGING = "micronaut-azure-logging";
-    private static final Dependency AZURE_LOGGING_DEPENDENCY =
-            MicronautDependencyUtils.azureDependency()
-                    .artifactId(ARTIFACT_ID_MICRONAUT_AZURE_LOGGING)
-                    .compile()
-                    .build();
 
     @Override
     public String getName() {
@@ -55,25 +52,14 @@ public class AzureLogging implements AzureCloudFeature, Feature {
         return "Provides integration with Azure Monitor Logs";
     }
 
-    @Nullable
-    @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-azure/latest/guide/#azureLogging";
-    }
-
-    @Nullable
-    @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://learn.microsoft.com/en-us/azure/azure-monitor/logs/data-platform-logs";
-    }
-
     @Override
     public String getCategory() {
         return LOGGING;
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        generatorContext.addDependency(AZURE_LOGGING_DEPENDENCY);
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.azure-logging");
     }
+
 }
