@@ -27,7 +27,4 @@ recipeList:
   - org.openrewrite.properties.AddProperty:
       property: micronaut.metrics.export.elastic.step
       value: PT1M
-  - org.openrewrite.properties.AddProperty:
-      property: micronaut.metrics.enabled
-      value: true
 

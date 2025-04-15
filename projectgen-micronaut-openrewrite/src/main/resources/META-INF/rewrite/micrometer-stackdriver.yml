@@ -28,9 +28,6 @@ recipeList:
       property: micronaut.metrics.export.stackdriver.step
       value: PT1M
   - org.openrewrite.properties.AddProperty:
-      property: micronaut.metrics.enabled
-      value: true
-  - org.openrewrite.properties.AddProperty:
       property: micronaut.metrics.export.stackdriver.projectId
       value: ${STACKDRIVER_PROJECT_ID}
 

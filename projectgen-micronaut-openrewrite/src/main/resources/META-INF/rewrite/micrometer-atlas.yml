@@ -4,6 +4,7 @@ displayName: Add Atlas dependency and configurations
 recipeList:
   - io.micronaut.starter.feature.micrometer-atlas.dependencies
   - io.micronaut.starter.feature.micrometer-atlas.configurations
+  - io.micronaut.starter.feature.micrometer-core.configurations
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.micrometer-atlas.dependencies
@@ -27,9 +28,6 @@ recipeList:
   - org.openrewrite.properties.AddProperty:
       property: micronaut.metrics.export.atlas.uri
       value: http\://localhost\:7101/api/v1/publish
-  - org.openrewrite.properties.AddProperty:
-      property: micronaut.metrics.enabled
-      value: true
   - org.openrewrite.properties.AddProperty:
       property: micronaut.metrics.export.atlas.step
       value: PT1M

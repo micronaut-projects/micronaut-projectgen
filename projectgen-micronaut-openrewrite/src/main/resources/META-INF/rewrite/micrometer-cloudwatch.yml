@@ -22,9 +22,6 @@ preconditions:
   - io.micronaut.starter.openrewrite.recipes.FindApplicationProperties
 recipeList:
   - org.openrewrite.properties.AddProperty:
-      property: micronaut.metrics.enabled
-      value: true
-  - org.openrewrite.properties.AddProperty:
       property: micronaut.metrics.export.cloudwatch.enabled
       value: true
 

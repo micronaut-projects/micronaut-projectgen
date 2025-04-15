@@ -23,13 +23,3 @@ recipeList:
       groupId: io.micronaut.micrometer
       artifactId: micronaut-micrometer-annotation
       configuration: annotationProcessor
----
-type: specs.openrewrite.org/v1beta/recipe
-name: io.micronaut.starter.feature.micrometer-annotation.configuration
-displayName: Add Micrometer Annotation configuration
-preconditions:
-  - io.micronaut.starter.openrewrite.recipes.FindApplicationProperties
-recipeList:
-  - org.openrewrite.properties.AddProperty:
-      property: micronaut.metrics.enabled
-      value: true

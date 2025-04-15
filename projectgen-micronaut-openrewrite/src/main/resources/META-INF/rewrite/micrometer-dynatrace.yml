@@ -36,7 +36,5 @@ recipeList:
   - org.openrewrite.properties.AddProperty:
       property: micronaut.metrics.export.dynatrace.step
       value: PT1M
-  - org.openrewrite.properties.AddProperty:
-      property: micronaut.metrics.enabled
-      value:  true
+
 

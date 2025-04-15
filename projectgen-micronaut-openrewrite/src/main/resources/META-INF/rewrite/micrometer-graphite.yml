@@ -31,8 +31,5 @@ recipeList:
       property: micronaut.metrics.export.graphite.enabled
       value: true
   - org.openrewrite.properties.AddProperty:
-      property: micronaut.metrics.enabled
-      value: true
-  - org.openrewrite.properties.AddProperty:
       property: micronaut.metrics.export.graphite.step
       value: PT1M

@@ -27,7 +27,4 @@ recipeList:
   - org.openrewrite.properties.AddProperty:
       property: micronaut.metrics.export.humio.step
       value: PT1M
-  - org.openrewrite.properties.AddProperty:
-      property: micronaut.metrics.enabled
-      value: true
 

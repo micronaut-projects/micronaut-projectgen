@@ -25,9 +25,6 @@ recipeList:
       property: micronaut.metrics.export.prometheus.enabled
       value: true
   - org.openrewrite.properties.AddProperty:
-      property: micronaut.metrics.enabled
-      value: true
-  - org.openrewrite.properties.AddProperty:
       property: micronaut.metrics.export.prometheus.step
       value: PT1M
   - org.openrewrite.properties.AddProperty:

@@ -33,9 +33,6 @@ recipeList:
   - org.openrewrite.properties.AddProperty:
       property: micronaut.metrics.export.oraclecloud.namespace
       value: change-me
-  - org.openrewrite.properties.AddProperty:
-      property: micronaut.metrics.enabled
-      value: true
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.micrometer-oracle-cloud.micronaut.documentation

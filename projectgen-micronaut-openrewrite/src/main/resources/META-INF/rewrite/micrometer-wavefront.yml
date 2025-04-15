@@ -28,9 +28,6 @@ recipeList:
       property: micronaut.metrics.export.wavefront.step
       value: PT1M
   - org.openrewrite.properties.AddProperty:
-      property: micronaut.metrics.enabled
-      value: true
-  - org.openrewrite.properties.AddProperty:
       property: micronaut.metrics.export.wavefront.apiToken
       value: ${WAVEFRONT_API_TOKEN}
 

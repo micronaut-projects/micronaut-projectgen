@@ -30,7 +30,4 @@ recipeList:
   - org.openrewrite.properties.AddProperty:
       property: micronaut.metrics.export.datadog.apiKey
       value: ${DATADOG_APIKEY}
-  - org.openrewrite.properties.AddProperty:
-      property: micronaut.metrics.enabled
-      value: true
 

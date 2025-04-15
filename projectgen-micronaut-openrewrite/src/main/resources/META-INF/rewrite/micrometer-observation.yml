@@ -14,13 +14,3 @@ recipeList:
       artifactId: micronaut-micrometer-observation
       configuration: implementation
       scope: compile
----
-type: specs.openrewrite.org/v1beta/recipe
-name: io.micronaut.starter.feature.micrometer-observation.configuration
-displayName: Add Micrometer Observation configuration
-preconditions:
-  - io.micronaut.starter.openrewrite.recipes.FindApplicationProperties
-recipeList:
-  - org.openrewrite.properties.AddProperty:
-      property: micronaut.metrics.enabled
-      value: true

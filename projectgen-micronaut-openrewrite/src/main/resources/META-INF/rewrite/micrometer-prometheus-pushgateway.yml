@@ -25,9 +25,6 @@ recipeList:
   - org.openrewrite.properties.AddProperty:
       property: micronaut.metrics.export.prometheus.pushgateway.enabled
       value: true
-  - org.openrewrite.properties.AddProperty:
-      property: micronaut.metrics.enabled
-      value: true
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.micrometer-prometheus-pushgateway.micronaut.documentation

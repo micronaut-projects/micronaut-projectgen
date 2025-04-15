@@ -28,9 +28,6 @@ recipeList:
       property: micronaut.metrics.export.new-relic.step
       value: PT1M
   - org.openrewrite.properties.AddProperty:
-      property: micronaut.metrics.enabled
-      value: true
-  - org.openrewrite.properties.AddProperty:
       property: micronaut.metrics.export.newrelic.apiKey
       value: ${NEWRELIC_API_KEY}
   - org.openrewrite.properties.AddProperty:
