@@ -17,6 +17,7 @@ package io.micronaut.starter.feature.micrometer;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
@@ -24,7 +25,9 @@ import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import io.micronaut.projectgen.core.feature.Feature;
 
+import io.micronaut.starter.feature.database.r2dbc.R2dbc;
 import io.micronaut.starter.feature.database.r2dbc.R2dbcFeature;
+import io.micronaut.starter.feature.database.r2dbc.R2dbcPool;
 import jakarta.inject.Singleton;
 
 import java.util.ArrayList;
@@ -33,6 +36,18 @@ import java.util.List;
 @Requires(property = "micronaut.starter.feature.micrometer.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Core implements OpenRewriteFeature {
+    private final R2dbcPool r2dbcPool;
+
+    public Core(R2dbcPool r2dbcPool) {
+        this.r2dbcPool = r2dbcPool;
+    }
+
+    @Override
+    public void processSelectedFeatures(FeatureContext featureContext) {
+        if (featureContext.isPresent(R2dbcFeature.class)) {
+            featureContext.addFeature(r2dbcPool);
+        }
+    }
 
     @Override
     public String getName() {
@@ -51,17 +66,11 @@ public class Core implements OpenRewriteFeature {
 
     @Override
     public String getDescription() {
-        return null;
+        return "Adds Micronaut Micrometer core dependency";
     }
 
     @Override
     public List<String> getRecipes(GeneratorContext generatorContext) {
-        List<String> recipes = new ArrayList<>();
-        recipes.add("io.micronaut.starter.feature.micrometer-core");
-        if(generatorContext.isFeaturePresent(R2dbcFeature.class)) {
-            recipes.add("io.micronaut.starter.feature.r2dbc-pool");
-        }
-        return recipes;
+        return List.of("io.micronaut.starter.feature.micrometer-core");
     }
-
 }

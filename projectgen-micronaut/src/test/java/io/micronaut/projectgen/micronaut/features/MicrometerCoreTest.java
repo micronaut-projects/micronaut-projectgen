@@ -26,12 +26,13 @@ class MicrometerCoreTest {
 
     @Test
     void coreFeaturesAddsTheDependency(MicronautProjectGenerator micronautProjectGenerator) throws Exception {
-        MicronautOptions options = MicronautOptions.builder().feature("micrometer").build();
+        MicronautOptions options = MicronautOptions.builder().feature("micrometer").feature("r2dbc").build();
         Map<String, String> project = generateProject(micronautProjectGenerator, options);
         String buildGradle = project.get("build.gradle.kts");
         assertNotNull(buildGradle);
         BuildTestVerifier verifier = BuildTestVerifier.of(buildGradle, options);
         assertTrue(verifier.hasDependency("io.micronaut.micrometer", "micronaut-micrometer-core", Scope.COMPILE), buildGradle);
+        assertTrue(verifier.hasDependency("io.r2dbc", "r2dbc-pool", Scope.COMPILE), buildGradle);
     }
 
     private static Map<String, String> generateProject(MicronautProjectGenerator micronautProjectGenerator,
