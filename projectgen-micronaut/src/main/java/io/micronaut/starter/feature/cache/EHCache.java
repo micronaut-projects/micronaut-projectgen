@@ -20,11 +20,14 @@ import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import jakarta.inject.Singleton;
+
+import java.util.List;
 
 @Requires(property = "micronaut.starter.feature.cache.ehcache.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class EHCache implements CacheFeature {
+public class EHCache implements CacheFeature, OpenRewriteFeature {
 
     @Override
     public String getName() {
@@ -42,22 +45,8 @@ public class EHCache implements CacheFeature {
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        generatorContext.getConfiguration().put("micronaut.caches.my-cache.maximumSize", 20);
-        generatorContext.addDependency(Dependency.builder()
-                .groupId("io.micronaut.cache")
-                .artifactId("micronaut-cache-ehcache")
-                .compile());
-    }
-
-    @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://www.ehcache.org/";
-    }
-
-    @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-cache/latest/guide/index.html#ehcache";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.cache-ehcache");
     }
 
 }
