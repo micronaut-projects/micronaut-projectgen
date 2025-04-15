@@ -1,0 +1,32 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.micrometer-azure-monitor
+displayName: Add Azure Monitor dependency and configuration
+recipeList:
+  - io.micronaut.starter.feature.micrometer-azure-monitor.dependencies
+  - io.micronaut.starter.feature.micrometer-azure-monitor.configuration
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.micrometer-azure-monitor.dependencies
+displayName: Add Azure Monitor dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.micrometer
+      artifactId: micronaut-micrometer-registry-azure-monitor
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.micrometer-azure-monitor.configuration
+displayName: Add Azure Monitor configuration
+preconditions:
+  - io.micronaut.starter.openrewrite.recipes.FindApplicationProperties
+recipeList:
+  - org.openrewrite.properties.AddProperty:
+      property: micronaut.metrics.export.azuremonitor.step
+      value: PT1M
+  - org.openrewrite.properties.AddProperty:
+      property: micronaut.metrics.export.azuremonitor.instrumentationKey
+      value: ${AZUREMONITOR_INSTRUMENTATION_KEY}
+  - org.openrewrite.properties.AddProperty:
+      property: micronaut.metrics.export.azuremonitor.enabled
+      value: true

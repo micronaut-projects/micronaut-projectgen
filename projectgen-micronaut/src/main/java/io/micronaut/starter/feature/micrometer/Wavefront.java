@@ -19,12 +19,15 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.feature.other.Management;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.micrometer.wavefront.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class Wavefront extends MicrometerFeature implements MicrometerRegistryFeature {
+public class Wavefront extends MicrometerFeature implements MicrometerRegistryFeature, OpenRewriteFeature {
 
     public Wavefront(Core core, Management management) {
         super(core, management);
@@ -36,10 +39,8 @@ public class Wavefront extends MicrometerFeature implements MicrometerRegistryFe
     }
 
     @Override
-    public void addConfiguration(@NonNull GeneratorContext generatorContext) {
-        generatorContext.getConfiguration().put(EXPORT_PREFIX + ".wavefront.enabled", true);
-        generatorContext.getConfiguration().put(EXPORT_PREFIX + ".wavefront.apiToken", "${WAVEFRONT_API_TOKEN}");
-        generatorContext.getConfiguration().put(EXPORT_PREFIX + ".wavefront.step", "PT1M");
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.micrometer-wavefront");
     }
 
     @Override

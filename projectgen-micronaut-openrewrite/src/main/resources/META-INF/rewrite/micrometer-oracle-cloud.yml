@@ -1,0 +1,45 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.micrometer-oracle-cloud
+displayName: Add Micrometer Oracle Cloud dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.micrometer-oracle-cloud.dependencies
+  - io.micronaut.starter.feature.micrometer-oracle-cloud.configuration
+  - io.micronaut.starter.feature.micrometer-oracle-cloud.micronaut.documentation
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.micrometer-oracle-cloud.dependencies
+displayName: Add Micrometer Oracle Cloud dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.oraclecloud
+      artifactId: micronaut-oraclecloud-bmc-monitoring
+      configuration: implementation
+      scope: compile
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.oraclecloud
+      artifactId: micronaut-oraclecloud-micrometer
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.micrometer-oracle-cloud.configuration
+displayName: Add Micrometer Oracle Cloud configuration
+preconditions:
+  - io.micronaut.starter.openrewrite.recipes.FindApplicationProperties
+recipeList:
+  - org.openrewrite.properties.AddProperty:
+      property: micronaut.metrics.export.oraclecloud.enabled
+      value: true
+  - org.openrewrite.properties.AddProperty:
+      property: micronaut.metrics.export.oraclecloud.namespace
+      value: change-me
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.micrometer-oracle-cloud.micronaut.documentation
+displayName: Append a link to Micronaut Oracle Cloud documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-oracle-cloud/latest/guide/#micrometer
+      appendNewline: true
+

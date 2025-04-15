@@ -70,11 +70,6 @@ jobs:
         run: |
           ./gradlew check --no-daemon --continue -x checkstyleMain
 
-      - name: "🔎 Run static analysis"
-        if: env.SONAR_TOKEN != '' && matrix.java == '17'
-        run: |
-          ./gradlew sonar
-
       - name: "📊 Publish Test Report"
         if: always()
         uses: mikepenz/action-junit-report@v5

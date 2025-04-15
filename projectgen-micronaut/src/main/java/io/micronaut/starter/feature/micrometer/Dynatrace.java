@@ -18,12 +18,15 @@ package io.micronaut.starter.feature.micrometer;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.feature.other.Management;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.micrometer.dynatrace.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class Dynatrace extends MicrometerFeature implements MicrometerRegistryFeature {
+public class Dynatrace extends MicrometerFeature implements MicrometerRegistryFeature, OpenRewriteFeature {
 
     public Dynatrace(Core core, Management management) {
         super(core, management);
@@ -35,12 +38,8 @@ public class Dynatrace extends MicrometerFeature implements MicrometerRegistryFe
     }
 
     @Override
-    public void addConfiguration(GeneratorContext generatorContext) {
-        generatorContext.getConfiguration().put(EXPORT_PREFIX + ".dynatrace.enabled", true);
-        generatorContext.getConfiguration().put(EXPORT_PREFIX + ".dynatrace.apiToken", "${DYNATRACE_DEVICE_API_TOKEN}");
-        generatorContext.getConfiguration().put(EXPORT_PREFIX + ".dynatrace.uri", "${DYNATRACE_DEVICE_URI}");
-        generatorContext.getConfiguration().put(EXPORT_PREFIX + ".dynatrace.deviceId", "${DYNATRACE_DEVICE_ID}");
-        generatorContext.getConfiguration().put(EXPORT_PREFIX + ".dynatrace.step", "PT1M");
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.micrometer-dynatrace");
     }
 
     @Override

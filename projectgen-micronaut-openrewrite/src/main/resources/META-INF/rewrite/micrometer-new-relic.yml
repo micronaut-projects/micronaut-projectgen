@@ -1,0 +1,36 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.micrometer-new-relic
+displayName: Add Micrometer New Relic dependency and configuration
+recipeList:
+  - io.micronaut.starter.feature.micrometer-new-relic.dependencies
+  - io.micronaut.starter.feature.micrometer-new-relic.configuration
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.micrometer-new-relic.dependencies
+displayName: Add Micrometer New Relic dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.micrometer
+      artifactId: micronaut-micrometer-registry-new-relic
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.micrometer-new-relic.configuration
+displayName: Add Micrometer New Relic configuration
+preconditions:
+  - io.micronaut.starter.openrewrite.recipes.FindApplicationProperties
+recipeList:
+  - org.openrewrite.properties.AddProperty:
+      property: micronaut.metrics.export.new-relic.enabled
+      value: true
+  - org.openrewrite.properties.AddProperty:
+      property: micronaut.metrics.export.new-relic.step
+      value: PT1M
+  - org.openrewrite.properties.AddProperty:
+      property: micronaut.metrics.export.newrelic.apiKey
+      value: ${NEWRELIC_API_KEY}
+  - org.openrewrite.properties.AddProperty:
+      property: micronaut.metrics.export.newrelic.accountId
+      value: ${NEWRELIC_ACCOUNT_ID}
+

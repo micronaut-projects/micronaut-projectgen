@@ -18,6 +18,7 @@ package io.micronaut.starter.feature.micrometer;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
@@ -29,17 +30,14 @@ import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.starter.feature.other.Management;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 import static io.micronaut.starter.build.dependencies.MicronautDependencyUtils.ARTIFACT_ID_PREFIX_MICRONAUT_MICROMETER;
 
 @Requires(property = "micronaut.starter.feature.micrometer.observation.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class MicrometerObservation extends MicrometerFeature implements Feature {
+public class MicrometerObservation extends MicrometerFeature implements OpenRewriteFeature {
     public static final String NAME = "micrometer-observation";
-    public static final String ARTIFACT_ID_MICRONAUT_MICROMETER_OBSERVATION = ARTIFACT_ID_PREFIX_MICRONAUT_MICROMETER + "observation";
-    public static final Dependency DEPENDENCY_MICRONAUT_MICROMETER_OBSERVATION = MicronautDependencyUtils.micrometerDependency()
-            .artifactId(ARTIFACT_ID_MICRONAUT_MICROMETER_OBSERVATION)
-            .compile()
-            .build();
     public static final String TITLE = "Micronaut Micrometer Observation";
 
     public MicrometerObservation(Core core, Management management) {
@@ -72,11 +70,8 @@ public class MicrometerObservation extends MicrometerFeature implements Feature 
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        addDependencies(generatorContext);
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.micrometer-observation");
     }
 
-    protected void addDependencies(@NonNull GeneratorContext generatorContext) {
-        generatorContext.addDependency(DEPENDENCY_MICRONAUT_MICROMETER_OBSERVATION);
-    }
 }

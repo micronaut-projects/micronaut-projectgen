@@ -18,12 +18,15 @@ package io.micronaut.starter.feature.micrometer;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.feature.other.Management;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.micrometer.prometheus.pushgateway.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class PrometheusPushGateway extends MicrometerFeature implements MicrometerRegistryFeature {
+public class PrometheusPushGateway extends MicrometerFeature implements MicrometerRegistryFeature, OpenRewriteFeature {
 
     public PrometheusPushGateway(Core core, Management management) {
         super(core, management);
@@ -35,13 +38,8 @@ public class PrometheusPushGateway extends MicrometerFeature implements Micromet
     }
 
     @Override
-    public void addConfiguration(GeneratorContext generatorContext) {
-        generatorContext.getConfiguration().put(EXPORT_PREFIX + ".prometheus.pushgateway.enabled", true);
-    }
-
-    @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-micrometer/latest/guide/#metricsAndReportersPrometheusPushGateway";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.micrometer-prometheus-pushgateway");
     }
 
     @Override

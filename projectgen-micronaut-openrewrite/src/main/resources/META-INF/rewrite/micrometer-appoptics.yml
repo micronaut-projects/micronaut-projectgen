@@ -1,0 +1,33 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.micrometer-appoptics
+displayName: Add Micrometer Appoptics Dependency and Configurations
+recipeList:
+  - io.micronaut.starter.feature.micrometer-appoptics.configurations
+  - io.micronaut.starter.feature.micrometer-appoptics.dependencies
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.micrometer-appoptics.configurations
+displayName: Add Micrometer Appoptics Configurations
+preconditions:
+  - io.micronaut.starter.openrewrite.recipes.FindApplicationProperties
+recipeList:
+  - org.openrewrite.properties.AddProperty:
+      property: micronaut.metrics.export.appoptics.enabled
+      value: true
+  - org.openrewrite.properties.AddProperty:
+      property: micronaut.metrics.export.appoptics.step
+      value: PT1M
+  - org.openrewrite.properties.AddProperty:
+      property: micronaut.metrics.export.appoptics.apiToken
+      value: ${APPOPTICS_API_TOKEN}
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.micrometer-appoptics.dependencies
+displayName: Add Micrometer Appoptics Dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.micrometer
+      artifactId: micronaut-micrometer-registry-appoptics
+      configuration: implementation
+      scope: compile
+

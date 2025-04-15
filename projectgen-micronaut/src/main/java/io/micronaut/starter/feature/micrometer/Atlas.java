@@ -18,12 +18,15 @@ package io.micronaut.starter.feature.micrometer;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.feature.other.Management;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.micrometer.atlas.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class Atlas extends MicrometerFeature implements MicrometerRegistryFeature {
+public class Atlas extends MicrometerFeature implements MicrometerRegistryFeature, OpenRewriteFeature {
 
     public Atlas(Core core, Management management) {
         super(core, management);
@@ -35,15 +38,13 @@ public class Atlas extends MicrometerFeature implements MicrometerRegistryFeatur
     }
 
     @Override
-    public void addConfiguration(GeneratorContext generatorContext) {
-        generatorContext.getConfiguration().put(EXPORT_PREFIX + ".atlas.enabled", true);
-        generatorContext.getConfiguration().put(EXPORT_PREFIX + ".atlas.uri", "http://localhost:7101/api/v1/publish");
-        generatorContext.getConfiguration().put(EXPORT_PREFIX + ".atlas.step", "PT1M");
+    public String getImplementationName() {
+        return "atlas";
     }
 
     @Override
-    public String getImplementationName() {
-        return "atlas";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.micrometer-atlas");
     }
 
 }

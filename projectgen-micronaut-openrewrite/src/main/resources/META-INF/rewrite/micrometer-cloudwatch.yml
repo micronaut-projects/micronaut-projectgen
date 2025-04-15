@@ -1,0 +1,27 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.micrometer-cloudwatch
+displayName: Add CloudWatch dependency and configuration
+recipeList:
+  - io.micronaut.starter.feature.micrometer-cloudwatch.dependencies
+  - io.micronaut.starter.feature.micrometer-cloudwatch.configuration
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.micrometer-cloudwatch.dependencies
+displayName: Add CloudWatch dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.micrometer
+      artifactId: micronaut-micrometer-registry-cloudwatch
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.micrometer-cloudwatch.configuration
+displayName: Add CloudWatch configurations
+preconditions:
+  - io.micronaut.starter.openrewrite.recipes.FindApplicationProperties
+recipeList:
+  - org.openrewrite.properties.AddProperty:
+      property: micronaut.metrics.export.cloudwatch.enabled
+      value: true
+

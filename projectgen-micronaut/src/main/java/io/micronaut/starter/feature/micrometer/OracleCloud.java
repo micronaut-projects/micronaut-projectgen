@@ -16,24 +16,18 @@
 package io.micronaut.starter.feature.micrometer;
 
 import io.micronaut.context.annotation.Requires;
-import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
-import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.micronaut.template.function.oraclefunction.OracleCloudFeature;
 import io.micronaut.starter.feature.other.Management;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.micrometer.oracle.cloud.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class OracleCloud extends MicrometerFeature implements OracleCloudFeature, MicrometerRegistryFeature  {
-
-    public static final String ARTIFACT_ID_MICRONAUT_ORACLECLOUD_MICROMETER = "micronaut-oraclecloud-micrometer";
-    public static final Dependency DEPENDENCY_MICRONAUT_ORACLE_CLOUD_MICROMETER = MicronautDependencyUtils.oracleCloudDependency()
-            .artifactId("micronaut-oraclecloud-bmc-monitoring")
-            .compile()
-            .build();
+public class OracleCloud extends MicrometerFeature implements OracleCloudFeature, MicrometerRegistryFeature, OpenRewriteFeature {
 
     public OracleCloud(Core core, Management management) {
         super(core, management);
@@ -45,26 +39,8 @@ public class OracleCloud extends MicrometerFeature implements OracleCloudFeature
     }
 
     @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-oracle-cloud/latest/guide/#micrometer";
-    }
-
-    @Override
-    public void addDependencies(@NonNull GeneratorContext generatorContext) {
-        generatorContext.addDependency(micrometerDependency());
-        generatorContext.addDependency(DEPENDENCY_MICRONAUT_ORACLE_CLOUD_MICROMETER);
-    }
-
-    @Override
-    public void addConfiguration(GeneratorContext generatorContext) {
-        generatorContext.getConfiguration().put(EXPORT_PREFIX + ".oraclecloud.enabled", true);
-        generatorContext.getConfiguration().put(EXPORT_PREFIX + ".oraclecloud.namespace", "change-me");
-    }
-
-    @Override
-    @NonNull
-    public Dependency.Builder micrometerDependency() {
-        return MicronautDependencyUtils.oracleCloudDependency().artifactId(ARTIFACT_ID_MICRONAUT_ORACLECLOUD_MICROMETER).compile();
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.micrometer-oracle-cloud");
     }
 
     @Override

@@ -18,6 +18,7 @@ package io.micronaut.starter.feature.micrometer;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
@@ -29,18 +30,16 @@ import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.starter.feature.other.Management;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 import static io.micronaut.starter.build.dependencies.MicronautDependencyUtils.ARTIFACT_ID_PREFIX_MICRONAUT_MICROMETER;
 
 @Requires(property = "micronaut.starter.feature.micrometer.observation.http.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class MicrometerObservationHttp extends MicrometerFeature implements Feature {
+public class MicrometerObservationHttp extends MicrometerFeature implements OpenRewriteFeature {
     public static final String NAME = "micrometer-observation-http";
-    public static final String ARTIFACT_ID_MICRONAUT_MICROMETER_OBSERVATION_HTTP = ARTIFACT_ID_PREFIX_MICRONAUT_MICROMETER + "observation-http";
     public static final String TITLE = "Micronaut Micrometer Observation HTTP";
-    public static final Dependency DEPENDENCY_MICRONAUT_MICROMETER_OBSERVATION_HTTP = MicronautDependencyUtils.micrometerDependency()
-            .artifactId(ARTIFACT_ID_MICRONAUT_MICROMETER_OBSERVATION_HTTP)
-            .compile()
-            .build();
+
 
     public MicrometerObservationHttp(Core core, Management management) {
         super(core, management);
@@ -72,17 +71,8 @@ public class MicrometerObservationHttp extends MicrometerFeature implements Feat
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        addDependencies(generatorContext);
-        addConfiguration(generatorContext);
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.micrometer-observation-http");
     }
 
-    protected void addConfiguration(GeneratorContext generatorContext) {
-        generatorContext.getConfiguration().put("micrometer.observation.http.server.enabled", true);
-        generatorContext.getConfiguration().put("micrometer.observation.http.client.enabled", true);
-    }
-
-    protected void addDependencies(@NonNull GeneratorContext generatorContext) {
-        generatorContext.addDependency(DEPENDENCY_MICRONAUT_MICROMETER_OBSERVATION_HTTP);
-    }
 }

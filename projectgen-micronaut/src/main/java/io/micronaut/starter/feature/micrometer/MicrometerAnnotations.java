@@ -17,6 +17,7 @@ package io.micronaut.starter.feature.micrometer;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
@@ -30,13 +31,13 @@ import io.micronaut.starter.feature.server.MicronautServerDependent;
 import io.micronaut.projectgen.core.utils.NameUtils;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.micrometer.annotation.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class MicrometerAnnotations implements Feature, MicronautServerDependent {
+public class MicrometerAnnotations implements Feature, MicronautServerDependent, OpenRewriteFeature {
 
     public static final String NAME = "micrometer-annotation";
-    private static final String ARTIFACT_ID_MICRONAUT_MICROMETER_ANNOTATION = "micronaut-micrometer-annotation";
-    private static final String PROPERTY_MICRONAUT_MICROMETER_VERSION = "micronaut.micrometer.version";
     private final Core core;
     private final Management management;
 
@@ -71,9 +72,8 @@ public class MicrometerAnnotations implements Feature, MicronautServerDependent 
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        generatorContext.addDependency(
-                MicronautDependencyUtils.annotationProcessor(generatorContext.getBuildTool(), MicronautDependencyUtils.GROUP_ID_MICRONAUT_MICROMETER, ARTIFACT_ID_MICRONAUT_MICROMETER_ANNOTATION, PROPERTY_MICRONAUT_MICROMETER_VERSION));
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.micrometer-annotation");
     }
 
     @Override

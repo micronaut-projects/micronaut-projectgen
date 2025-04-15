@@ -1,0 +1,29 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.micrometer-observation-http
+displayName: Add Micrometer Observation Http dependency and configuration
+recipeList:
+  - io.micronaut.starter.feature.micrometer-observation-http.dependencies
+  - io.micronaut.starter.feature.micrometer-observation-http.configuration
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.micrometer-observation-http.dependencies
+displayName: Add Micrometer Observation Http dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.micrometer
+      artifactId: micronaut-micrometer-observation-http
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.micrometer-observation-http.configuration
+displayName: Add Micrometer Observation Http configuration
+preconditions:
+  - io.micronaut.starter.openrewrite.recipes.FindApplicationProperties
+recipeList:
+  - org.openrewrite.properties.AddProperty:
+      property: micrometer.observation.http.server.enabled
+      value: true
+  - org.openrewrite.properties.AddProperty:
+      property: micrometer.observation.http.client.enabled
+      value: true

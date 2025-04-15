@@ -1,0 +1,9 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.micrometer-observation
+displayName: Add Micrometer Observation dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.micrometer
+      artifactId: micronaut-micrometer-observation
+      configuration: implementation
+      scope: compile

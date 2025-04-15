@@ -17,28 +17,37 @@ package io.micronaut.starter.feature.micrometer;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.feature.FeatureContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import io.micronaut.projectgen.core.feature.Feature;
 
+import io.micronaut.starter.feature.database.r2dbc.R2dbc;
 import io.micronaut.starter.feature.database.r2dbc.R2dbcFeature;
+import io.micronaut.starter.feature.database.r2dbc.R2dbcPool;
 import jakarta.inject.Singleton;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Requires(property = "micronaut.starter.feature.micrometer.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class Core implements Feature {
-    private static final Dependency MICRONAUT_MICROMETER_CORE = MicronautDependencyUtils.micrometerDependency()
-            .artifactId("micronaut-micrometer-core")
-            .compile()
-            .build();
+public class Core implements OpenRewriteFeature {
+    private final R2dbcPool r2dbcPool;
 
-    private static final Dependency R2DBC_POOL = Dependency.builder()
-            .groupId("io.r2dbc")
-            .artifactId("r2dbc-pool")
-            .runtime()
-            .build();
+    public Core(R2dbcPool r2dbcPool) {
+        this.r2dbcPool = r2dbcPool;
+    }
+
+    @Override
+    public void processSelectedFeatures(FeatureContext featureContext) {
+        if (featureContext.isPresent(R2dbcFeature.class)) {
+            featureContext.addFeature(r2dbcPool);
+        }
+    }
 
     @Override
     public String getName() {
@@ -57,15 +66,11 @@ public class Core implements Feature {
 
     @Override
     public String getDescription() {
-        return null;
+        return "Adds Micronaut Micrometer core dependency";
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        generatorContext.getConfiguration().put("micronaut.metrics.enabled", true);
-        generatorContext.addDependency(MICRONAUT_MICROMETER_CORE);
-        if (generatorContext.hasFeature(R2dbcFeature.class)) {
-            generatorContext.addDependency(R2DBC_POOL);
-        }
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.micrometer-core");
     }
 }

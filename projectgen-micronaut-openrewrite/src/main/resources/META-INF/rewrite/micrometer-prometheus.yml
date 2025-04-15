@@ -1,0 +1,32 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.micrometer-prometheus
+displayName: Add Micrometer Prometheus dependency and configuration
+recipeList:
+  - io.micronaut.starter.feature.micrometer-prometheus.dependencies
+  - io.micronaut.starter.feature.micrometer-prometheus.configuration
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.micrometer-prometheus.dependencies
+displayName: Add Micrometer Prometheus dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.micrometer
+      artifactId: micronaut-micrometer-registry-prometheus
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.micrometer-prometheus.configuration
+displayName: Add Micrometer Prometheus configuration
+preconditions:
+  - io.micronaut.starter.openrewrite.recipes.FindApplicationProperties
+recipeList:
+  - org.openrewrite.properties.AddProperty:
+      property: micronaut.metrics.export.prometheus.enabled
+      value: true
+  - org.openrewrite.properties.AddProperty:
+      property: micronaut.metrics.export.prometheus.step
+      value: PT1M
+  - org.openrewrite.properties.AddProperty:
+      property: micronaut.metrics.export.prometheus.descriptions
+      value: true
