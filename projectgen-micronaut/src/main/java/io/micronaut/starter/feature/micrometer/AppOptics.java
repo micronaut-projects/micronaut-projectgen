@@ -37,11 +37,6 @@ public class AppOptics extends MicrometerFeature implements MicrometerRegistryFe
         return "Adds support for Micrometer metrics (w/ AppOptics reporter)";
     }
 
-    // i will remove this method after migration of all micrometer features
-    @Override
-    public void addConfiguration(GeneratorContext generatorContext) {
-    }
-
     @Override
     public String getImplementationName() {
         return "appoptics";
@@ -51,5 +46,4 @@ public class AppOptics extends MicrometerFeature implements MicrometerRegistryFe
     public List<String> getRecipes(GeneratorContext generatorContext) {
         return List.of("io.micronaut.starter.feature.micrometer-appoptics");
     }
-
 }

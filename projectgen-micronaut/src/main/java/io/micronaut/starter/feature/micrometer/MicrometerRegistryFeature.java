@@ -27,7 +27,6 @@ import io.micronaut.projectgen.core.utils.NameUtils;
  * Marker interface for Micronaut Registry features.
  */
 public interface MicrometerRegistryFeature extends Feature {
-    String EXPORT_PREFIX = "micronaut.metrics.export";
 
     @Override
     default String getCategory() {
@@ -37,18 +36,6 @@ public interface MicrometerRegistryFeature extends Feature {
     @Override
     default String getTitle() {
         return NameUtils.getNaturalName(io.micronaut.core.naming.NameUtils.dehyphenate(getName()));
-    }
-
-    default void addDependencies(@NonNull GeneratorContext generatorContext) {
-        generatorContext.addDependency(micrometerDependency());
-    }
-
-    void addConfiguration(@NonNull GeneratorContext generatorContext);
-
-    @NonNull
-    default Dependency.Builder micrometerDependency() {
-        return MicronautDependencyUtils.micrometerRegistryDependency(getImplementationName())
-                .compile();
     }
 
     @Override
