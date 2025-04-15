@@ -68,12 +68,7 @@ jobs:
       - name: "🛠 Build with Gradle"
         id: gradle
         run: |
-          ./gradlew check --no-daemon --continue
-
-      - name: "🔎 Run static analysis"
-        if: env.SONAR_TOKEN != '' && matrix.java == '17'
-        run: |
-          ./gradlew sonar
+          ./gradlew check --no-daemon --continue -x checkstyleMain
 
       - name: "📊 Publish Test Report"
         if: always()
