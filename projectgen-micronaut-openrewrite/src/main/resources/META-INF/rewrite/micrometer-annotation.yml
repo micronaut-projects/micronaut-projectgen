@@ -2,18 +2,27 @@ type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.micrometer-annotation
 displayName: Add Micrometer Annotation dependency and configuration
 recipeList:
-  - io.micronaut.starter.feature.micrometer-annotation.dependencies
+  - io.micronaut.starter.feature.micrometer-annotation.maven.processor
+  - io.micronaut.starter.feature.micrometer-annotation.gradle.processor
   - io.micronaut.starter.feature.micrometer-annotation.configuration
 ---
 type: specs.openrewrite.org/v1beta/recipe
-name: io.micronaut.starter.feature.micrometer-annotation.dependencies
-displayName: Add Micrometer Annotation dependency
+name: io.micronaut.starter.feature.micrometer-annotation.maven.processor
+displayName: Adds Micrometer annotations Processor to the Maven compiler plugin
 recipeList:
-  - org.openrewrite.java.dependencies.AddDependency:
+  - org.openrewrite.maven.AddAnnotationProcessor:
       groupId: io.micronaut.micrometer
       artifactId: micronaut-micrometer-annotation
-      configuration: implementation
-      scope: compile
+      version: ${micronaut.micrometer.version}
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.micrometer-annotation.gradle.processor
+displayName: Adds Micrometer annotations Processor dependency to a Gradle Build
+recipeList:
+  - org.openrewrite.gradle.AddDependency:
+      groupId: io.micronaut.micrometer
+      artifactId: micronaut-micrometer-annotation
+      configuration: annotationProcessor
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.micrometer-annotation.configuration

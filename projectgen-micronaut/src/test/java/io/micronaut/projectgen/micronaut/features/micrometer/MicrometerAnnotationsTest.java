@@ -31,7 +31,7 @@ class MicrometerAnnotationsTest {
         String buildGradle = project.get("build.gradle.kts");
         assertNotNull(buildGradle);
         BuildTestVerifier verifier = BuildTestVerifier.of(buildGradle, options);
-        assertTrue(verifier.hasDependency("io.micronaut.micrometer", "micronaut-micrometer-annotation", Scope.COMPILE), buildGradle);
+        assertTrue(verifier.hasDependency("io.micronaut.micrometer", "micronaut-micrometer-annotation", Scope.ANNOTATION_PROCESSOR), buildGradle);
     }
 
     private static Map<String, String> generateProject(MicronautProjectGenerator micronautProjectGenerator,
