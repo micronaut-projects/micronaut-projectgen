@@ -20,11 +20,14 @@ import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.micronaut.features.config.MicronautDistributedConfigurationFeature;
 import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import io.micronaut.starter.feature.awsparameterstore.AwsParameterStore;
 import io.micronaut.projectgen.core.feature.DistributedConfigFeature;
 import jakarta.inject.Singleton;
+
+import java.util.List;
 
 /**
  * @see <a href="https://micronaut-projects.github.io/micronaut-aws/latest/guide/#distributedconfigurationsecretsmanager">Micronaut AWS Secrets Manager</a>
@@ -33,11 +36,7 @@ import jakarta.inject.Singleton;
  */
 @Requires(property = "micronaut.starter.feature.aws.secrets.manager.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class AwsSecretsManager implements MicronautDistributedConfigurationFeature {
-    private static final String ARTIFACT_ID_MICRONAUT_AWS_SECRETSMANAGER = "micronaut-aws-secretsmanager";
-    private static final Dependency.Builder DEPENDENCY_MICRONAUT_AWS_SECRETSMANAGER = MicronautDependencyUtils.awsDependency()
-            .artifactId(ARTIFACT_ID_MICRONAUT_AWS_SECRETSMANAGER)
-            .compile();
+public class AwsSecretsManager implements MicronautDistributedConfigurationFeature, OpenRewriteFeature {
 
     @Override
     public String getTitle() {
@@ -55,26 +54,8 @@ public class AwsSecretsManager implements MicronautDistributedConfigurationFeatu
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        addDependencies(generatorContext);
-        addBootstrapProperties(generatorContext);
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.aws-secrets-manager");
     }
 
-    @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-aws/latest/guide/#distributedconfigurationsecretsmanager";
-    }
-
-    @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://aws.amazon.com/secrets-manager/";
-    }
-
-    protected void addBootstrapProperties(@NonNull GeneratorContext generatorContext) {
-        populateBootstrapForDistributedConfiguration(generatorContext).putAll(AwsParameterStore.PROPERTIES_AWS_DISTRIBUTED_CONFIGURATION);
-    }
-
-    protected static void addDependencies(@NonNull GeneratorContext generatorContext) {
-        generatorContext.addDependency(DEPENDENCY_MICRONAUT_AWS_SECRETSMANAGER);
-    }
 }

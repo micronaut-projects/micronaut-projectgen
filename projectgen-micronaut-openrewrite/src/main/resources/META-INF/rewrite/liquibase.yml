@@ -34,7 +34,8 @@ recipeList:
   - org.openrewrite.xml.CreateXmlFile:
       relativeFileName: src/main/resources/db/liquibase-changelog.xml
       fileContents: >
-        <?xml version="1.0" encoding="UTF-8"?>
+        <?xml version="1.0" encoding="UTF-8" ?>
+
         <databaseChangeLog
           xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -50,7 +51,7 @@ recipeList:
   - org.openrewrite.xml.CreateXmlFile:
       relativeFileName: src/main/resources/db/changelog/01-schema.xml
       fileContents: >
-        <?xml version="1.0" encoding="UTF-8"?>
+        <?xml version="1.0" encoding="UTF-8" ?>
 
         <databaseChangeLog
           xmlns="http://www.liquibase.org/xml/ns/dbchangelog"

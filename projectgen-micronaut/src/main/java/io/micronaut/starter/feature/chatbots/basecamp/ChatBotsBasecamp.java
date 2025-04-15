@@ -32,7 +32,7 @@ import io.micronaut.projectgen.micronaut.template.chatbots.basecamp.finalCommand
 import io.micronaut.projectgen.micronaut.template.chatbots.basecamp.mockAboutCommandJson;
 import io.micronaut.projectgen.micronaut.template.chatbots.basecamp.basecampReadme;
 import io.micronaut.projectgen.micronaut.template.chatbots.basecamp.about;
-import io.micronaut.starter.feature.validator.MicronautValidationFeature;
+import io.micronaut.projectgen.micronaut.features.validator.MicronautValidationFeature;
 import io.micronaut.projectgen.core.options.TestFramework;
 import io.micronaut.projectgen.core.rocker.RockerTemplate;
 

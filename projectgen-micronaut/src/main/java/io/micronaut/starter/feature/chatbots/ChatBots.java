@@ -18,8 +18,8 @@ package io.micronaut.starter.feature.chatbots;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.feature.FeatureContext;
-import io.micronaut.starter.feature.validator.MicronautValidationFeature;
-import io.micronaut.starter.feature.validator.ValidationFeature;
+import io.micronaut.projectgen.micronaut.features.validator.MicronautValidationFeature;
+import io.micronaut.projectgen.micronaut.features.validator.ValidationFeature;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.rocker.RockerTemplate;
 

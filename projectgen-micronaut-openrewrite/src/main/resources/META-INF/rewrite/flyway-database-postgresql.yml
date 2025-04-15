@@ -1,0 +1,9 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.flyway-database-postgresql
+displayName: Add Flyway Database Postgresql dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: org.flywaydb
+      artifactId: flyway-database-postgresql
+      configuration: runtimeOnly
+      scope: runtime

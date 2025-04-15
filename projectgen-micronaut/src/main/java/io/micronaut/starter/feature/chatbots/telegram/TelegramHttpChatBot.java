@@ -29,7 +29,7 @@ import io.micronaut.projectgen.micronaut.template.chatbots.telegram.controllerGr
 import io.micronaut.projectgen.micronaut.template.chatbots.telegram.controllerJavaJunit;
 import io.micronaut.projectgen.micronaut.template.chatbots.telegram.controllerKotlinJunit;
 import io.micronaut.projectgen.micronaut.template.chatbots.telegram.controllerReadme;
-import io.micronaut.starter.feature.validator.MicronautValidationFeature;
+import io.micronaut.projectgen.micronaut.features.validator.MicronautValidationFeature;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.options.TestFramework;
 import io.micronaut.projectgen.core.rocker.RockerTemplate;

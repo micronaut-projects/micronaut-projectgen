@@ -13,10 +13,12 @@ recipeList:
       groupId: io.micronaut.reactor
       artifactId: micronaut-reactor
       configuration: implementation
+      scope: compile
   - org.openrewrite.java.dependencies.AddDependency:
       groupId: io.micrometer
       artifactId: context-propagation
       configuration: implementation
+      scope: compile
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.reactor.documentation.micronaut

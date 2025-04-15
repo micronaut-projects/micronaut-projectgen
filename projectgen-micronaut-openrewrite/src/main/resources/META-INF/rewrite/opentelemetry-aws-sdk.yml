@@ -1,0 +1,11 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.opentelemetry.instrumentation.opentelemetry-aws-sdk-2.2.dependency
+displayName: Add Open Telemetry AWS SDK 2.2 dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.opentelemetry.instrumentation
+      artifactId: opentelemetry-aws-sdk-2.2
+      configuration: implementation
+      scope: compile
+

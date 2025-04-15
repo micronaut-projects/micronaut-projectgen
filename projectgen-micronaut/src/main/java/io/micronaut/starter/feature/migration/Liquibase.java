@@ -20,6 +20,7 @@ import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.feature.FeatureContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.javalibs.logging.Slf4jJulBridge;
 import io.micronaut.starter.feature.logging.LiquibaseSlf4j;
 import io.micronaut.projectgen.micronaut.template.liquibase.liquibaseChangelog;
@@ -27,9 +28,11 @@ import io.micronaut.projectgen.micronaut.template.liquibase.liquibaseSchema;
 import io.micronaut.projectgen.core.rocker.RockerTemplate;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.liquibase.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class Liquibase implements MigrationFeature {
+public class Liquibase implements MigrationFeature, OpenRewriteFeature {
 
     public static final String NAME = "liquibase";
 
@@ -59,26 +62,9 @@ public class Liquibase implements MigrationFeature {
         return "Adds support for Liquibase database migrations";
     }
 
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://www.liquibase.org/";
+    @Override
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.liquibase");
     }
 
-    @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-liquibase/latest/guide/index.html";
-    }
-
-    @Override
-    public void apply(GeneratorContext generatorContext) {
-        generatorContext.addTemplate("liquibaseChangelog", new RockerTemplate("src/main/resources/db/liquibase-changelog.xml",
-                        liquibaseChangelog.template()));
-        generatorContext.addTemplate("liquibaseSchema", new RockerTemplate("src/main/resources/db/changelog/01-schema.xml",
-                        liquibaseSchema.template()));
-        generatorContext.addDependency(Dependency.builder()
-                .groupId("io.micronaut.liquibase")
-                .artifactId("micronaut-liquibase")
-                .compile());
-        generatorContext.getConfiguration().addNested(
-                "liquibase.datasources.default.change-log", "classpath:db/liquibase-changelog.xml");
-    }
 }
