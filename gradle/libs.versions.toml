@@ -14,6 +14,8 @@ typesafeconfig = "1.4.3"
 maven-plugin-api = "3.9.9"
 maven-invoker = "3.3.0"
 gradle-tooling-api = "8.12"
+sonatype-scan = "3.0.0"
+
 [libraries]
 micronaut-core = { module = 'io.micronaut:micronaut-core-bom', version.ref = 'micronaut' }
 micronaut-serde = { module = "io.micronaut.serde:micronaut-serde-bom", version.ref = "micronaut-serialization" }
@@ -31,6 +33,8 @@ rewrite-maven = { module = "org.openrewrite:rewrite-maven" }
 rewrite-java = { module = "org.openrewrite:rewrite-java" }
 maven-invoker = { module = "org.apache.maven.shared:maven-invoker", version.ref = "maven-invoker" }
 gradle-tooling-api = { module = "org.gradle:gradle-tooling-api", version.ref = "gradle-tooling-api" }
+sonatype-scan = { module = "org.sonatype.gradle.plugins:scan-gradle-plugin", version.ref = "sonatype-scan" }
+
 [bundles]
 
 [plugins]
