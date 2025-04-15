@@ -29,9 +29,9 @@ recipeList:
   - org.openrewrite.properties.AddProperty:
       property: azure.cosmos.endpoint
       value: azure-cosmos-endpoint
-#  - org.openrewrite.properties.AddProperty:
-#      property: azure.cosmos.key
-#      value:
+  - org.openrewrite.properties.AddProperty:
+      property: azure.cosmos.key
+      value: pleasechangeme
   - org.openrewrite.properties.AddProperty:
       property: azure.cosmos.consistency-level
       value: SESSION

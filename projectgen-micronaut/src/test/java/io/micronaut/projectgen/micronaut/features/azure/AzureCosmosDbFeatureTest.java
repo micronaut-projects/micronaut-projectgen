@@ -27,7 +27,7 @@ class AzureCosmosDbFeatureTest {
         assertEquals(StringUtils.TRUE, applicationProperties.getProperty("azure.cosmos.default-gateway-mode"));
         assertEquals("azure-cosmos-endpoint", applicationProperties.getProperty("azure.cosmos.endpoint"));
         assertEquals("SESSION", applicationProperties.getProperty("azure.cosmos.consistency-level"));
-//        assertEquals("", applicationProperties.getProperty("azure.cosmos.key"));
+        assertEquals("pleasechangeme", applicationProperties.getProperty("azure.cosmos.key"));
     }
 
     @Test
