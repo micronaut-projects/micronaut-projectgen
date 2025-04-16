@@ -1,0 +1,40 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.coherence
+displayName: Add Coherence dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.coherence.dependencies
+  - io.micronaut.starter.feature.coherence.micronaut.documentation
+  - io.micronaut.starter.feature.coherence.documentation.thirdparty
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.coherence.dependencies
+displayName: Add Coherence dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: com.oracle.coherence.ce
+      artifactId: coherence
+      configuration: implementation
+      scope: compile
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.coherence
+      artifactId: micronaut-coherence
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.coherence.micronaut.documentation
+displayName: Append a link to Micronaut Coherence documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-coherence/latest/guide/
+      appendNewline: true
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.coherence.documentation.thirdparty
+displayName: Append a link to Coherence Website
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://coherence.java.net/
+      appendNewline: true
