@@ -4,7 +4,7 @@ displayName: Add Coherence dependency and link to README
 recipeList:
   - io.micronaut.starter.feature.coherence.dependencies
   - io.micronaut.starter.feature.coherence.micronaut.documentation
-  - io.micronaut.starter.feature.coherence.documentation.thirdparty
+  - io.micronaut.starter.feature.coherence-docs
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.coherence.dependencies
@@ -29,12 +29,4 @@ recipeList:
       relativeFileName: README.md
       content: https://micronaut-projects.github.io/micronaut-coherence/latest/guide/
       appendNewline: true
----
-type: specs.openrewrite.org/v1beta/recipe
-name: io.micronaut.starter.feature.coherence.documentation.thirdparty
-displayName: Append a link to Coherence Website
-recipeList:
-  - org.openrewrite.text.AppendToTextFile:
-      relativeFileName: README.md
-      content: https://coherence.java.net/
-      appendNewline: true
+

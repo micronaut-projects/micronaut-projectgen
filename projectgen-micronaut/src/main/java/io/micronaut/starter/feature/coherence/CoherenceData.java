@@ -17,6 +17,7 @@ package io.micronaut.starter.feature.coherence;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
@@ -24,6 +25,8 @@ import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import jakarta.inject.Singleton;
+
+import java.util.List;
 
 /**
  * Coherence Data Feature.
@@ -33,7 +36,7 @@ import jakarta.inject.Singleton;
  */
 @Requires(property = "micronaut.starter.feature.coherence.data.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class CoherenceData implements Feature {
+public class CoherenceData implements OpenRewriteFeature {
 
     public static final String NAME = "coherence-data";
     private final CoherenceFeature coherenceFeature;
@@ -58,16 +61,6 @@ public class CoherenceData implements Feature {
     }
 
     @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://coherence.java.net/";
-    }
-
-    @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-coherence/latest/guide/#repository";
-    }
-
-    @Override
     public void processSelectedFeatures(FeatureContext featureContext) {
         if (!featureContext.isPresent(CoherenceFeature.class)) {
             featureContext.addFeature(coherenceFeature);
@@ -75,8 +68,8 @@ public class CoherenceData implements Feature {
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        generatorContext.addDependency(MicronautDependencyUtils.coherenceDependency().artifactId("micronaut-coherence-data").compile());
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.coherence-data");
     }
 
     @Override
