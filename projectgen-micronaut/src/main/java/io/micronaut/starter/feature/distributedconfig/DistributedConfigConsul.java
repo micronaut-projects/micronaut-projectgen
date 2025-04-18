@@ -22,13 +22,16 @@ import io.micronaut.projectgen.core.feature.DistributedConfigFeature;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.feature.FeatureContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.micronaut.features.config.MicronautDistributedConfigurationFeature;
 import io.micronaut.starter.feature.consul.Consul;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.config.consul.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class DistributedConfigConsul implements MicronautDistributedConfigurationFeature {
+public class DistributedConfigConsul implements MicronautDistributedConfigurationFeature, OpenRewriteFeature {
 
     private final Consul consul;
 
@@ -60,21 +63,8 @@ public class DistributedConfigConsul implements MicronautDistributedConfiguratio
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        generatorContext.addDependency(Dependency.builder()
-                .groupId("io.micronaut.discovery")
-                .artifactId("micronaut-discovery-client")
-                .compile());
-        populateBootstrapForDistributedConfiguration(generatorContext);
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.config-consul");
     }
 
-    @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://www.consul.io";
-    }
-
-    @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://docs.micronaut.io/latest/guide/index.html#distributedConfigurationConsul";
-    }
 }
