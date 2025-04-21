@@ -20,7 +20,7 @@ class EclipseStoreRestTest {
         String buildGradle = project.get("build.gradle.kts");
         assertNotNull(buildGradle);
         BuildTestVerifier verifier = BuildTestVerifier.of(buildGradle, options);
-        assertTrue(verifier.hasDependency("io.micronaut.eclipsestore", "micronaut-eclipsestore-rest"), buildGradle);
+        assertTrue(verifier.hasDependency("io.micronaut.eclipsestore", "micronaut-eclipsestore-rest", Scope.COMPILE), buildGradle);
     }
 
     @Test
