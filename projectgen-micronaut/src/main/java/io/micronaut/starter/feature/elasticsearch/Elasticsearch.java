@@ -17,6 +17,7 @@ package io.micronaut.starter.feature.elasticsearch;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
@@ -28,13 +29,12 @@ import io.micronaut.starter.feature.graalvm.GraalVM;
 import io.micronaut.starter.feature.logging.Slf4j;
 import jakarta.inject.Singleton;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.elasticsearch.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class Elasticsearch implements Feature {
-    private static final Dependency LOG4J_OVER_SLF4J = Slf4j.slf4jDependency()
-            .artifactId("log4j-over-slf4j")
-            .runtime()
-            .build();
+public class Elasticsearch implements OpenRewriteFeature {
 
     @Override
     public String getName() {
@@ -52,31 +52,18 @@ public class Elasticsearch implements Feature {
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        generatorContext.getConfiguration().put("elasticsearch.httpHosts", "http://localhost:9200,http://127.0.0.2:9200");
-        generatorContext.addDependency(MicronautDependencyUtils.elasticSearchDependency()
-                .artifactId("micronaut-elasticsearch")
-                .compile());
-        if (generatorContext.isFeaturePresent(GraalVM.class)) {
-            generatorContext.addDependency(LOG4J_OVER_SLF4J);
-            generatorContext.addDependency(Dependency.builder()
-                    .groupId("org.apache.logging.log4j")
-                    .lookupArtifactId("log4j-api")
-                    .compile());
-            generatorContext.addDependency(Dependency.builder()
-                    .groupId("org.apache.logging.log4j")
-                    .lookupArtifactId("log4j-core")
-                    .compile());
-        }
-    }
-
-    @Override
     public String getCategory() {
         return Category.SEARCH;
     }
 
     @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-elasticsearch/latest/guide/index.html";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        List<String> recipes = new ArrayList<>();
+        recipes.add("io.micronaut.starter.feature.elasticsearch");
+        if(generatorContext.isFeaturePresent(GraalVM.class)) {
+        recipes.add("io.micronaut.starter.feature.elasticsearch-log");
+        }
+        return recipes;
     }
+
 }
