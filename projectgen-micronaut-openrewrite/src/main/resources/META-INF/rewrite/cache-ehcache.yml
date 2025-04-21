@@ -1,0 +1,35 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.cache-ehcache
+displayName: Add Cache EHCache dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.cache-ehcache.dependencies
+  - io.micronaut.starter.feature.cache-ehcache.micronaut.documentation
+  - io.micronaut.starter.feature.cache-ehcache.documentation.thirdparty
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.cache-ehcache.dependencies
+displayName: Add Cache EHCache dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.cache
+      artifactId: micronaut-cache-ehcache
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.cache-ehcache.micronaut.documentation
+displayName: Append a link to Micronaut Cache EHCache documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-cache/latest/guide/index.html#ehcache
+      appendNewline: true
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.cache-ehcache.documentation.thirdparty
+displayName: Append a link to Cache EHCache Website
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://www.ehcache.org/
+      appendNewline: true

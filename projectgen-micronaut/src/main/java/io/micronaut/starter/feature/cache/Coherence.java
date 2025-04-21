@@ -20,12 +20,15 @@ import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.feature.FeatureContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.feature.coherence.CoherenceFeature;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.cache.coherence.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class Coherence implements CacheFeature {
+public class Coherence implements CacheFeature, OpenRewriteFeature {
 
     public static final String NAME = "cache-coherence";
     private final CoherenceFeature coherenceFeature;
@@ -50,16 +53,6 @@ public class Coherence implements CacheFeature {
     }
 
     @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://coherence.java.net/";
-    }
-
-    @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-coherence/latest/guide/#cache";
-    }
-
-    @Override
     public void processSelectedFeatures(FeatureContext featureContext) {
         if (!featureContext.isPresent(CoherenceFeature.class)) {
             featureContext.addFeature(coherenceFeature);
@@ -67,11 +60,8 @@ public class Coherence implements CacheFeature {
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        Dependency.Builder coherenceMicronaut = Dependency.builder()
-                .groupId("io.micronaut.coherence")
-                .artifactId("micronaut-coherence-cache")
-                .template();
-        generatorContext.addDependency(coherenceMicronaut.compile());
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.cache-coherence");
     }
+
 }
