@@ -8,6 +8,10 @@ import io.micronaut.projectgen.test.BuildTestVerifier;
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
 import org.junit.jupiter.api.Test;
 import java.util.Map;
+import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.test.ConfigurationUtils;
+
+import java.util.Properties;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -31,6 +35,16 @@ class DistributedConfigConsulTest {
         assertNotNull(readme);
         assertTrue(readme.contains("https://docs.micronaut.io/latest/guide/index.html#distributedConfigurationConsul"));
         assertTrue(readme.contains("https://www.consul.io"));
+    }
+
+    @Test
+    void distributedConfigConsulFeaturesAddsBootstrapConfiguration(MicronautProjectGenerator micronautProjectGenerator) throws Exception {
+        String name = "foo";
+        MicronautOptions options = MicronautOptions.builder().name(name).feature("config-consul").build();
+        Map<String, String> project = generateProject(micronautProjectGenerator, options);
+        Properties bootstrapProperties = ConfigurationUtils.loadBootstrapProperties(project);
+        assertEquals(name, bootstrapProperties.getProperty("micronaut.application.name"));
+        assertEquals(StringUtils.TRUE, bootstrapProperties.getProperty("micronaut.config-client.enabled"));
     }
 
     private static Map<String, String> generateProject(MicronautProjectGenerator micronautProjectGenerator,
