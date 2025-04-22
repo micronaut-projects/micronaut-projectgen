@@ -56,5 +56,4 @@ public class GraphQL implements OpenRewriteFeature {
         return List.of("io.micronaut.starter.feature.graphql");
     }
 
-
 }
