@@ -18,6 +18,7 @@ package io.micronaut.starter.feature.distributedconfig;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.feature.DistributedConfigFeature;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
@@ -30,6 +31,8 @@ import io.micronaut.starter.feature.k8s.Kubernetes;
 import io.micronaut.starter.feature.k8s.KubernetesClient;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 /**
  * Adds support for Kubernetes config maps configuration.
  *
@@ -38,8 +41,9 @@ import jakarta.inject.Singleton;
  */
 @Requires(property = "micronaut.starter.feature.config.kubernetes.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class KubernetesConfig implements DistributedConfigFeature {
+public class KubernetesConfig implements DistributedConfigFeature, OpenRewriteFeature {
     private final MicronautDistributedConfigurationFeature micronautDistributedConfigurationFeature;
+
     private final Kubernetes kubernetes;
 
     public KubernetesConfig(MicronautDistributedConfigurationFeature micronautDistributedConfigurationFeature, Kubernetes kubernetes) {
@@ -79,15 +83,7 @@ public class KubernetesConfig implements DistributedConfigFeature {
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        generatorContext.addDependency(Dependency.builder()
-                .groupId(KubernetesClient.MICRONAUT_KUBERNETES_GROUP_ID)
-                .artifactId("micronaut-kubernetes-discovery-client")
-                .compile());
-    }
-
-    @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-kubernetes/latest/guide/#config-client";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.config-kubernetes");
     }
 }
