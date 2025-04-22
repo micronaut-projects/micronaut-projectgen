@@ -19,6 +19,7 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
@@ -26,23 +27,13 @@ import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import io.micronaut.starter.feature.Category;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.eclipsestore.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class EclipseStore implements EclipseStoreFeature {
+public class EclipseStore implements EclipseStoreFeature, OpenRewriteFeature {
 
     public static final String NAME = "eclipsestore";
-    public static final String MICRONAUT_ECLIPSESTORE_ANNOTATIONS_ARTIFACT = "micronaut-eclipsestore-annotations";
-    public static final String MICRONAUT_ECLIPSESTORE_VERSION = "micronaut.eclipsestore.version";
-    public static final String ARTIFACT_ID_MICRONAUT_ECLIPSESTORE = "micronaut-eclipsestore";
-    public static final Dependency DEPENDENCY_MICRONAUT_ECLIPSE_STORE = MicronautDependencyUtils.eclipsestoreDependency()
-            .artifactId(ARTIFACT_ID_MICRONAUT_ECLIPSESTORE)
-            .compile()
-            .build();
-
-    public static final Dependency DEPENDENCY_MICRONAUT_ECLIPSE_STORE_ANNOTATIONS = MicronautDependencyUtils.eclipsestoreDependency()
-            .artifactId(MICRONAUT_ECLIPSESTORE_ANNOTATIONS_ARTIFACT)
-            .compile()
-            .build();
 
     @Override
     @NonNull
@@ -67,21 +58,8 @@ public class EclipseStore implements EclipseStoreFeature {
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        generatorContext.addDependency(DEPENDENCY_MICRONAUT_ECLIPSE_STORE);
-        generatorContext.addDependency(MicronautDependencyUtils.annotationProcessor(generatorContext.getBuildTool(),
-                MicronautDependencyUtils.GROUP_ID_MICRONAUT_ECLIPSESTORE, MICRONAUT_ECLIPSESTORE_ANNOTATIONS_ARTIFACT, MICRONAUT_ECLIPSESTORE_VERSION));
-        generatorContext.addDependency(DEPENDENCY_MICRONAUT_ECLIPSE_STORE_ANNOTATIONS);
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.eclipse-store");
     }
 
-    @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-eclipsestore/latest/guide";
-    }
-
-    @Override
-    @Nullable
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://docs.eclipsestore.io/";
-    }
 }

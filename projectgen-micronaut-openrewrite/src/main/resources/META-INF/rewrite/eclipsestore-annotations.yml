@@ -1,0 +1,24 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.eclipse-store-annotation
+displayName: Add EclipseStore Annotation dependency
+recipeList:
+  - io.micronaut.starter.feature.eclipse-store-annotation.maven
+  - io.micronaut.starter.feature.eclipse-store-annotation.gradle
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.eclipse-store-annotation.maven
+displayName: Add EclipseStore Annotation to the Maven compiler plugin
+recipeList:
+  - org.openrewrite.maven.AddAnnotationProcessor:
+      groupId: io.micronaut.eclipsestore
+      artifactId: micronaut-eclipsestore-annotations
+      version: ${micronaut.eclipsestore.version}
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.eclipse-store-annotation.gradle
+displayName: Add EclipseStore Annotation dependency to a Gradle Build
+recipeList:
+  - org.openrewrite.gradle.AddDependency:
+      groupId: io.micronaut.eclipsestore
+      artifactId: micronaut-eclipsestore-annotations
+      configuration: annotationProcessor
