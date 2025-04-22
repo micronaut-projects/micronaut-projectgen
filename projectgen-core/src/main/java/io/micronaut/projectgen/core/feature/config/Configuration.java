@@ -28,6 +28,8 @@ import java.util.List;
 import java.util.Collections;
 import java.util.UUID;
 
+import static io.micronaut.projectgen.core.utils.StringUtils.*;
+
 /**
  * Models application environment configuration to specify where the configuration is rooted for the given configuration values (key/value pairs).
  *
@@ -268,13 +270,13 @@ public class Configuration extends LinkedHashMap<String, Object> {
      * @param comment a comment to a configuration file.
      */
     public void comment(String comment) {
-        put(COMMENT_PREFIX + UUID.randomUUID(), comment);
+        put(COMMENT_PREFIX + randomString(), comment);
     }
 
     /**
      * Add a blank line
      */
     public void blankLine() {
-        put(BLANK_LINE_PREFIX + UUID.randomUUID(), EMPTY_STRING);
+        put(BLANK_LINE_PREFIX + randomString(), EMPTY_STRING);
     }
 }
