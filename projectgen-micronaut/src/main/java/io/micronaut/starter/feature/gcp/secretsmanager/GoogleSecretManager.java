@@ -18,6 +18,7 @@ package io.micronaut.starter.feature.gcp.secretsmanager;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.micronaut.features.config.MicronautDistributedConfigurationFeature;
@@ -27,7 +28,19 @@ import jakarta.inject.Singleton;
 
 @Requires(property = "micronaut.starter.feature.gcp.secrets.manager.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class GoogleSecretManager implements MicronautDistributedConfigurationFeature {
+public class GoogleSecretManager implements DistributedConfigFeature {
+    private final MicronautDistributedConfigurationFeature micronautDistributedConfigurationFeature;
+
+    public GoogleSecretManager(MicronautDistributedConfigurationFeature micronautDistributedConfigurationFeature) {
+        this.micronautDistributedConfigurationFeature = micronautDistributedConfigurationFeature;
+    }
+
+    @Override
+    public void processSelectedFeatures(FeatureContext featureContext) {
+        if (!featureContext.isPresent(MicronautDistributedConfigurationFeature.class)) {
+            featureContext.addFeature(micronautDistributedConfigurationFeature);
+        }
+    }
 
     @NonNull
     @Override
@@ -48,7 +61,6 @@ public class GoogleSecretManager implements MicronautDistributedConfigurationFea
     @Override
     public void apply(GeneratorContext generatorContext) {
         generatorContext.addDependency(gcpSecretManagerDependency());
-        populateBootstrapForDistributedConfiguration(generatorContext);
     }
 
     @NonNull

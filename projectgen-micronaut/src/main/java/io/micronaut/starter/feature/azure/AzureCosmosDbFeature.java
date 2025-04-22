@@ -17,6 +17,7 @@ package io.micronaut.starter.feature.azure;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
@@ -25,6 +26,7 @@ import io.micronaut.projectgen.core.feature.OneOfFeature;
 import jakarta.inject.Singleton;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -35,7 +37,7 @@ import java.util.Map;
  */
 @Requires(property = "micronaut.starter.feature.azure.cosmos.db.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class AzureCosmosDbFeature implements OneOfFeature {
+public class AzureCosmosDbFeature implements OneOfFeature, OpenRewriteFeature {
 
     @Override
     public String getName() {
@@ -63,27 +65,8 @@ public class AzureCosmosDbFeature implements OneOfFeature {
     }
 
     @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-azure/latest/guide/#azureCosmosClient";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.azure-cosmos-db");
     }
 
-    @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://learn.microsoft.com/en-us/azure/cosmos-db/";
-    }
-
-    @Override
-    public void apply(GeneratorContext generatorContext) {
-        generatorContext.addDependency(Dependency.builder()
-                .groupId("io.micronaut.azure")
-                .artifactId("micronaut-azure-cosmos")
-                .compile());
-        Map<String, Object> properties = new HashMap<>(5);
-        properties.put("consistency-level", "SESSION");
-        properties.put("endpoint", "azure-cosmos-endpoint");
-        properties.put("key", "");
-        properties.put("default-gateway-mode", true);
-        properties.put("endpoint-discovery-enabled", false);
-        generatorContext.getConfiguration().addNested("azure.cosmos", properties);
-    }
 }
