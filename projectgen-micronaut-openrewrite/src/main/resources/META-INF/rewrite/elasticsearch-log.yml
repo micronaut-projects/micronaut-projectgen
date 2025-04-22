@@ -1,0 +1,19 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.elasticsearch-log
+displayName: Add ElasticSearch Log dependencies
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: org.slf4j
+      artifactId: log4j-over-slf4j
+      configuration: runtimeOnly
+      scope: runtime
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: org.apache.logging.log4j
+      artifactId: log4j-api
+      configuration: implementation
+      scope: compile
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: org.apache.logging.log4j
+      artifactId: log4j-core
+      configuration: implementation
+      scope: compile
