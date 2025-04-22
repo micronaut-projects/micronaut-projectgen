@@ -1,0 +1,35 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.cache-coherence
+displayName: Add Cache Coherence dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.cache-coherence.dependencies
+  - io.micronaut.starter.feature.cache-coherence.micronaut.documentation
+  - io.micronaut.starter.feature.cache-coherence.documentation.thirdparty
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.cache-coherence.dependencies
+displayName: Add Cache Coherence dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.coherence
+      artifactId: micronaut-cache-coherence
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.cache-coherence.micronaut.documentation
+displayName: Append a link to Micronaut Cache Coherence documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-coherence/latest/guide/#cache
+      appendNewline: true
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.cache-coherence.documentation.thirdparty
+displayName: Append a link to Cache Coherence Website
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://coherence.java.net/
+      appendNewline: true

@@ -41,12 +41,14 @@ import java.util.List;
  */
 @Requires(property = "micronaut.starter.feature.config.kubernetes.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class KubernetesConfig implements MicronautDistributedConfigurationFeature, OpenRewriteFeature {
+public class KubernetesConfig implements DistributedConfigFeature, OpenRewriteFeature {
+    private final MicronautDistributedConfigurationFeature micronautDistributedConfigurationFeature;
 
     private final Kubernetes kubernetes;
 
-    public KubernetesConfig(Kubernetes kubernetes) {
+    public KubernetesConfig(MicronautDistributedConfigurationFeature micronautDistributedConfigurationFeature, Kubernetes kubernetes) {
         this.kubernetes = kubernetes;
+        this.micronautDistributedConfigurationFeature = micronautDistributedConfigurationFeature;
     }
 
     @Override
@@ -69,6 +71,9 @@ public class KubernetesConfig implements MicronautDistributedConfigurationFeatur
         if (!featureContext.isPresent(Kubernetes.class)) {
             featureContext.addFeature(kubernetes);
         }
+        if (!featureContext.isPresent(MicronautDistributedConfigurationFeature.class)) {
+            featureContext.addFeature(micronautDistributedConfigurationFeature);
+        }
     }
 
     @Override
@@ -81,5 +86,4 @@ public class KubernetesConfig implements MicronautDistributedConfigurationFeatur
     public List<String> getRecipes(GeneratorContext generatorContext) {
         return List.of("io.micronaut.starter.feature.config-kubernetes");
     }
-
 }

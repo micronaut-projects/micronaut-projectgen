@@ -17,6 +17,7 @@ package io.micronaut.starter.feature.cache;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
@@ -24,9 +25,11 @@ import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.Feature;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.cache.caffeine.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class Caffeine implements Feature {
+public class Caffeine implements OpenRewriteFeature {
 
     @Override
     public String getName() {
@@ -49,20 +52,8 @@ public class Caffeine implements Feature {
     }
 
     @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://github.com/ben-manes/caffeine";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.cache-caffeine");
     }
 
-    @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-cache/latest/guide/index.html";
-    }
-
-    @Override
-    public void apply(GeneratorContext generatorContext) {
-        generatorContext.addDependency(Dependency.builder()
-                .groupId("io.micronaut.cache")
-                .artifactId("micronaut-cache-caffeine")
-                .compile());
-    }
 }

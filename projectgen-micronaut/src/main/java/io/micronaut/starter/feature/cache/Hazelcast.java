@@ -19,11 +19,14 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import jakarta.inject.Singleton;
+
+import java.util.List;
 
 @Requires(property = "micronaut.starter.feature.cache.hazelcast.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class Hazelcast implements CacheFeature {
+public class Hazelcast implements CacheFeature, OpenRewriteFeature {
 
     @Override
     public String getName() {
@@ -41,20 +44,8 @@ public class Hazelcast implements CacheFeature {
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        generatorContext.getConfiguration().put("hazelcast.network.addresses", "['121.0.0.1:5701']");
-        generatorContext.addDependency(Dependency.builder()
-                .groupId("io.micronaut.cache")
-                .artifactId("micronaut-cache-hazelcast")
-                .compile());
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.cache-hazelcast");
     }
 
-    @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-cache/latest/guide/index.html#hazelcast";
-    }
-
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://hazelcast.org/";
-    }
 }

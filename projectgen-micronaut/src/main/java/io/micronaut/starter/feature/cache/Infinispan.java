@@ -19,11 +19,14 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import jakarta.inject.Singleton;
+
+import java.util.List;
 
 @Requires(property = "micronaut.starter.feature.cache.infinispan.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class Infinispan implements CacheFeature {
+public class Infinispan implements CacheFeature, OpenRewriteFeature {
 
     @Override
     public String getName() {
@@ -41,22 +44,8 @@ public class Infinispan implements CacheFeature {
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        generatorContext.getConfiguration().put("infinispan.client.hotrod.server.host", "infinispan.example.com");
-        generatorContext.getConfiguration().put("infinispan.client.hotrod.server.port", 10222);
-        generatorContext.addDependency(Dependency.builder()
-                .groupId("io.micronaut.cache")
-                .artifactId("micronaut-cache-infinispan")
-                .compile());
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.cache-infinispan");
     }
 
-    @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://infinispan.org/";
-    }
-
-    @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-cache/latest/guide/index.html#infinispan";
-    }
 }

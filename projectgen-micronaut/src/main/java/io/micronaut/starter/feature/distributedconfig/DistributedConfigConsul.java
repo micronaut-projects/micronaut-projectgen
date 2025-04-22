@@ -31,13 +31,15 @@ import java.util.List;
 
 @Requires(property = "micronaut.starter.feature.config.consul.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class DistributedConfigConsul implements MicronautDistributedConfigurationFeature, OpenRewriteFeature {
-
+public class DistributedConfigConsul implements DistributedConfigFeature, OpenRewriteFeature {
+    private final MicronautDistributedConfigurationFeature micronautDistributedConfigurationFeature;
     private final Consul consul;
 
-    public DistributedConfigConsul(Consul consul) {
+    public DistributedConfigConsul(MicronautDistributedConfigurationFeature micronautDistributedConfigurationFeature, Consul consul) {
         this.consul = consul;
+        this.micronautDistributedConfigurationFeature = micronautDistributedConfigurationFeature;
     }
+
 
     @NonNull
     @Override
@@ -60,11 +62,13 @@ public class DistributedConfigConsul implements MicronautDistributedConfiguratio
         if (!featureContext.isPresent(Consul.class)) {
             featureContext.addFeature(consul);
         }
+        if (!featureContext.isPresent(MicronautDistributedConfigurationFeature.class)) {
+            featureContext.addFeature(micronautDistributedConfigurationFeature);
+        }
     }
 
     @Override
     public List<String> getRecipes(GeneratorContext generatorContext) {
         return List.of("io.micronaut.starter.feature.config-consul");
     }
-
 }
