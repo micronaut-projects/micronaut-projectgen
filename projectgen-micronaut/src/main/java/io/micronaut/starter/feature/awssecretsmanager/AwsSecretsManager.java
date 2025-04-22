@@ -16,14 +16,11 @@
 package io.micronaut.starter.feature.awssecretsmanager;
 
 import io.micronaut.context.annotation.Requires;
-import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.micronaut.features.config.MicronautDistributedConfigurationFeature;
-import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
-import io.micronaut.starter.feature.awsparameterstore.AwsParameterStore;
 import io.micronaut.projectgen.core.feature.DistributedConfigFeature;
 import jakarta.inject.Singleton;
 
@@ -36,7 +33,19 @@ import java.util.List;
  */
 @Requires(property = "micronaut.starter.feature.aws.secrets.manager.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class AwsSecretsManager implements MicronautDistributedConfigurationFeature, OpenRewriteFeature {
+public class AwsSecretsManager implements DistributedConfigFeature, OpenRewriteFeature {
+    private final MicronautDistributedConfigurationFeature micronautDistributedConfigurationFeature;
+
+    public AwsSecretsManager(MicronautDistributedConfigurationFeature micronautDistributedConfigurationFeature) {
+        this.micronautDistributedConfigurationFeature = micronautDistributedConfigurationFeature;
+    }
+
+    @Override
+    public void processSelectedFeatures(FeatureContext featureContext) {
+        if (!featureContext.isPresent(MicronautDistributedConfigurationFeature.class)) {
+            featureContext.addFeature(micronautDistributedConfigurationFeature);
+        }
+    }
 
     @Override
     public String getTitle() {

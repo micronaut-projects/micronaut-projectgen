@@ -1,0 +1,58 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.azure-cosmos-db
+displayName: Add Azure Cosmos Db dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.azure-cosmos-db.dependencies
+  - io.micronaut.starter.feature.azure-cosmos-db.configuration
+  - io.micronaut.starter.feature.azure-cosmos-db.micronaut.documentation
+  - io.micronaut.starter.feature.azure-cosmos-db.documentation.thirdparty
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.azure-cosmos-db.dependencies
+displayName: Add Azure Cosmos Db dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.azure
+      artifactId: micronaut-azure-cosmos
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.azure-cosmos-db.configuration
+displayName: Add Azure Cosmos Db configuration
+preconditions:
+  - io.micronaut.starter.openrewrite.recipes.FindApplicationProperties
+recipeList:
+  - org.openrewrite.properties.AddProperty:
+      property: azure.cosmos.endpoint-discovery-enabled
+      value: false
+  - org.openrewrite.properties.AddProperty:
+      property: azure.cosmos.endpoint
+      value: azure-cosmos-endpoint
+  - org.openrewrite.properties.AddProperty:
+      property: azure.cosmos.key
+      value: pleasechangeme
+  - org.openrewrite.properties.AddProperty:
+      property: azure.cosmos.consistency-level
+      value: SESSION
+  - org.openrewrite.properties.AddProperty:
+      property: azure.cosmos.default-gateway-mode
+      value: true
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.azure-cosmos-db.micronaut.documentation
+displayName: Append a link to Micronaut Azure Cosmos Db documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-azure/latest/guide/#azureCosmosClient
+      appendNewline: true
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.azure-cosmos-db.documentation.thirdparty
+displayName: Append a link to Azure Cosmos Db Website
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://learn.microsoft.com/en-us/azure/cosmos-db/
+      appendNewline: true
