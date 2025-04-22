@@ -42,11 +42,9 @@ public class CoherenceDistributedConfiguration implements DistributedConfigFeatu
 
     public static final String NAME = "coherence-distributed-configuration";
     private final CoherenceFeature coherenceFeature;
-    private final CoherenceGrpcClient coherenceGrpcClient;
 
-    public CoherenceDistributedConfiguration(CoherenceFeature coherenceFeature, CoherenceGrpcClient coherenceGrpcClient) {
+    public CoherenceDistributedConfiguration(CoherenceFeature coherenceFeature) {
         this.coherenceFeature = coherenceFeature;
-        this.coherenceGrpcClient = coherenceGrpcClient;
     }
 
     @Override
@@ -68,9 +66,6 @@ public class CoherenceDistributedConfiguration implements DistributedConfigFeatu
     public void processSelectedFeatures(FeatureContext featureContext) {
         if (!featureContext.isPresent(CoherenceFeature.class)) {
             featureContext.addFeature(coherenceFeature);
-        }
-        if(featureContext.isPresent(CoherenceGrpcClient.class)) {
-            featureContext.addFeature(coherenceGrpcClient);
         }
     }
 
