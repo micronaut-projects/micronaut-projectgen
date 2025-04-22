@@ -34,6 +34,7 @@ class CoherenceDistributedConfigurationTest {
         assertNotNull(buildGradle);
         BuildTestVerifier verifier = BuildTestVerifier.of(buildGradle, options);
         assertTrue(verifier.hasDependency("io.micronaut.coherence", "micronaut-coherence-distributed-configuration", Scope.COMPILE), buildGradle);
+        assertTrue(verifier.hasDependency("com.oracle.coherence.ce", "coherence-java-client", Scope.COMPILE), buildGradle);
     }
 
     @Test

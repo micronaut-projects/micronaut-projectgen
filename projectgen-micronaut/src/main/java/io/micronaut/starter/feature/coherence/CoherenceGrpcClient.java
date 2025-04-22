@@ -72,7 +72,10 @@ public class CoherenceGrpcClient implements OpenRewriteFeature {
 
     @Override
     public List<String> getRecipes(GeneratorContext generatorContext) {
-        return List.of("io.micronaut.starter.feature.coherence-grpc-client");
+        return List.of(
+            "io.micronaut.starter.feature.coherence-grpc-client",
+            "io.micronaut.starter.feature.coherence-java-client"
+        );
     }
 
     @Override

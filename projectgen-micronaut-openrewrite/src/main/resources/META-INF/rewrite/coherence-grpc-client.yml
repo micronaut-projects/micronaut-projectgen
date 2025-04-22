@@ -12,11 +12,6 @@ name: io.micronaut.starter.feature.coherence-grpc-client.dependencies
 displayName: Add Coherence Grpc Client dependency
 recipeList:
   - org.openrewrite.java.dependencies.AddDependency:
-      groupId: com.oracle.coherence.ce
-      artifactId: coherence-java-client
-      configuration: implementation
-      scope: compile
-  - org.openrewrite.java.dependencies.AddDependency:
       groupId: io.micronaut.coherence
       artifactId: micronaut-coherence-grpc-client
       configuration: implementation

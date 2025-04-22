@@ -26,6 +26,7 @@ import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.projectgen.core.feature.DistributedConfigFeature;
 import jakarta.inject.Singleton;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -75,7 +76,11 @@ public class CoherenceDistributedConfiguration implements DistributedConfigFeatu
 
     @Override
     public List<String> getRecipes(GeneratorContext generatorContext) {
-        return List.of("io.micronaut.starter.feature.coherence-distributed-configuration");
+        List<String> recipes = new ArrayList<>();
+        recipes.add("io.micronaut.starter.feature.coherence-distributed-configuration");
+        if (OptionUtils.hasGradleBuildTool(generatorContext.getOptions()) && !generatorContext.isFeaturePresent(CoherenceGrpcClient.class)) {
+            recipes.add("io.micronaut.starter.feature.coherence-java-client");
+        }
+        return recipes;
     }
-
 }
