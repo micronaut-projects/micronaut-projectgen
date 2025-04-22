@@ -1,0 +1,35 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.azure-logging
+displayName: Add Azure Logging dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.azure-logging.dependencies
+  - io.micronaut.starter.feature.azure-logging.micronaut.documentation
+  - io.micronaut.starter.feature.azure-logging.documentation.thirdparty
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.azure-logging.dependencies
+displayName: Add Azure Logging dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.azure
+      artifactId: micronaut-azure-logging
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.azure-logging.micronaut.documentation
+displayName: Append a link to Micronaut Azure Logging documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-azure/latest/guide/#azureLogging
+      appendNewline: true
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.azure-logging.documentation.thirdparty
+displayName: Append a link to Azure Loggign Website
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://learn.microsoft.com/en-us/azure/azure-monitor/logs/data-platform-logs
+      appendNewline: true

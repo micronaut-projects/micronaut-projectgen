@@ -1,0 +1,50 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.cache-infinispan
+displayName: Add Cache Infinispan dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.cache-infinispan.dependencies
+  - io.micronaut.starter.feature.cache-infinispan.configurations
+  - io.micronaut.starter.feature.cache-infinispan.micronaut.documentation
+  - io.micronaut.starter.feature.cache-infinispan.documentation.thirdparty
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.cache-infinispan.dependencies
+displayName: Add Cache Infinispan dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.cache
+      artifactId: micronaut-cache-infinispan
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.cache-infinispan.micronaut.documentation
+displayName: Append a link to Micronaut Cache Infinispan documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-cache/latest/guide/index.html#infinispan
+      appendNewline: true
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.cache-infinispan.documentation.thirdparty
+displayName: Append a link to Cache Infinispan Website
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://infinispan.org/
+      appendNewline: true
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.cache-infinispan.configurations
+displayName: Add Cache Infinispan configuration
+preconditions:
+  - io.micronaut.starter.openrewrite.recipes.FindApplicationProperties
+recipeList:
+  - org.openrewrite.properties.AddProperty:
+      property: infinispan.client.hotrod.server.host
+      value: infinispan.example.com
+  - org.openrewrite.properties.AddProperty:
+      property: infinispan.client.hotrod.server.port
+      value: 10222
+

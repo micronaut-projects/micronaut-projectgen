@@ -15,22 +15,43 @@
  */
 package io.micronaut.projectgen.micronaut.features.config;
 
+import io.micronaut.core.annotation.Internal;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.projectgen.core.feature.DistributedConfigFeature;
+import io.micronaut.projectgen.core.feature.config.BootstrapConfiguration;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
+import jakarta.inject.Singleton;
 
+import java.util.List;
 import java.util.Map;
 
 /**
  * Micronaut Distributed Configuration.
  */
-public interface MicronautDistributedConfigurationFeature extends DistributedConfigFeature {
-    @NonNull
-    default Map<String, Object> populateBootstrapForDistributedConfiguration(@NonNull GeneratorContext generatorContext) {
-        Map<String, Object> config = generatorContext.getBootstrapConfiguration();
-        config.put("micronaut.application.name", generatorContext.getProject().getPropertyName());
-        config.put("micronaut.config-client.enabled", true);
-        return config;
+@Internal
+@Singleton
+public class MicronautDistributedConfigurationFeature implements DistributedConfigFeature, OpenRewriteFeature {
+
+    @Override
+    public String getName() {
+        return "micronaut-distributed-configuration";
     }
 
+    @Override
+    public boolean isVisible() {
+        return false;
+    }
+
+    @Override
+    public void apply(GeneratorContext generatorContext) {
+        processRecipes(generatorContext);
+        BootstrapConfiguration config = generatorContext.getBootstrapConfiguration();
+        config.put("micronaut.application.name", generatorContext.getProject().getPropertyName());
+    }
+
+    @Override
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.config.micronaut-distributed-configuration");
+    }
 }

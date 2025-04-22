@@ -1,0 +1,35 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.cache-caffeine
+displayName: Add Cache Caffeine dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.cache-caffeine.dependencies
+  - io.micronaut.starter.feature.cache-caffeine.micronaut.documentation
+  - io.micronaut.starter.feature.cache-caffeine.documentation.thirdparty
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.cache-caffeine.dependencies
+displayName: Add Cache Caffeine dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.cache
+      artifactId: micronaut-cache-caffeine
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.cache-caffeine.micronaut.documentation
+displayName: Append a link to Micronaut Cache Caffeine documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-cache/latest/guide/index.html
+      appendNewline: true
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.cache-caffeine.documentation.thirdparty
+displayName: Append a link to Cache Caffeine Website
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://github.com/ben-manes/caffeine
+      appendNewline: true

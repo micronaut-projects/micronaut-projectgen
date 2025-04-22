@@ -35,13 +35,16 @@ public interface OpenRewriteFeature extends Feature {
 
     @Override
     default void apply(GeneratorContext generatorContext) {
+        processRecipes(generatorContext);
+    }
+
+    default void processRecipes(GeneratorContext generatorContext) {
         for (String recipeName : getRecipes(generatorContext)) {
             generatorContext.addConfigurationByRecipeName(recipeName);
             generatorContext.addBootstrapConfigurationByRecipeName(recipeName);
             generatorContext.addDependenciesByRecipeName(recipeName);
             generatorContext.addTemplatesByRecipeName(recipeName);
         }
-
     }
 
     @Override
