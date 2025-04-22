@@ -28,13 +28,16 @@ import jakarta.inject.Singleton;
 
 @Requires(property = "micronaut.starter.feature.config.consul.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class DistributedConfigConsul implements MicronautDistributedConfigurationFeature {
+public class DistributedConfigConsul implements DistributedConfigFeature {
 
+    private final MicronautDistributedConfigurationFeature micronautDistributedConfigurationFeature;
     private final Consul consul;
 
-    public DistributedConfigConsul(Consul consul) {
+    public DistributedConfigConsul(MicronautDistributedConfigurationFeature micronautDistributedConfigurationFeature, Consul consul) {
         this.consul = consul;
+        this.micronautDistributedConfigurationFeature = micronautDistributedConfigurationFeature;
     }
+
 
     @NonNull
     @Override
@@ -57,6 +60,9 @@ public class DistributedConfigConsul implements MicronautDistributedConfiguratio
         if (!featureContext.isPresent(Consul.class)) {
             featureContext.addFeature(consul);
         }
+        if (!featureContext.isPresent(MicronautDistributedConfigurationFeature.class)) {
+            featureContext.addFeature(micronautDistributedConfigurationFeature);
+        }
     }
 
     @Override
@@ -65,7 +71,6 @@ public class DistributedConfigConsul implements MicronautDistributedConfiguratio
                 .groupId("io.micronaut.discovery")
                 .artifactId("micronaut-discovery-client")
                 .compile());
-        populateBootstrapForDistributedConfiguration(generatorContext);
     }
 
     @Override

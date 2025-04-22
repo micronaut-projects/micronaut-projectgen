@@ -19,6 +19,7 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.micronaut.features.config.MicronautDistributedConfigurationFeature;
 import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
@@ -31,7 +32,19 @@ import java.util.Map;
 
 @Requires(property = "micronaut.starter.feature.oracle.cloud.vault.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class OracleCloudVault implements MicronautDistributedConfigurationFeature {
+public class OracleCloudVault implements DistributedConfigFeature {
+    private final MicronautDistributedConfigurationFeature micronautDistributedConfigurationFeature;
+
+    public OracleCloudVault(MicronautDistributedConfigurationFeature micronautDistributedConfigurationFeature) {
+        this.micronautDistributedConfigurationFeature = micronautDistributedConfigurationFeature;
+    }
+
+    @Override
+    public void processSelectedFeatures(FeatureContext featureContext) {
+        if (!featureContext.isPresent(MicronautDistributedConfigurationFeature.class)) {
+            featureContext.addFeature(micronautDistributedConfigurationFeature);
+        }
+    }
 
     @NonNull
     @Override
@@ -69,7 +82,7 @@ public class OracleCloudVault implements MicronautDistributedConfigurationFeatur
                 .compile());
         generatorContext.getConfiguration().put("oci.config.profile", "DEFAULT");
 
-        Map<String, Object> bootstrapConfiguration = populateBootstrapForDistributedConfiguration(generatorContext);
+        Map<String, Object> bootstrapConfiguration = generatorContext.getBootstrapConfiguration();
         bootstrapConfiguration.put("oci.vault.config.enabled", true);
         Map<String, String> map = new HashMap<>();
         map.put("ocid", "");

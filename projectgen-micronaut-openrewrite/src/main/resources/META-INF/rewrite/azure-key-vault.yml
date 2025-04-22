@@ -3,7 +3,6 @@ name: io.micronaut.starter.feature.azure-key-vault
 displayName: Add Azure Key Vault dependency and link to README
 recipeList:
   - io.micronaut.starter.feature.azure-key-vault.dependencies
-  - io.micronaut.starter.feature.azure-key-vault.configuration
   - io.micronaut.starter.feature.azure-key-vault.micronaut.documentation
   - io.micronaut.starter.feature.azure-key-vault.documentation.thirdparty
 ---
@@ -16,16 +15,6 @@ recipeList:
       artifactId: micronaut-azure-secret-manager
       configuration: implementation
       scope: compile
----
-type: specs.openrewrite.org/v1beta/recipe
-name: io.micronaut.starter.feature.azure-key-vault.configuration
-displayName: Add Azure Key Vault configuration
-preconditions:
-  - io.micronaut.starter.openrewrite.recipes.FindBootstrapProperties
-recipeList:
-  - org.openrewrite.properties.AddProperty:
-      property: micronaut.config-client.enabled
-      value: true
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.azure-key-vault.micronaut.documentation

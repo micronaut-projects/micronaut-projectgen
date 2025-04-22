@@ -1,0 +1,10 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.config.micronaut-distributed-configuration
+displayName: Add Micronaut Distributed Configuration Configuration
+preconditions:
+  - io.micronaut.starter.openrewrite.recipes.FindBootstrapProperties
+recipeList:
+  - org.openrewrite.properties.AddProperty:
+      property: micronaut.config-client.enabled
+      value: true

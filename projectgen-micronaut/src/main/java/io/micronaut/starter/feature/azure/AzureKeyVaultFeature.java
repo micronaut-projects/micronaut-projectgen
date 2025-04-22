@@ -18,10 +18,8 @@ package io.micronaut.starter.feature.azure;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.micronaut.features.config.MicronautDistributedConfigurationFeature;
-import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.starter.feature.discovery.DiscoveryClient;
 import io.micronaut.projectgen.core.feature.DistributedConfigFeature;
@@ -37,11 +35,14 @@ import java.util.List;
  */
 @Requires(property = "micronaut.starter.feature.azure.key.vault.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class AzureKeyVaultFeature implements MicronautDistributedConfigurationFeature, OpenRewriteFeature {
+public class AzureKeyVaultFeature implements DistributedConfigFeature, OpenRewriteFeature {
 
+    private final MicronautDistributedConfigurationFeature micronautDistributedConfigurationFeature;
     private final DiscoveryClient discoveryClient;
 
-    public AzureKeyVaultFeature(DiscoveryClient discoveryClient) {
+    public AzureKeyVaultFeature(DiscoveryClient discoveryClient,
+                                MicronautDistributedConfigurationFeature micronautDistributedConfigurationFeature) {
+        this.micronautDistributedConfigurationFeature = micronautDistributedConfigurationFeature;
         this.discoveryClient = discoveryClient;
     }
 
@@ -49,6 +50,9 @@ public class AzureKeyVaultFeature implements MicronautDistributedConfigurationFe
     public void processSelectedFeatures(FeatureContext featureContext) {
         if (!featureContext.isPresent(DiscoveryClient.class)) {
             featureContext.addFeature(discoveryClient);
+        }
+        if (!featureContext.isPresent(MicronautDistributedConfigurationFeature.class)) {
+            featureContext.addFeature(micronautDistributedConfigurationFeature);
         }
     }
 
