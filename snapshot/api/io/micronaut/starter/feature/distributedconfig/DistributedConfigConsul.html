@@ -77,7 +77,7 @@ loadScripts(document, 'script');</script>
 <section class="class-description" id="class-description">
 <dl class="notes">
 <dt>All Implemented Interfaces:</dt>
-<dd><code>io.micronaut.core.naming.Described</code>, <code>io.micronaut.core.naming.Named</code>, <code>io.micronaut.core.order.Ordered</code>, <code><a href="../../../projectgen/core/feature/DistributedConfigFeature.html" title="interface in io.micronaut.projectgen.core.feature">DistributedConfigFeature</a></code>, <code><a href="../../../projectgen/core/feature/Feature.html" title="interface in io.micronaut.projectgen.core.feature">Feature</a></code>, <code><a href="../../../projectgen/micronaut/features/config/MicronautDistributedConfigurationFeature.html" title="interface in io.micronaut.projectgen.micronaut.features.config">MicronautDistributedConfigurationFeature</a></code></dd>
+<dd><code>io.micronaut.core.naming.Described</code>, <code>io.micronaut.core.naming.Named</code>, <code>io.micronaut.core.order.Ordered</code>, <code><a href="../../../projectgen/core/feature/DistributedConfigFeature.html" title="interface in io.micronaut.projectgen.core.feature">DistributedConfigFeature</a></code>, <code><a href="../../../projectgen/core/feature/Feature.html" title="interface in io.micronaut.projectgen.core.feature">Feature</a></code></dd>
 </dl>
 <hr>
 <div class="type-signature"><span class="annotations">@Requires(property="micronaut.starter.feature.config.consul.enabled",
@@ -86,7 +86,7 @@ loadScripts(document, 'script');</script>
 @Singleton
 </span><span class="modifiers">public class </span><span class="element-name type-name-label">DistributedConfigConsul</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
-implements <a href="../../../projectgen/micronaut/features/config/MicronautDistributedConfigurationFeature.html" title="interface in io.micronaut.projectgen.micronaut.features.config">MicronautDistributedConfigurationFeature</a></span></div>
+implements <a href="../../../projectgen/core/feature/DistributedConfigFeature.html" title="interface in io.micronaut.projectgen.core.feature">DistributedConfigFeature</a></span></div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -107,7 +107,8 @@ implements <a href="../../../projectgen/micronaut/features/config/MicronautDistr
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(io.micronaut.starter.feature.consul.Consul)" class="member-name-link">DistributedConfigConsul</a><wbr>(<a href="../consul/Consul.html" title="class in io.micronaut.starter.feature.consul">Consul</a>&nbsp;consul)</code></div>
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(io.micronaut.projectgen.micronaut.features.config.MicronautDistributedConfigurationFeature,io.micronaut.starter.feature.consul.Consul)" class="member-name-link">DistributedConfigConsul</a><wbr>(<a href="../../../projectgen/micronaut/features/config/MicronautDistributedConfigurationFeature.html" title="class in io.micronaut.projectgen.micronaut.features.config">MicronautDistributedConfigurationFeature</a>&nbsp;micronautDistributedConfigurationFeature,
+ <a href="../consul/Consul.html" title="class in io.micronaut.starter.feature.consul">Consul</a>&nbsp;consul)</code></div>
 <div class="col-last even-row-color">&nbsp;</div>
 </div>
 </section>
@@ -168,9 +169,6 @@ implements <a href="../../../projectgen/micronaut/features/config/MicronautDistr
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-io.micronaut.projectgen.core.feature.Feature">Methods inherited from interface&nbsp;io.micronaut.projectgen.core.feature.<a href="../../../projectgen/core/feature/Feature.html" title="interface in io.micronaut.projectgen.core.feature">Feature</a></h3>
 <code><a href="../../../projectgen/core/feature/Feature.html#getOrder()">getOrder</a>, <a href="../../../projectgen/core/feature/Feature.html#isCommunity()">isCommunity</a>, <a href="../../../projectgen/core/feature/Feature.html#isPreview()">isPreview</a>, <a href="../../../projectgen/core/feature/Feature.html#isVisible()">isVisible</a>, <a href="../../../projectgen/core/feature/Feature.html#supports(io.micronaut.projectgen.core.options.Options)">supports</a></code></div>
-<div class="inherited-list">
-<h3 id="methods-inherited-from-class-io.micronaut.projectgen.micronaut.features.config.MicronautDistributedConfigurationFeature">Methods inherited from interface&nbsp;io.micronaut.projectgen.micronaut.features.config.<a href="../../../projectgen/micronaut/features/config/MicronautDistributedConfigurationFeature.html" title="interface in io.micronaut.projectgen.micronaut.features.config">MicronautDistributedConfigurationFeature</a></h3>
-<code><a href="../../../projectgen/micronaut/features/config/MicronautDistributedConfigurationFeature.html#populateBootstrapForDistributedConfiguration(io.micronaut.projectgen.core.generator.GeneratorContext)">populateBootstrapForDistributedConfiguration</a></code></div>
 </section>
 </li>
 </ul>
@@ -183,9 +181,10 @@ implements <a href="../../../projectgen/micronaut/features/config/MicronautDistr
 <h2>Constructor Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="&lt;init&gt;(io.micronaut.starter.feature.consul.Consul)">
+<section class="detail" id="&lt;init&gt;(io.micronaut.projectgen.micronaut.features.config.MicronautDistributedConfigurationFeature,io.micronaut.starter.feature.consul.Consul)">
 <h3>DistributedConfigConsul</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">DistributedConfigConsul</span><wbr><span class="parameters">(<a href="../consul/Consul.html" title="class in io.micronaut.starter.feature.consul">Consul</a>&nbsp;consul)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">DistributedConfigConsul</span><wbr><span class="parameters">(<a href="../../../projectgen/micronaut/features/config/MicronautDistributedConfigurationFeature.html" title="class in io.micronaut.projectgen.micronaut.features.config">MicronautDistributedConfigurationFeature</a>&nbsp;micronautDistributedConfigurationFeature,
+ <a href="../consul/Consul.html" title="class in io.micronaut.starter.feature.consul">Consul</a>&nbsp;consul)</span></div>
 </section>
 </li>
 </ul>
