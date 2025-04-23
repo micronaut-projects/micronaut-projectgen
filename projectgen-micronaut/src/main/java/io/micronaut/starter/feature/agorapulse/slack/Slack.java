@@ -78,6 +78,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 
+import static io.micronaut.projectgen.core.utils.StringUtils.*;
 import static io.micronaut.starter.feature.agorapulse.AgoraPulseFeature.addMain;
 import static io.micronaut.starter.feature.agorapulse.AgoraPulseFeature.addTest;
 import static io.micronaut.starter.feature.agorapulse.AgoraPulseFeature.addTestUtil;
@@ -152,8 +153,8 @@ public class Slack implements AgoraPulseFeature {
 
     private void addConfiguration(GeneratorContext generatorContext) {
         Map<String, String> slack = new LinkedHashMap<>(1);
-        slack.put("bot-token", "xoxb-" + UUID.randomUUID());
-        slack.put("signing-secret", UUID.randomUUID().toString());
+        slack.put("bot-token", "xoxb-" + randomString());
+        slack.put("signing-secret", randomString());
 
         Map<String, Object> nested = new LinkedHashMap<>(1);
         nested.put("slack", slack);

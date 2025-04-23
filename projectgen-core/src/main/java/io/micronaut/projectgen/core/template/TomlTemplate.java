@@ -37,6 +37,7 @@ import java.util.SortedMap;
 import java.util.SortedSet;
 import java.util.TreeMap;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 public class TomlTemplate extends DefaultTemplate {
 
@@ -48,6 +49,13 @@ public class TomlTemplate extends DefaultTemplate {
 
     public TomlTemplate(String module, String path, Configuration config) {
         super(module, path);
+
+        // Delete unsupported entries (Comments or blank lines)
+        Set<String> keysToBeRemoved = config.keySet().stream()
+            .filter(k -> Configuration.PREFIXES.stream().anyMatch(k::startsWith)).collect(Collectors.toSet());;
+        for (String k : keysToBeRemoved) {
+            config.remove(k);
+        }
 
         // normalize config
         Map<DottedKey, Object> normalized = normalizeTopLevel(config);

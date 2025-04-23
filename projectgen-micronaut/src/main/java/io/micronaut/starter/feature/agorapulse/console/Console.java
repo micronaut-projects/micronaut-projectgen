@@ -86,7 +86,7 @@ public class Console implements AgoraPulseFeature {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        String secret = UUID.randomUUID().toString();
+        String secret = io.micronaut.projectgen.core.utils.StringUtils.randomString();
         addDependency(generatorContext);
         addExampleCode(generatorContext, secret);
         addConfiguration(generatorContext, secret);
