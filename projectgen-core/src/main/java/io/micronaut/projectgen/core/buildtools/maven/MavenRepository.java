@@ -20,6 +20,8 @@ import io.micronaut.core.annotation.NonNull;
 import io.micronaut.projectgen.core.buildtools.Repository;
 import io.micronaut.projectgen.core.rocker.RockerWritable;
 import io.micronaut.projectgen.core.template.mavenRepository;
+
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,7 +39,7 @@ public class MavenRepository extends RockerWritable {
     }
 
     @NonNull
-    public static List<MavenRepository> listOf(List<Repository> repositories) {
+    public static List<MavenRepository> listOf(Collection<Repository> repositories) {
         return repositories.stream()
             .map(it -> new MavenRepository(it.getId(), it.getUrl(), it.isSnapshot()))
             .collect(Collectors.toList());

@@ -23,6 +23,7 @@ import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.buildtools.dependencies.DependencyContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.DependencyCoordinate;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.options.Options;
 
 import java.util.*;
 import static io.micronaut.core.util.CollectionUtils.isNotEmpty;
@@ -52,13 +53,14 @@ public class GradleDependency extends DependencyCoordinate {
     private final boolean useVersionCatalogue;
 
     public GradleDependency(@NonNull Dependency dependency,
+                            @NonNull Options options,
                             @NonNull GeneratorContext generatorContext,
                             boolean useVersionCatalogue) {
         super(dependency);
         gradleConfiguration = GradleConfiguration.of(
             dependency.getScope(),
-            generatorContext.getLanguage(),
-            generatorContext.getTestFramework(),
+            options.language(),
+            options.testFramework(),
             generatorContext
         ).orElseThrow(() ->
             new IllegalArgumentException("Cannot map the dependency scope: [%s] to a Gradle specific scope".formatted(dependency.getScope())));
@@ -157,16 +159,11 @@ public class GradleDependency extends DependencyCoordinate {
     }
 
     @NonNull
-    public static List<GradleDependency> listOf(GeneratorContext generatorContext, boolean useVersionCatalogue) {
-        return listOf(generatorContext, generatorContext, useVersionCatalogue);
-    }
-
-    @NonNull
-    public static List<GradleDependency> listOf(DependencyContext dependencyContext, GeneratorContext generatorContext, boolean useVersionCatalogue) {
-        BuildTool buildTool = generatorContext.getOptions().buildTools().stream().filter(BuildTool::isGradle).findFirst().orElseThrow();
-        return generatorContext.removeDuplicates(dependencyContext.getDependencies(), generatorContext.getLanguage(), buildTool)
+    public static List<GradleDependency> listOf(GeneratorContext generatorContext, DependencyContext dependencyContext, Options options, boolean useVersionCatalogue) {
+        BuildTool buildTool = options.buildTools().stream().filter(BuildTool::isGradle).findFirst().orElseThrow();
+        return dependencyContext.removeDuplicates(dependencyContext.getDependencies(), options.language(), buildTool)
             .stream()
-            .map(dep -> new GradleDependency(dep, generatorContext, useVersionCatalogue))
+            .map(dep -> new GradleDependency(dep, options, generatorContext, useVersionCatalogue))
             .sorted(GradleDependency.COMPARATOR)
             .toList();
     }

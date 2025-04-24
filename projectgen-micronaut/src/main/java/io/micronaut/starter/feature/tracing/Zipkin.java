@@ -19,6 +19,8 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import io.micronaut.starter.feature.server.MicronautServerDependent;
@@ -53,19 +55,20 @@ public class Zipkin implements TracingFeature, MicronautServerDependent {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        addDependencies(generatorContext);
-        generatorContext.getConfiguration().put("tracing.zipkin.enabled", true);
-        generatorContext.getConfiguration().put("tracing.zipkin.http.url", "http://localhost:9411");
-        generatorContext.getConfiguration().put("tracing.zipkin.sampler.probability", 0.1);
+        ModuleContext module = generatorContext.getRootModule();
+        addDependencies(module, generatorContext.getOptions());
+        module.configuration().put("tracing.zipkin.enabled", true);
+        module.configuration().put("tracing.zipkin.http.url", "http://localhost:9411");
+        module.configuration().put("tracing.zipkin.sampler.probability", 0.1);
     }
 
-    protected void addDependencies(GeneratorContext generatorContext) {
-        generatorContext.addDependency(MicronautDependencyUtils.tracingDependency()
+    protected void addDependencies(ModuleContext module, Options options) {
+        module.addDependency(MicronautDependencyUtils.tracingDependency()
                 .artifactId(ARTIFACT_ID_MICRONAUT_TRACING_BRAVE_HTTP)
                 .compile());
 
-        if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions()) && generatorContext.getLanguage() == Language.GROOVY) {
-            generatorContext.addDependency(MicronautDependencyUtils.coreProcessor().compileOnly());
+        if (OptionUtils.hasMavenBuildTool(options) && options.language() == Language.GROOVY) {
+            module.addDependency(MicronautDependencyUtils.coreProcessor().compileOnly());
         }
     }
 

@@ -19,6 +19,7 @@ import com.fizzed.rocker.RockerModel;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.rocker.RockerWritable;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.projectgen.micronaut.ApplicationType;
@@ -65,8 +66,9 @@ public class GradleEnterprise implements Feature, GradleEnterpriseConfiguration 
 
     @Override
     public void apply(GeneratorContext generatorContext) {
+        ModuleContext module = generatorContext.getRootModule();
         if (OptionUtils.hasGradleBuildTool(generatorContext.getOptions())) {
-            generatorContext.addBuildPlugin(gradlePlugin(this));
+            module.addBuildPlugin(gradlePlugin(this));
         }
         if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())) {
             applyMaven(generatorContext, this);
@@ -90,7 +92,8 @@ public class GradleEnterprise implements Feature, GradleEnterpriseConfiguration 
     protected void addMavenTemplate(GeneratorContext generatorContext, String name, RockerModel rockerModel) {
         String templateName = name.contains(DOT) ? name.substring(0, name.indexOf(DOT)) : name;
         String path = String.join(SLASH, MAVEN_FOLDER, name);
-        generatorContext.addTemplate(templateName, new RockerTemplate(path, rockerModel));
+        ModuleContext module = generatorContext.getRootModule();
+        module.addTemplate(templateName, new RockerTemplate(path, rockerModel));
     }
 
     private static RockerModel extensionsRockerModel(GeneratorContext generatorContext) {

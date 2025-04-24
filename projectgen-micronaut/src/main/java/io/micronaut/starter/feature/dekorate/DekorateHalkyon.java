@@ -22,6 +22,7 @@ import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import jakarta.inject.Singleton;
 
 /**
@@ -65,12 +66,12 @@ public class DekorateHalkyon extends AbstractDekorateServiceFeature {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
+        ModuleContext module = generatorContext.getRootModule();
         Dependency.Builder halkyon = Dependency.builder()
                 .groupId("io.dekorate")
                 .artifactId("halkyon-annotations")
                 .template();
-
-        generatorContext.addDependency(halkyon.versionProperty("dekorate.version").annotationProcessor());
-        generatorContext.addDependency(halkyon.compile());
+        module.addDependency(halkyon.versionProperty("dekorate.version").annotationProcessor());
+        module.addDependency(halkyon.compile());
     }
 }

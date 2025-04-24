@@ -18,6 +18,7 @@ package io.micronaut.starter.feature.k8s;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
@@ -75,7 +76,8 @@ public class KubernetesClient implements Feature {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        generatorContext.addDependency(Dependency.builder()
+        ModuleContext module = generatorContext.getRootModule();
+        module.addDependency(Dependency.builder()
                 .groupId(MICRONAUT_KUBERNETES_GROUP_ID)
                 .artifactId("micronaut-kubernetes-client")
                 .compile());
@@ -83,12 +85,13 @@ public class KubernetesClient implements Feature {
     }
 
     static void fixupDependencies(GeneratorContext generatorContext) {
+        ModuleContext module = generatorContext.getRootModule();
         if (!generatorContext.hasFeature(DiscoveryCore.class)
                 && OptionUtils.hasMavenBuildTool(generatorContext.getOptions())
                 && generatorContext.getLanguage() == Language.GROOVY
         ) {
             // Maven requires discovery core provided to work with http-validation under groovy
-            generatorContext.addDependency(MicronautDependencyUtils.coreDependency()
+            module.addDependency(MicronautDependencyUtils.coreDependency()
                     .artifactId(DiscoveryCore.ARTIFACT_ID_MICRONAUT_DISCOVERY_CORE)
                     .compileOnly());
         }

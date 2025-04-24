@@ -4,7 +4,9 @@ import io.micronaut.context.annotation.Property;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.feature.config.ApplicationConfiguration;
+import io.micronaut.projectgen.core.feature.config.Configuration;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.io.MapOutputHandler;
 import io.micronaut.projectgen.micronaut.MicronautOptions;
 import io.micronaut.projectgen.micronaut.MicronautProjectGenerator;
@@ -46,7 +48,8 @@ class PropertiesTemplateTest {
 
         @Override
         public void apply(GeneratorContext generatorContext) {
-            ApplicationConfiguration configuration = generatorContext.getConfiguration();
+            ModuleContext module = generatorContext.getRootModule();
+            Configuration configuration = module.configuration();
             configuration.blankLine();
             configuration.comment("General Server Configuration");
             configuration.put("micronaut.server.port", "8090");

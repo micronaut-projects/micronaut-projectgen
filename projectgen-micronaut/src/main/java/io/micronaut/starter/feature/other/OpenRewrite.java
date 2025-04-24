@@ -18,6 +18,7 @@ package io.micronaut.starter.feature.other;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.rocker.RockerWritable;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
@@ -67,37 +68,38 @@ public class OpenRewrite implements LanguageSpecificFeature {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
+        ModuleContext module = generatorContext.getRootModule();
         BuildTool buildTool = generatorContext.getBuildTool();
         if (buildTool.isGradle()) {
-            addGradlePlugin(generatorContext);
+            addGradlePlugin(module);
         } else if (buildTool == MAVEN) {
-            addMavenPlugin(generatorContext);
+            addMavenPlugin(module);
         }
     }
 
-    private void addGradlePlugin(GeneratorContext generatorContext) {
-        generatorContext.addHelpLink("Rewrite Gradle Plugin", "https://plugins.gradle.org/plugin/org.openrewrite.rewrite");
-        generatorContext.addHelpLink("Rewrite Micronaut3to4Migration Recipe", "https://docs.openrewrite.org/running-recipes/popular-recipe-guides/migrate-to-micronaut-4-from-micronaut-3");
-        generatorContext.addBuildPlugin(GradlePlugin.builder()
+    private void addGradlePlugin(ModuleContext module) {
+        module.addHelpLink("Rewrite Gradle Plugin", "https://plugins.gradle.org/plugin/org.openrewrite.rewrite");
+        module.addHelpLink("Rewrite Micronaut3to4Migration Recipe", "https://docs.openrewrite.org/running-recipes/popular-recipe-guides/migrate-to-micronaut-4-from-micronaut-3");
+        module.addBuildPlugin(GradlePlugin.builder()
                 .id("org.openrewrite.rewrite")
                 .lookupArtifactId("plugin")
                 .extension(new RockerWritable(openrewriteGradlePlugin.template()))
                 .build());
 
-        generatorContext.addDependency(Dependency.builder()
+        module.addDependency(Dependency.builder()
                 .groupId("org.openrewrite.recipe")
                 .lookupArtifactId("rewrite-micronaut")
                 .scope(OPENREWRITE));
     }
 
-    private void addMavenPlugin(GeneratorContext generatorContext) {
-        generatorContext.addHelpLink("Rewrite Micronaut3to4Migration Recipe", "https://docs.openrewrite.org/running-recipes/popular-recipe-guides/migrate-to-micronaut-4-from-micronaut-3");
+    private void addMavenPlugin(ModuleContext module) {
+        module.addHelpLink("Rewrite Micronaut3to4Migration Recipe", "https://docs.openrewrite.org/running-recipes/popular-recipe-guides/migrate-to-micronaut-4-from-micronaut-3");
         String mavenPluginArtifactId = "rewrite-maven-plugin";
-        generatorContext.addBuildPlugin(MavenPlugin.builder()
+        module.addBuildPlugin(MavenPlugin.builder()
                 .artifactId(mavenPluginArtifactId)
                 .extension(new RockerWritable(openrewriteMavenPlugin.template()))
                 .build());
-        BuildProperties props = generatorContext.getBuildProperties();
+        BuildProperties props = module.buildProperties();
         coordinateResolver.resolve(mavenPluginArtifactId)
                 .ifPresent(coordinate -> props.put(
                         "openrewrite.maven.plugin.version", coordinate.getVersion()));

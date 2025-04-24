@@ -17,6 +17,7 @@ package io.micronaut.projectgen.core.openrewrite;
 
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.template.StringTemplate;
 
 import java.util.List;
@@ -39,11 +40,12 @@ public interface OpenRewriteFeature extends Feature {
     }
 
     default void processRecipes(GeneratorContext generatorContext) {
+        ModuleContext rootModule = generatorContext.getRootModule();
         for (String recipeName : getRecipes(generatorContext)) {
-            generatorContext.addConfigurationByRecipeName(recipeName);
-            generatorContext.addBootstrapConfigurationByRecipeName(recipeName);
-            generatorContext.addDependenciesByRecipeName(recipeName);
-            generatorContext.addTemplatesByRecipeName(recipeName);
+            rootModule.addConfigurationByRecipeName(recipeName);
+            rootModule.addBootstrapConfigurationByRecipeName(recipeName);
+            rootModule.addDependenciesByRecipeName(generatorContext.getOptions(), recipeName);
+            rootModule.addTemplatesByRecipeName(recipeName);
         }
     }
 

@@ -19,9 +19,10 @@ import com.fizzed.rocker.RockerModel;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
-import io.micronaut.projectgen.core.buildtools.RepositoryResolver;
 import io.micronaut.projectgen.core.feature.BuildFeature;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.core.rocker.RockerTemplate;
 import io.micronaut.projectgen.core.template.BinaryTemplate;
 import io.micronaut.projectgen.core.template.Template;
@@ -40,11 +41,9 @@ public class Maven implements BuildFeature {
     protected static final String WRAPPER_PROPS = ".mvn/wrapper/maven-wrapper.properties";
     protected static final String MAVEN_PREFIX = "maven/";
     protected final MavenBuildCreator dependencyResolver;
-    protected final RepositoryResolver repositoryResolver;
 
-    public Maven(MavenBuildCreator dependencyResolver, RepositoryResolver repositoryResolver) {
+    public Maven(MavenBuildCreator dependencyResolver) {
         this.dependencyResolver = dependencyResolver;
-        this.repositoryResolver = repositoryResolver;
     }
 
     @Override
@@ -74,10 +73,19 @@ public class Maven implements BuildFeature {
      * @param generatorContext Generator Context
      */
     protected void generatePom(GeneratorContext generatorContext) {
-        MavenBuild mavenBuild = createBuild(generatorContext);
+
+        for (String module : generatorContext.getModuleNames()) {
+            ModuleContext moduleContext = generatorContext.getModuleByName(module);
+            MavenBuild mavenBuild = createBuild(moduleContext, generatorContext.getOptions());
+            ParentPom parentPom = generatorContext.getFeature(ParentPomFeature.class).map(ParentPomFeature::getParentPom).orElse(null);
+            RockerModel rockerModel = genericPom.template(parentPom, mavenBuild);
+            moduleContext.addTemplate(module + "mavenPom", new RockerTemplate(module + "/pom.xml", rockerModel));
+        }
+        ModuleContext rootModule = generatorContext.getRootModule();
+        MavenBuild mavenBuild = createBuild(rootModule, generatorContext.getOptions());
         ParentPom parentPom = generatorContext.getFeature(ParentPomFeature.class).map(ParentPomFeature::getParentPom).orElse(null);
         RockerModel rockerModel = genericPom.template(parentPom, mavenBuild);
-        generatorContext.addTemplate("mavenPom", new RockerTemplate("pom.xml", rockerModel));
+        rootModule.addTemplate("mavenPom", new RockerTemplate("pom.xml", rockerModel));
     }
 
     /**
@@ -86,18 +94,20 @@ public class Maven implements BuildFeature {
      */
     protected void addMavenWrapper(GeneratorContext generatorContext) {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        generatorContext.addTemplate("mavenWrapperJar", new BinaryTemplate(Template.ROOT, WRAPPER_JAR, classLoader.getResource(MAVEN_PREFIX + WRAPPER_JAR)));
-        generatorContext.addTemplate("mavenWrapperProperties", new URLTemplate(Template.ROOT, WRAPPER_PROPS, classLoader.getResource(MAVEN_PREFIX + WRAPPER_PROPS)));
-        generatorContext.addTemplate("mavenWrapper", new URLTemplate(Template.ROOT, "mvnw", classLoader.getResource(MAVEN_PREFIX + "mvnw"), true));
-        generatorContext.addTemplate("mavenWrapperBat", new URLTemplate(Template.ROOT, "mvnw.bat", classLoader.getResource(MAVEN_PREFIX + "mvnw.cmd"), false));
+        ModuleContext rootModule = generatorContext.getRootModule();
+        rootModule.addTemplate("mavenWrapperJar", new BinaryTemplate(Template.ROOT, WRAPPER_JAR, classLoader.getResource(MAVEN_PREFIX + WRAPPER_JAR)));
+        rootModule.addTemplate("mavenWrapperProperties", new URLTemplate(Template.ROOT, WRAPPER_PROPS, classLoader.getResource(MAVEN_PREFIX + WRAPPER_PROPS)));
+        rootModule.addTemplate("mavenWrapper", new URLTemplate(Template.ROOT, "mvnw", classLoader.getResource(MAVEN_PREFIX + "mvnw"), true));
+        rootModule.addTemplate("mavenWrapperBat", new URLTemplate(Template.ROOT, "mvnw.bat", classLoader.getResource(MAVEN_PREFIX + "mvnw.cmd"), false));
     }
 
     /**
      *
-     * @param generatorContext Generator Context
+     * @param moduleContext Generator Context
+     * @param options Options
      * @return Maven Build
      */
-    protected MavenBuild createBuild(GeneratorContext generatorContext) {
-        return dependencyResolver.create(generatorContext, repositoryResolver.resolveRepositories(generatorContext));
+    protected MavenBuild createBuild(ModuleContext moduleContext, Options options) {
+        return dependencyResolver.create(moduleContext, options);
     }
 }

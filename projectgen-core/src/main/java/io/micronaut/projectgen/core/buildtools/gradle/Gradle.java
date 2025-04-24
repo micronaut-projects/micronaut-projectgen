@@ -21,9 +21,9 @@ import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.buildtools.Property;
-import io.micronaut.projectgen.core.buildtools.RepositoryResolver;
 import io.micronaut.projectgen.core.feature.BuildFeature;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.rocker.RockerTemplate;
 import io.micronaut.projectgen.core.template.BinaryTemplate;
 import io.micronaut.projectgen.core.template.Template;
@@ -68,12 +68,9 @@ public class Gradle implements BuildFeature {
     private static final String GRADLE_PROPERTIES = "gradle.properties";
 
     protected final GradleBuildCreator dependencyResolver;
-    protected final RepositoryResolver repositoryResolver;
 
-    public Gradle(GradleBuildCreator dependencyResolver,
-                  RepositoryResolver repositoryResolver) {
+    public Gradle(GradleBuildCreator dependencyResolver) {
         this.dependencyResolver = dependencyResolver;
-        this.repositoryResolver = repositoryResolver;
     }
 
     @Override
@@ -99,16 +96,28 @@ public class Gradle implements BuildFeature {
      * @param generatorContext Generator Context
      */
     protected void generateBuildFiles(GeneratorContext generatorContext) {
+        for (String module : generatorContext.getModuleNames()) {
+            ModuleContext moduleContext = generatorContext.getModuleByName(module);
+            generateBuildFiles(generatorContext, moduleContext);
+        }
+        ModuleContext rootModule = generatorContext.getRootModule();
+        generateBuildFiles(generatorContext, generatorContext.getRootModule());
+
         BuildTool buildTool = generatorContext.getOptions().buildTools().stream().filter(BuildTool::isGradle).findFirst().orElseThrow();
-        GradleBuild build = createBuild(generatorContext);
+        GradleBuild build = createBuild(generatorContext, rootModule);
+        addSettingsFile(buildTool, generatorContext, build);
+    }
+
+    protected void generateBuildFiles(GeneratorContext generatorContext, ModuleContext moduleContext) {
+        BuildTool buildTool = generatorContext.getOptions().buildTools().stream().filter(BuildTool::isGradle).findFirst().orElseThrow();
+        GradleBuild build = createBuild(generatorContext, moduleContext);
         RockerModel rockerModel = genericBuildGradle.template(generatorContext.getProject(),
             build,
             generatorContext.getFeatures().mainClass().orElse(null),
             generatorContext.getOptions().version(),
             StringUtils.isNotEmpty(generatorContext.getOptions().group()) ? generatorContext.getOptions().group() : generatorContext.getProject().getPackageName());
-        generatorContext.addTemplate(NAME_BUILD_GRADLE,
+        moduleContext.addTemplate(NAME_BUILD_GRADLE,
             new RockerTemplate(Template.ROOT, buildTool.getBuildFileName(), rockerModel));
-        addSettingsFile(buildTool, generatorContext, build);
     }
 
     /**
@@ -117,10 +126,11 @@ public class Gradle implements BuildFeature {
      */
     protected void addGradleInitFiles(GeneratorContext generatorContext) {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        generatorContext.addTemplate(NAME_GRADLE_WRAPPER_JAR, new BinaryTemplate(Template.ROOT, WRAPPER_JAR_PATH, classLoader.getResource(WRAPPER_JAR)));
-        generatorContext.addTemplate(NAME_GRADLE_WRAPPER_PROPERTIES, new URLTemplate(Template.ROOT, WRAPPER_PROPS_PATH, classLoader.getResource(WRAPPER_PROPS)));
-        generatorContext.addTemplate(NAME_GRADLE_WRAPPER, new URLTemplate(Template.ROOT, GRADLEW_PATH, classLoader.getResource(GRADLEW), true));
-        generatorContext.addTemplate(NAME_GRADLE_WRAPPER_BAT, new URLTemplate(Template.ROOT, GRADLEW_BAT_PATH, classLoader.getResource(GRADLEW_BAT), false));
+        ModuleContext rootModule = generatorContext.getRootModule();
+        rootModule.addTemplate(NAME_GRADLE_WRAPPER_JAR, new BinaryTemplate(Template.ROOT, WRAPPER_JAR_PATH, classLoader.getResource(WRAPPER_JAR)));
+        rootModule.addTemplate(NAME_GRADLE_WRAPPER_PROPERTIES, new URLTemplate(Template.ROOT, WRAPPER_PROPS_PATH, classLoader.getResource(WRAPPER_PROPS)));
+        rootModule.addTemplate(NAME_GRADLE_WRAPPER, new URLTemplate(Template.ROOT, GRADLEW_PATH, classLoader.getResource(GRADLEW), true));
+        rootModule.addTemplate(NAME_GRADLE_WRAPPER_BAT, new URLTemplate(Template.ROOT, GRADLEW_BAT_PATH, classLoader.getResource(GRADLEW_BAT), false));
     }
 
     /**
@@ -128,8 +138,8 @@ public class Gradle implements BuildFeature {
      * @param generatorContext  Generator Context
      * @return Gradle Build
      */
-    protected GradleBuild createBuild(GeneratorContext generatorContext) {
-        return dependencyResolver.create(generatorContext, repositoryResolver.resolveRepositories(generatorContext), Gradle.DEFAULT_USER_VERSION_CATALOGUE);
+    protected GradleBuild createBuild(GeneratorContext generatorContext, ModuleContext moduleContext) {
+        return dependencyResolver.create(generatorContext, moduleContext, generatorContext.getOptions(), Gradle.DEFAULT_USER_VERSION_CATALOGUE);
     }
 
     /**
@@ -137,9 +147,10 @@ public class Gradle implements BuildFeature {
      * @param generatorContext  Generator Context
      */
     protected void addGradleProperties(GeneratorContext generatorContext) {
-        List<Property> properties = generatorContext.getBuildProperties().getProperties();
+        ModuleContext moduleContext = generatorContext.getRootModule();
+        List<Property> properties = moduleContext.buildProperties().getProperties();
         if (!properties.isEmpty()) {
-            generatorContext.addTemplate("projectProperties", new RockerTemplate(Template.ROOT, GRADLE_PROPERTIES, gradleProperties.template(properties)));
+            moduleContext.addTemplate("projectProperties", new RockerTemplate(Template.ROOT, GRADLE_PROPERTIES, gradleProperties.template(properties)));
         }
     }
 
@@ -151,7 +162,8 @@ public class Gradle implements BuildFeature {
     protected void addSettingsFile(BuildTool buildTool, GeneratorContext generatorContext, GradleBuild build) {
         boolean hasMultiProjectFeature = generatorContext.getFeatures().hasMultiProjectFeature();
         String settingsFile = buildTool == BuildTool.GRADLE ? SETTINGS_GRADLE : SETTINGS_GRADLE_KTS;
-        generatorContext.addTemplate("gradleSettings",
+        ModuleContext moduleContext = generatorContext.getRootModule();
+        moduleContext.addTemplate("gradleSettings",
             new RockerTemplate(Template.ROOT, settingsFile,
                 settingsGradle.template(generatorContext.getProject(), build, hasMultiProjectFeature, generatorContext.getModuleNames())));
     }

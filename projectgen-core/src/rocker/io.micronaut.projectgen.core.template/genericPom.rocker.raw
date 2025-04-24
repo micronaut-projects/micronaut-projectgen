@@ -20,18 +20,24 @@
 @if (mavenBuild.getVersion() != null) {
   <version>@mavenBuild.getVersion()</version>
 }
+@if(mavenBuild.getRepositories().size() > 0) {
 @io.micronaut.projectgen.core.template.mavenProperties.template(mavenBuild.getProperties())
   <repositories>
 @mavenBuild.renderRepositories(4)
   </repositories>
+}
+@if(mavenBuild.getDependencies(false).size() > 0) {
   <dependencies>
 @for (MavenDependency f : mavenBuild.getDependencies(false)) {
 @io.micronaut.projectgen.core.template.mavenDependency.template(f.getGroupId(), f.getArtifactId(), f.getMavenScope().toString(), f.getVersion(), false, f.getExclusions())
 }
   </dependencies>
+}
+@if(mavenBuild.getPlugins().size() > 0) {
   <build>
     <plugins>
 @mavenBuild.renderPlugins(6)
     </plugins>
   </build>
+}
 </project>

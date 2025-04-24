@@ -16,6 +16,7 @@
 package io.micronaut.starter.feature.build;
 
 import io.micronaut.core.annotation.NonNull;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.gradle.GradlePlugin;
@@ -61,19 +62,19 @@ public interface KotlinSupportFeature extends OneOfFeature {
         return Category.LANGUAGES;
     }
 
-    default void addBuildPlugins(@NonNull GeneratorContext generatorContext) {
+    default void addBuildPlugins(@NonNull GeneratorContext generatorContext, ModuleContext module) {
         if (shouldApply(generatorContext)) {
-            generatorContext.addBuildPlugin(GradlePlugin.of("org.jetbrains.kotlin.jvm", "kotlin-gradle-plugin"));
-            generatorContext.addBuildPlugin(GradlePlugin.of("org.jetbrains.kotlin.plugin.allopen", "kotlin-allopen"));
+            module.addBuildPlugin(GradlePlugin.of("org.jetbrains.kotlin.jvm", "kotlin-gradle-plugin"));
+            module.addBuildPlugin(GradlePlugin.of("org.jetbrains.kotlin.plugin.allopen", "kotlin-allopen"));
             if (generatorContext.getFeatures().isFeaturePresent(JpaFeature.class)) {
-                generatorContext.addBuildPlugin(GradlePlugin.of("org.jetbrains.kotlin.plugin.jpa", "kotlin-noarg"));
+                module.addBuildPlugin(GradlePlugin.of("org.jetbrains.kotlin.plugin.jpa", "kotlin-noarg"));
             }
         }
         if (generatorContext.getJdkVersion().greaterThanEqual(JdkVersion.JDK_21) && generatorContext.hasFeature(Kapt.class)) {
             if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())) {
-                generatorContext.addTemplate("opens-for-kapt-and-java-21", new StringTemplate(".mvn/jvm.config", JDK_21_KAPT_MODULES));
+                module.addTemplate("opens-for-kapt-and-java-21", new StringTemplate(".mvn/jvm.config", JDK_21_KAPT_MODULES));
             } else {
-                generatorContext.getBuildProperties().put("kotlin.daemon.jvmargs", JDK_21_KAPT_MODULES.lines().collect(Collectors.joining(" \\" + System.lineSeparator() + "  ")));
+                module.buildProperties().put("kotlin.daemon.jvmargs", JDK_21_KAPT_MODULES.lines().collect(Collectors.joining(" \\" + System.lineSeparator() + "  ")));
             }
         }
     }

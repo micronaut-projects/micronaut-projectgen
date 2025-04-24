@@ -23,7 +23,9 @@ import io.micronaut.projectgen.core.buildtools.dependencies.Coordinate;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.buildtools.dependencies.DependencyCoordinate;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.options.Language;
+import io.micronaut.projectgen.core.options.Options;
 import jakarta.inject.Singleton;
 
 import java.util.ArrayList;
@@ -37,23 +39,25 @@ public class MavenBuildCreator {
 
     /**
      *
-     * @param generatorContext Generator Context
-     * @param repositories repositories
+     * @param moduleContext Module Context
+     * @param options Options
      * @return Maven Build
      */
     @NonNull
-    public MavenBuild create(GeneratorContext generatorContext, List<Repository> repositories) {
-        List<MavenDependency> dependencies = MavenDependency.listOf(generatorContext, generatorContext.getLanguage());
-        BuildProperties buildProperties = generatorContext.getBuildProperties();
+    public MavenBuild create(ModuleContext moduleContext,
+                             Options options) {
+        List<MavenDependency> dependencies = MavenDependency.listOf(moduleContext.dependencyContext(),
+            options.language());
+        BuildProperties buildProperties = moduleContext.buildProperties();
         List<DependencyCoordinate> annotationProcessorsCoordinates = new ArrayList<>();
         List<DependencyCoordinate> testAnnotationProcessorsCoordinates = new ArrayList<>();
-        boolean isKotlin = generatorContext.getLanguage() == Language.KOTLIN;
+        boolean isKotlin = options.language() == Language.KOTLIN;
         MavenCombineAttribute combineAttribute = isKotlin ? MavenCombineAttribute.OVERRIDE : MavenCombineAttribute.APPEND;
         MavenCombineAttribute testCombineAttribute = combineAttribute;
 
-        for (Dependency dependency : generatorContext.getDependencies()) {
+        for (Dependency dependency : moduleContext.getDependencies()) {
             if (dependency.getScope().getPhases().contains(Phase.ANNOTATION_PROCESSING)) {
-                if (dependency.getScope().getSource() == Source.MAIN && generatorContext.getLanguage() != Language.GROOVY) {
+                if (dependency.getScope().getSource() == Source.MAIN && options.language() != Language.GROOVY) {
                     // Don't add these for Groovy projects: it results in multiple dependencies.
                     // DependencyContext has already resolved Groovy annotation processors as dependencies
                     annotationProcessorsCoordinates.add(new DependencyCoordinate(dependency, true));
@@ -74,26 +78,26 @@ public class MavenBuildCreator {
         annotationProcessorsCoordinates.sort(Coordinate.COMPARATOR);
         testAnnotationProcessorsCoordinates.sort(Coordinate.COMPARATOR);
 
-        List<MavenPlugin> plugins = generatorContext.getBuildPlugins()
+        List<MavenPlugin> plugins = moduleContext.buildPlugins()
             .stream()
             .filter(MavenPlugin.class::isInstance)
             .map(MavenPlugin.class::cast)
             .sorted(OrderUtil.COMPARATOR)
             .toList();
 
-        return new MavenBuild(generatorContext.getOptions().group(),
-            StringUtils.isNotEmpty(generatorContext.getOptions().artifact())
-                ? generatorContext.getOptions().artifact()
-                : generatorContext.getProject().getName(),
-            generatorContext.getOptions().version(),
+        return new MavenBuild(options.group(),
+            StringUtils.isNotEmpty(options.artifact())
+                ? options.artifact()
+                : options.name(),
+            options.version(),
             annotationProcessorsCoordinates,
             testAnnotationProcessorsCoordinates,
             dependencies,
             buildProperties.getProperties(),
             plugins,
-            MavenRepository.listOf(repositories),
+            MavenRepository.listOf(moduleContext.repositories()),
             combineAttribute,
             testCombineAttribute,
-            generatorContext.getProfiles());
+            moduleContext.profiles());
     }
 }

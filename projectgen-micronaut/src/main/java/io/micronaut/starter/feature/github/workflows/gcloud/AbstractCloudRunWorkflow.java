@@ -17,6 +17,7 @@ package io.micronaut.starter.feature.github.workflows.gcloud;
 
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.feature.FeatureContext;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.rocker.RockerWritable;
 import io.micronaut.starter.feature.github.workflows.Secret;
 import io.micronaut.starter.feature.github.workflows.WorkflowsUtils;
@@ -74,20 +75,20 @@ public abstract class AbstractCloudRunWorkflow extends AbstractDockerRegistryWor
     @Override
     public void apply(GeneratorContext generatorContext) {
         super.apply(generatorContext);
-
+        ModuleContext module = generatorContext.getRootModule();
         String workflowFilePath = ".github/workflows/" + getWorkflowFileName(generatorContext);
 
-        generatorContext.addTemplate("gcloudCloudRunWorkflow",
+        module.addTemplate("gcloudCloudRunWorkflow",
                 new RockerTemplate(workflowFilePath,
                         gcloudCloudRunWorkflow.template(generatorContext.getProject(), generatorContext.getBuildTool(),
                                 generatorContext.getJdkVersion(), isGraal)
                 )
         );
 
-        generatorContext.addTemplate("exampleController", WorkflowsUtils.createExampleController(
+        module.addTemplate("exampleController", WorkflowsUtils.createExampleController(
                 generatorContext.getProject(), generatorContext.getLanguage()));
 
-        generatorContext.addHelpTemplate(new RockerWritable(gcloudCloudRunWorkflowReadme.template(
+        module.addHelpTemplate(new RockerWritable(gcloudCloudRunWorkflowReadme.template(
                 this, generatorContext.getProject(), workflowFilePath)));
     }
 }

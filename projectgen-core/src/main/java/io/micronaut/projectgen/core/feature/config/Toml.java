@@ -23,6 +23,7 @@ import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.projectgen.core.feature.FeaturePhase;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.template.Template;
 import io.micronaut.projectgen.core.template.TomlTemplate;
 import jakarta.inject.Singleton;
@@ -48,7 +49,8 @@ public class Toml implements ConfigurationFeature {
 
             @Override
             public void apply(GeneratorContext generatorContext) {
-                generatorContext.addDependency(Dependency.builder()
+                ModuleContext module = generatorContext.getRootModule();
+                module.addDependency(Dependency.builder()
                         .groupId("io.micronaut.toml")
                         .artifactId("micronaut-toml")
                         .compile());

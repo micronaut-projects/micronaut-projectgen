@@ -18,6 +18,7 @@ package io.micronaut.starter.feature.messaging.kafka;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.generator.Project;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
@@ -76,21 +77,24 @@ public class KafkaStreams extends EaseTestingFeature implements MessagingFeature
 
     @Override
     public void apply(GeneratorContext generatorContext) {
+        ModuleContext module = generatorContext.getRootModule();
         Project project = generatorContext.getProject();
 
         String exampleListener = generatorContext.getSourcePath("/{packagePath}/ExampleListener");
-        generatorContext.addTemplate("exampleListener", exampleListener,
+        module.addTemplate(generatorContext.getOptions().language(),
+            "exampleListener", exampleListener,
             exampleListenerJava.template(project),
             exampleListenerKotlin.template(project),
             exampleListenerGroovy.template(project));
 
         String exampleFactory = generatorContext.getSourcePath("/{packagePath}/ExampleFactory");
-        generatorContext.addTemplate("exampleFactory", exampleFactory,
+        module.addTemplate(generatorContext.getOptions().language(),
+            "exampleFactory", exampleFactory,
             exampleFactoryJava.template(project),
             exampleFactoryKotlin.template(project),
             exampleFactoryGroovy.template(project));
 
-        generatorContext.addDependency(Dependency.builder()
+        module.addDependency(Dependency.builder()
                 .groupId("io.micronaut.kafka")
                 .artifactId("micronaut-kafka-streams")
                 .compile());

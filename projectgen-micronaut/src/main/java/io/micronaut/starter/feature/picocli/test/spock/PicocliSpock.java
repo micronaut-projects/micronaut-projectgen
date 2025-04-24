@@ -18,6 +18,7 @@ package io.micronaut.starter.feature.picocli.test.spock;
 import com.fizzed.rocker.RockerModel;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.generator.Project;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.micronaut.template.picocli.test.spock.picocliSpockTest;
@@ -39,7 +40,8 @@ public class PicocliSpock implements PicocliTestFeature {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        generatorContext.addTemplate("picocliSpock", getTemplate(generatorContext.getProject()));
+        ModuleContext module = generatorContext.getRootModule();
+        module.addTemplate("picocliSpock", getTemplate(generatorContext.getProject()));
     }
 
     @Override

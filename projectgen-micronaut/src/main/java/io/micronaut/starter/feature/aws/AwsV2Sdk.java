@@ -19,6 +19,7 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
@@ -80,7 +81,8 @@ public class AwsV2Sdk implements AwsFeature {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        generatorContext.addDependency(Dependency.builder()
+        ModuleContext module = generatorContext.getRootModule();
+        module.addDependency(Dependency.builder()
                 .groupId(GROUP_ID_MICRONAUT_AWS)
                 .artifactId(ARTIFACT_ID_MICRONAUT_AWS_SDK_V_2)
                 .compile());

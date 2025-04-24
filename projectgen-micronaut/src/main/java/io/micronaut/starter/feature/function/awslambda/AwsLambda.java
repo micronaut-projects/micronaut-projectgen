@@ -20,6 +20,8 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.context.env.Environment;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.feature.config.Configuration;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.rocker.RockerWritable;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.projectgen.micronaut.ApplicationType;
@@ -207,62 +209,63 @@ public class AwsLambda implements FunctionFeature, DefaultFeature, AwsCloudFeatu
 
     @Override
     public void apply(GeneratorContext generatorContext) {
+        ModuleContext module = generatorContext.getRootModule();
         if (generatorContext.isFeatureMissing(CodeContributingFeature.class)) {
             ApplicationType applicationType = generatorContext.getOptions() instanceof MicronautOptions mnOptions ? mnOptions.applicationType() : null;
             if (applicationType == DEFAULT || applicationType == FUNCTION) {
-                addCode(generatorContext);
+                addCode(generatorContext, module);
                 if (applicationType == FUNCTION) {
-                    generatorContext.addDependency(AWS_LAMBDA_JAVA_EVENTS);
+                    module.addDependency(AWS_LAMBDA_JAVA_EVENTS);
                 }
-                addHelpTemplate(generatorContext);
-                disableSecurityFilterInTestConfiguration(generatorContext);
+                addHelpTemplate(generatorContext, module);
+                disableSecurityFilterInTestConfiguration(generatorContext, module);
             }
         }
         addMicronautRuntimeBuildProperty(generatorContext);
-        addDependencies(generatorContext);
+        addDependencies(module, generatorContext);
     }
 
-    private void addDependencies(@NonNull GeneratorContext generatorContext) {
+    private void addDependencies(@NonNull ModuleContext module, GeneratorContext generatorContext) {
         if (generatorContext.getOptions() instanceof MicronautOptions micronautOptions && micronautOptions.applicationType() == ApplicationType.FUNCTION) {
-            generatorContext.addDependency(DEPENDENCY_MICRONAUT_FUNCTION_AWS);
+            module.addDependency(DEPENDENCY_MICRONAUT_FUNCTION_AWS);
         }
         if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions()) && generatorContext.getOptions() instanceof MicronautOptions micronautOptions && micronautOptions.applicationType() == DEFAULT) {
-            generatorContext.addDependency(DEPENDENCY_MICRONAUT_FUNCTION_AWS_API_PROXY);
-            generatorContext.addDependency(DEPENDENCY_MICRONAUT_FUNCTION_AWS_API_PROXY_TEST);
+            module.addDependency(DEPENDENCY_MICRONAUT_FUNCTION_AWS_API_PROXY);
+            module.addDependency(DEPENDENCY_MICRONAUT_FUNCTION_AWS_API_PROXY_TEST);
         }
         if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions()) && generatorContext.hasFeature(GraalVM.class)) {
-            generatorContext.addDependency(AwsLambdaCustomRuntime.DEPENDENCY_AWS_FUNCTION_AWS_CUSTOM_RUNTIME);
+            module.addDependency(AwsLambdaCustomRuntime.DEPENDENCY_AWS_FUNCTION_AWS_CUSTOM_RUNTIME);
         }
 
         if (generatorContext.hasFeature(AwsLambdaSnapstart.class)) {
-            generatorContext.addDependency(DEPENDENCY_MICRONAUT_CRAC);
+            module.addDependency(DEPENDENCY_MICRONAUT_CRAC);
         }
 
         if (generatorContext.getFeatures().testFramework().isSpock() &&
                 OptionUtils.hasGradleBuildTool(generatorContext.getOptions())) {
             // maven has this in parent pom
-            generatorContext.addDependency(DEPENDENCY_MICRONAUT_FUNCTION_TEST);
+            module.addDependency(DEPENDENCY_MICRONAUT_FUNCTION_TEST);
         }
     }
 
-    protected void addCode(@NonNull GeneratorContext generatorContext) {
+    protected void addCode(@NonNull GeneratorContext generatorContext, ModuleContext module) {
         Project project = generatorContext.getProject();
         ApplicationType applicationType = generatorContext.getOptions() instanceof MicronautOptions mnOptions ? mnOptions.applicationType() : null;
         if (applicationType == DEFAULT) {
-            addHomeController(generatorContext, project);
-            addHomeControllerTest(generatorContext, project);
+            addHomeController(generatorContext, module, project);
+            addHomeControllerTest(generatorContext, module, project);
         } else if (applicationType == FUNCTION) {
-            addRequestHandler(generatorContext, project);
+            addRequestHandler(generatorContext, module, project);
             if (generatorContext.getFeatures().hasFeature(AwsApiFeature.class) ||
                     !generatorContext.getFeatures().hasFeature(AwsLambdaEventFeature.class)) {
-                addTest(generatorContext, project);
+                addTest(generatorContext, module, project);
             }
         }
     }
 
-    protected void addHelpTemplate(@NonNull GeneratorContext generatorContext) {
+    protected void addHelpTemplate(@NonNull GeneratorContext generatorContext, ModuleContext module) {
         readmeTemplate(generatorContext)
-                .ifPresent(rockerModel -> generatorContext.addHelpTemplate(new RockerWritable(rockerModel)));
+                .ifPresent(rockerModel -> module.addHelpTemplate(new RockerWritable(rockerModel)));
     }
 
     @NonNull
@@ -272,14 +275,14 @@ public class AwsLambda implements FunctionFeature, DefaultFeature, AwsCloudFeatu
                 .map(f -> HandlerClassFeature.readmeRockerModel(f, generatorContext, link));
     }
 
-    protected void disableSecurityFilterInTestConfiguration(@NonNull GeneratorContext generatorContext) {
+    protected void disableSecurityFilterInTestConfiguration(@NonNull GeneratorContext generatorContext, ModuleContext module) {
         if (generatorContext.getFeatures().hasFeature(SecurityFeature.class)) {
-            ApplicationConfiguration test = generatorContext.getConfigurationByEnvironmentOrDefaultConfig(Environment.FUNCTION, ApplicationConfiguration.functionTestConfig());
+            Configuration test = module.testConfiguration();
             test.put("micronaut.security.filter.enabled", false);
         }
     }
 
-    private void addHomeControllerTest(GeneratorContext generatorContext, Project project) {
+    private void addHomeControllerTest(GeneratorContext generatorContext, ModuleContext module, Project project) {
         String testSource =  generatorContext.getTestSourcePath("/{packagePath}/HomeController");
         String handler = HandlerClassFeature.resolveHandler(generatorContext);
         TestRockerModelProvider provider = new DefaultTestRockerModelProvider(homeControllerSpock.template(project, handler),
@@ -287,30 +290,30 @@ public class AwsLambda implements FunctionFeature, DefaultFeature, AwsCloudFeatu
                 homeControllerGroovyJunit.template(project, handler),
                 homeControllerKotlinJunit.template(project, handler),
                 homeControllerKoTest.template(project, handler));
-        generatorContext.addTemplate("testHomeController", testSource, provider);
+        module.addTemplate(generatorContext.getOptions(), "testHomeController", testSource, provider);
     }
 
-    private void addHomeController(GeneratorContext generatorContext, Project project) {
+    private void addHomeController(GeneratorContext generatorContext, ModuleContext module, Project project) {
         String controllerFile = generatorContext.getSourcePath("/{packagePath}/HomeController");
-        generatorContext.addTemplate("homeController", controllerFile,
+        module.addTemplate(generatorContext.getOptions().language(), "homeController", controllerFile,
                 homeControllerJava.template(project),
                 homeControllerKotlin.template(project),
                 homeControllerGroovy.template(project));
     }
 
-    private void addTest(GeneratorContext generatorContext, Project project) {
+    private void addTest(GeneratorContext generatorContext, ModuleContext module, Project project) {
         String testSource =  generatorContext.getTestSourcePath("/{packagePath}/FunctionRequestHandler");
         TestRockerModelProvider provider = new DefaultTestRockerModelProvider(awsLambdaFunctionRequestHandlerSpock.template(project),
                 awsLambdaFunctionRequestHandlerJavaJunit.template(project),
                 awsLambdaFunctionRequestHandlerGroovyJunit.template(project),
                 awsLambdaFunctionRequestHandlerKotlinJunit.template(project),
                 awsLambdaFunctionRequestHandlerKoTest.template(project));
-        generatorContext.addTemplate("testFunctionRequestHandler", testSource, provider);
+        module.addTemplate(generatorContext.getOptions(), "testFunctionRequestHandler", testSource, provider);
     }
 
-    private void addRequestHandler(GeneratorContext generatorContext, Project project) {
+    private void addRequestHandler(GeneratorContext generatorContext, ModuleContext module, Project project) {
         String awsLambdaRequestHandlerFile = generatorContext.getSourcePath("/{packagePath}/" + REQUEST_HANDLER);
-        generatorContext.addTemplate("functionRequestHandler", awsLambdaRequestHandlerFile,
+        module.addTemplate(generatorContext.getOptions().language(), "functionRequestHandler", awsLambdaRequestHandlerFile,
                 awsLambdaFunctionRequestHandlerJava.template(generatorContext.getFeatures(), project),
                 awsLambdaFunctionRequestHandlerKotlin.template(generatorContext.getFeatures(), project),
                 awsLambdaFunctionRequestHandlerGroovy.template(generatorContext.getFeatures(), project));

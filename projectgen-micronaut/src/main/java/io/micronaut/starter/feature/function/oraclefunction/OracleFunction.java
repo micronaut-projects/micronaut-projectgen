@@ -21,6 +21,8 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.projectgen.javalibs.logging.Logback;
 import io.micronaut.projectgen.micronaut.ApplicationType;
@@ -84,8 +86,9 @@ public class OracleFunction extends AbstractFunctionFeature implements OracleClo
     @Override
     public void apply(GeneratorContext generatorContext) {
         super.apply(generatorContext);
-        addDependencies(generatorContext);
-        addFuncYamlTemplate(generatorContext);
+        ModuleContext module = generatorContext.getRootModule();
+        addDependencies(generatorContext.getOptions(), module);
+        addFuncYamlTemplate(module, generatorContext.getProject());
     }
 
     @Override
@@ -175,19 +178,19 @@ public class OracleFunction extends AbstractFunctionFeature implements OracleClo
         return "oracle_function";
     }
 
-    protected void addDependencies(GeneratorContext generatorContext) {
-        if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())) {
-            generatorContext.addDependency(COM_FNPROJECT_RUNTIME);
-            generatorContext.addDependency(MICRONAUT_OCI_FUNCTION_HTTP);
-            generatorContext.addDependency(MICRONAUT_OCI_FUNCTION_HTTP_TEST);
+    protected void addDependencies(Options options, ModuleContext module) {
+        if (OptionUtils.hasMavenBuildTool(options)) {
+            module.addDependency(COM_FNPROJECT_RUNTIME);
+            module.addDependency(MICRONAUT_OCI_FUNCTION_HTTP);
+            module.addDependency(MICRONAUT_OCI_FUNCTION_HTTP_TEST);
         }
     }
 
-    protected void addFuncYamlTemplate(GeneratorContext generatorContext) {
-        generatorContext.addTemplate(
+    protected void addFuncYamlTemplate(ModuleContext module, Project project) {
+        module.addTemplate(
                 "func.yml", new RockerTemplate(
                         "func.yml",
-                        projectFnFunc.template(generatorContext.getProject()
+                        projectFnFunc.template(project
                         ))
         );
     }

@@ -17,6 +17,7 @@ package io.micronaut.starter.feature.github.workflows.azure;
 
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.feature.FeatureContext;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.rocker.RockerWritable;
 import io.micronaut.starter.feature.github.workflows.Secret;
 import io.micronaut.starter.feature.github.workflows.WorkflowsUtils;
@@ -81,19 +82,20 @@ public abstract class AbstractAzureContainerInstanceWorkflow extends AbstractDoc
     @Override
     public void apply(GeneratorContext generatorContext) {
         super.apply(generatorContext);
+        ModuleContext module = generatorContext.getRootModule();
         String workflowFilePath = ".github/workflows/" + getWorkflowFileName(generatorContext);
 
-        generatorContext.addTemplate("azureContainerInstanceWorkflow",
+        module.addTemplate("azureContainerInstanceWorkflow",
                 new RockerTemplate(workflowFilePath,
                         azureContainerInstanceWorkflow.template(generatorContext.getProject(),
                                 generatorContext.getBuildTool(), generatorContext.getJdkVersion(), isGraal
                 ))
         );
 
-        generatorContext.addTemplate("exampleController", WorkflowsUtils.createExampleController(
+        module.addTemplate("exampleController", WorkflowsUtils.createExampleController(
                 generatorContext.getProject(), generatorContext.getLanguage()));
 
-        generatorContext.addHelpTemplate(
+        module.addHelpTemplate(
                 new RockerWritable(azureContainerInstanceWorkflowReadme.template(
                         this, generatorContext.getProject(), workflowFilePath)));
     }

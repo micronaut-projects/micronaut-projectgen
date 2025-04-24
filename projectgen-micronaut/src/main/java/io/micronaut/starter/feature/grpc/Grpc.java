@@ -18,6 +18,7 @@ package io.micronaut.starter.feature.grpc;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
@@ -73,17 +74,18 @@ public class Grpc implements DefaultFeature {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        addDependencies(generatorContext);
-        generatorContext.addTemplate("proto", new RockerTemplate("src/main/proto/{propertyName}.proto", proto.template(generatorContext.getProject())));
+        ModuleContext module = generatorContext.getRootModule();
+        addDependencies(module);
+        module.addTemplate("proto", new RockerTemplate("src/main/proto/{propertyName}.proto", proto.template(generatorContext.getProject())));
         if (OptionUtils.hasGradleBuildTool(generatorContext.getOptions())) {
-            generatorContext.addHelpLink("Protobuf Gradle Plugin", "https://plugins.gradle.org/plugin/com.google.protobuf");
-            generatorContext.addBuildPlugin(gradlePlugin(generatorContext));
+            module.addHelpLink("Protobuf Gradle Plugin", "https://plugins.gradle.org/plugin/com.google.protobuf");
+            module.addBuildPlugin(gradlePlugin(generatorContext));
         }
     }
 
-    protected void addDependencies(@NonNull GeneratorContext generatorContext) {
-        generatorContext.addDependency(DEPENDENCY_MICRONAUT_GRPC_RUNTIME);
-        generatorContext.addDependency(DEPENDENCY_JAVAX_ANNOTATION_API);
+    protected void addDependencies(@NonNull ModuleContext module) {
+        module.addDependency(DEPENDENCY_MICRONAUT_GRPC_RUNTIME);
+        module.addDependency(DEPENDENCY_JAVAX_ANNOTATION_API);
     }
 
     private BuildPlugin gradlePlugin(GeneratorContext generatorContext) {

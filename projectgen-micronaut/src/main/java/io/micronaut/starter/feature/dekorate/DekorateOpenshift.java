@@ -21,6 +21,7 @@ import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.starter.feature.other.Management;
 
 import jakarta.inject.Singleton;
@@ -63,12 +64,12 @@ public class DekorateOpenshift extends AbstractDekoratePlatformFeature {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
+        ModuleContext module = generatorContext.getRootModule();
         Dependency.Builder openshift = Dependency.builder()
                 .groupId("io.dekorate")
                 .artifactId("openshift-annotations")
                 .template();
-
-        generatorContext.addDependency(openshift.versionProperty("dekorate.version").annotationProcessor());
-        generatorContext.addDependency(openshift.compile());
+        module.addDependency(openshift.versionProperty("dekorate.version").annotationProcessor());
+        module.addDependency(openshift.compile());
     }
 }

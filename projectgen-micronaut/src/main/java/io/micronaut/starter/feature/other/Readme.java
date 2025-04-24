@@ -18,6 +18,7 @@ package io.micronaut.starter.feature.other;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.rocker.RockerWritable;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
@@ -57,21 +58,22 @@ public class Readme implements DefaultFeature {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
+        ModuleContext module = generatorContext.getRootModule();
         List<Feature> featuresWithDocumentationLinks = generatorContext.getFeatures()
                 .getFeatures()
                 .stream()
                 .filter(feature -> feature.getFrameworkDocumentation(generatorContext) != null || feature.getThirdPartyDocumentation(generatorContext) != null)
                 .toList();
-        List<Writable> helpTemplates = generatorContext.getHelpTemplates();
+        final List<Writable> helpTemplates = module.helpTemplates();
         if (!helpTemplates.isEmpty() || !featuresWithDocumentationLinks.isEmpty()) {
-            generatorContext.addTemplate("readme", new DefaultTemplate(Template.ROOT, "README.md") {
+            module.addTemplate("readme", new DefaultTemplate(Template.ROOT, "README.md") {
                 @Override
                 public void write(OutputStream outputStream) throws IOException {
                     Writable mainDocsWritable = new RockerWritable(maindocs.template());
                     mainDocsWritable.write(outputStream);
 
                     byte[] lineSeparator = System.lineSeparator().getBytes(Charset.defaultCharset());
-                    for (Writable writable : generatorContext.getHelpTemplates()) {
+                    for (Writable writable : helpTemplates) {
                         writable.write(outputStream);
                         outputStream.write(lineSeparator);
                     }

@@ -17,6 +17,7 @@ package io.micronaut.starter.feature.database;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
@@ -72,14 +73,16 @@ public class Cassandra implements Feature, ContributingTestContainerDependency {
     }
 
     private void applyDependencies(GeneratorContext generatorContext) {
-        generatorContext.addDependency(MICRONAUT_CASSANDRA_DEPENDENCY);
+        ModuleContext module = generatorContext.getRootModule();
+        module.addDependency(MICRONAUT_CASSANDRA_DEPENDENCY);
         if (generatorContext.isFeaturePresent(MicrometerFeature.class)) {
-            generatorContext.addDependency(CASSANDRA_METRICS_MICROMETER_DEPENDENCY);
+            module.addDependency(CASSANDRA_METRICS_MICROMETER_DEPENDENCY);
         }
     }
 
     private void applyConfiguration(GeneratorContext generatorContext) {
-        ApplicationConfiguration configuration = generatorContext.getConfiguration();
+        ModuleContext module = generatorContext.getRootModule();
+        ApplicationConfiguration configuration = module.configuration();
         configuration.put("cassandra.default.basic.load-balancing-policy.local-datacenter", "datacenter1");
         configuration.put("cassandra.default.basic.session-name", "defaultSession");
         configuration.put("cassandra.default.advanced.control-connection.schema-agreement.timeout", 20);

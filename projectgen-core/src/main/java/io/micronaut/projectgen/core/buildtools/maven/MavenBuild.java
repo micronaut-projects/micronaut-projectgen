@@ -127,6 +127,14 @@ public class MavenBuild {
         this.profiles = profiles;
     }
 
+    public List<MavenPlugin> getPlugins() {
+        return plugins;
+    }
+
+    public List<MavenRepository> getRepositories() {
+        return repositories;
+    }
+
     /**
      *
      * @return Group ID

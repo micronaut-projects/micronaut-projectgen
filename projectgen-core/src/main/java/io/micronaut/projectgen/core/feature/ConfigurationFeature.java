@@ -17,6 +17,7 @@ package io.micronaut.projectgen.core.feature;
 
 import io.micronaut.projectgen.core.feature.config.Configuration;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.template.Template;
 import java.util.function.Function;
 
@@ -34,12 +35,17 @@ public interface ConfigurationFeature extends OneOfFeature {
 
     @Override
     default void apply(GeneratorContext generatorContext) {
+        ModuleContext module = generatorContext.getRootModule();
+        addTemplatesForConfigurations(module);
+    }
+
+    default void addTemplatesForConfigurations(ModuleContext module) {
         Function<Configuration, Template> createTemplateFunc = createTemplate();
-        generatorContext.getAllConfigurations()
+        module.getConfigurations()
             .stream()
             .filter(config -> !config.isEmpty())
             .forEach(config -> {
-                generatorContext.addTemplate(config.getTemplateKey(), createTemplateFunc.apply(config));
+                module.addTemplate(config.getTemplateKey(), createTemplateFunc.apply(config));
             });
     }
 }

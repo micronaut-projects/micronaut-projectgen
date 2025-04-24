@@ -19,6 +19,8 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.feature.config.Configuration;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
@@ -92,9 +94,10 @@ public class Platform7 implements CamundaCommunityFeature {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        addConfiguration(generatorContext);
-        generatorContext.addDependency(DEPENDENCY_PLATFORM7);
-        generatorContext.addDependency(DEPENDENCY_BPM_ASSERT);
+        ModuleContext module = generatorContext.getRootModule();
+        addConfiguration(module);
+        module.addDependency(DEPENDENCY_PLATFORM7);
+        module.addDependency(DEPENDENCY_BPM_ASSERT);
     }
 
     @Override
@@ -108,13 +111,14 @@ public class Platform7 implements CamundaCommunityFeature {
         return "https://github.com/camunda-community-hub/micronaut-camunda-platform-7";
     }
 
-    protected static void addConfiguration(GeneratorContext generatorContext) {
-        generatorContext.getConfiguration().put("camunda.admin-user.id", "admin");
-        generatorContext.getConfiguration().put("camunda.admin-user.password", "admin");
-        generatorContext.getConfiguration().put("camunda.webapps.enabled", true);
-        generatorContext.getConfiguration().put("camunda.rest.enabled", true);
-        generatorContext.getConfiguration().put("camunda.generic-properties.properties.initialize-telemetry", true);
-        generatorContext.getConfiguration().put("camunda.filter.create", "All tasks");
+    protected static void addConfiguration(ModuleContext moduleContext) {
+        Configuration config = moduleContext.configuration();
+        config.put("camunda.admin-user.id", "admin");
+        config.put("camunda.admin-user.password", "admin");
+        config.put("camunda.webapps.enabled", true);
+        config.put("camunda.rest.enabled", true);
+        config.put("camunda.generic-properties.properties.initialize-telemetry", true);
+        config.put("camunda.filter.create", "All tasks");
     }
 
 }

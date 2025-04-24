@@ -19,6 +19,7 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
@@ -83,7 +84,8 @@ public class Knative implements Feature {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        generatorContext.addTemplate("knativeYaml", new RockerTemplate("knativeYaml.yml", knativeYaml.template(generatorContext.getProject())));
+        ModuleContext module = generatorContext.getRootModule();
+        module.addTemplate("knativeYaml", new RockerTemplate("knativeYaml.yml", knativeYaml.template(generatorContext.getProject())));
     }
 
     @Override

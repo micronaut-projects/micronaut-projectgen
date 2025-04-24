@@ -19,6 +19,7 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.rocker.RockerWritable;
 import io.micronaut.projectgen.micronaut.template.github.workflows.docker.dockerRegistryWorkflow;
 import io.micronaut.projectgen.micronaut.template.github.workflows.docker.dockerRegistryWorkflowReadme;
@@ -61,16 +62,16 @@ public class GraalVMDockerRegistryWorkflow extends AbstractDockerRegistryWorkflo
     @Override
     public void apply(GeneratorContext generatorContext) {
         super.apply(generatorContext);
+        ModuleContext module = generatorContext.getRootModule();
         String workflowFilePath = ".github/workflows/" + getWorkflowFileName(generatorContext);
-
-        generatorContext.addTemplate("graalCEWorkflow",
+        module.addTemplate("graalCEWorkflow",
                 new RockerTemplate(workflowFilePath,
                         dockerRegistryWorkflow.template(generatorContext.getProject(), generatorContext.getJdkVersion(),
                                 generatorContext.getBuildTool(), true)
                 )
         );
 
-        generatorContext.addHelpTemplate(new RockerWritable(dockerRegistryWorkflowReadme.template(
+        module.addHelpTemplate(new RockerWritable(dockerRegistryWorkflowReadme.template(
                 this, generatorContext.getProject(), workflowFilePath)));
     }
 

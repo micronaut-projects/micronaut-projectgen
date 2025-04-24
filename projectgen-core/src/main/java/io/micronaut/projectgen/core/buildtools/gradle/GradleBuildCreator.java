@@ -20,8 +20,12 @@ import io.micronaut.core.order.OrderUtil;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.buildtools.Repository;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.options.Options;
 import jakarta.inject.Singleton;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,38 +38,40 @@ public class GradleBuildCreator {
     /**
      *
      * @param generatorContext Generator Context
-     * @param repositories List of repositories
+     * @param moduleContext Module Context
      * @param useVersionCatalogue Use version catalogue
      * @return Gradle Build
      */
     @NonNull
-    public GradleBuild create(@NonNull GeneratorContext generatorContext, List<Repository> repositories, boolean useVersionCatalogue) {
-        BuildTool buildTool = generatorContext.getOptions().buildTools().stream().filter(BuildTool::isGradle).findFirst().orElseThrow();
+    public GradleBuild create(@NonNull GeneratorContext generatorContext,
+                              @NonNull ModuleContext moduleContext,
+                              Options options, boolean useVersionCatalogue) {
+        BuildTool buildTool = options.buildTools().stream().filter(BuildTool::isGradle).findFirst().orElseThrow();
         GradleDsl gradleDsl = buildTool
                 .getGradleDsl()
                 .orElseThrow(() -> new IllegalArgumentException("GradleBuildCreator can only create Gradle builds"));
-        List<GradlePlugin> gradlePlugins = generatorContext.getBuildPlugins()
+        List<GradlePlugin> gradlePlugins = moduleContext.buildPlugins()
                 .stream()
                 .filter(GradlePlugin.class::isInstance)
                 .map(GradlePlugin.class::cast)
                 .sorted(OrderUtil.COMPARATOR)
                 .collect(Collectors.toList());
         return new GradleBuild(gradleDsl,
-                GradleDependency.listOf(generatorContext, useVersionCatalogue),
+                GradleDependency.listOf(generatorContext, moduleContext.dependencyContext(), generatorContext.getOptions(), useVersionCatalogue),
                 gradlePlugins,
-                getRepositories(generatorContext, repositories));
+                getRepositories(options, moduleContext.repositories()));
     }
 
     /**
      *
-     * @param generatorContext Generator Context
+     * @param options Options
      * @param repositories Repositories
      * @return Gradle Repositories
      */
     @NonNull
-    protected List<GradleRepository> getRepositories(@NonNull GeneratorContext generatorContext,
-                                                     List<Repository> repositories) {
-        BuildTool buildTool = generatorContext.getOptions().buildTools().stream().filter(BuildTool::isGradle).findFirst().orElseThrow();
+    protected List<GradleRepository> getRepositories(@NonNull Options options,
+                                                     Collection<Repository> repositories) {
+        BuildTool buildTool = options.buildTools().stream().filter(BuildTool::isGradle).findFirst().orElseThrow();
         return GradleRepository.listOf(buildTool.getGradleDsl()
                 .orElse(GradleDsl.GROOVY), repositories);
     }
