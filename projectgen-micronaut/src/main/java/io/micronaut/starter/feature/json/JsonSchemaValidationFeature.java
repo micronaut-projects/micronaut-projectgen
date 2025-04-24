@@ -17,6 +17,7 @@ package io.micronaut.starter.feature.json;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
@@ -26,16 +27,13 @@ import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.json.schema.validation.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class JsonSchemaValidationFeature implements Feature {
+public class JsonSchemaValidationFeature implements OpenRewriteFeature {
 
     public static final String NAME = "json-schema-validation";
-
-    private static final Dependency JSON_SCHEMA_VALIDATION_TEST_DEPENDENCY = MicronautDependencyUtils.jsonSchemaDependency()
-            .artifactId("micronaut-json-schema-validation")
-            .test()
-            .build();
 
     private final JsonSchemaFeature jsonSchemaFeature;
 
@@ -64,17 +62,13 @@ public class JsonSchemaValidationFeature implements Feature {
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        generatorContext.addDependency(JSON_SCHEMA_VALIDATION_TEST_DEPENDENCY);
-    }
-
-    @Override
     public void processSelectedFeatures(FeatureContext featureContext) {
         featureContext.addFeatureIfNotPresent(JsonSchemaFeature.class, jsonSchemaFeature);
     }
 
     @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-json-schema/latest/guide/index.html#validation";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.json-schema-validation");
     }
+
 }

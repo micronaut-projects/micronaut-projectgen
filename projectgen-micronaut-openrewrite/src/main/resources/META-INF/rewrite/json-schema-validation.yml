@@ -1,0 +1,25 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.json-schema-validation
+displayName: Add Json Schema Validation dependency and a link to README
+recipeList:
+  - io.micronaut.starter.feature.json-schema-validation.dependencies
+  - io.micronaut.starter.feature.json-schema-validation.micronaut.documentation
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.json-schema-validation.dependencies
+displayName: Add Json Schema Validation dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.jsonschema
+      artifactId: micronaut-json-schema-validation
+      configuration: testImplementation
+      scope: test
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.json-schema-validation.micronaut.documentation
+displayName: Append a link to Micronaut Json Schema Validation documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-json-schema/latest/guide/index.html#validation
+      appendNewline: true
