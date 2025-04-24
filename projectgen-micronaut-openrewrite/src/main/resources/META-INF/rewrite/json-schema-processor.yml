@@ -1,0 +1,23 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.json-schema-processor
+displayName: Add Json Schema Annotation Processor
+recipeList:
+  - io.micronaut.starter.feature.json-schema-processor.maven
+  - io.micronaut.starter.feature.json-schema-processor.gradle
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.json-schema-processor.maven
+displayName: Add Json Schema Processor to the Maven compiler plugin
+recipeList:
+  - org.openrewrite.maven.AddAnnotationProcessor:
+      groupId: io.micronaut.jsonschema
+      artifactId: micronaut-json-schema-processor
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.json-schema-processor.gradle
+displayName: Add Json Schema Processor dependency to a Gradle Build
+recipeList:
+  - org.openrewrite.gradle.AddDependency:
+      groupId: io.micronaut.jsonschema
+      artifactId: micronaut-json-schema-processor
+      configuration: annotationProcessor
