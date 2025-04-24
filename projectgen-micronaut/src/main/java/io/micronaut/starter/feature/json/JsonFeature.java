@@ -21,9 +21,4 @@ import io.micronaut.projectgen.core.feature.Feature;
 
 public interface JsonFeature extends Feature {
 
-    String ARTIFACT_ID_MICRONAUT_JACKSON_DATABIND = "micronaut-jackson-databind";
-    Dependency DEPENDENCY_MICRONAUT_JACKSON_DATABIND = MicronautDependencyUtils.coreDependency()
-            .artifactId(ARTIFACT_ID_MICRONAUT_JACKSON_DATABIND)
-            .compile()
-            .build();
 }

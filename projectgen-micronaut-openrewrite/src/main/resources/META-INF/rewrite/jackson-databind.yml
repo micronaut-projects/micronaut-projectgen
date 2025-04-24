@@ -1,0 +1,14 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.jackson-databind
+recipeList:
+  - io.micronaut.starter.feature.jackson-databind.dependencies
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.jackson-databind.dependencies
+displayName: Add Jackson Databind dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut
+      artifactId: micronaut-jackson-databind
+      configuration: implementation
+      scope: compile
