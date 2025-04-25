@@ -19,6 +19,8 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
+import io.micronaut.projectgen.core.feature.config.Configuration;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
@@ -73,5 +75,4 @@ public class JobRunrFeature implements MicronautCommunityFeature, OpenRewriteFea
     public List<String> getRecipes(GeneratorContext generatorContext) {
         return List.of("io.micronaut.starter.feature.jobrunr");
     }
-
 }

@@ -17,6 +17,7 @@ package io.micronaut.starter.feature.coherence;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
@@ -64,8 +65,9 @@ public class CoherenceFeature implements Feature {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        generatorContext.addDependency(MicronautDependencyUtils.coherenceDependency().artifactId("micronaut-coherence").compile());
-        generatorContext.addDependency(Dependency.builder().groupId("com.oracle.coherence.ce").artifactId("coherence").compile());
+        ModuleContext module = generatorContext.getRootModule();
+        module.addDependency(MicronautDependencyUtils.coherenceDependency().artifactId("micronaut-coherence").compile());
+        module.addDependency(Dependency.builder().groupId("com.oracle.coherence.ce").artifactId("coherence").compile());
     }
 
     @Override

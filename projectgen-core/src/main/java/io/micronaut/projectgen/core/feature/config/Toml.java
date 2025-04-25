@@ -23,6 +23,7 @@ import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.projectgen.core.feature.FeaturePhase;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.template.Template;
 import io.micronaut.projectgen.core.template.TomlTemplate;
 import jakarta.inject.Singleton;
@@ -48,7 +49,8 @@ public class Toml implements ConfigurationFeature {
 
             @Override
             public void apply(GeneratorContext generatorContext) {
-                generatorContext.addDependency(Dependency.builder()
+                ModuleContext module = generatorContext.getRootModule();
+                module.addDependency(Dependency.builder()
                         .groupId("io.micronaut.toml")
                         .artifactId("micronaut-toml")
                         .compile());
@@ -77,7 +79,12 @@ public class Toml implements ConfigurationFeature {
     }
 
     @Override
-    public Function<Configuration, Template> createTemplate() {
-        return cfg -> new TomlTemplate(cfg.getFullPath(EXTENSION), cfg);
+    public Function<Configuration, Template> createTemplate(String module) {
+        return cfg -> {
+            String path = StringUtils.isEmpty(module)
+                ? cfg.getFullPath(EXTENSION)
+                : module + "/" + cfg.getFullPath(EXTENSION);
+            return new TomlTemplate(path, cfg);
+        };
     }
 }

@@ -17,6 +17,7 @@ package io.micronaut.starter.feature.graallanguages;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.rocker.RockerWritable;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.projectgen.micronaut.ApplicationType;
@@ -78,15 +79,15 @@ public class Graalpy implements MinJdkFeature, MavenSpecificFeature {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        addDependencies(generatorContext);
+        ModuleContext module = generatorContext.getRootModule();
+        addDependencies(module);
         if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())) {
-            addGraalPyMavenPlugin(generatorContext);
+            addGraalPyMavenPlugin(module);
         }
     }
 
-    private void addGraalPyMavenPlugin(GeneratorContext generatorContext) {
-        BuildProperties buildProperties = generatorContext.getBuildProperties();
-        generatorContext.addBuildPlugin(graalpyMavenPlugin());
+    private void addGraalPyMavenPlugin(ModuleContext module) {
+        module.addBuildPlugin(graalpyMavenPlugin());
     }
 
     protected MavenPlugin graalpyMavenPlugin() {
@@ -101,8 +102,8 @@ public class Graalpy implements MinJdkFeature, MavenSpecificFeature {
         return Collections.emptyList();
     }
 
-    protected void addDependencies(GeneratorContext generatorContext) {
-        generatorContext.addDependency(MICRONAUT_GRAALPY_DEPENDENCY);
+    protected void addDependencies(ModuleContext module) {
+        module.addDependency(MICRONAUT_GRAALPY_DEPENDENCY);
     }
 
     @Override

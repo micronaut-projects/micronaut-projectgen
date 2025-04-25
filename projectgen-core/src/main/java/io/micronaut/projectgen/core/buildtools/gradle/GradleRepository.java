@@ -25,6 +25,7 @@ import io.micronaut.projectgen.core.template.WritableUtils;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -116,7 +117,7 @@ public class GradleRepository implements Writable {
     }
 
     @NonNull
-    public static List<GradleRepository> listOf(GradleDsl gradleDsl, List<Repository> repositories) {
+    public static List<GradleRepository> listOf(GradleDsl gradleDsl, Collection<Repository> repositories) {
         return repositories.stream()
             .map(it -> {
                 if (it instanceof MavenCentral) {

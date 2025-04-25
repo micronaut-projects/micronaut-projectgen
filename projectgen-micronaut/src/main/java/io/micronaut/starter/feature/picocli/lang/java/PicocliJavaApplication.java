@@ -19,6 +19,7 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.feature.JavaApplicationFeature;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.Project;
@@ -53,8 +54,8 @@ public class PicocliJavaApplication implements JavaApplicationFeature {
     @Override
     public void apply(GeneratorContext generatorContext) {
         JavaApplicationFeature.super.apply(generatorContext);
-
-        generatorContext.addTemplate("application", getTemplate(generatorContext.getProject()));
+        ModuleContext module = generatorContext.getRootModule();
+        module.addTemplate("application", getTemplate(generatorContext.getProject()));
     }
 
     public RockerTemplate getTemplate(Project project) {

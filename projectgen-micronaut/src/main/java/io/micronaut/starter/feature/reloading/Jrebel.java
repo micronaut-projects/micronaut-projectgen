@@ -20,6 +20,7 @@ import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.gradle.GradlePlugin;
 import io.micronaut.projectgen.core.buildtools.maven.MavenPlugin;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.starter.build.maven.JvmArgumentsFeature;
 import jakarta.inject.Singleton;
@@ -34,7 +35,7 @@ public class Jrebel implements ReloadingFeature, JvmArgumentsFeature {
 
     private static final String GROUP_ID_ORG_ZEROTURNAROUND = "org.zeroturnaround";
     private static final String ARTIFACT_ID_JREBEL_MAVEN_PLUGIN = "jrebel-maven-plugin";
-    
+
     @Override
     public String getName() {
         return "jrebel";
@@ -52,16 +53,17 @@ public class Jrebel implements ReloadingFeature, JvmArgumentsFeature {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
+        ModuleContext module = generatorContext.getRootModule();
         if (OptionUtils.hasGradleBuildTool(generatorContext.getOptions())) {
-            generatorContext.getBuildProperties().addComment("TODO: Replace with agent path from JRebel installation; see documentation");
-            generatorContext.getBuildProperties().addComment("rebelAgent=" + JVM_ARGUMENT_AGENT_PATH);
-            generatorContext.addBuildPlugin(GradlePlugin.builder()
+            module.buildProperties().addComment("TODO: Replace with agent path from JRebel installation; see documentation");
+            module.buildProperties().addComment("rebelAgent=" + JVM_ARGUMENT_AGENT_PATH);
+            module.addBuildPlugin(GradlePlugin.builder()
                     .id("org.zeroturnaround.gradle.jrebel")
                     .lookupArtifactId("gradle-jrebel-plugin")
                     .build());
-            generatorContext.addHelpLink("JRebel Gradle Plugin", "https://plugins.gradle.org/plugin/org.zeroturnaround.gradle.jrebel");
+            module.addHelpLink("JRebel Gradle Plugin", "https://plugins.gradle.org/plugin/org.zeroturnaround.gradle.jrebel");
         } else {
-            generatorContext.addBuildPlugin(MavenPlugin.builder()
+            module.addBuildPlugin(MavenPlugin.builder()
                     .groupId(GROUP_ID_ORG_ZEROTURNAROUND)
                     .artifactId(ARTIFACT_ID_JREBEL_MAVEN_PLUGIN)
                     .build());

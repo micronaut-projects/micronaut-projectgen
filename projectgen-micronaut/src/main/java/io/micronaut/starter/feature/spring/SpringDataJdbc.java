@@ -17,6 +17,7 @@ package io.micronaut.starter.feature.spring;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
@@ -62,10 +63,11 @@ public class SpringDataJdbc extends SpringFeature {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        generatorContext.addDependency(MicronautDependencyUtils.dataDependency()
+        ModuleContext module = generatorContext.getRootModule();
+        module.addDependency(MicronautDependencyUtils.dataDependency()
                 .artifactId("micronaut-data-spring")
                 .compile());
-        generatorContext.addDependency(Dependency.builder()
+        module.addDependency(Dependency.builder()
                 .groupId("org.springframework")
                 .artifactId("spring-jdbc")
                 .compile());

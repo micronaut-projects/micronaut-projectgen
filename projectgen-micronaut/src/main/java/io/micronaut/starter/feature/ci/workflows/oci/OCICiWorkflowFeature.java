@@ -19,6 +19,7 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.starter.feature.ci.workflows.CIWorkflowFeature;
 import io.micronaut.projectgen.micronaut.template.ci.oci.buildSpec;
 import io.micronaut.projectgen.micronaut.template.ci.oci.buildSpecGraal;
@@ -61,8 +62,8 @@ public class OCICiWorkflowFeature extends CIWorkflowFeature {
     @Override
     public void apply(GeneratorContext generatorContext) {
         super.apply(generatorContext);
-
-        generatorContext.addTemplate("buildSpec", workflowRockerTemplate(generatorContext));
+        ModuleContext module = generatorContext.getRootModule();
+        module.addTemplate("buildSpec", workflowRockerTemplate(generatorContext));
     }
 
     private Template workflowRockerTemplate(GeneratorContext generatorContext) {

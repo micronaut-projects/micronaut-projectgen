@@ -23,6 +23,7 @@ import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.buildtools.dependencies.Coordinate;
 import io.micronaut.projectgen.core.buildtools.dependencies.CoordinateResolver;
 import io.micronaut.projectgen.core.buildtools.dependencies.LookupFailedException;
+import io.micronaut.projectgen.core.buildtools.maven.ParentPomBuilder;
 import io.micronaut.projectgen.core.template.Writable;
 
 import java.util.ArrayList;
@@ -43,6 +44,7 @@ public class GradlePlugin implements BuildPlugin {
     private final GradleFile gradleFile;
     private final String id;
     private final String version;
+    private final Boolean apply;
     private final String artifactId;
     private final Writable extension;
     private final Writable settingsExtension;
@@ -56,6 +58,7 @@ public class GradlePlugin implements BuildPlugin {
     public GradlePlugin(@NonNull GradleFile gradleFile,
                         @Nullable String id,
                         @Nullable String version,
+                        @Nullable Boolean apply,
                         @Nullable String artifactId,
                         @Nullable Writable extension,
                         @Nullable Writable settingsExtension,
@@ -67,6 +70,7 @@ public class GradlePlugin implements BuildPlugin {
             gradleFile,
             id,
             version,
+            apply,
             artifactId,
             extension,
             settingsExtension,
@@ -81,6 +85,7 @@ public class GradlePlugin implements BuildPlugin {
     public GradlePlugin(@NonNull GradleFile gradleFile,
                         @Nullable String id,
                         @Nullable String version,
+                        @Nullable Boolean apply,
                         @Nullable String artifactId,
                         @Nullable Writable extension,
                         @Nullable Writable settingsExtension,
@@ -92,6 +97,7 @@ public class GradlePlugin implements BuildPlugin {
         this.gradleFile = gradleFile;
         this.id = id;
         this.version = version;
+        this.apply = apply;
         this.artifactId = artifactId;
         this.extension = extension;
         this.settingsExtension = settingsExtension;
@@ -100,6 +106,10 @@ public class GradlePlugin implements BuildPlugin {
         this.order = order;
         this.buildImports = buildImports;
         this.settingsImports = settingsImports;
+    }
+
+    public Boolean getApply() {
+        return apply;
     }
 
     public static GradlePlugin of(String id, String lookupArtifactId) {
@@ -200,7 +210,7 @@ public class GradlePlugin implements BuildPlugin {
     public BuildPlugin resolved(CoordinateResolver coordinateResolver) {
         Coordinate coordinate = coordinateResolver.resolve(artifactId)
             .orElseThrow(() -> new LookupFailedException(artifactId));
-        return new GradlePlugin(gradleFile, id, coordinate.getVersion(), null, extension, settingsExtension, pluginsManagementRepositories, false, order, buildImports, settingsImports);
+        return new GradlePlugin(gradleFile, id, coordinate.getVersion(), apply,null, extension, settingsExtension, pluginsManagementRepositories, false, order, buildImports, settingsImports);
     }
 
     @Override
@@ -236,6 +246,7 @@ public class GradlePlugin implements BuildPlugin {
         private GradleFile gradleFile = GradleFile.BUILD;
         private String id;
         private String artifactId;
+        private Boolean apply;
         private String version;
         private Writable extension;
         private Writable settingsExtension;
@@ -316,8 +327,13 @@ public class GradlePlugin implements BuildPlugin {
             return this;
         }
 
+        public GradlePlugin.Builder apply(boolean apply) {
+            this.apply = apply;
+            return this;
+        }
+
         public GradlePlugin build() {
-            return new GradlePlugin(gradleFile, id, version, artifactId, extension, settingsExtension, pluginsManagementRepositories, requiresLookup, order, buildImports, settingsImports);
+            return new GradlePlugin(gradleFile, id, version, apply, artifactId, extension, settingsExtension, pluginsManagementRepositories, requiresLookup, order, buildImports, settingsImports);
         }
     }
 

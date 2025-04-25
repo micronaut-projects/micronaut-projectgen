@@ -19,6 +19,7 @@ import io.micronaut.projectgen.core.buildtools.gradle.GradlePlugin;
 import io.micronaut.projectgen.core.buildtools.gradle.GradleSpecificFeature;
 import io.micronaut.projectgen.core.feature.BuildPluginFeature;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import jakarta.inject.Singleton;
 
@@ -43,8 +44,9 @@ public class GroovyGradlePlugin implements GradleSpecificFeature, BuildPluginFea
 
     @Override
     public void apply(GeneratorContext generatorContext) {
+        ModuleContext module = generatorContext.getRootModule();
         if (OptionUtils.hasGradleBuildTool(generatorContext.getOptions())) {
-            generatorContext.addBuildPlugin(GROOVY_GRADLE_PLUGIN);
+            module.addBuildPlugin(GROOVY_GRADLE_PLUGIN);
         }
     }
 }

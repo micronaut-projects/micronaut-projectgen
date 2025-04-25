@@ -19,9 +19,11 @@ import com.fizzed.rocker.RockerModel;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.generator.Project;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
+import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import io.micronaut.projectgen.micronaut.template.function.gcp.gcpFunctionGroovyJunit;
@@ -111,14 +113,15 @@ public class GoogleCloudFunction extends AbstractGoogleCloudFunction {
     @Override
     public void apply(GeneratorContext generatorContext) {
         super.apply(generatorContext);
-        addDependencies(generatorContext);
+        ModuleContext module = generatorContext.getRootModule();
+        addDependencies(module, generatorContext.getOptions());
     }
 
-    protected void addDependencies(GeneratorContext generatorContext) {
-        if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())) {
-            generatorContext.addDependency(GCP_FUNCTIONS_FRAMEWORK_API.compileOnly());
-            generatorContext.addDependency(MICRONAUT_GCP_FUNCTION_HTTP);
-            generatorContext.addDependency(MICRONAUT_GCP_FUNCTION_HTTP_TEST);
+    protected void addDependencies(ModuleContext module, Options options) {
+        if (OptionUtils.hasMavenBuildTool(options)) {
+            module.addDependency(GCP_FUNCTIONS_FRAMEWORK_API.compileOnly());
+            module.addDependency(MICRONAUT_GCP_FUNCTION_HTTP);
+            module.addDependency(MICRONAUT_GCP_FUNCTION_HTTP_TEST);
         }
     }
 

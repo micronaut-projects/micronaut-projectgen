@@ -18,6 +18,7 @@ package io.micronaut.starter.feature.sourcegen;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
@@ -81,11 +82,12 @@ public class SourcegenJava implements Feature {
     }
 
     private void addDependencies(GeneratorContext generatorContext) {
-        generatorContext.addDependency(DEPENDENCY_MICRONAUT_SOURCEGEN_ANNOTATIONS);
+        ModuleContext module = generatorContext.getRootModule();
+        module.addDependency(DEPENDENCY_MICRONAUT_SOURCEGEN_ANNOTATIONS);
         if (generatorContext.getLanguage() == Language.JAVA) {
-            generatorContext.addDependency(DEPENDENCY_MICRONAUT_SOURCEGEN_GENERATOR_JAVA);
+            module.addDependency(DEPENDENCY_MICRONAUT_SOURCEGEN_GENERATOR_JAVA);
         } else if (generatorContext.getLanguage() == Language.KOTLIN) {
-            generatorContext.addDependency(DEPENDENCY_MICRONAUT_SOURCEGEN_GENERATOR_KOTLIN);
+            module.addDependency(DEPENDENCY_MICRONAUT_SOURCEGEN_GENERATOR_KOTLIN);
         }
     }
 }

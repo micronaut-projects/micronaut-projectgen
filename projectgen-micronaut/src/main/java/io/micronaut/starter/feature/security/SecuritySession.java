@@ -21,6 +21,7 @@ import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.feature.FeatureContext;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.starter.feature.other.HttpSession;
 import jakarta.inject.Singleton;
 
@@ -59,8 +60,9 @@ public class SecuritySession extends SecurityFeature implements SecurityAuthenti
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        generatorContext.getConfiguration().put(PROPERTY_MICRONAUT_SECURITY_AUTHENTICATION, getSecurityAuthenticationMode().toString());
-        generatorContext.addDependency(Dependency.builder()
+        ModuleContext module = generatorContext.getRootModule();
+        module.configuration().put(PROPERTY_MICRONAUT_SECURITY_AUTHENTICATION, getSecurityAuthenticationMode().toString());
+        module.addDependency(Dependency.builder()
                 .groupId("io.micronaut.security")
                 .artifactId("micronaut-security-session")
                 .compile());

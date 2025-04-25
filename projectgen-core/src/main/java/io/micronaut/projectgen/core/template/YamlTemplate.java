@@ -37,11 +37,7 @@ public class YamlTemplate extends DefaultTemplate {
     private final Map<String, Object> config;
 
     public YamlTemplate(String path, Map<String, Object> config) {
-        this(DEFAULT_MODULE, path, config);
-    }
-
-    public YamlTemplate(String module, String path, Map<String, Object> config) {
-        super(module, path);
+        super(path);
         this.config = transform(config);
     }
 

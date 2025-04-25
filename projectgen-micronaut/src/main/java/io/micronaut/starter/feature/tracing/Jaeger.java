@@ -19,6 +19,7 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import io.micronaut.starter.feature.server.MicronautServerDependent;
@@ -52,15 +53,16 @@ public class Jaeger implements TracingFeature, MicronautServerDependent {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        generatorContext.getConfiguration().put("tracing.jaeger.enabled", true);
-        generatorContext.getConfiguration().put("tracing.jaeger.sampler.probability", 0.1);
+        ModuleContext module = generatorContext.getRootModule();
+        module.configuration().put("tracing.jaeger.enabled", true);
+        module.configuration().put("tracing.jaeger.sampler.probability", 0.1);
 
-        generatorContext.addDependency(MicronautDependencyUtils.tracingDependency()
+        module.addDependency(MicronautDependencyUtils.tracingDependency()
                 .artifactId("micronaut-tracing-jaeger")
                 .compile());
 
         if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions()) && generatorContext.getLanguage() == Language.GROOVY) {
-            generatorContext.addDependency(MicronautDependencyUtils.coreProcessor().compileOnly());
+            module.addDependency(MicronautDependencyUtils.coreProcessor().compileOnly());
         }
     }
 

@@ -21,6 +21,7 @@ import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.core.version.SemanticVersion;
 import io.micronaut.projectgen.core.feature.BuildPluginFeature;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
@@ -82,12 +83,13 @@ public class MicronautBuildPlugin implements BuildPluginFeature, DefaultFeature 
 
     @Override
     public void apply(GeneratorContext generatorContext) {
+        ModuleContext module = generatorContext.getRootModule();
         if (OptionUtils.hasGradleBuildTool(generatorContext.getOptions())) {
-            generatorContext.addHelpLink("Micronaut Gradle Plugin documentation", MICRONAUT_GRADLE_DOCS_URL);
+            module.addHelpLink("Micronaut Gradle Plugin documentation", MICRONAUT_GRADLE_DOCS_URL);
             if (GraalVMFeatureValidator.supports(generatorContext.getLanguage())) {
-                generatorContext.addHelpLink("GraalVM Gradle Plugin documentation", GRAALVM_GRADLE_DOCS_URL);
+                module.addHelpLink("GraalVM Gradle Plugin documentation", GRAALVM_GRADLE_DOCS_URL);
             }
-            generatorContext.addBuildPlugin(gradlePlugin(generatorContext));
+            module.addBuildPlugin(gradlePlugin(generatorContext));
         }
     }
 
@@ -130,7 +132,8 @@ public class MicronautBuildPlugin implements BuildPluginFeature, DefaultFeature 
     }
 
     Optional<String> resolveRuntime(GeneratorContext generatorContext) {
-        return generatorContext.getBuildProperties()
+        ModuleContext module = generatorContext.getRootModule();
+        return module.buildProperties()
                 .getProperties()
                 .stream()
                 .filter(property -> MicronautRuntimeFeature.PROPERTY_MICRONAUT_RUNTIME.equals(property.getKey()))
@@ -140,8 +143,9 @@ public class MicronautBuildPlugin implements BuildPluginFeature, DefaultFeature 
 
     @Nullable
     private Set<String> ignoredAutomaticDependencies(GeneratorContext generatorContext) {
-        if (generatorContext.hasDependency(MicronautDependencyUtils.GROUP_ID_MICRONAUT_DATA, MicronautDependencyUtils.ARTIFACT_ID_MICRONAUT_DATA_TX_HIBERNATE)
-                && generatorContext.countDependencies(MicronautDependencyUtils.GROUP_ID_MICRONAUT_DATA) == 1) {
+        ModuleContext module = generatorContext.getRootModule();
+        if (module.hasDependency(MicronautDependencyUtils.GROUP_ID_MICRONAUT_DATA, MicronautDependencyUtils.ARTIFACT_ID_MICRONAUT_DATA_TX_HIBERNATE)
+                && module.countDependencies(MicronautDependencyUtils.GROUP_ID_MICRONAUT_DATA) == 1) {
             return Set.of(MicronautDependencyUtils.GROUP_ID_MICRONAUT_DATA + ":" + ARTIFACT_ID_MICRONAUT_DATA_PROCESSOR_ARTIFACT);
         }
         return null;

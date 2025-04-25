@@ -15,6 +15,7 @@
  */
 package io.micronaut.starter.feature.messaging.mqtt;
 
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.starter.feature.messaging.MessagingFeature;
@@ -40,9 +41,10 @@ public interface MqttFeature extends MessagingFeature {
 
     @Override
     default void apply(GeneratorContext generatorContext) {
+        ModuleContext module = generatorContext.getRootModule();
         if (!generatorContext.isFeaturePresent(TestResources.class)) {
-            generatorContext.getConfiguration().put("mqtt.client.server-uri", "tcp://localhost:1883");
+            module.configuration().put("mqtt.client.server-uri", "tcp://localhost:1883");
         }
-        generatorContext.getConfiguration().put("mqtt.client.client-id", "${random.uuid}");
+        module.configuration().put("mqtt.client.client-id", "${random.uuid}");
     }
 }

@@ -18,6 +18,7 @@ package io.micronaut.starter.feature.build;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
@@ -34,7 +35,7 @@ import java.util.Set;
 @Singleton
 public class Kapt implements KotlinSupportFeature, DefaultFeature {
     public static final String NAME = "kapt";
-    
+
     @Override
     @NonNull
     public String getName() {
@@ -64,14 +65,15 @@ public class Kapt implements KotlinSupportFeature, DefaultFeature {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        addBuildPlugins(generatorContext);
+        ModuleContext module = generatorContext.getRootModule();
+        addBuildPlugins(generatorContext, module);
     }
 
     @Override
-    public void addBuildPlugins(@NonNull GeneratorContext generatorContext) {
-        KotlinSupportFeature.super.addBuildPlugins(generatorContext);
+    public void addBuildPlugins(@NonNull GeneratorContext generatorContext, ModuleContext module) {
+        KotlinSupportFeature.super.addBuildPlugins(generatorContext, module);
         if (KotlinSupportFeature.shouldApply(generatorContext)) {
-            generatorContext.addBuildPlugin(GradlePlugin.of("org.jetbrains.kotlin.kapt", "kotlin-gradle-plugin"));
+            module.addBuildPlugin(GradlePlugin.of("org.jetbrains.kotlin.kapt", "kotlin-gradle-plugin"));
         }
     }
 

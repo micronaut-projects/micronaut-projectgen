@@ -15,6 +15,7 @@
  */
 package io.micronaut.starter.feature.github.workflows.oci;
 
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.rocker.RockerWritable;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.projectgen.micronaut.ApplicationType;
@@ -99,19 +100,20 @@ public abstract class AbstractOracleFunctionsWorkflow extends AbstractDockerRegi
     @Override
     public void apply(GeneratorContext generatorContext) {
         super.apply(generatorContext);
+        ModuleContext module = generatorContext.getRootModule();
         ApplicationType applicationType = generatorContext.getOptions() instanceof MicronautOptions mnOptions ? mnOptions.applicationType() : null;
         if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions()) && applicationType.equals(ApplicationType.FUNCTION)) {
-            generatorContext.getBuildProperties().put("exec.mainClass", generatorContext.getProject().getPackageName() + ".Function");
+            module.buildProperties().put("exec.mainClass", generatorContext.getProject().getPackageName() + ".Function");
         }
 
         String workflowFilePath = ".github/workflows/" + getWorkflowFileName(generatorContext);
-        generatorContext.addTemplate("ociFunctionsWorkflow",
+        module.addTemplate("ociFunctionsWorkflow",
                 new RockerTemplate(workflowFilePath,
                         ociFunctionsWorkflow.template(generatorContext.getProject(), generatorContext.getBuildTool(),
                                 generatorContext.getJdkVersion(), isGraal)
                 )
         );
-        generatorContext.addHelpTemplate(new RockerWritable(ociFunctionsWorkflowReadme.template(
+        module.addHelpTemplate(new RockerWritable(ociFunctionsWorkflowReadme.template(
                 this, generatorContext.getProject(), applicationType, workflowFilePath)));
     }
 }

@@ -18,6 +18,7 @@ package io.micronaut.starter.feature.chatbots;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.feature.FeatureContext;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.micronaut.features.validator.MicronautValidationFeature;
 import io.micronaut.projectgen.micronaut.features.validator.ValidationFeature;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
@@ -39,13 +40,14 @@ public abstract class ChatBots implements ChatBotsFeature {
         this.validationFeature = validationFeature;
     }
 
-    protected abstract void renderTemplates(@NonNull GeneratorContext generatorContext);
+    protected abstract void renderTemplates(@NonNull GeneratorContext generatorContex, ModuleContext module);
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        addDependencies(generatorContext);
-        addConfigurations(generatorContext);
-        renderTemplates(generatorContext);
+        ModuleContext module = generatorContext.getRootModule();
+        addDependencies(module);
+        addConfigurations(module);
+        renderTemplates(generatorContext, module);
     }
 
     @Override
@@ -58,9 +60,9 @@ public abstract class ChatBots implements ChatBotsFeature {
         return "https://micronaut-projects.github.io/micronaut-chatbots/latest/guide/";
     }
 
-    protected abstract void addDependencies(@NonNull GeneratorContext generatorContext);
+    protected abstract void addDependencies(@NonNull ModuleContext module);
 
-    protected abstract void addConfigurations(@NonNull GeneratorContext generatorContext);
+    protected abstract void addConfigurations(@NonNull ModuleContext module);
 
     @NonNull
     protected abstract ChatBotType getChatBotType();

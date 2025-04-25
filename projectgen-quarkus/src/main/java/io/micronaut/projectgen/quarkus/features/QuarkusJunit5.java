@@ -17,6 +17,7 @@ package io.micronaut.projectgen.quarkus.features;
 
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import jakarta.inject.Singleton;
 
 @Singleton
@@ -31,6 +32,7 @@ public class QuarkusJunit5 implements QuarkusFeature {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        generatorContext.addDependency(DEPENDENCY_QUARKUS_JUNIT5);
+        ModuleContext moduleContext = generatorContext.getRootModule();
+        moduleContext.addDependency(DEPENDENCY_QUARKUS_JUNIT5);
     }
 }

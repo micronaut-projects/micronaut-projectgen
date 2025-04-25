@@ -22,6 +22,7 @@ import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.feature.FeatureContext;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.starter.feature.micrometer.Prometheus;
 
 import jakarta.inject.Singleton;
@@ -71,13 +72,13 @@ public class DekoratePrometheus extends AbstractDekorateServiceFeature {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
+        ModuleContext module = generatorContext.getRootModule();
         Dependency.Builder prometheus = Dependency.builder()
                 .groupId("io.dekorate")
                 .artifactId("prometheus-annotations")
                 .template();
-
-        generatorContext.addDependency(prometheus.versionProperty("dekorate.version").annotationProcessor());
-        generatorContext.addDependency(prometheus.compile());
+        module.addDependency(prometheus.versionProperty("dekorate.version").annotationProcessor());
+        module.addDependency(prometheus.compile());
     }
 
     @Nullable

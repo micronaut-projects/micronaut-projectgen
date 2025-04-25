@@ -20,6 +20,7 @@ import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.buildtools.maven.MavenPlugin;
 import io.micronaut.projectgen.core.buildtools.maven.MavenSpecificFeature;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import jakarta.inject.Singleton;
 
@@ -47,8 +48,9 @@ public class GroovyMavenPlusPlugin implements MavenSpecificFeature {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
+        ModuleContext module = generatorContext.getRootModule();
         if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())) {
-            generatorContext.addBuildPlugin(MavenPlugin.builder()
+            module.addBuildPlugin(MavenPlugin.builder()
                     .groupId(GROUP_ID_GMAVEN)
                     .artifactId(ARTIFACT_ID_GMAVEN)
                     .build());

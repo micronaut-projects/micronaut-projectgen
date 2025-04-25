@@ -21,6 +21,7 @@ import io.micronaut.core.util.CollectionUtils;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import io.micronaut.projectgen.core.feature.FeatureContext;
@@ -75,8 +76,9 @@ public class DataAzureCosmosFeature implements DataDocumentFeature {
     @Override
     public void apply(GeneratorContext generatorContext) {
         // TODO: Add test resources/containers support
-        generatorContext.getConfiguration().addNested(getConfiguration(generatorContext));
-        getDependencies(generatorContext).forEach(generatorContext::addDependency);
+        ModuleContext module = generatorContext.getRootModule();
+        module.configuration().addNested(getConfiguration(generatorContext));
+        getDependencies(generatorContext).forEach(module::addDependency);
     }
 
     protected NestedConfiguration getConfiguration(GeneratorContext generatorContext) {

@@ -17,6 +17,7 @@ package io.micronaut.starter.feature.function;
 
 import com.fizzed.rocker.RockerModel;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.rocker.RockerWritable;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.Project;
@@ -65,11 +66,12 @@ public abstract class AbstractFunctionFeature implements FunctionFeature, Micron
     }
 
     protected void applyFunction(GeneratorContext generatorContext, ApplicationType type) {
+        ModuleContext module = generatorContext.getRootModule();
         BuildTool buildTool = generatorContext.getBuildTool();
 
         if (generatorContext.isFeatureMissing(ChatBotsFeature.class)) {
             readmeTemplate(generatorContext, generatorContext.getProject(), buildTool)
-                    .ifPresent(rockerModel -> generatorContext.addHelpTemplate(new RockerWritable(rockerModel)));
+                    .ifPresent(rockerModel -> module.addHelpTemplate(new RockerWritable(rockerModel)));
         }
 
         if (type == ApplicationType.DEFAULT) {
@@ -83,18 +85,18 @@ public abstract class AbstractFunctionFeature implements FunctionFeature, Micron
             boolean serdeFeaturePresent = generatorContext.isFeaturePresent(SerializationFeature.class);
             switch (language) {
                 case GROOVY:
-                    generatorContext.addTemplate("function", new RockerTemplate(
+                    module.addTemplate("function", new RockerTemplate(
                             sourceFile,
                             groovyControllerTemplate(project, serdeFeaturePresent)));
                     break;
                 case KOTLIN:
-                    generatorContext.addTemplate("function", new RockerTemplate(
+                    module.addTemplate("function", new RockerTemplate(
                             sourceFile,
                             kotlinControllerTemplate(project, serdeFeaturePresent)));
                     break;
                 case JAVA:
                 default:
-                    generatorContext.addTemplate("function", new RockerTemplate(
+                    module.addTemplate("function", new RockerTemplate(
                             sourceFile,
                             javaControllerTemplate(project, serdeFeaturePresent)));
                     break;
@@ -109,13 +111,14 @@ public abstract class AbstractFunctionFeature implements FunctionFeature, Micron
     }
 
     protected void applyTestTemplate(GeneratorContext generatorContext, Project project, String name) {
+        ModuleContext module = generatorContext.getRootModule();
         String testSource =  generatorContext.getTestSourcePath("/{packagePath}/" + name);
         TestRockerModelProvider provider = new DefaultTestRockerModelProvider(spockTemplate(project),
                 javaJUnitTemplate(project),
                 groovyJUnitTemplate(project),
                 kotlinJUnitTemplate(project),
                 koTestTemplate(project));
-        generatorContext.addTemplate("testFunction", testSource, provider);
+        module.addTemplate(generatorContext.getOptions(), "testFunction", testSource, provider);
     }
 
     protected Optional<RockerModel> readmeTemplate(GeneratorContext generatorContext, Project project, BuildTool buildTool) {

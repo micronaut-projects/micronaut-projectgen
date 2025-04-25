@@ -38,7 +38,7 @@ public interface ApplicationFeature extends Feature {
         if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())) {
             String mainClass = mainClassName(generatorContext);
             if (mainClass != null) {
-                BuildProperties buildProperties = generatorContext.getBuildProperties();
+                BuildProperties buildProperties = generatorContext.getRootModule().buildProperties();
                 buildProperties.put("exec.mainClass", mainClass);
             }
         }
