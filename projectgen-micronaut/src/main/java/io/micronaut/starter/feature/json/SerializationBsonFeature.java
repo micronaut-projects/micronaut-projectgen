@@ -17,12 +17,15 @@ package io.micronaut.starter.feature.json;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import jakarta.inject.Singleton;
+
+import java.util.List;
 
 @Requires(property = "micronaut.starter.feature.serialization.bson.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class SerializationBsonFeature implements SerializationFeature {
-    private static final String ARTIFACT_ID_MICRONAUT_SERDE_BSON = "micronaut-serde-bson";
+public class SerializationBsonFeature implements OpenRewriteFeature {
 
     @Override
     public String getName() {
@@ -40,8 +43,8 @@ public class SerializationBsonFeature implements SerializationFeature {
     }
 
     @Override
-    public String getModule() {
-        return "bson";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.serialization-bson");
     }
 
 }
