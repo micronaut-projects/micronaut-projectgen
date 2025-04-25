@@ -18,6 +18,7 @@ package io.micronaut.starter.feature.k8s;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
@@ -76,13 +77,14 @@ public class KubernetesRxJava2Client implements Feature {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
+        ModuleContext module = generatorContext.getRootModule();
         if (!generatorContext.isFeaturePresent(RxJava2.class)) {
-            generatorContext.addDependency(Dependency.builder()
+            module.addDependency(Dependency.builder()
                     .groupId("io.reactivex.rxjava2")
                     .artifactId("rxjava")
                     .compile());
         }
-        generatorContext.addDependency(Dependency.builder()
+        module.addDependency(Dependency.builder()
                 .groupId(KubernetesClient.MICRONAUT_KUBERNETES_GROUP_ID)
                 .artifactId("micronaut-kubernetes-client-rxjava2")
                 .compile());

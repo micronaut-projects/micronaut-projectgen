@@ -21,6 +21,7 @@ import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.feature.DistributedConfigFeature;
 
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import jakarta.inject.Singleton;
 
 @Requires(property = "micronaut.starter.feature.netflix.archaius.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
@@ -44,7 +45,8 @@ public class Archaius implements DistributedConfigFeature {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        generatorContext.addDependency(Dependency.builder()
+        ModuleContext module = generatorContext.getRootModule();
+        module.addDependency(Dependency.builder()
                 .groupId("io.micronaut.netflix")
                 .artifactId("micronaut-netflix-archaius")
                 .compile());

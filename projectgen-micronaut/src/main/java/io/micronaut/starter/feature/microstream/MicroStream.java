@@ -19,6 +19,7 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
@@ -72,9 +73,10 @@ public class MicroStream implements MicroStreamFeature {
     }
 
     protected void addDependencies(@NonNull GeneratorContext generatorContext) {
-        generatorContext.addDependency(DEPENDENCY_MICRONAUT_MICROSTREAM);
-        generatorContext.addDependency(DEPENDENCY_MICRONAUT_MICROSTREAM_ANNOTATIONS);
-        generatorContext.addDependency(MicronautDependencyUtils.annotationProcessor(generatorContext.getBuildTool(),
+        ModuleContext module = generatorContext.getRootModule();
+        module.addDependency(DEPENDENCY_MICRONAUT_MICROSTREAM);
+        module.addDependency(DEPENDENCY_MICRONAUT_MICROSTREAM_ANNOTATIONS);
+        module.addDependency(MicronautDependencyUtils.annotationProcessor(generatorContext.getBuildTool(),
                 MicronautDependencyUtils.GROUP_ID_MICRONAUT_MICROSTREAM, MICRONAUT_MICROSTREAM_ANNOTATIONS_ARTIFACT, MICRONAUT_MICROSTREAM_VERSION));
     }
 

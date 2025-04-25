@@ -19,7 +19,9 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.context.env.Environment;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.feature.config.Configuration;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.projectgen.core.feature.config.ApplicationConfiguration;
@@ -73,19 +75,20 @@ public class SecurityOAuth2 extends SecurityFeature implements SecurityAuthentic
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        generatorContext.getConfiguration().put(PROPERTY_MICRONAUT_SECURITY_AUTHENTICATION,
+        ModuleContext module = generatorContext.getRootModule();
+        module.configuration().put(PROPERTY_MICRONAUT_SECURITY_AUTHENTICATION,
                 SecurityAuthenticationModeUtils.resolveSecurityAuthenticationMode(generatorContext)
                         .orElseGet(this::getSecurityAuthenticationMode).toString());
 
         SecurityOAuth2Configuration oAuth2Config = securityOAuth2Configuration(generatorContext);
 
-        ApplicationConfiguration devConfig = generatorContext.getConfigurationByEnvironmentOrDefaultConfig(Environment.DEVELOPMENT, ApplicationConfiguration.devConfig());
+        Configuration devConfig = module.devConfiguration();
         devConfig.put("micronaut.security.oauth2.clients.default.client-id", oAuth2Config.getClientId());
         devConfig.put("micronaut.security.oauth2.clients.default.client-secret", oAuth2Config.getClientSecret());
         if (generatorContext.isFeaturePresent(SecurityJWT.class)) {
             devConfig.put("micronaut.security.oauth2.clients.default.openid.issuer", oAuth2Config.getIssuer());
         }
-        generatorContext.addDependency(MicronautDependencyUtils.securityDependency()
+        module.addDependency(MicronautDependencyUtils.securityDependency()
                 .artifactId("micronaut-security-oauth2")
                 .compile());
     }

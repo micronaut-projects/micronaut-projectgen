@@ -17,6 +17,7 @@ package io.micronaut.projectgen.core.feature.gitignore;
 
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.rocker.RockerTemplate;
 import jakarta.inject.Singleton;
 import io.micronaut.projectgen.core.template.gitignore;
@@ -41,9 +42,10 @@ public class GitIgnore implements Feature {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
+        ModuleContext module = generatorContext.getRootModule();
         List<GitIgnoreGroup> groups = contributesGitIgnoreEntries.stream()
             .map(contributesGitIgnoreEntry -> contributesGitIgnoreEntry.gitIgnoreGroup(generatorContext))
             .toList();
-        generatorContext.addTemplate("gitignore", new RockerTemplate(".gitignore", gitignore.template(groups)));
+        module.addTemplate("gitignore", new RockerTemplate(".gitignore", gitignore.template(groups)));
     }
 }

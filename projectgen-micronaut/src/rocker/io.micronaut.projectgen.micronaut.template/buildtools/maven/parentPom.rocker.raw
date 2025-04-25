@@ -1,12 +1,13 @@
+@option discardLogicWhitespace=true
 @import io.micronaut.projectgen.core.buildtools.maven.ParentPom
-
 @args (ParentPom parentPom)
-
   <parent>
      <groupId>@(parentPom.groupId())</groupId>
      <artifactId>@(parentPom.artifactId())</artifactId>
      <version>@(parentPom.version())</version>
-@if (parentPom.relativePath()) {
+@if (parentPom.relativePath() == "") {
      <relativePath/> <!-- lookup parent from repository -->
+} else if (parentPom.relativePath() != null) {
+    <relativePath>@parentPom.relativePath()</relativePath>
 }
   </parent>

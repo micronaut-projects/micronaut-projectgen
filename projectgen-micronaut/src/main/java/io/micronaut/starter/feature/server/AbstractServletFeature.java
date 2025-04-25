@@ -18,6 +18,7 @@ package io.micronaut.starter.feature.server;
 import static io.micronaut.starter.build.dependencies.MicronautDependencyUtils.GROUP_ID_IO_MICRONAUT_SERVLET;
 
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 
 /**
@@ -26,7 +27,8 @@ import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 public abstract class AbstractServletFeature extends AbstractMicronautServerFeature {
     @Override
     public void apply(GeneratorContext generatorContext) {
-        generatorContext.addDependency(
+        ModuleContext module = generatorContext.getRootModule();
+        module.addDependency(
                 MicronautDependencyUtils.annotationProcessor(generatorContext.getBuildTool(),
                         GROUP_ID_IO_MICRONAUT_SERVLET,
                         "micronaut-servlet-processor",

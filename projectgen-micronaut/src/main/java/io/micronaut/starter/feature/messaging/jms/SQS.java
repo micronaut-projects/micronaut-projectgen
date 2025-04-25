@@ -20,6 +20,7 @@ import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.MavenCoordinate;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import io.micronaut.starter.feature.testresources.TestResourcesAdditionalModulesProvider;
 import io.micronaut.testresources.buildtools.KnownModules;
@@ -54,8 +55,9 @@ public class SQS extends AbstractJmsFeature implements TestResourcesAdditionalMo
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        generatorContext.getConfiguration().put("micronaut.jms.sqs.enabled", true);
-        generatorContext.addDependency(MicronautDependencyUtils.jmsDependency()
+        ModuleContext module = generatorContext.getRootModule();
+        module.configuration().put("micronaut.jms.sqs.enabled", true);
+        module.addDependency(MicronautDependencyUtils.jmsDependency()
                 .artifactId("micronaut-jms-sqs")
                 .compile());
     }

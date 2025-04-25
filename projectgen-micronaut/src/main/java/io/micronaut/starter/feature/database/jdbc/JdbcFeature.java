@@ -15,6 +15,7 @@
  */
 package io.micronaut.starter.feature.database.jdbc;
 
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.starter.feature.Category;
@@ -64,7 +65,8 @@ public abstract class JdbcFeature implements OneOfFeature, DatabaseDriverConfigu
         generatorContext.getFeature(DatabaseDriverFeature.class).ifPresent(dbFeature -> {
             Map<String, Object> jdbcConfig = new LinkedHashMap<>();
             applyDefaultConfig(generatorContext, dbFeature, jdbcConfig);
-            generatorContext.getConfiguration().addNested(jdbcConfig);
+            ModuleContext module = generatorContext.getRootModule();
+            module.configuration().addNested(jdbcConfig);
         });
     }
 

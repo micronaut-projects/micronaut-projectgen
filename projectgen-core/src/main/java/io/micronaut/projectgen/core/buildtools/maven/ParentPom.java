@@ -16,6 +16,7 @@
 package io.micronaut.projectgen.core.buildtools.maven;
 
 import io.micronaut.projectgen.core.buildtools.dependencies.Coordinate;
+import io.micronaut.sourcegen.annotations.Builder;
 
 /**
  * Parent POM.
@@ -24,13 +25,14 @@ import io.micronaut.projectgen.core.buildtools.dependencies.Coordinate;
  * @param version Version
  * @param relativePath Relative Path
  */
-public record ParentPom(String groupId, String artifactId, String version, boolean relativePath) {
+@Builder
+public record ParentPom(String groupId, String artifactId, String version, String relativePath) {
 
-    public ParentPom(Coordinate coordinate, boolean relativePath) {
+    public ParentPom(Coordinate coordinate, String relativePath) {
         this(coordinate.getGroupId(), coordinate.getArtifactId(), coordinate.getVersion(), relativePath);
     }
 
     public ParentPom(Coordinate coordinate) {
-        this(coordinate, false);
+        this(coordinate, null);
     }
 }

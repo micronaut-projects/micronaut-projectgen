@@ -17,6 +17,7 @@ package io.micronaut.starter.feature.spring;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
@@ -58,21 +59,22 @@ public class SpringWeb extends SpringFeature implements MicronautServerDependent
 
     @Override
     public void apply(GeneratorContext generatorContext) {
+        ModuleContext module = generatorContext.getRootModule();
         Dependency.Builder springWebAnnotation = MicronautDependencyUtils.springDependency()
                 .artifactId("micronaut-spring-web-annotation")
                 .versionProperty("micronaut.spring.version")
                 .template();
 
-        generatorContext.addDependency(springWebAnnotation.annotationProcessor());
-        generatorContext.addDependency(springWebAnnotation.testAnnotationProcessor());
-        generatorContext.addDependency(Dependency.builder()
+        module.addDependency(springWebAnnotation.annotationProcessor());
+        module.addDependency(springWebAnnotation.testAnnotationProcessor());
+        module.addDependency(Dependency.builder()
                 .groupId("org.springframework.boot")
                 .artifactId("spring-boot-starter-web")
                 .compile());
-        generatorContext.addDependency(MicronautDependencyUtils.coreDependency()
+        module.addDependency(MicronautDependencyUtils.coreDependency()
                 .artifactId("micronaut-http-server")
                 .compile());
-        generatorContext.addDependency(Dependency.builder()
+        module.addDependency(Dependency.builder()
                 .groupId("io.micronaut.spring")
                 .artifactId("micronaut-spring-web")
                 .runtime());

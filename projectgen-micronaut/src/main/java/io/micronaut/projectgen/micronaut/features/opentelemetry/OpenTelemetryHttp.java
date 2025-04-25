@@ -20,6 +20,7 @@ import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import io.micronaut.starter.feature.other.Management;
 import io.micronaut.starter.feature.server.MicronautServerDependent;
@@ -60,9 +61,10 @@ public class OpenTelemetryHttp implements TracingFeature, MicronautServerDepende
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        generatorContext.addDependency(MICRONAUT_OPEN_TELEMETRY_HTTP);
+        ModuleContext module = generatorContext.getRootModule();
+        module.addDependency(MICRONAUT_OPEN_TELEMETRY_HTTP);
         if (generatorContext.getFeatures().hasFeature(Management.class)) {
-            generatorContext.getConfiguration().addListItem("otel.exclusions", "/health");
+            module.configuration().addListItem("otel.exclusions", "/health");
         }
     }
 

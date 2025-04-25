@@ -20,6 +20,7 @@ import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.starter.feature.database.TestContainers;
 import io.micronaut.starter.feature.messaging.SharedTestResourceFeature;
 import io.micronaut.starter.feature.testresources.EaseTestingFeature;
@@ -50,7 +51,8 @@ public class Mqtt extends EaseTestingFeature implements MqttFeature, SharedTestR
     @Override
     public void apply(GeneratorContext generatorContext) {
         MqttFeature.super.apply(generatorContext);
-        generatorContext.addDependency(Dependency.builder()
+        ModuleContext module = generatorContext.getRootModule();
+        module.addDependency(Dependency.builder()
                 .groupId("io.micronaut.mqtt")
                 .artifactId("micronaut-mqttv5")
                 .compile());

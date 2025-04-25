@@ -19,6 +19,8 @@ import com.fizzed.rocker.RockerModel;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.generator.Project;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.core.rocker.RockerWritable;
 import io.micronaut.projectgen.core.utils.OptionUtils;
@@ -26,8 +28,6 @@ import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.buildtools.dependencies.DependencyContextImpl;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.Property;
-import io.micronaut.projectgen.core.buildtools.RepositoryResolver;
-import io.micronaut.projectgen.core.buildtools.dependencies.Coordinate;
 import io.micronaut.projectgen.core.buildtools.dependencies.CoordinateResolver;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.buildtools.dependencies.DependencyContext;
@@ -40,10 +40,8 @@ import io.micronaut.projectgen.core.buildtools.gradle.GradleDsl;
 import io.micronaut.projectgen.core.buildtools.gradle.GradlePlugin;
 import io.micronaut.projectgen.core.buildtools.gradle.GradleRepository;
 import io.micronaut.projectgen.core.buildtools.maven.MavenBuild;
-import io.micronaut.projectgen.core.buildtools.maven.MavenCombineAttribute;
 import io.micronaut.projectgen.core.buildtools.maven.MavenDependency;
 import io.micronaut.projectgen.core.buildtools.maven.MavenPlugin;
-import io.micronaut.projectgen.core.buildtools.maven.MavenRepository;
 import io.micronaut.projectgen.core.buildtools.maven.ParentPom;
 import io.micronaut.starter.feature.Category;
 import io.micronaut.starter.feature.InfrastructureAsCodeFeature;
@@ -64,13 +62,13 @@ import io.micronaut.projectgen.micronaut.template.buildtools.maven.mavenCompiler
 import io.micronaut.starter.feature.function.HandlerClassFeature;
 import io.micronaut.starter.feature.function.awslambda.AwsLambda;
 import io.micronaut.starter.feature.graalvm.GraalVM;
-import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.options.Language;
 import io.micronaut.projectgen.core.rocker.RockerTemplate;
 import io.micronaut.projectgen.core.template.Template;
 import io.micronaut.starter.util.FeaturesUtils;
 import io.micronaut.starter.util.VersionInfo;
 import jakarta.inject.Singleton;
+import org.openrewrite.jgit.transport.resolver.RepositoryResolver;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -89,13 +87,14 @@ public class Cdk implements MultiProjectFeature, InfrastructureAsCodeFeature {
     private static final String ARTIFACT_ID_MICRONAUT_STARTER_AWS_CDK = "micronaut-starter-aws-cdk";
     private final CpuArchitecture defaultCpuArchitecture;
     private final DependencyContext dependencyContext;
-    private final RepositoryResolver repositoryResolver;
+    //private final RepositoryResolver repositoryResolver;
     private final CoordinateResolver coordinateResolver;
     private final Dependency dependencyCdk;
 
     public Cdk(CoordinateResolver coordinateResolver,
-               X86 x86,
-               RepositoryResolver repositoryResolver) {
+               X86 x86
+               //RepositoryResolver repositoryResolver
+               ) {
         this.coordinateResolver = coordinateResolver;
 //        dependencyCdk = MicronautDependencyUtils.starterDependency()
 //                        .artifactId(ARTIFACT_ID_MICRONAUT_STARTER_AWS_CDK)
@@ -109,7 +108,6 @@ public class Cdk implements MultiProjectFeature, InfrastructureAsCodeFeature {
         dependencyCdk = null;
         this.defaultCpuArchitecture = x86;
         this.dependencyContext = new DependencyContextImpl(coordinateResolver);
-        this.repositoryResolver = repositoryResolver;
     }
 
     @Override
@@ -142,158 +140,160 @@ public class Cdk implements MultiProjectFeature, InfrastructureAsCodeFeature {
         return Category.CLOUD;
     }
 
-    @Override
-    public void apply(GeneratorContext generatorContext) {
-        boolean optimized = generatorContext.getFeatures().hasFeature(MicronautAot.class);
-        boolean nativeImage = generatorContext.getFeatures().hasFeature(GraalVM.class);
-        if (generatorContext.getFeatures().hasFeature(AwsApiFeature.class)) {
-            generatorContext.addTemplate("test-lambda", new RockerTemplate(Template.ROOT,
-                    "test-lambda.sh",
-                    testlambda.template(generatorContext.getBuildTool(),
-                            nativeImage,
-                            optimized,
-                            INFRA_MODULE),
-                    true));
-        }
-        generatorContext.addTemplate("cdk-json", new RockerTemplate(INFRA_MODULE, "cdk.json", cdkjson.template(generatorContext.getBuildTool(), INFRA_MODULE)));
-        generatorContext.addTemplate("cdk-main", new RockerTemplate(INFRA_MODULE, "src/main/java/{packagePath}/" + MAIN_CLASS_NAME + ".java",
-                cdkmain.template(generatorContext.getProject())));
-
-        String handler = HandlerClassFeature.resolveHandler(generatorContext);
-        Language lang = Language.JAVA;
-        addAppStackTest(generatorContext, lang, handler);
-        CpuArchitecture architecture = generatorContext.getFeatures().getFeature(CpuArchitecture.class)
-                .orElse(defaultCpuArchitecture);
-        ApplicationType applicationType = generatorContext.getOptions() instanceof MicronautOptions mnOptions ? mnOptions.applicationType() : null;
-        generatorContext.addTemplate("cdk-appstack", new RockerTemplate(INFRA_MODULE, lang.getSrcDir() + "/{packagePath}/AppStack.java",
-                cdkappstack.template(generatorContext.getFeatures(),
-                        generatorContext.getProject(),
-                        generatorContext.getBuildTool(),
-                        applicationType,
-                        architecture,
-                        Template.DEFAULT_MODULE,
-                        OptionUtils.hasGradleBuildTool(generatorContext.getOptions()) ? "build/libs" : "target",
-                        generatorContext.getFeatures().hasFeature(AwsLambda.class) ? "micronaut-function" : null,
-                        generatorContext.getFeatures().hasFeature(AwsApiFeature.class) ? "micronaut-function-api" : null,
-                        "0.1",
-                        handler,
-                        nativeImage,
-                        optimized,
-                        generatorContext.getJdkVersion()))
-        );
-        buildRockerModel(generatorContext).ifPresent(rockerModel -> {
-            generatorContext.addTemplate("cdk-build",
-                    new RockerTemplate(INFRA_MODULE, generatorContext.getBuildTool().getBuildFileName(), rockerModel));
-        });
-
-        generatorContext.addHelpTemplate(new RockerWritable(cdkhelp.template(generatorContext.getBuildTool(), generatorContext.getFeatures().hasFeature(GraalVM.class), generatorContext.getFeatures().hasFeature(MicronautAot.class), INFRA_MODULE)));
-    }
-
-    protected void addAppStackTest(@NonNull GeneratorContext generatorContext,
-                                   @NonNull Language lang,
-                                   @NonNull String handler) {
-        generatorContext.addTemplate("cdk-appstacktest", new RockerTemplate(INFRA_MODULE, lang.getTestSrcDir() + "/{packagePath}/AppStackTest.java",
-                cdkappstacktest.template(generatorContext.getProject(), handler)));
-
-    }
-
-    private void populateDependencies(GeneratorContext generatorContext) {
-        dependencyContext.addDependency(bomDependency().compile());
-        dependencyContext.addDependency(dependencyCdk);
-        coordinateResolver.resolve(ARTIFACT_ID_AWS_CDK_LIB)
-                .ifPresent(coordinate -> dependencyContext.addDependency(Dependency.builder()
-                        .groupId(coordinate.getGroupId())
-                        .artifactId(coordinate.getArtifactId())
-                        .version(coordinate.getVersion())
-                        .compile()
-                        .build()));
-        dependencyContext.addDependency(bomDependency().test());
-        dependencyContext.addDependency(Dependency.builder()
-                .groupId("org.junit.jupiter")
-                .artifactId("junit-jupiter-api")
-                .test());
-        dependencyContext.addDependency(Dependency.builder()
-                .groupId("org.junit.jupiter")
-                .artifactId("junit-jupiter-engine")
-                .test());
-        if (generatorContext.getFeatures().hasFeature(AmazonApiGatewayHttp.class)) {
-            dependencyContext.addDependency(Dependency.builder()
-                    .lookupArtifactId("apigatewayv2-alpha")
-                    .compile());
-            dependencyContext.addDependency(Dependency.builder()
-                    .lookupArtifactId("apigatewayv2-integrations-alpha")
-                    .compile());
-        }
-    }
-
-    private Dependency.Builder bomDependency() {
-        return MicronautDependencyUtils.platformDependency()
-                .artifactId("micronaut-platform")
-                .version(VersionInfo.getMicronautVersion())
-                .pom();
-    }
-
-    private Optional<RockerModel> buildRockerModel(GeneratorContext generatorContext) {
-        populateDependencies(generatorContext);
-        RockerModel rockerModel = null;
-        if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())) {
-            ParentPom parentPom = new ParentPom(generatorContext.getProject().getPackageName(), generatorContext.getProject().getName() + "-parent", "1.0-SNAPSHOT", false);
-            rockerModel = genericPom.template(parentPom, infrastructureMavenBuild(generatorContext));
-        } else if (OptionUtils.hasGradleBuildTool(generatorContext.getOptions())) {
-            rockerModel = genericBuildGradle.template(generatorContext.getProject(), infrastructureGradleBuild(generatorContext), MAIN_CLASS_NAME, null, null);
-        }
-        return Optional.ofNullable(rockerModel);
-    }
-
-    private MavenBuild infrastructureMavenBuild(GeneratorContext generatorContext) {
-        List<MavenDependency> dependencies = MavenDependency.listOf(dependencyContext, generatorContext.getLanguage());
-        List<MavenPlugin> plugins = Arrays.asList(
-                MavenPlugin.builder()
-                        .artifactId("maven-compiler-plugin")
-                        .extension(new RockerWritable(mavenCompilerPlugin.template()))
-                        .build(),
-                MavenPlugin.builder()
-                        .artifactId("exec-maven-plugin")
-                        .extension(new RockerWritable(execMavenPlugin.template(generatorContext.getProject().getPackageName() + "." + MAIN_CLASS_NAME)))
-                        .build());
-        List<Property> properties = Collections.singletonList(new Property() {
-            @Override
-            public String getKey() {
-                return "jdk.version";
-            }
-
-            @Override
-            public String getValue() {
-                return FeaturesUtils.getTargetJdk(generatorContext.getFeatures());
-            }
-        });
-        return null;
-//        return new MavenBuild(generatorContext.getProject().getName() + "-" + INFRA_MODULE,
-//                Collections.emptyList(),
-//                Collections.emptyList(),
-//                dependencies,
-//                properties,
+//    @Override
+//    public void apply(GeneratorContext generatorContext) {
+//        ModuleContext module = generatorContext.getRootModule();
+//        boolean optimized = generatorContext.getFeatures().hasFeature(MicronautAot.class);
+//        boolean nativeImage = generatorContext.getFeatures().hasFeature(GraalVM.class);
+//        if (generatorContext.getFeatures().hasFeature(AwsApiFeature.class)) {
+//            module.addTemplate("test-lambda", new RockerTemplate(Template.ROOT,
+//                    "test-lambda.sh",
+//                    testlambda.template(generatorContext.getBuildTool(),
+//                            nativeImage,
+//                            optimized,
+//                            INFRA_MODULE),
+//                    true));
+//        }
+//        module.addTemplate("cdk-json", new RockerTemplate(INFRA_MODULE, "cdk.json", cdkjson.template(generatorContext.getBuildTool(), INFRA_MODULE)));
+//        module.addTemplate("cdk-main", new RockerTemplate(INFRA_MODULE, "src/main/java/{packagePath}/" + MAIN_CLASS_NAME + ".java",
+//                cdkmain.template(generatorContext.getProject())));
+//
+//        String handler = HandlerClassFeature.resolveHandler(generatorContext);
+//        Language lang = Language.JAVA;
+//        addAppStackTest(generatorContext, lang, handler);
+//        CpuArchitecture architecture = generatorContext.getFeatures().getFeature(CpuArchitecture.class)
+//                .orElse(defaultCpuArchitecture);
+//        ApplicationType applicationType = generatorContext.getOptions() instanceof MicronautOptions mnOptions ? mnOptions.applicationType() : null;
+//        module.addTemplate("cdk-appstack", new RockerTemplate(INFRA_MODULE, lang.getSrcDir() + "/{packagePath}/AppStack.java",
+//                cdkappstack.template(generatorContext.getFeatures(),
+//                        generatorContext.getProject(),
+//                        generatorContext.getBuildTool(),
+//                        applicationType,
+//                        architecture,
+//                        Template.DEFAULT_MODULE,
+//                        OptionUtils.hasGradleBuildTool(generatorContext.getOptions()) ? "build/libs" : "target",
+//                        generatorContext.getFeatures().hasFeature(AwsLambda.class) ? "micronaut-function" : null,
+//                        generatorContext.getFeatures().hasFeature(AwsApiFeature.class) ? "micronaut-function-api" : null,
+//                        "0.1",
+//                        handler,
+//                        nativeImage,
+//                        optimized,
+//                        generatorContext.getJdkVersion()))
+//        );
+//        buildRockerModel(generatorContext).ifPresent(rockerModel -> {
+//            module.addTemplate("cdk-build",
+//                    new RockerTemplate(INFRA_MODULE, generatorContext.getBuildTool().getBuildFileName(), rockerModel));
+//        });
+//
+//        module.addHelpTemplate(new RockerWritable(cdkhelp.template(generatorContext.getBuildTool(), generatorContext.getFeatures().hasFeature(GraalVM.class), generatorContext.getFeatures().hasFeature(MicronautAot.class), INFRA_MODULE)));
+//    }
+//
+//    protected void addAppStackTest(@NonNull ModuleContext module,
+//                                   Project project,
+//                                   @NonNull Language lang,
+//                                   @NonNull String handler) {
+//        module.addTemplate("cdk-appstacktest", new RockerTemplate(INFRA_MODULE, lang.getTestSrcDir() + "/{packagePath}/AppStackTest.java",
+//                cdkappstacktest.template(project, handler)));
+//
+//    }
+//
+//    private void populateDependencies(GeneratorContext generatorContext) {
+//        dependencyContext.addDependency(bomDependency().compile());
+//        dependencyContext.addDependency(dependencyCdk);
+//        coordinateResolver.resolve(ARTIFACT_ID_AWS_CDK_LIB)
+//                .ifPresent(coordinate -> dependencyContext.addDependency(Dependency.builder()
+//                        .groupId(coordinate.getGroupId())
+//                        .artifactId(coordinate.getArtifactId())
+//                        .version(coordinate.getVersion())
+//                        .compile()
+//                        .build()));
+//        dependencyContext.addDependency(bomDependency().test());
+//        dependencyContext.addDependency(Dependency.builder()
+//                .groupId("org.junit.jupiter")
+//                .artifactId("junit-jupiter-api")
+//                .test());
+//        dependencyContext.addDependency(Dependency.builder()
+//                .groupId("org.junit.jupiter")
+//                .artifactId("junit-jupiter-engine")
+//                .test());
+//        if (generatorContext.getFeatures().hasFeature(AmazonApiGatewayHttp.class)) {
+//            dependencyContext.addDependency(Dependency.builder()
+//                    .lookupArtifactId("apigatewayv2-alpha")
+//                    .compile());
+//            dependencyContext.addDependency(Dependency.builder()
+//                    .lookupArtifactId("apigatewayv2-integrations-alpha")
+//                    .compile());
+//        }
+//    }
+//
+//    private Dependency.Builder bomDependency() {
+//        return MicronautDependencyUtils.platformDependency()
+//                .artifactId("micronaut-platform")
+//                .version(VersionInfo.getMicronautVersion())
+//                .pom();
+//    }
+//
+//    private Optional<RockerModel> buildRockerModel(GeneratorContext generatorContext) {
+//        populateDependencies(generatorContext);
+//        RockerModel rockerModel = null;
+//        if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())) {
+//            ParentPom parentPom = new ParentPom(generatorContext.getProject().getPackageName(), generatorContext.getProject().getName() + "-parent", "1.0-SNAPSHOT", false);
+//            rockerModel = genericPom.template(parentPom, infrastructureMavenBuild(generatorContext));
+//        } else if (OptionUtils.hasGradleBuildTool(generatorContext.getOptions())) {
+//            rockerModel = genericBuildGradle.template(generatorContext.getProject(), infrastructureGradleBuild(generatorContext), MAIN_CLASS_NAME, null, null);
+//        }
+//        return Optional.ofNullable(rockerModel);
+//    }
+//
+//    private MavenBuild infrastructureMavenBuild(GeneratorContext generatorContext) {
+//        List<MavenDependency> dependencies = MavenDependency.listOf(dependencyContext, generatorContext.getLanguage());
+//        List<MavenPlugin> plugins = Arrays.asList(
+//                MavenPlugin.builder()
+//                        .artifactId("maven-compiler-plugin")
+//                        .extension(new RockerWritable(mavenCompilerPlugin.template()))
+//                        .build(),
+//                MavenPlugin.builder()
+//                        .artifactId("exec-maven-plugin")
+//                        .extension(new RockerWritable(execMavenPlugin.template(generatorContext.getProject().getPackageName() + "." + MAIN_CLASS_NAME)))
+//                        .build());
+//        List<Property> properties = Collections.singletonList(new Property() {
+//            @Override
+//            public String getKey() {
+//                return "jdk.version";
+//            }
+//
+//            @Override
+//            public String getValue() {
+//                return FeaturesUtils.getTargetJdk(generatorContext.getFeatures());
+//            }
+//        });
+//        return null;
+////        return new MavenBuild(generatorContext.getProject().getName() + "-" + INFRA_MODULE,
+////                Collections.emptyList(),
+////                Collections.emptyList(),
+////                dependencies,
+////                properties,
+////                plugins,
+////                MavenRepository.listOf(repositoryResolver.resolveRepositories(generatorContext)),
+////                MavenCombineAttribute.APPEND,
+////                MavenCombineAttribute.APPEND,
+////                Collections.emptyList(),
+////                Collections.emptyList(),
+////                Collections.emptyList());
+//    }
+//
+//    private GradleBuild infrastructureGradleBuild(GeneratorContext generatorContext) {
+//        List<GradlePlugin> plugins = new ArrayList<>();
+//        plugins.add(GradlePlugin.builder().id("application")
+//                        .extension(new RockerTemplate(useJunitPlatform.template(generatorContext.getBuildTool().getGradleDsl().orElse(GradleDsl.GROOVY))))
+//                .build());
+//        plugins.add(GradlePlugin.builder().id("java").build());
+//        return new GradleBuild(generatorContext.getBuildTool().getGradleDsl().orElse(GradleDsl.GROOVY),
+//                GradleDependency.listOf(dependencyContext, generatorContext, useVersionCatalog()),
 //                plugins,
-//                MavenRepository.listOf(repositoryResolver.resolveRepositories(generatorContext)),
-//                MavenCombineAttribute.APPEND,
-//                MavenCombineAttribute.APPEND,
-//                Collections.emptyList(),
-//                Collections.emptyList(),
-//                Collections.emptyList());
-    }
-
-    private GradleBuild infrastructureGradleBuild(GeneratorContext generatorContext) {
-        List<GradlePlugin> plugins = new ArrayList<>();
-        plugins.add(GradlePlugin.builder().id("application")
-                        .extension(new RockerTemplate(useJunitPlatform.template(generatorContext.getBuildTool().getGradleDsl().orElse(GradleDsl.GROOVY))))
-                .build());
-        plugins.add(GradlePlugin.builder().id("java").build());
-        return new GradleBuild(generatorContext.getBuildTool().getGradleDsl().orElse(GradleDsl.GROOVY),
-                GradleDependency.listOf(dependencyContext, generatorContext, useVersionCatalog()),
-                plugins,
-                GradleRepository.listOf(generatorContext.getBuildTool().getGradleDsl().orElse(GradleDsl.GROOVY),
-                        repositoryResolver.resolveRepositories(generatorContext)));
-    }
+//                GradleRepository.listOf(generatorContext.getBuildTool().getGradleDsl().orElse(GradleDsl.GROOVY),
+//                        repositoryResolver.resolveRepositories(generatorContext)));
+//    }
 
     /**
      *

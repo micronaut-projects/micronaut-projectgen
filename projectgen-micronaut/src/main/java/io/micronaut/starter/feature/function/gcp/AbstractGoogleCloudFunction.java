@@ -17,6 +17,7 @@ package io.micronaut.starter.feature.function.gcp;
 
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.starter.feature.function.AbstractFunctionFeature;
@@ -45,8 +46,9 @@ public abstract class AbstractGoogleCloudFunction extends AbstractFunctionFeatur
     @Override
     public void apply(GeneratorContext generatorContext) {
         super.apply(generatorContext);
+        ModuleContext module = generatorContext.getRootModule();
         if (generatorContext.getFeatures().testFramework().isSpock()) {
-            generatorContext.addDependency(DEPENDENCY_MICRONAUT_SERVLET_CORE);
+            module.addDependency(DEPENDENCY_MICRONAUT_SERVLET_CORE);
         }
     }
 

@@ -17,6 +17,7 @@ package io.micronaut.starter.feature.other;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
@@ -64,7 +65,8 @@ public class OpenApiAdoc implements Feature, MicronautServerDependent {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        generatorContext.addDependency(DEPENDENCY_OPENAPI_ASCIIDOC);
+        ModuleContext module = generatorContext.getRootModule();
+        module.addDependency(DEPENDENCY_OPENAPI_ASCIIDOC);
     }
 
     @Override

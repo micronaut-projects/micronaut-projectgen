@@ -21,6 +21,7 @@ import io.micronaut.core.util.CollectionUtils;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.starter.feature.ContributingInterceptUrlMapFeature;
 import io.micronaut.starter.feature.InterceptUrlMap;
 import jakarta.inject.Singleton;
@@ -55,7 +56,8 @@ public class Security extends SecurityFeature {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        generatorContext.addDependency(Dependency.builder()
+        ModuleContext module = generatorContext.getRootModule();
+        module.addDependency(Dependency.builder()
                 .groupId("io.micronaut.security")
                 .artifactId("micronaut-security")
                 .compile());
@@ -63,6 +65,7 @@ public class Security extends SecurityFeature {
     }
 
     protected void addInterceptUrlMapConfiguration(@NonNull GeneratorContext generatorContext) {
+        ModuleContext module = generatorContext.getRootModule();
         List<Map<String, String>> list = generatorContext.getFeatures().getFeatures()
                 .stream()
                 .filter(f -> f instanceof ContributingInterceptUrlMapFeature)
@@ -71,7 +74,7 @@ public class Security extends SecurityFeature {
                 .map(InterceptUrlMap::toMap)
                 .toList();
         if (CollectionUtils.isNotEmpty(list)) {
-            generatorContext.getConfiguration().put("micronaut.security.intercept-url-map", list);
+            module.configuration().put("micronaut.security.intercept-url-map", list);
         }
     }
 

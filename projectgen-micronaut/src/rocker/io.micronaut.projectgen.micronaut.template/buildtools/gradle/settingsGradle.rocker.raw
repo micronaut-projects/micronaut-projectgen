@@ -16,7 +16,7 @@ import @(settingsImport)
 @if(!gradleBuild.getSettingsPlugins().isEmpty()) {
 plugins {
 @for (GradlePlugin gradlePlugin : gradleBuild.getSettingsPlugins()) {
-    id("@gradlePlugin.getId()") @(gradlePlugin.getVersion() != null ? "version(\"" + gradlePlugin.getVersion() + "\")" : "")
+    id("@gradlePlugin.getId()")@(gradlePlugin.getVersion() != null ? " version(\"" + gradlePlugin.getVersion() + "\")" : "")@(gradlePlugin.getApply() != null ? " apply false" : "")
 }
 }
 

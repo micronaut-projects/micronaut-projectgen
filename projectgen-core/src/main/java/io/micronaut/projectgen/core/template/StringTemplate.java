@@ -24,11 +24,7 @@ public class StringTemplate extends DefaultTemplate {
     private final String content;
 
     public StringTemplate(String path, String content) {
-        this(DEFAULT_MODULE, path, content);
-    }
-
-    public StringTemplate(String module, String path, String content) {
-        super(module, path);
+        super(path);
         this.content = content;
     }
 

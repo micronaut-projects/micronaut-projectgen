@@ -20,6 +20,7 @@ import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import jakarta.inject.Singleton;
 
@@ -54,7 +55,8 @@ public class SecurityCsrf extends SecurityFeature {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        generatorContext.addDependency(DEPENDENCY_MICRONAUT_SECURITY_CSRF);
+        ModuleContext module = generatorContext.getRootModule();
+        module.addDependency(DEPENDENCY_MICRONAUT_SECURITY_CSRF);
     }
 
     @Override

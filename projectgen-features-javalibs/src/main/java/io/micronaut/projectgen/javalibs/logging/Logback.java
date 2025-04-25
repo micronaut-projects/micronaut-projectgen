@@ -20,6 +20,7 @@ import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.feature.LoggingFeature;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.options.OperatingSystem;
 import io.micronaut.projectgen.core.rocker.RockerTemplate;
@@ -68,7 +69,8 @@ public class Logback implements LoggingFeature, OpenRewriteFeature {
      * @param useJul Use JUL
      */
     protected void addConfig(GeneratorContext generatorContext, boolean useJul) {
-        generatorContext.addTemplate("loggingConfig", new RockerTemplate("src/main/resources/logback.xml",
+        ModuleContext module = generatorContext.getRootModule();
+        module.addTemplate("loggingConfig", new RockerTemplate("src/main/resources/logback.xml",
             logback.template(useJansi(generatorContext), DEFAULT_COLORING, useJul)));
     }
 

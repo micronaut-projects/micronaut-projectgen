@@ -5,7 +5,7 @@
 @args (Project project, GradleBuild gradleBuild, String mainClassName, String version, String groupId)
 plugins {
 @for (GradlePlugin gradlePlugin : gradleBuild.getPlugins()) {
-    id("@gradlePlugin.getId()") @(gradlePlugin.getVersion() != null ? "version \"" + gradlePlugin.getVersion() + "\"" : "")
+    id("@gradlePlugin.getId()")@(gradlePlugin.getVersion() != null ? " version \"" + gradlePlugin.getVersion() + "\"" : "")@(gradlePlugin.getApply() != null ? " apply false" : "")
 }
 }
 
@@ -21,7 +21,7 @@ repositories {
 }
 
 dependencies {
-@for (GradleDependency dependency : gradleBuild.getDependencies()) {
+@for (GradleDependency dependency : gradleBuild.dependencies()) {
     @dependency.toSnippet()
 }
 }
