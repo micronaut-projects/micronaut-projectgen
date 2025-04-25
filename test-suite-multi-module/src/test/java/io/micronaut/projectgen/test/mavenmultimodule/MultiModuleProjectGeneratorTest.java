@@ -45,13 +45,14 @@ class MultiModuleProjectGeneratorTest {
         assertNotNull(project.get("build.gradle"));
         assertNotNull(project.get("settings.gradle"));
 
+        assertNotNull(project.get("application/src/main/java/com/example/multimodule/application/DemoApplication.java"));
         assertNotNull(project.get("library/src/main/java/com/example/multimodule/service/ServiceProperties.java"));
         assertNotNull(project.get("library/src/test/java/com/example/multimodule/service/MyServiceTest.java"));
         assertNotNull(project.get("library/src/main/java/com/example/multimodule/service/MyService.java"));
 
         Properties applicationProperties = ConfigurationUtils.loadApplicationPropertiesByModule(project, "application");
         assertNotNull(applicationProperties);
-        assertEquals("demo", applicationProperties.get("spring.application.name"));
+        assertEquals("Hello, World", applicationProperties.get("service.message"));
 
         assertFile("expectedSettings.gradle", "settings.gradle", project, resourceLoader);
         assertFile("library.gradle", "library/build.gradle", project, resourceLoader);

@@ -8,6 +8,7 @@ import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import jakarta.inject.Singleton;
+import multimodule.demoApplication;
 import static io.micronaut.projectgen.test.mavenmultimodule.SpringBootDependencies.*;
 
 @Singleton
@@ -36,13 +37,16 @@ class ApplicationModule implements Feature {
     @Override
     public void apply(GeneratorContext generatorContext) {
         ModuleContext module = generatorContext.getModuleByName(MODULE_APPLICATION);
-        module.configuration().put("spring.application.name", "demo");
+        module.configuration().put("service.message", "Hello, World");
         module.moduleAttributes().setCoordinate(COORDINATE);
         module.moduleAttributes().setDescription("Demo project for Spring Boot");
         module.addDependency(SPRING_BOOT_STARTER_ACTUATOR);
         module.addDependency(SPRING_BOOT_STARTER_WEB);
         module.addDependency(SPRING_BOOT_STARTER_TEST);
         module.addDependency(LIBRARY_DEPENDENCY);
+        module.addTemplate("DemoApplication.java",
+            "src/main/java/com/example/multimodule/application/DemoApplication.java",
+            demoApplication.template());
         if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())) {
             module.moduleAttributes().setParentPom(SPRING_BOOT_PARENT_POM);
             module.addBuildPlugin(SPRING_BOOT_MAVEN_PLUGIN);
