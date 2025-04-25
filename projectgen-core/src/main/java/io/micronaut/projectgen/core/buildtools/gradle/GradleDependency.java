@@ -16,7 +16,9 @@
 package io.micronaut.projectgen.core.buildtools.gradle;
 
 import io.micronaut.core.annotation.NonNull;
+import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.order.OrderUtil;
+import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.buildtools.dependencies.Coordinate;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
@@ -51,11 +53,13 @@ public class GradleDependency extends DependencyCoordinate {
     private final GradleConfiguration gradleConfiguration;
 
     private final boolean useVersionCatalogue;
+    private final String project;
 
     public GradleDependency(@NonNull Dependency dependency,
                             @NonNull Options options,
                             @NonNull GeneratorContext generatorContext,
-                            boolean useVersionCatalogue) {
+                            boolean useVersionCatalogue,
+                            @Nullable String project) {
         super(dependency);
         gradleConfiguration = GradleConfiguration.of(
             dependency.getScope(),
@@ -66,6 +70,7 @@ public class GradleDependency extends DependencyCoordinate {
             new IllegalArgumentException("Cannot map the dependency scope: [%s] to a Gradle specific scope".formatted(dependency.getScope())));
         isKotlinDSL = generatorContext.getOptions().buildTools().stream().anyMatch(bt -> bt.isGradle() && bt.getGradleDsl().isPresent() && bt.getGradleDsl().get() == GradleDsl.KOTLIN);
         this.useVersionCatalogue = useVersionCatalogue;
+        this.project = project;
     }
 
     /**
@@ -115,7 +120,11 @@ public class GradleDependency extends DependencyCoordinate {
             snippet += platformPrefix + "platform";
         }
         snippet += "(";
-        snippet += useVersionCatalogue ? versionCatalog().orElseGet(this::mavenCoordinate)  : mavenCoordinate();
+        if (StringUtils.isNotEmpty(project)) {
+            snippet += "project(\":" + project + "\")";
+        } else {
+            snippet += useVersionCatalogue ? versionCatalog().orElseGet(this::mavenCoordinate) : mavenCoordinate();
+        }
         snippet += ")";
         if (isPom() && isKotlinDSL) {
             snippet += ")";
@@ -163,7 +172,7 @@ public class GradleDependency extends DependencyCoordinate {
         BuildTool buildTool = options.buildTools().stream().filter(BuildTool::isGradle).findFirst().orElseThrow();
         return dependencyContext.removeDuplicates(dependencyContext.getDependencies(), options.language(), buildTool)
             .stream()
-            .map(dep -> new GradleDependency(dep, options, generatorContext, useVersionCatalogue))
+            .map(dep -> new GradleDependency(dep, options, generatorContext, useVersionCatalogue, dep.getProject()))
             .sorted(GradleDependency.COMPARATOR)
             .toList();
     }

@@ -13,7 +13,7 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public class SpringBootDependencies {
-    private static final String GROUP_ID_ORG_SPRINGFRAMEWORK_BOOT = "org.springframework.boot";
+    public static final String GROUP_ID_ORG_SPRINGFRAMEWORK_BOOT = "org.springframework.boot";
     public static final Dependency SPRING_BOOT_STARTER_TEST = Dependency.builder()
         .groupId(GROUP_ID_ORG_SPRINGFRAMEWORK_BOOT)
         .artifactId("spring-boot-starter-test")
@@ -24,13 +24,7 @@ public class SpringBootDependencies {
         .artifactId("spring-boot")
         .compile()
         .build();
-    public static final Supplier<GradlePlugin.Builder> SPRING_DEPENDENCY_MANAGEMENT_GRADLE_PLUGIN_BUILDER = () -> GradlePlugin.builder()
-    .id("io.spring.dependency-management")
-    .version("1.1.5");
     public static final String SPRING_BOOT_VERSION = "3.3.0";
-    public static final GradlePlugin.Builder SPRING_BOOT_PLUGIN_BUILDER = GradlePlugin.builder()
-        .id(GROUP_ID_ORG_SPRINGFRAMEWORK_BOOT)
-        .version(SPRING_BOOT_VERSION);
     public static final GradlePlugin JAVA_GRADLE_PLUGIN = GradlePlugin.builder()
         .id("java")
         .build();

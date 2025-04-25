@@ -7,9 +7,13 @@ import io.micronaut.projectgen.core.generator.ProjectGenerator;
 import io.micronaut.projectgen.core.io.MapOutputHandler;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.core.options.OptionsImpl;
+import io.micronaut.projectgen.core.rocker.RockerTemplate;
 import io.micronaut.projectgen.test.BuildTestVerifier;
 import io.micronaut.projectgen.test.ConfigurationUtils;
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
+import multimodule.myService;
+import multimodule.myServiceTest;
+import multimodule.serviceProperties;
 import org.junit.jupiter.api.Test;
 
 import java.io.InputStream;
@@ -41,7 +45,9 @@ class MultiModuleProjectGeneratorTest {
         assertNotNull(project.get("build.gradle"));
         assertNotNull(project.get("settings.gradle"));
 
-        System.out.println(project.keySet());
+        assertNotNull(project.get("library/src/main/java/com/example/multimodule/service/ServiceProperties.java"));
+        assertNotNull(project.get("library/src/test/java/com/example/multimodule/service/MyServiceTest.java"));
+        assertNotNull(project.get("library/src/main/java/com/example/multimodule/service/MyService.java"));
 
         Properties applicationProperties = ConfigurationUtils.loadApplicationPropertiesByModule(project, "application");
         assertNotNull(applicationProperties);
@@ -49,6 +55,7 @@ class MultiModuleProjectGeneratorTest {
 
         assertFile("expectedSettings.gradle", "settings.gradle", project, resourceLoader);
         assertFile("library.gradle", "library/build.gradle", project, resourceLoader);
+        assertFile("application.gradle", "application/build.gradle", project, resourceLoader);
         assertFile("rootPom.xml", "pom.xml", project, resourceLoader);
         assertFile("applicationPom.xml", "application/pom.xml", project, resourceLoader);
         assertFile("libraryPom.xml", "library/pom.xml", project, resourceLoader);

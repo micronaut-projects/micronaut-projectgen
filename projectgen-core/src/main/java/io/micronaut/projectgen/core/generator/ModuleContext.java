@@ -18,6 +18,7 @@ package io.micronaut.projectgen.core.generator;
 import com.fizzed.rocker.RockerModel;
 import io.micronaut.context.env.Environment;
 import io.micronaut.core.annotation.NonNull;
+import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.buildtools.BuildPlugin;
 import io.micronaut.projectgen.core.buildtools.BuildProperties;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
@@ -251,6 +252,13 @@ public record ModuleContext(CoordinateResolver coordinateResolver,
      */
     public void addTemplate(String name, Template template) {
         templates.put(name, template);
+    }
+
+    public void addTemplate(String templateName, String path, RockerModel rockerModel) {
+        addTemplate(templateName, new RockerTemplate(
+            StringUtils.isEmpty(moduleAttributes().getName())
+                ? path
+                : moduleAttributes().getName() + "/" + path, rockerModel));
     }
 
 

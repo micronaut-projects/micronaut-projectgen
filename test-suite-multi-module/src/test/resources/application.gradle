@@ -9,7 +9,8 @@ repositories {
     mavenCentral()
 }
 dependencies {
-    implementation("org.springframework.boot:spring-boot-stater-web")
-    implementation("org.springframework.boot:spring-boot-stater-actuator")
+    implementation(project(":library"))
+    implementation("org.springframework.boot:spring-boot-starter-actuator")
+    implementation("org.springframework.boot:spring-boot-starter-web")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
