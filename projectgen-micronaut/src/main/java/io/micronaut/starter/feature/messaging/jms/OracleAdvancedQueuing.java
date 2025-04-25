@@ -21,6 +21,7 @@ import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.feature.FeatureContext;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.starter.feature.database.Oracle;
 import jakarta.inject.Singleton;
 
@@ -73,12 +74,13 @@ public class OracleAdvancedQueuing extends AbstractJmsFeature {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        generatorContext.addDependency(Dependency.builder()
+        ModuleContext module = generatorContext.getRootModule();
+        module.addDependency(Dependency.builder()
                 .groupId("javax.transaction")
                 .artifactId("jta")
                 .version("1.1")
                 .compile());
-        generatorContext.addDependency(Dependency.builder()
+        module.addDependency(Dependency.builder()
                 .groupId("com.oracle.database.messaging")
                 .artifactId("aqapi")
                 .version("19.3.0.0")

@@ -20,6 +20,7 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
@@ -78,6 +79,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 
+import static io.micronaut.projectgen.core.utils.StringUtils.*;
 import static io.micronaut.starter.feature.agorapulse.AgoraPulseFeature.addMain;
 import static io.micronaut.starter.feature.agorapulse.AgoraPulseFeature.addTest;
 import static io.micronaut.starter.feature.agorapulse.AgoraPulseFeature.addTestUtil;
@@ -145,31 +147,33 @@ public class Slack implements AgoraPulseFeature {
     }
 
     private void addDependency(GeneratorContext generatorContext) {
-        generatorContext.addDependency(Dependency.builder()
+        ModuleContext module = generatorContext.getRootModule();
+        module.addDependency(Dependency.builder()
                 .lookupArtifactId(ARTIFACT_ID)
                 .compile());
     }
 
     private void addConfiguration(GeneratorContext generatorContext) {
         Map<String, String> slack = new LinkedHashMap<>(1);
-        slack.put("bot-token", "xoxb-" + UUID.randomUUID());
-        slack.put("signing-secret", UUID.randomUUID().toString());
+        slack.put("bot-token", "xoxb-" + randomString());
+        slack.put("signing-secret", randomString());
 
         Map<String, Object> nested = new LinkedHashMap<>(1);
         nested.put("slack", slack);
 
-        generatorContext.getConfiguration().addNested(nested);
+        ModuleContext module = generatorContext.getRootModule();
+        module.configuration().addNested(nested);
 
         if (generatorContext.getFeatures().hasFeature(Caffeine.class)) {
-            generatorContext.getConfiguration().addCommaSeparatedValue("micronaut.caches.slack-events.expire-after-write", "10m");
+            module.configuration().addCommaSeparatedValue("micronaut.caches.slack-events.expire-after-write", "10m");
         }
 
         if (generatorContext.getFeatures().hasFeature(RedisLettuce.class)) {
-            generatorContext.getConfiguration().addCommaSeparatedValue("redis.caches.slack-events.expire-after-write", "10m");
+            module.configuration().addCommaSeparatedValue("redis.caches.slack-events.expire-after-write", "10m");
         }
 
         if (generatorContext.getFeatures().hasFeature(EHCache.class)) {
-            generatorContext.getConfiguration().addCommaSeparatedValue("ehcache.caches.slack-events.enabled", "true");
+            module.configuration().addCommaSeparatedValue("ehcache.caches.slack-events.enabled", "true");
         }
     }
 
@@ -219,6 +223,7 @@ public class Slack implements AgoraPulseFeature {
     }
 
     private void addSlackManifest(GeneratorContext generatorContext) {
+        ModuleContext module = generatorContext.getRootModule();
         String subdomain = generatorContext.getProject().getPackageName().replace(".", "-");
 
         if (!subdomain.equals(generatorContext.getProject().getName())) {
@@ -226,7 +231,7 @@ public class Slack implements AgoraPulseFeature {
         }
 
         RockerModel manifestModel = slackManifest.template(generatorContext.getProject(), subdomain.toLowerCase(Locale.ROOT));
-        generatorContext.addTemplate("SlackManifest", new RockerTemplate("slack-manifest.yml", manifestModel));
+        module.addTemplate("SlackManifest", new RockerTemplate("slack-manifest.yml", manifestModel));
     }
 
     @NonNull
@@ -326,7 +331,8 @@ public class Slack implements AgoraPulseFeature {
 
     private void addGruTestFixture(GeneratorContext generatorContext, String className) {
         String suffix = generatorContext.getTestFramework().getTestFrameworkSuffixWithoutTrailingDot();
-        generatorContext.addTemplate("eventJson",
+        ModuleContext module = generatorContext.getRootModule();
+        module.addTemplate("eventJson",
                 new RockerTemplate("src/test/resources/{packagePath}/" + className + suffix + "/event.json", eventJson.template()));
     }
 

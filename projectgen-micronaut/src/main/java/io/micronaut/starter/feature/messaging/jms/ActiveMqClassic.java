@@ -21,6 +21,7 @@ import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import jakarta.inject.Singleton;
 
 @Requires(property = "micronaut.starter.feature.jms.activemq.classic.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
@@ -47,9 +48,10 @@ public class ActiveMqClassic extends AbstractJmsFeature {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        generatorContext.getConfiguration().put("micronaut.jms.activemq.classic.enabled", true);
-        generatorContext.getConfiguration().put("micronaut.jms.activemq.classic.connection-string", "tcp://localhost:61616");
-        generatorContext.addDependency(Dependency.builder()
+        ModuleContext module = generatorContext.getRootModule();
+        module.configuration().put("micronaut.jms.activemq.classic.enabled", true);
+        module.configuration().put("micronaut.jms.activemq.classic.connection-string", "tcp://localhost:61616");
+        module.addDependency(Dependency.builder()
                 .groupId("io.micronaut.jms")
                 .artifactId("micronaut-jms-activemq-classic")
                 .compile());

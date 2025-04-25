@@ -22,6 +22,7 @@ import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
 
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import jakarta.inject.Singleton;
 
@@ -51,8 +52,9 @@ public class Jetty extends AbstractServletFeature {
 
     @Override
     public void doApply(GeneratorContext generatorContext) {
+        ModuleContext module = generatorContext.getRootModule();
         if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())) {
-            generatorContext.addDependency(Dependency.builder()
+            module.addDependency(Dependency.builder()
                     .groupId("io.micronaut.servlet")
                     .artifactId("micronaut-http-server-jetty")
                     .compile());

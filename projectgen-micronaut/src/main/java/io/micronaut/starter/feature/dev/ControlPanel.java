@@ -18,6 +18,8 @@ package io.micronaut.starter.feature.dev;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.context.env.Environment;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.feature.config.Configuration;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
@@ -90,10 +92,11 @@ public class ControlPanel implements Feature {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        generatorContext.addDependency(MicronautDependencyUtils.controlPanelDependency().artifactId("micronaut-control-panel-ui"));
-        ApplicationConfiguration devConfig = generatorContext.getConfigurationByEnvironmentOrDefaultConfig(Environment.DEVELOPMENT, ApplicationConfiguration.devConfig());
+        ModuleContext module = generatorContext.getRootModule();
+        module.addDependency(MicronautDependencyUtils.controlPanelDependency().artifactId("micronaut-control-panel-ui"));
+        Configuration devConfig = module.devConfiguration();
 
-        generatorContext.addDependency(MicronautDependencyUtils.controlPanelDependency().artifactId("micronaut-control-panel-management"));
+        module.addDependency(MicronautDependencyUtils.controlPanelDependency().artifactId("micronaut-control-panel-management"));
         devConfig.put("endpoints.all.enabled", true);
         devConfig.put("endpoints.all.sensitive", false);
         devConfig.put("endpoints.health.details-visible", "ANONYMOUS");

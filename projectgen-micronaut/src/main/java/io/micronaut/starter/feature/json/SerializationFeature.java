@@ -16,6 +16,7 @@
 package io.micronaut.starter.feature.json;
 
 import io.micronaut.core.annotation.NonNull;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
@@ -45,8 +46,9 @@ public interface SerializationFeature extends JsonFeature {
 
     @Override
     default void apply(GeneratorContext generatorContext) {
+        ModuleContext module = generatorContext.getRootModule();
         dependencies(generatorContext)
-                .forEach(generatorContext::addDependency);
+                .forEach(module::addDependency);
     }
 
     @NonNull

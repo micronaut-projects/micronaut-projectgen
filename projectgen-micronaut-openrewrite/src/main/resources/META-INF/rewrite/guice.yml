@@ -1,0 +1,26 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.guice
+displayName: Add Guice dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.guice.dependencies
+  - io.micronaut.starter.feature.guice.micronaut.documentation
+  - io.micronaut.starter.feature.guice-processor
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.guice.dependencies
+displayName: Add Guice dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.guice
+      artifactId: micronaut-guice
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.guice.micronaut.documentation
+displayName: Append a link to Micronaut Guice documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-guice/latest/guide/index.html
+      appendNewline: true

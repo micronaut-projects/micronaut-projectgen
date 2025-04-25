@@ -15,9 +15,12 @@
  */
 package io.micronaut.projectgen.core.feature;
 
+import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.feature.config.Configuration;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.template.Template;
+
 import java.util.function.Function;
 
 /**
@@ -30,16 +33,27 @@ public interface ConfigurationFeature extends OneOfFeature {
         return ConfigurationFeature.class;
     }
 
-    Function<Configuration, Template> createTemplate();
+    Function<Configuration, Template> createTemplate(String module);
 
     @Override
     default void apply(GeneratorContext generatorContext) {
-        Function<Configuration, Template> createTemplateFunc = createTemplate();
-        generatorContext.getAllConfigurations()
-            .stream()
-            .filter(config -> !config.isEmpty())
-            .forEach(config -> {
-                generatorContext.addTemplate(config.getTemplateKey(), createTemplateFunc.apply(config));
-            });
+        ModuleContext module = generatorContext.getRootModule();
+        addTemplatesForConfigurations(module, "");
+        for (String name : generatorContext.getModuleNames()) {
+            module = generatorContext.getModuleByName(name);
+            addTemplatesForConfigurations(module, name);
+        }
+    }
+
+    default void addTemplatesForConfigurations(ModuleContext module, String name) {
+        Function<Configuration, Template> createTemplateFunc = createTemplate(name);
+        for (Configuration config : module.getConfigurations()) {
+            if (!config.isEmpty()) {
+                String templateName = StringUtils.isEmpty(name)
+                    ? config.getTemplateKey()
+                    : name + "/" + config.getTemplateKey();
+                module.addTemplate(templateName, createTemplateFunc.apply(config));
+            }
+        }
     }
 }

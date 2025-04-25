@@ -18,6 +18,7 @@ package io.micronaut.starter.feature.picocli.test.junit;
 import com.fizzed.rocker.RockerModel;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.generator.Project;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.micronaut.template.picocli.test.junit.picocliGroovyJunitTest;
@@ -43,7 +44,8 @@ public class PicocliJunit implements PicocliTestFeature {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        generatorContext.addTemplate("picocliJunitTest", getTemplate(generatorContext.getLanguage(), generatorContext.getProject()));
+        ModuleContext module = generatorContext.getRootModule();
+        module.addTemplate("picocliJunitTest", getTemplate(generatorContext.getLanguage(), generatorContext.getProject()));
     }
 
     @Override

@@ -17,6 +17,7 @@ package io.micronaut.starter.feature.messaging.rabbitmq;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
@@ -54,10 +55,11 @@ public class RabbitMQ extends EaseTestingFeature implements MessagingFeature, Sh
 
     @Override
     public void apply(GeneratorContext generatorContext) {
+        ModuleContext module = generatorContext.getRootModule();
         if (!generatorContext.isFeaturePresent(TestResources.class)) {
-            generatorContext.getConfiguration().put("rabbitmq.uri", "amqp://localhost:5672");
+            module.configuration().put("rabbitmq.uri", "amqp://localhost:5672");
         }
-        generatorContext.addDependency(Dependency.builder()
+        module.addDependency(Dependency.builder()
                 .groupId("io.micronaut.rabbitmq")
                 .artifactId("micronaut-rabbitmq")
                 .compile());

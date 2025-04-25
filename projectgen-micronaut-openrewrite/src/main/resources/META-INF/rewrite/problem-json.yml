@@ -1,0 +1,25 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.problem-json
+displayName: Add Problem Json dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.problem-json.dependencies
+  - io.micronaut.starter.feature.problem-json.micronaut.documentation
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.problem-json.dependencies
+displayName: Add Problem Json dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.problem
+      artifactId: micronaut-problem-json
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.problem-json.micronaut.documentation
+displayName: Append a link to Micronaut Problem Json documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-problem-json/latest/guide/index.html
+      appendNewline: true

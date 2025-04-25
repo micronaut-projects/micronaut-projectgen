@@ -23,7 +23,7 @@ import io.micronaut.projectgen.core.options.*;
 import java.util.*;
 
 /**
- * Micronaut Options.
+ * Quarkus Options.
  */
 public final class QuarkusOptions implements Options {
     private JdkVersion javaVersion;

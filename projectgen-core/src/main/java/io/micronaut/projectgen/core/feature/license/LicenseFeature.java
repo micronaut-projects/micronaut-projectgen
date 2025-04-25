@@ -18,6 +18,7 @@ package io.micronaut.projectgen.core.feature.license;
 import com.fizzed.rocker.RockerModel;
 import io.micronaut.projectgen.core.feature.OneOfFeature;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.rocker.RockerTemplate;
 
 /**
@@ -31,7 +32,8 @@ public interface LicenseFeature extends OneOfFeature {
 
     @Override
     default void apply(GeneratorContext generatorContext) {
-        generatorContext.addTemplate("license", new RockerTemplate("LICENSE", licenseModel(generatorContext)));
+        ModuleContext rootModule = generatorContext.getRootModule();
+        rootModule.addTemplate("license", new RockerTemplate("LICENSE", licenseModel(generatorContext)));
     }
 
     RockerModel licenseModel(GeneratorContext generatorContext);

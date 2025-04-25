@@ -17,6 +17,7 @@ package io.micronaut.starter.feature.coherence;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
@@ -76,9 +77,10 @@ public class CoherenceSessionStore implements Feature {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        generatorContext.getConfiguration().put("micronaut.session.http.coherence.enabled", true);
+        ModuleContext module = generatorContext.getRootModule();
+        module.configuration().put("micronaut.session.http.coherence.enabled", true);
 
-        generatorContext.addDependency(MicronautDependencyUtils.coherenceDependency().artifactId("micronaut-coherence-session").compile());
+        module.addDependency(MicronautDependencyUtils.coherenceDependency().artifactId("micronaut-coherence-session").compile());
     }
 
     @Override

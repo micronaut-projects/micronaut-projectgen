@@ -19,12 +19,16 @@ import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.CollectionUtils;
 import io.micronaut.core.util.StringUtils;
 
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Collections;
+import java.util.UUID;
+
+import static io.micronaut.projectgen.core.utils.StringUtils.*;
 
 /**
  * Models application environment configuration to specify where the configuration is rooted for the given configuration values (key/value pairs).
@@ -32,9 +36,14 @@ import java.util.Collections;
  */
 public class Configuration extends LinkedHashMap<String, Object> {
 
+    private static final String EMPTY_STRING = "";
     private final String path;
     private final String fileName;
     private final String templateKey;
+    public static final String COMMENT_PREFIX = "___COMMENT_KEY___";
+    public static final String BLANK_LINE_PREFIX = "___BLANK_LINE__KEY___";
+    public static final List<String> PREFIXES = Arrays.asList(COMMENT_PREFIX, BLANK_LINE_PREFIX);
+
 
     /**
      * A configuration rooted at path, with the given map of configurations.
@@ -254,5 +263,20 @@ public class Configuration extends LinkedHashMap<String, Object> {
             return values;
         }
         return Collections.singletonList(value);
+    }
+
+    /**
+     *
+     * @param comment a comment to a configuration file.
+     */
+    public void comment(String comment) {
+        put(COMMENT_PREFIX + randomString(), comment);
+    }
+
+    /**
+     * Add a blank line
+     */
+    public void blankLine() {
+        put(BLANK_LINE_PREFIX + randomString(), EMPTY_STRING);
     }
 }

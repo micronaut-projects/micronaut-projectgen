@@ -15,6 +15,7 @@
  */
 package io.micronaut.starter.feature.aws;
 
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
@@ -45,6 +46,7 @@ public interface AwsApiFeature extends AwsLambdaEventFeature, LambdaTrigger {
 
     @Override
     default void apply(GeneratorContext generatorContext) {
-        generatorContext.addDependency(MICRONAUT_AWS_APIGATEWAY);
+        ModuleContext module = generatorContext.getRootModule();
+        module.addDependency(MICRONAUT_AWS_APIGATEWAY);
     }
 }

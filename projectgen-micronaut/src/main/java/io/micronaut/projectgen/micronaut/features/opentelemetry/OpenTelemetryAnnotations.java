@@ -19,6 +19,7 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import jakarta.inject.Singleton;
 
@@ -54,7 +55,8 @@ public class OpenTelemetryAnnotations implements OpenTelemetryFeature {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        generatorContext.addDependency(MicronautDependencyUtils.annotationProcessor(generatorContext.getBuildTool(),
+        ModuleContext module = generatorContext.getRootModule();
+        module.addDependency(MicronautDependencyUtils.annotationProcessor(generatorContext.getBuildTool(),
                 MicronautDependencyUtils.GROUP_ID_MICRONAUT_TRACING,
                 MICRONAUT_TRACING_OPENTELEMETRY_ANNOTATION_ARTIFACTID,
                 MICRONAUT_TRACING_VERSION));

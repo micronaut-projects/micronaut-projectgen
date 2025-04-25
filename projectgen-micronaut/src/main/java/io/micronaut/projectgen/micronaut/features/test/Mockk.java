@@ -20,6 +20,7 @@ import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.feature.*;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.options.Language;
@@ -94,13 +95,14 @@ public class Mockk implements MockingFeature, DefaultFeature, OpenRewriteFeature
 
     @Override
     public void apply(GeneratorContext generatorContext) {
+        ModuleContext module = generatorContext.getRootModule();
         for (String recipeName : getRecipes(generatorContext)) {
-            generatorContext.addConfigurationByRecipeName(recipeName);
+            module.addConfigurationByRecipeName(recipeName);
         }
         // Only for Maven, these dependencies are applied by the Micronaut Gradle Plugin
         if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())) {
             for (String recipeName : getRecipes(generatorContext)) {
-                generatorContext.addDependenciesByRecipeName(recipeName);
+                module.addDependenciesByRecipeName(generatorContext.getOptions(), recipeName);
             }
         }
     }

@@ -18,6 +18,7 @@ package io.micronaut.starter.feature.chatbots.telegram;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
@@ -97,8 +98,8 @@ public class TelegramGcpChatBot extends ChatBotsTelegram implements GcpCloudFeat
     }
 
     @Override
-    protected void addDependencies(GeneratorContext generatorContext) {
-        generatorContext.addDependency(CHATBOTS_TELEGRAM_GCP_FUNCTION);
+    protected void addDependencies(ModuleContext module) {
+        module.addDependency(CHATBOTS_TELEGRAM_GCP_FUNCTION);
     }
 
     @Override
