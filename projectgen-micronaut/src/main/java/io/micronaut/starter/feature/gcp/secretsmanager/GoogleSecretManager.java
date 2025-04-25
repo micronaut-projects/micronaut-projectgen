@@ -21,6 +21,7 @@ import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.micronaut.features.config.MicronautDistributedConfigurationFeature;
 import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import io.micronaut.projectgen.core.feature.DistributedConfigFeature;
@@ -60,7 +61,8 @@ public class GoogleSecretManager implements DistributedConfigFeature {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        generatorContext.addDependency(gcpSecretManagerDependency());
+        ModuleContext module = generatorContext.getRootModule();
+        module.addDependency(gcpSecretManagerDependency());
     }
 
     @NonNull

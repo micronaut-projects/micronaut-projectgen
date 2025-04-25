@@ -19,6 +19,7 @@ import io.micronaut.projectgen.core.buildtools.gradle.GradlePlugin;
 import io.micronaut.projectgen.core.buildtools.gradle.GradleSpecificFeature;
 import io.micronaut.projectgen.core.feature.BuildPluginFeature;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.quarkus.features.QuarkusBom;
 import jakarta.inject.Singleton;
 
@@ -38,6 +39,7 @@ public class QuarkusGradlePlugin implements GradleSpecificFeature, BuildPluginFe
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        generatorContext.addBuildPlugin(QUARKUS_GRADLE_PLUGIN);
+        ModuleContext moduleContext = generatorContext.getRootModule();
+        moduleContext.addBuildPlugin(QUARKUS_GRADLE_PLUGIN);
     }
 }

@@ -20,6 +20,7 @@ import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.BuildProperties;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 
 public interface ApplicationFeature extends Feature {
@@ -34,10 +35,11 @@ public interface ApplicationFeature extends Feature {
 
     @Override
     default void apply(GeneratorContext generatorContext) {
+        ModuleContext module = generatorContext.getRootModule();
         if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())) {
             String mainClass = mainClassName(generatorContext);
             if (mainClass != null) {
-                BuildProperties buildProperties = generatorContext.getBuildProperties();
+                BuildProperties buildProperties = module.buildProperties();
                 buildProperties.put("exec.mainClass", mainClass);
             }
         }

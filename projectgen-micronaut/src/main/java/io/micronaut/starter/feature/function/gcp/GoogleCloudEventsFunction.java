@@ -19,6 +19,7 @@ import com.fizzed.rocker.RockerModel;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.Project;
@@ -83,11 +84,12 @@ public class GoogleCloudEventsFunction extends AbstractGoogleCloudFunction {
     @Override
     public void apply(GeneratorContext generatorContext) {
         super.apply(generatorContext);
+        ModuleContext module = generatorContext.getRootModule();
         Project project = generatorContext.getProject();
         String sourceFile = generatorContext.getSourcePath("/{packagePath}/Function");
-        generatorContext.addTemplate("function", new RockerTemplate(sourceFile, sourceFileModel(generatorContext)));
+        module.addTemplate("function", new RockerTemplate(sourceFile, sourceFileModel(generatorContext)));
         applyTestTemplate(generatorContext, project, "Function");
-        addDependencies(generatorContext);
+        addDependencies(module);
     }
 
     @Override
@@ -162,9 +164,9 @@ public class GoogleCloudEventsFunction extends AbstractGoogleCloudFunction {
         return "https://micronaut-projects.github.io/micronaut-gcp/latest/guide/index.html#cloudEventsFunctions";
     }
 
-    protected void addDependencies(GeneratorContext generatorContext) {
-        generatorContext.addDependency(DEPENDENCY_MICRONAUT_GCP_FUNCTION_CLOUDEVENTS);
-        generatorContext.addDependency(DEPENDENCY_MICRONAUT_SERDE_API);
+    protected void addDependencies(ModuleContext module) {
+        module.addDependency(DEPENDENCY_MICRONAUT_GCP_FUNCTION_CLOUDEVENTS);
+        module.addDependency(DEPENDENCY_MICRONAUT_SERDE_API);
     }
 
     @NonNull

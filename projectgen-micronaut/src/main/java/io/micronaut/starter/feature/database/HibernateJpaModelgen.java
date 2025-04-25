@@ -18,6 +18,7 @@ package io.micronaut.starter.feature.database;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
@@ -55,7 +56,8 @@ public class HibernateJpaModelgen implements Feature {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        generatorContext.addDependency(DEPENDENCY_JPAMODELGEN);
+        ModuleContext module = generatorContext.getRootModule();
+        module.addDependency(DEPENDENCY_JPAMODELGEN);
     }
 
     @Override

@@ -27,19 +27,11 @@ public class URLTemplate extends DefaultTemplate {
     private final boolean executable;
 
     public URLTemplate(String path, URL url) {
-        this(DEFAULT_MODULE, path, url, false);
+        this(path, url, false);
     }
 
     public URLTemplate(String path, URL url, boolean executable) {
-        this(DEFAULT_MODULE, path, url, executable);
-    }
-
-    public URLTemplate(String module, String path, URL url) {
-        this(module, path, url, false);
-    }
-
-    public URLTemplate(String module, String path, URL url, boolean executable) {
-        super(module, path);
+        super(path);
 
         this.url = Objects.requireNonNull(url, "Resource not found for path: " + path);
         this.executable = executable;

@@ -22,6 +22,7 @@ import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.projectgen.core.feature.config.ApplicationConfiguration;
 import io.micronaut.projectgen.core.feature.config.Configuration;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.starter.feature.database.jdbc.JdbcFeature;
 import io.micronaut.starter.feature.migration.MigrationFeature;
 import jakarta.inject.Singleton;
@@ -67,19 +68,20 @@ public class DataJpa implements JpaFeature, DataFeature {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        generatorContext.addDependency(DataFeature.dataProcessorDependency(generatorContext.getBuildTool()));
-        generatorContext.addDependency(Dependency.builder()
+        ModuleContext module = generatorContext.getRootModule();
+        module.addDependency(DataFeature.dataProcessorDependency(generatorContext.getBuildTool()));
+        module.addDependency(Dependency.builder()
                 .groupId("io.micronaut.data")
                 .artifactId("micronaut-data-hibernate-jpa")
                 .compile());
         DatabaseDriverFeature dbFeature = generatorContext.getRequiredFeature(DatabaseDriverFeature.class);
-        generatorContext.getConfiguration().addNested(getDatasourceConfig(generatorContext, dbFeature));
-        generatorContext.getConfiguration().addNested(JPA_HIBERNATE_PROPERTIES_HBM2DDL,
+        ApplicationConfiguration configuration = module.configuration();
+        configuration.addNested(getDatasourceConfig(generatorContext, dbFeature));
+        configuration.addNested(JPA_HIBERNATE_PROPERTIES_HBM2DDL,
                 generatorContext.getFeatures().hasFeature(MigrationFeature.class) ? Hbm2ddlAuto.NONE.toString() :
                         Hbm2ddlAuto.UPDATE.toString());
 
-        Configuration testConfig = ApplicationConfiguration.testConfig();
-        generatorContext.addConfiguration(testConfig);
+        Configuration testConfig = module.testConfiguration();
         testConfig.addNested(JPA_HIBERNATE_PROPERTIES_HBM2DDL,
                 generatorContext.getFeatures().hasFeature(MigrationFeature.class) ? Hbm2ddlAuto.NONE.toString() :
                         Hbm2ddlAuto.CREATE_DROP.toString());

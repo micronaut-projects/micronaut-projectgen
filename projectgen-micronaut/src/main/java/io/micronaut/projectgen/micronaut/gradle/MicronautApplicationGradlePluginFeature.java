@@ -21,6 +21,7 @@ import io.micronaut.projectgen.core.buildtools.dependencies.CoordinateResolver;
 import io.micronaut.projectgen.core.buildtools.gradle.GradleSpecificFeature;
 import io.micronaut.projectgen.core.feature.BuildPluginFeature;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.core.options.TestFramework;
 import io.micronaut.projectgen.core.utils.OptionUtils;
@@ -59,8 +60,9 @@ public class MicronautApplicationGradlePluginFeature implements BuildPluginFeatu
     @Override
     public void apply(GeneratorContext generatorContext) {
         Coordinate coordinate = coordinateResolver.resolve(ARTIFACT_ID_MICRONAUT_PARENT).orElseThrow();
-        generatorContext.getBuildProperties().put(PROPERTY_MICRONAUT_VERSION, coordinate.getVersion());
-        generatorContext.addBuildPlugin(micronautApplicationGradlePlugin(generatorContext));
+        ModuleContext module = generatorContext.getRootModule();
+        module.buildProperties().put(PROPERTY_MICRONAUT_VERSION, coordinate.getVersion());
+        module.addBuildPlugin(micronautApplicationGradlePlugin(generatorContext));
     }
 
     private BuildPlugin micronautApplicationGradlePlugin(GeneratorContext generatorContext) {

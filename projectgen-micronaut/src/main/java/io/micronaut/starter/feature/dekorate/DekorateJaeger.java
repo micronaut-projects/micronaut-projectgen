@@ -22,6 +22,7 @@ import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import jakarta.inject.Singleton;
 
 /**
@@ -62,12 +63,12 @@ public class DekorateJaeger extends AbstractDekorateServiceFeature {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
+        ModuleContext module = generatorContext.getRootModule();
         Dependency.Builder jaeger = Dependency.builder()
                 .groupId("io.dekorate")
                 .artifactId("jaeger-annotations")
                 .template();
-
-        generatorContext.addDependency(jaeger.versionProperty("dekorate.version").annotationProcessor());
-        generatorContext.addDependency(jaeger.compile());
+        module.addDependency(jaeger.versionProperty("dekorate.version").annotationProcessor());
+        module.addDependency(jaeger.compile());
     }
 }

@@ -16,6 +16,7 @@
 package io.micronaut.starter.feature.chatbots.telegram;
 
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.rocker.RockerWritable;
 import io.micronaut.starter.feature.chatbots.ChatBotType;
 import io.micronaut.starter.feature.chatbots.ChatBots;
@@ -49,28 +50,29 @@ abstract class ChatBotsTelegram extends ChatBots {
     }
 
     @Override
-    protected void addConfigurations(GeneratorContext generatorContext) {
-        generatorContext.getConfiguration().put(
+    protected void addConfigurations(ModuleContext module) {
+        module.configuration().put(
                 "micronaut.chatbots.telegram.bots.example.token",
                 "WEBHOOK_TOKEN"
         );
-        generatorContext.getConfiguration().put(
+        module.configuration().put(
                 "micronaut.chatbots.telegram.bots.example.at-username",
                 "@MyMicronautExampleBot"
         );
-        generatorContext.getConfiguration().put(
+        module.configuration().put(
                 "micronaut.chatbots.folder",
                 "botcommands"
         );
     }
 
     @Override
-    protected void renderTemplates(GeneratorContext generatorContext) {
-        generatorContext.addTemplate(
+    protected void renderTemplates(GeneratorContext generatorContext, ModuleContext module) {
+        module.addTemplate(
                 "about-markdown",
                 new RockerTemplate("src/main/resources/botcommands/about.md", about.template())
         );
-        generatorContext.addTemplate(
+        module.addTemplate(
+            generatorContext.getOptions().language(),
                 "about-command-handler",
                 generatorContext.getSourcePath("/{packagePath}/AboutCommandHandler"),
                 aboutCommandHandlerJava.template(generatorContext.getProject()),
@@ -78,7 +80,7 @@ abstract class ChatBotsTelegram extends ChatBots {
                 aboutCommandHandlerGroovy.template(generatorContext.getProject())
         );
         if (!generatorContext.getTestFramework().isKotlinTestFramework()) {
-            generatorContext.addTemplate(
+            module.addTemplate(
                     "mock-about-command-json",
                     new RockerTemplate(
                             "src/test/resources/mockAboutCommand.json",
@@ -87,7 +89,8 @@ abstract class ChatBotsTelegram extends ChatBots {
             );
         }
         if (generatorContext.getTestFramework() == TestFramework.JUNIT) {
-            generatorContext.addTemplate(
+            module.addTemplate(
+                generatorContext.getOptions().language(),
                     "about-command-handler-junit-test",
                     generatorContext.getTestSourcePath("/{packagePath}/AboutCommandHandler"),
                     aboutCommandHandlerJavaJunit.template(generatorContext.getProject()),
@@ -95,15 +98,16 @@ abstract class ChatBotsTelegram extends ChatBots {
                     aboutCommandHandlerGroovyJunit.template(generatorContext.getProject())
             );
         } else if (generatorContext.getTestFramework() == TestFramework.SPOCK) {
-            generatorContext.addTemplate(
+            module.addTemplate(
                     "about-command-handler-spock-groovy-test",
                     new RockerTemplate(generatorContext.getTestSourcePath("/{packagePath}/AboutCommandHandler"), aboutCommandHandlerGroovySpock.template(generatorContext.getProject()))
             );
         }
 
-        generatorContext.addHelpTemplate(new RockerWritable(telegramReadme.template(rootReadMeTemplate(generatorContext))));
+        module.addHelpTemplate(new RockerWritable(telegramReadme.template(rootReadMeTemplate(generatorContext))));
 
-        generatorContext.addTemplate(
+        module.addTemplate(
+            generatorContext.getOptions().language(),
                 "final-command-handler",
                 generatorContext.getSourcePath("/{packagePath}/FinalCommandHandler"),
                 finalCommandHandlerJava.template(generatorContext.getProject()),

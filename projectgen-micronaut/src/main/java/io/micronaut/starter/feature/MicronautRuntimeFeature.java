@@ -17,6 +17,7 @@ package io.micronaut.starter.feature;
 
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 
 public interface MicronautRuntimeFeature {
 
@@ -26,6 +27,7 @@ public interface MicronautRuntimeFeature {
     String resolveMicronautRuntime(@NonNull GeneratorContext generatorContext);
 
     default void addMicronautRuntimeBuildProperty(@NonNull GeneratorContext generatorContext) {
-        generatorContext.getBuildProperties().put(PROPERTY_MICRONAUT_RUNTIME, resolveMicronautRuntime(generatorContext));
+        ModuleContext module = generatorContext.getRootModule();
+        module.buildProperties().put(PROPERTY_MICRONAUT_RUNTIME, resolveMicronautRuntime(generatorContext));
     }
 }

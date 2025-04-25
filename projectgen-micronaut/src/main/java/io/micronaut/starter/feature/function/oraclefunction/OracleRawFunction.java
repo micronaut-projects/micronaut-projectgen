@@ -20,6 +20,9 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.buildtools.BuildProperties;
+import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.Project;
@@ -86,9 +89,7 @@ public class OracleRawFunction extends OracleFunction {
     @Override
     public void processSelectedFeatures(FeatureContext featureContext) {
         if (featureContext.getOptions() instanceof MicronautOptions mnOptions && mnOptions.applicationType() == ApplicationType.DEFAULT) {
-            featureContext.addFeature(
-                    httpFunction
-            );
+            featureContext.addFeature(httpFunction);
         }
         super.processSelectedFeatures(featureContext);
         // Requires Jackson due to https://github.com/micronaut-projects/micronaut-oracle-cloud/issues/603
@@ -97,51 +98,52 @@ public class OracleRawFunction extends OracleFunction {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
+        ModuleContext module = generatorContext.getRootModule();
         ApplicationType type = generatorContext.getOptions() instanceof MicronautOptions mnOptions ? mnOptions.applicationType() : null;
         if (type == ApplicationType.FUNCTION) {
-            applyFunction(generatorContext,
-                    type);
+            applyFunction(generatorContext, type);
             Language language = generatorContext.getLanguage();
             Project project = generatorContext.getProject();
             String sourceFile = generatorContext.getSourcePath("/{packagePath}/Function");
             switch (language) {
                 case GROOVY:
-                    generatorContext.addTemplate("function", new RockerTemplate(
+                    module.addTemplate("function", new RockerTemplate(
                             sourceFile,
                             oracleRawFunctionGroovy.template(project)));
                     break;
                 case KOTLIN:
-                    generatorContext.addTemplate("function", new RockerTemplate(
+                    module.addTemplate("function", new RockerTemplate(
                             sourceFile,
                             oracleRawFunctionKotlin.template(project)));
                     break;
                 case JAVA:
                 default:
-                    generatorContext.addTemplate("function", new RockerTemplate(
+                    module.addTemplate("function", new RockerTemplate(
                             sourceFile,
                             oracleRawFunctionJava.template(project)));
             }
 
             if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())) {
                 addMicronautRuntimeBuildProperty(generatorContext);
-                generatorContext.getBuildProperties().put("jib.docker.tag", "${project.version}");
-                generatorContext.getBuildProperties().put("exec.mainClass", "com.fnproject.fn.runtime.EntryPoint");
-                generatorContext.getBuildProperties().put("jib.docker.image", "[REGION].ocir.io/[TENANCY]/[REPO]/${project.artifactId}");
-                generatorContext.getBuildProperties().put("function.entrypoint", project.getPackageName() + ".Function::handleRequest");
+                BuildProperties buildProperties = module.buildProperties();
+                buildProperties.put("jib.docker.tag", "${project.version}");
+                buildProperties.put("exec.mainClass", "com.fnproject.fn.runtime.EntryPoint");
+                buildProperties.put("jib.docker.image", "[REGION].ocir.io/[TENANCY]/[REPO]/${project.artifactId}");
+                buildProperties.put("function.entrypoint", project.getPackageName() + ".Function::handleRequest");
             }
 
             applyTestTemplate(generatorContext, project, "Function");
         }
-        addDependencies(generatorContext);
+        addDependencies(generatorContext.getOptions(), module);
     }
 
     @Override
-    protected void addDependencies(GeneratorContext generatorContext) {
-        if (generatorContext.getOptions() instanceof MicronautOptions micronautOptions && micronautOptions.applicationType() == ApplicationType.FUNCTION) {
-            generatorContext.addDependency(MICRONAUT_OCI_FUNCTION);
-            generatorContext.addDependency(COM_FNPROJECT_RUNTIME);
-            generatorContext.addDependency(COM_FNPROJECT_API);
-            generatorContext.addDependency(COM_FNPROJECT_TESTING_JUNIT4);
+    protected void addDependencies(Options options, ModuleContext module) {
+        if (options instanceof MicronautOptions micronautOptions && micronautOptions.applicationType() == ApplicationType.FUNCTION) {
+            module.addDependency(MICRONAUT_OCI_FUNCTION);
+            module.addDependency(COM_FNPROJECT_RUNTIME);
+            module.addDependency(COM_FNPROJECT_API);
+            module.addDependency(COM_FNPROJECT_TESTING_JUNIT4);
         }
     }
 

@@ -2,7 +2,6 @@
 @import java.util.List
 @import io.micronaut.projectgen.core.buildtools.dependencies.DependencyCoordinate
 @args(String groupId, String artifactId, String scope, String version, boolean pom, List<DependencyCoordinate> exclusions)
-
     <dependency>
       <groupId>@groupId</groupId>
       <artifactId>@artifactId</artifactId>

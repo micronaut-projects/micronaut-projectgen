@@ -19,6 +19,7 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
@@ -83,7 +84,8 @@ public class Kubernetes implements Feature {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        generatorContext.addTemplate("k8sYaml", new RockerTemplate("k8s.yml", k8sYaml.template(generatorContext.getProject())));
+        ModuleContext module = generatorContext.getRootModule();
+        module.addTemplate("k8sYaml", new RockerTemplate("k8s.yml", k8sYaml.template(generatorContext.getProject())));
     }
 
     @Override

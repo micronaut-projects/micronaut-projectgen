@@ -17,6 +17,7 @@ package io.micronaut.starter.feature.database;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
@@ -62,17 +63,18 @@ public class HibernateJpa implements JpaFeature {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        generatorContext.getConfiguration().put(JPA_HIBERNATE_PROPERTIES_HBM2DDL,
+        ModuleContext module = generatorContext.getRootModule();
+        module.configuration().put(JPA_HIBERNATE_PROPERTIES_HBM2DDL,
                 generatorContext.getFeatures().hasFeature(MigrationFeature.class) ? Hbm2ddlAuto.NONE.toString() :
                         Hbm2ddlAuto.UPDATE.toString());
-        addDependencies(generatorContext);
+        addDependencies(module);
     }
 
-    protected void addDependencies(GeneratorContext generatorContext) {
-        generatorContext.addDependency(MicronautDependencyUtils.sqlDependency()
+    protected void addDependencies(ModuleContext module) {
+        module.addDependency(MicronautDependencyUtils.sqlDependency()
                 .artifactId(ARTIFACT_ID_MICRONAUT_HIBERNATE_JPA)
                 .compile());
-        generatorContext.addDependency(MicronautDependencyUtils.dataDependency()
+        module.addDependency(MicronautDependencyUtils.dataDependency()
                 .artifactId(MicronautDependencyUtils.ARTIFACT_ID_MICRONAUT_DATA_TX_HIBERNATE)
                 .compile());
     }

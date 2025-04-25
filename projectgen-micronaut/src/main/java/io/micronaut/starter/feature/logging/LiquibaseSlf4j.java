@@ -18,6 +18,7 @@ package io.micronaut.starter.feature.logging;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.feature.LoggingFeature;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
@@ -50,7 +51,8 @@ public class LiquibaseSlf4j implements ThirdPartyLibraryFeature, LoggingFeature 
     }
 
     protected void addDependencies(GeneratorContext generatorContext) {
-        generatorContext.addDependency(Dependency.builder().lookupArtifactId(ARTIFACT_ID_LIQUIBASE_SLF_4_J).runtime());
+        ModuleContext module = generatorContext.getRootModule();
+        module.addDependency(Dependency.builder().lookupArtifactId(ARTIFACT_ID_LIQUIBASE_SLF_4_J).runtime());
     }
 
     @Override

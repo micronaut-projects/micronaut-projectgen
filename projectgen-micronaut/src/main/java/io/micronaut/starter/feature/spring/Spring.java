@@ -17,6 +17,7 @@ package io.micronaut.starter.feature.spring;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
@@ -51,9 +52,10 @@ public class Spring implements Feature {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        generatorContext.addDependency(
+        ModuleContext module = generatorContext.getRootModule();
+        module.addDependency(
                 MicronautDependencyUtils.annotationProcessor(generatorContext.getBuildTool(), MicronautDependencyUtils.GROUP_ID_MICRONAUT_SPRING, ARTIFACT_ID_MICRONAUT_SPRING_ANNOTATION, PROPERTY_MICRONAUT_SPRING_VERSION));
-        generatorContext.addDependency(Dependency.builder()
+        module.addDependency(Dependency.builder()
                 .groupId(GROUP_ID_ORG_SPRINGFRAMEWORK_BOOT)
                 .artifactId(ARTIFACT_ID_SPRING_BOOT_STARTER)
                 .compile());

@@ -17,6 +17,7 @@ package io.micronaut.starter.feature.other;
 
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.feature.FeatureContext;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
@@ -45,8 +46,9 @@ abstract class OpenApiView implements Feature, MicronautServerDependent, Contrib
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        generatorContext.addTemplate("openapiProperties", new RockerTemplate("openapi.properties", openApiProperties.template(this)));
-        generatorContext.addTemplate("exampleController", WorkflowsUtils.createExampleController(
+        ModuleContext module = generatorContext.getRootModule();
+        module.addTemplate("openapiProperties", new RockerTemplate("openapi.properties", openApiProperties.template(this)));
+        module.addTemplate("exampleController", WorkflowsUtils.createExampleController(
                 generatorContext.getProject(), generatorContext.getLanguage()));
     }
 

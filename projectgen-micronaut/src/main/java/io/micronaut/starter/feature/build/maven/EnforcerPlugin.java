@@ -19,6 +19,7 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
@@ -77,7 +78,8 @@ public class EnforcerPlugin implements DefaultFeature {
     }
 
     protected void addEnforcerPlugin(GeneratorContext generatorContext) {
-        generatorContext.addBuildPlugin(MavenPlugin.builder()
+        ModuleContext module = generatorContext.getRootModule();
+        module.addBuildPlugin(MavenPlugin.builder()
                 .groupId(GROUP_ID_ORG_APACHE_MAVEN_PLUGINS)
                 .artifactId(ARTIFACT_ID_MAVEN_ENFORCER_PLUGIN)
                 .build());

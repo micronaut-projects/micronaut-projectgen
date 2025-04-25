@@ -17,11 +17,13 @@ package io.micronaut.projectgen.core.buildtools.gradle;
 
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.CollectionUtils;
+import io.micronaut.projectgen.core.buildtools.dependencies.Coordinate;
 import io.micronaut.projectgen.core.buildtools.dependencies.DependencyCoordinate;
 import io.micronaut.projectgen.core.buildtools.dependencies.Substitution;
 import io.micronaut.projectgen.core.rocker.RockerWritable;
 import io.micronaut.projectgen.core.template.Writable;
 import io.micronaut.projectgen.core.template.WritableUtils;
+import io.micronaut.sourcegen.annotations.Builder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,7 +31,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -42,59 +43,13 @@ import io.micronaut.projectgen.core.template.substitutions;
 /**
  * Representation of a Gradle Build.
  */
-public class GradleBuild {
+@Builder
+public record GradleBuild(Coordinate coordinate,
+                          GradleDsl dsl,
+                          List<GradleDependency> dependencies,
+                          List<GradlePlugin> plugins,
+                          List<GradleRepository> repositories) {
     private static final Logger LOG = LoggerFactory.getLogger(GradleBuild.class);
-
-    private final GradleDsl dsl;
-    private final List<GradleDependency> dependencies;
-    private final List<GradlePlugin> plugins;
-    private final List<GradleRepository> repositories;
-
-    public GradleBuild() {
-        this(GradleDsl.GROOVY, Collections.emptyList(), Collections.emptyList());
-    }
-
-    public GradleBuild(@NonNull GradleDsl gradleDsl,
-                       @NonNull List<GradleDependency> dependencies,
-                       @NonNull List<GradleRepository> repositories) {
-        this(gradleDsl, dependencies, Collections.emptyList(), repositories);
-    }
-
-    public GradleBuild(@NonNull GradleDsl gradleDsl,
-                       @NonNull List<GradleDependency> dependencies,
-                       @NonNull List<GradlePlugin> plugins,
-                       @NonNull List<GradleRepository> repositories) {
-        this.dsl = gradleDsl;
-        this.dependencies = dependencies;
-        this.plugins = plugins;
-        this.repositories = repositories;
-    }
-
-    /**
-     *
-     * @return Gradle DSL
-     */
-    @NonNull
-    public GradleDsl getDsl() {
-        return dsl;
-    }
-
-    /**
-     *
-     * @return Dependencies
-     */
-    @NonNull
-    public List<GradleDependency> getDependencies() {
-        return dependencies;
-    }
-
-    /**
-     *
-     * @return repositories
-     */
-    public List<GradleRepository> getRepositories() {
-        return repositories;
-    }
 
     /**
      *
@@ -102,7 +57,7 @@ public class GradleBuild {
      */
     @NonNull
     public List<GradlePlugin> getPlugins() {
-        return plugins.stream().filter(gradlePlugin -> gradlePlugin.getGradleFile() == GradleFile.BUILD).collect(Collectors.toList());
+        return plugins.stream().filter(gradlePlugin -> gradlePlugin.getGradleFile() == GradleFile.BUILD).toList();
     }
 
     /**
@@ -146,9 +101,11 @@ public class GradleBuild {
      */
     @NonNull
     public String renderExtensions() {
-        return renderWritableExtensions(plugins.stream()
+        List<Writable> extensions = plugins.stream()
             .map(GradlePlugin::getExtension)
-            .filter(Objects::nonNull));
+            .filter(Objects::nonNull)
+            .toList();
+        return renderWritableExtensions(extensions.stream());
     }
 
     /**
@@ -185,7 +142,7 @@ public class GradleBuild {
         List<GradleRepository> repos = plugins.stream()
             .flatMap(plugin -> plugin.getPluginsManagementRepositories().stream())
             .distinct()
-            .collect(Collectors.toList());
+            .toList();
         if (CollectionUtils.isEmpty(repos)) {
             return "";
         }
@@ -198,20 +155,22 @@ public class GradleBuild {
      */
     @NonNull
     private String renderWritableExtensions(Stream<Writable> extensions) {
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        StringBuilder result = new StringBuilder();
         extensions
             .filter(Objects::nonNull)
             .forEach(writable -> {
                 try {
+                    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
                     writable.write(outputStream);
-                    outputStream.write(System.lineSeparator().getBytes(StandardCharsets.UTF_8));
+                    result.append(outputStream.toString(StandardCharsets.UTF_8))
+                        .append(System.lineSeparator());
                 } catch (IOException e) {
                     if (LOG.isErrorEnabled()) {
-                        LOG.error("IO Exception rendering Gradle Plugin extension");
+                        LOG.error("IO Exception rendering Gradle Plugin extension", e);
                     }
                 }
             });
-        return new String(outputStream.toByteArray(), StandardCharsets.UTF_8);
+        return result.toString();
     }
 
     /**

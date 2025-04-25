@@ -18,6 +18,7 @@ package io.micronaut.starter.feature.database;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import io.micronaut.projectgen.core.feature.FeatureContext;
@@ -46,15 +47,16 @@ public abstract class DataMongoFeature extends EaseTestingFeature implements Dat
 
     @Override
     public void apply(GeneratorContext generatorContext) {
+        ModuleContext module = generatorContext.getRootModule();
         if (!generatorContext.getFeatures().isFeaturePresent(TestResources.class)) {
-            generatorContext.getConfiguration().put(MONGODB_URI_CONFIGURATION_KEY, MONGODB_URI_CONFIGURATION_VALUE);
+            module.configuration().put(MONGODB_URI_CONFIGURATION_KEY, MONGODB_URI_CONFIGURATION_VALUE);
         }
 
         if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())) {
-            generatorContext.addDependency(DataFeature.dataProcessorDependency(generatorContext.getBuildTool()));
+            module.addDependency(DataFeature.dataProcessorDependency(generatorContext.getBuildTool()));
         }
-        generatorContext.addDependency(DataDocumentFeature.dataDocumentProcessorDependency(generatorContext.getBuildTool()));
-        generatorContext.addDependency(MicronautDependencyUtils.dataDependency()
+        module.addDependency(DataDocumentFeature.dataDocumentProcessorDependency(generatorContext.getBuildTool()));
+        module.addDependency(MicronautDependencyUtils.dataDependency()
                 .compile()
                 .artifactId(MICRONAUT_DATA_MONGODB_ARTIFACT)
                 .versionProperty(MICRONAUT_DATA_VERSION));
@@ -64,7 +66,7 @@ public abstract class DataMongoFeature extends EaseTestingFeature implements Dat
                 .artifactId(mongoArtifact());
         // Needs to be an implementation dependency for the Groovy compiler
         driverDependency = generatorContext.getLanguage() == Language.GROOVY ? driverDependency.compile() : driverDependency.runtime();
-        generatorContext.addDependency(driverDependency);
+        module.addDependency(driverDependency);
     }
 
     @Override

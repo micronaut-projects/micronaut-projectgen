@@ -28,6 +28,7 @@ import io.micronaut.projectgen.core.utils.NameUtils;
 import jakarta.inject.Provider;
 import jakarta.inject.Singleton;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -64,13 +65,21 @@ public class DefaultProjectGenerator implements ProjectGenerator {
         generatorContext.applyFeatures();
 
         try (TemplateRenderer templateRenderer = TemplateRenderer.create(project, outputHandler)) {
-            for (Template template: generatorContext.getTemplates().values()) {
-                RenderResult renderResult = templateRenderer.render(template);
-                if (renderResult.getError() != null) {
-                    throw renderResult.getError();
-                }
+            ModuleContext moduleContext = generatorContext.getRootModule();
+            renderTemplates(templateRenderer, moduleContext);
+            for (String name : generatorContext.getModuleNames()) {
+                renderTemplates(templateRenderer, generatorContext.getModuleByName(name));
             }
         }
 
+    }
+
+    void renderTemplates(TemplateRenderer templateRenderer, ModuleContext moduleContext) throws Exception {
+        for (Template template : moduleContext.templates().values()) {
+            RenderResult renderResult = templateRenderer.render(template);
+            if (renderResult.getError() != null) {
+                throw renderResult.getError();
+            }
+        }
     }
 }

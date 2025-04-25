@@ -1,3 +1,4 @@
+@option discardLogicWhitespace=true
 @import io.micronaut.projectgen.micronaut.ApplicationType
 @import io.micronaut.projectgen.core.generator.Project
 @import io.micronaut.projectgen.core.buildtools.Property
@@ -34,7 +35,7 @@ MavenBuild mavenBuild
 
   <dependencies>
 @if (features.language().isGroovy()) {
-@for (processor : mavenBuild.getAnnotationProcessors()) {
+@for (processor : mavenBuild.annotationProcessors()) {
 @dependency.template(processor.getGroupId(), processor.getArtifactId(), "provided", null, false, null)
 }
 }
@@ -44,5 +45,5 @@ MavenBuild mavenBuild
 }
   </dependencies>
 
-@profiles.template(mavenBuild.getProfiles())
+@profiles.template(mavenBuild.profiles())
 </project>

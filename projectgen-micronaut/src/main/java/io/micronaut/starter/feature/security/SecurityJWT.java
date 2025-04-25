@@ -19,6 +19,7 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import jakarta.inject.Singleton;
 
@@ -53,14 +54,15 @@ public class SecurityJWT extends SecurityFeature implements SecurityAuthenticati
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        generatorContext.getConfiguration().put(PROPERTY_MICRONAUT_SECURITY_AUTHENTICATION, getSecurityAuthenticationMode().toString());
+        ModuleContext module = generatorContext.getRootModule();
+        module.configuration().put(PROPERTY_MICRONAUT_SECURITY_AUTHENTICATION, getSecurityAuthenticationMode().toString());
         Optional<SecurityAuthenticationMode> securityAuthenticationModeOptional = SecurityAuthenticationModeUtils.resolveSecurityAuthenticationMode(generatorContext);
         if (securityAuthenticationModeOptional.isPresent() &&
                 (securityAuthenticationModeOptional.get() == SecurityAuthenticationMode.BEARER || securityAuthenticationModeOptional.get() == SecurityAuthenticationMode.COOKIE)
         ) {
-            generatorContext.getConfiguration().put("micronaut.security.token.jwt.signatures.secret.generator.secret", "${JWT_GENERATOR_SIGNATURE_SECRET:pleaseChangeThisSecretForANewOne}");
+            module.configuration().put("micronaut.security.token.jwt.signatures.secret.generator.secret", "${JWT_GENERATOR_SIGNATURE_SECRET:pleaseChangeThisSecretForANewOne}");
         }
-        generatorContext.addDependency(MicronautDependencyUtils.securityDependency()
+        module.addDependency(MicronautDependencyUtils.securityDependency()
                 .artifactId("micronaut-security-jwt")
                 .compile());
     }

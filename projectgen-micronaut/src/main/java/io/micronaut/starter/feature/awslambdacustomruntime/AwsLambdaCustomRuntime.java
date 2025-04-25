@@ -20,6 +20,7 @@ import io.micronaut.context.exceptions.ConfigurationException;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.rocker.RockerWritable;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.projectgen.micronaut.ApplicationType;
@@ -103,23 +104,24 @@ public class AwsLambdaCustomRuntime implements FunctionFeature, ApplicationFeatu
     @Override
     public void apply(GeneratorContext generatorContext) {
         ApplicationFeature.super.apply(generatorContext);
+        ModuleContext module = generatorContext.getRootModule();
         Project project = generatorContext.getProject();
         if (shouldGenerateMainClassForRuntime(generatorContext)) {
-            addFunctionLambdaRuntime(generatorContext, project);
+            addFunctionLambdaRuntime(generatorContext, module, project);
         }
 
         if (generatorContext.getFeatures().isFeaturePresent(GraalVM.class)) {
-            generatorContext.addHelpTemplate(new RockerWritable(awsCustomRuntimeReadme.template(generatorContext.getBuildTool())));
+            module.addHelpTemplate(new RockerWritable(awsCustomRuntimeReadme.template(generatorContext.getBuildTool())));
         }
-        addDependencies(generatorContext);
+        addDependencies(generatorContext, module);
     }
 
-    private void addDependencies(@NonNull GeneratorContext generatorContext) {
-        generatorContext.addDependency(DEPENDENCY_AWS_FUNCTION_AWS_CUSTOM_RUNTIME);
+    private void addDependencies(@NonNull GeneratorContext generatorContext, ModuleContext module) {
+        module.addDependency(DEPENDENCY_AWS_FUNCTION_AWS_CUSTOM_RUNTIME);
         if (generatorContext.getFeatures().testFramework().isSpock() &&
                 OptionUtils.hasGradleBuildTool(generatorContext.getOptions())) {
             // maven has this in parent pom
-            generatorContext.addDependency(AwsLambda.DEPENDENCY_MICRONAUT_FUNCTION_TEST);
+            module.addDependency(AwsLambda.DEPENDENCY_MICRONAUT_FUNCTION_TEST);
         }
     }
 
@@ -143,9 +145,9 @@ public class AwsLambdaCustomRuntime implements FunctionFeature, ApplicationFeatu
         throw new ConfigurationException("aws-lambda-custom-runtime should be used together with aws-lambda or aws-gateway-lambda-proxy");
     }
 
-    private void addFunctionLambdaRuntime(GeneratorContext generatorContext, Project project) {
+    private void addFunctionLambdaRuntime(GeneratorContext generatorContext, ModuleContext module, Project project) {
         String functionLambdaRuntime = generatorContext.getSourcePath("/{packagePath}/FunctionLambdaRuntime");
-        generatorContext.addTemplate("functionLambdaRuntime", functionLambdaRuntime,
+        module.addTemplate(generatorContext.getOptions().language(), "functionLambdaRuntime", functionLambdaRuntime,
                 functionLambdaRuntimeJava.template(generatorContext.getFeatures(), project),
                 functionLambdaRuntimeKotlin.template(generatorContext.getFeatures(), project),
                 functionLambdaRuntimeGroovy.template(generatorContext.getFeatures(), project));

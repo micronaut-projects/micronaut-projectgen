@@ -25,29 +25,20 @@ import java.io.OutputStream;
  * Rocker template.
  */
 public class RockerTemplate extends DefaultTemplate {
-
     private final RockerWritable writable;
 
     private final boolean executable;
 
     public RockerTemplate(RockerModel delegate) {
-        this(DEFAULT_MODULE, "", delegate, false);
+        this( "", delegate);
     }
 
     public RockerTemplate(String path, RockerModel delegate) {
-        this(DEFAULT_MODULE, path, delegate, false);
-    }
-
-    public RockerTemplate(String module, String path, RockerModel delegate) {
-        this(module, path, delegate, false);
+        this(path, delegate, false);
     }
 
     public RockerTemplate(String path, RockerModel delegate, boolean executable) {
-        this(DEFAULT_MODULE, path, delegate, executable);
-    }
-
-    public RockerTemplate(String module, String path, RockerModel delegate, boolean executable) {
-        super(module, path);
+        super(path);
         this.writable = new RockerWritable(delegate);
         this.executable = executable;
     }

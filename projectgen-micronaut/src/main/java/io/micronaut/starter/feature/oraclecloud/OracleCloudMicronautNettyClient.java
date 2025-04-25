@@ -19,6 +19,7 @@ package io.micronaut.starter.feature.oraclecloud;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
@@ -58,7 +59,8 @@ public class OracleCloudMicronautNettyClient implements Feature {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        generatorContext.addDependency(MicronautDependencyUtils.oracleCloudDependency()
+        ModuleContext module = generatorContext.getRootModule();
+        module.addDependency(MicronautDependencyUtils.oracleCloudDependency()
                 .artifactId("micronaut-oraclecloud-httpclient-netty")
                 .compile());
     }

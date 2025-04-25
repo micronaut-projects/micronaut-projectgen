@@ -18,6 +18,7 @@ package io.micronaut.starter.feature.chatbots.telegram;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.Project;
@@ -98,8 +99,8 @@ public class TelegramAwsChatBot extends ChatBotsTelegram implements AwsFeature, 
     }
 
     @Override
-    protected void addDependencies(GeneratorContext generatorContext) {
-        generatorContext.addDependency(CHATBOTS_TELEGRAM_LAMBDA);
+    protected void addDependencies(ModuleContext module) {
+        module.addDependency(CHATBOTS_TELEGRAM_LAMBDA);
     }
 
     @Override

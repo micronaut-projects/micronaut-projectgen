@@ -20,6 +20,7 @@ import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import jakarta.inject.Singleton;
 
 @Requires(property = "micronaut.starter.feature.mqttv3.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
@@ -42,7 +43,8 @@ public class MqttV3 implements MqttFeature {
     @Override
     public void apply(GeneratorContext generatorContext) {
         MqttFeature.super.apply(generatorContext);
-        generatorContext.addDependency(Dependency.builder()
+        ModuleContext module = generatorContext.getRootModule();
+        module.addDependency(Dependency.builder()
                 .groupId("io.micronaut.mqtt")
                 .artifactId("micronaut-mqttv3")
                 .compile());
