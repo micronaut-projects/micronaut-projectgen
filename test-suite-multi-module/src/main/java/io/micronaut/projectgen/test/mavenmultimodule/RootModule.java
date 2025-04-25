@@ -6,6 +6,7 @@ import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.generator.ModuleContext;
 import jakarta.inject.Singleton;
+import multimodule.catalog;
 
 @Singleton
 class RootModule implements Feature {
@@ -30,5 +31,6 @@ class RootModule implements Feature {
         ModuleContext module = generatorContext.getRootModule();
         module.moduleAttributes().setCoordinate(COORDINATE);
         module.moduleAttributes().setPackaging(Packaging.POM);
+        module.addTemplate("libs.versions.toml", "gradle/libs.versions.toml", catalog.template());
     }
 }

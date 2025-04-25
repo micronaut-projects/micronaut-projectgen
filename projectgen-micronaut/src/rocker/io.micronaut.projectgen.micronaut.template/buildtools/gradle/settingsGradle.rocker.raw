@@ -16,7 +16,11 @@ import @(settingsImport)
 @if(!gradleBuild.getSettingsPlugins().isEmpty()) {
 plugins {
 @for (GradlePlugin gradlePlugin : gradleBuild.getSettingsPlugins()) {
+@if(gradlePlugin.getAlias() != null) {
+    alias(@gradlePlugin.getAlias())@(gradlePlugin.getApply() != null ? " apply false" : "")
+} else {
     id("@gradlePlugin.getId()")@(gradlePlugin.getVersion() != null ? " version(\"" + gradlePlugin.getVersion() + "\")" : "")@(gradlePlugin.getApply() != null ? " apply false" : "")
+}
 }
 }
 
