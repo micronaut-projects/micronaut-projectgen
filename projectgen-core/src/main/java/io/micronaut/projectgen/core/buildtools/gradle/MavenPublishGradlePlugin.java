@@ -42,14 +42,13 @@ public class MavenPublishGradlePlugin implements BuildPluginFeature, GradleSpeci
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        ModuleContext rootModule = generatorContext.getRootModule();
-        rootModule.addBuildPlugin(MAVEN_PUBLISH_GRADLE_PLUGIN);
-        populateBuildProperties(generatorContext);
+        ModuleContext module = generatorContext.getRootModule();
+        module.addBuildPlugin(MAVEN_PUBLISH_GRADLE_PLUGIN);
+        populateBuildProperties(module);
     }
 
-    private static void populateBuildProperties(GeneratorContext generatorContext) {
-        ModuleContext rootModule = generatorContext.getRootModule();
-        BuildProperties props = rootModule.buildProperties();
+    private static void populateBuildProperties(ModuleContext module) {
+        BuildProperties props = module.buildProperties();
         props.put("projectVersion", "0.0.1-SNAPSHOT");
         props.put("inceptionYear", "" + LocalDate.now().getYear());
         props.put("projectName", "TODO");
