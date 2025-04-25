@@ -17,6 +17,7 @@ package io.micronaut.starter.feature.redis;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
@@ -25,9 +26,11 @@ import io.micronaut.projectgen.core.feature.Feature;
 
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.redis.lettuce.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class RedisLettuce implements Feature {
+public class RedisLettuce implements OpenRewriteFeature {
 
     @Override
     public String getName() {
@@ -45,12 +48,8 @@ public class RedisLettuce implements Feature {
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        generatorContext.getConfiguration().put("redis.uri", "redis://localhost");
-        generatorContext.addDependency(Dependency.builder()
-                .groupId("io.micronaut.redis")
-                .artifactId("micronaut-redis-lettuce")
-                .compile());
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.redis-lettuce");
     }
 
     @Override
