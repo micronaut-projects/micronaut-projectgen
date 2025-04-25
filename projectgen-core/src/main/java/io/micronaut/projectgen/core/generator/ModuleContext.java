@@ -62,7 +62,7 @@ public record ModuleContext(CoordinateResolver coordinateResolver,
                             ApplicationConfiguration configuration,
                             Map<String, ApplicationConfiguration> configurationByEnvironment,
                             BootstrapConfiguration bootstrapConfiguration,
-                            Map<String, ApplicationConfiguration> bootstrapConfigurationByEnvironment,
+                            Map<String, BootstrapConfiguration> bootstrapConfigurationByEnvironment,
                             DependencyContext dependencyContext,
                             Set<BuildPlugin> buildPlugins,
                             Map<String, Template> templates,
@@ -77,7 +77,7 @@ public record ModuleContext(CoordinateResolver coordinateResolver,
                          ApplicationConfiguration configuration,
                          Map<String, ApplicationConfiguration> configurationByEnvironment,
                          BootstrapConfiguration bootstrapConfiguration,
-                         Map<String, ApplicationConfiguration> bootstrapConfigurationByEnvironment,
+                         Map<String, BootstrapConfiguration> bootstrapConfigurationByEnvironment,
                          DependencyContext dependencyContext,
                          Set<BuildPlugin> buildPlugins,
                          Map<String, Template> templates,
@@ -350,6 +350,18 @@ public record ModuleContext(CoordinateResolver coordinateResolver,
 
     public Configuration getConfigurationByEnvironmentOrDefaultConfig(String env, ApplicationConfiguration defaultConfig) {
         return configurationByEnvironment.computeIfAbsent(env, key -> defaultConfig);
+    }
+
+    public Configuration getConfigurationByEnvironment(String env) {
+        return getConfigurationByEnvironmentOrDefaultConfig(env, new ApplicationConfiguration(env));
+    }
+
+    public Configuration getBootstrapConfigurationByEnvironment(String env) {
+        return getBootstrapConfigurationByEnvironmentOrDefaultConfig(env, new BootstrapConfiguration(env));
+    }
+
+    public Configuration getBootstrapConfigurationByEnvironmentOrDefaultConfig(String env, BootstrapConfiguration defaultConfig) {
+        return bootstrapConfigurationByEnvironment.computeIfAbsent(env, key -> defaultConfig);
     }
 
     public Configuration testConfiguration() {
