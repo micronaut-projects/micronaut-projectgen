@@ -18,6 +18,7 @@ package io.micronaut.starter.feature.k8s;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
@@ -61,7 +62,8 @@ public class KubernetesInformer implements Feature {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        generatorContext.addDependency(Dependency.builder()
+        ModuleContext module = generatorContext.getRootModule();
+        module.addDependency(Dependency.builder()
                 .groupId(KubernetesClient.MICRONAUT_KUBERNETES_GROUP_ID)
                 .artifactId("micronaut-kubernetes-informer")
                 .compile());

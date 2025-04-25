@@ -18,6 +18,8 @@ package io.micronaut.starter.feature.function.azure;
 import com.fizzed.rocker.RockerModel;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.Project;
@@ -96,7 +98,8 @@ public class AzureRawFunction extends AbstractAzureFunction {
                     groovyJUnitTemplate(project),
                     kotlinJUnitTemplate(project),
                     koTestTemplate(project));
-            generatorContext.addTemplate("testFunction", testSource, provider);
+            ModuleContext module = generatorContext.getRootModule();
+            module.addTemplate(generatorContext.getOptions(), "testFunction", testSource, provider);
         }
     }
 
@@ -105,7 +108,8 @@ public class AzureRawFunction extends AbstractAzureFunction {
                                        String name,
                                        RockerModel javaModel) {
         String  testSource = Language.JAVA.getTestSrcDir() + "/{packagePath}/" + name + "." + Language.JAVA.getExtension();
-        generatorContext.addTemplate(templateName, new RockerTemplate(testSource, javaModel));
+        ModuleContext module = generatorContext.getRootModule();
+        module.addTemplate(templateName, new RockerTemplate(testSource, javaModel));
     }
 
     @Override
@@ -131,8 +135,8 @@ public class AzureRawFunction extends AbstractAzureFunction {
     }
 
     @Override
-    protected void addDependencies(GeneratorContext generatorContext) {
-        super.addDependencies(generatorContext);
-        generatorContext.addDependency(MICRONAUT_AZURE_FUNCTION);
+    protected void addDependencies(ModuleContext module, Options options) {
+        super.addDependencies(module, options);
+        module.addDependency(MICRONAUT_AZURE_FUNCTION);
     }
 }

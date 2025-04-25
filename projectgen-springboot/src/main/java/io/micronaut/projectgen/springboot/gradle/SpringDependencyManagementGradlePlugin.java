@@ -20,6 +20,7 @@ import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.buildtools.gradle.GradlePlugin;
 import io.micronaut.projectgen.core.buildtools.gradle.GradleSpecificFeature;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import jakarta.inject.Singleton;
@@ -55,8 +56,9 @@ public class SpringDependencyManagementGradlePlugin implements GradleSpecificFea
 
     @Override
     public void apply(GeneratorContext generatorContext) {
+        ModuleContext moduleContext = generatorContext.getRootModule();
         if (OptionUtils.hasGradleBuildTool(generatorContext.getOptions())) {
-            generatorContext.addBuildPlugin(GradlePlugin.builder()
+            moduleContext.addBuildPlugin(GradlePlugin.builder()
                     .id(GRADLE_PLUGIN_ID_SPRING_DEPENDENCY_MANAGEMENT)
                     .lookupArtifactId(ARTIFACT_ID)
                     .build());

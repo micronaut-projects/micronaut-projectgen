@@ -20,6 +20,7 @@ import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.starter.feature.database.jdbc.JdbcFeature;
 import io.micronaut.starter.feature.testresources.DbType;
 import io.micronaut.starter.feature.testresources.TestResources;
@@ -137,8 +138,9 @@ public class SQLServer extends DatabaseDriverFeature {
     @Override
     public void apply(GeneratorContext generatorContext) {
         super.apply(generatorContext);
+        ModuleContext module = generatorContext.getRootModule();
         if (generatorContext.hasFeature(TestResources.class)) {
-            generatorContext.getConfiguration().put("test-resources.containers.mssql.accept-license", acceptLicense());
+            module.configuration().put("test-resources.containers.mssql.accept-license", acceptLicense());
         }
     }
 

@@ -20,6 +20,7 @@ import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.starter.feature.testresources.TestResources;
@@ -67,7 +68,8 @@ public class DataHibernateReactive extends HibernateReactiveFeature implements D
     @Override
     public void apply(GeneratorContext generatorContext) {
         super.apply(generatorContext);
-        generatorContext.addDependency(DataFeature.dataProcessorDependency(generatorContext.getBuildTool()));
-        generatorContext.addDependency(DEPENDENCY_MICRONAUT_DATA_HIBERNATE_REACTIVE);
+        ModuleContext module = generatorContext.getRootModule();
+        module.addDependency(DataFeature.dataProcessorDependency(generatorContext.getBuildTool()));
+        module.addDependency(DEPENDENCY_MICRONAUT_DATA_HIBERNATE_REACTIVE);
     }
 }

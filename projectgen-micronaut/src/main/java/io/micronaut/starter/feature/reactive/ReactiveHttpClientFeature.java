@@ -16,6 +16,7 @@
 package io.micronaut.starter.feature.reactive;
 
 import io.micronaut.core.annotation.NonNull;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
@@ -39,7 +40,8 @@ public interface ReactiveHttpClientFeature extends Feature {
     }
 
     default void addDependencies(GeneratorContext generatorContext) {
-        getDependencies(generatorContext).forEach(generatorContext::addDependency);
+        ModuleContext module = generatorContext.getRootModule();
+        getDependencies(generatorContext).forEach(module::addDependency);
     }
 
     @NonNull

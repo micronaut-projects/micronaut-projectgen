@@ -18,6 +18,7 @@ package io.micronaut.starter.feature.other;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.rocker.RockerWritable;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
@@ -36,6 +37,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -58,20 +60,29 @@ public class Readme implements DefaultFeature {
     @Override
     public void apply(GeneratorContext generatorContext) {
         List<Feature> featuresWithDocumentationLinks = generatorContext.getFeatures()
-                .getFeatures()
-                .stream()
-                .filter(feature -> feature.getFrameworkDocumentation(generatorContext) != null || feature.getThirdPartyDocumentation(generatorContext) != null)
-                .toList();
-        List<Writable> helpTemplates = generatorContext.getHelpTemplates();
+            .getFeatures()
+            .stream()
+            .filter(feature -> feature.getFrameworkDocumentation(generatorContext) != null || feature.getThirdPartyDocumentation(generatorContext) != null)
+            .toList();
+        ModuleContext module = generatorContext.getRootModule();
+        apply(module, featuresWithDocumentationLinks, generatorContext);
+        for (String name : generatorContext.getModuleNames()) {
+            module = generatorContext.getModuleByName(name);
+            apply(module, Collections.emptyList(), generatorContext);
+        }
+    }
+
+    private void apply(ModuleContext  module, List<Feature> featuresWithDocumentationLinks, GeneratorContext generatorContext) {
+        final List<Writable> helpTemplates = module.helpTemplates();
         if (!helpTemplates.isEmpty() || !featuresWithDocumentationLinks.isEmpty()) {
-            generatorContext.addTemplate("readme", new DefaultTemplate(Template.ROOT, "README.md") {
+            module.addTemplate("readme", new DefaultTemplate("README.md") {
                 @Override
                 public void write(OutputStream outputStream) throws IOException {
                     Writable mainDocsWritable = new RockerWritable(maindocs.template());
                     mainDocsWritable.write(outputStream);
 
                     byte[] lineSeparator = System.lineSeparator().getBytes(Charset.defaultCharset());
-                    for (Writable writable : generatorContext.getHelpTemplates()) {
+                    for (Writable writable : helpTemplates) {
                         writable.write(outputStream);
                         outputStream.write(lineSeparator);
                     }

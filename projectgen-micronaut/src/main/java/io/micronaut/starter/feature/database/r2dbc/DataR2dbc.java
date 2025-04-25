@@ -21,6 +21,7 @@ import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.starter.feature.database.Data;
@@ -67,11 +68,12 @@ public class DataR2dbc implements R2dbcFeature, DataFeature, TransactionalNotSup
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        generatorContext.addDependency(DataFeature.dataProcessorDependency(generatorContext.getBuildTool()));
-        generatorContext.addDependency(DEPENDENCY_MICRONAUT_DATA_R2DBC);
+        ModuleContext moduleContext = generatorContext.getRootModule();
+        moduleContext.addDependency(DataFeature.dataProcessorDependency(generatorContext.getBuildTool()));
+        moduleContext.addDependency(DEPENDENCY_MICRONAUT_DATA_R2DBC);
 
         DatabaseDriverFeature dbFeature = generatorContext.getRequiredFeature(DatabaseDriverFeature.class);
-        generatorContext.getConfiguration().addNested(getDatasourceConfig(generatorContext, dbFeature));
+        moduleContext.configuration().addNested(getDatasourceConfig(generatorContext, dbFeature));
     }
 
     @Override

@@ -18,6 +18,7 @@ package io.micronaut.starter.feature.server;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
@@ -53,8 +54,9 @@ public class Netty extends AbstractMicronautServerFeature {
 
     @Override
     public void doApply(GeneratorContext generatorContext) {
+        ModuleContext module = generatorContext.getRootModule();
         if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())) {
-            generatorContext.addDependency(MicronautDependencyUtils.coreDependency()
+            module.addDependency(MicronautDependencyUtils.coreDependency()
                     .artifactId("micronaut-http-server-netty")
                     .compile());
         }

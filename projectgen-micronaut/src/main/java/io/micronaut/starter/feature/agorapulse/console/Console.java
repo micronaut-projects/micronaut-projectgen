@@ -19,6 +19,7 @@ import com.fizzed.rocker.RockerModel;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.projectgen.micronaut.ApplicationType;
@@ -93,7 +94,8 @@ public class Console implements AgoraPulseFeature {
     }
 
     protected void addDependency(GeneratorContext generatorContext) {
-        generatorContext.addDependency(Dependency.builder()
+        ModuleContext module = generatorContext.getRootModule();
+        module.addDependency(Dependency.builder()
                 .lookupArtifactId(ARTIFACT_ID)
                 .developmentOnly());
 
@@ -105,26 +107,27 @@ public class Console implements AgoraPulseFeature {
     }
 
     protected void addGroovyDependency(GeneratorContext generatorContext) {
+        ModuleContext module = generatorContext.getRootModule();
         if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())) {
-            generatorContext.getBuildProperties().put("groovyVersion", VersionInfo.getDependencyVersion("groovy").getValue());
+            module.buildProperties().put("groovyVersion", VersionInfo.getDependencyVersion("groovy").getValue());
         }
         Dependency.Builder groovy = Dependency.builder()
                 .groupId("org.apache.groovy")
                 .artifactId("groovy")
                 .developmentOnly();
-        generatorContext.addDependency(groovy);
+        module.addDependency(groovy);
     }
 
     protected void addKotlinScriptingDependency(GeneratorContext generatorContext) {
         Coordinate coordinate = generatorContext.resolveCoordinate("kotlin-bom");
-        generatorContext.getBuildProperties().put("kotlinVersion", coordinate.getVersion());
+        ModuleContext module = generatorContext.getRootModule();
+        module.buildProperties().put("kotlinVersion", coordinate.getVersion());
         Dependency.Builder kotlin = Dependency.builder()
                 .groupId("org.jetbrains.kotlin")
                 .compile()
                 .version("${kotlinVersion}")
                 .template();
-
-        generatorContext.addDependency(kotlin.artifactId("kotlin-scripting-jsr223").developmentOnly());
+        module.addDependency(kotlin.artifactId("kotlin-scripting-jsr223").developmentOnly());
     }
 
     protected void addExampleCode(GeneratorContext generatorContext, String secret) {
@@ -133,14 +136,16 @@ public class Console implements AgoraPulseFeature {
     }
 
     protected void addDslFile(GeneratorContext generatorContext) {
+        ModuleContext module = generatorContext.getRootModule();
         dslFile(generatorContext).ifPresent(rockerModel -> {
-            generatorContext.addTemplate("consoleGroovyDsl", new RockerTemplate("src/test/resources/console.gdsl", rockerModel));
+            module.addTemplate("consoleGroovyDsl", new RockerTemplate("src/test/resources/console.gdsl", rockerModel));
         });
     }
 
     protected void addHttpFile(GeneratorContext generatorContext, String secret) {
-        httpFile(generatorContext, secret).ifPresent(rockerModel -> generatorContext.
-                addTemplate("consoleHttpFile", new RockerTemplate("src/test/resources/console.http", rockerModel))
+        ModuleContext module = generatorContext.getRootModule();
+        httpFile(generatorContext, secret).ifPresent(rockerModel ->
+            module.addTemplate("consoleHttpFile", new RockerTemplate("src/test/resources/console.http", rockerModel))
         );
     }
 
@@ -168,8 +173,8 @@ public class Console implements AgoraPulseFeature {
         settings.put("addresses", Arrays.asList("/127.0.0.1", "/0:0:0:0:0:0:0:1"));
         settings.put("header-name", SSRF_HEADER_NAME);
         settings.put("header-value", secret);
-
-        generatorContext.getConfiguration().addNested(Collections.singletonMap("console", settings));
+        ModuleContext module = generatorContext.getRootModule();
+        module.configuration().addNested(Collections.singletonMap("console", settings));
     }
 
 }

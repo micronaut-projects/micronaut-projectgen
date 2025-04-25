@@ -1,5 +1,5 @@
 /*
- * Copyright 2017-2023 original authors
+ * Copyright 2017-2025 original authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,21 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.projectgen.core.buildtools;
+package io.micronaut.projectgen.core.buildtools.maven;
 
-import io.micronaut.context.annotation.DefaultImplementation;
-import io.micronaut.core.annotation.NonNull;
-import io.micronaut.projectgen.core.generator.GeneratorContext;
+public enum Packaging {
+    JAR("jar"),
+    WAR("war"),
+    EAR("ear"),
+    POM("pom"),
+    EJB("ejb"),
+    MAVEN_PLUGIN("maven-plugin"),
+    RAR("rar"),
+    PAR("par");
 
-import java.util.List;
+    private final String name;
 
-/**
- * Repository Resolver.
- */
-@DefaultImplementation(DefaultRepositoryResolver.class)
-@FunctionalInterface
-public interface RepositoryResolver {
+    Packaging(String name) {
+        this.name = name;
+    }
 
-    @NonNull
-    List<Repository> resolveRepositories(@NonNull GeneratorContext generatorContext);
+    @Override
+    public String toString() {
+        return name;
+    }
 }

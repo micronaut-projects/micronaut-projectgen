@@ -18,6 +18,7 @@ package io.micronaut.starter.feature.json;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
@@ -54,7 +55,8 @@ public class JsonSmart implements Feature {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        generatorContext.addDependency(DEPENDENCY_JSON_SMART);
+        ModuleContext module = generatorContext.getRootModule();
+        module.addDependency(DEPENDENCY_JSON_SMART);
     }
 
     @Override

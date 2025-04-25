@@ -19,6 +19,7 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.starter.feature.ci.workflows.CIWorkflowFeature;
 import io.micronaut.projectgen.micronaut.template.ci.gitlab.gitlabci;
 import io.micronaut.starter.feature.graalvm.GraalVM;
@@ -53,8 +54,8 @@ public class GitlabCiWorkflowFeature extends CIWorkflowFeature {
     @Override
     public void apply(GeneratorContext generatorContext) {
         super.apply(generatorContext);
-
-        generatorContext.addTemplate("gitlabci", workflowRockerTemplate(generatorContext));
+        ModuleContext module = generatorContext.getRootModule();
+        module.addTemplate("gitlabci", workflowRockerTemplate(generatorContext));
     }
 
     private Template workflowRockerTemplate(GeneratorContext generatorContext) {

@@ -30,11 +30,7 @@ public class PropertiesTemplate extends DefaultTemplate {
     private final Properties properties;
 
     public PropertiesTemplate(String path, Map<String, Object> config) {
-        this(DEFAULT_MODULE, path, config);
-    }
-
-    public PropertiesTemplate(String module, String path, Map<String, Object> config) {
-        super(module, path);
+        super(path);
         this.properties = transform(new LinkedProperties(), "", config);
     }
 

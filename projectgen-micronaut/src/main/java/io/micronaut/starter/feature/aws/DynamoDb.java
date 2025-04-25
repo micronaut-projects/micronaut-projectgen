@@ -20,6 +20,7 @@ import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.projectgen.micronaut.template.aws.dynamodbConfigurationGroovy;
@@ -63,39 +64,42 @@ public class DynamoDb implements AwsFeature {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
+        ModuleContext module = generatorContext.getRootModule();
         Dependency.Builder dynamoDbDependency = Dependency.builder()
                 .groupId(GROUP_ID_AWS_SDK_V2)
                 .artifactId(ARTIFACTID_DYNAMODB)
                 .compile();
 
         AwsSdkDependenciesUtils.dependencies(generatorContext, dynamoDbDependency)
-                .forEach(generatorContext::addDependency);
+                .forEach(module::addDependency);
 
         String repositoryFile = generatorContext.getSourcePath("/{packagePath}/DynamoRepository");
-        generatorContext.addTemplate("dynamoRepository", repositoryFile,
+        module.addTemplate(generatorContext.getOptions().language(), "dynamoRepository", repositoryFile,
                 dynamodbRepositoryJava.template(generatorContext.getProject()),
                 dynamodbRepositoryKotlin.template(generatorContext.getProject()),
                 dynamodbRepositoryGroovy.template(generatorContext.getProject()));
 
         String configurationFile = generatorContext.getSourcePath("/{packagePath}/DynamoConfiguration");
-        generatorContext.addTemplate("dynamoConfiguration", configurationFile,
+        module.addTemplate(generatorContext.getOptions().language() ,"dynamoConfiguration", configurationFile,
                 dynamodbConfigurationJava.template(generatorContext.getProject()),
                 dynamodbConfigurationKotlin.template(generatorContext.getProject()),
                 dynamodbConfigurationGroovy.template(generatorContext.getProject()));
 
         String ciAwsCredentialsProviderChainCondition = generatorContext.getSourcePath("/{packagePath}/CIAwsCredentialsProviderChainCondition");
-        generatorContext.addTemplate("ciAwsCredentialsProviderChainCondition", ciAwsCredentialsProviderChainCondition,
+        module.addTemplate(generatorContext.getOptions().language(),
+            "ciAwsCredentialsProviderChainCondition", ciAwsCredentialsProviderChainCondition,
                 ciawsconditionJava.template(generatorContext.getProject()),
                 ciawsconditionKotlin.template(generatorContext.getProject()),
                 ciawsconditionGroovy.template(generatorContext.getProject()));
 
         String cIAwsRegionProviderChainCondition = generatorContext.getSourcePath("/{packagePath}/CIAwsRegionProviderChainCondition");
-        generatorContext.addTemplate("cIAwsRegionProviderChainCondition", cIAwsRegionProviderChainCondition,
+        module.addTemplate(generatorContext.getOptions().language(),
+            "cIAwsRegionProviderChainCondition", cIAwsRegionProviderChainCondition,
                 ciawsregionconditionJava.template(generatorContext.getProject()),
                 ciawsregionconditionKotlin.template(generatorContext.getProject()),
                 ciawsregionconditionGroovy.template(generatorContext.getProject()));
 
-        Configuration testConfig = generatorContext.getConfigurationByEnvironmentOrDefaultConfig("function", new ApplicationConfiguration("test", "function"));
+        Configuration testConfig = module.testConfiguration();
         testConfig.put("aws.region", "us-east-1");
     }
 

@@ -19,6 +19,7 @@ import io.micronaut.projectgen.core.buildtools.gradle.GradlePlugin;
 import io.micronaut.projectgen.core.buildtools.gradle.GradleSpecificFeature;
 import io.micronaut.projectgen.core.feature.BuildPluginFeature;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import jakarta.inject.Singleton;
 
 /**
@@ -46,7 +47,8 @@ public class MicronautLibraryGradlePlugin implements BuildPluginFeature, GradleS
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        generatorContext.addBuildPlugin(GradlePlugin.builder()
+        ModuleContext module = generatorContext.getRootModule();
+        module.addBuildPlugin(GradlePlugin.builder()
             .id(MICRONAUT_LIBRARY_GRADLE_PLUGIN_ID)
             .lookupArtifactId(MicronautApplicationGradlePlugin.Builder.ARTIFACT_ID)
             .order(GRADLE_PLUGIN_ORDER)

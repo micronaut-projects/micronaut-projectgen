@@ -24,6 +24,7 @@ import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.projectgen.core.feature.FeaturePhase;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.template.Template;
 import io.micronaut.projectgen.core.template.YamlTemplate;
 import jakarta.inject.Singleton;
@@ -71,7 +72,8 @@ public class Yaml implements ConfigurationFeature {
 
             @Override
             public void apply(GeneratorContext generatorContext) {
-                generatorContext.addDependency(DEPENDENCY_YAML);
+                ModuleContext module = generatorContext.getRootModule();
+                module.addDependency(DEPENDENCY_YAML);
             }
         });
     }
@@ -82,7 +84,12 @@ public class Yaml implements ConfigurationFeature {
     }
 
     @Override
-    public Function<Configuration, Template> createTemplate() {
-        return config -> new YamlTemplate(config.getFullPath(EXTENSION), config);
+    public Function<Configuration, Template> createTemplate(String module) {
+        return config -> {
+            String path = StringUtils.isEmpty(module)
+                ? config.getFullPath(EXTENSION)
+                : module + "/" + config.getFullPath(EXTENSION);
+            return new YamlTemplate(path, config);
+        };
     }
 }

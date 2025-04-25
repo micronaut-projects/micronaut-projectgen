@@ -20,6 +20,7 @@ import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.feature.KotlinApplicationFeature;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
@@ -112,29 +113,29 @@ public class Ktor implements KotlinApplicationFeature, ThirdPartyServerFeature, 
     @Override
     public void apply(GeneratorContext generatorContext) {
         KotlinApplicationFeature.super.apply(generatorContext);
+        ModuleContext module = generatorContext.getRootModule();
+        module.addTemplate("application", new RockerTemplate("src/main/kotlin/{packagePath}/Application.kt", applicationKotlin.template(generatorContext.getProject())));
+        module.addTemplate("homeRoute", new RockerTemplate("src/main/kotlin/{packagePath}/HomeRoute.kt", homeRouteKotlin.template(generatorContext.getProject())));
+        module.addTemplate("jacksonFeature", new RockerTemplate("src/main/kotlin/{packagePath}/JacksonFeature.kt", jacksonFeatureKotlin.template(generatorContext.getProject())));
+        module.addTemplate("nameTransformer", new RockerTemplate("src/main/kotlin/{packagePath}/NameTransformer.kt", nameTransformerKotlin.template(generatorContext.getProject())));
+        module.addTemplate("uppercaseTransformer", new RockerTemplate("src/main/kotlin/{packagePath}/UppercaseTransformer.kt", uppercaseTransformerKotlin.template(generatorContext.getProject())));
 
-        generatorContext.addTemplate("application", new RockerTemplate("src/main/kotlin/{packagePath}/Application.kt", applicationKotlin.template(generatorContext.getProject())));
-        generatorContext.addTemplate("homeRoute", new RockerTemplate("src/main/kotlin/{packagePath}/HomeRoute.kt", homeRouteKotlin.template(generatorContext.getProject())));
-        generatorContext.addTemplate("jacksonFeature", new RockerTemplate("src/main/kotlin/{packagePath}/JacksonFeature.kt", jacksonFeatureKotlin.template(generatorContext.getProject())));
-        generatorContext.addTemplate("nameTransformer", new RockerTemplate("src/main/kotlin/{packagePath}/NameTransformer.kt", nameTransformerKotlin.template(generatorContext.getProject())));
-        generatorContext.addTemplate("uppercaseTransformer", new RockerTemplate("src/main/kotlin/{packagePath}/UppercaseTransformer.kt", uppercaseTransformerKotlin.template(generatorContext.getProject())));
-
-        addDependencies(generatorContext);
+        addDependencies(module);
     }
 
-    protected void addDependencies(@NonNull GeneratorContext generatorContext) {
-        generatorContext.addDependency(MicronautDependencyUtils.kotlinDependency()
+    protected void addDependencies(@NonNull ModuleContext module) {
+        module.addDependency(MicronautDependencyUtils.kotlinDependency()
                 .artifactId("micronaut-ktor")
                 .compile());
 
-        generatorContext.addDependency(MicronautDependencyUtils.validationDependency()
+        module.addDependency(MicronautDependencyUtils.validationDependency()
                 .artifactId("micronaut-validation")
                 .compile());
 
         coordinateResolver.resolve(ARTIFACT_ID_KTOR_SERVER_NETTY)
                 .map(Coordinate::getVersion)
                 .ifPresent(version -> {
-                    generatorContext.addDependency(Dependency.builder()
+                    module.addDependency(Dependency.builder()
                             .groupId(GROUP_ID_IO_KTOR)
                             .artifactId(ARTIFACT_ID_KTOR_SERVER_NETTY)
                             .version(version)
@@ -143,7 +144,7 @@ public class Ktor implements KotlinApplicationFeature, ThirdPartyServerFeature, 
         coordinateResolver.resolve(ARTIFACT_ID_KTOR_SERIALIZATION_JACKSON)
                 .map(Coordinate::getVersion)
                 .ifPresent(version -> {
-                    generatorContext.addDependency(Dependency.builder()
+                    module.addDependency(Dependency.builder()
                             .groupId(GROUP_ID_IO_KTOR)
                             .artifactId(ARTIFACT_ID_KTOR_SERIALIZATION_JACKSON)
                             .version(version)
@@ -152,7 +153,7 @@ public class Ktor implements KotlinApplicationFeature, ThirdPartyServerFeature, 
         coordinateResolver.resolve(ARTIFACT_ID_KTOR_SERVER_CONTENT_NEGOTIATION)
                 .map(Coordinate::getVersion)
                 .ifPresent(version -> {
-                    generatorContext.addDependency(Dependency.builder()
+                    module.addDependency(Dependency.builder()
                             .groupId(GROUP_ID_IO_KTOR)
                             .artifactId(ARTIFACT_ID_KTOR_SERVER_CONTENT_NEGOTIATION)
                             .version(version)

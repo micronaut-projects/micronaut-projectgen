@@ -20,7 +20,9 @@ import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.feature.DistributedConfigFeature;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.feature.FeaturePhase;
+import io.micronaut.projectgen.core.feature.config.Configuration;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import jakarta.inject.Singleton;
 import java.util.Map;
 
@@ -48,12 +50,10 @@ public class AppName implements Feature {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        Map<String, Object> config;
-        if (generatorContext.isFeaturePresent(DistributedConfigFeature.class)) {
-            config = generatorContext.getBootstrapConfiguration();
-        } else {
-            config = generatorContext.getConfiguration();
-        }
+        ModuleContext module = generatorContext.getRootModule();
+        Configuration config = generatorContext.isFeaturePresent(DistributedConfigFeature.class)
+             ? module.bootstrapConfiguration()
+            : module.configuration();
         config.put("micronaut.application.name", generatorContext.getProject().getPropertyName());
     }
 }

@@ -19,6 +19,7 @@ import io.micronaut.projectgen.core.buildtools.BuildPlugin;
 import io.micronaut.projectgen.core.buildtools.BuildProperties;
 import io.micronaut.projectgen.core.feature.BuildPluginFeature;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.rocker.RockerWritable;
 import jakarta.inject.Singleton;
 import io.micronaut.projectgen.core.template.mavenPublishGradlePlugin;
@@ -41,12 +42,13 @@ public class MavenPublishGradlePlugin implements BuildPluginFeature, GradleSpeci
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        generatorContext.addBuildPlugin(MAVEN_PUBLISH_GRADLE_PLUGIN);
-        populateBuildProperties(generatorContext);
+        ModuleContext module = generatorContext.getRootModule();
+        module.addBuildPlugin(MAVEN_PUBLISH_GRADLE_PLUGIN);
+        populateBuildProperties(module);
     }
 
-    private static void populateBuildProperties(GeneratorContext generatorContext) {
-        BuildProperties props = generatorContext.getBuildProperties();
+    private static void populateBuildProperties(ModuleContext module) {
+        BuildProperties props = module.buildProperties();
         props.put("projectVersion", "0.0.1-SNAPSHOT");
         props.put("inceptionYear", "" + LocalDate.now().getYear());
         props.put("projectName", "TODO");

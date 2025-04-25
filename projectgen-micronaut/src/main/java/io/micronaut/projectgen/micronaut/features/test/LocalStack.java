@@ -18,6 +18,7 @@ package io.micronaut.projectgen.micronaut.features.test;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
@@ -78,9 +79,10 @@ public class LocalStack implements OpenRewriteFeature {
     @Override
     public void apply(GeneratorContext generatorContext) {
         OpenRewriteFeature.super.apply(generatorContext);
+        ModuleContext module = generatorContext.getRootModule();
         // SQS pulls this in transitively so this is not required
         if (!generatorContext.isFeaturePresent(SQS.class)) {
-            generatorContext.addDependency(Dependency.builder()
+            module.addDependency(Dependency.builder()
                     .groupId("com.amazonaws")
                     .artifactId("aws-java-sdk-core")
                     .test());
