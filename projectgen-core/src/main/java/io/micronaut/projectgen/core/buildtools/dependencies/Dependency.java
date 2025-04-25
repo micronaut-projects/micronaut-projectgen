@@ -50,6 +50,9 @@ public final class Dependency implements Coordinate {
     private final String project;
 
     @Nullable
+    private final String comment;
+
+    @Nullable
     private final String versionProperty;
     private final boolean requiresLookup;
     private final int order;
@@ -73,7 +76,8 @@ public final class Dependency implements Coordinate {
                        boolean pom,
                        @Nullable List<Dependency> exclusions,
                        @Nullable List<Substitution> substitutions,
-                       @Nullable String project) {
+                       @Nullable String project,
+                       @Nullable String comment) {
         this.scope = scope;
         this.groupId = groupId;
         this.artifactId = artifactId;
@@ -86,6 +90,7 @@ public final class Dependency implements Coordinate {
         this.exclusions = exclusions;
         this.substitutions = substitutions;
         this.project = project;
+        this.comment = comment;
     }
 
     @Override
@@ -114,6 +119,12 @@ public final class Dependency implements Coordinate {
         if (scope != null ? !scope.equals(that.scope) : that.scope != null) {
             return false;
         }
+        if (project != null ? !project.equals(that.project) : that.project != null) {
+            return false;
+        }
+        if (comment != null ? !comment.equals(that.comment) : that.comment != null) {
+            return false;
+        }
         if (groupId != null ? !groupId.equals(that.groupId) : that.groupId != null) {
             return false;
         }
@@ -139,6 +150,8 @@ public final class Dependency implements Coordinate {
         result = 31 * result + artifactId.hashCode();
         result = 31 * result + (version != null ? version.hashCode() : 0);
         result = 31 * result + (versionProperty != null ? versionProperty.hashCode() : 0);
+        result = 31 * result + (project != null ? project.hashCode() : 0);
+        result = 31 * result + (comment != null ? comment.hashCode() : 0);
         result = 31 * result + (requiresLookup ? 1 : 0);
         result = 31 * result + order;
         result = 31 * result + (annotationProcessorPriority ? 1 : 0);
@@ -160,6 +173,10 @@ public final class Dependency implements Coordinate {
 
     public Scope getScope() {
         return scope;
+    }
+
+    public String getComment() {
+        return comment;
     }
 
     @Override
@@ -213,6 +230,7 @@ public final class Dependency implements Coordinate {
             pom,
             Collections.emptyList(),
             Collections.emptyList(),
+            null,
             null);
     }
 
@@ -232,7 +250,8 @@ public final class Dependency implements Coordinate {
             dep.isPom(),
             dep.getExclusions(),
             dep.getSubstitutions(),
-            dep.project);
+            dep.project,
+            dep.comment);
     }
 
     @Nullable
@@ -258,6 +277,21 @@ public final class Dependency implements Coordinate {
         private List<Dependency> exclusions;
         private List<Substitution> substitutions;
         private String project;
+        private String comment;
+
+        /**
+         *
+         * @param comment Comment
+         * @return The Builder
+         */
+        public Builder comment(@NonNull String comment) {
+            if (template) {
+                return copy().comment(comment);
+            } else {
+                this.comment = comment;
+                return this;
+            }
+        }
 
         /**
          *
@@ -574,7 +608,8 @@ public final class Dependency implements Coordinate {
                 pom,
                 exclusions,
                 substitutions,
-                project);
+                project,
+                comment);
         }
 
         private Builder copy() {

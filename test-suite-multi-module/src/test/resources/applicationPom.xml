@@ -22,6 +22,7 @@
       <scope>compile</scope>
     </dependency>
 
+    <!-- To expose an actuator endpoint -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-actuator</artifactId>
