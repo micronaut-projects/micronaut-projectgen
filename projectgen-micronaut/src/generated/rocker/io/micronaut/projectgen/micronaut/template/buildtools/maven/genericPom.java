@@ -7,13 +7,13 @@ import com.fizzed.rocker.RockerContent;
 import com.fizzed.rocker.RockerOutput;
 import com.fizzed.rocker.runtime.DefaultRockerTemplate;
 import com.fizzed.rocker.runtime.PlainTextUnloadedClassLoader;
-// import @ [1:1]
-import io.micronaut.projectgen.core.buildtools.maven.ParentPom;
 // import @ [2:1]
-import io.micronaut.projectgen.core.buildtools.maven.MavenBuild;
+import io.micronaut.projectgen.core.buildtools.maven.ParentPom;
 // import @ [3:1]
-import io.micronaut.projectgen.core.buildtools.maven.MavenDependency;
+import io.micronaut.projectgen.core.buildtools.maven.MavenBuild;
 // import @ [4:1]
+import io.micronaut.projectgen.core.buildtools.maven.MavenDependency;
+// import @ [5:1]
 import io.micronaut.projectgen.core.buildtools.Property;;
 
 /*
@@ -26,22 +26,11 @@ public class genericPom extends com.fizzed.rocker.runtime.DefaultRockerModel {
     static public com.fizzed.rocker.ContentType getContentType() { return com.fizzed.rocker.ContentType.RAW; }
     static public String getTemplateName() { return "genericPom.rocker.raw"; }
     static public String getTemplatePackageName() { return "io.micronaut.projectgen.micronaut.template.buildtools.maven"; }
-    static public String getHeaderHash() { return "-278082239"; }
-    static public String[] getArgumentNames() { return new String[] { "parentPom", "mavenBuild" }; }
+    static public String getHeaderHash() { return "632454414"; }
+    static public String[] getArgumentNames() { return new String[] { "mavenBuild" }; }
 
-    // argument @ [5:2]
-    private ParentPom parentPom;
-    // argument @ [5:2]
+    // argument @ [6:2]
     private MavenBuild mavenBuild;
-
-    public genericPom parentPom(ParentPom parentPom) {
-        this.parentPom = parentPom;
-        return this;
-    }
-
-    public ParentPom parentPom() {
-        return this.parentPom;
-    }
 
     public genericPom mavenBuild(MavenBuild mavenBuild) {
         this.mavenBuild = mavenBuild;
@@ -52,9 +41,8 @@ public class genericPom extends com.fizzed.rocker.runtime.DefaultRockerModel {
         return this.mavenBuild;
     }
 
-    static public genericPom template(ParentPom parentPom, MavenBuild mavenBuild) {
+    static public genericPom template(MavenBuild mavenBuild) {
         return new genericPom()
-            .parentPom(parentPom)
             .mavenBuild(mavenBuild);
     }
 
@@ -66,20 +54,36 @@ public class genericPom extends com.fizzed.rocker.runtime.DefaultRockerModel {
 
     static public class Template extends com.fizzed.rocker.runtime.DefaultRockerTemplate {
 
-        // \n<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd\">\n  <modelVersion>4.0.0</modelVersion>\n
+        // <?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd\">\n  <modelVersion>4.0.0</modelVersion>\n
         static private final byte[] PLAIN_TEXT_0_0;
         // \n
         static private final byte[] PLAIN_TEXT_1_0;
-        // \n  <artifactId>
+        //   <groupId>
         static private final byte[] PLAIN_TEXT_2_0;
-        // </artifactId>\n
+        // </groupId>\n
         static private final byte[] PLAIN_TEXT_3_0;
-        // \n  <dependencies>\n
+        //   <artifactId>
         static private final byte[] PLAIN_TEXT_4_0;
-        // \n  </dependencies>\n  <build>\n    <plugins>\n
+        // </artifactId>\n
         static private final byte[] PLAIN_TEXT_5_0;
-        // \n    </plugins>\n  </build>\n</project>\n
+        //   <version>
         static private final byte[] PLAIN_TEXT_6_0;
+        // </version>\n
+        static private final byte[] PLAIN_TEXT_7_0;
+        //   <name>
+        static private final byte[] PLAIN_TEXT_8_0;
+        // </name>\n
+        static private final byte[] PLAIN_TEXT_9_0;
+        //   <description>
+        static private final byte[] PLAIN_TEXT_10_0;
+        // </description>\n
+        static private final byte[] PLAIN_TEXT_11_0;
+        // \n  <dependencies>\n
+        static private final byte[] PLAIN_TEXT_12_0;
+        //   </dependencies>\n  <build>\n    <plugins>\n
+        static private final byte[] PLAIN_TEXT_13_0;
+        // \n    </plugins>\n  </build>\n</project>\n
+        static private final byte[] PLAIN_TEXT_14_0;
 
         static {
             PlainTextUnloadedClassLoader loader = PlainTextUnloadedClassLoader.tryLoad(genericPom.class.getClassLoader(), genericPom.class.getName() + "$PlainText", "UTF-8");
@@ -90,11 +94,17 @@ public class genericPom extends com.fizzed.rocker.runtime.DefaultRockerModel {
             PLAIN_TEXT_4_0 = loader.tryGet("PLAIN_TEXT_4_0");
             PLAIN_TEXT_5_0 = loader.tryGet("PLAIN_TEXT_5_0");
             PLAIN_TEXT_6_0 = loader.tryGet("PLAIN_TEXT_6_0");
+            PLAIN_TEXT_7_0 = loader.tryGet("PLAIN_TEXT_7_0");
+            PLAIN_TEXT_8_0 = loader.tryGet("PLAIN_TEXT_8_0");
+            PLAIN_TEXT_9_0 = loader.tryGet("PLAIN_TEXT_9_0");
+            PLAIN_TEXT_10_0 = loader.tryGet("PLAIN_TEXT_10_0");
+            PLAIN_TEXT_11_0 = loader.tryGet("PLAIN_TEXT_11_0");
+            PLAIN_TEXT_12_0 = loader.tryGet("PLAIN_TEXT_12_0");
+            PLAIN_TEXT_13_0 = loader.tryGet("PLAIN_TEXT_13_0");
+            PLAIN_TEXT_14_0 = loader.tryGet("PLAIN_TEXT_14_0");
         }
 
-        // argument @ [5:2]
-        protected final ParentPom parentPom;
-        // argument @ [5:2]
+        // argument @ [6:2]
         protected final MavenBuild mavenBuild;
 
         public Template(genericPom model) {
@@ -103,91 +113,158 @@ public class genericPom extends com.fizzed.rocker.runtime.DefaultRockerModel {
             __internal.setContentType(getContentType());
             __internal.setTemplateName(getTemplateName());
             __internal.setTemplatePackageName(getTemplatePackageName());
-            this.parentPom = model.parentPom();
             this.mavenBuild = model.mavenBuild();
         }
 
         @Override
         protected void __doRender() throws IOException, RenderingException {
-            // PlainText @ [5:51]
-            __internal.aboutToExecutePosInTemplate(5, 51);
+            // PlainText @ [6:30]
+            __internal.aboutToExecutePosInTemplate(6, 30);
             __internal.writeValue(PLAIN_TEXT_0_0);
-            // IfBlockBegin @ [10:1]
-            __internal.aboutToExecutePosInTemplate(10, 1);
-            if (parentPom != null) {
-                // PlainText @ [10:26]
-                __internal.aboutToExecutePosInTemplate(10, 26);
+            // IfBlockBegin @ [11:1]
+            __internal.aboutToExecutePosInTemplate(11, 1);
+            if (mavenBuild.parentPom() != null) {
+                // ValueExpression @ [12:1]
+                __internal.aboutToExecutePosInTemplate(12, 1);
+                __internal.renderValue(io.micronaut.projectgen.core.template.parentPom.template(mavenBuild.parentPom()), false);
+                // PlainText @ [12:82]
+                __internal.aboutToExecutePosInTemplate(12, 82);
                 __internal.writeValue(PLAIN_TEXT_1_0);
-                // ValueExpression @ [11:1]
+                // IfBlockEnd @ [11:1]
                 __internal.aboutToExecutePosInTemplate(11, 1);
-                __internal.renderValue(io.micronaut.projectgen.micronaut.template.buildtools.maven.parentPom.template(parentPom), false);
-                // PlainText @ [11:91]
-                __internal.aboutToExecutePosInTemplate(11, 91);
-                __internal.writeValue(PLAIN_TEXT_1_0);
-                // IfBlockEnd @ [10:1]
-                __internal.aboutToExecutePosInTemplate(10, 1);
-            } // if end @ [10:1]
-            // PlainText @ [12:2]
-            __internal.aboutToExecutePosInTemplate(12, 2);
-            __internal.writeValue(PLAIN_TEXT_2_0);
-            // ValueExpression @ [13:15]
-            __internal.aboutToExecutePosInTemplate(13, 15);
-            __internal.renderValue(mavenBuild.getArtifactId(), false);
-            // PlainText @ [13:42]
-            __internal.aboutToExecutePosInTemplate(13, 42);
-            __internal.writeValue(PLAIN_TEXT_3_0);
-            // ValueExpression @ [14:1]
+            } // if end @ [11:1]
+            // IfBlockBegin @ [14:1]
             __internal.aboutToExecutePosInTemplate(14, 1);
-            __internal.renderValue(properties.template(mavenBuild.getProperties()), false);
-            // PlainText @ [14:49]
-            __internal.aboutToExecutePosInTemplate(14, 49);
-            __internal.writeValue(PLAIN_TEXT_4_0);
-            // ForBlockBegin @ [16:1]
-            __internal.aboutToExecutePosInTemplate(16, 1);
+            if (mavenBuild.coordinate() != null && mavenBuild.coordinate().getGroupId() != null) {
+                // PlainText @ [14:88]
+                __internal.aboutToExecutePosInTemplate(14, 88);
+                __internal.writeValue(PLAIN_TEXT_2_0);
+                // ValueExpression @ [15:12]
+                __internal.aboutToExecutePosInTemplate(15, 12);
+                __internal.renderValue(mavenBuild.coordinate().getGroupId(), false);
+                // PlainText @ [15:49]
+                __internal.aboutToExecutePosInTemplate(15, 49);
+                __internal.writeValue(PLAIN_TEXT_3_0);
+                // IfBlockEnd @ [14:1]
+                __internal.aboutToExecutePosInTemplate(14, 1);
+            } // if end @ [14:1]
+            // IfBlockBegin @ [17:1]
+            __internal.aboutToExecutePosInTemplate(17, 1);
+            if (mavenBuild.coordinate() != null && mavenBuild.coordinate().getArtifactId() != null) {
+                // PlainText @ [17:91]
+                __internal.aboutToExecutePosInTemplate(17, 91);
+                __internal.writeValue(PLAIN_TEXT_4_0);
+                // ValueExpression @ [18:15]
+                __internal.aboutToExecutePosInTemplate(18, 15);
+                __internal.renderValue(mavenBuild.coordinate().getArtifactId(), false);
+                // PlainText @ [18:55]
+                __internal.aboutToExecutePosInTemplate(18, 55);
+                __internal.writeValue(PLAIN_TEXT_5_0);
+                // IfBlockEnd @ [17:1]
+                __internal.aboutToExecutePosInTemplate(17, 1);
+            } // if end @ [17:1]
+            // IfBlockBegin @ [20:1]
+            __internal.aboutToExecutePosInTemplate(20, 1);
+            if (mavenBuild.coordinate() != null && mavenBuild.coordinate().getVersion() != null) {
+                // PlainText @ [20:88]
+                __internal.aboutToExecutePosInTemplate(20, 88);
+                __internal.writeValue(PLAIN_TEXT_6_0);
+                // ValueExpression @ [21:12]
+                __internal.aboutToExecutePosInTemplate(21, 12);
+                __internal.renderValue(mavenBuild.coordinate().getVersion(), false);
+                // PlainText @ [21:49]
+                __internal.aboutToExecutePosInTemplate(21, 49);
+                __internal.writeValue(PLAIN_TEXT_7_0);
+                // IfBlockEnd @ [20:1]
+                __internal.aboutToExecutePosInTemplate(20, 1);
+            } // if end @ [20:1]
+            // IfBlockBegin @ [23:1]
+            __internal.aboutToExecutePosInTemplate(23, 1);
+            if (mavenBuild.name() != null) {
+                // PlainText @ [23:34]
+                __internal.aboutToExecutePosInTemplate(23, 34);
+                __internal.writeValue(PLAIN_TEXT_8_0);
+                // ValueExpression @ [24:9]
+                __internal.aboutToExecutePosInTemplate(24, 9);
+                __internal.renderValue(mavenBuild.name(), false);
+                // PlainText @ [24:27]
+                __internal.aboutToExecutePosInTemplate(24, 27);
+                __internal.writeValue(PLAIN_TEXT_9_0);
+                // IfBlockEnd @ [23:1]
+                __internal.aboutToExecutePosInTemplate(23, 1);
+            } // if end @ [23:1]
+            // IfBlockBegin @ [26:1]
+            __internal.aboutToExecutePosInTemplate(26, 1);
+            if (mavenBuild.description() != null) {
+                // PlainText @ [26:41]
+                __internal.aboutToExecutePosInTemplate(26, 41);
+                __internal.writeValue(PLAIN_TEXT_10_0);
+                // ValueExpression @ [27:16]
+                __internal.aboutToExecutePosInTemplate(27, 16);
+                __internal.renderValue(mavenBuild.description(), false);
+                // PlainText @ [27:41]
+                __internal.aboutToExecutePosInTemplate(27, 41);
+                __internal.writeValue(PLAIN_TEXT_11_0);
+                // IfBlockEnd @ [26:1]
+                __internal.aboutToExecutePosInTemplate(26, 1);
+            } // if end @ [26:1]
+            // ValueExpression @ [29:1]
+            __internal.aboutToExecutePosInTemplate(29, 1);
+            __internal.renderValue(properties.template(mavenBuild.properties()), false);
+            // PlainText @ [29:46]
+            __internal.aboutToExecutePosInTemplate(29, 46);
+            __internal.writeValue(PLAIN_TEXT_12_0);
+            // ForBlockBegin @ [31:1]
+            __internal.aboutToExecutePosInTemplate(31, 1);
             try {
                 final com.fizzed.rocker.runtime.IterableForIterator<MavenDependency> __forIterator0 = new com.fizzed.rocker.runtime.IterableForIterator<MavenDependency>(mavenBuild.getDependencies(false));
                 while (__forIterator0.hasNext()) {
                     final MavenDependency f = __forIterator0.next();
                     try {
-                        // PlainText @ [16:63]
-                        __internal.aboutToExecutePosInTemplate(16, 63);
-                        __internal.writeValue(PLAIN_TEXT_1_0);
-                        // ValueExpression @ [17:1]
-                        __internal.aboutToExecutePosInTemplate(17, 1);
+                        // ValueExpression @ [32:1]
+                        __internal.aboutToExecutePosInTemplate(32, 1);
                         __internal.renderValue(dependency.template(f.getGroupId(), f.getArtifactId(), f.getMavenScope().toString(), f.getVersion(), false, f.getExclusions()), false);
-                        // PlainText @ [17:128]
-                        __internal.aboutToExecutePosInTemplate(17, 128);
+                        // PlainText @ [32:128]
+                        __internal.aboutToExecutePosInTemplate(32, 128);
                         __internal.writeValue(PLAIN_TEXT_1_0);
-                        // ForBlockEnd @ [16:1]
-                        __internal.aboutToExecutePosInTemplate(16, 1);
+                        // ForBlockEnd @ [31:1]
+                        __internal.aboutToExecutePosInTemplate(31, 1);
                     } catch (com.fizzed.rocker.runtime.ContinueException e) {
                         // support for continuing for loops
                     }
-                } // for end @ [16:1]
+                } // for end @ [31:1]
             } catch (com.fizzed.rocker.runtime.BreakException e) {
                 // support for breaking for loops
             }
-            // PlainText @ [18:2]
-            __internal.aboutToExecutePosInTemplate(18, 2);
-            __internal.writeValue(PLAIN_TEXT_5_0);
-            // ValueExpression @ [22:1]
-            __internal.aboutToExecutePosInTemplate(22, 1);
+            // PlainText @ [33:2]
+            __internal.aboutToExecutePosInTemplate(33, 2);
+            __internal.writeValue(PLAIN_TEXT_13_0);
+            // ValueExpression @ [37:1]
+            __internal.aboutToExecutePosInTemplate(37, 1);
             __internal.renderValue(mavenBuild.renderPlugins(6), false);
-            // PlainText @ [22:29]
-            __internal.aboutToExecutePosInTemplate(22, 29);
-            __internal.writeValue(PLAIN_TEXT_6_0);
+            // PlainText @ [37:29]
+            __internal.aboutToExecutePosInTemplate(37, 29);
+            __internal.writeValue(PLAIN_TEXT_14_0);
         }
     }
 
     private static class PlainText {
 
-        static private final String PLAIN_TEXT_0_0 = "\n<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd\">\n  <modelVersion>4.0.0</modelVersion>\n";
+        static private final String PLAIN_TEXT_0_0 = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd\">\n  <modelVersion>4.0.0</modelVersion>\n";
         static private final String PLAIN_TEXT_1_0 = "\n";
-        static private final String PLAIN_TEXT_2_0 = "\n  <artifactId>";
-        static private final String PLAIN_TEXT_3_0 = "</artifactId>\n";
-        static private final String PLAIN_TEXT_4_0 = "\n  <dependencies>\n";
-        static private final String PLAIN_TEXT_5_0 = "\n  </dependencies>\n  <build>\n    <plugins>\n";
-        static private final String PLAIN_TEXT_6_0 = "\n    </plugins>\n  </build>\n</project>\n";
+        static private final String PLAIN_TEXT_2_0 = "  <groupId>";
+        static private final String PLAIN_TEXT_3_0 = "</groupId>\n";
+        static private final String PLAIN_TEXT_4_0 = "  <artifactId>";
+        static private final String PLAIN_TEXT_5_0 = "</artifactId>\n";
+        static private final String PLAIN_TEXT_6_0 = "  <version>";
+        static private final String PLAIN_TEXT_7_0 = "</version>\n";
+        static private final String PLAIN_TEXT_8_0 = "  <name>";
+        static private final String PLAIN_TEXT_9_0 = "</name>\n";
+        static private final String PLAIN_TEXT_10_0 = "  <description>";
+        static private final String PLAIN_TEXT_11_0 = "</description>\n";
+        static private final String PLAIN_TEXT_12_0 = "\n  <dependencies>\n";
+        static private final String PLAIN_TEXT_13_0 = "  </dependencies>\n  <build>\n    <plugins>\n";
+        static private final String PLAIN_TEXT_14_0 = "\n    </plugins>\n  </build>\n</project>\n";
 
     }
 

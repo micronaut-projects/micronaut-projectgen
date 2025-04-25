@@ -51,8 +51,8 @@ public class mavenCompilerPlugin extends com.fizzed.rocker.runtime.DefaultRocker
 
         @Override
         protected void __doRender() throws IOException, RenderingException {
-            // PlainText @ [1:1]
-            __internal.aboutToExecutePosInTemplate(1, 1);
+            // PlainText @ [2:1]
+            __internal.aboutToExecutePosInTemplate(2, 1);
             __internal.writeValue(PLAIN_TEXT_0_0);
         }
     }

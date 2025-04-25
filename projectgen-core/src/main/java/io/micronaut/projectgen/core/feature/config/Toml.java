@@ -79,7 +79,12 @@ public class Toml implements ConfigurationFeature {
     }
 
     @Override
-    public Function<Configuration, Template> createTemplate() {
-        return cfg -> new TomlTemplate(cfg.getFullPath(EXTENSION), cfg);
+    public Function<Configuration, Template> createTemplate(String module) {
+        return cfg -> {
+            String path = StringUtils.isEmpty(module)
+                ? cfg.getFullPath(EXTENSION)
+                : module + "/" + cfg.getFullPath(EXTENSION);
+            return new TomlTemplate(path, cfg);
+        };
     }
 }

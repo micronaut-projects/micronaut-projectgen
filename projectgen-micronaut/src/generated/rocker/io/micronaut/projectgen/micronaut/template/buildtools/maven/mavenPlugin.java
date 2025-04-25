@@ -21,9 +21,9 @@ public class mavenPlugin extends com.fizzed.rocker.runtime.DefaultRockerModel {
     static public String getHeaderHash() { return "731999644"; }
     static public String[] getArgumentNames() { return new String[] { "groupId", "artifactId" }; }
 
-    // argument @ [1:2]
+    // argument @ [2:2]
     private String groupId;
-    // argument @ [1:2]
+    // argument @ [2:2]
     private String artifactId;
 
     public mavenPlugin groupId(String groupId) {
@@ -58,7 +58,7 @@ public class mavenPlugin extends com.fizzed.rocker.runtime.DefaultRockerModel {
 
     static public class Template extends com.fizzed.rocker.runtime.DefaultRockerTemplate {
 
-        // \n<plugin>\n  <groupId>
+        // <plugin>\n  <groupId>
         static private final byte[] PLAIN_TEXT_0_0;
         // </groupId>\n  <artifactId>
         static private final byte[] PLAIN_TEXT_1_0;
@@ -72,9 +72,9 @@ public class mavenPlugin extends com.fizzed.rocker.runtime.DefaultRockerModel {
             PLAIN_TEXT_2_0 = loader.tryGet("PLAIN_TEXT_2_0");
         }
 
-        // argument @ [1:2]
+        // argument @ [2:2]
         protected final String groupId;
-        // argument @ [1:2]
+        // argument @ [2:2]
         protected final String artifactId;
 
         public Template(mavenPlugin model) {
@@ -89,27 +89,27 @@ public class mavenPlugin extends com.fizzed.rocker.runtime.DefaultRockerModel {
 
         @Override
         protected void __doRender() throws IOException, RenderingException {
-            // PlainText @ [1:41]
-            __internal.aboutToExecutePosInTemplate(1, 41);
+            // PlainText @ [2:41]
+            __internal.aboutToExecutePosInTemplate(2, 41);
             __internal.writeValue(PLAIN_TEXT_0_0);
-            // ValueExpression @ [3:12]
-            __internal.aboutToExecutePosInTemplate(3, 12);
+            // ValueExpression @ [4:12]
+            __internal.aboutToExecutePosInTemplate(4, 12);
             __internal.renderValue(groupId, false);
-            // PlainText @ [3:20]
-            __internal.aboutToExecutePosInTemplate(3, 20);
+            // PlainText @ [4:20]
+            __internal.aboutToExecutePosInTemplate(4, 20);
             __internal.writeValue(PLAIN_TEXT_1_0);
-            // ValueExpression @ [4:15]
-            __internal.aboutToExecutePosInTemplate(4, 15);
+            // ValueExpression @ [5:15]
+            __internal.aboutToExecutePosInTemplate(5, 15);
             __internal.renderValue(artifactId, false);
-            // PlainText @ [4:26]
-            __internal.aboutToExecutePosInTemplate(4, 26);
+            // PlainText @ [5:26]
+            __internal.aboutToExecutePosInTemplate(5, 26);
             __internal.writeValue(PLAIN_TEXT_2_0);
         }
     }
 
     private static class PlainText {
 
-        static private final String PLAIN_TEXT_0_0 = "\n<plugin>\n  <groupId>";
+        static private final String PLAIN_TEXT_0_0 = "<plugin>\n  <groupId>";
         static private final String PLAIN_TEXT_1_0 = "</groupId>\n  <artifactId>";
         static private final String PLAIN_TEXT_2_0 = "</artifactId>\n</plugin>\n";
 

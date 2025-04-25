@@ -21,27 +21,13 @@ import io.micronaut.core.util.StringUtils;
 public abstract class DefaultTemplate implements Template {
 
     protected final String path;
-    protected final String module;
-    protected boolean useModule;
 
-    protected DefaultTemplate(@NonNull String module, @NonNull String path) {
-        this.module = module;
+    protected DefaultTemplate(@NonNull String path) {
         this.path = path;
     }
 
     @Override
     public String getPath() {
-        return useModule && StringUtils.isNotEmpty(module) ? String.join("/", module, path) : path;
-    }
-
-    @Override
-    public void setUseModule(boolean useModule) {
-        this.useModule = useModule;
-    }
-
-    @Override
-    @NonNull
-    public String getModule() {
-        return module;
+        return path;
     }
 }

@@ -102,7 +102,7 @@ public class settingsGradle extends com.fizzed.rocker.runtime.DefaultRockerModel
         static private final byte[] PLAIN_TEXT_3_0;
         // \n    id(\"
         static private final byte[] PLAIN_TEXT_4_0;
-        // \") 
+        // \")
         static private final byte[] PLAIN_TEXT_5_0;
         // \n}\n\n
         static private final byte[] PLAIN_TEXT_6_0;
@@ -224,11 +224,14 @@ public class settingsGradle extends com.fizzed.rocker.runtime.DefaultRockerModel
                             // PlainText @ [19:30]
                             __internal.aboutToExecutePosInTemplate(19, 30);
                             __internal.writeValue(PLAIN_TEXT_5_0);
-                            // EvalExpression @ [19:33]
-                            __internal.aboutToExecutePosInTemplate(19, 33);
-                            __internal.renderValue((gradlePlugin.getVersion() != null ? "version(\"" + gradlePlugin.getVersion() + "\")" : ""), false);
-                            // PlainText @ [19:125]
+                            // EvalExpression @ [19:32]
+                            __internal.aboutToExecutePosInTemplate(19, 32);
+                            __internal.renderValue((gradlePlugin.getVersion() != null ? " version(\"" + gradlePlugin.getVersion() + "\")" : ""), false);
+                            // EvalExpression @ [19:125]
                             __internal.aboutToExecutePosInTemplate(19, 125);
+                            __internal.renderValue((gradlePlugin.getApply() != null ? " apply false" : ""), false);
+                            // PlainText @ [19:181]
+                            __internal.aboutToExecutePosInTemplate(19, 181);
                             __internal.writeValue(PLAIN_TEXT_1_0);
                             // ForBlockEnd @ [18:1]
                             __internal.aboutToExecutePosInTemplate(18, 1);
@@ -310,7 +313,7 @@ public class settingsGradle extends com.fizzed.rocker.runtime.DefaultRockerModel
         static private final String PLAIN_TEXT_2_0 = "\nimport ";
         static private final String PLAIN_TEXT_3_0 = "\nplugins {\n";
         static private final String PLAIN_TEXT_4_0 = "\n    id(\"";
-        static private final String PLAIN_TEXT_5_0 = "\") ";
+        static private final String PLAIN_TEXT_5_0 = "\")";
         static private final String PLAIN_TEXT_6_0 = "\n}\n\n";
         static private final String PLAIN_TEXT_7_0 = "\n\nrootProject.name=\"";
         static private final String PLAIN_TEXT_8_0 = "\"\n\n";

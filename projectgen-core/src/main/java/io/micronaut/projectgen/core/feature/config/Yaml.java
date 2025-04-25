@@ -84,7 +84,12 @@ public class Yaml implements ConfigurationFeature {
     }
 
     @Override
-    public Function<Configuration, Template> createTemplate() {
-        return config -> new YamlTemplate(config.getFullPath(EXTENSION), config);
+    public Function<Configuration, Template> createTemplate(String module) {
+        return config -> {
+            String path = StringUtils.isEmpty(module)
+                ? config.getFullPath(EXTENSION)
+                : module + "/" + config.getFullPath(EXTENSION);
+            return new YamlTemplate(path, config);
+        };
     }
 }

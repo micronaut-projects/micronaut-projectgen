@@ -56,6 +56,7 @@ import java.util.Set;
 
 public record ModuleContext(CoordinateResolver coordinateResolver,
                             RecipeFetcher recipeFetcher,
+                            ModuleAttributes moduleAttributes,
                             BuildProperties buildProperties,
                             ApplicationConfiguration configuration,
                             Map<String, ApplicationConfiguration> configurationByEnvironment,
@@ -70,6 +71,7 @@ public record ModuleContext(CoordinateResolver coordinateResolver,
 
     public ModuleContext(CoordinateResolver coordinateResolver,
                          RecipeFetcher recipeFetcher,
+                         ModuleAttributes moduleAttributes,
                          BuildProperties buildProperties,
                          ApplicationConfiguration configuration,
                          Map<String, ApplicationConfiguration> configurationByEnvironment,
@@ -83,6 +85,7 @@ public record ModuleContext(CoordinateResolver coordinateResolver,
                          List<Writable> helpTemplates) {
         this.coordinateResolver = coordinateResolver;
         this.recipeFetcher = recipeFetcher;
+        this.moduleAttributes = moduleAttributes;
         this.buildProperties = buildProperties;
         this.configuration = configuration;
         this.configurationByEnvironment = configurationByEnvironment;
@@ -97,8 +100,13 @@ public record ModuleContext(CoordinateResolver coordinateResolver,
     }
 
     public ModuleContext(CoordinateResolver coordinateResolver, RecipeFetcher recipeFetcher) {
+        this(null, coordinateResolver, recipeFetcher);
+    }
+
+    public ModuleContext(String name, CoordinateResolver coordinateResolver, RecipeFetcher recipeFetcher) {
         this(coordinateResolver,
             recipeFetcher,
+            new ModuleAttributes(),
             new BuildProperties(),
             new ApplicationConfiguration(),
             new HashMap<>(),
@@ -110,6 +118,7 @@ public record ModuleContext(CoordinateResolver coordinateResolver,
             new HashSet<>(),
             new HashSet<>(),
             new ArrayList<>());
+        this.moduleAttributes.setName(name);
     }
 
     /**

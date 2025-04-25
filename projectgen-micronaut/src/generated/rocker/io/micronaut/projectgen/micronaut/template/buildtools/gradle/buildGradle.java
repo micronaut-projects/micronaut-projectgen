@@ -110,7 +110,7 @@ public class buildGradle extends com.fizzed.rocker.runtime.DefaultRockerModel {
         static private final byte[] PLAIN_TEXT_2_0;
         // \n    id(\"
         static private final byte[] PLAIN_TEXT_3_0;
-        // \") 
+        // \")
         static private final byte[] PLAIN_TEXT_4_0;
         // \n}\n\nversion = \"0.1\"\ngroup = \"
         static private final byte[] PLAIN_TEXT_5_0;
@@ -354,11 +354,14 @@ public class buildGradle extends com.fizzed.rocker.runtime.DefaultRockerModel {
                         // PlainText @ [24:30]
                         __internal.aboutToExecutePosInTemplate(24, 30);
                         __internal.writeValue(PLAIN_TEXT_4_0);
-                        // EvalExpression @ [24:33]
-                        __internal.aboutToExecutePosInTemplate(24, 33);
-                        __internal.renderValue((gradlePlugin.getVersion() != null ? "version \"" + gradlePlugin.getVersion() + "\"" : ""), false);
-                        // PlainText @ [24:124]
+                        // EvalExpression @ [24:32]
+                        __internal.aboutToExecutePosInTemplate(24, 32);
+                        __internal.renderValue((gradlePlugin.getVersion() != null ? " version \"" + gradlePlugin.getVersion() + "\"" : ""), false);
+                        // EvalExpression @ [24:124]
                         __internal.aboutToExecutePosInTemplate(24, 124);
+                        __internal.renderValue((gradlePlugin.getApply() != null ? " apply false" : ""), false);
+                        // PlainText @ [24:180]
+                        __internal.aboutToExecutePosInTemplate(24, 180);
                         __internal.writeValue(PLAIN_TEXT_1_0);
                         // ForBlockEnd @ [23:1]
                         __internal.aboutToExecutePosInTemplate(23, 1);
@@ -386,9 +389,9 @@ public class buildGradle extends com.fizzed.rocker.runtime.DefaultRockerModel {
                 __internal.writeValue(PLAIN_TEXT_1_0);
                 // IfBlockBegin @ [32:1]
                 __internal.aboutToExecutePosInTemplate(32, 1);
-                if (gradleBuild.getDsl() == GradleDsl.KOTLIN) {
-                    // PlainText @ [32:48]
-                    __internal.aboutToExecutePosInTemplate(32, 48);
+                if (gradleBuild.dsl() == GradleDsl.KOTLIN) {
+                    // PlainText @ [32:45]
+                    __internal.aboutToExecutePosInTemplate(32, 45);
                     __internal.writeValue(PLAIN_TEXT_7_0);
                     // IfBlockElse @ [34:1]
                     __internal.aboutToExecutePosInTemplate(34, 1);
@@ -410,9 +413,9 @@ public class buildGradle extends com.fizzed.rocker.runtime.DefaultRockerModel {
             __internal.writeValue(PLAIN_TEXT_0_0);
             // IfBlockBegin @ [39:1]
             __internal.aboutToExecutePosInTemplate(39, 1);
-            if (features.language().isKotlin() && gradleBuild.getDsl() == GradleDsl.KOTLIN) {
-                // PlainText @ [39:82]
-                __internal.aboutToExecutePosInTemplate(39, 82);
+            if (features.language().isKotlin() && gradleBuild.dsl() == GradleDsl.KOTLIN) {
+                // PlainText @ [39:79]
+                __internal.aboutToExecutePosInTemplate(39, 79);
                 __internal.writeValue(PLAIN_TEXT_9_0);
                 // IfBlockEnd @ [39:1]
                 __internal.aboutToExecutePosInTemplate(39, 1);
@@ -594,9 +597,9 @@ public class buildGradle extends com.fizzed.rocker.runtime.DefaultRockerModel {
                     __internal.writeValue(PLAIN_TEXT_29_0);
                     // IfBlockBegin @ [120:1]
                     __internal.aboutToExecutePosInTemplate(120, 1);
-                    if (gradleBuild.getDsl() == GradleDsl.KOTLIN) {
-                        // PlainText @ [120:48]
-                        __internal.aboutToExecutePosInTemplate(120, 48);
+                    if (gradleBuild.dsl() == GradleDsl.KOTLIN) {
+                        // PlainText @ [120:45]
+                        __internal.aboutToExecutePosInTemplate(120, 45);
                         __internal.writeValue(PLAIN_TEXT_30_0);
                         // IfBlockElse @ [124:1]
                         __internal.aboutToExecutePosInTemplate(124, 1);
@@ -618,9 +621,9 @@ public class buildGradle extends com.fizzed.rocker.runtime.DefaultRockerModel {
                         __internal.writeValue(PLAIN_TEXT_33_0);
                         // IfBlockBegin @ [133:13]
                         __internal.aboutToExecutePosInTemplate(133, 13);
-                        if (gradleBuild.getDsl() == GradleDsl.KOTLIN) {
-                            // PlainText @ [133:60]
-                            __internal.aboutToExecutePosInTemplate(133, 60);
+                        if (gradleBuild.dsl() == GradleDsl.KOTLIN) {
+                            // PlainText @ [133:57]
+                            __internal.aboutToExecutePosInTemplate(133, 57);
                             __internal.writeValue(PLAIN_TEXT_34_0);
                             // IfBlockElse @ [135:13]
                             __internal.aboutToExecutePosInTemplate(135, 13);
@@ -642,9 +645,9 @@ public class buildGradle extends com.fizzed.rocker.runtime.DefaultRockerModel {
                         __internal.writeValue(PLAIN_TEXT_33_0);
                         // IfBlockBegin @ [139:13]
                         __internal.aboutToExecutePosInTemplate(139, 13);
-                        if (gradleBuild.getDsl() == GradleDsl.KOTLIN) {
-                            // PlainText @ [139:60]
-                            __internal.aboutToExecutePosInTemplate(139, 60);
+                        if (gradleBuild.dsl() == GradleDsl.KOTLIN) {
+                            // PlainText @ [139:57]
+                            __internal.aboutToExecutePosInTemplate(139, 57);
                             __internal.writeValue(PLAIN_TEXT_37_0);
                             // IfBlockElse @ [141:13]
                             __internal.aboutToExecutePosInTemplate(141, 13);
@@ -672,9 +675,9 @@ public class buildGradle extends com.fizzed.rocker.runtime.DefaultRockerModel {
                         __internal.writeValue(PLAIN_TEXT_33_0);
                         // IfBlockBegin @ [149:13]
                         __internal.aboutToExecutePosInTemplate(149, 13);
-                        if (gradleBuild.getDsl() == GradleDsl.KOTLIN) {
-                            // PlainText @ [149:60]
-                            __internal.aboutToExecutePosInTemplate(149, 60);
+                        if (gradleBuild.dsl() == GradleDsl.KOTLIN) {
+                            // PlainText @ [149:57]
+                            __internal.aboutToExecutePosInTemplate(149, 57);
                             __internal.writeValue(PLAIN_TEXT_34_0);
                             // IfBlockElse @ [151:13]
                             __internal.aboutToExecutePosInTemplate(151, 13);
@@ -696,9 +699,9 @@ public class buildGradle extends com.fizzed.rocker.runtime.DefaultRockerModel {
                         __internal.writeValue(PLAIN_TEXT_33_0);
                         // IfBlockBegin @ [155:13]
                         __internal.aboutToExecutePosInTemplate(155, 13);
-                        if (gradleBuild.getDsl() == GradleDsl.KOTLIN) {
-                            // PlainText @ [155:60]
-                            __internal.aboutToExecutePosInTemplate(155, 60);
+                        if (gradleBuild.dsl() == GradleDsl.KOTLIN) {
+                            // PlainText @ [155:57]
+                            __internal.aboutToExecutePosInTemplate(155, 57);
                             __internal.writeValue(PLAIN_TEXT_37_0);
                             // IfBlockElse @ [157:13]
                             __internal.aboutToExecutePosInTemplate(157, 13);
@@ -726,9 +729,9 @@ public class buildGradle extends com.fizzed.rocker.runtime.DefaultRockerModel {
                     __internal.writeValue(PLAIN_TEXT_41_0);
                     // IfBlockBegin @ [164:13]
                     __internal.aboutToExecutePosInTemplate(164, 13);
-                    if (gradleBuild.getDsl() == GradleDsl.KOTLIN) {
-                        // PlainText @ [164:60]
-                        __internal.aboutToExecutePosInTemplate(164, 60);
+                    if (gradleBuild.dsl() == GradleDsl.KOTLIN) {
+                        // PlainText @ [164:57]
+                        __internal.aboutToExecutePosInTemplate(164, 57);
                         __internal.writeValue(PLAIN_TEXT_34_0);
                         // IfBlockElse @ [166:13]
                         __internal.aboutToExecutePosInTemplate(166, 13);
@@ -744,9 +747,9 @@ public class buildGradle extends com.fizzed.rocker.runtime.DefaultRockerModel {
                     __internal.writeValue(PLAIN_TEXT_42_0);
                     // IfBlockBegin @ [172:13]
                     __internal.aboutToExecutePosInTemplate(172, 13);
-                    if (gradleBuild.getDsl() == GradleDsl.KOTLIN) {
-                        // PlainText @ [172:60]
-                        __internal.aboutToExecutePosInTemplate(172, 60);
+                    if (gradleBuild.dsl() == GradleDsl.KOTLIN) {
+                        // PlainText @ [172:57]
+                        __internal.aboutToExecutePosInTemplate(172, 57);
                         __internal.writeValue(PLAIN_TEXT_34_0);
                         // IfBlockElse @ [174:13]
                         __internal.aboutToExecutePosInTemplate(174, 13);
@@ -822,9 +825,9 @@ public class buildGradle extends com.fizzed.rocker.runtime.DefaultRockerModel {
                 __internal.writeValue(PLAIN_TEXT_48_0);
                 // IfBlockBegin @ [216:1]
                 __internal.aboutToExecutePosInTemplate(216, 1);
-                if (gradleBuild.getDsl() == GradleDsl.KOTLIN) {
-                    // PlainText @ [216:48]
-                    __internal.aboutToExecutePosInTemplate(216, 48);
+                if (gradleBuild.dsl() == GradleDsl.KOTLIN) {
+                    // PlainText @ [216:45]
+                    __internal.aboutToExecutePosInTemplate(216, 45);
                     __internal.writeValue(PLAIN_TEXT_49_0);
                     // ValueExpression @ [219:48]
                     __internal.aboutToExecutePosInTemplate(219, 48);
@@ -876,9 +879,9 @@ public class buildGradle extends com.fizzed.rocker.runtime.DefaultRockerModel {
                 __internal.writeValue(PLAIN_TEXT_55_0);
                 // IfBlockBegin @ [259:1]
                 __internal.aboutToExecutePosInTemplate(259, 1);
-                if (gradleBuild.getDsl() == GradleDsl.KOTLIN) {
-                    // PlainText @ [259:48]
-                    __internal.aboutToExecutePosInTemplate(259, 48);
+                if (gradleBuild.dsl() == GradleDsl.KOTLIN) {
+                    // PlainText @ [259:45]
+                    __internal.aboutToExecutePosInTemplate(259, 45);
                     __internal.writeValue(PLAIN_TEXT_56_0);
                     // IfBlockElse @ [301:1]
                     __internal.aboutToExecutePosInTemplate(301, 1);
@@ -919,7 +922,7 @@ public class buildGradle extends com.fizzed.rocker.runtime.DefaultRockerModel {
         static private final String PLAIN_TEXT_1_0 = "\n";
         static private final String PLAIN_TEXT_2_0 = "\nplugins {\n";
         static private final String PLAIN_TEXT_3_0 = "\n    id(\"";
-        static private final String PLAIN_TEXT_4_0 = "\") ";
+        static private final String PLAIN_TEXT_4_0 = "\")";
         static private final String PLAIN_TEXT_5_0 = "\n}\n\nversion = \"0.1\"\ngroup = \"";
         static private final String PLAIN_TEXT_6_0 = "\"\n\n";
         static private final String PLAIN_TEXT_7_0 = "\napply(from=\"gradle/asciidoc.gradle\")\n";

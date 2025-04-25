@@ -7,51 +7,51 @@ import com.fizzed.rocker.RockerContent;
 import com.fizzed.rocker.RockerOutput;
 import com.fizzed.rocker.runtime.DefaultRockerTemplate;
 import com.fizzed.rocker.runtime.PlainTextUnloadedClassLoader;
-// import @ [1:1]
-import io.micronaut.projectgen.micronaut.ApplicationType;
 // import @ [2:1]
-import io.micronaut.projectgen.core.generator.Project;
+import io.micronaut.projectgen.micronaut.ApplicationType;
 // import @ [3:1]
-import io.micronaut.projectgen.core.buildtools.Property;
+import io.micronaut.projectgen.core.generator.Project;
 // import @ [4:1]
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
+import io.micronaut.projectgen.core.buildtools.Property;
 // import @ [5:1]
-import io.micronaut.projectgen.core.buildtools.dependencies.MavenCoordinate;
+import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 // import @ [6:1]
-import io.micronaut.projectgen.core.buildtools.maven.MavenBuild;
+import io.micronaut.projectgen.core.buildtools.dependencies.MavenCoordinate;
 // import @ [7:1]
-import io.micronaut.projectgen.core.buildtools.maven.MavenDependency;
+import io.micronaut.projectgen.core.buildtools.maven.MavenBuild;
 // import @ [8:1]
-import io.micronaut.projectgen.core.feature.Features;
+import io.micronaut.projectgen.core.buildtools.maven.MavenDependency;
 // import @ [9:1]
-import io.micronaut.projectgen.micronaut.template.buildtools.maven.dependency;
+import io.micronaut.projectgen.core.feature.Features;
 // import @ [10:1]
-import io.micronaut.starter.feature.database.Data;
+import io.micronaut.projectgen.micronaut.template.buildtools.maven.dependency;
 // import @ [11:1]
-import io.micronaut.starter.feature.database.DatabaseDriverFeature;
+import io.micronaut.starter.feature.database.Data;
 // import @ [12:1]
 import io.micronaut.starter.feature.database.DatabaseDriverFeature;
 // import @ [13:1]
-import io.micronaut.starter.feature.database.DatabaseDriverFeatureDependencies;
+import io.micronaut.starter.feature.database.DatabaseDriverFeature;
 // import @ [14:1]
-import io.micronaut.starter.feature.database.HibernateReactiveFeature;
+import io.micronaut.starter.feature.database.DatabaseDriverFeatureDependencies;
 // import @ [15:1]
 import io.micronaut.starter.feature.database.HibernateReactiveFeature;
 // import @ [16:1]
-import io.micronaut.starter.feature.database.JpaFeature;
+import io.micronaut.starter.feature.database.HibernateReactiveFeature;
 // import @ [17:1]
-import io.micronaut.starter.feature.database.r2dbc.R2dbc;
+import io.micronaut.starter.feature.database.JpaFeature;
 // import @ [18:1]
-import io.micronaut.starter.feature.github.workflows.docker.AbstractDockerRegistryWorkflow;
+import io.micronaut.starter.feature.database.r2dbc.R2dbc;
 // import @ [19:1]
-import io.micronaut.starter.feature.messaging.SharedTestResourceFeature;
+import io.micronaut.starter.feature.github.workflows.docker.AbstractDockerRegistryWorkflow;
 // import @ [20:1]
-import io.micronaut.starter.feature.migration.MigrationFeature;
+import io.micronaut.starter.feature.messaging.SharedTestResourceFeature;
 // import @ [21:1]
-import io.micronaut.starter.feature.testresources.TestResources;
+import io.micronaut.starter.feature.migration.MigrationFeature;
 // import @ [22:1]
-import io.micronaut.starter.util.VersionInfo;
+import io.micronaut.starter.feature.testresources.TestResources;
 // import @ [23:1]
+import io.micronaut.starter.util.VersionInfo;
+// import @ [24:1]
 import io.micronaut.starter.util.FeaturesUtils;
 
 /*
@@ -67,15 +67,15 @@ public class pom extends com.fizzed.rocker.runtime.DefaultRockerModel {
     static public String getHeaderHash() { return "1799324624"; }
     static public String[] getArgumentNames() { return new String[] { "applicationType", "project", "features", "mavenBuild", "jvmArguments" }; }
 
-    // argument @ [25:2]
+    // argument @ [26:2]
     private ApplicationType applicationType;
-    // argument @ [25:2]
+    // argument @ [26:2]
     private Project project;
-    // argument @ [25:2]
+    // argument @ [26:2]
     private Features features;
-    // argument @ [25:2]
+    // argument @ [26:2]
     private MavenBuild mavenBuild;
-    // argument @ [25:2]
+    // argument @ [26:2]
     private String jvmArguments;
 
     public pom applicationType(ApplicationType applicationType) {
@@ -140,174 +140,172 @@ public class pom extends com.fizzed.rocker.runtime.DefaultRockerModel {
 
     static public class Template extends com.fizzed.rocker.runtime.DefaultRockerTemplate {
 
-        // \n<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd\">\n  <modelVersion>4.0.0</modelVersion>\n
+        // <?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd\">\n  <modelVersion>4.0.0</modelVersion>\n
         static private final byte[] PLAIN_TEXT_0_0;
-        // \n  <groupId>
+        //   <groupId>
         static private final byte[] PLAIN_TEXT_1_0;
         // </groupId>\n
         static private final byte[] PLAIN_TEXT_2_0;
-        // \n  <artifactId>
+        //   <artifactId>
         static private final byte[] PLAIN_TEXT_3_0;
         // </artifactId>\n  <version>0.1</version>\n  <packaging>${packaging}</packaging>\n\n
         static private final byte[] PLAIN_TEXT_4_0;
-        // \n  <parent>\n    <groupId>
+        //   <parent>\n    <groupId>
         static private final byte[] PLAIN_TEXT_5_0;
         // </groupId>\n    <artifactId>
         static private final byte[] PLAIN_TEXT_6_0;
         // -parent</artifactId>\n    <version>1.0-SNAPSHOT</version>\n  </parent>\n\n
         static private final byte[] PLAIN_TEXT_7_0;
-        // \n  <parent>\n    <groupId>io.micronaut.platform</groupId>\n    <artifactId>micronaut-parent</artifactId>\n    <version>
+        //   <parent>\n    <groupId>io.micronaut.platform</groupId>\n    <artifactId>micronaut-parent</artifactId>\n    <version>
         static private final byte[] PLAIN_TEXT_8_0;
         // </version>\n  </parent>\n
         static private final byte[] PLAIN_TEXT_9_0;
-        // \n\n  <properties>\n    <packaging>jar</packaging>\n
+        // \n  <properties>\n    <packaging>jar</packaging>\n
         static private final byte[] PLAIN_TEXT_10_0;
-        // \n    <jdk.version>
+        //     <jdk.version>
         static private final byte[] PLAIN_TEXT_11_0;
         // </jdk.version>\n
         static private final byte[] PLAIN_TEXT_12_0;
-        // \n    <release.version>
+        //     <release.version>
         static private final byte[] PLAIN_TEXT_13_0;
         // </release.version>\n
         static private final byte[] PLAIN_TEXT_14_0;
-        // \n
+        //     <!--
         static private final byte[] PLAIN_TEXT_15_0;
-        // \n    <!--
-        static private final byte[] PLAIN_TEXT_16_0;
         // -->\n
+        static private final byte[] PLAIN_TEXT_16_0;
+        //     <
         static private final byte[] PLAIN_TEXT_17_0;
-        // \n    <
-        static private final byte[] PLAIN_TEXT_18_0;
         // >
-        static private final byte[] PLAIN_TEXT_19_0;
+        static private final byte[] PLAIN_TEXT_18_0;
         // </
-        static private final byte[] PLAIN_TEXT_20_0;
+        static private final byte[] PLAIN_TEXT_19_0;
         // >\n
+        static private final byte[] PLAIN_TEXT_20_0;
+        //   </properties>\n\n  <repositories>\n
         static private final byte[] PLAIN_TEXT_21_0;
-        // \n  </properties>\n\n  <repositories>\n
-        static private final byte[] PLAIN_TEXT_22_0;
         // \n  </repositories>\n\n
+        static private final byte[] PLAIN_TEXT_22_0;
+        //   <dependencyManagement>\n    <dependencies>\n
         static private final byte[] PLAIN_TEXT_23_0;
-        // \n  <dependencyManagement>\n    <dependencies>\n
+        // \n
         static private final byte[] PLAIN_TEXT_24_0;
-        // \n    </dependencies>\n  </dependencyManagement>\n
+        //     </dependencies>\n  </dependencyManagement>\n
         static private final byte[] PLAIN_TEXT_25_0;
-        // \n\n  <dependencies>\n
+        // \n  <dependencies>\n
         static private final byte[] PLAIN_TEXT_26_0;
-        // \n\n
+        //   </dependencies>\n  <build>\n    <plugins>\n
         static private final byte[] PLAIN_TEXT_27_0;
-        // \n  </dependencies>\n  <build>\n    <plugins>\n
+        //       <plugin>\n        <groupId>io.micronaut.maven</groupId>\n        <artifactId>micronaut-maven-plugin</artifactId>\n
         static private final byte[] PLAIN_TEXT_28_0;
-        // \n      <plugin>\n        <groupId>io.micronaut.maven</groupId>\n        <artifactId>micronaut-maven-plugin</artifactId>\n
+        //         <configuration>\n
         static private final byte[] PLAIN_TEXT_29_0;
-        // \n        <configuration>\n
+        //           <shared>true</shared>\n
         static private final byte[] PLAIN_TEXT_30_0;
-        // \n          <shared>true</shared>\n
+        //           <jvmArguments>
         static private final byte[] PLAIN_TEXT_31_0;
-        // \n          <jvmArguments>
-        static private final byte[] PLAIN_TEXT_32_0;
         // </jvmArguments>\n
+        static private final byte[] PLAIN_TEXT_32_0;
+        //           <nativeImageBuildArgs>\n            <arg>-H:+StaticExecutableWithDynamicLibC</arg>\n            <arg>-Dfn.handler=${function.entrypoint}</arg>\n          </nativeImageBuildArgs>\n          <appArguments>\n            <arg>${function.entrypoint}</arg>\n          </appArguments>\n
         static private final byte[] PLAIN_TEXT_33_0;
-        // \n          <nativeImageBuildArgs>\n            <arg>-H:+StaticExecutableWithDynamicLibC</arg>\n            <arg>-Dfn.handler=${function.entrypoint}</arg>\n          </nativeImageBuildArgs>\n          <appArguments>\n            <arg>${function.entrypoint}</arg>\n          </appArguments>\n
+        //           <configFile>aot-${packaging}.properties</configFile>\n
         static private final byte[] PLAIN_TEXT_34_0;
-        // \n          <configFile>aot-${packaging}.properties</configFile>\n
+        //         </configuration>\n
         static private final byte[] PLAIN_TEXT_35_0;
-        // \n        </configuration>\n
+        //       </plugin>\n
         static private final byte[] PLAIN_TEXT_36_0;
-        // \n      </plugin>\n
+        //       <plugin>\n        <groupId>org.apache.maven.plugins</groupId>\n        <artifactId>maven-surefire-plugin</artifactId>\n        <configuration>\n          <includes>\n            <include>**/*Spec.*</include>\n            <include>**/*Test.*</include>\n          </includes>\n        </configuration>\n
         static private final byte[] PLAIN_TEXT_37_0;
-        // \n      <plugin>\n        <groupId>org.apache.maven.plugins</groupId>\n        <artifactId>maven-surefire-plugin</artifactId>\n        <configuration>\n          <includes>\n            <include>**/*Spec.*</include>\n            <include>**/*Test.*</include>\n          </includes>\n        </configuration>\n
+        //         <dependencies>\n          <dependency>\n            <groupId>org.junit.jupiter</groupId>\n            <artifactId>junit-jupiter-engine</artifactId>\n            <version>${junit5.version}</version>\n          </dependency>\n        </dependencies>\n
         static private final byte[] PLAIN_TEXT_38_0;
-        // \n        <dependencies>\n          <dependency>\n            <groupId>org.junit.jupiter</groupId>\n            <artifactId>junit-jupiter-engine</artifactId>\n            <version>${junit5.version}</version>\n          </dependency>\n        </dependencies>\n
+        //        <plugin>\n         <groupId>com.google.cloud.functions</groupId>\n         <artifactId>function-maven-plugin</artifactId>\n         <configuration>\n           <functionTarget>io.micronaut.gcp.function.http.HttpFunction</functionTarget>\n         </configuration>\n        </plugin>\n
         static private final byte[] PLAIN_TEXT_39_0;
-        // \n       <plugin>\n         <groupId>com.google.cloud.functions</groupId>\n         <artifactId>function-maven-plugin</artifactId>\n         <configuration>\n           <functionTarget>io.micronaut.gcp.function.http.HttpFunction</functionTarget>\n         </configuration>\n        </plugin>\n
+        //       <plugin>\n        <groupId>org.apache.maven.plugins</groupId>\n        <artifactId>maven-compiler-plugin</artifactId>\n        <configuration>\n          <!-- Uncomment to enable incremental compilation -->\n          <!-- <useIncrementalCompilation>false</useIncrementalCompilation> -->\n\n          <annotationProcessorPaths 
         static private final byte[] PLAIN_TEXT_40_0;
-        // \n      <plugin>\n        <groupId>org.apache.maven.plugins</groupId>\n        <artifactId>maven-compiler-plugin</artifactId>\n        <configuration>\n          <!-- Uncomment to enable incremental compilation -->\n          <!-- <useIncrementalCompilation>false</useIncrementalCompilation> -->\n\n          <annotationProcessorPaths 
+        //             <path>\n              <groupId>
         static private final byte[] PLAIN_TEXT_41_0;
-        // \n            <path>\n              <groupId>
-        static private final byte[] PLAIN_TEXT_42_0;
         // </groupId>\n              <artifactId>
-        static private final byte[] PLAIN_TEXT_43_0;
+        static private final byte[] PLAIN_TEXT_42_0;
         // </artifactId>\n
+        static private final byte[] PLAIN_TEXT_43_0;
+        //               <version>
         static private final byte[] PLAIN_TEXT_44_0;
-        // \n              <version>
-        static private final byte[] PLAIN_TEXT_45_0;
         // </version>\n
+        static private final byte[] PLAIN_TEXT_45_0;
+        //               <exclusions>\n
         static private final byte[] PLAIN_TEXT_46_0;
-        // \n              <exclusions>\n
+        //                 <exclusion>\n                  <groupId>
         static private final byte[] PLAIN_TEXT_47_0;
-        // \n                <exclusion>\n                  <groupId>
-        static private final byte[] PLAIN_TEXT_48_0;
         // </groupId>\n                  <artifactId>
-        static private final byte[] PLAIN_TEXT_49_0;
+        static private final byte[] PLAIN_TEXT_48_0;
         // </artifactId>\n                </exclusion>\n
+        static private final byte[] PLAIN_TEXT_49_0;
+        //               </exclusions>\n
         static private final byte[] PLAIN_TEXT_50_0;
-        // \n              </exclusions>\n
+        //             </path>\n
         static private final byte[] PLAIN_TEXT_51_0;
-        // \n            </path>\n
+        //           </annotationProcessorPaths>\n          <compilerArgs>\n            <arg>-Amicronaut.processing.group=
         static private final byte[] PLAIN_TEXT_52_0;
-        // \n          </annotationProcessorPaths>\n          <compilerArgs>\n            <arg>-Amicronaut.processing.group=
-        static private final byte[] PLAIN_TEXT_53_0;
         // </arg>\n            <arg>-Amicronaut.processing.module=
-        static private final byte[] PLAIN_TEXT_54_0;
+        static private final byte[] PLAIN_TEXT_53_0;
         // </arg>\n          </compilerArgs>\n        </configuration>\n      </plugin>\n
+        static private final byte[] PLAIN_TEXT_54_0;
+        //       <plugin>\n        <artifactId>kotlin-maven-plugin</artifactId>\n        <groupId>org.jetbrains.kotlin</groupId>\n        <version>${kotlinVersion}</version>\n        <configuration>\n          <jvmTarget>${jdk.version}</jvmTarget>\n          <compilerPlugins>\n
         static private final byte[] PLAIN_TEXT_55_0;
-        // \n      <plugin>\n        <artifactId>kotlin-maven-plugin</artifactId>\n        <groupId>org.jetbrains.kotlin</groupId>\n        <version>${kotlinVersion}</version>\n        <configuration>\n          <jvmTarget>${jdk.version}</jvmTarget>\n          <compilerPlugins>\n
+        //             <plugin>jpa</plugin>\n
         static private final byte[] PLAIN_TEXT_56_0;
-        // \n            <plugin>jpa</plugin>\n
+        //             <plugin>all-open</plugin>\n          </compilerPlugins>\n          <pluginOptions>\n            <option>all-open:annotation=io.micronaut.aop.Around</option>\n          </pluginOptions>\n        </configuration>\n        <executions>\n          <execution>\n            <id>kapt</id>\n            <goals>\n              <goal>kapt</goal>\n            </goals>\n            <configuration>\n              <sourceDirs>\n                <sourceDir>${project.basedir}/src/main/kotlin</sourc...
         static private final byte[] PLAIN_TEXT_57_0;
-        // \n            <plugin>all-open</plugin>\n          </compilerPlugins>\n          <pluginOptions>\n            <option>all-open:annotation=io.micronaut.aop.Around</option>\n          </pluginOptions>\n        </configuration>\n        <executions>\n          <execution>\n            <id>kapt</id>\n            <goals>\n              <goal>kapt</goal>\n            </goals>\n            <configuration>\n              <sourceDirs>\n                <sourceDir>${project.basedir}/src/main/kotlin</sou...
+        //                <annotationProcessorPath>\n                 <groupId>
         static private final byte[] PLAIN_TEXT_58_0;
-        // \n               <annotationProcessorPath>\n                 <groupId>
-        static private final byte[] PLAIN_TEXT_59_0;
         // </groupId>\n                 <artifactId>
+        static private final byte[] PLAIN_TEXT_59_0;
+        //                  <version>
         static private final byte[] PLAIN_TEXT_60_0;
-        // \n                 <version>
+        //                </annotationProcessorPath>\n
         static private final byte[] PLAIN_TEXT_61_0;
-        // \n               </annotationProcessorPath>\n
+        //               </annotationProcessorPaths>\n              <annotationProcessorArgs>\n                <annotationProcessorArg>micronaut.processing.group=
         static private final byte[] PLAIN_TEXT_62_0;
-        // \n              </annotationProcessorPaths>\n              <annotationProcessorArgs>\n                <annotationProcessorArg>micronaut.processing.group=
-        static private final byte[] PLAIN_TEXT_63_0;
         // </annotationProcessorArg>\n                <annotationProcessorArg>micronaut.processing.module=
+        static private final byte[] PLAIN_TEXT_63_0;
+        // </annotationProcessorArg>\n              </annotationProcessorArgs>\n            </configuration>\n          </execution>\n          <execution>\n            <id>compile</id>\n            <goals>\n              <goal>compile</goal>\n            </goals>\n            <configuration>\n              <sourceDirs>\n                <sourceDir>${project.basedir}/src/main/kotlin</sourceDir>\n
         static private final byte[] PLAIN_TEXT_64_0;
-        // </annotationProcessorArg>\n              </annotationProcessorArgs>\n            </configuration>\n          </execution>\n          <execution>\n            <id>compile</id>\n            <goals>\n              <goal>compile</goal>\n            </goals>\n            <configuration>\n              <sourceDirs>\n                <sourceDir>${project.basedir}/src/main/kotlin</sourceDir>\n                
+        //                 <sourceDir>${project.build.directory}/generated-sources/</sourceDir>\n
         static private final byte[] PLAIN_TEXT_65_0;
-        // \n                <sourceDir>${project.build.directory}/generated-sources/</sourceDir>\n                
+        //               </sourceDirs>\n            </configuration>\n          </execution>\n
         static private final byte[] PLAIN_TEXT_66_0;
-        // \n              </sourceDirs>\n            </configuration>\n          </execution>\n
+        //           <execution>\n            <id>test-kapt</id>\n            <goals>\n              <goal>test-kapt</goal>\n            </goals>\n            <configuration>\n              <sourceDirs>\n                <sourceDir>${project.basedir}/src/test/kotlin</sourceDir>\n              </sourceDirs>\n              <annotationProcessorPaths 
         static private final byte[] PLAIN_TEXT_67_0;
-        // \n          <execution>\n            <id>test-kapt</id>\n            <goals>\n              <goal>test-kapt</goal>\n            </goals>\n            <configuration>\n              <sourceDirs>\n                <sourceDir>${project.basedir}/src/test/kotlin</sourceDir>\n              </sourceDirs>\n              <annotationProcessorPaths 
+        //               </annotationProcessorPaths>\n            </configuration>\n          </execution>\n          <execution>\n            <id>test-compile</id>\n            <goals>\n              <goal>test-compile</goal>\n            </goals>\n            <configuration>\n              <sourceDirs>\n                <sourceDir>${project.basedir}/src/test/kotlin</sourceDir>\n                <sourceDir>${project.basedir}/target/generated-sources/kapt/test</sourceDir>\n              </sourceDirs>\n   ...
         static private final byte[] PLAIN_TEXT_68_0;
-        // \n              </annotationProcessorPaths>\n            </configuration>\n          </execution>\n          <execution>\n            <id>test-compile</id>\n            <goals>\n              <goal>test-compile</goal>\n            </goals>\n            <configuration>\n              <sourceDirs>\n                <sourceDir>${project.basedir}/src/test/kotlin</sourceDir>\n                <sourceDir>${project.basedir}/target/generated-sources/kapt/test</sourceDir>\n              </sourceDirs>\n ...
+        //         </executions>\n        <dependencies>\n          <dependency>\n            <groupId>org.jetbrains.kotlin</groupId>\n            <artifactId>kotlin-maven-allopen</artifactId>\n            <version>${kotlinVersion}</version>\n          </dependency>\n
         static private final byte[] PLAIN_TEXT_69_0;
-        // \n        </executions>\n        <dependencies>\n          <dependency>\n            <groupId>org.jetbrains.kotlin</groupId>\n            <artifactId>kotlin-maven-allopen</artifactId>\n            <version>${kotlinVersion}</version>\n          </dependency>\n
+        //           <dependency>\n            <groupId>org.jetbrains.kotlin</groupId>\n            <artifactId>kotlin-maven-noarg</artifactId>\n            <version>${kotlinVersion}</version>\n          </dependency>\n
         static private final byte[] PLAIN_TEXT_70_0;
-        // \n          <dependency>\n            <groupId>org.jetbrains.kotlin</groupId>\n            <artifactId>kotlin-maven-noarg</artifactId>\n            <version>${kotlinVersion}</version>\n          </dependency>\n
+        //         </dependencies>\n      </plugin>\n      <plugin>\n        <groupId>org.apache.maven.plugins</groupId>\n        <artifactId>maven-compiler-plugin</artifactId>\n        <configuration>\n          <proc>none</proc>\n          <source>${jdk.version}</source>\n          <target>${jdk.version}</target>\n        </configuration>\n        <executions>\n          <execution>\n            <id>default-compile</id>\n            <phase>none</phase>\n          </execution>\n          <execution>\n ...
         static private final byte[] PLAIN_TEXT_71_0;
-        // \n        </dependencies>\n      </plugin>\n      <plugin>\n        <groupId>org.apache.maven.plugins</groupId>\n        <artifactId>maven-compiler-plugin</artifactId>\n        <configuration>\n          <proc>none</proc>\n          <source>${jdk.version}</source>\n          <target>${jdk.version}</target>\n        </configuration>\n        <executions>\n          <execution>\n            <id>default-compile</id>\n            <phase>none</phase>\n          </execution>\n          <execution>\...
+        //       <plugin>\n        <artifactId>maven-compiler-plugin</artifactId>\n      </plugin>\n      <plugin>\n        <groupId>org.codehaus.mojo</groupId>\n        <artifactId>properties-maven-plugin</artifactId>\n        <version>1.0.0</version>\n        <executions>\n          <execution>\n            <goals>\n              <goal>set-system-properties</goal>\n            </goals>\n            <configuration>\n              <properties>\n                <property>\n                  <name>groovy....
         static private final byte[] PLAIN_TEXT_72_0;
-        // \n      <plugin>\n        <artifactId>maven-compiler-plugin</artifactId>\n      </plugin>\n      <plugin>\n        <groupId>org.codehaus.mojo</groupId>\n        <artifactId>properties-maven-plugin</artifactId>\n        <version>1.0.0</version>\n        <executions>\n          <execution>\n            <goals>\n              <goal>set-system-properties</goal>\n            </goals>\n            <configuration>\n              <properties>\n                <property>\n                  <name>groov...
+        //       <plugin>\n        <groupId>com.github.os72</groupId>\n        <artifactId>protoc-jar-maven-plugin</artifactId>\n      </plugin>\n
         static private final byte[] PLAIN_TEXT_73_0;
-        // \n      <plugin>\n        <groupId>com.github.os72</groupId>\n        <artifactId>protoc-jar-maven-plugin</artifactId>\n      </plugin>\n
+        //       <plugin>\n        <groupId>com.google.cloud.tools</groupId>\n        <artifactId>jib-maven-plugin</artifactId>\n        <configuration>\n          <to>\n            <image>${jib.docker.image}:${jib.docker.tag}</image>\n          </to>\n
         static private final byte[] PLAIN_TEXT_74_0;
-        // \n      <plugin>\n        <groupId>com.google.cloud.tools</groupId>\n        <artifactId>jib-maven-plugin</artifactId>\n        <configuration>\n          <to>\n            <image>${jib.docker.image}:${jib.docker.tag}</image>\n          </to>\n  
+        //           <container>\n            <args>${function.entrypoint}</args>\n            <mainClass>${exec.mainClass}</mainClass>\n          </container>\n
         static private final byte[] PLAIN_TEXT_75_0;
-        // \n          <container>\n            <args>${function.entrypoint}</args>\n            <mainClass>${exec.mainClass}</mainClass>\n          </container>\n  
+        //         </configuration>\n      </plugin>\n
         static private final byte[] PLAIN_TEXT_76_0;
-        // \n        </configuration>\n      </plugin>\n
+        //     </plugins>\n  </build>\n\n
         static private final byte[] PLAIN_TEXT_77_0;
-        // \n    </plugins>\n  </build>\n\n
+        //   <pluginRepositories>\n
         static private final byte[] PLAIN_TEXT_78_0;
-        // \n  <pluginRepositories>\n    
+        //     <pluginRepository>\n       <id>central</id>\n       <url>https://repo.maven.apache.org/maven2</url>\n    </pluginRepository>\n    <pluginRepository>\n       <id>ossrh</id>\n       <url>https://oss.sonatype.org/content/repositories/snapshots</url>\n       <snapshots>\n           <enabled>true</enabled>\n       </snapshots>\n    </pluginRepository>\n
         static private final byte[] PLAIN_TEXT_79_0;
-        // \n    <pluginRepository>\n       <id>central</id>\n       <url>https://repo.maven.apache.org/maven2</url>\n    </pluginRepository>\n    <pluginRepository>\n       <id>ossrh</id>\n       <url>https://oss.sonatype.org/content/repositories/snapshots</url>\n       <snapshots>\n           <enabled>true</enabled>\n       </snapshots>\n    </pluginRepository>\n    
+        //   </pluginRepositories>\n
         static private final byte[] PLAIN_TEXT_80_0;
-        // \n  </pluginRepositories>\n
+        //     <pluginRepositories>\n       <pluginRepository>\n           <id>central</id>\n           <url>https://repo.maven.apache.org/maven2</url>\n       </pluginRepository>\n       <pluginRepository>\n           <id>ossrh</id>\n           <url>https://oss.sonatype.org/content/repositories/snapshots</url>\n           <snapshots>\n               <enabled>true</enabled>\n           </snapshots>\n       </pluginRepository>\n    </pluginRepositories>\n
         static private final byte[] PLAIN_TEXT_81_0;
-        // \n    <pluginRepositories>\n       <pluginRepository>\n           <id>central</id>\n           <url>https://repo.maven.apache.org/maven2</url>\n       </pluginRepository>\n       <pluginRepository>\n           <id>ossrh</id>\n           <url>https://oss.sonatype.org/content/repositories/snapshots</url>\n           <snapshots>\n               <enabled>true</enabled>\n           </snapshots>\n       </pluginRepository>\n    </pluginRepositories>\n
-        static private final byte[] PLAIN_TEXT_82_0;
         // \n</project>\n
-        static private final byte[] PLAIN_TEXT_83_0;
+        static private final byte[] PLAIN_TEXT_82_0;
 
         static {
             PlainTextUnloadedClassLoader loader = PlainTextUnloadedClassLoader.tryLoad(pom.class.getClassLoader(), pom.class.getName() + "$PlainText", "UTF-8");
@@ -394,18 +392,17 @@ public class pom extends com.fizzed.rocker.runtime.DefaultRockerModel {
             PLAIN_TEXT_80_0 = loader.tryGet("PLAIN_TEXT_80_0");
             PLAIN_TEXT_81_0 = loader.tryGet("PLAIN_TEXT_81_0");
             PLAIN_TEXT_82_0 = loader.tryGet("PLAIN_TEXT_82_0");
-            PLAIN_TEXT_83_0 = loader.tryGet("PLAIN_TEXT_83_0");
         }
 
-        // argument @ [25:2]
+        // argument @ [26:2]
         protected final ApplicationType applicationType;
-        // argument @ [25:2]
+        // argument @ [26:2]
         protected final Project project;
-        // argument @ [25:2]
+        // argument @ [26:2]
         protected final Features features;
-        // argument @ [25:2]
+        // argument @ [26:2]
         protected final MavenBuild mavenBuild;
-        // argument @ [25:2]
+        // argument @ [26:2]
         protected final String jvmArguments;
 
         public Template(pom model) {
@@ -423,289 +420,268 @@ public class pom extends com.fizzed.rocker.runtime.DefaultRockerModel {
 
         @Override
         protected void __doRender() throws IOException, RenderingException {
-            // PlainText @ [31:2]
-            __internal.aboutToExecutePosInTemplate(31, 2);
+            // PlainText @ [32:2]
+            __internal.aboutToExecutePosInTemplate(32, 2);
             __internal.writeValue(PLAIN_TEXT_0_0);
-            // IfBlockBegin @ [36:1]
-            __internal.aboutToExecutePosInTemplate(36, 1);
+            // IfBlockBegin @ [37:1]
+            __internal.aboutToExecutePosInTemplate(37, 1);
             if (!features.contains("aws-cdk")) {
-                // PlainText @ [36:38]
-                __internal.aboutToExecutePosInTemplate(36, 38);
+                // PlainText @ [37:38]
+                __internal.aboutToExecutePosInTemplate(37, 38);
                 __internal.writeValue(PLAIN_TEXT_1_0);
-                // ValueExpression @ [37:12]
-                __internal.aboutToExecutePosInTemplate(37, 12);
+                // ValueExpression @ [38:12]
+                __internal.aboutToExecutePosInTemplate(38, 12);
                 __internal.renderValue(project.getPackageName(), false);
-                // PlainText @ [37:37]
-                __internal.aboutToExecutePosInTemplate(37, 37);
+                // PlainText @ [38:37]
+                __internal.aboutToExecutePosInTemplate(38, 37);
                 __internal.writeValue(PLAIN_TEXT_2_0);
-                // IfBlockEnd @ [36:1]
-                __internal.aboutToExecutePosInTemplate(36, 1);
-            } // if end @ [36:1]
-            // PlainText @ [38:2]
-            __internal.aboutToExecutePosInTemplate(38, 2);
+                // IfBlockEnd @ [37:1]
+                __internal.aboutToExecutePosInTemplate(37, 1);
+            } // if end @ [37:1]
+            // PlainText @ [39:2]
+            __internal.aboutToExecutePosInTemplate(39, 2);
             __internal.writeValue(PLAIN_TEXT_3_0);
-            // ValueExpression @ [39:15]
-            __internal.aboutToExecutePosInTemplate(39, 15);
-            __internal.renderValue(mavenBuild.getArtifactId(), false);
-            // PlainText @ [39:42]
-            __internal.aboutToExecutePosInTemplate(39, 42);
+            // ValueExpression @ [40:15]
+            __internal.aboutToExecutePosInTemplate(40, 15);
+            __internal.renderValue(mavenBuild.coordinate().getArtifactId(), false);
+            // PlainText @ [40:55]
+            __internal.aboutToExecutePosInTemplate(40, 55);
             __internal.writeValue(PLAIN_TEXT_4_0);
-            // IfBlockBegin @ [43:1]
-            __internal.aboutToExecutePosInTemplate(43, 1);
+            // IfBlockBegin @ [44:1]
+            __internal.aboutToExecutePosInTemplate(44, 1);
             if (features.contains("aws-cdk")) {
-                // PlainText @ [43:37]
-                __internal.aboutToExecutePosInTemplate(43, 37);
+                // PlainText @ [44:37]
+                __internal.aboutToExecutePosInTemplate(44, 37);
                 __internal.writeValue(PLAIN_TEXT_5_0);
-                // ValueExpression @ [45:14]
-                __internal.aboutToExecutePosInTemplate(45, 14);
+                // ValueExpression @ [46:14]
+                __internal.aboutToExecutePosInTemplate(46, 14);
                 __internal.renderValue(project.getPackageName(), false);
-                // PlainText @ [45:39]
-                __internal.aboutToExecutePosInTemplate(45, 39);
+                // PlainText @ [46:39]
+                __internal.aboutToExecutePosInTemplate(46, 39);
                 __internal.writeValue(PLAIN_TEXT_6_0);
-                // EvalExpression @ [46:17]
-                __internal.aboutToExecutePosInTemplate(46, 17);
+                // EvalExpression @ [47:17]
+                __internal.aboutToExecutePosInTemplate(47, 17);
                 __internal.renderValue((project.getName()), false);
-                // PlainText @ [46:37]
-                __internal.aboutToExecutePosInTemplate(46, 37);
+                // PlainText @ [47:37]
+                __internal.aboutToExecutePosInTemplate(47, 37);
                 __internal.writeValue(PLAIN_TEXT_7_0);
-                // IfBlockElse @ [50:1]
-                __internal.aboutToExecutePosInTemplate(50, 1);
-            } else { // else @ [50:1]
-                // PlainText @ [50:9]
-                __internal.aboutToExecutePosInTemplate(50, 9);
+                // IfBlockElse @ [51:1]
+                __internal.aboutToExecutePosInTemplate(51, 1);
+            } else { // else @ [51:1]
+                // PlainText @ [51:9]
+                __internal.aboutToExecutePosInTemplate(51, 9);
                 __internal.writeValue(PLAIN_TEXT_8_0);
-                // ValueExpression @ [54:14]
-                __internal.aboutToExecutePosInTemplate(54, 14);
+                // ValueExpression @ [55:14]
+                __internal.aboutToExecutePosInTemplate(55, 14);
                 __internal.renderValue(VersionInfo.getMicronautVersion(), false);
-                // PlainText @ [54:48]
-                __internal.aboutToExecutePosInTemplate(54, 48);
+                // PlainText @ [55:48]
+                __internal.aboutToExecutePosInTemplate(55, 48);
                 __internal.writeValue(PLAIN_TEXT_9_0);
-                // IfBlockEnd @ [43:1]
-                __internal.aboutToExecutePosInTemplate(43, 1);
-            } // if end @ [43:1]
-            // PlainText @ [56:2]
-            __internal.aboutToExecutePosInTemplate(56, 2);
+                // IfBlockEnd @ [44:1]
+                __internal.aboutToExecutePosInTemplate(44, 1);
+            } // if end @ [44:1]
+            // PlainText @ [57:2]
+            __internal.aboutToExecutePosInTemplate(57, 2);
             __internal.writeValue(PLAIN_TEXT_10_0);
-            // IfBlockBegin @ [60:1]
-            __internal.aboutToExecutePosInTemplate(60, 1);
+            // IfBlockBegin @ [61:1]
+            __internal.aboutToExecutePosInTemplate(61, 1);
             if (features.language().isKotlin()) {
-                // PlainText @ [60:39]
-                __internal.aboutToExecutePosInTemplate(60, 39);
+                // PlainText @ [61:39]
+                __internal.aboutToExecutePosInTemplate(61, 39);
                 __internal.writeValue(PLAIN_TEXT_11_0);
-                // ValueExpression @ [61:18]
-                __internal.aboutToExecutePosInTemplate(61, 18);
+                // ValueExpression @ [62:18]
+                __internal.aboutToExecutePosInTemplate(62, 18);
                 __internal.renderValue(FeaturesUtils.getTargetJdk(features, 17), false);
-                // PlainText @ [61:59]
-                __internal.aboutToExecutePosInTemplate(61, 59);
+                // PlainText @ [62:59]
+                __internal.aboutToExecutePosInTemplate(62, 59);
                 __internal.writeValue(PLAIN_TEXT_12_0);
-                // IfBlockElse @ [62:1]
-                __internal.aboutToExecutePosInTemplate(62, 1);
-            } else { // else @ [62:1]
-                // PlainText @ [62:9]
-                __internal.aboutToExecutePosInTemplate(62, 9);
+                // IfBlockElse @ [63:1]
+                __internal.aboutToExecutePosInTemplate(63, 1);
+            } else { // else @ [63:1]
+                // PlainText @ [63:9]
+                __internal.aboutToExecutePosInTemplate(63, 9);
                 __internal.writeValue(PLAIN_TEXT_11_0);
-                // ValueExpression @ [63:18]
-                __internal.aboutToExecutePosInTemplate(63, 18);
+                // ValueExpression @ [64:18]
+                __internal.aboutToExecutePosInTemplate(64, 18);
                 __internal.renderValue(FeaturesUtils.getTargetJdk(features), false);
-                // PlainText @ [63:55]
-                __internal.aboutToExecutePosInTemplate(63, 55);
+                // PlainText @ [64:55]
+                __internal.aboutToExecutePosInTemplate(64, 55);
                 __internal.writeValue(PLAIN_TEXT_12_0);
-                // IfBlockEnd @ [60:1]
-                __internal.aboutToExecutePosInTemplate(60, 1);
-            } // if end @ [60:1]
-            // PlainText @ [64:2]
-            __internal.aboutToExecutePosInTemplate(64, 2);
+                // IfBlockEnd @ [61:1]
+                __internal.aboutToExecutePosInTemplate(61, 1);
+            } // if end @ [61:1]
+            // PlainText @ [65:2]
+            __internal.aboutToExecutePosInTemplate(65, 2);
             __internal.writeValue(PLAIN_TEXT_13_0);
-            // ValueExpression @ [65:22]
-            __internal.aboutToExecutePosInTemplate(65, 22);
+            // ValueExpression @ [66:22]
+            __internal.aboutToExecutePosInTemplate(66, 22);
             __internal.renderValue(features.javaVersion().majorVersion(), false);
-            // PlainText @ [65:60]
-            __internal.aboutToExecutePosInTemplate(65, 60);
+            // PlainText @ [66:60]
+            __internal.aboutToExecutePosInTemplate(66, 60);
             __internal.writeValue(PLAIN_TEXT_14_0);
-            // ForBlockBegin @ [66:1]
-            __internal.aboutToExecutePosInTemplate(66, 1);
+            // ForBlockBegin @ [67:1]
+            __internal.aboutToExecutePosInTemplate(67, 1);
             try {
-                final com.fizzed.rocker.runtime.IterableForIterator<Property> __forIterator0 = new com.fizzed.rocker.runtime.IterableForIterator<Property>(mavenBuild.getProperties());
+                final com.fizzed.rocker.runtime.IterableForIterator<Property> __forIterator0 = new com.fizzed.rocker.runtime.IterableForIterator<Property>(mavenBuild.properties());
                 while (__forIterator0.hasNext()) {
                     final Property prop = __forIterator0.next();
                     try {
-                        // PlainText @ [66:52]
-                        __internal.aboutToExecutePosInTemplate(66, 52);
-                        __internal.writeValue(PLAIN_TEXT_15_0);
-                        // IfBlockBegin @ [67:1]
-                        __internal.aboutToExecutePosInTemplate(67, 1);
+                        // IfBlockBegin @ [68:1]
+                        __internal.aboutToExecutePosInTemplate(68, 1);
                         if (prop.isComment()) {
-                            // PlainText @ [67:25]
-                            __internal.aboutToExecutePosInTemplate(67, 25);
-                            __internal.writeValue(PLAIN_TEXT_16_0);
-                            // ValueExpression @ [68:9]
-                            __internal.aboutToExecutePosInTemplate(68, 9);
-                            __internal.renderValue(prop.getComment(), false);
-                            // PlainText @ [68:27]
-                            __internal.aboutToExecutePosInTemplate(68, 27);
-                            __internal.writeValue(PLAIN_TEXT_17_0);
-                            // IfBlockElse @ [69:1]
-                            __internal.aboutToExecutePosInTemplate(69, 1);
-                        } else { // else @ [69:1]
-                            // PlainText @ [69:9]
+                            // PlainText @ [68:25]
+                            __internal.aboutToExecutePosInTemplate(68, 25);
+                            __internal.writeValue(PLAIN_TEXT_15_0);
+                            // ValueExpression @ [69:9]
                             __internal.aboutToExecutePosInTemplate(69, 9);
+                            __internal.renderValue(prop.getComment(), false);
+                            // PlainText @ [69:27]
+                            __internal.aboutToExecutePosInTemplate(69, 27);
+                            __internal.writeValue(PLAIN_TEXT_16_0);
+                            // IfBlockElse @ [70:1]
+                            __internal.aboutToExecutePosInTemplate(70, 1);
+                        } else { // else @ [70:1]
+                            // PlainText @ [70:9]
+                            __internal.aboutToExecutePosInTemplate(70, 9);
+                            __internal.writeValue(PLAIN_TEXT_17_0);
+                            // ValueExpression @ [71:6]
+                            __internal.aboutToExecutePosInTemplate(71, 6);
+                            __internal.renderValue(prop.getKey(), false);
+                            // PlainText @ [71:20]
+                            __internal.aboutToExecutePosInTemplate(71, 20);
                             __internal.writeValue(PLAIN_TEXT_18_0);
-                            // ValueExpression @ [70:6]
-                            __internal.aboutToExecutePosInTemplate(70, 6);
-                            __internal.renderValue(prop.getKey(), false);
-                            // PlainText @ [70:20]
-                            __internal.aboutToExecutePosInTemplate(70, 20);
-                            __internal.writeValue(PLAIN_TEXT_19_0);
-                            // ValueExpression @ [70:21]
-                            __internal.aboutToExecutePosInTemplate(70, 21);
+                            // ValueExpression @ [71:21]
+                            __internal.aboutToExecutePosInTemplate(71, 21);
                             __internal.renderValue(prop.getValue(), false);
-                            // PlainText @ [70:37]
-                            __internal.aboutToExecutePosInTemplate(70, 37);
-                            __internal.writeValue(PLAIN_TEXT_20_0);
-                            // ValueExpression @ [70:39]
-                            __internal.aboutToExecutePosInTemplate(70, 39);
+                            // PlainText @ [71:37]
+                            __internal.aboutToExecutePosInTemplate(71, 37);
+                            __internal.writeValue(PLAIN_TEXT_19_0);
+                            // ValueExpression @ [71:39]
+                            __internal.aboutToExecutePosInTemplate(71, 39);
                             __internal.renderValue(prop.getKey(), false);
-                            // PlainText @ [70:53]
-                            __internal.aboutToExecutePosInTemplate(70, 53);
-                            __internal.writeValue(PLAIN_TEXT_21_0);
-                            // IfBlockEnd @ [67:1]
-                            __internal.aboutToExecutePosInTemplate(67, 1);
-                        } // if end @ [67:1]
-                        // PlainText @ [71:2]
-                        __internal.aboutToExecutePosInTemplate(71, 2);
-                        __internal.writeValue(PLAIN_TEXT_15_0);
-                        // ForBlockEnd @ [66:1]
-                        __internal.aboutToExecutePosInTemplate(66, 1);
+                            // PlainText @ [71:53]
+                            __internal.aboutToExecutePosInTemplate(71, 53);
+                            __internal.writeValue(PLAIN_TEXT_20_0);
+                            // IfBlockEnd @ [68:1]
+                            __internal.aboutToExecutePosInTemplate(68, 1);
+                        } // if end @ [68:1]
+                        // ForBlockEnd @ [67:1]
+                        __internal.aboutToExecutePosInTemplate(67, 1);
                     } catch (com.fizzed.rocker.runtime.ContinueException e) {
                         // support for continuing for loops
                     }
-                } // for end @ [66:1]
+                } // for end @ [67:1]
             } catch (com.fizzed.rocker.runtime.BreakException e) {
                 // support for breaking for loops
             }
-            // PlainText @ [72:2]
-            __internal.aboutToExecutePosInTemplate(72, 2);
-            __internal.writeValue(PLAIN_TEXT_22_0);
-            // ValueExpression @ [76:1]
-            __internal.aboutToExecutePosInTemplate(76, 1);
+            // PlainText @ [73:2]
+            __internal.aboutToExecutePosInTemplate(73, 2);
+            __internal.writeValue(PLAIN_TEXT_21_0);
+            // ValueExpression @ [77:1]
+            __internal.aboutToExecutePosInTemplate(77, 1);
             __internal.renderValue(mavenBuild.renderRepositories(4), false);
-            // PlainText @ [76:34]
-            __internal.aboutToExecutePosInTemplate(76, 34);
-            __internal.writeValue(PLAIN_TEXT_23_0);
-            // IfBlockBegin @ [79:1]
-            __internal.aboutToExecutePosInTemplate(79, 1);
+            // PlainText @ [77:34]
+            __internal.aboutToExecutePosInTemplate(77, 34);
+            __internal.writeValue(PLAIN_TEXT_22_0);
+            // IfBlockBegin @ [80:1]
+            __internal.aboutToExecutePosInTemplate(80, 1);
             if (mavenBuild.hasPomDependency()) {
-                // PlainText @ [79:38]
-                __internal.aboutToExecutePosInTemplate(79, 38);
-                __internal.writeValue(PLAIN_TEXT_24_0);
-                // ForBlockBegin @ [82:1]
-                __internal.aboutToExecutePosInTemplate(82, 1);
+                // PlainText @ [80:38]
+                __internal.aboutToExecutePosInTemplate(80, 38);
+                __internal.writeValue(PLAIN_TEXT_23_0);
+                // ForBlockBegin @ [83:1]
+                __internal.aboutToExecutePosInTemplate(83, 1);
                 try {
                     final com.fizzed.rocker.runtime.IterableForIterator<MavenDependency> __forIterator1 = new com.fizzed.rocker.runtime.IterableForIterator<MavenDependency>(mavenBuild.getDependencies(true));
                     while (__forIterator1.hasNext()) {
                         final MavenDependency f = __forIterator1.next();
                         try {
-                            // PlainText @ [82:62]
-                            __internal.aboutToExecutePosInTemplate(82, 62);
-                            __internal.writeValue(PLAIN_TEXT_15_0);
-                            // ValueExpression @ [83:1]
-                            __internal.aboutToExecutePosInTemplate(83, 1);
+                            // ValueExpression @ [84:1]
+                            __internal.aboutToExecutePosInTemplate(84, 1);
                             __internal.renderValue(dependency.template(f.getGroupId(), f.getArtifactId(), f.getMavenScope().toString(), f.getVersion(), true, f.getExclusions()), false);
-                            // PlainText @ [83:127]
-                            __internal.aboutToExecutePosInTemplate(83, 127);
-                            __internal.writeValue(PLAIN_TEXT_15_0);
-                            // ForBlockEnd @ [82:1]
-                            __internal.aboutToExecutePosInTemplate(82, 1);
+                            // PlainText @ [84:127]
+                            __internal.aboutToExecutePosInTemplate(84, 127);
+                            __internal.writeValue(PLAIN_TEXT_24_0);
+                            // ForBlockEnd @ [83:1]
+                            __internal.aboutToExecutePosInTemplate(83, 1);
                         } catch (com.fizzed.rocker.runtime.ContinueException e) {
                             // support for continuing for loops
                         }
-                    } // for end @ [82:1]
+                    } // for end @ [83:1]
                 } catch (com.fizzed.rocker.runtime.BreakException e) {
                     // support for breaking for loops
                 }
-                // PlainText @ [84:2]
-                __internal.aboutToExecutePosInTemplate(84, 2);
+                // PlainText @ [85:2]
+                __internal.aboutToExecutePosInTemplate(85, 2);
                 __internal.writeValue(PLAIN_TEXT_25_0);
-                // IfBlockEnd @ [79:1]
-                __internal.aboutToExecutePosInTemplate(79, 1);
-            } // if end @ [79:1]
-            // PlainText @ [87:2]
-            __internal.aboutToExecutePosInTemplate(87, 2);
+                // IfBlockEnd @ [80:1]
+                __internal.aboutToExecutePosInTemplate(80, 1);
+            } // if end @ [80:1]
+            // PlainText @ [88:2]
+            __internal.aboutToExecutePosInTemplate(88, 2);
             __internal.writeValue(PLAIN_TEXT_26_0);
-            // IfBlockBegin @ [90:1]
-            __internal.aboutToExecutePosInTemplate(90, 1);
+            // IfBlockBegin @ [91:1]
+            __internal.aboutToExecutePosInTemplate(91, 1);
             if (features.language().isGroovy()) {
-                // PlainText @ [90:39]
-                __internal.aboutToExecutePosInTemplate(90, 39);
-                __internal.writeValue(PLAIN_TEXT_15_0);
-                // ForBlockBegin @ [91:1]
-                __internal.aboutToExecutePosInTemplate(91, 1);
+                // ForBlockBegin @ [92:1]
+                __internal.aboutToExecutePosInTemplate(92, 1);
                 try {
-                    com.fizzed.rocker.runtime.Java8Iterator.forEach(mavenBuild.getAnnotationProcessors(), (processor) -> {
+                    com.fizzed.rocker.runtime.Java8Iterator.forEach(mavenBuild.annotationProcessors(), (processor) -> {
                         try {
-                            // PlainText @ [91:58]
-                            __internal.aboutToExecutePosInTemplate(91, 58);
-                            __internal.writeValue(PLAIN_TEXT_15_0);
-                            // ValueExpression @ [92:1]
-                            __internal.aboutToExecutePosInTemplate(92, 1);
+                            // ValueExpression @ [93:1]
+                            __internal.aboutToExecutePosInTemplate(93, 1);
                             __internal.renderValue(dependency.template(processor.getGroupId(), processor.getArtifactId(), "provided", null, false, null), false);
-                            // PlainText @ [92:103]
-                            __internal.aboutToExecutePosInTemplate(92, 103);
-                            __internal.writeValue(PLAIN_TEXT_15_0);
-                            // ForBlockEnd @ [91:1]
-                            __internal.aboutToExecutePosInTemplate(91, 1);
+                            // PlainText @ [93:103]
+                            __internal.aboutToExecutePosInTemplate(93, 103);
+                            __internal.writeValue(PLAIN_TEXT_24_0);
+                            // ForBlockEnd @ [92:1]
+                            __internal.aboutToExecutePosInTemplate(92, 1);
                         } catch (com.fizzed.rocker.runtime.ContinueException e) {
                             // support for continuing for loops
                         }
-                    }); // for end @ [91:1]
+                    }); // for end @ [92:1]
                 } catch (com.fizzed.rocker.runtime.BreakException e) {
                     // support for breaking for loops
                 }
-                // PlainText @ [93:2]
-                __internal.aboutToExecutePosInTemplate(93, 2);
-                __internal.writeValue(PLAIN_TEXT_15_0);
-                // IfBlockEnd @ [90:1]
-                __internal.aboutToExecutePosInTemplate(90, 1);
-            } // if end @ [90:1]
-            // PlainText @ [94:2]
-            __internal.aboutToExecutePosInTemplate(94, 2);
-            __internal.writeValue(PLAIN_TEXT_27_0);
-            // ForBlockBegin @ [96:1]
-            __internal.aboutToExecutePosInTemplate(96, 1);
+                // IfBlockEnd @ [91:1]
+                __internal.aboutToExecutePosInTemplate(91, 1);
+            } // if end @ [91:1]
+            // PlainText @ [95:2]
+            __internal.aboutToExecutePosInTemplate(95, 2);
+            __internal.writeValue(PLAIN_TEXT_24_0);
+            // ForBlockBegin @ [97:1]
+            __internal.aboutToExecutePosInTemplate(97, 1);
             try {
                 final com.fizzed.rocker.runtime.IterableForIterator<MavenDependency> __forIterator2 = new com.fizzed.rocker.runtime.IterableForIterator<MavenDependency>(mavenBuild.getDependencies(false));
                 while (__forIterator2.hasNext()) {
                     final MavenDependency f = __forIterator2.next();
                     try {
-                        // PlainText @ [96:63]
-                        __internal.aboutToExecutePosInTemplate(96, 63);
-                        __internal.writeValue(PLAIN_TEXT_15_0);
-                        // ValueExpression @ [97:1]
-                        __internal.aboutToExecutePosInTemplate(97, 1);
+                        // ValueExpression @ [98:1]
+                        __internal.aboutToExecutePosInTemplate(98, 1);
                         __internal.renderValue(dependency.template(f.getGroupId(), f.getArtifactId(), f.getMavenScope().toString(), f.getVersion(), false, f.getExclusions()), false);
-                        // PlainText @ [97:128]
-                        __internal.aboutToExecutePosInTemplate(97, 128);
-                        __internal.writeValue(PLAIN_TEXT_15_0);
-                        // ForBlockEnd @ [96:1]
-                        __internal.aboutToExecutePosInTemplate(96, 1);
+                        // PlainText @ [98:128]
+                        __internal.aboutToExecutePosInTemplate(98, 128);
+                        __internal.writeValue(PLAIN_TEXT_24_0);
+                        // ForBlockEnd @ [97:1]
+                        __internal.aboutToExecutePosInTemplate(97, 1);
                     } catch (com.fizzed.rocker.runtime.ContinueException e) {
                         // support for continuing for loops
                     }
-                } // for end @ [96:1]
+                } // for end @ [97:1]
             } catch (com.fizzed.rocker.runtime.BreakException e) {
                 // support for breaking for loops
             }
-            // PlainText @ [98:2]
-            __internal.aboutToExecutePosInTemplate(98, 2);
-            __internal.writeValue(PLAIN_TEXT_28_0);
-            // IfBlockBegin @ [102:1]
-            __internal.aboutToExecutePosInTemplate(102, 1);
+            // PlainText @ [99:2]
+            __internal.aboutToExecutePosInTemplate(99, 2);
+            __internal.writeValue(PLAIN_TEXT_27_0);
+            // IfBlockBegin @ [103:1]
+            __internal.aboutToExecutePosInTemplate(103, 1);
             if (features.application() != null || features.contains("oracle-function") || features.contains("aws-lambda")) {
-                // PlainText @ [102:114]
-                __internal.aboutToExecutePosInTemplate(102, 114);
-                __internal.writeValue(PLAIN_TEXT_29_0);
-                // IfBlockBegin @ [106:1]
-                __internal.aboutToExecutePosInTemplate(106, 1);
+                // PlainText @ [103:114]
+                __internal.aboutToExecutePosInTemplate(103, 114);
+                __internal.writeValue(PLAIN_TEXT_28_0);
+                // IfBlockBegin @ [107:1]
+                __internal.aboutToExecutePosInTemplate(107, 1);
                 if (jvmArguments != null
      || features.contains("oracle-function")
      || features.contains("micronaut-aot")
@@ -716,592 +692,561 @@ public class pom extends com.fizzed.rocker.runtime.DefaultRockerModel {
                || features.isFeaturePresent(HibernateReactiveFeature.class)
                || features.isFeaturePresent(R2dbc.class)))
 ) {
-                    // PlainText @ [115:4]
-                    __internal.aboutToExecutePosInTemplate(115, 4);
-                    __internal.writeValue(PLAIN_TEXT_30_0);
-                    // IfBlockBegin @ [117:1]
-                    __internal.aboutToExecutePosInTemplate(117, 1);
+                    // PlainText @ [116:4]
+                    __internal.aboutToExecutePosInTemplate(116, 4);
+                    __internal.writeValue(PLAIN_TEXT_29_0);
+                    // IfBlockBegin @ [118:1]
+                    __internal.aboutToExecutePosInTemplate(118, 1);
                     if (features.isFeaturePresent(SharedTestResourceFeature.class)) {
-                        // PlainText @ [117:67]
-                        __internal.aboutToExecutePosInTemplate(117, 67);
-                        __internal.writeValue(PLAIN_TEXT_31_0);
-                        // IfBlockEnd @ [117:1]
-                        __internal.aboutToExecutePosInTemplate(117, 1);
-                    } // if end @ [117:1]
-                    // PlainText @ [119:2]
-                    __internal.aboutToExecutePosInTemplate(119, 2);
-                    __internal.writeValue(PLAIN_TEXT_15_0);
-                    // IfBlockBegin @ [120:1]
-                    __internal.aboutToExecutePosInTemplate(120, 1);
+                        // PlainText @ [118:67]
+                        __internal.aboutToExecutePosInTemplate(118, 67);
+                        __internal.writeValue(PLAIN_TEXT_30_0);
+                        // IfBlockEnd @ [118:1]
+                        __internal.aboutToExecutePosInTemplate(118, 1);
+                    } // if end @ [118:1]
+                    // IfBlockBegin @ [121:1]
+                    __internal.aboutToExecutePosInTemplate(121, 1);
                     if (jvmArguments != null) {
-                        // PlainText @ [120:29]
-                        __internal.aboutToExecutePosInTemplate(120, 29);
-                        __internal.writeValue(PLAIN_TEXT_32_0);
-                        // EvalExpression @ [121:25]
-                        __internal.aboutToExecutePosInTemplate(121, 25);
+                        // PlainText @ [121:29]
+                        __internal.aboutToExecutePosInTemplate(121, 29);
+                        __internal.writeValue(PLAIN_TEXT_31_0);
+                        // EvalExpression @ [122:25]
+                        __internal.aboutToExecutePosInTemplate(122, 25);
                         __internal.renderValue((jvmArguments), false);
-                        // PlainText @ [121:40]
-                        __internal.aboutToExecutePosInTemplate(121, 40);
-                        __internal.writeValue(PLAIN_TEXT_33_0);
-                        // IfBlockEnd @ [120:1]
-                        __internal.aboutToExecutePosInTemplate(120, 1);
-                    } // if end @ [120:1]
-                    // PlainText @ [122:2]
-                    __internal.aboutToExecutePosInTemplate(122, 2);
-                    __internal.writeValue(PLAIN_TEXT_15_0);
-                    // IfBlockBegin @ [123:1]
-                    __internal.aboutToExecutePosInTemplate(123, 1);
+                        // PlainText @ [122:40]
+                        __internal.aboutToExecutePosInTemplate(122, 40);
+                        __internal.writeValue(PLAIN_TEXT_32_0);
+                        // IfBlockEnd @ [121:1]
+                        __internal.aboutToExecutePosInTemplate(121, 1);
+                    } // if end @ [121:1]
+                    // IfBlockBegin @ [124:1]
+                    __internal.aboutToExecutePosInTemplate(124, 1);
                     if (applicationType == ApplicationType.FUNCTION && features.contains("oracle-function")) {
-                        // PlainText @ [123:91]
-                        __internal.aboutToExecutePosInTemplate(123, 91);
-                        __internal.writeValue(PLAIN_TEXT_34_0);
-                        // IfBlockEnd @ [123:1]
-                        __internal.aboutToExecutePosInTemplate(123, 1);
-                    } // if end @ [123:1]
-                    // PlainText @ [131:2]
-                    __internal.aboutToExecutePosInTemplate(131, 2);
-                    __internal.writeValue(PLAIN_TEXT_15_0);
-                    // IfBlockBegin @ [132:1]
-                    __internal.aboutToExecutePosInTemplate(132, 1);
+                        // PlainText @ [124:91]
+                        __internal.aboutToExecutePosInTemplate(124, 91);
+                        __internal.writeValue(PLAIN_TEXT_33_0);
+                        // IfBlockEnd @ [124:1]
+                        __internal.aboutToExecutePosInTemplate(124, 1);
+                    } // if end @ [124:1]
+                    // IfBlockBegin @ [133:1]
+                    __internal.aboutToExecutePosInTemplate(133, 1);
                     if (features.contains("micronaut-aot")) {
-                        // PlainText @ [132:43]
-                        __internal.aboutToExecutePosInTemplate(132, 43);
-                        __internal.writeValue(PLAIN_TEXT_35_0);
-                        // IfBlockEnd @ [132:1]
-                        __internal.aboutToExecutePosInTemplate(132, 1);
-                    } // if end @ [132:1]
-                    // PlainText @ [134:2]
-                    __internal.aboutToExecutePosInTemplate(134, 2);
-                    __internal.writeValue(PLAIN_TEXT_36_0);
-                    // IfBlockEnd @ [106:1]
-                    __internal.aboutToExecutePosInTemplate(106, 1);
-                } // if end @ [106:1]
-                // PlainText @ [136:2]
-                __internal.aboutToExecutePosInTemplate(136, 2);
-                __internal.writeValue(PLAIN_TEXT_37_0);
-                // IfBlockEnd @ [102:1]
-                __internal.aboutToExecutePosInTemplate(102, 1);
-            } // if end @ [102:1]
-            // PlainText @ [138:2]
-            __internal.aboutToExecutePosInTemplate(138, 2);
-            __internal.writeValue(PLAIN_TEXT_27_0);
-            // IfBlockBegin @ [140:1]
-            __internal.aboutToExecutePosInTemplate(140, 1);
+                        // PlainText @ [133:43]
+                        __internal.aboutToExecutePosInTemplate(133, 43);
+                        __internal.writeValue(PLAIN_TEXT_34_0);
+                        // IfBlockEnd @ [133:1]
+                        __internal.aboutToExecutePosInTemplate(133, 1);
+                    } // if end @ [133:1]
+                    // PlainText @ [135:2]
+                    __internal.aboutToExecutePosInTemplate(135, 2);
+                    __internal.writeValue(PLAIN_TEXT_35_0);
+                    // IfBlockEnd @ [107:1]
+                    __internal.aboutToExecutePosInTemplate(107, 1);
+                } // if end @ [107:1]
+                // PlainText @ [137:2]
+                __internal.aboutToExecutePosInTemplate(137, 2);
+                __internal.writeValue(PLAIN_TEXT_36_0);
+                // IfBlockEnd @ [103:1]
+                __internal.aboutToExecutePosInTemplate(103, 1);
+            } // if end @ [103:1]
+            // PlainText @ [139:2]
+            __internal.aboutToExecutePosInTemplate(139, 2);
+            __internal.writeValue(PLAIN_TEXT_24_0);
+            // IfBlockBegin @ [141:1]
+            __internal.aboutToExecutePosInTemplate(141, 1);
             if (features.testFramework() != null && (features.testFramework().isKotlinTestFramework() || features.testFramework().isSpock())) {
-                // PlainText @ [140:133]
-                __internal.aboutToExecutePosInTemplate(140, 133);
-                __internal.writeValue(PLAIN_TEXT_38_0);
-                // IfBlockBegin @ [150:1]
-                __internal.aboutToExecutePosInTemplate(150, 1);
-                if (features.testFramework().isKotlinTestFramework()) {
-                    // PlainText @ [150:57]
-                    __internal.aboutToExecutePosInTemplate(150, 57);
-                    __internal.writeValue(PLAIN_TEXT_39_0);
-                    // IfBlockEnd @ [150:1]
-                    __internal.aboutToExecutePosInTemplate(150, 1);
-                } // if end @ [150:1]
-                // PlainText @ [158:2]
-                __internal.aboutToExecutePosInTemplate(158, 2);
+                // PlainText @ [141:133]
+                __internal.aboutToExecutePosInTemplate(141, 133);
                 __internal.writeValue(PLAIN_TEXT_37_0);
-                // IfBlockEnd @ [140:1]
-                __internal.aboutToExecutePosInTemplate(140, 1);
-            } // if end @ [140:1]
-            // PlainText @ [160:2]
-            __internal.aboutToExecutePosInTemplate(160, 2);
-            __internal.writeValue(PLAIN_TEXT_15_0);
-            // ValueExpression @ [161:1]
-            __internal.aboutToExecutePosInTemplate(161, 1);
-            __internal.renderValue(mavenBuild.renderPlugins(6), false);
-            // PlainText @ [161:29]
-            __internal.aboutToExecutePosInTemplate(161, 29);
-            __internal.writeValue(PLAIN_TEXT_15_0);
-            // IfBlockBegin @ [162:1]
+                // IfBlockBegin @ [151:1]
+                __internal.aboutToExecutePosInTemplate(151, 1);
+                if (features.testFramework().isKotlinTestFramework()) {
+                    // PlainText @ [151:57]
+                    __internal.aboutToExecutePosInTemplate(151, 57);
+                    __internal.writeValue(PLAIN_TEXT_38_0);
+                    // IfBlockEnd @ [151:1]
+                    __internal.aboutToExecutePosInTemplate(151, 1);
+                } // if end @ [151:1]
+                // PlainText @ [159:2]
+                __internal.aboutToExecutePosInTemplate(159, 2);
+                __internal.writeValue(PLAIN_TEXT_36_0);
+                // IfBlockEnd @ [141:1]
+                __internal.aboutToExecutePosInTemplate(141, 1);
+            } // if end @ [141:1]
+            // ValueExpression @ [162:1]
             __internal.aboutToExecutePosInTemplate(162, 1);
+            __internal.renderValue(mavenBuild.renderPlugins(6), false);
+            // PlainText @ [162:29]
+            __internal.aboutToExecutePosInTemplate(162, 29);
+            __internal.writeValue(PLAIN_TEXT_24_0);
+            // IfBlockBegin @ [163:1]
+            __internal.aboutToExecutePosInTemplate(163, 1);
             if (features.contains("google-cloud-function")) {
-                // PlainText @ [162:51]
-                __internal.aboutToExecutePosInTemplate(162, 51);
-                __internal.writeValue(PLAIN_TEXT_40_0);
-                // IfBlockEnd @ [162:1]
-                __internal.aboutToExecutePosInTemplate(162, 1);
-            } // if end @ [162:1]
-            // PlainText @ [170:2]
-            __internal.aboutToExecutePosInTemplate(170, 2);
-            __internal.writeValue(PLAIN_TEXT_15_0);
-            // IfBlockBegin @ [171:1]
-            __internal.aboutToExecutePosInTemplate(171, 1);
+                // PlainText @ [163:51]
+                __internal.aboutToExecutePosInTemplate(163, 51);
+                __internal.writeValue(PLAIN_TEXT_39_0);
+                // IfBlockEnd @ [163:1]
+                __internal.aboutToExecutePosInTemplate(163, 1);
+            } // if end @ [163:1]
+            // IfBlockBegin @ [172:1]
+            __internal.aboutToExecutePosInTemplate(172, 1);
             if (features.language().isJava()) {
-                // PlainText @ [171:37]
-                __internal.aboutToExecutePosInTemplate(171, 37);
-                __internal.writeValue(PLAIN_TEXT_41_0);
-                // ValueExpression @ [179:37]
-                __internal.aboutToExecutePosInTemplate(179, 37);
-                __internal.renderValue(mavenBuild.getAnnotationProcessorCombineAttribute(), false);
-                // PlainText @ [179:89]
-                __internal.aboutToExecutePosInTemplate(179, 89);
-                __internal.writeValue(PLAIN_TEXT_21_0);
-                // ForBlockBegin @ [180:1]
-                __internal.aboutToExecutePosInTemplate(180, 1);
+                // PlainText @ [172:37]
+                __internal.aboutToExecutePosInTemplate(172, 37);
+                __internal.writeValue(PLAIN_TEXT_40_0);
+                // ValueExpression @ [180:37]
+                __internal.aboutToExecutePosInTemplate(180, 37);
+                __internal.renderValue(mavenBuild.annotationProcessorCombineAttribute(), false);
+                // PlainText @ [180:86]
+                __internal.aboutToExecutePosInTemplate(180, 86);
+                __internal.writeValue(PLAIN_TEXT_20_0);
+                // ForBlockBegin @ [181:1]
+                __internal.aboutToExecutePosInTemplate(181, 1);
                 try {
-                    com.fizzed.rocker.runtime.Java8Iterator.forEach(mavenBuild.getAnnotationProcessors(), (processor) -> {
+                    com.fizzed.rocker.runtime.Java8Iterator.forEach(mavenBuild.annotationProcessors(), (processor) -> {
                         try {
-                            // PlainText @ [180:58]
-                            __internal.aboutToExecutePosInTemplate(180, 58);
-                            __internal.writeValue(PLAIN_TEXT_42_0);
-                            // ValueExpression @ [182:24]
-                            __internal.aboutToExecutePosInTemplate(182, 24);
+                            // PlainText @ [181:55]
+                            __internal.aboutToExecutePosInTemplate(181, 55);
+                            __internal.writeValue(PLAIN_TEXT_41_0);
+                            // ValueExpression @ [183:24]
+                            __internal.aboutToExecutePosInTemplate(183, 24);
                             __internal.renderValue(processor.getGroupId(), false);
-                            // PlainText @ [182:47]
-                            __internal.aboutToExecutePosInTemplate(182, 47);
-                            __internal.writeValue(PLAIN_TEXT_43_0);
-                            // ValueExpression @ [183:27]
-                            __internal.aboutToExecutePosInTemplate(183, 27);
+                            // PlainText @ [183:47]
+                            __internal.aboutToExecutePosInTemplate(183, 47);
+                            __internal.writeValue(PLAIN_TEXT_42_0);
+                            // ValueExpression @ [184:27]
+                            __internal.aboutToExecutePosInTemplate(184, 27);
                             __internal.renderValue(processor.getArtifactId(), false);
-                            // PlainText @ [183:53]
-                            __internal.aboutToExecutePosInTemplate(183, 53);
-                            __internal.writeValue(PLAIN_TEXT_44_0);
-                            // IfBlockBegin @ [184:1]
-                            __internal.aboutToExecutePosInTemplate(184, 1);
+                            // PlainText @ [184:53]
+                            __internal.aboutToExecutePosInTemplate(184, 53);
+                            __internal.writeValue(PLAIN_TEXT_43_0);
+                            // IfBlockBegin @ [185:1]
+                            __internal.aboutToExecutePosInTemplate(185, 1);
                             if (processor.getVersion() != null) {
-                                // PlainText @ [184:39]
-                                __internal.aboutToExecutePosInTemplate(184, 39);
-                                __internal.writeValue(PLAIN_TEXT_45_0);
-                                // ValueExpression @ [185:24]
-                                __internal.aboutToExecutePosInTemplate(185, 24);
+                                // PlainText @ [185:39]
+                                __internal.aboutToExecutePosInTemplate(185, 39);
+                                __internal.writeValue(PLAIN_TEXT_44_0);
+                                // ValueExpression @ [186:24]
+                                __internal.aboutToExecutePosInTemplate(186, 24);
                                 __internal.renderValue(processor.getVersion(), false);
-                                // PlainText @ [185:47]
-                                __internal.aboutToExecutePosInTemplate(185, 47);
-                                __internal.writeValue(PLAIN_TEXT_46_0);
-                                // IfBlockEnd @ [184:1]
-                                __internal.aboutToExecutePosInTemplate(184, 1);
-                            } // if end @ [184:1]
-                            // PlainText @ [186:2]
-                            __internal.aboutToExecutePosInTemplate(186, 2);
-                            __internal.writeValue(PLAIN_TEXT_15_0);
-                            // IfBlockBegin @ [187:1]
-                            __internal.aboutToExecutePosInTemplate(187, 1);
+                                // PlainText @ [186:47]
+                                __internal.aboutToExecutePosInTemplate(186, 47);
+                                __internal.writeValue(PLAIN_TEXT_45_0);
+                                // IfBlockEnd @ [185:1]
+                                __internal.aboutToExecutePosInTemplate(185, 1);
+                            } // if end @ [185:1]
+                            // IfBlockBegin @ [188:1]
+                            __internal.aboutToExecutePosInTemplate(188, 1);
                             if (processor.getExclusions() != null) {
-                                // PlainText @ [187:42]
-                                __internal.aboutToExecutePosInTemplate(187, 42);
-                                __internal.writeValue(PLAIN_TEXT_47_0);
-                                // ForBlockBegin @ [189:1]
-                                __internal.aboutToExecutePosInTemplate(189, 1);
+                                // PlainText @ [188:42]
+                                __internal.aboutToExecutePosInTemplate(188, 42);
+                                __internal.writeValue(PLAIN_TEXT_46_0);
+                                // ForBlockBegin @ [190:1]
+                                __internal.aboutToExecutePosInTemplate(190, 1);
                                 try {
                                     com.fizzed.rocker.runtime.Java8Iterator.forEach(processor.getExclusions(), (exclusion) -> {
                                         try {
-                                            // PlainText @ [189:47]
-                                            __internal.aboutToExecutePosInTemplate(189, 47);
-                                            __internal.writeValue(PLAIN_TEXT_48_0);
-                                            // ValueExpression @ [191:28]
-                                            __internal.aboutToExecutePosInTemplate(191, 28);
+                                            // PlainText @ [190:47]
+                                            __internal.aboutToExecutePosInTemplate(190, 47);
+                                            __internal.writeValue(PLAIN_TEXT_47_0);
+                                            // ValueExpression @ [192:28]
+                                            __internal.aboutToExecutePosInTemplate(192, 28);
                                             __internal.renderValue(exclusion.getGroupId(), false);
-                                            // PlainText @ [191:51]
-                                            __internal.aboutToExecutePosInTemplate(191, 51);
-                                            __internal.writeValue(PLAIN_TEXT_49_0);
-                                            // ValueExpression @ [192:31]
-                                            __internal.aboutToExecutePosInTemplate(192, 31);
+                                            // PlainText @ [192:51]
+                                            __internal.aboutToExecutePosInTemplate(192, 51);
+                                            __internal.writeValue(PLAIN_TEXT_48_0);
+                                            // ValueExpression @ [193:31]
+                                            __internal.aboutToExecutePosInTemplate(193, 31);
                                             __internal.renderValue(exclusion.getArtifactId(), false);
-                                            // PlainText @ [192:57]
-                                            __internal.aboutToExecutePosInTemplate(192, 57);
-                                            __internal.writeValue(PLAIN_TEXT_50_0);
-                                            // ForBlockEnd @ [189:1]
-                                            __internal.aboutToExecutePosInTemplate(189, 1);
+                                            // PlainText @ [193:57]
+                                            __internal.aboutToExecutePosInTemplate(193, 57);
+                                            __internal.writeValue(PLAIN_TEXT_49_0);
+                                            // ForBlockEnd @ [190:1]
+                                            __internal.aboutToExecutePosInTemplate(190, 1);
                                         } catch (com.fizzed.rocker.runtime.ContinueException e) {
                                             // support for continuing for loops
                                         }
-                                    }); // for end @ [189:1]
+                                    }); // for end @ [190:1]
                                 } catch (com.fizzed.rocker.runtime.BreakException e) {
                                     // support for breaking for loops
                                 }
-                                // PlainText @ [194:2]
-                                __internal.aboutToExecutePosInTemplate(194, 2);
-                                __internal.writeValue(PLAIN_TEXT_51_0);
-                                // IfBlockEnd @ [187:1]
-                                __internal.aboutToExecutePosInTemplate(187, 1);
-                            } // if end @ [187:1]
-                            // PlainText @ [196:2]
-                            __internal.aboutToExecutePosInTemplate(196, 2);
-                            __internal.writeValue(PLAIN_TEXT_52_0);
-                            // ForBlockEnd @ [180:1]
-                            __internal.aboutToExecutePosInTemplate(180, 1);
+                                // PlainText @ [195:2]
+                                __internal.aboutToExecutePosInTemplate(195, 2);
+                                __internal.writeValue(PLAIN_TEXT_50_0);
+                                // IfBlockEnd @ [188:1]
+                                __internal.aboutToExecutePosInTemplate(188, 1);
+                            } // if end @ [188:1]
+                            // PlainText @ [197:2]
+                            __internal.aboutToExecutePosInTemplate(197, 2);
+                            __internal.writeValue(PLAIN_TEXT_51_0);
+                            // ForBlockEnd @ [181:1]
+                            __internal.aboutToExecutePosInTemplate(181, 1);
                         } catch (com.fizzed.rocker.runtime.ContinueException e) {
                             // support for continuing for loops
                         }
-                    }); // for end @ [180:1]
+                    }); // for end @ [181:1]
                 } catch (com.fizzed.rocker.runtime.BreakException e) {
                     // support for breaking for loops
                 }
-                // PlainText @ [198:2]
-                __internal.aboutToExecutePosInTemplate(198, 2);
+                // PlainText @ [199:2]
+                __internal.aboutToExecutePosInTemplate(199, 2);
+                __internal.writeValue(PLAIN_TEXT_52_0);
+                // ValueExpression @ [202:47]
+                __internal.aboutToExecutePosInTemplate(202, 47);
+                __internal.renderValue(project.getPackageName(), false);
+                // PlainText @ [202:72]
+                __internal.aboutToExecutePosInTemplate(202, 72);
                 __internal.writeValue(PLAIN_TEXT_53_0);
-                // ValueExpression @ [201:47]
-                __internal.aboutToExecutePosInTemplate(201, 47);
-                __internal.renderValue(project.getPackageName(), false);
-                // PlainText @ [201:72]
-                __internal.aboutToExecutePosInTemplate(201, 72);
-                __internal.writeValue(PLAIN_TEXT_54_0);
-                // ValueExpression @ [202:48]
-                __internal.aboutToExecutePosInTemplate(202, 48);
+                // ValueExpression @ [203:48]
+                __internal.aboutToExecutePosInTemplate(203, 48);
                 __internal.renderValue(project.getName(), false);
-                // PlainText @ [202:66]
-                __internal.aboutToExecutePosInTemplate(202, 66);
-                __internal.writeValue(PLAIN_TEXT_55_0);
-                // IfBlockElseIf @ [206:1]
-                __internal.aboutToExecutePosInTemplate(206, 1);
+                // PlainText @ [203:66]
+                __internal.aboutToExecutePosInTemplate(203, 66);
+                __internal.writeValue(PLAIN_TEXT_54_0);
+                // IfBlockElseIf @ [207:1]
+                __internal.aboutToExecutePosInTemplate(207, 1);
             } else if (features.language().isKotlin()) {
-                // PlainText @ [206:45]
-                __internal.aboutToExecutePosInTemplate(206, 45);
-                __internal.writeValue(PLAIN_TEXT_56_0);
-                // IfBlockBegin @ [214:1]
-                __internal.aboutToExecutePosInTemplate(214, 1);
+                // PlainText @ [207:45]
+                __internal.aboutToExecutePosInTemplate(207, 45);
+                __internal.writeValue(PLAIN_TEXT_55_0);
+                // IfBlockBegin @ [215:1]
+                __internal.aboutToExecutePosInTemplate(215, 1);
                 if (features.isFeaturePresent(JpaFeature.class)) {
-                    // PlainText @ [214:52]
-                    __internal.aboutToExecutePosInTemplate(214, 52);
-                    __internal.writeValue(PLAIN_TEXT_57_0);
-                    // IfBlockEnd @ [214:1]
-                    __internal.aboutToExecutePosInTemplate(214, 1);
-                } // if end @ [214:1]
-                // PlainText @ [216:2]
-                __internal.aboutToExecutePosInTemplate(216, 2);
-                __internal.writeValue(PLAIN_TEXT_58_0);
-                // ValueExpression @ [233:41]
-                __internal.aboutToExecutePosInTemplate(233, 41);
-                __internal.renderValue(mavenBuild.getAnnotationProcessorCombineAttribute(), false);
-                // PlainText @ [233:93]
-                __internal.aboutToExecutePosInTemplate(233, 93);
-                __internal.writeValue(PLAIN_TEXT_21_0);
-                // ForBlockBegin @ [234:1]
-                __internal.aboutToExecutePosInTemplate(234, 1);
+                    // PlainText @ [215:52]
+                    __internal.aboutToExecutePosInTemplate(215, 52);
+                    __internal.writeValue(PLAIN_TEXT_56_0);
+                    // IfBlockEnd @ [215:1]
+                    __internal.aboutToExecutePosInTemplate(215, 1);
+                } // if end @ [215:1]
+                // PlainText @ [217:2]
+                __internal.aboutToExecutePosInTemplate(217, 2);
+                __internal.writeValue(PLAIN_TEXT_57_0);
+                // ValueExpression @ [234:41]
+                __internal.aboutToExecutePosInTemplate(234, 41);
+                __internal.renderValue(mavenBuild.annotationProcessorCombineAttribute(), false);
+                // PlainText @ [234:90]
+                __internal.aboutToExecutePosInTemplate(234, 90);
+                __internal.writeValue(PLAIN_TEXT_20_0);
+                // ForBlockBegin @ [235:1]
+                __internal.aboutToExecutePosInTemplate(235, 1);
                 try {
-                    com.fizzed.rocker.runtime.Java8Iterator.forEach(mavenBuild.getAnnotationProcessors(), (processor) -> {
+                    com.fizzed.rocker.runtime.Java8Iterator.forEach(mavenBuild.annotationProcessors(), (processor) -> {
                         try {
-                            // PlainText @ [234:58]
-                            __internal.aboutToExecutePosInTemplate(234, 58);
-                            __internal.writeValue(PLAIN_TEXT_59_0);
-                            // ValueExpression @ [236:27]
-                            __internal.aboutToExecutePosInTemplate(236, 27);
+                            // PlainText @ [235:55]
+                            __internal.aboutToExecutePosInTemplate(235, 55);
+                            __internal.writeValue(PLAIN_TEXT_58_0);
+                            // ValueExpression @ [237:27]
+                            __internal.aboutToExecutePosInTemplate(237, 27);
                             __internal.renderValue(processor.getGroupId(), false);
-                            // PlainText @ [236:50]
-                            __internal.aboutToExecutePosInTemplate(236, 50);
-                            __internal.writeValue(PLAIN_TEXT_60_0);
-                            // ValueExpression @ [237:30]
-                            __internal.aboutToExecutePosInTemplate(237, 30);
+                            // PlainText @ [237:50]
+                            __internal.aboutToExecutePosInTemplate(237, 50);
+                            __internal.writeValue(PLAIN_TEXT_59_0);
+                            // ValueExpression @ [238:30]
+                            __internal.aboutToExecutePosInTemplate(238, 30);
                             __internal.renderValue(processor.getArtifactId(), false);
-                            // PlainText @ [237:56]
-                            __internal.aboutToExecutePosInTemplate(237, 56);
-                            __internal.writeValue(PLAIN_TEXT_44_0);
-                            // IfBlockBegin @ [238:1]
-                            __internal.aboutToExecutePosInTemplate(238, 1);
+                            // PlainText @ [238:56]
+                            __internal.aboutToExecutePosInTemplate(238, 56);
+                            __internal.writeValue(PLAIN_TEXT_43_0);
+                            // IfBlockBegin @ [239:1]
+                            __internal.aboutToExecutePosInTemplate(239, 1);
                             if (processor.getVersion() != null) {
-                                // PlainText @ [238:39]
-                                __internal.aboutToExecutePosInTemplate(238, 39);
-                                __internal.writeValue(PLAIN_TEXT_61_0);
-                                // ValueExpression @ [239:27]
-                                __internal.aboutToExecutePosInTemplate(239, 27);
+                                // PlainText @ [239:39]
+                                __internal.aboutToExecutePosInTemplate(239, 39);
+                                __internal.writeValue(PLAIN_TEXT_60_0);
+                                // ValueExpression @ [240:27]
+                                __internal.aboutToExecutePosInTemplate(240, 27);
                                 __internal.renderValue(processor.getVersion(), false);
-                                // PlainText @ [239:50]
-                                __internal.aboutToExecutePosInTemplate(239, 50);
-                                __internal.writeValue(PLAIN_TEXT_46_0);
-                                // IfBlockEnd @ [238:1]
-                                __internal.aboutToExecutePosInTemplate(238, 1);
-                            } // if end @ [238:1]
-                            // PlainText @ [240:2]
-                            __internal.aboutToExecutePosInTemplate(240, 2);
-                            __internal.writeValue(PLAIN_TEXT_62_0);
-                            // ForBlockEnd @ [234:1]
-                            __internal.aboutToExecutePosInTemplate(234, 1);
+                                // PlainText @ [240:50]
+                                __internal.aboutToExecutePosInTemplate(240, 50);
+                                __internal.writeValue(PLAIN_TEXT_45_0);
+                                // IfBlockEnd @ [239:1]
+                                __internal.aboutToExecutePosInTemplate(239, 1);
+                            } // if end @ [239:1]
+                            // PlainText @ [241:2]
+                            __internal.aboutToExecutePosInTemplate(241, 2);
+                            __internal.writeValue(PLAIN_TEXT_61_0);
+                            // ForBlockEnd @ [235:1]
+                            __internal.aboutToExecutePosInTemplate(235, 1);
                         } catch (com.fizzed.rocker.runtime.ContinueException e) {
                             // support for continuing for loops
                         }
-                    }); // for end @ [234:1]
+                    }); // for end @ [235:1]
                 } catch (com.fizzed.rocker.runtime.BreakException e) {
                     // support for breaking for loops
                 }
-                // PlainText @ [242:2]
-                __internal.aboutToExecutePosInTemplate(242, 2);
-                __internal.writeValue(PLAIN_TEXT_63_0);
-                // ValueExpression @ [245:68]
-                __internal.aboutToExecutePosInTemplate(245, 68);
+                // PlainText @ [243:2]
+                __internal.aboutToExecutePosInTemplate(243, 2);
+                __internal.writeValue(PLAIN_TEXT_62_0);
+                // ValueExpression @ [246:68]
+                __internal.aboutToExecutePosInTemplate(246, 68);
                 __internal.renderValue(project.getPackageName(), false);
-                // PlainText @ [245:93]
-                __internal.aboutToExecutePosInTemplate(245, 93);
-                __internal.writeValue(PLAIN_TEXT_64_0);
-                // ValueExpression @ [246:69]
-                __internal.aboutToExecutePosInTemplate(246, 69);
+                // PlainText @ [246:93]
+                __internal.aboutToExecutePosInTemplate(246, 93);
+                __internal.writeValue(PLAIN_TEXT_63_0);
+                // ValueExpression @ [247:69]
+                __internal.aboutToExecutePosInTemplate(247, 69);
                 __internal.renderValue(project.getPropertyName(), false);
-                // PlainText @ [246:95]
-                __internal.aboutToExecutePosInTemplate(246, 95);
-                __internal.writeValue(PLAIN_TEXT_65_0);
-                // IfBlockBegin @ [258:17]
-                __internal.aboutToExecutePosInTemplate(258, 17);
+                // PlainText @ [247:95]
+                __internal.aboutToExecutePosInTemplate(247, 95);
+                __internal.writeValue(PLAIN_TEXT_64_0);
+                // IfBlockBegin @ [259:17]
+                __internal.aboutToExecutePosInTemplate(259, 17);
                 if (features.contains("grpc")) {
-                    // PlainText @ [258:50]
-                    __internal.aboutToExecutePosInTemplate(258, 50);
-                    __internal.writeValue(PLAIN_TEXT_66_0);
-                    // IfBlockEnd @ [258:17]
-                    __internal.aboutToExecutePosInTemplate(258, 17);
-                } // if end @ [258:17]
-                // PlainText @ [260:18]
-                __internal.aboutToExecutePosInTemplate(260, 18);
-                __internal.writeValue(PLAIN_TEXT_67_0);
-                // IfBlockBegin @ [264:1]
-                __internal.aboutToExecutePosInTemplate(264, 1);
+                    // PlainText @ [259:50]
+                    __internal.aboutToExecutePosInTemplate(259, 50);
+                    __internal.writeValue(PLAIN_TEXT_65_0);
+                    // IfBlockEnd @ [259:17]
+                    __internal.aboutToExecutePosInTemplate(259, 17);
+                } // if end @ [259:17]
+                // PlainText @ [261:18]
+                __internal.aboutToExecutePosInTemplate(261, 18);
+                __internal.writeValue(PLAIN_TEXT_66_0);
+                // IfBlockBegin @ [265:1]
+                __internal.aboutToExecutePosInTemplate(265, 1);
                 if (features.testFramework().isKotlinTestFramework() || features.testFramework().isJunit()) {
-                    // PlainText @ [264:95]
-                    __internal.aboutToExecutePosInTemplate(264, 95);
-                    __internal.writeValue(PLAIN_TEXT_68_0);
-                    // ValueExpression @ [274:41]
-                    __internal.aboutToExecutePosInTemplate(274, 41);
-                    __internal.renderValue(mavenBuild.getTestAnnotationProcessorCombineAttribute(), false);
-                    // PlainText @ [274:97]
-                    __internal.aboutToExecutePosInTemplate(274, 97);
-                    __internal.writeValue(PLAIN_TEXT_21_0);
-                    // ForBlockBegin @ [275:1]
-                    __internal.aboutToExecutePosInTemplate(275, 1);
+                    // PlainText @ [265:95]
+                    __internal.aboutToExecutePosInTemplate(265, 95);
+                    __internal.writeValue(PLAIN_TEXT_67_0);
+                    // ValueExpression @ [275:41]
+                    __internal.aboutToExecutePosInTemplate(275, 41);
+                    __internal.renderValue(mavenBuild.testAnnotationProcessorCombineAttribute(), false);
+                    // PlainText @ [275:94]
+                    __internal.aboutToExecutePosInTemplate(275, 94);
+                    __internal.writeValue(PLAIN_TEXT_20_0);
+                    // ForBlockBegin @ [276:1]
+                    __internal.aboutToExecutePosInTemplate(276, 1);
                     try {
-                        com.fizzed.rocker.runtime.Java8Iterator.forEach(mavenBuild.getTestAnnotationProcessors(), (processor) -> {
+                        com.fizzed.rocker.runtime.Java8Iterator.forEach(mavenBuild.testAnnotationProcessors(), (processor) -> {
                             try {
-                                // PlainText @ [275:62]
-                                __internal.aboutToExecutePosInTemplate(275, 62);
-                                __internal.writeValue(PLAIN_TEXT_59_0);
-                                // ValueExpression @ [277:27]
-                                __internal.aboutToExecutePosInTemplate(277, 27);
+                                // PlainText @ [276:59]
+                                __internal.aboutToExecutePosInTemplate(276, 59);
+                                __internal.writeValue(PLAIN_TEXT_58_0);
+                                // ValueExpression @ [278:27]
+                                __internal.aboutToExecutePosInTemplate(278, 27);
                                 __internal.renderValue(processor.getGroupId(), false);
-                                // PlainText @ [277:50]
-                                __internal.aboutToExecutePosInTemplate(277, 50);
-                                __internal.writeValue(PLAIN_TEXT_60_0);
-                                // ValueExpression @ [278:30]
-                                __internal.aboutToExecutePosInTemplate(278, 30);
+                                // PlainText @ [278:50]
+                                __internal.aboutToExecutePosInTemplate(278, 50);
+                                __internal.writeValue(PLAIN_TEXT_59_0);
+                                // ValueExpression @ [279:30]
+                                __internal.aboutToExecutePosInTemplate(279, 30);
                                 __internal.renderValue(processor.getArtifactId(), false);
-                                // PlainText @ [278:56]
-                                __internal.aboutToExecutePosInTemplate(278, 56);
-                                __internal.writeValue(PLAIN_TEXT_44_0);
-                                // IfBlockBegin @ [279:1]
-                                __internal.aboutToExecutePosInTemplate(279, 1);
+                                // PlainText @ [279:56]
+                                __internal.aboutToExecutePosInTemplate(279, 56);
+                                __internal.writeValue(PLAIN_TEXT_43_0);
+                                // IfBlockBegin @ [280:1]
+                                __internal.aboutToExecutePosInTemplate(280, 1);
                                 if (processor.getVersion() != null) {
-                                    // PlainText @ [279:39]
-                                    __internal.aboutToExecutePosInTemplate(279, 39);
-                                    __internal.writeValue(PLAIN_TEXT_61_0);
-                                    // ValueExpression @ [280:27]
-                                    __internal.aboutToExecutePosInTemplate(280, 27);
+                                    // PlainText @ [280:39]
+                                    __internal.aboutToExecutePosInTemplate(280, 39);
+                                    __internal.writeValue(PLAIN_TEXT_60_0);
+                                    // ValueExpression @ [281:27]
+                                    __internal.aboutToExecutePosInTemplate(281, 27);
                                     __internal.renderValue(processor.getVersion(), false);
-                                    // PlainText @ [280:50]
-                                    __internal.aboutToExecutePosInTemplate(280, 50);
-                                    __internal.writeValue(PLAIN_TEXT_46_0);
-                                    // IfBlockEnd @ [279:1]
-                                    __internal.aboutToExecutePosInTemplate(279, 1);
-                                } // if end @ [279:1]
-                                // PlainText @ [281:2]
-                                __internal.aboutToExecutePosInTemplate(281, 2);
-                                __internal.writeValue(PLAIN_TEXT_62_0);
-                                // ForBlockEnd @ [275:1]
-                                __internal.aboutToExecutePosInTemplate(275, 1);
+                                    // PlainText @ [281:50]
+                                    __internal.aboutToExecutePosInTemplate(281, 50);
+                                    __internal.writeValue(PLAIN_TEXT_45_0);
+                                    // IfBlockEnd @ [280:1]
+                                    __internal.aboutToExecutePosInTemplate(280, 1);
+                                } // if end @ [280:1]
+                                // PlainText @ [282:2]
+                                __internal.aboutToExecutePosInTemplate(282, 2);
+                                __internal.writeValue(PLAIN_TEXT_61_0);
+                                // ForBlockEnd @ [276:1]
+                                __internal.aboutToExecutePosInTemplate(276, 1);
                             } catch (com.fizzed.rocker.runtime.ContinueException e) {
                                 // support for continuing for loops
                             }
-                        }); // for end @ [275:1]
+                        }); // for end @ [276:1]
                     } catch (com.fizzed.rocker.runtime.BreakException e) {
                         // support for breaking for loops
                     }
-                    // PlainText @ [283:2]
-                    __internal.aboutToExecutePosInTemplate(283, 2);
-                    __internal.writeValue(PLAIN_TEXT_69_0);
-                    // IfBlockEnd @ [264:1]
-                    __internal.aboutToExecutePosInTemplate(264, 1);
-                } // if end @ [264:1]
-                // PlainText @ [299:2]
-                __internal.aboutToExecutePosInTemplate(299, 2);
-                __internal.writeValue(PLAIN_TEXT_70_0);
-                // IfBlockBegin @ [307:1]
-                __internal.aboutToExecutePosInTemplate(307, 1);
+                    // PlainText @ [284:2]
+                    __internal.aboutToExecutePosInTemplate(284, 2);
+                    __internal.writeValue(PLAIN_TEXT_68_0);
+                    // IfBlockEnd @ [265:1]
+                    __internal.aboutToExecutePosInTemplate(265, 1);
+                } // if end @ [265:1]
+                // PlainText @ [300:2]
+                __internal.aboutToExecutePosInTemplate(300, 2);
+                __internal.writeValue(PLAIN_TEXT_69_0);
+                // IfBlockBegin @ [308:1]
+                __internal.aboutToExecutePosInTemplate(308, 1);
                 if (features.isFeaturePresent(JpaFeature.class)) {
-                    // PlainText @ [307:52]
-                    __internal.aboutToExecutePosInTemplate(307, 52);
-                    __internal.writeValue(PLAIN_TEXT_71_0);
-                    // IfBlockEnd @ [307:1]
-                    __internal.aboutToExecutePosInTemplate(307, 1);
-                } // if end @ [307:1]
-                // PlainText @ [313:2]
-                __internal.aboutToExecutePosInTemplate(313, 2);
-                __internal.writeValue(PLAIN_TEXT_72_0);
-                // IfBlockEnd @ [171:1]
-                __internal.aboutToExecutePosInTemplate(171, 1);
-            } // if end @ [171:1]
-            // PlainText @ [349:2]
-            __internal.aboutToExecutePosInTemplate(349, 2);
-            __internal.writeValue(PLAIN_TEXT_15_0);
-            // IfBlockBegin @ [350:1]
-            __internal.aboutToExecutePosInTemplate(350, 1);
+                    // PlainText @ [308:52]
+                    __internal.aboutToExecutePosInTemplate(308, 52);
+                    __internal.writeValue(PLAIN_TEXT_70_0);
+                    // IfBlockEnd @ [308:1]
+                    __internal.aboutToExecutePosInTemplate(308, 1);
+                } // if end @ [308:1]
+                // PlainText @ [314:2]
+                __internal.aboutToExecutePosInTemplate(314, 2);
+                __internal.writeValue(PLAIN_TEXT_71_0);
+                // IfBlockEnd @ [172:1]
+                __internal.aboutToExecutePosInTemplate(172, 1);
+            } // if end @ [172:1]
+            // IfBlockBegin @ [351:1]
+            __internal.aboutToExecutePosInTemplate(351, 1);
             if (features.language().isGroovy()) {
-                // PlainText @ [350:39]
-                __internal.aboutToExecutePosInTemplate(350, 39);
-                __internal.writeValue(PLAIN_TEXT_73_0);
-                // IfBlockEnd @ [350:1]
-                __internal.aboutToExecutePosInTemplate(350, 1);
-            } // if end @ [350:1]
-            // PlainText @ [378:2]
-            __internal.aboutToExecutePosInTemplate(378, 2);
-            __internal.writeValue(PLAIN_TEXT_15_0);
-            // IfBlockBegin @ [379:1]
-            __internal.aboutToExecutePosInTemplate(379, 1);
+                // PlainText @ [351:39]
+                __internal.aboutToExecutePosInTemplate(351, 39);
+                __internal.writeValue(PLAIN_TEXT_72_0);
+                // IfBlockEnd @ [351:1]
+                __internal.aboutToExecutePosInTemplate(351, 1);
+            } // if end @ [351:1]
+            // IfBlockBegin @ [380:1]
+            __internal.aboutToExecutePosInTemplate(380, 1);
             if (features.contains("grpc")) {
-                // PlainText @ [379:34]
-                __internal.aboutToExecutePosInTemplate(379, 34);
-                __internal.writeValue(PLAIN_TEXT_74_0);
-                // IfBlockEnd @ [379:1]
-                __internal.aboutToExecutePosInTemplate(379, 1);
-            } // if end @ [379:1]
-            // PlainText @ [384:2]
-            __internal.aboutToExecutePosInTemplate(384, 2);
-            __internal.writeValue(PLAIN_TEXT_15_0);
-            // IfBlockBegin @ [385:1]
-            __internal.aboutToExecutePosInTemplate(385, 1);
+                // PlainText @ [380:34]
+                __internal.aboutToExecutePosInTemplate(380, 34);
+                __internal.writeValue(PLAIN_TEXT_73_0);
+                // IfBlockEnd @ [380:1]
+                __internal.aboutToExecutePosInTemplate(380, 1);
+            } // if end @ [380:1]
+            // IfBlockBegin @ [386:1]
+            __internal.aboutToExecutePosInTemplate(386, 1);
             if (features.getFeatures().stream().anyMatch(f -> f instanceof AbstractDockerRegistryWorkflow) || features.contains("oracle-function")) {
-                // PlainText @ [385:138]
-                __internal.aboutToExecutePosInTemplate(385, 138);
-                __internal.writeValue(PLAIN_TEXT_75_0);
-                // IfBlockBegin @ [393:3]
-                __internal.aboutToExecutePosInTemplate(393, 3);
+                // PlainText @ [386:138]
+                __internal.aboutToExecutePosInTemplate(386, 138);
+                __internal.writeValue(PLAIN_TEXT_74_0);
+                // IfBlockBegin @ [394:3]
+                __internal.aboutToExecutePosInTemplate(394, 3);
                 if (applicationType == ApplicationType.FUNCTION && features.contains("oracle-function")) {
-                    // PlainText @ [393:92]
-                    __internal.aboutToExecutePosInTemplate(393, 92);
-                    __internal.writeValue(PLAIN_TEXT_76_0);
-                    // IfBlockEnd @ [393:3]
-                    __internal.aboutToExecutePosInTemplate(393, 3);
-                } // if end @ [393:3]
-                // PlainText @ [398:4]
-                __internal.aboutToExecutePosInTemplate(398, 4);
-                __internal.writeValue(PLAIN_TEXT_77_0);
-                // IfBlockEnd @ [385:1]
-                __internal.aboutToExecutePosInTemplate(385, 1);
-            } // if end @ [385:1]
-            // PlainText @ [401:2]
-            __internal.aboutToExecutePosInTemplate(401, 2);
-            __internal.writeValue(PLAIN_TEXT_78_0);
-            // IfBlockBegin @ [405:1]
-            __internal.aboutToExecutePosInTemplate(405, 1);
+                    // PlainText @ [394:92]
+                    __internal.aboutToExecutePosInTemplate(394, 92);
+                    __internal.writeValue(PLAIN_TEXT_75_0);
+                    // IfBlockEnd @ [394:3]
+                    __internal.aboutToExecutePosInTemplate(394, 3);
+                } // if end @ [394:3]
+                // PlainText @ [399:4]
+                __internal.aboutToExecutePosInTemplate(399, 4);
+                __internal.writeValue(PLAIN_TEXT_76_0);
+                // IfBlockEnd @ [386:1]
+                __internal.aboutToExecutePosInTemplate(386, 1);
+            } // if end @ [386:1]
+            // PlainText @ [402:2]
+            __internal.aboutToExecutePosInTemplate(402, 2);
+            __internal.writeValue(PLAIN_TEXT_77_0);
+            // IfBlockBegin @ [406:1]
+            __internal.aboutToExecutePosInTemplate(406, 1);
             if (features.language().isGroovy() || features.testFramework().isSpock()) {
-                // PlainText @ [405:77]
-                __internal.aboutToExecutePosInTemplate(405, 77);
-                __internal.writeValue(PLAIN_TEXT_79_0);
-                // IfBlockBegin @ [407:5]
-                __internal.aboutToExecutePosInTemplate(407, 5);
+                // PlainText @ [406:77]
+                __internal.aboutToExecutePosInTemplate(406, 77);
+                __internal.writeValue(PLAIN_TEXT_78_0);
+                // IfBlockBegin @ [408:5]
+                __internal.aboutToExecutePosInTemplate(408, 5);
                 if (VersionInfo.isStarterSnapshot()) {
-                    // PlainText @ [407:44]
-                    __internal.aboutToExecutePosInTemplate(407, 44);
-                    __internal.writeValue(PLAIN_TEXT_80_0);
-                    // IfBlockEnd @ [407:5]
-                    __internal.aboutToExecutePosInTemplate(407, 5);
-                } // if end @ [407:5]
-                // PlainText @ [419:6]
-                __internal.aboutToExecutePosInTemplate(419, 6);
-                __internal.writeValue(PLAIN_TEXT_81_0);
-                // IfBlockElseIf @ [421:1]
-                __internal.aboutToExecutePosInTemplate(421, 1);
+                    // PlainText @ [408:44]
+                    __internal.aboutToExecutePosInTemplate(408, 44);
+                    __internal.writeValue(PLAIN_TEXT_79_0);
+                    // IfBlockEnd @ [408:5]
+                    __internal.aboutToExecutePosInTemplate(408, 5);
+                } // if end @ [408:5]
+                // PlainText @ [420:6]
+                __internal.aboutToExecutePosInTemplate(420, 6);
+                __internal.writeValue(PLAIN_TEXT_80_0);
+                // IfBlockElseIf @ [422:1]
+                __internal.aboutToExecutePosInTemplate(422, 1);
             } else if (VersionInfo.isStarterSnapshot()) {
-                // PlainText @ [421:46]
-                __internal.aboutToExecutePosInTemplate(421, 46);
-                __internal.writeValue(PLAIN_TEXT_82_0);
-                // IfBlockEnd @ [405:1]
-                __internal.aboutToExecutePosInTemplate(405, 1);
-            } // if end @ [405:1]
-            // PlainText @ [435:2]
-            __internal.aboutToExecutePosInTemplate(435, 2);
-            __internal.writeValue(PLAIN_TEXT_15_0);
-            // ValueExpression @ [436:1]
-            __internal.aboutToExecutePosInTemplate(436, 1);
-            __internal.renderValue(profiles.template(mavenBuild.getProfiles()), false);
-            // PlainText @ [436:45]
-            __internal.aboutToExecutePosInTemplate(436, 45);
-            __internal.writeValue(PLAIN_TEXT_83_0);
+                // PlainText @ [422:46]
+                __internal.aboutToExecutePosInTemplate(422, 46);
+                __internal.writeValue(PLAIN_TEXT_81_0);
+                // IfBlockEnd @ [406:1]
+                __internal.aboutToExecutePosInTemplate(406, 1);
+            } // if end @ [406:1]
+            // ValueExpression @ [437:1]
+            __internal.aboutToExecutePosInTemplate(437, 1);
+            __internal.renderValue(profiles.template(mavenBuild.profiles()), false);
+            // PlainText @ [437:42]
+            __internal.aboutToExecutePosInTemplate(437, 42);
+            __internal.writeValue(PLAIN_TEXT_82_0);
         }
     }
 
     private static class PlainText {
 
-        static private final String PLAIN_TEXT_0_0 = "\n<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd\">\n  <modelVersion>4.0.0</modelVersion>\n";
-        static private final String PLAIN_TEXT_1_0 = "\n  <groupId>";
+        static private final String PLAIN_TEXT_0_0 = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd\">\n  <modelVersion>4.0.0</modelVersion>\n";
+        static private final String PLAIN_TEXT_1_0 = "  <groupId>";
         static private final String PLAIN_TEXT_2_0 = "</groupId>\n";
-        static private final String PLAIN_TEXT_3_0 = "\n  <artifactId>";
+        static private final String PLAIN_TEXT_3_0 = "  <artifactId>";
         static private final String PLAIN_TEXT_4_0 = "</artifactId>\n  <version>0.1</version>\n  <packaging>${packaging}</packaging>\n\n";
-        static private final String PLAIN_TEXT_5_0 = "\n  <parent>\n    <groupId>";
+        static private final String PLAIN_TEXT_5_0 = "  <parent>\n    <groupId>";
         static private final String PLAIN_TEXT_6_0 = "</groupId>\n    <artifactId>";
         static private final String PLAIN_TEXT_7_0 = "-parent</artifactId>\n    <version>1.0-SNAPSHOT</version>\n  </parent>\n\n";
-        static private final String PLAIN_TEXT_8_0 = "\n  <parent>\n    <groupId>io.micronaut.platform</groupId>\n    <artifactId>micronaut-parent</artifactId>\n    <version>";
+        static private final String PLAIN_TEXT_8_0 = "  <parent>\n    <groupId>io.micronaut.platform</groupId>\n    <artifactId>micronaut-parent</artifactId>\n    <version>";
         static private final String PLAIN_TEXT_9_0 = "</version>\n  </parent>\n";
-        static private final String PLAIN_TEXT_10_0 = "\n\n  <properties>\n    <packaging>jar</packaging>\n";
-        static private final String PLAIN_TEXT_11_0 = "\n    <jdk.version>";
+        static private final String PLAIN_TEXT_10_0 = "\n  <properties>\n    <packaging>jar</packaging>\n";
+        static private final String PLAIN_TEXT_11_0 = "    <jdk.version>";
         static private final String PLAIN_TEXT_12_0 = "</jdk.version>\n";
-        static private final String PLAIN_TEXT_13_0 = "\n    <release.version>";
+        static private final String PLAIN_TEXT_13_0 = "    <release.version>";
         static private final String PLAIN_TEXT_14_0 = "</release.version>\n";
-        static private final String PLAIN_TEXT_15_0 = "\n";
-        static private final String PLAIN_TEXT_16_0 = "\n    <!--";
-        static private final String PLAIN_TEXT_17_0 = "-->\n";
-        static private final String PLAIN_TEXT_18_0 = "\n    <";
-        static private final String PLAIN_TEXT_19_0 = ">";
-        static private final String PLAIN_TEXT_20_0 = "</";
-        static private final String PLAIN_TEXT_21_0 = ">\n";
-        static private final String PLAIN_TEXT_22_0 = "\n  </properties>\n\n  <repositories>\n";
-        static private final String PLAIN_TEXT_23_0 = "\n  </repositories>\n\n";
-        static private final String PLAIN_TEXT_24_0 = "\n  <dependencyManagement>\n    <dependencies>\n";
-        static private final String PLAIN_TEXT_25_0 = "\n    </dependencies>\n  </dependencyManagement>\n";
-        static private final String PLAIN_TEXT_26_0 = "\n\n  <dependencies>\n";
-        static private final String PLAIN_TEXT_27_0 = "\n\n";
-        static private final String PLAIN_TEXT_28_0 = "\n  </dependencies>\n  <build>\n    <plugins>\n";
-        static private final String PLAIN_TEXT_29_0 = "\n      <plugin>\n        <groupId>io.micronaut.maven</groupId>\n        <artifactId>micronaut-maven-plugin</artifactId>\n";
-        static private final String PLAIN_TEXT_30_0 = "\n        <configuration>\n";
-        static private final String PLAIN_TEXT_31_0 = "\n          <shared>true</shared>\n";
-        static private final String PLAIN_TEXT_32_0 = "\n          <jvmArguments>";
-        static private final String PLAIN_TEXT_33_0 = "</jvmArguments>\n";
-        static private final String PLAIN_TEXT_34_0 = "\n          <nativeImageBuildArgs>\n            <arg>-H:+StaticExecutableWithDynamicLibC</arg>\n            <arg>-Dfn.handler=${function.entrypoint}</arg>\n          </nativeImageBuildArgs>\n          <appArguments>\n            <arg>${function.entrypoint}</arg>\n          </appArguments>\n";
-        static private final String PLAIN_TEXT_35_0 = "\n          <configFile>aot-${packaging}.properties</configFile>\n";
-        static private final String PLAIN_TEXT_36_0 = "\n        </configuration>\n";
-        static private final String PLAIN_TEXT_37_0 = "\n      </plugin>\n";
-        static private final String PLAIN_TEXT_38_0 = "\n      <plugin>\n        <groupId>org.apache.maven.plugins</groupId>\n        <artifactId>maven-surefire-plugin</artifactId>\n        <configuration>\n          <includes>\n            <include>**/*Spec.*</include>\n            <include>**/*Test.*</include>\n          </includes>\n        </configuration>\n";
-        static private final String PLAIN_TEXT_39_0 = "\n        <dependencies>\n          <dependency>\n            <groupId>org.junit.jupiter</groupId>\n            <artifactId>junit-jupiter-engine</artifactId>\n            <version>${junit5.version}</version>\n          </dependency>\n        </dependencies>\n";
-        static private final String PLAIN_TEXT_40_0 = "\n       <plugin>\n         <groupId>com.google.cloud.functions</groupId>\n         <artifactId>function-maven-plugin</artifactId>\n         <configuration>\n           <functionTarget>io.micronaut.gcp.function.http.HttpFunction</functionTarget>\n         </configuration>\n        </plugin>\n";
-        static private final String PLAIN_TEXT_41_0 = "\n      <plugin>\n        <groupId>org.apache.maven.plugins</groupId>\n        <artifactId>maven-compiler-plugin</artifactId>\n        <configuration>\n          <!-- Uncomment to enable incremental compilation -->\n          <!-- <useIncrementalCompilation>false</useIncrementalCompilation> -->\n\n          <annotationProcessorPaths ";
-        static private final String PLAIN_TEXT_42_0 = "\n            <path>\n              <groupId>";
-        static private final String PLAIN_TEXT_43_0 = "</groupId>\n              <artifactId>";
-        static private final String PLAIN_TEXT_44_0 = "</artifactId>\n";
-        static private final String PLAIN_TEXT_45_0 = "\n              <version>";
-        static private final String PLAIN_TEXT_46_0 = "</version>\n";
-        static private final String PLAIN_TEXT_47_0 = "\n              <exclusions>\n";
-        static private final String PLAIN_TEXT_48_0 = "\n                <exclusion>\n                  <groupId>";
-        static private final String PLAIN_TEXT_49_0 = "</groupId>\n                  <artifactId>";
-        static private final String PLAIN_TEXT_50_0 = "</artifactId>\n                </exclusion>\n";
-        static private final String PLAIN_TEXT_51_0 = "\n              </exclusions>\n";
-        static private final String PLAIN_TEXT_52_0 = "\n            </path>\n";
-        static private final String PLAIN_TEXT_53_0 = "\n          </annotationProcessorPaths>\n          <compilerArgs>\n            <arg>-Amicronaut.processing.group=";
-        static private final String PLAIN_TEXT_54_0 = "</arg>\n            <arg>-Amicronaut.processing.module=";
-        static private final String PLAIN_TEXT_55_0 = "</arg>\n          </compilerArgs>\n        </configuration>\n      </plugin>\n";
-        static private final String PLAIN_TEXT_56_0 = "\n      <plugin>\n        <artifactId>kotlin-maven-plugin</artifactId>\n        <groupId>org.jetbrains.kotlin</groupId>\n        <version>${kotlinVersion}</version>\n        <configuration>\n          <jvmTarget>${jdk.version}</jvmTarget>\n          <compilerPlugins>\n";
-        static private final String PLAIN_TEXT_57_0 = "\n            <plugin>jpa</plugin>\n";
-        static private final String PLAIN_TEXT_58_0 = "\n            <plugin>all-open</plugin>\n          </compilerPlugins>\n          <pluginOptions>\n            <option>all-open:annotation=io.micronaut.aop.Around</option>\n          </pluginOptions>\n        </configuration>\n        <executions>\n          <execution>\n            <id>kapt</id>\n            <goals>\n              <goal>kapt</goal>\n            </goals>\n            <configuration>\n              <sourceDirs>\n                <sourceDir>${project.basedir}/src/main/kotlin</sourceDir>\n              </sourceDirs>\n              <annotationProcessorPaths ";
-        static private final String PLAIN_TEXT_59_0 = "\n               <annotationProcessorPath>\n                 <groupId>";
-        static private final String PLAIN_TEXT_60_0 = "</groupId>\n                 <artifactId>";
-        static private final String PLAIN_TEXT_61_0 = "\n                 <version>";
-        static private final String PLAIN_TEXT_62_0 = "\n               </annotationProcessorPath>\n";
-        static private final String PLAIN_TEXT_63_0 = "\n              </annotationProcessorPaths>\n              <annotationProcessorArgs>\n                <annotationProcessorArg>micronaut.processing.group=";
-        static private final String PLAIN_TEXT_64_0 = "</annotationProcessorArg>\n                <annotationProcessorArg>micronaut.processing.module=";
-        static private final String PLAIN_TEXT_65_0 = "</annotationProcessorArg>\n              </annotationProcessorArgs>\n            </configuration>\n          </execution>\n          <execution>\n            <id>compile</id>\n            <goals>\n              <goal>compile</goal>\n            </goals>\n            <configuration>\n              <sourceDirs>\n                <sourceDir>${project.basedir}/src/main/kotlin</sourceDir>\n                ";
-        static private final String PLAIN_TEXT_66_0 = "\n                <sourceDir>${project.build.directory}/generated-sources/</sourceDir>\n                ";
-        static private final String PLAIN_TEXT_67_0 = "\n              </sourceDirs>\n            </configuration>\n          </execution>\n";
-        static private final String PLAIN_TEXT_68_0 = "\n          <execution>\n            <id>test-kapt</id>\n            <goals>\n              <goal>test-kapt</goal>\n            </goals>\n            <configuration>\n              <sourceDirs>\n                <sourceDir>${project.basedir}/src/test/kotlin</sourceDir>\n              </sourceDirs>\n              <annotationProcessorPaths ";
-        static private final String PLAIN_TEXT_69_0 = "\n              </annotationProcessorPaths>\n            </configuration>\n          </execution>\n          <execution>\n            <id>test-compile</id>\n            <goals>\n              <goal>test-compile</goal>\n            </goals>\n            <configuration>\n              <sourceDirs>\n                <sourceDir>${project.basedir}/src/test/kotlin</sourceDir>\n                <sourceDir>${project.basedir}/target/generated-sources/kapt/test</sourceDir>\n              </sourceDirs>\n            </configuration>\n          </execution>\n";
-        static private final String PLAIN_TEXT_70_0 = "\n        </executions>\n        <dependencies>\n          <dependency>\n            <groupId>org.jetbrains.kotlin</groupId>\n            <artifactId>kotlin-maven-allopen</artifactId>\n            <version>${kotlinVersion}</version>\n          </dependency>\n";
-        static private final String PLAIN_TEXT_71_0 = "\n          <dependency>\n            <groupId>org.jetbrains.kotlin</groupId>\n            <artifactId>kotlin-maven-noarg</artifactId>\n            <version>${kotlinVersion}</version>\n          </dependency>\n";
-        static private final String PLAIN_TEXT_72_0 = "\n        </dependencies>\n      </plugin>\n      <plugin>\n        <groupId>org.apache.maven.plugins</groupId>\n        <artifactId>maven-compiler-plugin</artifactId>\n        <configuration>\n          <proc>none</proc>\n          <source>${jdk.version}</source>\n          <target>${jdk.version}</target>\n        </configuration>\n        <executions>\n          <execution>\n            <id>default-compile</id>\n            <phase>none</phase>\n          </execution>\n          <execution>\n            <id>default-testCompile</id>\n            <phase>none</phase>\n          </execution>\n          <execution>\n            <id>java-compile</id>\n            <phase>compile</phase>\n            <goals>\n              <goal>compile</goal>\n            </goals>\n          </execution>\n          <execution>\n            <id>java-test-compile</id>\n            <phase>test-compile</phase>\n            <goals>\n              <goal>testCompile</goal>\n            </goals>\n          </execution>\n        </executions>\n      </plugin>\n";
-        static private final String PLAIN_TEXT_73_0 = "\n      <plugin>\n        <artifactId>maven-compiler-plugin</artifactId>\n      </plugin>\n      <plugin>\n        <groupId>org.codehaus.mojo</groupId>\n        <artifactId>properties-maven-plugin</artifactId>\n        <version>1.0.0</version>\n        <executions>\n          <execution>\n            <goals>\n              <goal>set-system-properties</goal>\n            </goals>\n            <configuration>\n              <properties>\n                <property>\n                  <name>groovy.target.directory</name>\n                  <value>${project.build.directory}/classes</value>\n                </property>\n                <property>\n                  <name>groovy.parameters</name>\n                  <value>true</value>\n                </property>\n              </properties>\n            </configuration>\n          </execution>\n        </executions>\n      </plugin>\n";
-        static private final String PLAIN_TEXT_74_0 = "\n      <plugin>\n        <groupId>com.github.os72</groupId>\n        <artifactId>protoc-jar-maven-plugin</artifactId>\n      </plugin>\n";
-        static private final String PLAIN_TEXT_75_0 = "\n      <plugin>\n        <groupId>com.google.cloud.tools</groupId>\n        <artifactId>jib-maven-plugin</artifactId>\n        <configuration>\n          <to>\n            <image>${jib.docker.image}:${jib.docker.tag}</image>\n          </to>\n  ";
-        static private final String PLAIN_TEXT_76_0 = "\n          <container>\n            <args>${function.entrypoint}</args>\n            <mainClass>${exec.mainClass}</mainClass>\n          </container>\n  ";
-        static private final String PLAIN_TEXT_77_0 = "\n        </configuration>\n      </plugin>\n";
-        static private final String PLAIN_TEXT_78_0 = "\n    </plugins>\n  </build>\n\n";
-        static private final String PLAIN_TEXT_79_0 = "\n  <pluginRepositories>\n    ";
-        static private final String PLAIN_TEXT_80_0 = "\n    <pluginRepository>\n       <id>central</id>\n       <url>https://repo.maven.apache.org/maven2</url>\n    </pluginRepository>\n    <pluginRepository>\n       <id>ossrh</id>\n       <url>https://oss.sonatype.org/content/repositories/snapshots</url>\n       <snapshots>\n           <enabled>true</enabled>\n       </snapshots>\n    </pluginRepository>\n    ";
-        static private final String PLAIN_TEXT_81_0 = "\n  </pluginRepositories>\n";
-        static private final String PLAIN_TEXT_82_0 = "\n    <pluginRepositories>\n       <pluginRepository>\n           <id>central</id>\n           <url>https://repo.maven.apache.org/maven2</url>\n       </pluginRepository>\n       <pluginRepository>\n           <id>ossrh</id>\n           <url>https://oss.sonatype.org/content/repositories/snapshots</url>\n           <snapshots>\n               <enabled>true</enabled>\n           </snapshots>\n       </pluginRepository>\n    </pluginRepositories>\n";
-        static private final String PLAIN_TEXT_83_0 = "\n</project>\n";
+        static private final String PLAIN_TEXT_15_0 = "    <!--";
+        static private final String PLAIN_TEXT_16_0 = "-->\n";
+        static private final String PLAIN_TEXT_17_0 = "    <";
+        static private final String PLAIN_TEXT_18_0 = ">";
+        static private final String PLAIN_TEXT_19_0 = "</";
+        static private final String PLAIN_TEXT_20_0 = ">\n";
+        static private final String PLAIN_TEXT_21_0 = "  </properties>\n\n  <repositories>\n";
+        static private final String PLAIN_TEXT_22_0 = "\n  </repositories>\n\n";
+        static private final String PLAIN_TEXT_23_0 = "  <dependencyManagement>\n    <dependencies>\n";
+        static private final String PLAIN_TEXT_24_0 = "\n";
+        static private final String PLAIN_TEXT_25_0 = "    </dependencies>\n  </dependencyManagement>\n";
+        static private final String PLAIN_TEXT_26_0 = "\n  <dependencies>\n";
+        static private final String PLAIN_TEXT_27_0 = "  </dependencies>\n  <build>\n    <plugins>\n";
+        static private final String PLAIN_TEXT_28_0 = "      <plugin>\n        <groupId>io.micronaut.maven</groupId>\n        <artifactId>micronaut-maven-plugin</artifactId>\n";
+        static private final String PLAIN_TEXT_29_0 = "        <configuration>\n";
+        static private final String PLAIN_TEXT_30_0 = "          <shared>true</shared>\n";
+        static private final String PLAIN_TEXT_31_0 = "          <jvmArguments>";
+        static private final String PLAIN_TEXT_32_0 = "</jvmArguments>\n";
+        static private final String PLAIN_TEXT_33_0 = "          <nativeImageBuildArgs>\n            <arg>-H:+StaticExecutableWithDynamicLibC</arg>\n            <arg>-Dfn.handler=${function.entrypoint}</arg>\n          </nativeImageBuildArgs>\n          <appArguments>\n            <arg>${function.entrypoint}</arg>\n          </appArguments>\n";
+        static private final String PLAIN_TEXT_34_0 = "          <configFile>aot-${packaging}.properties</configFile>\n";
+        static private final String PLAIN_TEXT_35_0 = "        </configuration>\n";
+        static private final String PLAIN_TEXT_36_0 = "      </plugin>\n";
+        static private final String PLAIN_TEXT_37_0 = "      <plugin>\n        <groupId>org.apache.maven.plugins</groupId>\n        <artifactId>maven-surefire-plugin</artifactId>\n        <configuration>\n          <includes>\n            <include>**/*Spec.*</include>\n            <include>**/*Test.*</include>\n          </includes>\n        </configuration>\n";
+        static private final String PLAIN_TEXT_38_0 = "        <dependencies>\n          <dependency>\n            <groupId>org.junit.jupiter</groupId>\n            <artifactId>junit-jupiter-engine</artifactId>\n            <version>${junit5.version}</version>\n          </dependency>\n        </dependencies>\n";
+        static private final String PLAIN_TEXT_39_0 = "       <plugin>\n         <groupId>com.google.cloud.functions</groupId>\n         <artifactId>function-maven-plugin</artifactId>\n         <configuration>\n           <functionTarget>io.micronaut.gcp.function.http.HttpFunction</functionTarget>\n         </configuration>\n        </plugin>\n";
+        static private final String PLAIN_TEXT_40_0 = "      <plugin>\n        <groupId>org.apache.maven.plugins</groupId>\n        <artifactId>maven-compiler-plugin</artifactId>\n        <configuration>\n          <!-- Uncomment to enable incremental compilation -->\n          <!-- <useIncrementalCompilation>false</useIncrementalCompilation> -->\n\n          <annotationProcessorPaths ";
+        static private final String PLAIN_TEXT_41_0 = "            <path>\n              <groupId>";
+        static private final String PLAIN_TEXT_42_0 = "</groupId>\n              <artifactId>";
+        static private final String PLAIN_TEXT_43_0 = "</artifactId>\n";
+        static private final String PLAIN_TEXT_44_0 = "              <version>";
+        static private final String PLAIN_TEXT_45_0 = "</version>\n";
+        static private final String PLAIN_TEXT_46_0 = "              <exclusions>\n";
+        static private final String PLAIN_TEXT_47_0 = "                <exclusion>\n                  <groupId>";
+        static private final String PLAIN_TEXT_48_0 = "</groupId>\n                  <artifactId>";
+        static private final String PLAIN_TEXT_49_0 = "</artifactId>\n                </exclusion>\n";
+        static private final String PLAIN_TEXT_50_0 = "              </exclusions>\n";
+        static private final String PLAIN_TEXT_51_0 = "            </path>\n";
+        static private final String PLAIN_TEXT_52_0 = "          </annotationProcessorPaths>\n          <compilerArgs>\n            <arg>-Amicronaut.processing.group=";
+        static private final String PLAIN_TEXT_53_0 = "</arg>\n            <arg>-Amicronaut.processing.module=";
+        static private final String PLAIN_TEXT_54_0 = "</arg>\n          </compilerArgs>\n        </configuration>\n      </plugin>\n";
+        static private final String PLAIN_TEXT_55_0 = "      <plugin>\n        <artifactId>kotlin-maven-plugin</artifactId>\n        <groupId>org.jetbrains.kotlin</groupId>\n        <version>${kotlinVersion}</version>\n        <configuration>\n          <jvmTarget>${jdk.version}</jvmTarget>\n          <compilerPlugins>\n";
+        static private final String PLAIN_TEXT_56_0 = "            <plugin>jpa</plugin>\n";
+        static private final String PLAIN_TEXT_57_0 = "            <plugin>all-open</plugin>\n          </compilerPlugins>\n          <pluginOptions>\n            <option>all-open:annotation=io.micronaut.aop.Around</option>\n          </pluginOptions>\n        </configuration>\n        <executions>\n          <execution>\n            <id>kapt</id>\n            <goals>\n              <goal>kapt</goal>\n            </goals>\n            <configuration>\n              <sourceDirs>\n                <sourceDir>${project.basedir}/src/main/kotlin</sourceDir>\n              </sourceDirs>\n              <annotationProcessorPaths ";
+        static private final String PLAIN_TEXT_58_0 = "               <annotationProcessorPath>\n                 <groupId>";
+        static private final String PLAIN_TEXT_59_0 = "</groupId>\n                 <artifactId>";
+        static private final String PLAIN_TEXT_60_0 = "                 <version>";
+        static private final String PLAIN_TEXT_61_0 = "               </annotationProcessorPath>\n";
+        static private final String PLAIN_TEXT_62_0 = "              </annotationProcessorPaths>\n              <annotationProcessorArgs>\n                <annotationProcessorArg>micronaut.processing.group=";
+        static private final String PLAIN_TEXT_63_0 = "</annotationProcessorArg>\n                <annotationProcessorArg>micronaut.processing.module=";
+        static private final String PLAIN_TEXT_64_0 = "</annotationProcessorArg>\n              </annotationProcessorArgs>\n            </configuration>\n          </execution>\n          <execution>\n            <id>compile</id>\n            <goals>\n              <goal>compile</goal>\n            </goals>\n            <configuration>\n              <sourceDirs>\n                <sourceDir>${project.basedir}/src/main/kotlin</sourceDir>\n";
+        static private final String PLAIN_TEXT_65_0 = "                <sourceDir>${project.build.directory}/generated-sources/</sourceDir>\n";
+        static private final String PLAIN_TEXT_66_0 = "              </sourceDirs>\n            </configuration>\n          </execution>\n";
+        static private final String PLAIN_TEXT_67_0 = "          <execution>\n            <id>test-kapt</id>\n            <goals>\n              <goal>test-kapt</goal>\n            </goals>\n            <configuration>\n              <sourceDirs>\n                <sourceDir>${project.basedir}/src/test/kotlin</sourceDir>\n              </sourceDirs>\n              <annotationProcessorPaths ";
+        static private final String PLAIN_TEXT_68_0 = "              </annotationProcessorPaths>\n            </configuration>\n          </execution>\n          <execution>\n            <id>test-compile</id>\n            <goals>\n              <goal>test-compile</goal>\n            </goals>\n            <configuration>\n              <sourceDirs>\n                <sourceDir>${project.basedir}/src/test/kotlin</sourceDir>\n                <sourceDir>${project.basedir}/target/generated-sources/kapt/test</sourceDir>\n              </sourceDirs>\n            </configuration>\n          </execution>\n";
+        static private final String PLAIN_TEXT_69_0 = "        </executions>\n        <dependencies>\n          <dependency>\n            <groupId>org.jetbrains.kotlin</groupId>\n            <artifactId>kotlin-maven-allopen</artifactId>\n            <version>${kotlinVersion}</version>\n          </dependency>\n";
+        static private final String PLAIN_TEXT_70_0 = "          <dependency>\n            <groupId>org.jetbrains.kotlin</groupId>\n            <artifactId>kotlin-maven-noarg</artifactId>\n            <version>${kotlinVersion}</version>\n          </dependency>\n";
+        static private final String PLAIN_TEXT_71_0 = "        </dependencies>\n      </plugin>\n      <plugin>\n        <groupId>org.apache.maven.plugins</groupId>\n        <artifactId>maven-compiler-plugin</artifactId>\n        <configuration>\n          <proc>none</proc>\n          <source>${jdk.version}</source>\n          <target>${jdk.version}</target>\n        </configuration>\n        <executions>\n          <execution>\n            <id>default-compile</id>\n            <phase>none</phase>\n          </execution>\n          <execution>\n            <id>default-testCompile</id>\n            <phase>none</phase>\n          </execution>\n          <execution>\n            <id>java-compile</id>\n            <phase>compile</phase>\n            <goals>\n              <goal>compile</goal>\n            </goals>\n          </execution>\n          <execution>\n            <id>java-test-compile</id>\n            <phase>test-compile</phase>\n            <goals>\n              <goal>testCompile</goal>\n            </goals>\n          </execution>\n        </executions>\n      </plugin>\n";
+        static private final String PLAIN_TEXT_72_0 = "      <plugin>\n        <artifactId>maven-compiler-plugin</artifactId>\n      </plugin>\n      <plugin>\n        <groupId>org.codehaus.mojo</groupId>\n        <artifactId>properties-maven-plugin</artifactId>\n        <version>1.0.0</version>\n        <executions>\n          <execution>\n            <goals>\n              <goal>set-system-properties</goal>\n            </goals>\n            <configuration>\n              <properties>\n                <property>\n                  <name>groovy.target.directory</name>\n                  <value>${project.build.directory}/classes</value>\n                </property>\n                <property>\n                  <name>groovy.parameters</name>\n                  <value>true</value>\n                </property>\n              </properties>\n            </configuration>\n          </execution>\n        </executions>\n      </plugin>\n";
+        static private final String PLAIN_TEXT_73_0 = "      <plugin>\n        <groupId>com.github.os72</groupId>\n        <artifactId>protoc-jar-maven-plugin</artifactId>\n      </plugin>\n";
+        static private final String PLAIN_TEXT_74_0 = "      <plugin>\n        <groupId>com.google.cloud.tools</groupId>\n        <artifactId>jib-maven-plugin</artifactId>\n        <configuration>\n          <to>\n            <image>${jib.docker.image}:${jib.docker.tag}</image>\n          </to>\n";
+        static private final String PLAIN_TEXT_75_0 = "          <container>\n            <args>${function.entrypoint}</args>\n            <mainClass>${exec.mainClass}</mainClass>\n          </container>\n";
+        static private final String PLAIN_TEXT_76_0 = "        </configuration>\n      </plugin>\n";
+        static private final String PLAIN_TEXT_77_0 = "    </plugins>\n  </build>\n\n";
+        static private final String PLAIN_TEXT_78_0 = "  <pluginRepositories>\n";
+        static private final String PLAIN_TEXT_79_0 = "    <pluginRepository>\n       <id>central</id>\n       <url>https://repo.maven.apache.org/maven2</url>\n    </pluginRepository>\n    <pluginRepository>\n       <id>ossrh</id>\n       <url>https://oss.sonatype.org/content/repositories/snapshots</url>\n       <snapshots>\n           <enabled>true</enabled>\n       </snapshots>\n    </pluginRepository>\n";
+        static private final String PLAIN_TEXT_80_0 = "  </pluginRepositories>\n";
+        static private final String PLAIN_TEXT_81_0 = "    <pluginRepositories>\n       <pluginRepository>\n           <id>central</id>\n           <url>https://repo.maven.apache.org/maven2</url>\n       </pluginRepository>\n       <pluginRepository>\n           <id>ossrh</id>\n           <url>https://oss.sonatype.org/content/repositories/snapshots</url>\n           <snapshots>\n               <enabled>true</enabled>\n           </snapshots>\n       </pluginRepository>\n    </pluginRepositories>\n";
+        static private final String PLAIN_TEXT_82_0 = "\n</project>\n";
 
     }
 

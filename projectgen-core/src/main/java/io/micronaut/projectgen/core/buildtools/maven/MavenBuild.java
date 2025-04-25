@@ -16,11 +16,13 @@
 package io.micronaut.projectgen.core.buildtools.maven;
 
 import io.micronaut.core.annotation.NonNull;
+import io.micronaut.core.annotation.Nullable;
 import io.micronaut.projectgen.core.buildtools.Property;
 import io.micronaut.projectgen.core.buildtools.dependencies.Coordinate;
 import io.micronaut.projectgen.core.buildtools.dependencies.DependencyCoordinate;
 import io.micronaut.projectgen.core.template.Writable;
 import io.micronaut.projectgen.core.template.WritableUtils;
+import io.micronaut.sourcegen.annotations.Builder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,134 +36,21 @@ import java.util.stream.Collectors;
 /**
  * Maven Build.
  */
-public class MavenBuild {
-    private static final Logger LOG = LoggerFactory.getLogger(MavenBuild.class);
-
-    private final MavenCombineAttribute annotationProcessorCombineAttribute;
-
-    private final MavenCombineAttribute testAnnotationProcessorCombineAttribute;
-
-    private final List<DependencyCoordinate> testAnnotationProcessors;
-
-    private final List<DependencyCoordinate> annotationProcessors;
-
-    private final List<MavenDependency> dependencies;
-
-    private final List<MavenPlugin> plugins;
-
-    private final List<Property> properties;
-
-    private final Collection<Profile> profiles;
-
-    private final List<MavenRepository> repositories;
-
-    @NonNull
-    private final String groupId;
-
-    @NonNull
-    private final String artifactId;
-
-    @NonNull
-    private final String version;
-
-    public MavenBuild(String groupId,
-                      String artifactId,
-                      String version) {
-        this(groupId,
-            artifactId,
-            version,
-            Collections.emptyList(),
-            Collections.emptyList(),
-            Collections.emptyList(),
-            Collections.emptyList(),
-            Collections.emptyList(),
-            Collections.emptyList(),
-            MavenCombineAttribute.APPEND,
-            MavenCombineAttribute.APPEND,
-            Collections.emptyList());
-    }
-
-    public MavenBuild(@NonNull String groupId,
-                      @NonNull String artifactId,
-                      @NonNull String version,
-                      @NonNull List<MavenDependency> dependencies,
-                      @NonNull List<MavenPlugin> plugins,
-                      @NonNull List<MavenRepository> repositories) {
-        this(groupId,
-            artifactId,
-            version,
-            Collections.emptyList(),
-            Collections.emptyList(),
-            dependencies,
-            Collections.emptyList(),
-            plugins,
-            repositories,
-            MavenCombineAttribute.APPEND,
-            MavenCombineAttribute.APPEND,
-            Collections.emptyList());
-    }
-
-    public MavenBuild(@NonNull String groupId,
-                      @NonNull String artifactId,
-                      @NonNull String version,
-                      @NonNull List<DependencyCoordinate> annotationProcessors,
-                      @NonNull List<DependencyCoordinate> testAnnotationProcessors,
-                      @NonNull List<MavenDependency> dependencies,
-                      @NonNull List<Property> properties,
-                      @NonNull List<MavenPlugin> plugins,
-                      @NonNull List<MavenRepository> repositories,
-                      @NonNull MavenCombineAttribute annotationProcessorCombineAttribute,
-                      @NonNull MavenCombineAttribute testAnnotationProcessorCombineAttribute,
-                      @NonNull Collection<Profile> profiles) {
-        this.groupId = groupId;
-        this.artifactId = artifactId;
-        this.version = version;
-        this.annotationProcessors = annotationProcessors;
-        this.testAnnotationProcessors = testAnnotationProcessors;
-        this.dependencies = dependencies;
-        this.properties = properties;
-        this.plugins = plugins;
-        this.repositories = repositories;
-        this.annotationProcessorCombineAttribute = annotationProcessorCombineAttribute;
-        this.testAnnotationProcessorCombineAttribute = testAnnotationProcessorCombineAttribute;
-        this.profiles = profiles;
-    }
-
-    public List<MavenPlugin> getPlugins() {
-        return plugins;
-    }
-
-    public List<MavenRepository> getRepositories() {
-        return repositories;
-    }
-
-    /**
-     *
-     * @return Group ID
-     */
-    @NonNull
-    public String getGroupId() {
-        return groupId;
-    }
-
-    /**
-     *
-     * @return Artifact ID
-     */
-    @NonNull
-    public String getArtifactId() {
-        return artifactId;
-    }
-
-    /**
-     *
-     * @return version
-     */
-    @NonNull
-    public String getVersion() {
-        return version;
-    }
-
+@Builder
+public record MavenBuild(String name,
+                         String description,
+                         Coordinate coordinate,
+                         @Nullable Packaging packaging,
+                         ParentPom parentPom,
+                         MavenCombineAttribute annotationProcessorCombineAttribute,
+                         MavenCombineAttribute testAnnotationProcessorCombineAttribute,
+                         List<DependencyCoordinate> testAnnotationProcessors,
+                         List<DependencyCoordinate> annotationProcessors,
+                         List<MavenDependency> dependencies,
+                         List<MavenPlugin> plugins,
+                         List<Property> properties,
+                         Collection<Profile> profiles,
+                         List<MavenRepository> repositories) {
     /**
      *
      * @param indentationSpaces Indentation Spaces
@@ -171,7 +60,7 @@ public class MavenBuild {
     public String renderRepositories(int indentationSpaces) {
         return WritableUtils.renderWritableList(this.repositories.stream()
             .map(Writable.class::cast)
-            .collect(Collectors.toList()), indentationSpaces);
+            .toList(), indentationSpaces);
     }
 
     /**
@@ -184,44 +73,8 @@ public class MavenBuild {
         List<Writable> writableList = plugins.stream()
             .map(MavenPlugin::getExtension)
             .filter(Objects::nonNull)
-            .collect(Collectors.toList());
+            .toList();
         return WritableUtils.renderWritableList(writableList, indentationSpaces);
-    }
-
-    /**
-     *
-     * @return Annotation Processors
-     */
-    @NonNull
-    public List<DependencyCoordinate> getAnnotationProcessors() {
-        return annotationProcessors;
-    }
-
-    /**
-     *
-     * @return Test annotation processors
-     */
-    @NonNull
-    public List<DependencyCoordinate> getTestAnnotationProcessors() {
-        return testAnnotationProcessors;
-    }
-
-    /**
-     *
-     * @return Maven Profiles
-     */
-    @NonNull
-    public Collection<Profile> getProfiles() {
-        return profiles;
-    }
-
-    /**
-     *
-     * @return Dependencies
-     */
-    @NonNull
-    public List<MavenDependency> getDependencies() {
-        return dependencies;
     }
 
     /**
@@ -243,31 +96,5 @@ public class MavenBuild {
      */
     public boolean hasPomDependency() {
         return dependencies.stream().anyMatch(Coordinate::isPom);
-    }
-
-    /**
-     *
-     * @return build properties
-     */
-    @NonNull
-    public List<Property> getProperties() {
-        return properties;
-    }
-
-    /**
-     *
-     * @return annotation processors combine attribute
-     */
-    public MavenCombineAttribute getAnnotationProcessorCombineAttribute() {
-        return annotationProcessorCombineAttribute;
-    }
-
-    /**
-     *
-     * @return test annotation processors combine attribute
-     */
-    @NonNull
-    public MavenCombineAttribute getTestAnnotationProcessorCombineAttribute() {
-        return testAnnotationProcessorCombineAttribute;
     }
 }

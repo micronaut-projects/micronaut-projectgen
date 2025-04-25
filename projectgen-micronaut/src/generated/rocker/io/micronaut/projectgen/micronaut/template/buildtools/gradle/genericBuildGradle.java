@@ -106,7 +106,7 @@ public class genericBuildGradle extends com.fizzed.rocker.runtime.DefaultRockerM
         static private final byte[] PLAIN_TEXT_0_0;
         // \n    id(\"
         static private final byte[] PLAIN_TEXT_1_0;
-        // \") 
+        // \")
         static private final byte[] PLAIN_TEXT_2_0;
         // \n
         static private final byte[] PLAIN_TEXT_3_0;
@@ -200,11 +200,14 @@ public class genericBuildGradle extends com.fizzed.rocker.runtime.DefaultRockerM
                         // PlainText @ [8:30]
                         __internal.aboutToExecutePosInTemplate(8, 30);
                         __internal.writeValue(PLAIN_TEXT_2_0);
-                        // EvalExpression @ [8:33]
-                        __internal.aboutToExecutePosInTemplate(8, 33);
-                        __internal.renderValue((gradlePlugin.getVersion() != null ? "version \"" + gradlePlugin.getVersion() + "\"" : ""), false);
-                        // PlainText @ [8:124]
+                        // EvalExpression @ [8:32]
+                        __internal.aboutToExecutePosInTemplate(8, 32);
+                        __internal.renderValue((gradlePlugin.getVersion() != null ? " version \"" + gradlePlugin.getVersion() + "\"" : ""), false);
+                        // EvalExpression @ [8:124]
                         __internal.aboutToExecutePosInTemplate(8, 124);
+                        __internal.renderValue((gradlePlugin.getApply() != null ? " apply false" : ""), false);
+                        // PlainText @ [8:180]
+                        __internal.aboutToExecutePosInTemplate(8, 180);
                         __internal.writeValue(PLAIN_TEXT_3_0);
                         // ForBlockEnd @ [7:1]
                         __internal.aboutToExecutePosInTemplate(7, 1);
@@ -263,12 +266,12 @@ public class genericBuildGradle extends com.fizzed.rocker.runtime.DefaultRockerM
             // ForBlockBegin @ [24:1]
             __internal.aboutToExecutePosInTemplate(24, 1);
             try {
-                final com.fizzed.rocker.runtime.IterableForIterator<GradleDependency> __forIterator1 = new com.fizzed.rocker.runtime.IterableForIterator<GradleDependency>(gradleBuild.getDependencies());
+                final com.fizzed.rocker.runtime.IterableForIterator<GradleDependency> __forIterator1 = new com.fizzed.rocker.runtime.IterableForIterator<GradleDependency>(gradleBuild.dependencies());
                 while (__forIterator1.hasNext()) {
                     final GradleDependency dependency = __forIterator1.next();
                     try {
-                        // PlainText @ [24:69]
-                        __internal.aboutToExecutePosInTemplate(24, 69);
+                        // PlainText @ [24:66]
+                        __internal.aboutToExecutePosInTemplate(24, 66);
                         __internal.writeValue(PLAIN_TEXT_10_0);
                         // ValueExpression @ [25:5]
                         __internal.aboutToExecutePosInTemplate(25, 5);
@@ -315,6 +318,9 @@ public class genericBuildGradle extends com.fizzed.rocker.runtime.DefaultRockerM
             // ValueExpression @ [34:1]
             __internal.aboutToExecutePosInTemplate(34, 1);
             __internal.renderValue(gradleBuild.renderExtensions(), false);
+            // PlainText @ [34:32]
+            __internal.aboutToExecutePosInTemplate(34, 32);
+            __internal.writeValue(PLAIN_TEXT_3_0);
         }
     }
 
@@ -322,7 +328,7 @@ public class genericBuildGradle extends com.fizzed.rocker.runtime.DefaultRockerM
 
         static private final String PLAIN_TEXT_0_0 = "\nplugins {\n";
         static private final String PLAIN_TEXT_1_0 = "\n    id(\"";
-        static private final String PLAIN_TEXT_2_0 = "\") ";
+        static private final String PLAIN_TEXT_2_0 = "\")";
         static private final String PLAIN_TEXT_3_0 = "\n";
         static private final String PLAIN_TEXT_4_0 = "\n}\n\n";
         static private final String PLAIN_TEXT_5_0 = "\nversion = \"";

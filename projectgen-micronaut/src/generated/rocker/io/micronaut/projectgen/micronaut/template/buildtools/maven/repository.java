@@ -21,11 +21,11 @@ public class repository extends com.fizzed.rocker.runtime.DefaultRockerModel {
     static public String getHeaderHash() { return "988232872"; }
     static public String[] getArgumentNames() { return new String[] { "id", "url", "snapshot" }; }
 
-    // argument @ [1:2]
+    // argument @ [2:2]
     private String id;
-    // argument @ [1:2]
+    // argument @ [2:2]
     private String url;
-    // argument @ [1:2]
+    // argument @ [2:2]
     private boolean snapshot;
 
     public repository id(String id) {
@@ -70,15 +70,15 @@ public class repository extends com.fizzed.rocker.runtime.DefaultRockerModel {
 
     static public class Template extends com.fizzed.rocker.runtime.DefaultRockerTemplate {
 
-        // \n<repository>\n  <id>
+        // <repository>\n  <id>
         static private final byte[] PLAIN_TEXT_0_0;
         // </id>\n  <url>
         static private final byte[] PLAIN_TEXT_1_0;
         // </url>\n
         static private final byte[] PLAIN_TEXT_2_0;
-        // \n  <snapshots>\n    <enabled>true</enabled>\n  </snapshots>\n  <releases>\n    <enabled>false</enabled>\n  </releases>\n
+        //   <snapshots>\n    <enabled>true</enabled>\n  </snapshots>\n  <releases>\n    <enabled>false</enabled>\n  </releases>\n
         static private final byte[] PLAIN_TEXT_3_0;
-        // \n</repository>\n
+        // </repository>\n
         static private final byte[] PLAIN_TEXT_4_0;
 
         static {
@@ -90,11 +90,11 @@ public class repository extends com.fizzed.rocker.runtime.DefaultRockerModel {
             PLAIN_TEXT_4_0 = loader.tryGet("PLAIN_TEXT_4_0");
         }
 
-        // argument @ [1:2]
+        // argument @ [2:2]
         protected final String id;
-        // argument @ [1:2]
+        // argument @ [2:2]
         protected final String url;
-        // argument @ [1:2]
+        // argument @ [2:2]
         protected final boolean snapshot;
 
         public Template(repository model) {
@@ -110,43 +110,43 @@ public class repository extends com.fizzed.rocker.runtime.DefaultRockerModel {
 
         @Override
         protected void __doRender() throws IOException, RenderingException {
-            // PlainText @ [1:47]
-            __internal.aboutToExecutePosInTemplate(1, 47);
+            // PlainText @ [2:47]
+            __internal.aboutToExecutePosInTemplate(2, 47);
             __internal.writeValue(PLAIN_TEXT_0_0);
-            // ValueExpression @ [3:7]
-            __internal.aboutToExecutePosInTemplate(3, 7);
+            // ValueExpression @ [4:7]
+            __internal.aboutToExecutePosInTemplate(4, 7);
             __internal.renderValue(id, false);
-            // PlainText @ [3:10]
-            __internal.aboutToExecutePosInTemplate(3, 10);
+            // PlainText @ [4:10]
+            __internal.aboutToExecutePosInTemplate(4, 10);
             __internal.writeValue(PLAIN_TEXT_1_0);
-            // ValueExpression @ [4:8]
-            __internal.aboutToExecutePosInTemplate(4, 8);
+            // ValueExpression @ [5:8]
+            __internal.aboutToExecutePosInTemplate(5, 8);
             __internal.renderValue(url, false);
-            // PlainText @ [4:12]
-            __internal.aboutToExecutePosInTemplate(4, 12);
+            // PlainText @ [5:12]
+            __internal.aboutToExecutePosInTemplate(5, 12);
             __internal.writeValue(PLAIN_TEXT_2_0);
-            // IfBlockBegin @ [5:1]
-            __internal.aboutToExecutePosInTemplate(5, 1);
+            // IfBlockBegin @ [6:1]
+            __internal.aboutToExecutePosInTemplate(6, 1);
             if (snapshot) {
-                // PlainText @ [5:16]
-                __internal.aboutToExecutePosInTemplate(5, 16);
+                // PlainText @ [6:16]
+                __internal.aboutToExecutePosInTemplate(6, 16);
                 __internal.writeValue(PLAIN_TEXT_3_0);
-                // IfBlockEnd @ [5:1]
-                __internal.aboutToExecutePosInTemplate(5, 1);
-            } // if end @ [5:1]
-            // PlainText @ [12:2]
-            __internal.aboutToExecutePosInTemplate(12, 2);
+                // IfBlockEnd @ [6:1]
+                __internal.aboutToExecutePosInTemplate(6, 1);
+            } // if end @ [6:1]
+            // PlainText @ [13:2]
+            __internal.aboutToExecutePosInTemplate(13, 2);
             __internal.writeValue(PLAIN_TEXT_4_0);
         }
     }
 
     private static class PlainText {
 
-        static private final String PLAIN_TEXT_0_0 = "\n<repository>\n  <id>";
+        static private final String PLAIN_TEXT_0_0 = "<repository>\n  <id>";
         static private final String PLAIN_TEXT_1_0 = "</id>\n  <url>";
         static private final String PLAIN_TEXT_2_0 = "</url>\n";
-        static private final String PLAIN_TEXT_3_0 = "\n  <snapshots>\n    <enabled>true</enabled>\n  </snapshots>\n  <releases>\n    <enabled>false</enabled>\n  </releases>\n";
-        static private final String PLAIN_TEXT_4_0 = "\n</repository>\n";
+        static private final String PLAIN_TEXT_3_0 = "  <snapshots>\n    <enabled>true</enabled>\n  </snapshots>\n  <releases>\n    <enabled>false</enabled>\n  </releases>\n";
+        static private final String PLAIN_TEXT_4_0 = "</repository>\n";
 
     }
 

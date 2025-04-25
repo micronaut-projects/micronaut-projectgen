@@ -36,7 +36,7 @@ public class SpringBootParentPomFeature implements ParentPomFeature {
     @Override
     public ParentPom getParentPom() {
         Coordinate coordinate = coordinateResolver.resolve("spring-boot-starter-parent").orElseThrow();
-        return new ParentPom(coordinate, true);
+        return new ParentPom(coordinate, "");
     }
 
     @Override

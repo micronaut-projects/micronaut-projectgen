@@ -7,7 +7,7 @@ import com.fizzed.rocker.RockerContent;
 import com.fizzed.rocker.RockerOutput;
 import com.fizzed.rocker.runtime.DefaultRockerTemplate;
 import com.fizzed.rocker.runtime.PlainTextUnloadedClassLoader;
-// import @ [1:1]
+// import @ [2:1]
 import io.micronaut.projectgen.core.buildtools.maven.ParentPom;
 
 /*
@@ -48,7 +48,7 @@ public class parentPom extends com.fizzed.rocker.runtime.DefaultRockerModel {
 
     static public class Template extends com.fizzed.rocker.runtime.DefaultRockerTemplate {
 
-        // \n\n  <parent>\n     <groupId>
+        //   <parent>\n     <groupId>
         static private final byte[] PLAIN_TEXT_0_0;
         // </groupId>\n     <artifactId>
         static private final byte[] PLAIN_TEXT_1_0;
@@ -56,10 +56,14 @@ public class parentPom extends com.fizzed.rocker.runtime.DefaultRockerModel {
         static private final byte[] PLAIN_TEXT_2_0;
         // </version>\n
         static private final byte[] PLAIN_TEXT_3_0;
-        // \n     <relativePath/> <!-- lookup parent from repository -->\n
+        //      <relativePath/> <!-- lookup parent from repository -->\n
         static private final byte[] PLAIN_TEXT_4_0;
-        // \n  </parent>\n
+        //     <relativePath>
         static private final byte[] PLAIN_TEXT_5_0;
+        // </relativePath>\n
+        static private final byte[] PLAIN_TEXT_6_0;
+        //   </parent>\n
+        static private final byte[] PLAIN_TEXT_7_0;
 
         static {
             PlainTextUnloadedClassLoader loader = PlainTextUnloadedClassLoader.tryLoad(parentPom.class.getClassLoader(), parentPom.class.getName() + "$PlainText", "UTF-8");
@@ -69,6 +73,8 @@ public class parentPom extends com.fizzed.rocker.runtime.DefaultRockerModel {
             PLAIN_TEXT_3_0 = loader.tryGet("PLAIN_TEXT_3_0");
             PLAIN_TEXT_4_0 = loader.tryGet("PLAIN_TEXT_4_0");
             PLAIN_TEXT_5_0 = loader.tryGet("PLAIN_TEXT_5_0");
+            PLAIN_TEXT_6_0 = loader.tryGet("PLAIN_TEXT_6_0");
+            PLAIN_TEXT_7_0 = loader.tryGet("PLAIN_TEXT_7_0");
         }
 
         // argument @ [3:2]
@@ -88,47 +94,61 @@ public class parentPom extends com.fizzed.rocker.runtime.DefaultRockerModel {
             // PlainText @ [3:28]
             __internal.aboutToExecutePosInTemplate(3, 28);
             __internal.writeValue(PLAIN_TEXT_0_0);
-            // EvalExpression @ [6:15]
-            __internal.aboutToExecutePosInTemplate(6, 15);
+            // EvalExpression @ [5:15]
+            __internal.aboutToExecutePosInTemplate(5, 15);
             __internal.renderValue((parentPom.groupId()), false);
-            // PlainText @ [6:37]
-            __internal.aboutToExecutePosInTemplate(6, 37);
+            // PlainText @ [5:37]
+            __internal.aboutToExecutePosInTemplate(5, 37);
             __internal.writeValue(PLAIN_TEXT_1_0);
-            // EvalExpression @ [7:18]
-            __internal.aboutToExecutePosInTemplate(7, 18);
+            // EvalExpression @ [6:18]
+            __internal.aboutToExecutePosInTemplate(6, 18);
             __internal.renderValue((parentPom.artifactId()), false);
-            // PlainText @ [7:43]
-            __internal.aboutToExecutePosInTemplate(7, 43);
+            // PlainText @ [6:43]
+            __internal.aboutToExecutePosInTemplate(6, 43);
             __internal.writeValue(PLAIN_TEXT_2_0);
-            // EvalExpression @ [8:15]
-            __internal.aboutToExecutePosInTemplate(8, 15);
+            // EvalExpression @ [7:15]
+            __internal.aboutToExecutePosInTemplate(7, 15);
             __internal.renderValue((parentPom.version()), false);
-            // PlainText @ [8:37]
-            __internal.aboutToExecutePosInTemplate(8, 37);
+            // PlainText @ [7:37]
+            __internal.aboutToExecutePosInTemplate(7, 37);
             __internal.writeValue(PLAIN_TEXT_3_0);
-            // IfBlockBegin @ [9:1]
-            __internal.aboutToExecutePosInTemplate(9, 1);
-            if (parentPom.relativePath()) {
-                // PlainText @ [9:33]
-                __internal.aboutToExecutePosInTemplate(9, 33);
+            // IfBlockBegin @ [8:1]
+            __internal.aboutToExecutePosInTemplate(8, 1);
+            if (parentPom.relativePath() == "") {
+                // PlainText @ [8:39]
+                __internal.aboutToExecutePosInTemplate(8, 39);
                 __internal.writeValue(PLAIN_TEXT_4_0);
-                // IfBlockEnd @ [9:1]
-                __internal.aboutToExecutePosInTemplate(9, 1);
-            } // if end @ [9:1]
-            // PlainText @ [11:2]
-            __internal.aboutToExecutePosInTemplate(11, 2);
-            __internal.writeValue(PLAIN_TEXT_5_0);
+                // IfBlockElseIf @ [10:1]
+                __internal.aboutToExecutePosInTemplate(10, 1);
+            } else if (parentPom.relativePath() != null) {
+                // PlainText @ [10:47]
+                __internal.aboutToExecutePosInTemplate(10, 47);
+                __internal.writeValue(PLAIN_TEXT_5_0);
+                // ValueExpression @ [11:19]
+                __internal.aboutToExecutePosInTemplate(11, 19);
+                __internal.renderValue(parentPom.relativePath(), false);
+                // PlainText @ [11:44]
+                __internal.aboutToExecutePosInTemplate(11, 44);
+                __internal.writeValue(PLAIN_TEXT_6_0);
+                // IfBlockEnd @ [8:1]
+                __internal.aboutToExecutePosInTemplate(8, 1);
+            } // if end @ [8:1]
+            // PlainText @ [12:2]
+            __internal.aboutToExecutePosInTemplate(12, 2);
+            __internal.writeValue(PLAIN_TEXT_7_0);
         }
     }
 
     private static class PlainText {
 
-        static private final String PLAIN_TEXT_0_0 = "\n\n  <parent>\n     <groupId>";
+        static private final String PLAIN_TEXT_0_0 = "  <parent>\n     <groupId>";
         static private final String PLAIN_TEXT_1_0 = "</groupId>\n     <artifactId>";
         static private final String PLAIN_TEXT_2_0 = "</artifactId>\n     <version>";
         static private final String PLAIN_TEXT_3_0 = "</version>\n";
-        static private final String PLAIN_TEXT_4_0 = "\n     <relativePath/> <!-- lookup parent from repository -->\n";
-        static private final String PLAIN_TEXT_5_0 = "\n  </parent>\n";
+        static private final String PLAIN_TEXT_4_0 = "     <relativePath/> <!-- lookup parent from repository -->\n";
+        static private final String PLAIN_TEXT_5_0 = "    <relativePath>";
+        static private final String PLAIN_TEXT_6_0 = "</relativePath>\n";
+        static private final String PLAIN_TEXT_7_0 = "  </parent>\n";
 
     }
 

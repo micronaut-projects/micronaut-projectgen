@@ -37,6 +37,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -58,15 +59,23 @@ public class Readme implements DefaultFeature {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
         List<Feature> featuresWithDocumentationLinks = generatorContext.getFeatures()
-                .getFeatures()
-                .stream()
-                .filter(feature -> feature.getFrameworkDocumentation(generatorContext) != null || feature.getThirdPartyDocumentation(generatorContext) != null)
-                .toList();
+            .getFeatures()
+            .stream()
+            .filter(feature -> feature.getFrameworkDocumentation(generatorContext) != null || feature.getThirdPartyDocumentation(generatorContext) != null)
+            .toList();
+        ModuleContext module = generatorContext.getRootModule();
+        apply(module, featuresWithDocumentationLinks, generatorContext);
+        for (String name : generatorContext.getModuleNames()) {
+            module = generatorContext.getModuleByName(name);
+            apply(module, Collections.emptyList(), generatorContext);
+        }
+    }
+
+    private void apply(ModuleContext  module, List<Feature> featuresWithDocumentationLinks, GeneratorContext generatorContext) {
         final List<Writable> helpTemplates = module.helpTemplates();
         if (!helpTemplates.isEmpty() || !featuresWithDocumentationLinks.isEmpty()) {
-            module.addTemplate("readme", new DefaultTemplate(Template.ROOT, "README.md") {
+            module.addTemplate("readme", new DefaultTemplate("README.md") {
                 @Override
                 public void write(OutputStream outputStream) throws IOException {
                     Writable mainDocsWritable = new RockerWritable(maindocs.template());

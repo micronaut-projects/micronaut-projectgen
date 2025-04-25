@@ -44,11 +44,7 @@ public class TomlTemplate extends DefaultTemplate {
     private final Map<DottedKey, Map<DottedKey, Object>> tables;
 
     public TomlTemplate(String path, Configuration config) {
-        this(DEFAULT_MODULE, path, config);
-    }
-
-    public TomlTemplate(String module, String path, Configuration config) {
-        super(module, path);
+        super(path);
 
         // Delete unsupported entries (Comments or blank lines)
         Set<String> keysToBeRemoved = config.keySet().stream()

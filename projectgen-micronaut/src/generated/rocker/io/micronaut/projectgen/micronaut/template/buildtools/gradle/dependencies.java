@@ -140,12 +140,12 @@ public class dependencies extends com.fizzed.rocker.runtime.DefaultRockerModel {
             // ForBlockBegin @ [16:1]
             __internal.aboutToExecutePosInTemplate(16, 1);
             try {
-                final com.fizzed.rocker.runtime.IterableForIterator<GradleDependency> __forIterator0 = new com.fizzed.rocker.runtime.IterableForIterator<GradleDependency>(gradleBuild.getDependencies());
+                final com.fizzed.rocker.runtime.IterableForIterator<GradleDependency> __forIterator0 = new com.fizzed.rocker.runtime.IterableForIterator<GradleDependency>(gradleBuild.dependencies());
                 while (__forIterator0.hasNext()) {
                     final GradleDependency dependency = __forIterator0.next();
                     try {
-                        // PlainText @ [16:69]
-                        __internal.aboutToExecutePosInTemplate(16, 69);
+                        // PlainText @ [16:66]
+                        __internal.aboutToExecutePosInTemplate(16, 66);
                         __internal.writeValue(PLAIN_TEXT_1_0);
                         // ValueExpression @ [17:5]
                         __internal.aboutToExecutePosInTemplate(17, 5);

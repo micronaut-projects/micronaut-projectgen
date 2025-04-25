@@ -79,7 +79,7 @@ public class GeneratorContext {
     }
 
     public ModuleContext getModuleByName(String name) {
-        return modules.computeIfAbsent(name, k -> new ModuleContext(coordinateResolver, recipeFetcher));
+        return modules.computeIfAbsent(name, k -> new ModuleContext(k, coordinateResolver, recipeFetcher));
     }
 
     /**

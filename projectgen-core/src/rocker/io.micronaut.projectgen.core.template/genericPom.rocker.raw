@@ -1,27 +1,37 @@
 @option discardLogicWhitespace=true
+@import java.util.Collection
 @import io.micronaut.projectgen.core.buildtools.maven.ParentPom
 @import io.micronaut.projectgen.core.buildtools.maven.MavenBuild
 @import io.micronaut.projectgen.core.buildtools.maven.MavenDependency
 @import io.micronaut.projectgen.core.buildtools.Property;
-@args (ParentPom parentPom, MavenBuild mavenBuild)
+@args (MavenBuild mavenBuild, Collection<String> modules)
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-@if (parentPom != null) {
-@io.micronaut.projectgen.core.template.parentPom.template(parentPom)
+@if (mavenBuild.parentPom() != null) {
+@io.micronaut.projectgen.core.template.parentPom.template(mavenBuild.parentPom())
 }
-@if (mavenBuild.getGroupId() != null) {
-  <groupId>@mavenBuild.getGroupId()</groupId>
+@if (mavenBuild.coordinate() != null && mavenBuild.coordinate().getGroupId() != null) {
+  <groupId>@mavenBuild.coordinate().getGroupId()</groupId>
 }
-@if (mavenBuild.getArtifactId() != null) {
-  <artifactId>@mavenBuild.getArtifactId()</artifactId>
+@if (mavenBuild.coordinate() != null && mavenBuild.coordinate().getArtifactId() != null) {
+  <artifactId>@mavenBuild.coordinate().getArtifactId()</artifactId>
 }
-@if (mavenBuild.getVersion() != null) {
-  <version>@mavenBuild.getVersion()</version>
+@if (mavenBuild.coordinate() != null && mavenBuild.coordinate().getVersion() != null) {
+  <version>@mavenBuild.coordinate().getVersion()</version>
 }
-@if(mavenBuild.getRepositories().size() > 0) {
-@io.micronaut.projectgen.core.template.mavenProperties.template(mavenBuild.getProperties())
+@if (mavenBuild.packaging() != null) {
+  <packaging>@mavenBuild.packaging().toString()</packaging>
+}
+@if (mavenBuild.name() != null) {
+  <name>@mavenBuild.name()</name>
+}
+@if (mavenBuild.description() != null) {
+  <description>@mavenBuild.description()</description>
+}
+@if(mavenBuild.repositories().size() > 0) {
+@io.micronaut.projectgen.core.template.mavenProperties.template(mavenBuild.properties())
   <repositories>
 @mavenBuild.renderRepositories(4)
   </repositories>
@@ -33,11 +43,18 @@
 }
   </dependencies>
 }
-@if(mavenBuild.getPlugins().size() > 0) {
+@if(mavenBuild.plugins().size() > 0) {
   <build>
     <plugins>
 @mavenBuild.renderPlugins(6)
     </plugins>
   </build>
+}
+@if(modules.size() > 0) {
+  <modules>
+@for (String module : modules) {
+    <module>@module</module>
+}
+  </modules>
 }
 </project>

@@ -39,23 +39,23 @@ public class MavenBuildCreator {
 
     /**
      *
-     * @param moduleContext Module Context
+     * @param module Module Context
      * @param options Options
      * @return Maven Build
      */
     @NonNull
-    public MavenBuild create(ModuleContext moduleContext,
+    public MavenBuild create(ModuleContext module,
                              Options options) {
-        List<MavenDependency> dependencies = MavenDependency.listOf(moduleContext.dependencyContext(),
+        List<MavenDependency> dependencies = MavenDependency.listOf(module.dependencyContext(),
             options.language());
-        BuildProperties buildProperties = moduleContext.buildProperties();
+        BuildProperties buildProperties = module.buildProperties();
         List<DependencyCoordinate> annotationProcessorsCoordinates = new ArrayList<>();
         List<DependencyCoordinate> testAnnotationProcessorsCoordinates = new ArrayList<>();
         boolean isKotlin = options.language() == Language.KOTLIN;
         MavenCombineAttribute combineAttribute = isKotlin ? MavenCombineAttribute.OVERRIDE : MavenCombineAttribute.APPEND;
         MavenCombineAttribute testCombineAttribute = combineAttribute;
 
-        for (Dependency dependency : moduleContext.getDependencies()) {
+        for (Dependency dependency : module.getDependencies()) {
             if (dependency.getScope().getPhases().contains(Phase.ANNOTATION_PROCESSING)) {
                 if (dependency.getScope().getSource() == Source.MAIN && options.language() != Language.GROOVY) {
                     // Don't add these for Groovy projects: it results in multiple dependencies.
@@ -78,26 +78,28 @@ public class MavenBuildCreator {
         annotationProcessorsCoordinates.sort(Coordinate.COMPARATOR);
         testAnnotationProcessorsCoordinates.sort(Coordinate.COMPARATOR);
 
-        List<MavenPlugin> plugins = moduleContext.buildPlugins()
+        List<MavenPlugin> plugins = module.buildPlugins()
             .stream()
             .filter(MavenPlugin.class::isInstance)
             .map(MavenPlugin.class::cast)
             .sorted(OrderUtil.COMPARATOR)
             .toList();
 
-        return new MavenBuild(options.group(),
-            StringUtils.isNotEmpty(options.artifact())
-                ? options.artifact()
-                : options.name(),
-            options.version(),
-            annotationProcessorsCoordinates,
-            testAnnotationProcessorsCoordinates,
-            dependencies,
-            buildProperties.getProperties(),
-            plugins,
-            MavenRepository.listOf(moduleContext.repositories()),
-            combineAttribute,
-            testCombineAttribute,
-            moduleContext.profiles());
+        return MavenBuildBuilder.builder()
+            .parentPom(module.moduleAttributes().getParentPom())
+            .packaging(module.moduleAttributes().getPackaging())
+            .coordinate(module.moduleAttributes().getCoordinate())
+            .name(module.moduleAttributes().getName())
+            .description(module.moduleAttributes().getDescription())
+            .repositories(MavenRepository.listOf(module.repositories()))
+            .plugins(plugins)
+            .properties(buildProperties.getProperties())
+            .annotationProcessorCombineAttribute(combineAttribute)
+            .testAnnotationProcessorCombineAttribute(testCombineAttribute)
+            .profiles(module.profiles())
+            .dependencies(dependencies)
+            .annotationProcessors(annotationProcessorsCoordinates)
+            .testAnnotationProcessors(testAnnotationProcessorsCoordinates)
+            .build();
     }
 }

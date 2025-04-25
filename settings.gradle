@@ -24,7 +24,7 @@ include 'projectgen-springboot'
 include 'projectgen-micronaut'
 include 'projectgen-quarkus'
 include 'projectgen-micronaut-openrewrite'
-include 'test-suite-maven-multi-module'
+include 'test-suite-multi-module'
 
 enableFeaturePreview 'TYPESAFE_PROJECT_ACCESSORS'
 

@@ -15,51 +15,70 @@
  */
 package io.micronaut.projectgen.core.buildtools.gradle;
 
+import com.fizzed.rocker.RockerModel;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.order.OrderUtil;
+import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.buildtools.Repository;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.options.Options;
-import jakarta.inject.Singleton;
+import io.micronaut.projectgen.core.rocker.RockerTemplate;
+import io.micronaut.projectgen.core.template.Template;
+import io.micronaut.projectgen.core.template.genericBuildGradle;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Gradle Build Creator.
  */
-@Singleton
-public class GradleBuildCreator {
+public final class GradleBuildCreator {
+    private GradleBuildCreator() {
+    }
 
-    /**
-     *
-     * @param generatorContext Generator Context
-     * @param moduleContext Module Context
-     * @param useVersionCatalogue Use version catalogue
-     * @return Gradle Build
-     */
+    public static final boolean DEFAULT_USER_VERSION_CATALOGUE = false;
+
+    public static RockerTemplate buildFileTemplate(GeneratorContext generatorContext, ModuleContext moduleContext, String module) {
+        GradleBuild build = create(generatorContext, moduleContext, generatorContext.getOptions());
+        BuildTool buildTool = generatorContext.getOptions().buildTools().stream().filter(BuildTool::isGradle).findFirst().orElseThrow();
+        RockerModel rockerModel = genericBuildGradle.template(generatorContext.getProject(),
+            build,
+            generatorContext.getFeatures().mainClass().orElse(null),
+            generatorContext.getOptions().version(),
+            StringUtils.isNotEmpty(generatorContext.getOptions().group()) ? generatorContext.getOptions().group() : generatorContext.getProject().getPackageName());
+        return new RockerTemplate(StringUtils.isEmpty(module)
+            ? buildTool.getBuildFileName()
+            : module + "/" + buildTool.getBuildFileName(), rockerModel);
+    }
+
     @NonNull
-    public GradleBuild create(@NonNull GeneratorContext generatorContext,
-                              @NonNull ModuleContext moduleContext,
+    public static GradleBuild create(@NonNull GeneratorContext generatorContext,
+                                     @NonNull ModuleContext module,
+                                     Options options) {
+        return create(generatorContext, module, options, DEFAULT_USER_VERSION_CATALOGUE);
+    }
+
+    @NonNull
+    public static GradleBuild create(@NonNull GeneratorContext generatorContext,
+                              @NonNull ModuleContext module,
                               Options options, boolean useVersionCatalogue) {
         BuildTool buildTool = options.buildTools().stream().filter(BuildTool::isGradle).findFirst().orElseThrow();
         GradleDsl gradleDsl = buildTool
                 .getGradleDsl()
                 .orElseThrow(() -> new IllegalArgumentException("GradleBuildCreator can only create Gradle builds"));
-        List<GradlePlugin> gradlePlugins = moduleContext.buildPlugins()
+        List<GradlePlugin> gradlePlugins = module.buildPlugins()
                 .stream()
                 .filter(GradlePlugin.class::isInstance)
                 .map(GradlePlugin.class::cast)
                 .sorted(OrderUtil.COMPARATOR)
-                .collect(Collectors.toList());
-        return new GradleBuild(gradleDsl,
-                GradleDependency.listOf(generatorContext, moduleContext.dependencyContext(), generatorContext.getOptions(), useVersionCatalogue),
+                .toList();
+        return new GradleBuild(module.moduleAttributes().getCoordinate(),
+            gradleDsl,
+                GradleDependency.listOf(generatorContext, module.dependencyContext(), generatorContext.getOptions(), useVersionCatalogue),
                 gradlePlugins,
-                getRepositories(options, moduleContext.repositories()));
+                getRepositories(options, module.repositories()));
     }
 
     /**
@@ -69,7 +88,7 @@ public class GradleBuildCreator {
      * @return Gradle Repositories
      */
     @NonNull
-    protected List<GradleRepository> getRepositories(@NonNull Options options,
+    private static List<GradleRepository> getRepositories(@NonNull Options options,
                                                      Collection<Repository> repositories) {
         BuildTool buildTool = options.buildTools().stream().filter(BuildTool::isGradle).findFirst().orElseThrow();
         return GradleRepository.listOf(buildTool.getGradleDsl()
