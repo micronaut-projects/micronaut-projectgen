@@ -46,5 +46,6 @@ public class SpringBootDependencies {
     public static final Dependency SPRING_BOOT_STARTER_ACTUATOR = Dependency.builder()
         .groupId("org.springframework.boot")
         .artifactId("spring-boot-starter-actuator")
+        .comment("To expose an actuator endpoint")
         .compile().build();
 }

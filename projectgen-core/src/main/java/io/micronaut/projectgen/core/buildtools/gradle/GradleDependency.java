@@ -54,12 +54,14 @@ public class GradleDependency extends DependencyCoordinate {
 
     private final boolean useVersionCatalogue;
     private final String project;
+    private final String comment;
 
     public GradleDependency(@NonNull Dependency dependency,
                             @NonNull Options options,
                             @NonNull GeneratorContext generatorContext,
                             boolean useVersionCatalogue,
-                            @Nullable String project) {
+                            @Nullable String project,
+                            @Nullable String comment) {
         super(dependency);
         gradleConfiguration = GradleConfiguration.of(
             dependency.getScope(),
@@ -71,6 +73,7 @@ public class GradleDependency extends DependencyCoordinate {
         isKotlinDSL = generatorContext.getOptions().buildTools().stream().anyMatch(bt -> bt.isGradle() && bt.getGradleDsl().isPresent() && bt.getGradleDsl().get() == GradleDsl.KOTLIN);
         this.useVersionCatalogue = useVersionCatalogue;
         this.project = project;
+        this.comment = comment;
     }
 
     /**
@@ -111,7 +114,11 @@ public class GradleDependency extends DependencyCoordinate {
      */
     @NonNull
     public String toSnippet() {
-        String snippet = gradleConfiguration.getConfigurationName();
+        String snippet = "";
+        if (StringUtils.isNotEmpty(comment)) {
+            snippet += "/* " + comment + " */\n    ";
+        }
+        snippet += gradleConfiguration.getConfigurationName();
         if (isPom()) {
             String platformPrefix = " ";
             if (isKotlinDSL) {
@@ -172,7 +179,7 @@ public class GradleDependency extends DependencyCoordinate {
         BuildTool buildTool = options.buildTools().stream().filter(BuildTool::isGradle).findFirst().orElseThrow();
         return dependencyContext.removeDuplicates(dependencyContext.getDependencies(), options.language(), buildTool)
             .stream()
-            .map(dep -> new GradleDependency(dep, options, generatorContext, useVersionCatalogue, dep.getProject()))
+            .map(dep -> new GradleDependency(dep, options, generatorContext, useVersionCatalogue, dep.getProject(), dep.getComment()))
             .sorted(GradleDependency.COMPARATOR)
             .toList();
     }

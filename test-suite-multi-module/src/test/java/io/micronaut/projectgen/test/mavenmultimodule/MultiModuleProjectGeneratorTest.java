@@ -56,9 +56,9 @@ class MultiModuleProjectGeneratorTest {
 
         assertFile("expectedSettings.gradle", "settings.gradle", project, resourceLoader);
         assertFile("library.gradle", "library/build.gradle", project, resourceLoader);
-        assertFile("application.gradle", "application/build.gradle", project, resourceLoader);
         assertFile("rootPom.xml", "pom.xml", project, resourceLoader);
         assertFile("applicationPom.xml", "application/pom.xml", project, resourceLoader);
+        assertFile("application.gradle", "application/build.gradle", project, resourceLoader);
         assertFile("libraryPom.xml", "library/pom.xml", project, resourceLoader);
 
         String buildGradle = project.get("library/build.gradle");
@@ -86,6 +86,6 @@ class MultiModuleProjectGeneratorTest {
         Optional<InputStream> resourceAsStream = resourceLoader.getResourceAsStream("classpath:" + classpathName);
         assertTrue(resourceAsStream.isPresent());
         String expected = new String(resourceAsStream.get().readAllBytes(), StandardCharsets.UTF_8);
-        assertEquals(contents.strip(), expected.strip());
+        assertEquals(expected.strip(), contents.strip());
     }
 }

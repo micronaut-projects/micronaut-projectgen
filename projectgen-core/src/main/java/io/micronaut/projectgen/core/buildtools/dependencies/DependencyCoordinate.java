@@ -43,6 +43,9 @@ public class DependencyCoordinate implements Coordinate, Ordered {
     @Nullable
     private final List<Substitution> substitutions;
 
+    @Nullable
+    private final String comment;
+
     public DependencyCoordinate(Dependency dependency) {
         this(dependency, false);
     }
@@ -58,8 +61,9 @@ public class DependencyCoordinate implements Coordinate, Ordered {
                 dependency.getExclusions()
                     .stream()
                     .map(DependencyCoordinate::new)
-                    .collect(Collectors.toList()),
-            dependency.getSubstitutions());
+                    .toList(),
+            dependency.getSubstitutions(),
+            dependency.getComment());
     }
 
     public DependencyCoordinate(String groupId,
@@ -73,6 +77,7 @@ public class DependencyCoordinate implements Coordinate, Ordered {
             order,
             pom,
             null,
+            null,
             null);
     }
 
@@ -82,7 +87,8 @@ public class DependencyCoordinate implements Coordinate, Ordered {
                                 int order,
                                 boolean pom,
                                 @Nullable List<DependencyCoordinate> exclusions,
-                                @Nullable List<Substitution> substitutions) {
+                                @Nullable List<Substitution> substitutions,
+                                @Nullable String comment) {
         this.groupId = groupId;
         this.artifactId = artifactId;
         this.version = version;
@@ -90,6 +96,7 @@ public class DependencyCoordinate implements Coordinate, Ordered {
         this.pom = pom;
         this.exclusions = exclusions;
         this.substitutions = substitutions;
+        this.comment = comment;
     }
 
     /**
@@ -136,6 +143,11 @@ public class DependencyCoordinate implements Coordinate, Ordered {
     @Override
     public boolean isPom() {
         return pom;
+    }
+
+    @Nullable
+    public String getComment() {
+        return comment;
     }
 
     @Override

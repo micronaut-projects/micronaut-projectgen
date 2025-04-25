@@ -48,22 +48,29 @@ public class DefaultProjectGenerator implements ProjectGenerator {
     }
 
     @Override
-    public void generate(Options options, OutputHandler outputHandler, ConsoleOutput consoleOutput, Provider<AvailableFeatures> availableFeaturesProvider) throws Exception {
+    public void generate(Options options,
+                         OutputHandler outputHandler,
+                         ConsoleOutput consoleOutput,
+                         Provider<AvailableFeatures> availableFeaturesProvider) throws Exception {
         Project project = NameUtils.parse(options.name());
-        List<String> selectedFeatures = options.features();
+        GeneratorContext generatorContext = createGeneratorContext(project, options, availableFeaturesProvider, consoleOutput);
+        generatorContext.applyFeatures();
+        renderTemplates(outputHandler, project, generatorContext);
+    }
 
+    public GeneratorContext createGeneratorContext(Project project,
+                                                   Options options,
+                                                   Provider<AvailableFeatures> availableFeaturesProvider,
+                                                   ConsoleOutput consoleOutput) {
+        List<String> selectedFeatures = options.features();
         AvailableFeatures availableFeatures = availableFeaturesProvider == null
             ? beanContext.getBean(AvailableFeatures.class)
             : availableFeaturesProvider.get();
         FeatureContext featureContext = contextFactory.createFeatureContext(availableFeatures, selectedFeatures, options);
-        GeneratorContext generatorContext = contextFactory.createGeneratorContext(project, featureContext, consoleOutput);
+        return contextFactory.createGeneratorContext(project, featureContext, consoleOutput);
+    }
 
-        List<String> features = new ArrayList<>(generatorContext.getFeatures().size());
-        features.addAll(generatorContext.getFeatures());
-        features.sort(Comparator.comparing(Function.identity()));
-
-        generatorContext.applyFeatures();
-
+    private void renderTemplates(OutputHandler outputHandler, Project project, GeneratorContext generatorContext) throws Exception {
         try (TemplateRenderer templateRenderer = TemplateRenderer.create(project, outputHandler)) {
             ModuleContext moduleContext = generatorContext.getRootModule();
             renderTemplates(templateRenderer, moduleContext);
@@ -71,7 +78,6 @@ public class DefaultProjectGenerator implements ProjectGenerator {
                 renderTemplates(templateRenderer, generatorContext.getModuleByName(name));
             }
         }
-
     }
 
     void renderTemplates(TemplateRenderer templateRenderer, ModuleContext moduleContext) throws Exception {

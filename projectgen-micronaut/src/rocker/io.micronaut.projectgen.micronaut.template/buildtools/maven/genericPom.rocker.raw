@@ -29,7 +29,7 @@
 @properties.template(mavenBuild.properties())
   <dependencies>
 @for (MavenDependency f : mavenBuild.getDependencies(false)) {
-@dependency.template(f.getGroupId(), f.getArtifactId(), f.getMavenScope().toString(), f.getVersion(), false, f.getExclusions())
+@dependency.template(f.getGroupId(), f.getArtifactId(), f.getMavenScope().toString(), f.getVersion(), false, f.getComment(), f.getExclusions())
 }
   </dependencies>
   <build>
