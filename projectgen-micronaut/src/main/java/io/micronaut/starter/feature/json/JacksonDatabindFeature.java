@@ -17,24 +17,19 @@ package io.micronaut.starter.feature.json;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
-import io.micronaut.projectgen.core.generator.ModuleContext;
-import io.micronaut.projectgen.micronaut.ApplicationType;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.starter.feature.Category;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.jackson.databind.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class JacksonDatabindFeature implements JsonFeature {
+public class JacksonDatabindFeature implements OpenRewriteFeature {
     @Override
     public String getName() {
         return "jackson-databind";
-    }
-
-    @Override
-    public void apply(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
-        module.addDependency(DEPENDENCY_MICRONAUT_JACKSON_DATABIND);
     }
 
     @Override
@@ -50,5 +45,10 @@ public class JacksonDatabindFeature implements JsonFeature {
     @Override
     public String getTitle() {
         return "Jackson Databind Integration";
+    }
+
+    @Override
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.jackson-databind");
     }
 }

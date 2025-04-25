@@ -17,34 +17,17 @@ package io.micronaut.starter.feature.json;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
-import io.micronaut.projectgen.core.generator.ModuleContext;
-import io.micronaut.projectgen.micronaut.ApplicationType;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
-import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import io.micronaut.starter.feature.Category;
-import io.micronaut.starter.feature.staticResources.ContributingStaticResources;
-import io.micronaut.starter.feature.staticResources.StaticResource;
 import jakarta.inject.Singleton;
-
-import java.util.Collections;
 import java.util.List;
 
 @Requires(property = "micronaut.starter.feature.json.schema.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class JsonSchemaFeature implements ContributingStaticResources {
+public class JsonSchemaFeature implements OpenRewriteFeature {
 
     public static final String NAME = "json-schema";
-
-    private static final Dependency JSON_SCHEMA_PROCESSOR_DEPENDENCY = MicronautDependencyUtils.jsonSchemaDependency()
-            .artifactId("micronaut-json-schema-processor")
-            .annotationProcessor()
-            .build();
-
-    private static final Dependency JSON_SCHEMA_ANNOTAIONS_DEPENDENCY = MicronautDependencyUtils.jsonSchemaDependency()
-            .artifactId("micronaut-json-schema-annotations")
-            .compile()
-            .build();
 
     @Override
     public String getName() {
@@ -67,24 +50,7 @@ public class JsonSchemaFeature implements ContributingStaticResources {
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
-        module.addDependency(JSON_SCHEMA_PROCESSOR_DEPENDENCY);
-        module.addDependency(JSON_SCHEMA_ANNOTAIONS_DEPENDENCY);
-    }
-
-    @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://json-schema.org/learn/getting-started-step-by-step";
-    }
-
-    @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-json-schema/latest/guide/";
-    }
-
-    @Override
-    public List<StaticResource> staticResources() {
-        return Collections.singletonList(new StaticResource("jsonschema", "/schemas/**", "classpath:META-INF/schemas"));
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.json-schema");
     }
 }
