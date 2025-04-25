@@ -22,6 +22,7 @@ import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.feature.KotlinApplicationFeature;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.javalibs.logging.Slf4jJulBridge;
 import io.micronaut.projectgen.micronaut.ApplicationType;
@@ -66,9 +67,10 @@ public class KotlinApplication implements KotlinApplicationFeature {
     @Override
     public void apply(GeneratorContext generatorContext) {
         KotlinApplicationFeature.super.apply(generatorContext);
+        ModuleContext module = generatorContext.getRootModule();
         if (shouldGenerateApplicationFile(generatorContext)) {
-            addApplication(generatorContext);
-            addApplicationTest(generatorContext);
+            addApplication(generatorContext, module);
+            addApplicationTest(generatorContext, module);
         }
     }
 
@@ -77,12 +79,12 @@ public class KotlinApplication implements KotlinApplicationFeature {
                 || !generatorContext.getFeatures().hasFeature(FunctionFeature.class);
     }
 
-    protected void addApplication(GeneratorContext generatorContext) {
-        generatorContext.addTemplate("application", new RockerTemplate(getPath(), application(generatorContext)));
+    protected void addApplication(GeneratorContext generatorContext, ModuleContext module) {
+        module.addTemplate("application", new RockerTemplate(getPath(), application(generatorContext, module)));
     }
 
-    protected RockerModel application(GeneratorContext generatorContext) {
-        String defaultEnvironment = getDefaultEnvironment(generatorContext);
+    protected RockerModel application(GeneratorContext generatorContext, ModuleContext module) {
+        String defaultEnvironment = getDefaultEnvironment(module);
         boolean eagerInitSingleton = generatorContext.getFeatures().isFeaturePresent(RequireEagerSingletonInitializationFeature.class);
         return application.template(
                 generatorContext.getProject(),
@@ -92,13 +94,13 @@ public class KotlinApplication implements KotlinApplicationFeature {
         );
     }
 
-    private static String getDefaultEnvironment(GeneratorContext generatorContext) {
-        return generatorContext.hasConfigurationByEnvironment(Environment.DEVELOPMENT) ? Environment.DEVELOPMENT : null;
+    private static String getDefaultEnvironment(ModuleContext moduleContext) {
+        return moduleContext.hasConfigurationByEnvironment(Environment.DEVELOPMENT) ? Environment.DEVELOPMENT : null;
     }
 
-    protected void addApplicationTest(GeneratorContext generatorContext) {
+    protected void addApplicationTest(GeneratorContext generatorContext, ModuleContext module) {
         String testSourcePath = generatorContext.getTestSourcePath("/{packagePath}/{className}");
-        generatorContext.addTemplate("applicationTest",
+        module.addTemplate("applicationTest",
                 new RockerTemplate(testSourcePath, applicationTest(generatorContext))
         );
     }

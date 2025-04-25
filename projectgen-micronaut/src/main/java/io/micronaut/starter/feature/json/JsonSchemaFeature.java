@@ -17,6 +17,7 @@ package io.micronaut.starter.feature.json;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
@@ -67,8 +68,9 @@ public class JsonSchemaFeature implements ContributingStaticResources {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        generatorContext.addDependency(JSON_SCHEMA_PROCESSOR_DEPENDENCY);
-        generatorContext.addDependency(JSON_SCHEMA_ANNOTAIONS_DEPENDENCY);
+        ModuleContext module = generatorContext.getRootModule();
+        module.addDependency(JSON_SCHEMA_PROCESSOR_DEPENDENCY);
+        module.addDependency(JSON_SCHEMA_ANNOTAIONS_DEPENDENCY);
     }
 
     @Override

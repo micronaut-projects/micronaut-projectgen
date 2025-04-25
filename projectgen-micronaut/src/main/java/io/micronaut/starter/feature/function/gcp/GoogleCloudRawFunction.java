@@ -19,6 +19,8 @@ import com.fizzed.rocker.RockerModel;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.Project;
@@ -71,12 +73,13 @@ public class GoogleCloudRawFunction extends AbstractGoogleCloudFunction {
     @Override
     public void apply(GeneratorContext generatorContext) {
         super.apply(generatorContext);
+        ModuleContext module = generatorContext.getRootModule();
         ApplicationType type = generatorContext.getOptions() instanceof MicronautOptions mnOptions
                 ? mnOptions.applicationType() : null;
         if (type == ApplicationType.FUNCTION && generatorContext.isFeatureMissing(CodeContributingFeature.class)) {
             Project project = generatorContext.getProject();
             String sourceFile = generatorContext.getSourcePath("/{packagePath}/Function");
-            generatorContext.addTemplate(
+            module.addTemplate(generatorContext.getOptions().language(),
                     "function",
                     sourceFile,
                     gcpRawBackgroundFunctionJava.template(project),
@@ -85,15 +88,15 @@ public class GoogleCloudRawFunction extends AbstractGoogleCloudFunction {
             );
 
             applyTestTemplate(generatorContext, project, "Function");
-            addDependencies(generatorContext);
+            addDependencies(module, generatorContext.getOptions());
         }
     }
 
-    void addDependencies(GeneratorContext generatorContext) {
-        generatorContext.addDependency(MICRONAUT_GCP_FUNCTION);
-        generatorContext.addDependency(GCP_FUNCTIONS_FRAMEWORK_API.compileOnly());
-        if (OptionUtils.hasGradleBuildTool(generatorContext.getOptions())) {
-            generatorContext.addDependency(GCP_FUNCTIONS_FRAMEWORK_API.test());
+    void addDependencies(ModuleContext module, Options options) {
+        module.addDependency(MICRONAUT_GCP_FUNCTION);
+        module.addDependency(GCP_FUNCTIONS_FRAMEWORK_API.compileOnly());
+        if (OptionUtils.hasGradleBuildTool(options)) {
+            module.addDependency(GCP_FUNCTIONS_FRAMEWORK_API.test());
         }
     }
 

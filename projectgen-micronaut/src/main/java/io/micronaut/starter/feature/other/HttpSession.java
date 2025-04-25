@@ -19,6 +19,7 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
@@ -62,13 +63,14 @@ public class HttpSession implements Feature  {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        Map<String, Object> configuration = generatorContext.getConfiguration();
+        ModuleContext module = generatorContext.getRootModule();
+        Map<String, Object> configuration = module.configuration();
         configuration.put("micronaut.session.http.cookie", true);
         configuration.put("micronaut.session.http.header", true);
         if (generatorContext.isFeaturePresent(RedisLettuce.class)) {
             configuration.put("micronaut.session.http.redis.enabled", true);
         }
-        generatorContext.addDependency(MicronautDependencyUtils.sessionDependency()
+        module.addDependency(MicronautDependencyUtils.sessionDependency()
                 .artifactId("micronaut-session")
                 .compile());
     }

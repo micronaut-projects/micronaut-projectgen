@@ -21,6 +21,7 @@ import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.micronaut.features.config.MicronautDistributedConfigurationFeature;
 import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import io.micronaut.projectgen.core.feature.DistributedConfigFeature;
@@ -77,12 +78,13 @@ public class OracleCloudVault implements DistributedConfigFeature {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        generatorContext.addDependency(MicronautDependencyUtils.oracleCloudDependency()
+        ModuleContext module = generatorContext.getRootModule();
+        module.addDependency(MicronautDependencyUtils.oracleCloudDependency()
                 .artifactId("micronaut-oraclecloud-vault")
                 .compile());
-        generatorContext.getConfiguration().put("oci.config.profile", "DEFAULT");
+        module.configuration().put("oci.config.profile", "DEFAULT");
 
-        Map<String, Object> bootstrapConfiguration = generatorContext.getBootstrapConfiguration();
+        Map<String, Object> bootstrapConfiguration = module.bootstrapConfiguration();
         bootstrapConfiguration.put("oci.vault.config.enabled", true);
         Map<String, String> map = new HashMap<>();
         map.put("ocid", "");

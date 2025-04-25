@@ -18,6 +18,7 @@ package io.micronaut.projectgen.core.buildtools.gradle;
 import io.micronaut.projectgen.core.buildtools.BuildPlugin;
 import io.micronaut.projectgen.core.feature.BuildPluginFeature;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.rocker.RockerWritable;
 import jakarta.inject.Singleton;
 import io.micronaut.projectgen.core.template.signingGradlePlugin;
@@ -40,6 +41,7 @@ public class SigningGradlePlugin implements BuildPluginFeature, GradleSpecificFe
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        generatorContext.addBuildPlugin(SIGNING_GRADLE_PLUGIN);
+        ModuleContext rootModule = generatorContext.getRootModule();
+        rootModule.addBuildPlugin(SIGNING_GRADLE_PLUGIN);
     }
 }

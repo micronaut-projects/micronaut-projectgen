@@ -21,6 +21,7 @@ import io.micronaut.projectgen.build.dependencies.StarterCoordinates;
 import io.micronaut.projectgen.core.buildtools.dependencies.Coordinate;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.rocker.RockerWritable;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.projectgen.micronaut.template.view.mvnPluginReact;
@@ -86,11 +87,12 @@ public class React implements ViewFeature, MicronautServerDependent {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
+        ModuleContext module = generatorContext.getRootModule();
         try {
-            generatorContext.addDependency(MicronautDependencyUtils.viewsDependency().artifactId(ARTIFACT_ID).compile());
+            module.addDependency(MicronautDependencyUtils.viewsDependency().artifactId(ARTIFACT_ID).compile());
 
             if (OptionUtils.hasGradleBuildTool(generatorContext.getOptions())) {
-                generatorContext.addDependency(Dependency.builder()
+                module.addDependency(Dependency.builder()
                         .runtime()
                         .groupId(StarterCoordinates.JS_COMMUNITY.getGroupId())
                         .artifactId(StarterCoordinates.JS_COMMUNITY.getArtifactId())
@@ -99,7 +101,7 @@ public class React implements ViewFeature, MicronautServerDependent {
                 );
 
                 // This plugin teaches Gradle to download NodeJS and use it to run JS programs.
-                generatorContext.addBuildPlugin(
+                module.addBuildPlugin(
                         GradlePlugin.builder()
                                 .id("com.github.node-gradle.node")
                                 .version(NODE_GRADLE_PLUGIN_VERSION)
@@ -109,7 +111,7 @@ public class React implements ViewFeature, MicronautServerDependent {
 
                 // This teaches Gradle to download the right GraalVM automatically (community edition).
                 // For some reason Gradle won't do it out of the box :(
-                generatorContext.addBuildPlugin(
+                module.addBuildPlugin(
                         GradlePlugin.builder()
                                 .id("org.gradle.toolchains.foojay-resolver-convention")
                                 .version("0.8.0")
@@ -119,25 +121,25 @@ public class React implements ViewFeature, MicronautServerDependent {
             } else if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())) {
                 // We spell out the individual dependencies here because the Starter dependency management code for
                 // Maven builds can't express the direct pom dependency needed by Truffle.
-                generatorContext.addDependency(Dependency.builder()
+                module.addDependency(Dependency.builder()
                         .groupId("org.graalvm.js")
                         .artifactId("js-language")
                         .version(StarterCoordinates.JS_COMMUNITY.getVersion())
                         .runtime()
                 );
-                generatorContext.addDependency(Dependency.builder()
+                module.addDependency(Dependency.builder()
                         .groupId("org.graalvm.truffle")
                         .artifactId("truffle-enterprise")
                         .version(StarterCoordinates.JS_COMMUNITY.getVersion())
                         .runtime()
                 );
-                generatorContext.addDependency(Dependency.builder()
+                module.addDependency(Dependency.builder()
                         .groupId("org.graalvm.truffle")
                         .artifactId("truffle-runtime")
                         .version(StarterCoordinates.JS_COMMUNITY.getVersion())
                         .runtime()
                 );
-                generatorContext.addDependency(Dependency.builder()
+                module.addDependency(Dependency.builder()
                         .groupId("org.graalvm.polyglot")
                         .artifactId("polyglot")
                         .version(StarterCoordinates.JS_COMMUNITY.getVersion())
@@ -145,7 +147,7 @@ public class React implements ViewFeature, MicronautServerDependent {
                 );
 
                 Coordinate coordinate = generatorContext.resolveCoordinate("frontend-maven-plugin");
-                generatorContext.addBuildPlugin(
+                module.addBuildPlugin(
                         MavenPlugin.builder()
                                 .artifactId(StarterCoordinates.FRONTEND_MAVEN_PLUGIN.getArtifactId())
                                 .extension(new RockerWritable(mvnPluginReact.template(coordinate.getGroupId(), coordinate.getArtifactId(), coordinate.getVersion())))
@@ -157,7 +159,7 @@ public class React implements ViewFeature, MicronautServerDependent {
             // be minified and transpiled as part of the build pipeline.
             var ourResourceURL = Thread.currentThread().getContextClassLoader().getResource("views/react").toString();
             for (var fileName : FRONTEND_FILES) {
-                generatorContext.addTemplate(
+                module.addTemplate(
                         fileName,
                         new URLTemplate("src/main/js/" + fileName, new URL(ourResourceURL + "/" + fileName))
                 );
@@ -165,15 +167,15 @@ public class React implements ViewFeature, MicronautServerDependent {
             var sourceFile = generatorContext.getSourcePath("/{packagePath}/AppController");
 
             if (generatorContext.getLanguage() == Language.JAVA) {
-                generatorContext.addTemplate("AppController.java",
+                module.addTemplate("AppController.java",
                         new RockerTemplate(sourceFile, reactControllerJava.template(generatorContext.getProject())));
             } else if (generatorContext.getLanguage() == Language.KOTLIN) {
-                generatorContext.addTemplate("AppController.kt",
+                module.addTemplate("AppController.kt",
                         new RockerTemplate(sourceFile, reactControllerKotlin.template(generatorContext.getProject())));
             }
 
             // This will stop being necessary in Truffle 24.1
-            generatorContext.getConfiguration().addNested("micronaut.executors.blocking.virtual", "false");
+            module.configuration().addNested("micronaut.executors.blocking.virtual", "false");
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);   // Cannot happen.
         }

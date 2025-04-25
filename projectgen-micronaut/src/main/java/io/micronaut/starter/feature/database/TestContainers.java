@@ -20,6 +20,7 @@ import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.feature.FeaturePhase;
@@ -57,51 +58,52 @@ public class TestContainers implements Feature {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
+        ModuleContext module = generatorContext.getRootModule();
         generatorContext.getFeatures().getFeatures()
                 .stream()
                 .filter(ContributingTestContainerDependency.class::isInstance)
-                .forEach(f -> ((ContributingTestContainerDependency) f).testContainersDependencies().forEach(generatorContext::addDependency));
-        generatorContext.addDependency(ContributingTestContainerDependency.testContainerDependency(ARTIFACT_ID_TESTCONTAINERS));
+                .forEach(f -> ((ContributingTestContainerDependency) f).testContainersDependencies().forEach(module::addDependency));
+        module.addDependency(ContributingTestContainerDependency.testContainerDependency(ARTIFACT_ID_TESTCONTAINERS));
 
         generatorContext.getFeature(DatabaseDriverFeature.class).ifPresent(driverFeature -> {
             generatorContext.getFeature(R2dbc.class).ifPresent(driverConfiguration -> {
                 if (driverFeature instanceof SQLServer) {
-                    generatorContext.addTemplate("sqlserverEula", new StringTemplate("src/test/resources/container-license-acceptance.txt", "mcr.microsoft.com/mssql/server:2019-CU16-GDR1-ubuntu-20.04"));
+                    module.addTemplate("sqlserverEula", new StringTemplate("src/test/resources/container-license-acceptance.txt", "mcr.microsoft.com/mssql/server:2019-CU16-GDR1-ubuntu-20.04"));
                 }
                 r2dbcUrlForDatabaseDriverFeature(driverFeature).ifPresent(url -> {
-                    Configuration testConfig = generatorContext.getConfigurationByEnvironmentOrDefaultConfig("test", ApplicationConfiguration.testConfig());
+                    Configuration testConfig = module.getConfigurationByEnvironmentOrDefaultConfig("test", ApplicationConfiguration.testConfig());
                     testConfig.put(driverConfiguration.getUrlKey(), url);
                 });
-                generatorContext.addDependency(ContributingTestContainerDependency.testContainerDependency("r2dbc"));
+                module.addDependency(ContributingTestContainerDependency.testContainerDependency("r2dbc"));
                 // TestContainers requires the database module, a jdbc driver AND the r2dbc module: see https://www.testcontainers.org/modules/databases/r2dbc/
-                driverFeature.getJavaClientDependency().ifPresent(d -> generatorContext.addDependency(d.testRuntime()));
+                driverFeature.getJavaClientDependency().ifPresent(d -> module.addDependency(d.testRuntime()));
                 artifactIdForDriverFeature(driverFeature).ifPresent(dependencyArtifactId ->
-                        generatorContext.addDependency(ContributingTestContainerDependency.testContainerDependency(dependencyArtifactId)));
+                    module.addDependency(ContributingTestContainerDependency.testContainerDependency(dependencyArtifactId)));
             });
             generatorContext.getFeature(DatabaseDriverConfigurationFeature.class).ifPresent(driverConfiguration -> {
                 String driver = "org.testcontainers.jdbc.ContainerDatabaseDriver";
                 if (driverFeature instanceof SQLServer) {
-                    generatorContext.addTemplate("sqlserverEula", new StringTemplate("src/test/resources/container-license-acceptance.txt", "mcr.microsoft.com/mssql/server:2019-CU16-GDR1-ubuntu-20.04"));
+                    module.addTemplate("sqlserverEula", new StringTemplate("src/test/resources/container-license-acceptance.txt", "mcr.microsoft.com/mssql/server:2019-CU16-GDR1-ubuntu-20.04"));
                 }
                 urlForDatabaseDriverFeature(driverFeature).ifPresent(url -> {
-                    Configuration testConfig = generatorContext.getConfigurationByEnvironmentOrDefaultConfig("test", ApplicationConfiguration.testConfig());
+                    Configuration testConfig = module.getConfigurationByEnvironmentOrDefaultConfig("test", ApplicationConfiguration.testConfig());
                     testConfig.put(driverConfiguration.getUrlKey(), url);
                     testConfig.put(driverConfiguration.getDriverKey(), driver);
                 });
                 artifactIdForDriverFeature(driverFeature).ifPresent(dependencyArtifactId ->
-                        generatorContext.addDependency(ContributingTestContainerDependency.testContainerDependency(dependencyArtifactId)));
+                    module.addDependency(ContributingTestContainerDependency.testContainerDependency(dependencyArtifactId)));
             });
             generatorContext.getFeature(HibernateReactiveFeature.class).ifPresent(hibernateReactiveFeature -> {
                 urlForDatabaseDriverFeature(driverFeature).ifPresent(url -> {
-                    Configuration testConfig = generatorContext.getConfigurationByEnvironmentOrDefaultConfig("test", ApplicationConfiguration.testConfig());
+                    Configuration testConfig = module.getConfigurationByEnvironmentOrDefaultConfig("test", ApplicationConfiguration.testConfig());
                     testConfig.put(hibernateReactiveFeature.getUrlKey(), url);
                 });
                 artifactIdForDriverFeature(driverFeature)
-                        .ifPresent(dependencyArtifactId -> generatorContext.addDependency(ContributingTestContainerDependency.testContainerDependency(dependencyArtifactId)));
+                        .ifPresent(dependencyArtifactId -> module.addDependency(ContributingTestContainerDependency.testContainerDependency(dependencyArtifactId)));
             });
         });
         testContainerArtifactIdByTestFramework(generatorContext.getTestFramework()).ifPresent(testArtifactId -> {
-            generatorContext.addDependency(ContributingTestContainerDependency.testContainerDependency(testArtifactId));
+            module.addDependency(ContributingTestContainerDependency.testContainerDependency(testArtifactId));
         });
     }
 

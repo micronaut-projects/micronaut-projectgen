@@ -20,6 +20,7 @@ import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.feature.FeatureContext;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.starter.feature.database.jdbc.JdbcFeature;
 import jakarta.inject.Singleton;
 
@@ -63,14 +64,15 @@ public class DataJdbc implements DataFeature {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        generatorContext.addDependency(DataFeature.dataProcessorDependency(generatorContext.getBuildTool()));
-        generatorContext.addDependency(Dependency.builder()
+        ModuleContext module = generatorContext.getRootModule();
+        module.addDependency(DataFeature.dataProcessorDependency(generatorContext.getBuildTool()));
+        module.addDependency(Dependency.builder()
                 .groupId("io.micronaut.data")
                 .artifactId(MICRONAUT_DATA_JDBC_ARTIFACT)
                 .compile());
 
         DatabaseDriverFeature dbFeature = generatorContext.getRequiredFeature(DatabaseDriverFeature.class);
-        generatorContext.getConfiguration().addNested(getDatasourceConfig(generatorContext, dbFeature));
+        module.configuration().addNested(getDatasourceConfig(generatorContext, dbFeature));
     }
 
     @Override

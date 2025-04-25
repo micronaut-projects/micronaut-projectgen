@@ -18,6 +18,7 @@ package io.micronaut.starter.feature.view;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import io.micronaut.starter.feature.server.MicronautServerDependent;
 import jakarta.inject.Singleton;
@@ -55,7 +56,8 @@ public class Pebble implements ViewFeature, MicronautServerDependent {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        generatorContext.addDependency(MicronautDependencyUtils.viewsDependency()
+        ModuleContext module = generatorContext.getRootModule();
+        module.addDependency(MicronautDependencyUtils.viewsDependency()
                 .artifactId(ARTIFACT_ID_MICRONAUT_VIEWS_PEBBLE)
                 .compile());
     }

@@ -1,0 +1,8 @@
+dependencyManagement {
+    imports {
+        mavenBom org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES
+    }
+}
+tasks.withType(JavaCompile).configureEach {
+    options.compilerArgs.add("-parameters")
+}

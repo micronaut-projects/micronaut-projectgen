@@ -18,6 +18,7 @@ package io.micronaut.starter.feature.view;
 import com.fizzed.rocker.RockerModel;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
@@ -89,22 +90,23 @@ public class ViewsFieldsetTck implements Feature {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        addThymeleafSuite(generatorContext);
-        addDependencies(generatorContext);
+        ModuleContext module = generatorContext.getRootModule();
+        addThymeleafSuite(generatorContext, module);
+        addDependencies(module);
     }
 
-    private void addThymeleafSuite(GeneratorContext generatorContext) {
+    private void addThymeleafSuite(GeneratorContext generatorContext, ModuleContext module) {
         if (generatorContext.getLanguage() == Language.JAVA) {
             RockerModel rockerModel = thymeleafSuite.template(generatorContext.getProject());
             String templateName = "thymeleafSuite";
             String extension = generatorContext.getLanguage().getExtension();
             String srcDir = generatorContext.getLanguage().getTestSrcDir();
-            generatorContext.addTemplate(templateName,
+            module.addTemplate(templateName,
                     new RockerTemplate(srcDir + "/{packagePath}/ThymeleafSuite." + extension, rockerModel));
         }
     }
 
-    private void addDependencies(GeneratorContext generatorContext) {
-        generatorContext.addDependency(DEPENDENCY_VIEWS_FIELDSET_TCK);
+    private void addDependencies(ModuleContext module) {
+        module.addDependency(DEPENDENCY_VIEWS_FIELDSET_TCK);
     }
 }

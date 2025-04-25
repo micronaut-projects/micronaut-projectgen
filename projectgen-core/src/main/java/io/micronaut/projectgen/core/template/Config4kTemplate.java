@@ -32,11 +32,7 @@ public class Config4kTemplate extends DefaultTemplate {
     private final Config config;
 
     public Config4kTemplate(String path, Map<String, Object> values) {
-        this(DEFAULT_MODULE, path, values);
-    }
-
-    public Config4kTemplate(String module, String path, Map<String, Object> values) {
-        super(module, path);
+        super(path);
         config = ConfigFactory.parseMap(removeCommentsAndBlankLinesEntries(values));
     }
 

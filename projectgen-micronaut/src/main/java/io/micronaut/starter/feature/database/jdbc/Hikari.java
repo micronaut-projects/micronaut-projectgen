@@ -19,6 +19,7 @@ import io.micronaut.context.annotation.Primary;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import io.micronaut.starter.feature.database.DatabaseDriverFeature;
 import jakarta.inject.Singleton;
@@ -53,7 +54,8 @@ public class Hikari extends JdbcFeature {
     @Override
     public void apply(GeneratorContext generatorContext) {
         super.apply(generatorContext);
-        generatorContext.addDependency(MicronautDependencyUtils.sqlDependency()
+        ModuleContext module = generatorContext.getRootModule();
+        module.addDependency(MicronautDependencyUtils.sqlDependency()
                 .artifactId(MICRONAUT_JDBC_HIKARI_ARTIFACT)
                 .compile());
     }

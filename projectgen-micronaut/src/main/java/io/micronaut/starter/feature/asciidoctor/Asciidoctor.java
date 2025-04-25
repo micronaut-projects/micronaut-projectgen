@@ -17,6 +17,7 @@ package io.micronaut.starter.feature.asciidoctor;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.rocker.RockerWritable;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.projectgen.micronaut.ApplicationType;
@@ -62,17 +63,18 @@ public class Asciidoctor implements Feature {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
+        ModuleContext module = generatorContext.getRootModule();
         if (OptionUtils.hasGradleBuildTool(generatorContext.getOptions())) {
-            generatorContext.addTemplate("asciidocGradle", new RockerTemplate("gradle/asciidoc.gradle", asciidocGradle.template()));
+            module.addTemplate("asciidocGradle", new RockerTemplate("gradle/asciidoc.gradle", asciidocGradle.template()));
 
-            generatorContext.addBuildPlugin(GradlePlugin.builder()
+            module.addBuildPlugin(GradlePlugin.builder()
                     .id("org.asciidoctor.jvm.convert")
                     .lookupArtifactId("asciidoctor-gradle-jvm")
                     .build());
 
         } else if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())) {
             String mavenPluginArtifactId = "asciidoctor-maven-plugin";
-            BuildProperties props = generatorContext.getBuildProperties();
+            BuildProperties props = module.buildProperties();
             coordinateResolver.resolve(mavenPluginArtifactId)
                     .ifPresent(coordinate -> props.put("asciidoctor.maven.plugin.version", coordinate.getVersion()));
             coordinateResolver.resolve("asciidoctorj")
@@ -82,12 +84,12 @@ public class Asciidoctor implements Feature {
             coordinateResolver.resolve("jruby")
                     .ifPresent(coordinate -> props.put("jruby.version", coordinate.getVersion()));
 
-            generatorContext.addBuildPlugin(MavenPlugin.builder()
+            module.addBuildPlugin(MavenPlugin.builder()
                     .artifactId(mavenPluginArtifactId)
                     .extension(new RockerWritable(asciidocMavenPlugin.template()))
                     .build());
         }
-        generatorContext.addTemplate("indexAdoc", new RockerTemplate("src/docs/asciidoc/index.adoc", indexAdoc.template()));
+        module.addTemplate("indexAdoc", new RockerTemplate("src/docs/asciidoc/index.adoc", indexAdoc.template()));
     }
 
     @Override

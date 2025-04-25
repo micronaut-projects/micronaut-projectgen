@@ -21,6 +21,7 @@ import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.feature.TestFeature;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
@@ -62,15 +63,16 @@ public class KoTest implements TestFeature {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
+        ModuleContext module = generatorContext.getRootModule();
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        generatorContext.addTemplate("koTestConfig",
+        module.addTemplate("koTestConfig",
                 new URLTemplate("src/test/kotlin/io/kotest/provided/ProjectConfig.kt",
                         classLoader.getResource("kotest/ProjectConfig.kt")));
         // Only for Maven, these dependencies are applied by the Micronaut Gradle Plugin
         if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())) {
-            generatorContext.addDependency(DEPENDENCY_MICRONAUT_TEST_KOTEST);
-            generatorContext.addDependency(DEPENDENCY_KOTEST_RUNNER_JUNIT_5_JVM);
-            generatorContext.addDependency(DEPENDENCY_KOTEST_ASSERTIONS_CORE_JVM);
+            module.addDependency(DEPENDENCY_MICRONAUT_TEST_KOTEST);
+            module.addDependency(DEPENDENCY_KOTEST_RUNNER_JUNIT_5_JVM);
+            module.addDependency(DEPENDENCY_KOTEST_ASSERTIONS_CORE_JVM);
         }
     }
 

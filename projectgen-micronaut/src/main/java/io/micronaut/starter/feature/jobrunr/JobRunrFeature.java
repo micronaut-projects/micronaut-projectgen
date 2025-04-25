@@ -18,6 +18,8 @@ package io.micronaut.starter.feature.jobrunr;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.feature.config.Configuration;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
@@ -71,17 +73,19 @@ public class JobRunrFeature implements MicronautCommunityFeature {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        addDependencies(generatorContext);
-        addConfiguration(generatorContext);
+        ModuleContext module = generatorContext.getRootModule();
+        addDependencies(module);
+        addConfiguration(module);
     }
 
-    protected void addDependencies(GeneratorContext generatorContext) {
-        generatorContext.addDependency(JOBRUNR_DEPENDENCY);
+    protected void addDependencies(ModuleContext module) {
+        module.addDependency(JOBRUNR_DEPENDENCY);
     }
 
-    protected void addConfiguration(GeneratorContext generatorContext) {
-        generatorContext.getConfiguration().put(PROPERTY_JOBRUNR_BACKGROUND_JOB_SERVER_ENABLED, false);
-        generatorContext.getConfiguration().put(PROPERTY_JOBRUNR_DASHBOARD_ENABLED, false);
+    protected void addConfiguration(ModuleContext module) {
+        Configuration configuration = module.configuration();
+        configuration.put(PROPERTY_JOBRUNR_BACKGROUND_JOB_SERVER_ENABLED, false);
+        configuration.put(PROPERTY_JOBRUNR_DASHBOARD_ENABLED, false);
     }
 
     @Override

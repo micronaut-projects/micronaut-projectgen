@@ -18,6 +18,7 @@ package io.micronaut.starter.feature.oraclecloud;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
@@ -72,15 +73,16 @@ public class OracleCloudLogging implements OracleCloudFeature, Feature {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        addDependencies(generatorContext);
-        addConfiguration(generatorContext);
+        ModuleContext module = generatorContext.getRootModule();
+        addDependencies(module);
+        addConfiguration(module);
     }
 
-    protected void addConfiguration(GeneratorContext generatorContext) {
-        generatorContext.getConfiguration().put("oci.config.profile", "DEFAULT");
+    protected void addConfiguration(ModuleContext module) {
+        module.configuration().put("oci.config.profile", "DEFAULT");
     }
 
-    protected void addDependencies(GeneratorContext generatorContext) {
-        generatorContext.addDependency(ORACLE_LOGGING_DEPENDENCY);
+    protected void addDependencies(ModuleContext module) {
+        module.addDependency(ORACLE_LOGGING_DEPENDENCY);
     }
 }

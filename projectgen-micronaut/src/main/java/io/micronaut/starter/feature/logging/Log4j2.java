@@ -19,6 +19,7 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.feature.LoggingFeature;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
@@ -53,26 +54,27 @@ public class Log4j2 implements LoggingFeature {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        populateDependencies(generatorContext);
-        generatorContext.addTemplate("loggingConfig", new RockerTemplate("src/main/resources/log4j2.xml", log4j2.template(generatorContext.getProject())));
+        ModuleContext module = generatorContext.getRootModule();
+        populateDependencies(module);
+        module.addTemplate("loggingConfig", new RockerTemplate("src/main/resources/log4j2.xml", log4j2.template(generatorContext.getProject())));
     }
 
-    private void populateDependencies(GeneratorContext generatorContext) {
-        generatorContext.addDependency(Dependency.builder()
+    private void populateDependencies(ModuleContext module) {
+        module.addDependency(Dependency.builder()
                 .groupId(GROUP_ID)
                 .artifactId("log4j-bom")
                 .version(VersionInfo.getBomVersion("log4j"))
                 .pom()
                 .compile());
-        generatorContext.addDependency(Dependency.builder()
+        module.addDependency(Dependency.builder()
                 .groupId(GROUP_ID)
                 .artifactId("log4j-api")
                 .compile());
-        generatorContext.addDependency(Dependency.builder()
+        module.addDependency(Dependency.builder()
                 .groupId(GROUP_ID)
                 .artifactId("log4j-core")
                 .runtime());
-        generatorContext.addDependency(Dependency.builder()
+        module.addDependency(Dependency.builder()
                 .groupId(GROUP_ID)
                 .artifactId("log4j-slf4j-impl")
                 .runtime());

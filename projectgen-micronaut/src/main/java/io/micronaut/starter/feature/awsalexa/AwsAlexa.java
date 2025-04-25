@@ -17,6 +17,7 @@ package io.micronaut.starter.feature.awsalexa;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.Project;
@@ -127,14 +128,15 @@ public class AwsAlexa implements Feature, AwsCloudFeature, CodeContributingFeatu
         stopIntentHandler(generatorContext, project);
         stopIntentHandlerTest(generatorContext, project);
 
+        ModuleContext module = generatorContext.getRootModule();
         if (generatorContext.getOptions() instanceof MicronautOptions micronautOptions && micronautOptions.applicationType() == ApplicationType.FUNCTION) {
-            generatorContext.addDependency(Dependency.builder()
+            module.addDependency(Dependency.builder()
                     .groupId("io.micronaut.aws")
                     .artifactId("micronaut-function-aws-alexa")
                     .compile());
         }
         if (generatorContext.getOptions() instanceof MicronautOptions micronautOptions && micronautOptions.applicationType() == ApplicationType.DEFAULT) {
-            generatorContext.addDependency(Dependency.builder()
+            module.addDependency(Dependency.builder()
                     .groupId("io.micronaut.aws")
                     .artifactId("micronaut-aws-alexa-httpserver")
                     .compile());
@@ -143,7 +145,8 @@ public class AwsAlexa implements Feature, AwsCloudFeature, CodeContributingFeatu
 
     private void cancelIntentHandler(GeneratorContext generatorContext, Project project) {
         String cancelIntentHandler = generatorContext.getSourcePath("/{packagePath}/CancelIntentHandler");
-        generatorContext.addTemplate("cancelIntentHandler", cancelIntentHandler,
+        ModuleContext module = generatorContext.getRootModule();
+        module.addTemplate(generatorContext.getLanguage(), "cancelIntentHandler", cancelIntentHandler,
                 cancelIntentHandlerJava.template(project),
                 cancelIntentHandlerKotlin.template(project),
                 cancelIntentHandlerGroovy.template(project));
@@ -151,7 +154,8 @@ public class AwsAlexa implements Feature, AwsCloudFeature, CodeContributingFeatu
 
     private void fallbackIntentHandler(GeneratorContext generatorContext, Project project) {
         String fallbackIntentHandler = generatorContext.getSourcePath("/{packagePath}/FallbackIntentHandler");
-        generatorContext.addTemplate("fallbackIntentHandler", fallbackIntentHandler,
+        ModuleContext module = generatorContext.getRootModule();
+        module.addTemplate(generatorContext.getLanguage(), "fallbackIntentHandler", fallbackIntentHandler,
                 fallbackIntentHandlerJava.template(project),
                 fallbackIntentHandlerKotlin.template(project),
                 fallbackIntentHandlerGroovy.template(project));
@@ -159,7 +163,8 @@ public class AwsAlexa implements Feature, AwsCloudFeature, CodeContributingFeatu
 
     private void helpIntentHandler(GeneratorContext generatorContext, Project project) {
         String helpIntentHandler = generatorContext.getSourcePath("/{packagePath}/HelpIntentHandler");
-        generatorContext.addTemplate("helpIntentHandler", helpIntentHandler,
+        ModuleContext module = generatorContext.getRootModule();
+        module.addTemplate(generatorContext.getLanguage(), "helpIntentHandler", helpIntentHandler,
                 helpIntentHandlerJava.template(project),
                 helpIntentHandlerKotlin.template(project),
                 helpIntentHandlerGroovy.template(project));
@@ -167,7 +172,8 @@ public class AwsAlexa implements Feature, AwsCloudFeature, CodeContributingFeatu
 
     private void launchRequestIntentHandler(GeneratorContext generatorContext, Project project) {
         String launchRequestIntentHandler = generatorContext.getSourcePath("/{packagePath}/LaunchRequestIntentHandler");
-        generatorContext.addTemplate("launchRequestIntentHandler", launchRequestIntentHandler,
+        ModuleContext module = generatorContext.getRootModule();
+        module.addTemplate(generatorContext.getLanguage(), "launchRequestIntentHandler", launchRequestIntentHandler,
                 launchRequestIntentHandlerJava.template(project),
                 launchRequestIntentHandlerKotlin.template(project),
                 launchRequestIntentHandlerGroovy.template(project));
@@ -175,7 +181,8 @@ public class AwsAlexa implements Feature, AwsCloudFeature, CodeContributingFeatu
 
     private void sessionEndedRequestIntentHandler(GeneratorContext generatorContext, Project project) {
         String sessionEndedRequestIntentHandler = generatorContext.getSourcePath("/{packagePath}/SessionEndedRequestIntentHandler");
-        generatorContext.addTemplate("sessionEndedRequestIntentHandler", sessionEndedRequestIntentHandler,
+        ModuleContext module = generatorContext.getRootModule();
+        module.addTemplate(generatorContext.getLanguage(), "sessionEndedRequestIntentHandler", sessionEndedRequestIntentHandler,
                 sessionEndedRequestIntentHandlerJava.template(project),
                 sessionEndedRequestIntentHandlerKotlin.template(project),
                 sessionEndedRequestIntentHandlerGroovy.template(project));
@@ -183,7 +190,8 @@ public class AwsAlexa implements Feature, AwsCloudFeature, CodeContributingFeatu
 
     private void stopIntentHandler(GeneratorContext generatorContext, Project project) {
         String stopIntentHandler = generatorContext.getSourcePath("/{packagePath}/StopIntentHandler");
-        generatorContext.addTemplate("stopIntentHandler", stopIntentHandler,
+        ModuleContext module = generatorContext.getRootModule();
+        module.addTemplate(generatorContext.getLanguage(), "stopIntentHandler", stopIntentHandler,
                 stopIntentHandlerJava.template(project),
                 stopIntentHandlerKotlin.template(project),
                 stopIntentHandlerGroovy.template(project));
@@ -196,7 +204,8 @@ public class AwsAlexa implements Feature, AwsCloudFeature, CodeContributingFeatu
                 launchRequestIntentHandlerGroovyJunit.template(project),
                 launchRequestIntentHandlerKotlinJunit.template(project),
                 launchRequestIntentHandlerKoTest.template(project));
-        generatorContext.addTemplate("testLaunchRequestIntentHandler", launchRequestIntentHandlerTest, provider);
+        ModuleContext module = generatorContext.getRootModule();
+        module.addTemplate(generatorContext.getOptions(), "testLaunchRequestIntentHandler", launchRequestIntentHandlerTest, provider);
     }
 
     private void cancelIntentHandlerTest(GeneratorContext generatorContext, Project project) {
@@ -206,7 +215,8 @@ public class AwsAlexa implements Feature, AwsCloudFeature, CodeContributingFeatu
                 cancelIntentHandlerGroovyJunit.template(project),
                 cancelIntentHandlerKotlinJunit.template(project),
                 cancelIntentHandlerKoTest.template(project));
-        generatorContext.addTemplate("testCancelIntentHandler", cancelIntentHandlerTest, provider);
+        ModuleContext module = generatorContext.getRootModule();
+        module.addTemplate(generatorContext.getOptions(), "testCancelIntentHandler", cancelIntentHandlerTest, provider);
     }
 
     private void fallbackIntentHandlerTest(GeneratorContext generatorContext, Project project) {
@@ -216,7 +226,8 @@ public class AwsAlexa implements Feature, AwsCloudFeature, CodeContributingFeatu
                 fallbackIntentHandlerGroovyJunit.template(project),
                 fallbackIntentHandlerKotlinJunit.template(project),
                 fallbackIntentHandlerKoTest.template(project));
-        generatorContext.addTemplate("testFallbackIntentHandler", fallbackIntentHandlerTest, provider);
+        ModuleContext module = generatorContext.getRootModule();
+        module.addTemplate(generatorContext.getOptions(), "testFallbackIntentHandler", fallbackIntentHandlerTest, provider);
     }
 
     private void helpIntentHandlerTest(GeneratorContext generatorContext, Project project) {
@@ -226,9 +237,8 @@ public class AwsAlexa implements Feature, AwsCloudFeature, CodeContributingFeatu
                 helpIntentHandlerGroovyJunit.template(project),
                 helpIntentHandlerKotlinJunit.template(project),
                 helpIntentHandlerKoTest.template(project));
-
-        generatorContext.addTemplate("testHelpIntentHandler", helpIntentHandlerTest, provider);
-
+        ModuleContext module = generatorContext.getRootModule();
+        module.addTemplate(generatorContext.getOptions(), "testHelpIntentHandler", helpIntentHandlerTest, provider);
     }
 
     private void sessionEndedIntentHandlerTest(GeneratorContext generatorContext, Project project) {
@@ -238,7 +248,8 @@ public class AwsAlexa implements Feature, AwsCloudFeature, CodeContributingFeatu
                 sessionEndedRequestIntentHandlerGroovyJunit.template(project),
                 sessionEndedRequestIntentHandlerKotlinJunit.template(project),
                 sessionEndedRequestIntentHandlerKoTest.template(project));
-        generatorContext.addTemplate("testSessionEndedRequestIntentHandler", sessionEndedIntentHandlerTest, provider);
+        ModuleContext module = generatorContext.getRootModule();
+        module.addTemplate(generatorContext.getOptions(), "testSessionEndedRequestIntentHandler", sessionEndedIntentHandlerTest, provider);
 
     }
 
@@ -249,8 +260,8 @@ public class AwsAlexa implements Feature, AwsCloudFeature, CodeContributingFeatu
                 stopIntentHandlerGroovyJunit.template(project),
                 stopIntentHandlerKotlinJunit.template(project),
                 stopIntentHandlerKoTest.template(project));
-
-        generatorContext.addTemplate("testStopIntentHandler", stopIntentHandlerTest, provider);
+        ModuleContext module = generatorContext.getRootModule();
+        module.addTemplate(generatorContext.getOptions(), "testStopIntentHandler", stopIntentHandlerTest, provider);
     }
 
     @Override

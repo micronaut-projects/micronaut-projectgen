@@ -19,6 +19,7 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
@@ -61,8 +62,9 @@ public class ExternalWorker implements CamundaCommunityFeature {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        generatorContext.getConfiguration().put("camunda.external-client.base-url", "http://localhost:8080/engine-rest");
-        generatorContext.addDependency(DEPENDENCY_EXTERNAL_WORKER);
+        ModuleContext module = generatorContext.getRootModule();
+        module.configuration().put("camunda.external-client.base-url", "http://localhost:8080/engine-rest");
+        module.addDependency(DEPENDENCY_EXTERNAL_WORKER);
     }
 
     @Override

@@ -21,6 +21,7 @@ import io.micronaut.projectgen.core.buildtools.maven.MavenPlugin;
 import io.micronaut.projectgen.core.buildtools.maven.MavenSpecificFeature;
 import io.micronaut.projectgen.core.feature.BuildPluginFeature;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.projectgen.springboot.SpringBootDependencies;
 import jakarta.inject.Singleton;
@@ -46,8 +47,9 @@ public class SpringBootMavenPlugin implements MavenSpecificFeature, BuildPluginF
 
     @Override
     public void apply(GeneratorContext generatorContext) {
+        ModuleContext moduleContext = generatorContext.getRootModule();
         if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())) {
-            generatorContext.addBuildPlugin(MavenPlugin.builder()
+            moduleContext.addBuildPlugin(MavenPlugin.builder()
                 .groupId(SpringBootDependencies.GROUP_ID_ORG_SPRINGFRAMEWORK_BOOT)
                 .artifactId("spring-boot-maven-plugin")
                 .build());

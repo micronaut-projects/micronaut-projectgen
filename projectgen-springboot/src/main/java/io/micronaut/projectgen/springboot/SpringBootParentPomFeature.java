@@ -20,6 +20,7 @@ import io.micronaut.projectgen.core.buildtools.dependencies.CoordinateResolver;
 import io.micronaut.projectgen.core.buildtools.maven.ParentPom;
 import io.micronaut.projectgen.core.buildtools.maven.ParentPomFeature;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import jakarta.inject.Singleton;
 
@@ -35,7 +36,7 @@ public class SpringBootParentPomFeature implements ParentPomFeature {
     @Override
     public ParentPom getParentPom() {
         Coordinate coordinate = coordinateResolver.resolve("spring-boot-starter-parent").orElseThrow();
-        return new ParentPom(coordinate, true);
+        return new ParentPom(coordinate, "");
     }
 
     @Override
@@ -45,9 +46,10 @@ public class SpringBootParentPomFeature implements ParentPomFeature {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
+        ModuleContext moduleContext = generatorContext.getRootModule();
         if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())
             && generatorContext.getOptions().javaVersion() != null) {
-            generatorContext.getBuildProperties().put(PROPERTY_JAVA_VERSION, generatorContext.getOptions().javaVersion().asString());
+            moduleContext.buildProperties().put(PROPERTY_JAVA_VERSION, generatorContext.getOptions().javaVersion().asString());
         }
     }
 

@@ -21,6 +21,7 @@ import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.starter.feature.other.Management;
 
 import jakarta.inject.Singleton;
@@ -63,12 +64,12 @@ public class DekorateKubernetes extends AbstractDekoratePlatformFeature {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
+        ModuleContext module = generatorContext.getRootModule();
         Dependency.Builder kubernetes = Dependency.builder()
                 .groupId("io.dekorate")
                 .artifactId("kubernetes-annotations")
                 .template();
-
-        generatorContext.addDependency(kubernetes.versionProperty("dekorate.version").annotationProcessor());
-        generatorContext.addDependency(kubernetes.compile());
+        module.addDependency(kubernetes.versionProperty("dekorate.version").annotationProcessor());
+        module.addDependency(kubernetes.compile());
     }
 }

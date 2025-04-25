@@ -17,6 +17,7 @@ package io.micronaut.starter.feature.database;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
@@ -47,14 +48,15 @@ public class JAsyncSQLFeature implements Feature {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        Map<String, Object> configuration = generatorContext.getConfiguration();
+        ModuleContext module = generatorContext.getRootModule();
+        Map<String, Object> configuration = module.configuration();
         configuration.put("jasync.client.port", 5432);
         configuration.put("jasync.client.host", "the-host");
         configuration.put("jasync.client.database", "the-db");
         configuration.put("jasync.client.username", "test");
         configuration.put("jasync.client.password", "test");
         configuration.put("jasync.client.maxActiveConnections", 5);
-        generatorContext.addDependency(Dependency.builder()
+        module.addDependency(Dependency.builder()
                 .groupId("io.micronaut.sql")
                 .artifactId("micronaut-jasync-sql")
                 .compile());

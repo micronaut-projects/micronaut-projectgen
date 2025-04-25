@@ -20,6 +20,7 @@ import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Coordinate;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.rocker.RockerWritable;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.projectgen.micronaut.template.view.exampleJTE;
@@ -76,15 +77,16 @@ public class JTE implements ViewFeature, MicronautServerDependent {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        generatorContext.addDependency(MicronautDependencyUtils.viewsDependency()
+        ModuleContext module = generatorContext.getRootModule();
+        module.addDependency(MicronautDependencyUtils.viewsDependency()
                 .artifactId(ARTIFACT_ID_MICRONAUT_VIEWS_JTE)
                 .compile());
         if (OptionUtils.hasGradleBuildTool(generatorContext.getOptions())) {
-            generatorContext.addBuildPlugin(gradlePlugin(generatorContext));
+            module.addBuildPlugin(gradlePlugin(generatorContext));
         } else if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())) {
-            generatorContext.addBuildPlugin(mavenPlugin(generatorContext));
+            module.addBuildPlugin(mavenPlugin(generatorContext));
         }
-        generatorContext.addTemplate("exampleJte", new RockerTemplate(JTE_SRC_DIR + "/example.jte", exampleJTE.template()));
+        module.addTemplate("exampleJte", new RockerTemplate(JTE_SRC_DIR + "/example.jte", exampleJTE.template()));
     }
 
     private BuildPlugin gradlePlugin(GeneratorContext generatorContext) {
