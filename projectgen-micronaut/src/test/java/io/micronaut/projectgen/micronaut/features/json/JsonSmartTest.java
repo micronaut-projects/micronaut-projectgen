@@ -21,6 +21,7 @@ class JsonSmartTest {
         assertNotNull(buildGradle);
         BuildTestVerifier verifier = BuildTestVerifier.of(buildGradle, options);
         assertTrue(verifier.hasDependency("net.minidev", "json-smart", Scope.TEST), buildGradle);
+        assertTrue(buildGradle.contains("2.5.1"));
     }
 
     @Test
