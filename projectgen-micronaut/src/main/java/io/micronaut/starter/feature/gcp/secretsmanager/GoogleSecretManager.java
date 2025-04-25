@@ -20,16 +20,16 @@ import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
-import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.micronaut.features.config.MicronautDistributedConfigurationFeature;
-import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import io.micronaut.projectgen.core.feature.DistributedConfigFeature;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.gcp.secrets.manager.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class GoogleSecretManager implements DistributedConfigFeature {
+public class GoogleSecretManager implements DistributedConfigFeature, OpenRewriteFeature {
     private final MicronautDistributedConfigurationFeature micronautDistributedConfigurationFeature;
 
     public GoogleSecretManager(MicronautDistributedConfigurationFeature micronautDistributedConfigurationFeature) {
@@ -60,26 +60,7 @@ public class GoogleSecretManager implements DistributedConfigFeature {
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
-        module.addDependency(gcpSecretManagerDependency());
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.gcp-secrets-manager");
     }
-
-    @NonNull
-    private Dependency.Builder gcpSecretManagerDependency() {
-        return MicronautDependencyUtils.gcpDependency()
-                .artifactId("micronaut-gcp-secret-manager")
-                .compile();
-    }
-
-    @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-gcp/latest/guide/#secretManager";
-    }
-
-    @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://cloud.google.com/secret-manager";
-    }
-
 }

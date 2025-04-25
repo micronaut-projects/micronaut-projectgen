@@ -16,28 +16,20 @@
 package io.micronaut.starter.feature.gcp;
 
 import io.micronaut.context.annotation.Requires;
-import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.util.StringUtils;
-import io.micronaut.projectgen.core.generator.ModuleContext;
-import io.micronaut.projectgen.micronaut.ApplicationType;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
-import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
-import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.starter.feature.function.gcp.GcpCloudFeature;
 import jakarta.inject.Singleton;
+
+import java.util.List;
+
 import static io.micronaut.starter.feature.Category.LOGGING;
 
 @Requires(property = "micronaut.starter.feature.gcp.logging.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class GoogleLogging implements GcpCloudFeature, Feature {
+public class GoogleLogging implements GcpCloudFeature, OpenRewriteFeature {
     public static final String NAME = "gcp-logging";
-    private static final String ARTIFACT_ID_MICRONAUT_GCP_LOGGING = "micronaut-gcp-logging";
-    private static final Dependency GOOGLE_LOGGING_DEPENDENCY =
-            MicronautDependencyUtils.gcpDependency()
-                    .artifactId(ARTIFACT_ID_MICRONAUT_GCP_LOGGING)
-                    .compile()
-                    .build();
 
     @Override
     public String getName() {
@@ -54,30 +46,13 @@ public class GoogleLogging implements GcpCloudFeature, Feature {
         return "Provides integration with Google Cloud Logging";
     }
 
-    @Nullable
-    @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-gcp/latest/guide/#logging";
-    }
-
-    @Nullable
-    @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://cloud.google.com/logging";
-    }
-
     @Override
     public String getCategory() {
         return LOGGING;
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        addDependencies(generatorContext);
-    }
-
-    protected void addDependencies(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
-        module.addDependency(GOOGLE_LOGGING_DEPENDENCY);
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.gcp-logging");
     }
 }
