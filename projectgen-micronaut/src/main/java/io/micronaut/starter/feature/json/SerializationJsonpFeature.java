@@ -21,15 +21,16 @@ import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import jakarta.inject.Singleton;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Requires(property = "micronaut.starter.feature.serialization.jsonp.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class SerializationJsonpFeature implements SerializationFeature {
-    private static final String ARTIFACT_ID_MICRONAUT_SERDE_JSONP = "micronaut-serde-jsonp";
+public class SerializationJsonpFeature implements OpenRewriteFeature {
 
     @Override
     public String getName() {
@@ -47,19 +48,13 @@ public class SerializationJsonpFeature implements SerializationFeature {
     }
 
     @Override
-    public String getModule() {
-        return "jsonp";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        List<String> recipes = new ArrayList<>();
+        recipes.add("io.micronaut.starter.feature.serialization-jsonp");
+        if(OptionUtils.hasMavenBuildTool(generatorContext.getOptions())){
+            recipes.add("io.micronaut.starter.feature.jakarta-json-bind");
+        }
+        return recipes;
     }
 
-    @NonNull
-    @Override
-    public List<Dependency.Builder> dependencies(@NonNull GeneratorContext generatorContext) {
-        List<Dependency.Builder> dependencyList = SerializationFeature.super.dependencies(generatorContext);
-        if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())) {
-            dependencyList.add(Dependency.builder()
-                    .lookupArtifactId("jakarta.json.bind-api")
-                    .compile());
-        }
-        return dependencyList;
-    }
 }
