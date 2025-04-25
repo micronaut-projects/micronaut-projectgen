@@ -1,0 +1,39 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.jobrunr
+displayName: Add Jobrunr dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.jobrunr.dependencies
+  - io.micronaut.starter.feature.jobrunr.configuration
+  - io.micronaut.starter.feature.jobrunr.documentation.thirdparty
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.jobrunr.dependencies
+displayName: Add Jobrunr dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: org.jobrunr
+      artifactId: jobrunr-micronaut-feature
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.jobrunr.configuration
+displayName: Add Jobrunr configuration
+preconditions:
+  - io.micronaut.starter.openrewrite.recipes.FindApplicationProperties
+recipeList:
+  - org.openrewrite.properties.AddProperty:
+      property: jobrunr.background-job-server.enabled
+      value: false
+  - org.openrewrite.properties.AddProperty:
+      property: jobrunr.dashboard.enabled
+      value: false
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.jobrunr.documentation.thirdparty
+displayName: Append a link to Micronaut Jobrunr documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://www.jobrunr.io/en/documentation/configuration/micronaut/
+      appendNewline: true

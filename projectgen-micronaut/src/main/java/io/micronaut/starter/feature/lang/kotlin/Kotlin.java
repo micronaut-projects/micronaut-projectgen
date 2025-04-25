@@ -19,6 +19,7 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.feature.KotlinApplicationFeature;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Coordinate;
@@ -75,26 +76,27 @@ public class Kotlin implements LanguageFeature {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        addKotlinVersionProperty(generatorContext);
-        addDependencies(generatorContext);
+        ModuleContext module = generatorContext.getRootModule();
+        addKotlinVersionProperty(generatorContext, module);
+        addDependencies(module);
     }
 
-    protected void addKotlinVersionProperty(GeneratorContext generatorContext) {
+    protected void addKotlinVersionProperty(GeneratorContext generatorContext, ModuleContext module) {
         Coordinate coordinate = generatorContext.resolveCoordinate("kotlin-bom");
-        generatorContext.getBuildProperties().put("kotlinVersion", coordinate.getVersion());
+        module.buildProperties().put("kotlinVersion", coordinate.getVersion());
     }
 
-    protected void addDependencies(GeneratorContext generatorContext) {
+    protected void addDependencies(ModuleContext module) {
         Dependency.Builder kotlin = Dependency.builder()
                 .groupId("org.jetbrains.kotlin")
                 .compile()
                 .version("${kotlinVersion}")
                 .template();
 
-        generatorContext.addDependency(kotlin.artifactId("kotlin-stdlib-jdk8"));
-        generatorContext.addDependency(kotlin.artifactId("kotlin-reflect"));
-        generatorContext.addDependency(DEPENDENCY_MICRONAUT_KOTLIN_RUNTIME);
-        generatorContext.addDependency(Dependency.builder()
+        module.addDependency(kotlin.artifactId("kotlin-stdlib-jdk8"));
+        module.addDependency(kotlin.artifactId("kotlin-reflect"));
+        module.addDependency(DEPENDENCY_MICRONAUT_KOTLIN_RUNTIME);
+        module.addDependency(Dependency.builder()
                 .groupId("com.fasterxml.jackson.module")
                 .artifactId("jackson-module-kotlin")
                 .runtime());

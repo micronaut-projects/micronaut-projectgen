@@ -19,6 +19,7 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.starter.feature.server.MicronautServerDependent;
@@ -89,12 +90,13 @@ public class Thymeleaf implements ViewFeature, MicronautServerDependent {
     }
 
     protected void addDependencies(GeneratorContext generatorContext) {
-        generatorContext.addDependency(DEPENDENCY_MICRONAUT_VIEWS_THYMELEAF);
-        addLayout(generatorContext);
+        ModuleContext module = generatorContext.getRootModule();
+        module.addDependency(DEPENDENCY_MICRONAUT_VIEWS_THYMELEAF);
+        addLayout(module);
     }
 
-    private void addLayout(GeneratorContext generatorContext) {
+    private void addLayout(ModuleContext module) {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        generatorContext.addTemplate(LAYOUT_HTML, new URLTemplate(VIEWS_PATH + LAYOUT_HTML, classLoader.getResource(RESOURCES_THYMELEAF_PATH +  LAYOUT_HTML)));
+        module.addTemplate(LAYOUT_HTML, new URLTemplate(VIEWS_PATH + LAYOUT_HTML, classLoader.getResource(RESOURCES_THYMELEAF_PATH +  LAYOUT_HTML)));
     }
 }

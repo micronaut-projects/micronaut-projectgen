@@ -19,6 +19,7 @@ import com.fizzed.rocker.RockerModel;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.annotation.Nullable;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.starter.feature.MicronautCommunityFeature;
 import io.micronaut.projectgen.core.options.Language;
 import io.micronaut.starter.options.MicronautVersion;
@@ -94,19 +95,21 @@ public interface AgoraPulseFeature extends MicronautCommunityFeature {
     }
 
     static void addMain(GeneratorContext generatorContext, String className, RockerModel rockerModel, String templateName) {
+        ModuleContext module = generatorContext.getRootModule();
         String extension = generatorContext.getLanguage().getExtension();
         String srcDir = generatorContext.getLanguage().getSrcDir();
-        generatorContext.addTemplate(
+        module.addTemplate(
                 templateName,
                 new RockerTemplate(srcDir + "/{packagePath}/" + className + "." + extension, rockerModel)
         );
     }
 
     static void addTest(GeneratorContext generatorContext, String className, RockerModel rockerModel, String templateName) {
+        ModuleContext module = generatorContext.getRootModule();
         String testSrcDir = generatorContext.getLanguage().getTestSrcDir();
         String extension = generatorContext.getLanguage().getExtension();
         String testFrameworkSuffix = generatorContext.getTestFramework().getTestFrameworkSuffix();
-        generatorContext.addTemplate(
+        module.addTemplate(
                 templateName,
                 new RockerTemplate(testSrcDir + "/{packagePath}/" + className + testFrameworkSuffix + extension, rockerModel)
         );
@@ -115,7 +118,8 @@ public interface AgoraPulseFeature extends MicronautCommunityFeature {
     static void addTestUtil(GeneratorContext generatorContext, String className, RockerModel rockerModel, String templateName) {
         String testSrcDir = generatorContext.getLanguage().getTestSrcDir();
         String extension = generatorContext.getLanguage().getExtension();
-        generatorContext.addTemplate(
+        ModuleContext module = generatorContext.getRootModule();
+        module.addTemplate(
                 templateName,
                 new RockerTemplate(testSrcDir + "/{packagePath}/" + className +  '.' + extension, rockerModel)
         );

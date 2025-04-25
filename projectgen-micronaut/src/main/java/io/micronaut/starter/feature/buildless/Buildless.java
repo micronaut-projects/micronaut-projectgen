@@ -17,6 +17,7 @@ package io.micronaut.starter.feature.buildless;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.rocker.RockerWritable;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.projectgen.micronaut.ApplicationType;
@@ -89,9 +90,10 @@ public class Buildless implements CommunityFeature, GradleSpecificFeature {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
+        ModuleContext module = generatorContext.getRootModule();
         if (OptionUtils.hasGradleBuildTool(generatorContext.getOptions())) {
-            generatorContext.getBuildProperties().put("org.gradle.caching", "true");
-            generatorContext.addBuildPlugin(buildPlugin(generatorContext));
+            module.buildProperties().put("org.gradle.caching", "true");
+            module.addBuildPlugin(buildPlugin(generatorContext));
         }
     }
 }

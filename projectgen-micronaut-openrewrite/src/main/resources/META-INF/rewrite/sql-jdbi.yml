@@ -1,0 +1,25 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.sql-jdbi
+displayName: Add Jdbi dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.sql-jdbi.dependencies
+  - io.micronaut.starter.feature.sql-jdbi.micronaut.documentation
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.sql-jdbi.dependencies
+displayName: Add Jdbi dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.sql
+      artifactId: micronaut-jdbi
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.sql-jdbi.micronaut.documentation
+displayName: Append a link to Micronaut Jdbi documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-sql/latest/guide/index.html#jdbi
+      appendNewline: true

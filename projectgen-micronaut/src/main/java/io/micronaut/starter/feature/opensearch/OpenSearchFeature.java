@@ -15,6 +15,7 @@
  */
 package io.micronaut.starter.feature.opensearch;
 
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.MavenCoordinate;
@@ -57,7 +58,8 @@ public abstract class OpenSearchFeature extends EaseTestingFeature implements Op
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        generatorContext.addDependency(MicronautDependencyUtils
+        ModuleContext module = generatorContext.getRootModule();
+        module.addDependency(MicronautDependencyUtils
                 .opensearchDependency()
                 .artifactId("micronaut-" + getName())
                 .compile());

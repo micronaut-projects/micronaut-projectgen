@@ -19,6 +19,7 @@ import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.projectgen.core.feature.TestFeature;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.options.Language;
 import io.micronaut.projectgen.core.options.TestFramework;
 import io.micronaut.projectgen.core.utils.OptionUtils;
@@ -78,13 +79,14 @@ public class MicronautTestSpock implements TestFeature {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
+        ModuleContext module = generatorContext.getRootModule();
         // Only for Maven, these dependencies are applied by the Micronaut Gradle Plugin
         if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())) {
             if (generatorContext.getLanguage() != Language.GROOVY) {
-                generatorContext.addDependency(DEPENDENCY_MICRONAUT_INJECT_GROOVY);
+                module.addDependency(DEPENDENCY_MICRONAUT_INJECT_GROOVY);
             }
-            generatorContext.addDependency(DEPENDENCY_SPOCK_CORE_EXCLUDING_GROOVY_ALL);
-            generatorContext.addDependency(DEPENDENCY_MICRONAUT_TEST_SPOCK);
+            module.addDependency(DEPENDENCY_SPOCK_CORE_EXCLUDING_GROOVY_ALL);
+            module.addDependency(DEPENDENCY_MICRONAUT_TEST_SPOCK);
         }
     }
 }

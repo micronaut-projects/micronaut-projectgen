@@ -18,23 +18,32 @@ package io.micronaut.projectgen.core.template;
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 import com.typesafe.config.ConfigRenderOptions;
+import io.micronaut.projectgen.core.feature.config.Configuration;
 
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Config4kTemplate extends DefaultTemplate {
 
     private final Config config;
 
     public Config4kTemplate(String path, Map<String, Object> values) {
-        this(DEFAULT_MODULE, path, values);
+        super(path);
+        config = ConfigFactory.parseMap(removeCommentsAndBlankLinesEntries(values));
     }
 
-    public Config4kTemplate(String module, String path, Map<String, Object> values) {
-        super(module, path);
-        config = ConfigFactory.parseMap(values);
+    private Map<String, Object> removeCommentsAndBlankLinesEntries(Map<String, Object> values) {
+        // Delete unsupported entries (Comments or blank lines)
+        Set<String> keysToBeRemoved = values.keySet().stream()
+            .filter(k -> Configuration.PREFIXES.stream().anyMatch(k::startsWith)).collect(Collectors.toSet());;
+        for (String k : keysToBeRemoved) {
+            values.remove(k);
+        }
+        return values;
     }
 
     @Override

@@ -16,6 +16,7 @@
 package io.micronaut.starter.feature.lang.groovy.module;
 
 import io.micronaut.core.annotation.NonNull;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
@@ -34,6 +35,7 @@ public interface GroovyModuleFeature extends Feature {
 
     @Override
     default void apply(GeneratorContext generatorContext) {
+        ModuleContext module = generatorContext.getRootModule();
         Dependency.Builder builder = Dependency.builder()
                 .groupId("org.apache.groovy")
                 .artifactId(getName());
@@ -44,7 +46,7 @@ public interface GroovyModuleFeature extends Feature {
             // if test is Spock, add to test classpath; validation fails otherwise
             builder.test();
         }
-        generatorContext.addDependency(builder);
+        module.addDependency(builder);
     }
 
     @Override

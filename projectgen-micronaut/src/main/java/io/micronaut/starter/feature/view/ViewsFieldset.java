@@ -17,6 +17,7 @@ package io.micronaut.starter.feature.view;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
@@ -122,20 +123,22 @@ public class ViewsFieldset implements Feature {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
+        ModuleContext module = generatorContext.getRootModule();
         if (generatorContext.hasFeature(Thymeleaf.class)) {
-            addThymeleafTemplates(generatorContext);
+            addThymeleafTemplates(generatorContext, module);
         }
         addDependencies(generatorContext);
     }
 
-    private void addThymeleafTemplates(GeneratorContext generatorContext) {
+    private void addThymeleafTemplates(GeneratorContext generatorContext, ModuleContext module) {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         for (String fileName : THYMELEAF_FRAGMENTS) {
-            generatorContext.addTemplate(fileName, new URLTemplate(FIELDSET_PATH + fileName, classLoader.getResource(RESOURCES_THYMELEAF_PATH +  fileName)));
+            module.addTemplate(fileName, new URLTemplate(FIELDSET_PATH + fileName, classLoader.getResource(RESOURCES_THYMELEAF_PATH +  fileName)));
         }
     }
 
     private void addDependencies(GeneratorContext generatorContext) {
-        generatorContext.addDependency(DEPENDENCY_VIEWS_FIELDSET);
+        ModuleContext module = generatorContext.getRootModule();
+        module.addDependency(DEPENDENCY_VIEWS_FIELDSET);
     }
 }

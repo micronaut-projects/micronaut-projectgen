@@ -17,6 +17,7 @@ package io.micronaut.projectgen.core.buildtools.gradle;
 
 import io.micronaut.projectgen.core.feature.BuildPluginFeature;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.rocker.RockerTemplate;
 import io.micronaut.projectgen.core.rocker.RockerWritable;
 import io.micronaut.projectgen.core.template.spotlesslicensejava;
@@ -54,12 +55,13 @@ public class SpotlessGradlePlugin implements BuildPluginFeature, GradleSpecificF
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        generatorContext.addBuildPlugin(GradlePlugin.builder()
+        ModuleContext rootModule = generatorContext.getRootModule();
+        rootModule.addBuildPlugin(GradlePlugin.builder()
             .id(SPOTLESS_GRADLE_PLUGIN_ID)
             .lookupArtifactId(SPOTLESS_PLUGIN_GRADLE_ARTIFACT_ID)
             .extension(new RockerWritable(spotlessGradlePlugin.template()))
             .build());
 
-        generatorContext.addTemplate("spotlessLicenseJava", new RockerTemplate("config/spotless.license.java", spotlesslicensejava.template()));
+        rootModule.addTemplate("spotlessLicenseJava", new RockerTemplate("config/spotless.license.java", spotlesslicensejava.template()));
     }
 }

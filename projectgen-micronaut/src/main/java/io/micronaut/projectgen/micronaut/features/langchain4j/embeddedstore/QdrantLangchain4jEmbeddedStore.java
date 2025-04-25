@@ -19,6 +19,7 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import io.micronaut.projectgen.micronaut.features.langchain4j.Langchain4jEmbeddedStore;
@@ -55,8 +56,9 @@ public class QdrantLangchain4jEmbeddedStore implements Langchain4jEmbeddedStore,
     @Override
     public void apply(GeneratorContext generatorContext) {
         OpenRewriteFeature.super.apply(generatorContext);
+        ModuleContext module = generatorContext.getRootModule();
         if (generatorContext.hasFeature(TestResources.class)) {
-            generatorContext.addDependency(DEPENDENCY_MICRONAUT_LANGCHAIN4J_QDRANT_TESTRESOURCES);
+            module.addDependency(DEPENDENCY_MICRONAUT_LANGCHAIN4J_QDRANT_TESTRESOURCES);
         }
     }
 }

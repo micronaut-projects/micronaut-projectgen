@@ -21,6 +21,7 @@ import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.buildtools.gradle.GradleSpecificFeature;
 import io.micronaut.projectgen.core.feature.DefaultFeature;
 import io.micronaut.projectgen.core.feature.Feature;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
@@ -70,14 +71,16 @@ public class KotlinSymbolProcessing implements KotlinSupportFeature, DefaultFeat
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        addBuildPlugins(generatorContext);
+        ModuleContext moduleContext = generatorContext.getRootModule();
+        addBuildPlugins(generatorContext, moduleContext);
+
     }
 
     @Override
-    public void addBuildPlugins(@NonNull GeneratorContext generatorContext) {
-        KotlinSupportFeature.super.addBuildPlugins(generatorContext);
+    public void addBuildPlugins(@NonNull GeneratorContext generatorContext, ModuleContext moduleContext) {
+        KotlinSupportFeature.super.addBuildPlugins(generatorContext, moduleContext);
         if (KotlinSupportFeature.shouldApply(generatorContext)) {
-            generatorContext.addBuildPlugin(GradlePlugin.of("com.google.devtools.ksp", "com.google.devtools.ksp.gradle.plugin"));
+            moduleContext.addBuildPlugin(GradlePlugin.of("com.google.devtools.ksp", "com.google.devtools.ksp.gradle.plugin"));
         }
     }
 

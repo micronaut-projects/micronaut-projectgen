@@ -18,6 +18,7 @@ package io.micronaut.starter.feature.other;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.projectgen.micronaut.ApplicationType;
@@ -71,10 +72,11 @@ public class OpenApi implements Feature, MicronautServerDependent {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        generatorContext.addDependency(micronautOpenApiProcessor(generatorContext));
-        generatorContext.addDependency(DEPENDENCY_OPENAPI_ANNOTATIONS);
+        ModuleContext module = generatorContext.getRootModule();
+        module.addDependency(micronautOpenApiProcessor(generatorContext));
+        module.addDependency(DEPENDENCY_OPENAPI_ANNOTATIONS);
         if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions()) && generatorContext.getLanguage() == Language.GROOVY) {
-            generatorContext.addDependency(MicronautDependencyUtils.openapi()
+            module.addDependency(MicronautDependencyUtils.openapi()
                     .artifactId(ARTIFACT_ID_MICRONAUT_OPENAPI)
                     .compile());
         }

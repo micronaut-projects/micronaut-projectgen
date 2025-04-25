@@ -47,6 +47,9 @@ public final class Dependency implements Coordinate {
     private final String version;
 
     @Nullable
+    private final String project;
+
+    @Nullable
     private final String versionProperty;
     private final boolean requiresLookup;
     private final int order;
@@ -69,7 +72,8 @@ public final class Dependency implements Coordinate {
                        int order,
                        boolean pom,
                        @Nullable List<Dependency> exclusions,
-                       @Nullable List<Substitution> substitutions) {
+                       @Nullable List<Substitution> substitutions,
+                       @Nullable String project) {
         this.scope = scope;
         this.groupId = groupId;
         this.artifactId = artifactId;
@@ -81,6 +85,7 @@ public final class Dependency implements Coordinate {
         this.pom = pom;
         this.exclusions = exclusions;
         this.substitutions = substitutions;
+        this.project = project;
     }
 
     @Override
@@ -207,7 +212,8 @@ public final class Dependency implements Coordinate {
             order,
             pom,
             Collections.emptyList(),
-            Collections.emptyList());
+            Collections.emptyList(),
+            null);
     }
 
     public boolean isAnnotationProcessorPriority() {
@@ -225,7 +231,13 @@ public final class Dependency implements Coordinate {
             dep.getOrder(),
             dep.isPom(),
             dep.getExclusions(),
-            dep.getSubstitutions());
+            dep.getSubstitutions(),
+            dep.project);
+    }
+
+    @Nullable
+    public String getProject() {
+        return this.project;
     }
 
     /**
@@ -245,6 +257,21 @@ public final class Dependency implements Coordinate {
         private boolean pom;
         private List<Dependency> exclusions;
         private List<Substitution> substitutions;
+        private String project;
+
+        /**
+         *
+         * @param project Project
+         * @return The Builder
+         */
+        public Builder project(@NonNull String project) {
+            if (template) {
+                return copy().project(project);
+            } else {
+                this.project = project;
+                return this;
+            }
+        }
 
         /**
          *
@@ -546,7 +573,8 @@ public final class Dependency implements Coordinate {
                 order,
                 pom,
                 exclusions,
-                substitutions);
+                substitutions,
+                project);
         }
 
         private Builder copy() {

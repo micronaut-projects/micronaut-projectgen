@@ -1,0 +1,25 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.graphql
+displayName: Add Graphql dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.graphql.dependencies
+  - io.micronaut.starter.feature.graphql.micronaut.documentation
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.graphql.dependencies
+displayName: Add Graphql dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.graphql
+      artifactId: micronaut-graphql
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.graphql.micronaut.documentation
+displayName: Append a link to Micronaut Graphql documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-graphql/latest/guide/index.html
+      appendNewline: true

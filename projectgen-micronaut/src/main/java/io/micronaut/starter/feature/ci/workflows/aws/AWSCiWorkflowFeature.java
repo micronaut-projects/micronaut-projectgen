@@ -19,6 +19,7 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.starter.feature.ci.workflows.CIWorkflowFeature;
 import io.micronaut.projectgen.core.rocker.RockerTemplate;
 import io.micronaut.projectgen.core.template.Template;
@@ -58,8 +59,8 @@ public class AWSCiWorkflowFeature extends CIWorkflowFeature {
     @Override
     public void apply(GeneratorContext generatorContext) {
         super.apply(generatorContext);
-
-        generatorContext.addTemplate("cloudBuild", workflowRockerTemplate(generatorContext));
+        ModuleContext module = generatorContext.getRootModule();
+        module.addTemplate("cloudBuild", workflowRockerTemplate(generatorContext));
     }
 
     private Template workflowRockerTemplate(GeneratorContext generatorContext) {

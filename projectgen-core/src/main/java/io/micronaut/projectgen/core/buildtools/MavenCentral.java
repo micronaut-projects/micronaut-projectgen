@@ -23,11 +23,12 @@ import io.micronaut.core.annotation.NonNull;
 public class MavenCentral implements Repository {
 
     public static final String URL = "https://repo.maven.apache.org/maven2";
+    public static final String MAVEN_CENTRAL_ID = "central";
 
     @Override
     @NonNull
     public String getId() {
-        return "central";
+        return MAVEN_CENTRAL_ID;
     }
 
     @Override

@@ -17,6 +17,7 @@ package io.micronaut.starter.feature.guice;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
@@ -25,20 +26,12 @@ import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.Feature;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.guice.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class MicronautGuice implements Feature {
+public class MicronautGuice implements OpenRewriteFeature {
     public static final String NAME = "guice";
-    private static final String ARTIFACT_ID_MICRONAUT_GUICE = "micronaut-guice";
-    private static final String ARTIFACT_ID_MICRONAUT_GUICE_PROCESSOR = "micronaut-guice-processor";
-    private static final Dependency MICRONAUT_GUICE_ANNOTATION_PROCESSOR = MicronautDependencyUtils.guiceDependency()
-            .artifactId(ARTIFACT_ID_MICRONAUT_GUICE_PROCESSOR)
-            .annotationProcessor()
-            .build();
-    private static final Dependency MICRONAUT_GUICE = MicronautDependencyUtils.guiceDependency()
-            .artifactId(ARTIFACT_ID_MICRONAUT_GUICE)
-            .compile()
-            .build();
 
     @Override
     public String getName() {
@@ -56,18 +49,8 @@ public class MicronautGuice implements Feature {
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        addDependencies(generatorContext);
-    }
-
-    private void addDependencies(GeneratorContext generatorContext) {
-        generatorContext.addDependency(MICRONAUT_GUICE);
-        generatorContext.addDependency(MICRONAUT_GUICE_ANNOTATION_PROCESSOR);
-    }
-
-    @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-guice/latest/guide/index.html";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.guice");
     }
 
     @Override

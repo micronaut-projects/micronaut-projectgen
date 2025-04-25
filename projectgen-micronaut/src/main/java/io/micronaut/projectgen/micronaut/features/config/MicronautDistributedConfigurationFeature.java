@@ -20,6 +20,7 @@ import io.micronaut.core.annotation.NonNull;
 import io.micronaut.projectgen.core.feature.DistributedConfigFeature;
 import io.micronaut.projectgen.core.feature.config.BootstrapConfiguration;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import jakarta.inject.Singleton;
 
@@ -46,7 +47,8 @@ public class MicronautDistributedConfigurationFeature implements DistributedConf
     @Override
     public void apply(GeneratorContext generatorContext) {
         processRecipes(generatorContext);
-        BootstrapConfiguration config = generatorContext.getBootstrapConfiguration();
+        ModuleContext module = generatorContext.getRootModule();
+        BootstrapConfiguration config = module.bootstrapConfiguration();
         config.put("micronaut.application.name", generatorContext.getProject().getPropertyName());
     }
 
