@@ -17,8 +17,6 @@ package io.micronaut.projectgen.core.buildtools;
 
 import io.micronaut.core.annotation.NonNull;
 
-import java.util.Objects;
-
 /**
  * Maven Central.
  */
