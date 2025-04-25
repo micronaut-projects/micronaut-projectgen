@@ -14,6 +14,7 @@ recipeList:
       artifactId: json-path
       configuration: testImplementation
       scope: test
+      version: 2.9.0
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.json-path.documentation.thirdparty

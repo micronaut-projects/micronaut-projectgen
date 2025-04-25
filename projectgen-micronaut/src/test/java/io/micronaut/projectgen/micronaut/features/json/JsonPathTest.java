@@ -21,6 +21,7 @@ class JsonPathTest {
         assertNotNull(buildGradle);
         BuildTestVerifier verifier = BuildTestVerifier.of(buildGradle, options);
         assertTrue(verifier.hasDependency("com.jayway.jsonpath", "json-path", Scope.TEST), buildGradle);
+        assertTrue(buildGradle.contains("2.9.0"));
     }
 
     @Test
