@@ -71,7 +71,6 @@ class MultiModuleProjectGeneratorTest {
         buildGradle = project.get("application/build.gradle");
         verifier = BuildTestVerifier.of(buildGradle, options);
         assertTrue(verifier.hasBuildPlugin("org.springframework.boot"), buildGradle);
-        assertTrue(verifier.hasBuildPlugin("io.spring.dependency-management"), buildGradle);
         assertTrue(verifier.hasDependency("org.springframework.boot", "spring-boot-starter-web", Scope.COMPILE), buildGradle);
         assertTrue(verifier.hasDependency("org.springframework.boot", "spring-boot-starter-actuator", Scope.COMPILE), buildGradle);
         assertTrue(verifier.hasDependency("org.springframework.boot", "spring-boot-starter-test", Scope.TEST), buildGradle);

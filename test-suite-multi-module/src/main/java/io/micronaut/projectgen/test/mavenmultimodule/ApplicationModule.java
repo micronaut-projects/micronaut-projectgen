@@ -59,8 +59,7 @@ class ApplicationModule implements Feature {
                 .version(SPRING_BOOT_VERSION)
                 .build());
             module.addBuildPlugin(GradlePlugin.builder()
-                .id("io.spring.dependency-management")
-                .version("1.1.5")
+                .alias("libs.spring.dependency.management")
                 .build());
         }
     }
