@@ -22,15 +22,16 @@ import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.micronaut.features.httpclient.HttpClient;
 import io.micronaut.starter.feature.reactive.ReactiveFeature;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.rxjava3.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class RxJava3 implements ReactiveFeature {
-
-    public static final String MICRONAUT_RXJAVA3_GROUP_ID = "io.micronaut.rxjava3";
+public class RxJava3 implements ReactiveFeature, OpenRewriteFeature {
 
     private final RxJava3HttpClient rxJava3HttpClient;
 
@@ -55,11 +56,6 @@ public class RxJava3 implements ReactiveFeature {
     }
 
     @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-rxjava3/snapshot/guide/index.html";
-    }
-
-    @Override
     public void processSelectedFeatures(FeatureContext featureContext) {
         if (featureContext.isPresent(HttpClient.class)) {
             featureContext.addFeature(rxJava3HttpClient);
@@ -67,11 +63,8 @@ public class RxJava3 implements ReactiveFeature {
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
-        module.addDependency(Dependency.builder()
-                .groupId(MICRONAUT_RXJAVA3_GROUP_ID)
-                .artifactId("micronaut-rxjava3")
-                .compile());
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.rxjava3");
     }
+
 }
