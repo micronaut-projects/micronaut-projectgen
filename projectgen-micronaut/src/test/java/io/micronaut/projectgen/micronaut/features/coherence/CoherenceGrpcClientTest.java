@@ -20,8 +20,8 @@ class CoherenceGrpcClientTest {
     void coherenceGrpcClientConfiguration(MicronautProjectGenerator micronautProjectGenerator) throws Exception {
         MicronautOptions options = MicronautOptions.builder().feature("coherence-grpc-client").build();
         Map<String, String> project = generateProject(micronautProjectGenerator, options);
-        Properties bootstrapProperties = ConfigurationUtils.loadBootstrapProperties(project);
-        assertEquals("grpc", bootstrapProperties.getProperty("coherence.session.default.type"));
+        Properties applicationProperties = ConfigurationUtils.loadApplicationProperties(project);
+        assertEquals("grpc", applicationProperties.getProperty("coherence.session.default.type"));
     }
 
     @Test

@@ -28,6 +28,7 @@ import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.projectgen.core.feature.DistributedConfigFeature;
 import jakarta.inject.Singleton;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -72,10 +73,15 @@ public class CoherenceGrpcClient implements OpenRewriteFeature {
 
     @Override
     public List<String> getRecipes(GeneratorContext generatorContext) {
-        return List.of(
-            "io.micronaut.starter.feature.coherence-grpc-client",
-            "io.micronaut.starter.feature.coherence-java-client"
-        );
+        List<String> recipes = new ArrayList<>();
+        recipes.add("io.micronaut.starter.feature.coherence-grpc-client");
+        recipes.add("io.micronaut.starter.feature.coherence-java-client");
+        if(generatorContext.isFeaturePresent(DistributedConfigFeature.class)) {
+            recipes.add("io.micronaut.starter.feature.coherence-grpc-client.conf-bootstrap");
+        } else {
+            recipes.add("io.micronaut.starter.feature.coherence-grpc-client.conf-application");
+        }
+       return recipes;
     }
 
     @Override

@@ -1,0 +1,9 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.coherence-grpc-client.conf-application
+displayName: Add Coherence Grpc Client configuration
+preconditions:
+  - io.micronaut.starter.openrewrite.recipes.FindApplicationProperties
+recipeList:
+  - org.openrewrite.properties.AddProperty:
+      property: coherence.session.default.type
+      value: grpc
