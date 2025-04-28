@@ -72,6 +72,11 @@ public class CoherenceDistributedConfiguration implements DistributedConfigFeatu
     @Override
     public List<String> getRecipes(GeneratorContext generatorContext) {
         List<String> recipes = new ArrayList<>();
+        if(generatorContext.isFeaturePresent(DistributedConfigFeature.class)){
+            recipes.add("io.micronaut.starter.feature.coherence-distributed-configuration-conf-bootstrap");
+        } else {
+            recipes.add("io.micronaut.starter.feature.coherence-distributed-configuration-conf-application");
+        }
         recipes.add("io.micronaut.starter.feature.coherence-distributed-configuration");
         if (OptionUtils.hasGradleBuildTool(generatorContext.getOptions()) && !generatorContext.isFeaturePresent(CoherenceGrpcClient.class)) {
             recipes.add("io.micronaut.starter.feature.coherence-java-client");

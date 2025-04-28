@@ -5,7 +5,6 @@ recipeList:
   - io.micronaut.starter.feature.coherence-distributed-configuration.dependencies
   - io.micronaut.starter.feature.coherence-distributed-configuration.micronaut.documentation
   - io.micronaut.starter.feature.coherence-docs
-  - io.micronaut.starter.feature.coherence-distributed-configuration.configuration
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.coherence-distributed-configuration.dependencies
@@ -25,21 +24,6 @@ recipeList:
       relativeFileName: README.md
       content: https://micronaut-projects.github.io/micronaut-coherence/latest/guide/#distributedConfiguration
       appendNewline: true
----
-type: specs.openrewrite.org/v1beta/recipe
-name: io.micronaut.starter.feature.coherence-distributed-configuration.configuration
-displayName: Add Coherence Distributed Configuration
-preconditions:
-  - io.micronaut.starter.openrewrite.recipes.FindBootstrapProperties
-recipeList:
-  - org.openrewrite.properties.AddProperty:
-      property: coherence.client.enabled
-      value: true
-  - org.openrewrite.properties.AddProperty:
-      property: coherence.client.host
-      value: localhost
-  - org.openrewrite.properties.AddProperty:
-      property: coherence.client.port
-      value: 1408
+
 
 

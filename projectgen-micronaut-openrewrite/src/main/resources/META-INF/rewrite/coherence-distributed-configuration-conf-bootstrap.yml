@@ -1,0 +1,15 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.coherence-distributed-configuration-conf-bootstrap
+displayName: Add Coherence Distributed Configuration
+preconditions:
+  - io.micronaut.starter.openrewrite.recipes.FindBootstrapProperties
+recipeList:
+  - org.openrewrite.properties.AddProperty:
+      property: coherence.client.enabled
+      value: true
+  - org.openrewrite.properties.AddProperty:
+      property: coherence.client.host
+      value: localhost
+  - org.openrewrite.properties.AddProperty:
+      property: coherence.client.port
+      value: 1408
