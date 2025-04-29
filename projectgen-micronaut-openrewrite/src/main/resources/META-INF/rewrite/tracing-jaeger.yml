@@ -3,6 +3,7 @@ name: io.micronaut.starter.feature.tracing-jaeger
 displayName: Add Tracing Jaeger dependency and link to README
 recipeList:
   - io.micronaut.starter.feature.tracing-jaeger.dependencies
+  - io.micronaut.starter.feature.tracing-jaeger.configuration
   - io.micronaut.starter.feature.tracing-jaeger.micronaut.documentation
   - io.micronaut.starter.feature.tracing-jaeger.documentation.thirdparty
 ---
@@ -15,6 +16,19 @@ recipeList:
       artifactId: micronaut-tracing-jaeger
       configuration: implementation
       scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.tracing-jaeger.configuration
+displayName: Add Tracing Jaeger configuration
+preconditions:
+  - io.micronaut.starter.openrewrite.recipes.FindApplicationProperties
+recipeList:
+  - org.openrewrite.properties.AddProperty:
+      property: tracing.jaeger.enabled
+      value: true
+  - org.openrewrite.properties.AddProperty:
+      property: tracing.jaeger.sampler.probability
+      value: 0.1
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.tracing-jaeger.micronaut.documentation
