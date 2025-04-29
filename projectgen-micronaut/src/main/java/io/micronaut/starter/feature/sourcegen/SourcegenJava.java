@@ -19,6 +19,7 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
@@ -29,26 +30,14 @@ import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.options.Language;
 import jakarta.inject.Singleton;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.sourcegen.generator.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class SourcegenJava implements Feature {
+public class SourcegenJava implements OpenRewriteFeature {
 
     public static final String NAME = "sourcegen-generator";
-
-    private static final Dependency DEPENDENCY_MICRONAUT_SOURCEGEN_ANNOTATIONS = MicronautDependencyUtils.sourcegenDependency()
-            .artifactId("micronaut-sourcegen-annotations")
-            .scope(Scope.COMPILE)
-            .build();
-
-    private static final Dependency DEPENDENCY_MICRONAUT_SOURCEGEN_GENERATOR_JAVA = MicronautDependencyUtils.sourcegenDependency()
-            .artifactId("micronaut-sourcegen-generator-java")
-            .scope(Scope.ANNOTATION_PROCESSOR)
-            .build();
-
-    private static final Dependency DEPENDENCY_MICRONAUT_SOURCEGEN_GENERATOR_KOTLIN = MicronautDependencyUtils.sourcegenDependency()
-            .artifactId("micronaut-sourcegen-generator-kotlin")
-            .scope(Scope.ANNOTATION_PROCESSOR)
-            .build();
 
     @Override
     @NonNull
@@ -72,22 +61,15 @@ public class SourcegenJava implements Feature {
     }
 
     @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-sourcegen/latest/guide/";
-    }
-
-    @Override
-    public void apply(GeneratorContext generatorContext) {
-        addDependencies(generatorContext);
-    }
-
-    private void addDependencies(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
-        module.addDependency(DEPENDENCY_MICRONAUT_SOURCEGEN_ANNOTATIONS);
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        List<String> recipes = new ArrayList<>();
+        recipes.add("io.micronaut.starter.feature.sourcegen-generator");
         if (generatorContext.getLanguage() == Language.JAVA) {
-            module.addDependency(DEPENDENCY_MICRONAUT_SOURCEGEN_GENERATOR_JAVA);
+            recipes.add("io.micronaut.starter.feature.sourcegen-generator-annotation-java");
         } else if (generatorContext.getLanguage() == Language.KOTLIN) {
-            module.addDependency(DEPENDENCY_MICRONAUT_SOURCEGEN_GENERATOR_KOTLIN);
+            recipes.add("io.micronaut.starter.feature.sourcegen-generator-annotation-kotlin");
         }
+        return recipes;
     }
+
 }
