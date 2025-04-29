@@ -1,0 +1,35 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.tracing-jaeger
+displayName: Add Tracing Jaeger dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.tracing-jaeger.dependencies
+  - io.micronaut.starter.feature.tracing-jaeger.micronaut.documentation
+  - io.micronaut.starter.feature.tracing-jaeger.documentation.thirdparty
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.tracing-jaeger.dependencies
+displayName: Add Tracing Jaeger dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.tracing
+      artifactId: micronaut-tracing-jaeger
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.tracing-jaeger.micronaut.documentation
+displayName: Append a link to Micronaut Tracing Jaeger documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-tracing/latest/guide/#jaeger
+      appendNewline: true
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.tracing-jaeger.documentation.thirdparty
+displayName: Append a link to Tracing Jaeger website
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://www.jaegertracing.io/
+      appendNewline: true
