@@ -25,14 +25,12 @@ import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.core.rocker.RockerTemplate;
 import io.micronaut.projectgen.core.template.BinaryTemplate;
-import io.micronaut.projectgen.core.template.Template;
 import io.micronaut.projectgen.core.template.URLTemplate;
 import jakarta.inject.Singleton;
 import io.micronaut.projectgen.core.template.genericPom;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 
 /**
  * Maven Feature.
@@ -44,10 +42,10 @@ public class Maven implements BuildFeature {
     protected static final String WRAPPER_JAR = ".mvn/wrapper/maven-wrapper.jar";
     protected static final String WRAPPER_PROPS = ".mvn/wrapper/maven-wrapper.properties";
     protected static final String MAVEN_PREFIX = "maven/";
-    protected final MavenBuildCreator dependencyResolver;
+    protected final MavenBuildCreator mavenBuildCreator;
 
-    public Maven(MavenBuildCreator dependencyResolver) {
-        this.dependencyResolver = dependencyResolver;
+    public Maven(MavenBuildCreator mavenBuildCreator) {
+        this.mavenBuildCreator = mavenBuildCreator;
     }
 
     @Override
@@ -112,6 +110,6 @@ public class Maven implements BuildFeature {
      * @return Maven Build
      */
     protected MavenBuild createBuild(ModuleContext moduleContext, Options options) {
-        return dependencyResolver.create(moduleContext, options);
+        return mavenBuildCreator.create(moduleContext, options);
     }
 }
