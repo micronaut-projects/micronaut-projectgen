@@ -6,6 +6,7 @@
   <artifactId>gs-multi-module</artifactId>
   <version>0.1.0</version>
   <packaging>pom</packaging>
+
   <modules>
     <module>library</module>
     <module>application</module>

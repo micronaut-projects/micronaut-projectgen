@@ -30,8 +30,8 @@
 @if (mavenBuild.description() != null) {
   <description>@mavenBuild.description()</description>
 }
-@if(mavenBuild.repositories().size() > 0) {
 @io.micronaut.projectgen.core.template.mavenProperties.template(mavenBuild.properties())
+@if(mavenBuild.repositories().size() > 0) {
   <repositories>
 @mavenBuild.renderRepositories(4)
   </repositories>
