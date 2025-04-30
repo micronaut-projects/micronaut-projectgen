@@ -54,7 +54,7 @@ public class DependencyCoordinate implements Coordinate, Ordered {
         this(dependency.getGroupId(),
             dependency.getArtifactId(),
             showVersionProperty && dependency.getVersionProperty() != null ?
-                "${" + dependency.getVersionProperty() + "}" : dependency.getVersion(),
+                dependency.getVersionProperty() : dependency.getVersion(),
             dependency.getOrder(),
             dependency.isPom(),
             dependency.getExclusions() == null ? null :

@@ -16,8 +16,11 @@
 package io.micronaut.projectgen.test;
 
 import io.micronaut.core.annotation.NonNull;
+import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.buildtools.Scope;
+import io.micronaut.projectgen.core.options.Language;
 import io.micronaut.projectgen.core.options.Options;
+import io.micronaut.projectgen.core.options.TestFramework;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 
 /**
@@ -32,6 +35,10 @@ public interface BuildTestVerifier {
      * @return Whether the build has the annotation processor
      */
     boolean hasAnnotationProcessor(String groupId, String artifactId);
+
+    default public String getProperty(String propertyName) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
     /**
      *
@@ -165,10 +172,43 @@ public interface BuildTestVerifier {
     boolean hasBuildPlugin(String id);
 
     @NonNull
-    static BuildTestVerifier of(@NonNull String template, @NonNull Options options) {
-        if (OptionUtils.hasGradleBuildTool(options)) {
-            return new GradleBuildTestVerifier(template, options);
+    static BuildTestVerifier of(@NonNull String template,
+                                @NonNull BuildTool buildTool,
+                                @NonNull Language language,
+                                @NonNull TestFramework testFramework) {
+        if (buildTool.isGradle()) {
+            return new GradleBuildTestVerifier(template, buildTool, language, testFramework);
+        }
+        if (buildTool == BuildTool.MAVEN) {
+            return new MavenBuildTestVerifier(template);
         }
         return null;//TODO
+    }
+
+    /**
+     *
+     * @param template
+     * @param options
+     * @return
+     * @deprecated Use {@link BuildTestVerifier#of(String, BuildTool, Language, TestFramework)} instead.
+     */
+    @Deprecated(forRemoval = true)
+    @NonNull
+    static BuildTestVerifier of(@NonNull String template, @NonNull Options options) {
+        if (OptionUtils.hasGradleBuildTool(options)) {
+            return new GradleBuildTestVerifier(template, options.getBuildTool(), options.language(), options.testFramework());
+        }
+        if (OptionUtils.hasMavenBuildTool(options)) {
+            return new MavenBuildTestVerifier(template);
+        }
+        return null;//TODO
+    }
+
+    default boolean hasBuildPlugin(String groupId, String artifactId) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    default boolean hasParentPom(String groupId, String artifactId) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

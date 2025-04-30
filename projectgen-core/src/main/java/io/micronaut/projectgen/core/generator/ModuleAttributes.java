@@ -21,7 +21,7 @@ import io.micronaut.projectgen.core.buildtools.maven.ParentPom;
 
 public class ModuleAttributes {
     private ParentPom parentPom;
-    private Packaging packaging;
+    private String packaging;
     private Coordinate coordinate;
     private String name;
     private String description;
@@ -58,11 +58,15 @@ public class ModuleAttributes {
         this.description = description;
     }
 
-    public Packaging getPackaging() {
+    public String getPackaging() {
         return packaging;
     }
 
     public void setPackaging(Packaging packaging) {
+        setPackaging(packaging.toString());
+    }
+
+    public void setPackaging(String packaging) {
         this.packaging = packaging;
     }
 }

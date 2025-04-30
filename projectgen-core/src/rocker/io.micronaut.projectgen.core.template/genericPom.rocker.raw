@@ -22,7 +22,7 @@
   <version>@mavenBuild.coordinate().getVersion()</version>
 }
 @if (mavenBuild.packaging() != null) {
-  <packaging>@mavenBuild.packaging().toString()</packaging>
+  <packaging>@mavenBuild.packaging()</packaging>
 }
 @if (mavenBuild.name() != null) {
   <name>@mavenBuild.name()</name>

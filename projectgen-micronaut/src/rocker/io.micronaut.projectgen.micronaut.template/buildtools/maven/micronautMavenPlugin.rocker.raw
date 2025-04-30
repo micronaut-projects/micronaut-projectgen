@@ -1,0 +1,34 @@
+@option discardLogicWhitespace=true
+@import java.util.List
+@args(Boolean shared, String jvmArguments, String configFile, List<String> nativeImageBuildArgs, List<String> appArguments)
+<plugin>
+    <groupId>io.micronaut.maven</groupId>
+    <artifactId>micronaut-maven-plugin</artifactId>
+@if(shared != null || jvmArguments != null || configFile != null || nativeImageBuildArgs != null || appArguments != null) {
+    <configuration>
+@if(shared != null && shared == true) {
+        <shared>true</shared>
+}
+@if (jvmArguments != null) {
+        <jvmArguments>@(jvmArguments)</jvmArguments>
+}
+@if (configFile != null) {
+        <configFile>@(configFile)</configFile>
+}
+@if (nativeImageBuildArgs != null) {
+        <nativeImageBuildArgs>
+@for (String arg : nativeImageBuildArgs) {
+            <arg>@(arg)</arg>
+}
+        </nativeImageBuildArgs>
+}
+@if (appArguments != null) {
+        <appArguments>
+@for (String arg : appArguments) {
+            <arg>@(arg)</arg>
+}
+        </appArguments>
+}
+    </configuration>
+}
+</plugin>

@@ -30,6 +30,51 @@ class MavenScopeTest {
         assertEquals(scope, mavenScopeOptional.get());
     }
 
+    @ParameterizedTest
+    @MethodSource("mavenScopeOfString")
+    void testProjectNaturalName(String scope, MavenScope mavenScope) {
+        Optional<MavenScope> mavenScopeOptional = MavenScope.of(scope);
+        assertTrue(mavenScopeOptional.isPresent());
+        assertEquals(mavenScope, mavenScopeOptional.get());
+        assertTrue(MavenScope.of("foo").isEmpty());
+    }
+
+    @ParameterizedTest
+    @MethodSource("toScope")
+    void testToScope(MavenScope mavenScope, Optional<Scope> scopeOptional) {
+        Optional<Scope> toScopeResult = mavenScope.toScope();
+        if (toScopeResult.isPresent()) {
+            assertTrue(scopeOptional.isPresent());
+            Scope expectedScope = scopeOptional.get();
+            Scope result = toScopeResult.get();
+            assertEquals(expectedScope, result);
+        } else {
+            assertTrue(scopeOptional.isEmpty());
+        }
+    }
+
+    private static Stream<Arguments> mavenScopeOfString() {
+        return Stream.of(
+            Arguments.of("compile", MavenScope.COMPILE),
+            Arguments.of("provided", MavenScope.PROVIDED),
+            Arguments.of("runtime", MavenScope.RUNTIME),
+            Arguments.of("test", MavenScope.TEST),
+            Arguments.of("system", MavenScope.SYSTEM),
+            Arguments.of("import", MavenScope.IMPORT)
+        );
+    }
+
+    private static Stream<Arguments> toScope() {
+        return Stream.of(
+            Arguments.of(MavenScope.COMPILE, Optional.of(Scope.COMPILE)),
+            Arguments.of(MavenScope.PROVIDED, Optional.of(Scope.COMPILE_ONLY)),
+            Arguments.of(MavenScope.RUNTIME, Optional.of(Scope.RUNTIME)),
+            Arguments.of(MavenScope.TEST, Optional.of(Scope.TEST)),
+            Arguments.of(MavenScope.SYSTEM, Optional.empty()),
+            Arguments.of(MavenScope.IMPORT, Optional.empty())
+        );
+    }
+
     private static Stream<Arguments> mavenScopeOf() {
         return Stream.of(
         Arguments.of(Source.MAIN, List.of(Phase.DEVELOPMENT), Language.JAVA, MavenScope.PROVIDED),

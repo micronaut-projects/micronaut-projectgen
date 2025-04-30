@@ -200,14 +200,25 @@ public record ModuleContext(CoordinateResolver coordinateResolver,
      * @param recipeName recipe Name
      */
     public void addDependenciesByRecipeName(Options options, String recipeName) {
+        List<Dependency> dependencies = new ArrayList<>();
+        if (OptionUtils.hasMavenBuildTool(options)) {
+            for (Dependency d : recipeFetcher.findAllByRecipeNameAndBuildTool(recipeName, BuildTool.MAVEN)) {
+                dependencies.add(d);
+            }
+        }
         if (OptionUtils.hasGradleBuildTool(options)) {
             for (Dependency d : recipeFetcher.findAllByRecipeNameAndBuildTool(recipeName, BuildTool.GRADLE)) {
-                addDependency(d);
+                if (dependencies.stream().noneMatch(dep ->
+                    dep.getGroupId().equals(d.getGroupId()) &&
+                        dep.getArtifactId().equals(d.getArtifactId()) &&
+                        dep.getScope().equals(d.getScope())
+                )) {
+                    dependencies.add(d);
+                }
             }
-        } else if (OptionUtils.hasMavenBuildTool(options)) {
-            for (Dependency d : recipeFetcher.findAllByRecipeNameAndBuildTool(recipeName, BuildTool.MAVEN)) {
-                addDependency(d);
-            }
+        }
+        for (Dependency d : dependencies) {
+            addDependency(d);
         }
     }
 

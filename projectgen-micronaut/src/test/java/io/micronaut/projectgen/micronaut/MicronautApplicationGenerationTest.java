@@ -2,11 +2,9 @@ package io.micronaut.projectgen.micronaut;
 
 import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.buildtools.Scope;
-import io.micronaut.projectgen.core.generator.ProjectGenerator;
 import io.micronaut.projectgen.core.io.MapOutputHandler;
 import io.micronaut.projectgen.core.options.JdkVersion;
 import io.micronaut.projectgen.core.options.Language;
-import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.core.options.TestFramework;
 import io.micronaut.projectgen.test.BuildTestVerifier;
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
@@ -47,6 +45,17 @@ class MicronautApplicationGenerationTest {
         assertEquals(expected, project.keySet());
         String pomXml = project.get("pom.xml");
         System.out.println(pomXml);
+        BuildTestVerifier verifier = BuildTestVerifier.of(pomXml, BuildTool.MAVEN, options.language(), options.testFramework());
+        assertEquals("netty", verifier.getProperty("micronaut.runtime"));
+        assertEquals("jar", verifier.getProperty("packaging"));
+        assertEquals("21", verifier.getProperty("jdk.version"));
+        assertEquals("21", verifier.getProperty("release.version"));
+        assertNotNull(verifier.getProperty("exec.mainClass"));
+        //assertEquals("com.example.Application", verifier.getProperty("exec.mainClass"));
+        assertTrue(verifier.hasBuildPlugin("org.apache.maven.plugins", "maven-enforcer-plugin"));
+        assertTrue(verifier.hasBuildPlugin("org.apache.maven.plugins", "maven-compiler-plugin"));
+        assertTrue(verifier.hasBuildPlugin("io.micronaut.maven", "micronaut-maven-plugin"));
+        assertTrue(verifier.hasParentPom("io.micronaut.platform", "micronaut-parent"));
     }
 
     @Test
@@ -87,7 +96,6 @@ class MicronautApplicationGenerationTest {
         assertFalse(verifier.hasDependency("org.junit.jupiter", "junit-jupiter-api", Scope.TEST));
         assertFalse(verifier.hasDependency("org.junit.jupiter", "junit-jupiter-engine", Scope.TEST));
         assertTrue(buildGradle.contains("testRuntime(\"junit5\")"));
-
     }
 
     private static MicronautOptions createOptions(List<BuildTool> buildTools) {
