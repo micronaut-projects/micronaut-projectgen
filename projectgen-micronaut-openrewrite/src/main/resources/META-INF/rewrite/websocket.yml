@@ -1,0 +1,25 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.websocket
+displayName: Add Websocket dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.websocket.dependencies
+  - io.micronaut.starter.feature.websocket.micronaut.documentation
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.websocket.dependencies
+displayName: Add Websocket dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut
+      artifactId: micronaut-websocket
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.websocket.micronaut.documentation
+displayName: Append a link to Micronaut Websocket documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://docs.micronaut.io/latest/guide/#websocket
+      appendNewline: true
