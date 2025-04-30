@@ -1,0 +1,27 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.dekorate-servicecatalog
+displayName: Add Dekorate Servicecatalog Dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.dekorate-servicecatalog.dependencies
+  - io.micronaut.starter.feature.dekorate-servicecatalog.documentation.thirdparty
+  - io.micronaut.starter.feature.servicecatalog-annotations
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.dekorate-servicecatalog.dependencies
+displayName: Add Dekorate Servicecatalog Dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.dekorate
+      artifactId: servicecatalog-annotations
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.dekorate-servicecatalog.documentation.thirdparty
+displayName: Append a link to Dekorate Servicecatalog documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://github.com/dekorateio/dekorate#service-catalog
+      appendNewline: true
+
