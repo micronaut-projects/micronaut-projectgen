@@ -1,0 +1,24 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.kubernetes-annotations
+displayName: Add Kubernetes Annotations Processor
+recipeList:
+  - io.micronaut.starter.feature.kubernetes-annotations.maven
+  - io.micronaut.starter.feature.kubernetes-annotations.gradle
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.kubernetes-annotations.maven
+displayName: Add Kubernetes Annotation to the Maven compiler plugin
+recipeList:
+  - org.openrewrite.maven.AddAnnotationProcessor:
+      groupId: io.dekorate
+      artifactId: kubernetes-annotations
+      version: ${dekorate.version}
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.kubernetes-annotations.gradle
+displayName: Add Kubernetes Annotation dependency to a Gradle Build
+recipeList:
+  - org.openrewrite.gradle.AddDependency:
+      groupId: io.dekorate
+      artifactId: kubernetes-annotations
+      configuration: annotationProcessor

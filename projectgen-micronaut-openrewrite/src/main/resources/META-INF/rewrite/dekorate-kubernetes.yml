@@ -1,0 +1,27 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.dekorate-kubernetes
+displayName: Add Dekorate Kubernetes Dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.dekorate-kubernetes.dependencies
+  - io.micronaut.starter.feature.dekorate-kubernetes.documentation.thirdparty
+  - io.micronaut.starter.feature.kubernetes-annotations
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.dekorate-kubernetes.dependencies
+displayName: Add Dekorate Kubernetes Dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.dekorate
+      artifactId: kubernetes-annotations
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.dekorate-kubernetes.documentation.thirdparty
+displayName: Append a link to Dekorate Kubernetes documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://github.com/dekorateio/dekorate#kubernetes
+      appendNewline: true
+
