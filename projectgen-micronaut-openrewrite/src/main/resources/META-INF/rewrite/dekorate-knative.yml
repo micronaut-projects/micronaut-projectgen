@@ -1,0 +1,27 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.dekorate-knative
+displayName: Add Dekorate Knative Dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.dekorate-knative.dependencies
+  - io.micronaut.starter.feature.dekorate-knative.documentation.thirdparty
+  - io.micronaut.starter.feature.knative-annotations
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.dekorate-knative.dependencies
+displayName: Add Dekorate Knative Dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.dekorate
+      artifactId: knative-annotations
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.dekorate-knative.documentation.thirdparty
+displayName: Append a link to Dekorate Knative documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://github.com/dekorateio/dekorate#knative
+      appendNewline: true
+

@@ -23,9 +23,12 @@ import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.feature.micrometer.Prometheus;
 
 import jakarta.inject.Singleton;
+
+import java.util.List;
 
 /**
  * Adds Dekorate Prometheus support that generates ServiceMonitor resource.
@@ -35,7 +38,7 @@ import jakarta.inject.Singleton;
  */
 @Requires(property = "micronaut.starter.feature.dekorate.prometheus.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class DekoratePrometheus extends AbstractDekorateServiceFeature {
+public class DekoratePrometheus extends AbstractDekorateServiceFeature implements OpenRewriteFeature {
 
     private final Prometheus prometheus;
 
@@ -71,19 +74,8 @@ public class DekoratePrometheus extends AbstractDekorateServiceFeature {
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
-        Dependency.Builder prometheus = Dependency.builder()
-                .groupId("io.dekorate")
-                .artifactId("prometheus-annotations")
-                .template();
-        module.addDependency(prometheus.versionProperty("dekorate.version").annotationProcessor());
-        module.addDependency(prometheus.compile());
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.dekorate-prometheus");
     }
 
-    @Nullable
-    @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://github.com/dekorateio/dekorate#prometheus-annotations";
-    }
 }

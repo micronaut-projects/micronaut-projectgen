@@ -23,7 +23,10 @@ import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import jakarta.inject.Singleton;
+
+import java.util.List;
 
 /**
  * Adds Dekorate Jaeger support.
@@ -33,7 +36,7 @@ import jakarta.inject.Singleton;
  */
 @Requires(property = "micronaut.starter.feature.dekorate.jaeger.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class DekorateJaeger extends AbstractDekorateServiceFeature {
+public class DekorateJaeger extends AbstractDekorateServiceFeature implements OpenRewriteFeature {
 
     public DekorateJaeger(DekorateKubernetes dekorateKubernetes) {
         super(dekorateKubernetes);
@@ -55,20 +58,9 @@ public class DekorateJaeger extends AbstractDekorateServiceFeature {
         return "Adds to Decorate deployment manifests Jaeger sidecar container";
     }
 
-    @Nullable
     @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://github.com/dekorateio/dekorate#jaeger-annotations";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.dekorate-jaeger");
     }
 
-    @Override
-    public void apply(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
-        Dependency.Builder jaeger = Dependency.builder()
-                .groupId("io.dekorate")
-                .artifactId("jaeger-annotations")
-                .template();
-        module.addDependency(jaeger.versionProperty("dekorate.version").annotationProcessor());
-        module.addDependency(jaeger.compile());
-    }
 }
