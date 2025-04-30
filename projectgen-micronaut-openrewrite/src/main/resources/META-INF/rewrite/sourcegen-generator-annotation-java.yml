@@ -1,0 +1,23 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.sourcegen-generator-annotation-java
+displayName: Add SourceGen Generator Annotation Processor for java
+recipeList:
+  - io.micronaut.starter.feature.sourcegen-generator-annotation-java.maven
+  - io.micronaut.starter.feature.sourcegen-generator-annotation-java.gradle
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.sourcegen-generator-annotation-java.maven
+displayName: Adds SourceGen Generator annotation Processor to the Maven compiler plugin
+recipeList:
+  - org.openrewrite.maven.AddAnnotationProcessor:
+      groupId: io.micronaut.sourcegen
+      artifactId: micronaut-sourcegen-generator-java
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.sourcegen-generator-annotation-java.gradle
+displayName: Adds SourceGen Generator annotation Processor dependency to a Gradle Build
+recipeList:
+  - org.openrewrite.gradle.AddDependency:
+      groupId: io.micronaut.sourcegen
+      artifactId: micronaut-sourcegen-generator-java
+      configuration: annotationProcessor
