@@ -18,6 +18,7 @@ package io.micronaut.starter.feature.vertx;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
@@ -25,9 +26,11 @@ import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.Feature;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.vertx.pg.client.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class VertxPg implements Feature {
+public class VertxPg implements OpenRewriteFeature {
 
     @Override
     public String getName() {
@@ -45,18 +48,8 @@ public class VertxPg implements Feature {
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
-        module.configuration().put("vertx.pg.client.port", 5432);
-        module.configuration().put("vertx.pg.client.host", "the-host");
-        module.configuration().put("vertx.pg.client.database", "the-db");
-        module.configuration().put("vertx.pg.client.database.user", "user");
-        module.configuration().put("vertx.pg.client.database.password", "password");
-        module.configuration().put("vertx.pg.client.database.maxSize", 5);
-        module.addDependency(Dependency.builder()
-                .groupId("io.micronaut.sql")
-                .artifactId("micronaut-vertx-pg-client")
-                .compile());
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.vertx-pg-client");
     }
 
     @Override
