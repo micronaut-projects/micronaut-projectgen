@@ -17,11 +17,8 @@ package io.micronaut.starter.feature.coherence;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
-<<<<<<< HEAD
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
-=======
 import io.micronaut.projectgen.core.generator.ModuleContext;
->>>>>>> 0.0.x
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
@@ -72,14 +69,8 @@ public class CoherenceData implements OpenRewriteFeature {
     }
 
     @Override
-<<<<<<< HEAD
     public List<String> getRecipes(GeneratorContext generatorContext) {
         return List.of("io.micronaut.starter.feature.coherence-data");
-=======
-    public void apply(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
-        module.addDependency(MicronautDependencyUtils.coherenceDependency().artifactId("micronaut-coherence-data").compile());
->>>>>>> 0.0.x
     }
 
     @Override

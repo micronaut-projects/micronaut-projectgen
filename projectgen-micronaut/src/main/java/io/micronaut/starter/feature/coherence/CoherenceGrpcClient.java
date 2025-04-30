@@ -17,12 +17,9 @@ package io.micronaut.starter.feature.coherence;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
-<<<<<<< HEAD
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
-=======
 import io.micronaut.projectgen.core.feature.config.Configuration;
 import io.micronaut.projectgen.core.generator.ModuleContext;
->>>>>>> 0.0.x
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
@@ -77,7 +74,6 @@ public class CoherenceGrpcClient implements OpenRewriteFeature {
     }
 
     @Override
-<<<<<<< HEAD
     public List<String> getRecipes(GeneratorContext generatorContext) {
         List<String> recipes = new ArrayList<>();
         recipes.add("io.micronaut.starter.feature.coherence-grpc-client");
@@ -88,16 +84,6 @@ public class CoherenceGrpcClient implements OpenRewriteFeature {
             recipes.add("io.micronaut.starter.feature.coherence-grpc-client.conf-application");
         }
        return recipes;
-=======
-    public void apply(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
-        Configuration config = generatorContext.isFeaturePresent(DistributedConfigFeature.class)
-            ? module.bootstrapConfiguration()
-            : module.configuration();
-        config.put("coherence.session.default.type", "grpc");
-        module.addDependency(MicronautDependencyUtils.coherenceDependency().artifactId("micronaut-coherence-grpc-client").compile());
-        module.addDependency(Dependency.builder().groupId("com.oracle.coherence.ce").artifactId("coherence-java-client").compile());
->>>>>>> 0.0.x
     }
 
     @Override

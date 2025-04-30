@@ -17,11 +17,8 @@ package io.micronaut.starter.feature.coherence;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
-<<<<<<< HEAD
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
-=======
 import io.micronaut.projectgen.core.generator.ModuleContext;
->>>>>>> 0.0.x
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
@@ -29,7 +26,6 @@ import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import jakarta.inject.Singleton;
-
 import java.util.List;
 
 /**
@@ -72,16 +68,8 @@ public class CoherenceSessionStore implements OpenRewriteFeature {
     }
 
     @Override
-<<<<<<< HEAD
     public List<String> getRecipes(GeneratorContext generatorContext) {
         return List.of("io.micronaut.starter.feature.coherence-session");
-=======
-    public void apply(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
-        module.configuration().put("micronaut.session.http.coherence.enabled", true);
-
-        module.addDependency(MicronautDependencyUtils.coherenceDependency().artifactId("micronaut-coherence-session").compile());
->>>>>>> 0.0.x
     }
 
     @Override

@@ -17,11 +17,8 @@ package io.micronaut.starter.feature.coherence;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
-<<<<<<< HEAD
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
-=======
 import io.micronaut.projectgen.core.generator.ModuleContext;
->>>>>>> 0.0.x
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
@@ -60,25 +57,8 @@ public class CoherenceFeature implements OpenRewriteFeature {
     }
 
     @Override
-<<<<<<< HEAD
     public List<String> getRecipes(GeneratorContext generatorContext) {
         return List.of("io.micronaut.starter.feature.coherence");
-=======
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://coherence.java.net/";
-    }
-
-    @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-coherence/latest/guide/";
-    }
-
-    @Override
-    public void apply(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
-        module.addDependency(MicronautDependencyUtils.coherenceDependency().artifactId("micronaut-coherence").compile());
-        module.addDependency(Dependency.builder().groupId("com.oracle.coherence.ce").artifactId("coherence").compile());
->>>>>>> 0.0.x
     }
 
     @Override
