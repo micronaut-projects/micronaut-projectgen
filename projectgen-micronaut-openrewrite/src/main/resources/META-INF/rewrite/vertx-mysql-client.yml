@@ -1,0 +1,41 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.vertx-mysql-client
+displayName: Add Vertx Mysql Client dependency and configuration
+recipeList:
+  - io.micronaut.starter.feature.vertx-mysql-client.dependencies
+  - io.micronaut.starter.feature.vertx-mysql-client.configuration
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.vertx-mysql-client.dependencies
+displayName: Add Vertx Mysql Client dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.sql
+      artifactId: micronaut-vertx-mysql-client
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.vertx-mysql-client.configuration
+displayName: Add Vertx Mysql Client configuration
+preconditions:
+  - io.micronaut.starter.openrewrite.recipes.FindApplicationProperties
+recipeList:
+  - org.openrewrite.properties.AddProperty:
+      property: vertx.mysql.client.host
+      value: the-host
+  - org.openrewrite.properties.AddProperty:
+      property: vertx.mysql.client.port
+      value: 3306
+  - org.openrewrite.properties.AddProperty:
+      property: vertx.mysql.client.database.user
+      value: user
+  - org.openrewrite.properties.AddProperty:
+      property: vertx.mysql.client.database
+      value: the-db
+  - org.openrewrite.properties.AddProperty:
+      property: vertx.mysql.client.database.password
+      value: password
+  - org.openrewrite.properties.AddProperty:
+      property: vertx.mysql.client.database.maxSize
+      value: 5
