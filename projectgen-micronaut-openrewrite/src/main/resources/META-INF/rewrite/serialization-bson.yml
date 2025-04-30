@@ -1,0 +1,16 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.serialization-bson
+displayName: Add Serialization Bson dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.serialization-bson.dependencies
+  - io.micronaut.starter.feature.serialization-docs
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.serialization-bson.dependencies
+displayName: Add Serialization Bson dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.serde
+      artifactId: micronaut-serde-bson
+      configuration: implementation
+      scope: compile

@@ -18,6 +18,7 @@ package io.micronaut.starter.feature.messaging.nats;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
@@ -61,7 +62,8 @@ public class Nats implements MessagingFeature {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        generatorContext.getConfiguration().put("nats.default.addresses", Collections.singletonList("nats://localhost:4222"));
-        generatorContext.addDependency(MICRONAUT_NATS);
+        ModuleContext module = generatorContext.getRootModule();
+        module.configuration().put("nats.default.addresses", Collections.singletonList("nats://localhost:4222"));
+        module.addDependency(MICRONAUT_NATS);
     }
 }

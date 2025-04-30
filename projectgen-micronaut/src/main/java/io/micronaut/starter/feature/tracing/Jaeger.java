@@ -19,6 +19,8 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import io.micronaut.starter.feature.server.MicronautServerDependent;
@@ -27,9 +29,12 @@ import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.options.Language;
 import jakarta.inject.Singleton;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.tracing.jaeger.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class Jaeger implements TracingFeature, MicronautServerDependent {
+public class Jaeger implements TracingFeature, MicronautServerDependent, OpenRewriteFeature {
 
     public static final String NAME = "tracing-jaeger";
 
@@ -51,26 +56,15 @@ public class Jaeger implements TracingFeature, MicronautServerDependent {
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        generatorContext.getConfiguration().put("tracing.jaeger.enabled", true);
-        generatorContext.getConfiguration().put("tracing.jaeger.sampler.probability", 0.1);
-
-        generatorContext.addDependency(MicronautDependencyUtils.tracingDependency()
-                .artifactId("micronaut-tracing-jaeger")
-                .compile());
-
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        List<String> recipes = new ArrayList<>();
+        recipes.add("io.micronaut.starter.feature.tracing-jaeger");
         if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions()) && generatorContext.getLanguage() == Language.GROOVY) {
-            generatorContext.addDependency(MicronautDependencyUtils.coreProcessor().compileOnly());
+            recipes.add("io.micronaut.starter.feature.micronaut-core-processor-maven");
         }
+        return recipes;
     }
 
-    @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-tracing/latest/guide/#jaeger";
-    }
 
-    @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://www.jaegertracing.io/";
-    }
+
 }

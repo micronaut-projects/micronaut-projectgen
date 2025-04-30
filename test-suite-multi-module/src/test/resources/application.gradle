@@ -1,0 +1,17 @@
+plugins {
+    id("java")
+    id("org.springframework.boot") version "3.3.0"
+    alias(libs.spring.dependency.management)
+}
+group = "com.example"
+version = "0.0.1-SNAPSHOT"
+repositories {
+    mavenCentral()
+}
+dependencies {
+    implementation(project(":library"))
+    /* To expose an actuator endpoint */
+    implementation("org.springframework.boot:spring-boot-starter-actuator")
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
+}

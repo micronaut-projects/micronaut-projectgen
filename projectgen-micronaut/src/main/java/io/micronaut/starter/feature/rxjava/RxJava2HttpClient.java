@@ -20,6 +20,7 @@ import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.feature.reactive.ReactiveHttpClientFeature;
 import jakarta.inject.Singleton;
 
@@ -28,18 +29,7 @@ import java.util.List;
 
 @Requires(property = "micronaut.starter.feature.rxjava2.http.client.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class RxJava2HttpClient implements ReactiveHttpClientFeature {
-
-    private static final String ARTIFACT_ID_MICRONAUT_RXJAVA_2_HTTP_CLIENT = "micronaut-rxjava2-http-client";
-    private static final Dependency DEPENDENCY_MICRONAUT_RXJAVA_2_HTTP_CLIENT = Dependency.builder()
-            .groupId(RxJava2.MICRONAUT_RXJAVA2_GROUP_ID)
-            .artifactId(ARTIFACT_ID_MICRONAUT_RXJAVA_2_HTTP_CLIENT)
-            .compile().build();
-
-    @Override
-    public List<Dependency> getDependencies(GeneratorContext generatorContext) {
-        return Collections.singletonList(DEPENDENCY_MICRONAUT_RXJAVA_2_HTTP_CLIENT);
-    }
+public class RxJava2HttpClient implements OpenRewriteFeature {
 
     @NonNull
     @Override
@@ -57,4 +47,10 @@ public class RxJava2HttpClient implements ReactiveHttpClientFeature {
     public String getDescription() {
         return "RxJava 2 variation of the Micronaut HTTP client.";
     }
+
+    @Override
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.rxjava2-http-client");
+    }
+
 }

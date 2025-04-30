@@ -17,6 +17,8 @@ package io.micronaut.starter.feature.websocket;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
@@ -25,16 +27,13 @@ import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.Feature;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.websocket.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class Websocket implements Feature {
+public class Websocket implements OpenRewriteFeature {
 
     public static final String NAME = "websocket";
-
-    private static final Dependency DEPENDENCY_WEBSOCKET = MicronautDependencyUtils.coreDependency()
-            .artifactId("micronaut-websocket")
-            .compile()
-            .build();
 
     @Override
     public String getName() {
@@ -52,14 +51,10 @@ public class Websocket implements Feature {
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        generatorContext.addDependency(DEPENDENCY_WEBSOCKET);
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.websocket");
     }
 
-    @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://docs.micronaut.io/latest/guide/#websocket";
-    }
 
     @Override
     public String getCategory() {

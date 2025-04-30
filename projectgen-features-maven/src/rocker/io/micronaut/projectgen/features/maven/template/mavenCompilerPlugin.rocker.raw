@@ -1,0 +1,59 @@
+@option discardLogicWhitespace=true
+@import io.micronaut.projectgen.core.buildtools.dependencies.Dependency
+@import java.util.List
+@import io.micronaut.projectgen.core.buildtools.maven.MavenCompilerPluginAnnotationProcessors
+@args(String version, String configurationCombine, Boolean incrementalCompilation, String source, String target, MavenCompilerPluginAnnotationProcessors ann, List<String> compilerArgs)
+<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-compiler-plugin</artifactId>
+@if (version != null) {
+    <version>@version</version>
+}
+@if (configurationCombine != null) {
+    <configuration @(configurationCombine)>
+} else {
+    <configuration>
+}
+@if (source != null) {
+        <source>@(source)</source>
+}
+@if (target != null) {
+        <target>@(target)</target>
+}
+@if (incrementalCompilation != null) {
+        <useIncrementalCompilation>@(incrementalCompilation)</<useIncrementalCompilation>
+}
+@if (ann.combineAttribute() != null) {
+        <annotationProcessorPaths @(ann.combineAttribute())>
+} else {
+        <annotationProcessorPaths>
+}
+@for (processor : ann.annotationProcessors()) {
+            <path>
+              <groupId>@processor.getGroupId()</groupId>
+              <artifactId>@processor.getArtifactId()</artifactId>
+@if (processor.getVersion() != null) {
+              <version>@processor.getVersion()</version>
+}
+@if (processor.getExclusions() != null) {
+              <exclusions>
+@for (exclusion : processor.getExclusions()) {
+                <exclusion>
+                  <groupId>@exclusion.getGroupId()</groupId>
+                  <artifactId>@exclusion.getArtifactId()</artifactId>
+                </exclusion>
+}
+              </exclusions>
+}
+            </path>
+}
+          </annotationProcessorPaths>
+@if (compilerArgs != null) {
+          <compilerArgs>
+@for (String arg : compilerArgs) {
+              <arg>@(arg)</arg>
+}
+          </compilerArgs>
+}
+        </configuration>
+</plugin>

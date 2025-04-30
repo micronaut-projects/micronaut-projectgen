@@ -1,0 +1,27 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.dekorate-openshift
+displayName: Add Dekorate Openshift Dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.dekorate-openshift.dependencies
+  - io.micronaut.starter.feature.dekorate-openshift.documentation.thirdparty
+  - io.micronaut.starter.feature.openshift-annotations
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.dekorate-openshift.dependencies
+displayName: Add Dekorate Openshift Dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.dekorate
+      artifactId: openshift-annotations
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.dekorate-openshift.documentation.thirdparty
+displayName: Append a link to Dekorate Openshift documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://github.com/dekorateio/dekorate#openshift
+      appendNewline: true
+

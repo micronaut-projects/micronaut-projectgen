@@ -1,3 +1,4 @@
+@option discardLogicWhitespace=true
 @import io.micronaut.projectgen.micronaut.ApplicationType
 @import io.micronaut.projectgen.core.generator.Project
 @import io.micronaut.projectgen.core.buildtools.Property
@@ -36,7 +37,7 @@ String jvmArguments
 @if (!features.contains("aws-cdk")) {
   <groupId>@project.getPackageName()</groupId>
 }
-  <artifactId>@mavenBuild.getArtifactId()</artifactId>
+  <artifactId>@mavenBuild.coordinate().getArtifactId()</artifactId>
   <version>0.1</version>
   <packaging>${packaging}</packaging>
 
@@ -63,7 +64,7 @@ String jvmArguments
     <jdk.version>@FeaturesUtils.getTargetJdk(features)</jdk.version>
 }
     <release.version>@features.javaVersion().majorVersion()</release.version>
-@for (Property prop : mavenBuild.getProperties()) {
+@for (Property prop : mavenBuild.properties()) {
 @if (prop.isComment()) {
     <!--@prop.getComment()-->
 } else {
@@ -80,7 +81,7 @@ String jvmArguments
   <dependencyManagement>
     <dependencies>
 @for (MavenDependency f : mavenBuild.getDependencies(true)) {
-@dependency.template(f.getGroupId(), f.getArtifactId(), f.getMavenScope().toString(), f.getVersion(), true, f.getExclusions())
+@dependency.template(f.getGroupId(), f.getArtifactId(), f.getMavenScope().toString(), f.getVersion(), true, f.getComment(), f.getExclusions())
 }
     </dependencies>
   </dependencyManagement>
@@ -88,13 +89,13 @@ String jvmArguments
 
   <dependencies>
 @if (features.language().isGroovy()) {
-@for (processor : mavenBuild.getAnnotationProcessors()) {
-@dependency.template(processor.getGroupId(), processor.getArtifactId(), "provided", null, false, null)
+@for (processor : mavenBuild.annotationProcessors()) {
+@dependency.template(processor.getGroupId(), processor.getArtifactId(), "provided", null, false, null, null)
 }
 }
 
 @for (MavenDependency f : mavenBuild.getDependencies(false)) {
-@dependency.template(f.getGroupId(), f.getArtifactId(), f.getMavenScope().toString(), f.getVersion(), false, f.getExclusions())
+@dependency.template(f.getGroupId(), f.getArtifactId(), f.getMavenScope().toString(), f.getVersion(), false, f.getComment(), f.getExclusions())
 }
   </dependencies>
   <build>
@@ -176,8 +177,8 @@ String jvmArguments
           <!-- Uncomment to enable incremental compilation -->
           <!-- <useIncrementalCompilation>false</useIncrementalCompilation> -->
 
-          <annotationProcessorPaths @mavenBuild.getAnnotationProcessorCombineAttribute()>
-@for (processor : mavenBuild.getAnnotationProcessors()) {
+          <annotationProcessorPaths @mavenBuild.annotationProcessorCombineAttribute()>
+@for (processor : mavenBuild.annotationProcessors()) {
             <path>
               <groupId>@processor.getGroupId()</groupId>
               <artifactId>@processor.getArtifactId()</artifactId>
@@ -230,8 +231,8 @@ String jvmArguments
               <sourceDirs>
                 <sourceDir>${project.basedir}/src/main/kotlin</sourceDir>
               </sourceDirs>
-              <annotationProcessorPaths @mavenBuild.getAnnotationProcessorCombineAttribute()>
-@for (processor : mavenBuild.getAnnotationProcessors()) {
+              <annotationProcessorPaths @mavenBuild.annotationProcessorCombineAttribute()>
+@for (processor : mavenBuild.annotationProcessors()) {
                <annotationProcessorPath>
                  <groupId>@processor.getGroupId()</groupId>
                  <artifactId>@processor.getArtifactId()</artifactId>
@@ -271,8 +272,8 @@ String jvmArguments
               <sourceDirs>
                 <sourceDir>${project.basedir}/src/test/kotlin</sourceDir>
               </sourceDirs>
-              <annotationProcessorPaths @mavenBuild.getTestAnnotationProcessorCombineAttribute()>
-@for (processor : mavenBuild.getTestAnnotationProcessors()) {
+              <annotationProcessorPaths @mavenBuild.testAnnotationProcessorCombineAttribute()>
+@for (processor : mavenBuild.testAnnotationProcessors()) {
                <annotationProcessorPath>
                  <groupId>@processor.getGroupId()</groupId>
                  <artifactId>@processor.getArtifactId()</artifactId>
@@ -433,5 +434,5 @@ String jvmArguments
        </pluginRepository>
     </pluginRepositories>
 }
-@profiles.template(mavenBuild.getProfiles())
+@profiles.template(mavenBuild.profiles())
 </project>

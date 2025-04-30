@@ -17,6 +17,7 @@ package io.micronaut.starter.feature.database;
 
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.starter.feature.Category;
 import io.micronaut.starter.feature.migration.MigrationFeature;
 import io.micronaut.starter.feature.testresources.DbType;
@@ -39,36 +40,38 @@ public abstract class HibernateReactiveFeature extends EaseTestingFeature implem
 
     @Override
     public void apply(GeneratorContext generatorContext) {
+        ModuleContext module = generatorContext.getRootModule();
+
         DatabaseDriverFeature dbFeature = generatorContext.getRequiredFeature(DatabaseDriverFeature.class);
 
         if (dbFeature instanceof PostgreSQL) {
-            generatorContext.addDependency(Dependency.builder()
+            module.addDependency(Dependency.builder()
                     .lookupArtifactId("client")
                     .compile());
         }
-        generatorContext.getConfiguration().put(JPA_HIBERNATE_PROPERTIES_HBM2DDL,
+        module.configuration().put(JPA_HIBERNATE_PROPERTIES_HBM2DDL,
                 generatorContext.getFeatures().hasFeature(MigrationFeature.class) ? Hbm2ddlAuto.NONE.toString() :
                         Hbm2ddlAuto.UPDATE.toString());
 
-        generatorContext.getConfiguration().put(JPA_DEFAULT_REACTIVE, true);
+        module.configuration().put(JPA_DEFAULT_REACTIVE, true);
         Optional<DbType> optionalDbType = dbFeature.getDbType();
         if (!generatorContext.isFeaturePresent(TestResources.class)) {
             Optional<MigrationFeature> migrationFeature = generatorContext.getFeatures().getFeature(MigrationFeature.class);
-            generatorContext.getConfiguration().put(JPA_DEFAULT_PROPERTIES_HIBERNATE_CONNECTION_URL,
+            module.configuration().put(JPA_DEFAULT_PROPERTIES_HIBERNATE_CONNECTION_URL,
                     migrationFeature.map(f -> "${datasources.default.url}").orElse(dbFeature.getJdbcUrl()));
-            generatorContext.getConfiguration().put(JPA_DEFAULT_PROPERTIES_HIBERNATE_CONNECTION_USERNAME,
+            module.configuration().put(JPA_DEFAULT_PROPERTIES_HIBERNATE_CONNECTION_USERNAME,
                     migrationFeature.map(f -> "${datasources.default.username}").orElse(dbFeature.getDefaultUser()));
-            generatorContext.getConfiguration().put(JPA_DEFAULT_PROPERTIES_HIBERNATE_CONNECTION_PASSWORD,
+            module.configuration().put(JPA_DEFAULT_PROPERTIES_HIBERNATE_CONNECTION_PASSWORD,
                     migrationFeature.map(f -> "${datasources.default.password}").orElse(dbFeature.getDefaultPassword()));
         } else {
             optionalDbType.ifPresent(type ->
-                    generatorContext.getConfiguration().put(JPA_HIBERNATE_PROPERTIES_CONNECTION + ".db-type", type.toString())
+                module.configuration().put(JPA_HIBERNATE_PROPERTIES_CONNECTION + ".db-type", type.toString())
             );
         }
         if (optionalDbType.isPresent()) {
             DbType dbType = optionalDbType.get();
             if (dbType == DbType.ORACLEFREE) {
-                generatorContext.getConfiguration().put(JPA_HIBERNATE_PROPERTIES_DIALECT, ORACLE_DIALECT);
+                module.configuration().put(JPA_HIBERNATE_PROPERTIES_DIALECT, ORACLE_DIALECT);
             }
         }
     }

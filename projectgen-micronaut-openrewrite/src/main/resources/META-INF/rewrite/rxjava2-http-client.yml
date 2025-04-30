@@ -1,0 +1,9 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.rxjava2-http-client
+displayName: Add RxJava2 Http Client dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.rxjava2
+      artifactId: micronaut-rxjava2-http-client
+      configuration: implementation
+      scope: compile

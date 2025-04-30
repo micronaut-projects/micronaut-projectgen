@@ -17,9 +17,14 @@ package io.micronaut.starter.feature.coherence;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.feature.config.Configuration;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
+<<<<<<< HEAD
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
+=======
+import io.micronaut.projectgen.core.generator.ModuleContext;
+>>>>>>> 0.0.x
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import io.micronaut.projectgen.core.feature.FeatureContext;
@@ -70,6 +75,7 @@ public class CoherenceDistributedConfiguration implements DistributedConfigFeatu
     }
 
     @Override
+<<<<<<< HEAD
     public List<String> getRecipes(GeneratorContext generatorContext) {
         List<String> recipes = new ArrayList<>();
         if(generatorContext.isFeaturePresent(DistributedConfigFeature.class)){
@@ -80,6 +86,26 @@ public class CoherenceDistributedConfiguration implements DistributedConfigFeatu
         recipes.add("io.micronaut.starter.feature.coherence-distributed-configuration");
         if (OptionUtils.hasGradleBuildTool(generatorContext.getOptions()) && !generatorContext.isFeaturePresent(CoherenceGrpcClient.class)) {
             recipes.add("io.micronaut.starter.feature.coherence-java-client");
+=======
+    public void apply(GeneratorContext generatorContext) {
+        ModuleContext module = generatorContext.getRootModule();
+        Configuration config = generatorContext.isFeaturePresent(DistributedConfigFeature.class)
+            ? module.bootstrapConfiguration()
+            : module.configuration();
+
+        config.put("coherence.client.enabled", true);
+        config.put("coherence.client.host", "${COHERENCE_HOST:localhost}");
+        config.put("coherence.client.port", "${COHERENCE_PORT:1408}");
+
+        Dependency.Builder distributedConfiguration = MicronautDependencyUtils.coherenceDependency().artifactId("micronaut-coherence-distributed-configuration").compile();
+        module.addDependency(distributedConfiguration);
+
+        if (OptionUtils.hasGradleBuildTool(generatorContext.getOptions()) && !generatorContext.isFeaturePresent(CoherenceGrpcClient.class)) {
+            module.addDependency(Dependency.builder()
+                    .groupId("com.oracle.coherence.ce")
+                    .artifactId("coherence-java-client")
+                    .compile());
+>>>>>>> 0.0.x
         }
         return recipes;
     }

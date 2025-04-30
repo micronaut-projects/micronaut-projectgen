@@ -1,0 +1,27 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.dekorate-jaeger
+displayName: Add Dekorate Jaeger Dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.dekorate-jaeger.dependencies
+  - io.micronaut.starter.feature.dekorate-jaeger.documentation.thirdparty
+  - io.micronaut.starter.feature.jaeger-annotations
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.dekorate-jaeger.dependencies
+displayName: Add Dekorate Jaeger Dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.dekorate
+      artifactId: jaeger-annotations
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.dekorate-jaeger.documentation.thirdparty
+displayName: Append a link to Dekorate Jaeger documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://github.com/dekorateio/dekorate#jaeger-annotations
+      appendNewline: true
+

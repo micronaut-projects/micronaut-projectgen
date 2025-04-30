@@ -21,6 +21,9 @@
 @if (profile.getDependencies() != null) {
             <dependencies>
 @for (Dependency dependency : profile.getDependencies()) {
+                @if (dependency.getComment() != null) {
+                    <!-- @dependency.getComment() -->
+                }
                 <dependency>
                     <groupId>@dependency.getGroupId()</groupId>
                     <artifactId>@dependency.getArtifactId()</artifactId>

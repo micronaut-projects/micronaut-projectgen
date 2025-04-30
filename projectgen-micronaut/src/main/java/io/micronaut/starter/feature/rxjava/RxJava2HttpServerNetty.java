@@ -18,6 +18,8 @@ package io.micronaut.starter.feature.rxjava;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
@@ -25,9 +27,11 @@ import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.Feature;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.rxjava2.http.server.netty.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class RxJava2HttpServerNetty implements Feature {
+public class RxJava2HttpServerNetty implements OpenRewriteFeature {
 
     @NonNull
     @Override
@@ -46,10 +50,8 @@ public class RxJava2HttpServerNetty implements Feature {
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        generatorContext.addDependency(Dependency.builder()
-                .groupId(RxJava2.MICRONAUT_RXJAVA2_GROUP_ID)
-                .artifactId("micronaut-rxjava2-http-server-netty")
-                .runtime());
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.rxjava2-http-server-netty");
     }
+
 }

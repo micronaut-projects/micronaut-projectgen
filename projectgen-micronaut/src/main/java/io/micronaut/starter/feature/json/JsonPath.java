@@ -18,23 +18,18 @@ package io.micronaut.starter.feature.json;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
-import io.micronaut.projectgen.micronaut.ApplicationType;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.starter.feature.Category;
-import io.micronaut.projectgen.core.feature.Feature;
 import jakarta.inject.Singleton;
+
+import java.util.List;
 
 @Requires(property = "micronaut.starter.feature.json.path.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class JsonPath implements Feature {
+public class JsonPath implements OpenRewriteFeature {
 
     public static final String NAME = "json-path";
-
-    private static final Dependency DEPENDENCY_JSON_PATH = Dependency.builder()
-            .lookupArtifactId("json-path")
-            .test()
-            .build();
 
     @Override
     @NonNull
@@ -53,17 +48,12 @@ public class JsonPath implements Feature {
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        generatorContext.addDependency(DEPENDENCY_JSON_PATH);
-    }
-
-    @Override
     public String getCategory() {
         return Category.TEST;
     }
 
     @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://github.com/json-path/JsonPath";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.json-path");
     }
 }

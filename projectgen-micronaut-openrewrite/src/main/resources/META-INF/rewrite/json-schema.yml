@@ -1,0 +1,51 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.json-schema
+displayName: Add Json Schema dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.json-schema.dependencies
+  - io.micronaut.starter.feature.json-schema.micronaut.documentation
+  - io.micronaut.starter.feature.json-schema.documentation.thirdparty
+  - io.micronaut.starter.feature.json-schema.configuration
+  - io.micronaut.starter.feature.json-schema-processor
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.json-schema.dependencies
+displayName: Add Json Schema dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.jsonschema
+      artifactId: micronaut-json-schema-annotations
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.json-schema.micronaut.documentation
+displayName: Append a link to Micronaut Json Schema documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-json-schema/latest/guide/
+      appendNewline: true
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.json-schema.documentation.thirdparty
+displayName: Append a link to Json Schema website
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://json-schema.org/learn/getting-started-step-by-step
+      appendNewline: true
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.json-schema.configuration
+displayName: Add Json Schema configuration
+preconditions:
+  - io.micronaut.starter.openrewrite.recipes.FindApplicationProperties
+recipeList:
+  - org.openrewrite.properties.AddProperty:
+      property: micronaut.router.static-resources.jsonschema.mapping
+      value: /schemas/**
+  - org.openrewrite.properties.AddProperty:
+      property: micronaut.router.static-resources.jsonschema.paths
+      value: classpath\:META-INF/schemas
+

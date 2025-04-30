@@ -1,3 +1,4 @@
+@option discardLogicWhitespace=true
 @import io.micronaut.projectgen.micronaut.ApplicationType
 @import io.micronaut.projectgen.core.generator.Project
 @import io.micronaut.projectgen.core.buildtools.Property
@@ -26,7 +27,7 @@ MavenBuild mavenBuild
   <dependencyManagement>
     <dependencies>
 @for (MavenDependency f : mavenBuild.getDependencies(true)) {
-@dependency.template(f.getGroupId(), f.getArtifactId(), f.getMavenScope().toString(), f.getVersion(), true, f.getExclusions())
+@dependency.template(f.getGroupId(), f.getArtifactId(), f.getMavenScope().toString(), f.getVersion(), true, f.getComment(), f.getExclusions())
 }
     </dependencies>
   </dependencyManagement>
@@ -34,15 +35,15 @@ MavenBuild mavenBuild
 
   <dependencies>
 @if (features.language().isGroovy()) {
-@for (processor : mavenBuild.getAnnotationProcessors()) {
-@dependency.template(processor.getGroupId(), processor.getArtifactId(), "provided", null, false, null)
+@for (processor : mavenBuild.annotationProcessors()) {
+@dependency.template(processor.getGroupId(), processor.getArtifactId(), "provided", null, false, null, null)
 }
 }
 
 @for (MavenDependency f : mavenBuild.getDependencies(false)) {
-@dependency.template(f.getGroupId(), f.getArtifactId(), f.getMavenScope().toString(), f.getVersion(), false, f.getExclusions())
+@dependency.template(f.getGroupId(), f.getArtifactId(), f.getMavenScope().toString(), f.getVersion(), false, f.getComment(), f.getExclusions())
 }
   </dependencies>
 
-@profiles.template(mavenBuild.getProfiles())
+@profiles.template(mavenBuild.profiles())
 </project>

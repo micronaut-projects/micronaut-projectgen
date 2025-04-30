@@ -17,16 +17,11 @@ package io.micronaut.projectgen.core.buildtools.maven;
 
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.order.OrderUtil;
-import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.buildtools.*;
-import io.micronaut.projectgen.core.buildtools.dependencies.Coordinate;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
-import io.micronaut.projectgen.core.buildtools.dependencies.DependencyCoordinate;
-import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.options.Language;
+import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.options.Options;
 import jakarta.inject.Singleton;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -34,66 +29,43 @@ import java.util.List;
  */
 @Singleton
 public class MavenBuildCreator {
-
     /**
      *
-     * @param generatorContext Generator Context
-     * @param repositories repositories
+     * @param module Module Context
+     * @param options Options
      * @return Maven Build
      */
     @NonNull
-    public MavenBuild create(GeneratorContext generatorContext, List<Repository> repositories) {
-        List<MavenDependency> dependencies = MavenDependency.listOf(generatorContext, generatorContext.getLanguage());
-        BuildProperties buildProperties = generatorContext.getBuildProperties();
-        List<DependencyCoordinate> annotationProcessorsCoordinates = new ArrayList<>();
-        List<DependencyCoordinate> testAnnotationProcessorsCoordinates = new ArrayList<>();
-        boolean isKotlin = generatorContext.getLanguage() == Language.KOTLIN;
-        MavenCombineAttribute combineAttribute = isKotlin ? MavenCombineAttribute.OVERRIDE : MavenCombineAttribute.APPEND;
-        MavenCombineAttribute testCombineAttribute = combineAttribute;
-
-        for (Dependency dependency : generatorContext.getDependencies()) {
-            if (dependency.getScope().getPhases().contains(Phase.ANNOTATION_PROCESSING)) {
-                if (dependency.getScope().getSource() == Source.MAIN && generatorContext.getLanguage() != Language.GROOVY) {
-                    // Don't add these for Groovy projects: it results in multiple dependencies.
-                    // DependencyContext has already resolved Groovy annotation processors as dependencies
-                    annotationProcessorsCoordinates.add(new DependencyCoordinate(dependency, true));
-                    if (dependency.isAnnotationProcessorPriority()) {
-                        combineAttribute = MavenCombineAttribute.OVERRIDE;
-                    }
-                }
-                if (dependency.getScope().getSource() == Source.TEST) {
-                    testAnnotationProcessorsCoordinates.add(new DependencyCoordinate(dependency, true));
-                    if (dependency.isAnnotationProcessorPriority()) {
-                        testCombineAttribute = MavenCombineAttribute.OVERRIDE;
-                    }
-                }
-            }
-        }
+    public MavenBuild create(ModuleContext module,
+                             Options options) {
+        List<MavenDependency> dependencies = MavenDependency.listOf(module.dependencyContext(),
+            options.language());
+        BuildProperties buildProperties = module.buildProperties();
 
 
-        annotationProcessorsCoordinates.sort(Coordinate.COMPARATOR);
-        testAnnotationProcessorsCoordinates.sort(Coordinate.COMPARATOR);
-
-        List<MavenPlugin> plugins = generatorContext.getBuildPlugins()
+        List<MavenPlugin> plugins = module.buildPlugins()
             .stream()
             .filter(MavenPlugin.class::isInstance)
             .map(MavenPlugin.class::cast)
             .sorted(OrderUtil.COMPARATOR)
             .toList();
 
-        return new MavenBuild(generatorContext.getOptions().group(),
-            StringUtils.isNotEmpty(generatorContext.getOptions().artifact())
-                ? generatorContext.getOptions().artifact()
-                : generatorContext.getProject().getName(),
-            generatorContext.getOptions().version(),
-            annotationProcessorsCoordinates,
-            testAnnotationProcessorsCoordinates,
-            dependencies,
-            buildProperties.getProperties(),
-            plugins,
-            MavenRepository.listOf(repositories),
-            combineAttribute,
-            testCombineAttribute,
-            generatorContext.getProfiles());
+        MavenCompilerPluginAnnotationProcessors ann = MavenCompilerPluginAnnotationProcessors.of(module, options.language());
+        return MavenBuildBuilder.builder()
+            .parentPom(module.moduleAttributes().getParentPom())
+            .packaging(module.moduleAttributes().getPackaging())
+            .coordinate(module.moduleAttributes().getCoordinate())
+            .name(module.moduleAttributes().getName())
+            .description(module.moduleAttributes().getDescription())
+            .repositories(MavenRepository.listOf(module.repositories()))
+            .plugins(plugins)
+            .properties(buildProperties.getProperties())
+            .annotationProcessorCombineAttribute(ann.combineAttribute())
+            .testAnnotationProcessorCombineAttribute(ann.testCombineAttribute())
+            .profiles(module.profiles())
+            .dependencies(dependencies)
+            .annotationProcessors(ann.annotationProcessors())
+            .testAnnotationProcessors(ann.testAnnotationProcessors())
+            .build();
     }
 }

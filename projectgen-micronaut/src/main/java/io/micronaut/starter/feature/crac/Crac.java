@@ -18,6 +18,7 @@ package io.micronaut.starter.feature.crac;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.projectgen.micronaut.ApplicationType;
@@ -52,7 +53,7 @@ public class Crac implements RequireEagerSingletonInitializationFeature {
     public String getTitle() {
         return "Support for CRaC (Coordinated Restore at Checkpoint)";
     }
-    
+
     @Override
     @NonNull
     public String getDescription() {
@@ -82,15 +83,16 @@ public class Crac implements RequireEagerSingletonInitializationFeature {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        generatorContext.addDependency(DEPENDENCY_MICRONAUT_CRAC);
+        ModuleContext module = generatorContext.getRootModule();
+        module.addDependency(DEPENDENCY_MICRONAUT_CRAC);
         if (OptionUtils.hasGradleBuildTool(generatorContext.getOptions())) {
-            generatorContext.addBuildPlugin(GradlePlugin.builder()
+            module.addBuildPlugin(GradlePlugin.builder()
                     .id("io.micronaut.crac")
                     .lookupArtifactId("micronaut-crac-plugin")
                     .build());
         }
         if (generatorContext.isFeaturePresent(Hikari.class)) {
-            generatorContext.getConfiguration().addNested("datasources.default.allow-pool-suspension", true);
+            module.configuration().addNested("datasources.default.allow-pool-suspension", true);
         }
     }
 }

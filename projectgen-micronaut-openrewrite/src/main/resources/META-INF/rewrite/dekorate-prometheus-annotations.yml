@@ -1,0 +1,24 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.prometheus-annotations
+displayName: Add Prometheus Annotations Processor
+recipeList:
+  - io.micronaut.starter.feature.prometheus-annotations.maven
+  - io.micronaut.starter.feature.prometheus-annotations.gradle
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.prometheus-annotations.maven
+displayName: Add Prometheus Annotation to the Maven compiler plugin
+recipeList:
+  - org.openrewrite.maven.AddAnnotationProcessor:
+      groupId: io.dekorate
+      artifactId: prometheus-annotations
+      version: ${dekorate.version}
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.prometheus-annotations.gradle
+displayName: Add Prometheus Annotation dependency to a Gradle Build
+recipeList:
+  - org.openrewrite.gradle.AddDependency:
+      groupId: io.dekorate
+      artifactId: prometheus-annotations
+      configuration: annotationProcessor

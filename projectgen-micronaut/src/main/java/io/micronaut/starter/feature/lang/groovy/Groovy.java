@@ -18,6 +18,7 @@ package io.micronaut.starter.feature.lang.groovy;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.feature.GroovyApplicationFeature;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
@@ -91,12 +92,13 @@ public class Groovy implements LanguageFeature {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
+        ModuleContext module = generatorContext.getRootModule();
         if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())) {
-            generatorContext.getBuildProperties().put("groovyVersion", VersionInfo.getDependencyVersion("groovy").getValue());
-            generatorContext.addDependency(DEPENDENCY_MICRONAUT_INJECT_GROOVY);
-            generatorContext.addDependency(DEPENDENCY_GROOVY);
+            module.buildProperties().put("groovyVersion", VersionInfo.getDependencyVersion("groovy").getValue());
+            module.addDependency(DEPENDENCY_MICRONAUT_INJECT_GROOVY);
+            module.addDependency(DEPENDENCY_GROOVY);
         }
-        generatorContext.addDependency(DEPENDENCY_MICRONAUT_GROOVY_RUNTIME);
+        module.addDependency(DEPENDENCY_MICRONAUT_GROOVY_RUNTIME);
     }
 
     @Override

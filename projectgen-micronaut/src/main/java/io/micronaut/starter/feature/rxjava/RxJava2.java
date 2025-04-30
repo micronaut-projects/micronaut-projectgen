@@ -20,6 +20,8 @@ import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
+import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.Feature;
 
@@ -28,14 +30,11 @@ import io.micronaut.projectgen.micronaut.features.httpclient.HttpClient;
 import io.micronaut.starter.feature.server.Netty;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.rxjava2.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class RxJava2 implements Feature {
-    public static final String MICRONAUT_RXJAVA2_GROUP_ID = "io.micronaut.rxjava2";
-    public static final Dependency DEPENDENCY_MICRONAUT_RXJAVA2 = Dependency.builder()
-            .groupId(MICRONAUT_RXJAVA2_GROUP_ID)
-            .artifactId("micronaut-rxjava2")
-            .compile().build();
+public class RxJava2 implements OpenRewriteFeature {
 
     private final RxJava2HttpServerNetty rxJava2HttpServerNetty;
     private final RxJava2HttpClient rxJava2HttpClient;
@@ -67,11 +66,6 @@ public class RxJava2 implements Feature {
     }
 
     @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-rxjava2/snapshot/guide/index.html";
-    }
-
-    @Override
     public void processSelectedFeatures(FeatureContext featureContext) {
         if (featureContext.isPresent(Netty.class)) {
             featureContext.addFeature(rxJava2HttpServerNetty);
@@ -82,8 +76,8 @@ public class RxJava2 implements Feature {
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        generatorContext.addDependency(DEPENDENCY_MICRONAUT_RXJAVA2);
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.rxjava2");
     }
 
 }

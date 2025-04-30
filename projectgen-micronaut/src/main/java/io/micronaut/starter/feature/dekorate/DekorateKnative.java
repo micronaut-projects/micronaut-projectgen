@@ -21,9 +21,13 @@ import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
+import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.feature.other.Management;
 
 import jakarta.inject.Singleton;
+
+import java.util.List;
 
 /**
  * Adds Dekorate Knative support.
@@ -33,7 +37,7 @@ import jakarta.inject.Singleton;
  */
 @Requires(property = "micronaut.starter.feature.dekorate.knative.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class DekorateKnative extends AbstractDekoratePlatformFeature {
+public class DekorateKnative extends AbstractDekoratePlatformFeature implements OpenRewriteFeature {
 
     public DekorateKnative(Management management) {
         super(management);
@@ -55,20 +59,9 @@ public class DekorateKnative extends AbstractDekoratePlatformFeature {
         return "Generates Knative Kubernetes deployment manifest using Dekorate Knative Support";
     }
 
-    @Nullable
     @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://github.com/dekorateio/dekorate#knative";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.dekorate-knative");
     }
 
-    @Override
-    public void apply(GeneratorContext generatorContext) {
-        Dependency.Builder knative = Dependency.builder()
-                .groupId("io.dekorate")
-                .artifactId("knative-annotations")
-                .template();
-
-        generatorContext.addDependency(knative.versionProperty("dekorate.version").annotationProcessor());
-        generatorContext.addDependency(knative.compile());
-    }
 }

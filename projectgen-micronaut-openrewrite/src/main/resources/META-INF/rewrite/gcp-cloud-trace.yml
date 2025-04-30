@@ -1,0 +1,35 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.gcp-cloud-trace
+displayName: Add Gcp Cloud Trace dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.gcp-cloud-trace.dependencies
+  - io.micronaut.starter.feature.gcp-cloud-trace.micronaut.documentation
+  - io.micronaut.starter.feature.gcp-cloud-trace.documentation.thirdparty
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.gcp-cloud-trace.dependencies
+displayName: Add Gcp Cloud Trace dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.gcp
+      artifactId: micronaut-gcp-tracing
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.gcp-cloud-trace.micronaut.documentation
+displayName: Append a link to Micronaut Gcp Cloud Trace documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-gcp/latest/guide/index.html#tracing
+      appendNewline: true
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.gcp-cloud-trace.documentation.thirdparty
+displayName: Append a link to Gcp Cloud Trace website
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://cloud.google.com/trace
+      appendNewline: true

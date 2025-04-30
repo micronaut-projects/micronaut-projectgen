@@ -22,7 +22,11 @@ import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 
+import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import jakarta.inject.Singleton;
+
+import java.util.List;
 
 /**
  * Adds Dekorate Service Catalog support.
@@ -32,7 +36,7 @@ import jakarta.inject.Singleton;
  */
 @Requires(property = "micronaut.starter.feature.dekorate.servicecatalog.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class DekorateServiceCatalog extends AbstractDekorateServiceFeature {
+public class DekorateServiceCatalog extends AbstractDekorateServiceFeature implements OpenRewriteFeature {
 
     public DekorateServiceCatalog(DekorateKubernetes dekorateKubernetes) {
         super(dekorateKubernetes);
@@ -57,20 +61,9 @@ public class DekorateServiceCatalog extends AbstractDekorateServiceFeature {
                 """;
     }
 
-    @Nullable
     @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://github.com/dekorateio/dekorate#service-catalog";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.dekorate-servicecatalog");
     }
 
-    @Override
-    public void apply(GeneratorContext generatorContext) {
-        Dependency.Builder servicecatalog = Dependency.builder()
-                .groupId("io.dekorate")
-                .artifactId("servicecatalog-annotations")
-                .template();
-
-        generatorContext.addDependency(servicecatalog.versionProperty("dekorate.version").annotationProcessor());
-        generatorContext.addDependency(servicecatalog.compile());
-    }
 }

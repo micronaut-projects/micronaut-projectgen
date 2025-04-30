@@ -19,6 +19,7 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.CollectionUtils;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.feature.DefaultFeature;
@@ -57,8 +58,9 @@ public class StaticResourceFeature implements DefaultFeature {
                 .toList();
         if (CollectionUtils.isNotEmpty(list)) {
             for (StaticResource staticResource : list) {
-                generatorContext.getConfiguration().put("micronaut.router.static-resources." + staticResource.name() + ".paths", staticResource.paths());
-                generatorContext.getConfiguration().put("micronaut.router.static-resources." + staticResource.name() + ".mapping", staticResource.mapping());
+                ModuleContext module = generatorContext.getRootModule();
+                module.configuration().put("micronaut.router.static-resources." + staticResource.name() + ".paths", staticResource.paths());
+                module.configuration().put("micronaut.router.static-resources." + staticResource.name() + ".mapping", staticResource.mapping());
             }
         }
     }

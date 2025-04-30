@@ -1,0 +1,26 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.json-path
+displayName: Add Json Path dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.json-path.dependencies
+  - io.micronaut.starter.feature.json-path.documentation.thirdparty
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.json-path.dependencies
+displayName: Add Json Path dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: com.jayway.jsonpath
+      artifactId: json-path
+      configuration: testImplementation
+      scope: test
+      version: 2.9.0
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.json-path.documentation.thirdparty
+displayName: Append a link to Json Path website
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://github.com/json-path/JsonPath
+      appendNewline: true

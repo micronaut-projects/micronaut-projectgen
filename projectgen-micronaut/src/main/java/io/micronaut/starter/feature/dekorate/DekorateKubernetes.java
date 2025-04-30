@@ -21,9 +21,13 @@ import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
+import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.feature.other.Management;
 
 import jakarta.inject.Singleton;
+
+import java.util.List;
 
 /**
  * Adds Dekorate Kubernetes support.
@@ -33,7 +37,7 @@ import jakarta.inject.Singleton;
  */
 @Requires(property = "micronaut.starter.feature.dekorate.kubernetes.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class DekorateKubernetes extends AbstractDekoratePlatformFeature {
+public class DekorateKubernetes extends AbstractDekoratePlatformFeature implements OpenRewriteFeature {
 
     public DekorateKubernetes(Management management) {
         super(management);
@@ -55,20 +59,9 @@ public class DekorateKubernetes extends AbstractDekoratePlatformFeature {
         return "Generates Kubernetes deployment manifest using Dekorate Kubernetes Support";
     }
 
-    @Nullable
     @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://github.com/dekorateio/dekorate#kubernetes";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.dekorate-kubernetes");
     }
 
-    @Override
-    public void apply(GeneratorContext generatorContext) {
-        Dependency.Builder kubernetes = Dependency.builder()
-                .groupId("io.dekorate")
-                .artifactId("kubernetes-annotations")
-                .template();
-
-        generatorContext.addDependency(kubernetes.versionProperty("dekorate.version").annotationProcessor());
-        generatorContext.addDependency(kubernetes.compile());
-    }
 }

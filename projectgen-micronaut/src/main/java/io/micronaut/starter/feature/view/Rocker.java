@@ -19,6 +19,7 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Coordinate;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.rocker.RockerWritable;
 import io.micronaut.projectgen.micronaut.template.view.gradlePluginRocker;
 import io.micronaut.projectgen.micronaut.template.view.mvnPluginRocker;
@@ -61,27 +62,28 @@ public class Rocker implements ViewFeature, MicronautServerDependent {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        generatorContext.addDependency(MicronautDependencyUtils.viewsDependency()
+        ModuleContext module = generatorContext.getRootModule();
+        module.addDependency(MicronautDependencyUtils.viewsDependency()
                 .artifactId(ARTIFACT_ID_MICRONAUT_VIEWS_ROCKER)
                 .compile());
-        generatorContext.addBuildPlugin(GradlePlugin.builder()
+        module.addBuildPlugin(GradlePlugin.builder()
                 .id("nu.studer.rocker")
-                .extension(new RockerWritable(gradlePluginRocker.template(rockerSrcDir(generatorContext))))
+                .extension(new RockerWritable(gradlePluginRocker.template(rockerSrcDir(module))))
                 .lookupArtifactId("gradle-rocker-plugin")
                 .build());
         String mavenPluginArtifactId = "rocker-maven-plugin";
         Coordinate coordinate = generatorContext.resolveCoordinate(mavenPluginArtifactId);
-        generatorContext.addBuildPlugin(MavenPlugin.builder()
+        module.addBuildPlugin(MavenPlugin.builder()
                 .artifactId(mavenPluginArtifactId)
                 .extension(new RockerWritable(mvnPluginRocker.template(coordinate.getGroupId(),
                         coordinate.getArtifactId(),
                         coordinate.getVersion(),
-                        rockerSrcDir(generatorContext))))
+                        rockerSrcDir(module))))
                 .build());
     }
 
-    private String rockerSrcDir(GeneratorContext generatorContext) {
-        String path = generatorContext.getConfiguration().getPath();
+    private String rockerSrcDir(ModuleContext module) {
+        String path = module.configuration().getPath();
         if (path.endsWith("/")) {
             path = path.substring(0, path.lastIndexOf('/'));
         }

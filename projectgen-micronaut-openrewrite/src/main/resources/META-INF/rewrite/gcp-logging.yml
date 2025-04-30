@@ -1,0 +1,35 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.gcp-logging
+displayName: Add Gcp Logging dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.gcp-logging.dependencies
+  - io.micronaut.starter.feature.gcp-logging.micronaut.documentation
+  - io.micronaut.starter.feature.gcp-logging.documentation.thirdparty
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.gcp-logging.dependencies
+displayName: Add Gcp Logging dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.gcp
+      artifactId: micronaut-gcp-logging
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.gcp-logging.micronaut.documentation
+displayName: Append a link to Micronaut Gcp Logging documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-gcp/latest/guide/#logging
+      appendNewline: true
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.gcp-logging.documentation.thirdparty
+displayName: Append a link to Gcp Logging website
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://cloud.google.com/logging
+      appendNewline: true

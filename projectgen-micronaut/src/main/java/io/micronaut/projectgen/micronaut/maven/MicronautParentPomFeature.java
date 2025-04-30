@@ -20,6 +20,7 @@ import io.micronaut.projectgen.core.buildtools.dependencies.CoordinateResolver;
 import io.micronaut.projectgen.core.buildtools.maven.ParentPom;
 import io.micronaut.projectgen.core.buildtools.maven.ParentPomFeature;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import jakarta.inject.Singleton;
 
@@ -50,12 +51,16 @@ public class MicronautParentPomFeature implements ParentPomFeature {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
+        ModuleContext module = generatorContext.getRootModule();
         if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())) {
             if (generatorContext.getOptions().javaVersion() != null) {
-                generatorContext.getBuildProperties().put(PROPERTY_JDK_VERSION, generatorContext.getOptions().javaVersion().asString());
+                String javaVersion = generatorContext.getOptions().javaVersion().asString();
+                module.buildProperties().put(PROPERTY_JDK_VERSION, javaVersion);
+                module.buildProperties().put("release.version", javaVersion);
             }
             coordinateResolver.resolve(ARTIFACT_ID_MICRONAUT_PARENT).ifPresent(coordinate ->
-                generatorContext.getBuildProperties().put(PROPERTY_MICRONAUT_VERSION, coordinate.getVersion()));
+                module.buildProperties().put(PROPERTY_MICRONAUT_VERSION, coordinate.getVersion()));
+            module.moduleAttributes().setParentPom(getParentPom());
         }
     }
 

@@ -16,6 +16,7 @@
 package io.micronaut.starter.feature.chatbots.basecamp;
 
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.rocker.RockerWritable;
 import io.micronaut.starter.feature.chatbots.ChatBotType;
 import io.micronaut.starter.feature.chatbots.ChatBots;
@@ -49,20 +50,21 @@ abstract class ChatBotsBasecamp extends ChatBots {
     }
 
     @Override
-    protected void addConfigurations(GeneratorContext generatorContext) {
-        generatorContext.getConfiguration().put(
+    protected void addConfigurations(ModuleContext module) {
+        module.configuration().put(
                 "micronaut.chatbots.folder",
                 "botcommands"
         );
     }
 
     @Override
-    protected void renderTemplates(GeneratorContext generatorContext) {
-        generatorContext.addTemplate(
+    protected void renderTemplates(GeneratorContext generatorContext, ModuleContext module) {
+        module.addTemplate(
                 "about-html",
                 new RockerTemplate("src/main/resources/botcommands/about.html", about.template())
         );
-        generatorContext.addTemplate(
+        module.addTemplate(
+            generatorContext.getOptions().language(),
                 "basecamp-about-command-handler",
                 generatorContext.getSourcePath("/{packagePath}/BasecampAboutCommandHandler"),
                 aboutCommandHandlerJava.template(generatorContext.getProject()),
@@ -70,7 +72,7 @@ abstract class ChatBotsBasecamp extends ChatBots {
                 aboutCommandHandlerGroovy.template(generatorContext.getProject())
         );
         if (!generatorContext.getTestFramework().isKotlinTestFramework()) {
-            generatorContext.addTemplate(
+            module.addTemplate(
                     "mock-basecamp-about-command-json",
                     new RockerTemplate(
                             "src/test/resources/mockBasecampAboutCommand.json",
@@ -79,7 +81,8 @@ abstract class ChatBotsBasecamp extends ChatBots {
             );
         }
         if (generatorContext.getTestFramework() == TestFramework.JUNIT) {
-            generatorContext.addTemplate(
+            module.addTemplate(
+                generatorContext.getOptions().language(),
                     "about-command-handler-junit-test",
                     generatorContext.getTestSourcePath("/{packagePath}/BasecampAboutCommandHandler"),
                     aboutCommandHandlerJavaJunit.template(generatorContext.getProject()),
@@ -87,15 +90,16 @@ abstract class ChatBotsBasecamp extends ChatBots {
                     aboutCommandHandlerGroovyJunit.template(generatorContext.getProject())
             );
         } else if (generatorContext.getTestFramework() == TestFramework.SPOCK) {
-            generatorContext.addTemplate(
+            module.addTemplate(
                     "about-command-handler-spock-groovy-test",
                     new RockerTemplate(generatorContext.getTestSourcePath("/{packagePath}/BasecampAboutCommandHandler"), aboutCommandHandlerGroovySpock.template(generatorContext.getProject()))
             );
         }
 
-        generatorContext.addHelpTemplate(new RockerWritable(basecampReadme.template(rootReadMeTemplate(generatorContext))));
+        module.addHelpTemplate(new RockerWritable(basecampReadme.template(rootReadMeTemplate(generatorContext))));
 
-        generatorContext.addTemplate(
+        module.addTemplate(
+            generatorContext.getOptions().language(),
                 "final-command-handler",
                 generatorContext.getSourcePath("/{packagePath}/BasecampFinalCommandHandler"),
                 finalCommandHandlerJava.template(generatorContext.getProject()),

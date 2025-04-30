@@ -1,0 +1,25 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.retry
+displayName: Add Retry dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.retry.dependencies
+  - io.micronaut.starter.retry.micronaut.documentation
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.retry.dependencies
+displayName: Add Retry dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut
+      artifactId: micronaut-retry
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.retry.micronaut.documentation
+displayName: Append a link to Micronaut Retry Documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://docs.micronaut.io/latest/guide/#retry
+      appendNewline: true

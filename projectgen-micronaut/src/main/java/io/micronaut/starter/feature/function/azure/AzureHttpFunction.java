@@ -19,6 +19,8 @@ import com.fizzed.rocker.RockerModel;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.Project;
@@ -98,10 +100,10 @@ public class AzureHttpFunction extends AbstractAzureFunction implements Feature 
     }
 
     @Override
-    protected void addFunctionTemplate(GeneratorContext generatorContext, Project project) {
+    protected void addFunctionTemplate(ModuleContext module, GeneratorContext generatorContext, Options options, Project project) {
         if (generatorContext.getOptions() instanceof MicronautOptions micronautOptions && micronautOptions.applicationType() == ApplicationType.DEFAULT) {
             String triggerFile = generatorContext.getSourcePath("/{packagePath}/Function");
-            generatorContext.addTemplate("trigger", triggerFile,
+            module.addTemplate(generatorContext.getOptions().language(), "trigger", triggerFile,
                     azureFunctionTriggerJava.template(project),
                     azureFunctionTriggerKotlin.template(project),
                     azureFunctionTriggerGroovy.template(project));
@@ -115,11 +117,11 @@ public class AzureHttpFunction extends AbstractAzureFunction implements Feature 
     }
 
     @Override
-    protected void addDependencies(GeneratorContext generatorContext) {
-        super.addDependencies(generatorContext);
-        if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())) {
-            generatorContext.addDependency(MICRONAUT_AZURE_FUNCTION_HTTP);
-            generatorContext.addDependency(MICRONAUT_AZURE_FUNCTION_HTTP_TEST);
+    protected void addDependencies(ModuleContext module, Options options) {
+        super.addDependencies(module, options);
+        if (OptionUtils.hasMavenBuildTool(options)) {
+            module.addDependency(MICRONAUT_AZURE_FUNCTION_HTTP);
+            module.addDependency(MICRONAUT_AZURE_FUNCTION_HTTP_TEST);
         }
     }
 }

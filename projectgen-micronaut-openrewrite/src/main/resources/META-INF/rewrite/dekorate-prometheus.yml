@@ -1,0 +1,27 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.dekorate-prometheus
+displayName: Add Dekorate Prometheus Dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.dekorate-prometheus.dependencies
+  - io.micronaut.starter.feature.dekorate-prometheus.documentation.thirdparty
+  - io.micronaut.starter.feature.prometheus-annotations
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.dekorate-prometheus.dependencies
+displayName: Add Dekorate Prometheus Dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.dekorate
+      artifactId: prometheus-annotations
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.dekorate-prometheus.documentation.thirdparty
+displayName: Append a link to Dekorate Prometheus documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://github.com/dekorateio/dekorate#prometheus
+      appendNewline: true
+

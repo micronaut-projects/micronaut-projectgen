@@ -19,6 +19,7 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
@@ -105,19 +106,20 @@ public class R2dbc implements R2dbcFeature {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
+        ModuleContext module = generatorContext.getRootModule();
         DatabaseDriverFeature dbFeature = generatorContext.getRequiredFeature(DatabaseDriverFeature.class);
         if (!generatorContext.isFeaturePresent(TestResources.class)) {
             Map<String, Object> rdbcConfig = new LinkedHashMap<>();
             rdbcConfig.put(getUrlKey(), dbFeature.getR2dbcUrl());
             rdbcConfig.put(USERNAME_KEY, dbFeature.getDefaultUser());
             rdbcConfig.put(PASSWORD_KEY, dbFeature.getDefaultPassword());
-            generatorContext.getConfiguration().putAll(rdbcConfig);
+            module.configuration().putAll(rdbcConfig);
         } else {
-            dbFeature.getDbType().ifPresent(type -> generatorContext.getConfiguration().addNested("r2dbc.datasources.default.db-type", type.toString()));
-            generatorContext.getConfiguration().addNested("r2dbc.datasources.default.dialect", dbFeature.getDataDialect());
+            dbFeature.getDbType().ifPresent(type -> module.configuration().addNested("r2dbc.datasources.default.db-type", type.toString()));
+            module.configuration().addNested("r2dbc.datasources.default.dialect", dbFeature.getDataDialect());
         }
         if (!generatorContext.isFeaturePresent(DataR2dbc.class)) {
-            generatorContext.addDependency(DEPENDENCY_MICRONAUT_R2DBC_CORE);
+            module.addDependency(DEPENDENCY_MICRONAUT_R2DBC_CORE);
         }
     }
 

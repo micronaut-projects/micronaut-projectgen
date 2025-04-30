@@ -1,0 +1,24 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.openshift-annotations
+displayName: Add Openshift Annotations Processor
+recipeList:
+  - io.micronaut.starter.feature.openshift-annotations.maven
+  - io.micronaut.starter.feature.openshift-annotations.gradle
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.openshift-annotations.maven
+displayName: Add Openshift Annotation to the Maven compiler plugin
+recipeList:
+  - org.openrewrite.maven.AddAnnotationProcessor:
+      groupId: io.dekorate
+      artifactId: openshift-annotations
+      version: ${dekorate.version}
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.openshift-annotations.gradle
+displayName: Add Openshift Annotation dependency to a Gradle Build
+recipeList:
+  - org.openrewrite.gradle.AddDependency:
+      groupId: io.dekorate
+      artifactId: openshift-annotations
+      configuration: annotationProcessor

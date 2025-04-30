@@ -17,6 +17,7 @@ package io.micronaut.starter.feature.vertx;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
@@ -45,14 +46,14 @@ public class VertxPg implements Feature {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        generatorContext.getConfiguration().put("vertx.pg.client.port", 5432);
-        generatorContext.getConfiguration().put("vertx.pg.client.host", "the-host");
-        generatorContext.getConfiguration().put("vertx.pg.client.database", "the-db");
-        generatorContext.getConfiguration().put("vertx.pg.client.database.user", "user");
-        generatorContext.getConfiguration().put("vertx.pg.client.database.password", "password");
-        generatorContext.getConfiguration().put("vertx.pg.client.database.maxSize", 5);
-
-        generatorContext.addDependency(Dependency.builder()
+        ModuleContext module = generatorContext.getRootModule();
+        module.configuration().put("vertx.pg.client.port", 5432);
+        module.configuration().put("vertx.pg.client.host", "the-host");
+        module.configuration().put("vertx.pg.client.database", "the-db");
+        module.configuration().put("vertx.pg.client.database.user", "user");
+        module.configuration().put("vertx.pg.client.database.password", "password");
+        module.configuration().put("vertx.pg.client.database.maxSize", 5);
+        module.addDependency(Dependency.builder()
                 .groupId("io.micronaut.sql")
                 .artifactId("micronaut-vertx-pg-client")
                 .compile());

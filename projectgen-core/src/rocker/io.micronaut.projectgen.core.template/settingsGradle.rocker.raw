@@ -5,7 +5,6 @@
 @import io.micronaut.projectgen.core.buildtools.gradle.GradleDsl
 @import java.util.Collection;
 @args (Project project, GradleBuild gradleBuild, boolean hasMultiProjectFeature, Collection<String> moduleNames)
-
 @if(!gradleBuild.getSettingsImports().isEmpty()) {
 @for (String settingsImport : gradleBuild.getSettingsImports()) {
 import @(settingsImport)
@@ -15,7 +14,11 @@ import @(settingsImport)
 @if(!gradleBuild.getSettingsPlugins().isEmpty()) {
 plugins {
 @for (GradlePlugin gradlePlugin : gradleBuild.getSettingsPlugins()) {
-    id("@gradlePlugin.getId()") @(gradlePlugin.getVersion() != null ? "version(\"" + gradlePlugin.getVersion() + "\")" : "")
+@if(gradlePlugin.getAlias() != null) {
+    alias(@gradlePlugin.getAlias())@(gradlePlugin.getApply() != null ? " apply false" : "")
+} else {
+    id("@gradlePlugin.getId()")@(gradlePlugin.getVersion() != null ? " version(\"" + gradlePlugin.getVersion() + "\")" : "")@(gradlePlugin.getApply() != null ? " apply false" : "")
+}
 }
 }
 }

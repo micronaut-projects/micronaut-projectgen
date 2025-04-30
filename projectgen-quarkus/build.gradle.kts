@@ -10,5 +10,4 @@ dependencies {
     testRuntimeOnly(mnTest.junit.jupiter.engine)
     testImplementation(mnTest.junit.jupiter.params)
     testImplementation(project(":micronaut-projectgen-test"))
-
 }

@@ -7,24 +7,28 @@
 @if(gradleBuild.getPlugins().size() > 0) {
 plugins {
 @for (GradlePlugin gradlePlugin : gradleBuild.getPlugins()) {
-    id("@gradlePlugin.getId()") @(gradlePlugin.getVersion() != null ? "version \"" + gradlePlugin.getVersion() + "\"" : "")
+@if(gradlePlugin.getAlias() != null) {
+    alias(@gradlePlugin.getAlias())@(gradlePlugin.getApply() != null ? " apply false" : "")
+} else {
+    id("@gradlePlugin.getId()")@(gradlePlugin.getVersion() != null ? " version \"" + gradlePlugin.getVersion() + "\"" : "")@(gradlePlugin.getApply() != null ? " apply false" : "")
 }
 }
 }
-@if (version != null) {
-version = "@(version)"
 }
-@if (groupId != null) {
-group = "@(groupId)"
+@if (gradleBuild.coordinate() != null && gradleBuild.coordinate().getGroupId() != null) {
+group = "@(gradleBuild.coordinate().getGroupId())"
 }
-@if(gradleBuild.getRepositories().size() > 0) {
+@if (gradleBuild.coordinate() != null && gradleBuild.coordinate().getVersion() != null) {
+version = "@(gradleBuild.coordinate().getVersion())"
+}
+@if(gradleBuild.repositories().size() > 0) {
 repositories {
 @gradleBuild.renderRepositories()
 }
 }
-@if(gradleBuild.getDependencies().size() > 0) {
+@if(gradleBuild.dependencies().size() > 0) {
 dependencies {
-@for (GradleDependency dependency : gradleBuild.getDependencies()) {
+@for (GradleDependency dependency : gradleBuild.dependencies()) {
     @dependency.toSnippet()
 }
 }

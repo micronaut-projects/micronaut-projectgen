@@ -15,6 +15,7 @@
  */
 package io.micronaut.projectgen.core.template;
 
+import io.micronaut.projectgen.core.feature.config.Configuration;
 import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.Yaml;
 
@@ -24,7 +25,11 @@ import java.io.OutputStreamWriter;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.function.BiFunction;
+import java.util.function.Function;
 import java.util.regex.Pattern;
+
+import static io.micronaut.projectgen.core.feature.config.Configuration.PREFIXES;
 
 public class YamlTemplate extends DefaultTemplate {
 
@@ -32,11 +37,7 @@ public class YamlTemplate extends DefaultTemplate {
     private final Map<String, Object> config;
 
     public YamlTemplate(String path, Map<String, Object> config) {
-        this(DEFAULT_MODULE, path, config);
-    }
-
-    public YamlTemplate(String module, String path, Map<String, Object> config) {
-        super(module, path);
+        super(path);
         this.config = transform(config);
     }
 
@@ -64,6 +65,7 @@ public class YamlTemplate extends DefaultTemplate {
     @SuppressWarnings("unchecked")
     protected Map<String, Object> transform(Map<String, Object> config) {
         Map<String, Object> transformed = new LinkedHashMap<>();
+        Function<String, Boolean> SKIP_KEY = s -> PREFIXES.stream().anyMatch(s::startsWith);
         for (Map.Entry<String, Object> entry: config.entrySet()) {
             Map<String, Object> finalMap = transformed;
             String key = entry.getKey();
@@ -72,23 +74,32 @@ public class YamlTemplate extends DefaultTemplate {
             if (index != -1) {
                 String[] keys = DOT_PATTERN.split(key);
                 if (!"micronaut".equals(keys[0]) && config.keySet().stream().filter(k -> k.startsWith(keys[0] + ".")).count() == 1) {
-                    finalMap.put(key, value);
+                    if (!SKIP_KEY.apply(key)) {
+                        finalMap.put(key, value);
+                    }
                 } else {
                     for (int i = 0; i < keys.length - 1; i++) {
                         String subKey = keys[i];
 
                         if (!finalMap.containsKey(subKey)) {
-                            finalMap.put(subKey, new LinkedHashMap<>());
+                            if (!SKIP_KEY.apply(subKey)) {
+                                finalMap.put(subKey, new LinkedHashMap<>());
+                            }
                         }
                         Object next = finalMap.get(subKey);
                         if (next instanceof Map) {
                             finalMap = (Map<String, Object>) next;
                         }
                     }
-                    finalMap.put(keys[keys.length - 1], value);
+                    String k = keys[keys.length - 1];
+                    if (!SKIP_KEY.apply(k)) {
+                        finalMap.put(k, value);
+                    }
                 }
             } else {
-                finalMap.put(key, value);
+                if (!SKIP_KEY.apply(key)) {
+                    finalMap.put(key, value);
+                }
             }
         }
         return transformed;
