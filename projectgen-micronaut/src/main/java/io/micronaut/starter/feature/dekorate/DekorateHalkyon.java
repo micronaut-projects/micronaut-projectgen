@@ -23,7 +23,10 @@ import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import jakarta.inject.Singleton;
+
+import java.util.List;
 
 /**
  * Adds Dekorate Service Halkyon support.
@@ -33,7 +36,7 @@ import jakarta.inject.Singleton;
  */
 @Requires(property = "micronaut.starter.feature.dekorate.halkyon.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class DekorateHalkyon extends AbstractDekorateServiceFeature {
+public class DekorateHalkyon extends AbstractDekorateServiceFeature implements OpenRewriteFeature {
 
     public DekorateHalkyon(DekorateKubernetes dekorateKubernetes) {
         super(dekorateKubernetes);
@@ -58,20 +61,9 @@ public class DekorateHalkyon extends AbstractDekorateServiceFeature {
                 """;
     }
 
-    @Nullable
     @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://github.com/dekorateio/dekorate#halkyon-crd";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.dekorate-halkyon");
     }
 
-    @Override
-    public void apply(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
-        Dependency.Builder halkyon = Dependency.builder()
-                .groupId("io.dekorate")
-                .artifactId("halkyon-annotations")
-                .template();
-        module.addDependency(halkyon.versionProperty("dekorate.version").annotationProcessor());
-        module.addDependency(halkyon.compile());
-    }
 }

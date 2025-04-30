@@ -1,0 +1,24 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.halkyon-annotations
+displayName: Add Halkyon Annotations Processor
+recipeList:
+  - io.micronaut.starter.feature.halkyon-annotations.maven
+  - io.micronaut.starter.feature.halkyon-annotations.gradle
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.halkyon-annotations.maven
+displayName: Add Halkyon Annotation to the Maven compiler plugin
+recipeList:
+  - org.openrewrite.maven.AddAnnotationProcessor:
+      groupId: io.dekorate
+      artifactId: halkyon-annotations
+      version: ${dekorate.version}
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.halkyon-annotations.gradle
+displayName: Add Halkyon Annotation dependency to a Gradle Build
+recipeList:
+  - org.openrewrite.gradle.AddDependency:
+      groupId: io.dekorate
+      artifactId: halkyon-annotations
+      configuration: annotationProcessor
