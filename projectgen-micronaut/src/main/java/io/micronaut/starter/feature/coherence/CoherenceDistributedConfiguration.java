@@ -20,6 +20,7 @@ import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.feature.config.Configuration;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
@@ -27,6 +28,8 @@ import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.projectgen.core.feature.DistributedConfigFeature;
 import jakarta.inject.Singleton;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -37,7 +40,7 @@ import java.util.Map;
  */
 @Requires(property = "micronaut.starter.feature.coherence.distributed.configuration.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class CoherenceDistributedConfiguration implements DistributedConfigFeature {
+public class CoherenceDistributedConfiguration implements DistributedConfigFeature, OpenRewriteFeature {
 
     public static final String NAME = "coherence-distributed-configuration";
     private final CoherenceFeature coherenceFeature;
@@ -62,16 +65,6 @@ public class CoherenceDistributedConfiguration implements DistributedConfigFeatu
     }
 
     @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://coherence.java.net/";
-    }
-
-    @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-coherence/latest/guide/#distributedConfiguration";
-    }
-
-    @Override
     public void processSelectedFeatures(FeatureContext featureContext) {
         if (!featureContext.isPresent(CoherenceFeature.class)) {
             featureContext.addFeature(coherenceFeature);
@@ -79,24 +72,17 @@ public class CoherenceDistributedConfiguration implements DistributedConfigFeatu
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
-        Configuration config = generatorContext.isFeaturePresent(DistributedConfigFeature.class)
-            ? module.bootstrapConfiguration()
-            : module.configuration();
-
-        config.put("coherence.client.enabled", true);
-        config.put("coherence.client.host", "${COHERENCE_HOST:localhost}");
-        config.put("coherence.client.port", "${COHERENCE_PORT:1408}");
-
-        Dependency.Builder distributedConfiguration = MicronautDependencyUtils.coherenceDependency().artifactId("micronaut-coherence-distributed-configuration").compile();
-        module.addDependency(distributedConfiguration);
-
-        if (OptionUtils.hasGradleBuildTool(generatorContext.getOptions()) && !generatorContext.isFeaturePresent(CoherenceGrpcClient.class)) {
-            module.addDependency(Dependency.builder()
-                    .groupId("com.oracle.coherence.ce")
-                    .artifactId("coherence-java-client")
-                    .compile());
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        List<String> recipes = new ArrayList<>();
+        if(generatorContext.isFeaturePresent(DistributedConfigFeature.class)){
+            recipes.add("io.micronaut.starter.feature.coherence-distributed-configuration-conf-bootstrap");
+        } else {
+            recipes.add("io.micronaut.starter.feature.coherence-distributed-configuration-conf-application");
         }
+        recipes.add("io.micronaut.starter.feature.coherence-distributed-configuration");
+        if (OptionUtils.hasGradleBuildTool(generatorContext.getOptions()) && !generatorContext.isFeaturePresent(CoherenceGrpcClient.class)) {
+            recipes.add("io.micronaut.starter.feature.coherence-java-client");
+        }
+        return recipes;
     }
 }

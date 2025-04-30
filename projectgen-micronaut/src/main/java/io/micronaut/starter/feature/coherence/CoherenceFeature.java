@@ -17,6 +17,7 @@ package io.micronaut.starter.feature.coherence;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
@@ -26,6 +27,8 @@ import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.Feature;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 /**
  * Base coherence feature.
  *
@@ -34,7 +37,7 @@ import jakarta.inject.Singleton;
  */
 @Requires(property = "micronaut.starter.feature.coherence.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class CoherenceFeature implements Feature {
+public class CoherenceFeature implements OpenRewriteFeature {
 
     public static final String NAME = "coherence";
 
@@ -54,20 +57,8 @@ public class CoherenceFeature implements Feature {
     }
 
     @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://coherence.java.net/";
-    }
-
-    @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-coherence/latest/guide/";
-    }
-
-    @Override
-    public void apply(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
-        module.addDependency(MicronautDependencyUtils.coherenceDependency().artifactId("micronaut-coherence").compile());
-        module.addDependency(Dependency.builder().groupId("com.oracle.coherence.ce").artifactId("coherence").compile());
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.coherence");
     }
 
     @Override
