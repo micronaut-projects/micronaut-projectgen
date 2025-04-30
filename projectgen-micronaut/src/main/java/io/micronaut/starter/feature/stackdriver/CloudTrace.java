@@ -19,6 +19,7 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
@@ -27,9 +28,11 @@ import io.micronaut.projectgen.core.feature.Feature;
 
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.gcp.cloud.trace.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class CloudTrace implements Feature {
+public class CloudTrace implements OpenRewriteFeature {
 
     @NonNull
     @Override
@@ -53,20 +56,8 @@ public class CloudTrace implements Feature {
     }
 
     @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://cloud.google.com/trace";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.gcp-cloud-trace");
     }
 
-    @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-gcp/latest/guide/index.html#tracing";
-    }
-
-    @Override
-    public void apply(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
-        module.addDependency(MicronautDependencyUtils.gcpDependency()
-                .artifactId("micronaut-gcp-tracing")
-                .compile());
-    }
 }
