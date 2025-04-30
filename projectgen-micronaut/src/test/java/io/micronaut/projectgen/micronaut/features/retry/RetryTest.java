@@ -30,7 +30,6 @@ class RetryTest {
 
         String pom = project.get("pom.xml");
         assertNotNull(pom);
-        System.out.println(pom);
         verifier = BuildTestVerifier.of(pom, BuildTool.MAVEN, options.language(), options.testFramework());
         assertTrue(verifier.hasDependency("io.micronaut", "micronaut-retry", Scope.COMPILE), pom);
     }

@@ -26,13 +26,11 @@ class JaxRsTest {
         Map<String, String> project = generateProject(micronautProjectGenerator, options);
         String buildGradle = project.get("build.gradle.kts");
         assertNotNull(buildGradle);
-        System.out.println(buildGradle);
         BuildTestVerifier verifier = BuildTestVerifier.of(buildGradle, BuildTool.GRADLE_KOTLIN, options.language(), options.testFramework());
         assertTrue(verifier.hasDependency("io.micronaut.jaxrs", "micronaut-jaxrs-server", Scope.COMPILE), buildGradle);
         assertTrue(verifier.hasAnnotationProcessor("io.micronaut.jaxrs", "micronaut-jaxrs-processor"), buildGradle);
 
         String pom = project.get("pom.xml");
-        System.out.println(pom);
         assertEquals(1, StringUtils.countOccurrences(pom, "micronaut-serde-processor"), pom);
         assertNotNull(pom);
         verifier = BuildTestVerifier.of(pom, BuildTool.MAVEN, options.language(), options.testFramework());
