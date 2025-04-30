@@ -22,9 +22,12 @@ import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.feature.other.Management;
 
 import jakarta.inject.Singleton;
+
+import java.util.List;
 
 /**
  * Adds Dekorate Openshift support.
@@ -34,7 +37,7 @@ import jakarta.inject.Singleton;
  */
 @Requires(property = "micronaut.starter.feature.dekorate.openshift.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class DekorateOpenshift extends AbstractDekoratePlatformFeature {
+public class DekorateOpenshift extends AbstractDekoratePlatformFeature implements OpenRewriteFeature {
 
     public DekorateOpenshift(Management management) {
         super(management);
@@ -56,20 +59,9 @@ public class DekorateOpenshift extends AbstractDekoratePlatformFeature {
         return "Generates OpenShift deployment manifest using Dekorate OpenShift Support";
     }
 
-    @Nullable
     @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://github.com/dekorateio/dekorate#kubernetes";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.dekorate-openshift");
     }
 
-    @Override
-    public void apply(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
-        Dependency.Builder openshift = Dependency.builder()
-                .groupId("io.dekorate")
-                .artifactId("openshift-annotations")
-                .template();
-        module.addDependency(openshift.versionProperty("dekorate.version").annotationProcessor());
-        module.addDependency(openshift.compile());
-    }
 }
