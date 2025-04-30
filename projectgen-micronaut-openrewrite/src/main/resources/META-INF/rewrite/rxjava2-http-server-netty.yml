@@ -1,0 +1,9 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.rxjava2-http-server-netty
+displayName: Add RxJava2 Http Server Netty dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.rxjava2
+      artifactId: micronaut-rxjava2-http-server-netty
+      configuration: implementation
+      scope: runtime
