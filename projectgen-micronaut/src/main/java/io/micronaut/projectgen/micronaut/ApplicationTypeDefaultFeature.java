@@ -21,6 +21,7 @@ import io.micronaut.projectgen.core.buildtools.maven.Maven;
 import io.micronaut.projectgen.core.feature.*;
 import io.micronaut.projectgen.core.feature.config.Properties;
 import io.micronaut.projectgen.core.feature.gitignore.GitIgnore;
+import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.options.Language;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.core.utils.OptionUtils;
@@ -38,6 +39,8 @@ import io.micronaut.projectgen.micronaut.features.test.MicronautTestJunit5;
 import io.micronaut.projectgen.micronaut.features.test.MicronautTestSpock;
 import io.micronaut.projectgen.micronaut.features.validation.MicronautHttpValidation;
 import io.micronaut.projectgen.micronaut.gradle.MicronautApplicationGradlePluginFeature;
+import io.micronaut.projectgen.micronaut.maven.MicronautMavenCompilerPlugin;
+import io.micronaut.projectgen.micronaut.maven.MicronautMavenPlugin;
 import io.micronaut.projectgen.micronaut.maven.MicronautParentPomFeature;
 import io.micronaut.starter.feature.function.FunctionFeature;
 import io.micronaut.starter.feature.lang.kotlin.KotlinApplication;
@@ -54,6 +57,8 @@ import java.util.Set;
 @Singleton
 public class ApplicationTypeDefaultFeature extends ApplicationTypeFeature {
     private final Maven maven;
+    private final MicronautMavenPlugin micronautMavenPlugin;
+    private final MicronautMavenCompilerPlugin micronautMavenCompilerPlugin;
     private final AppName appName;
     private final Netty netty;
     private final MicronautHttpValidation micronautHttpValidation;
@@ -76,11 +81,12 @@ public class ApplicationTypeDefaultFeature extends ApplicationTypeFeature {
     @SuppressWarnings("ParameterNumber")
     public ApplicationTypeDefaultFeature(Gradle gradle,
                                          Maven maven,
+                                         MicronautMavenPlugin micronautMavenPlugin,
                                          Properties properties,
                                          AppName appName,
                                          Logback logback,
                                          MicronautTestJunit5 micronautTestJunit5,
-                                         MicronautTestSpock micronautTestSpock, Netty netty,
+                                         MicronautTestSpock micronautTestSpock, MicronautMavenCompilerPlugin micronautMavenCompilerPlugin, Netty netty,
                                          MicronautHttpValidation micronautHttpValidation,
                                          MicronautApplicationGradlePluginFeature micronautApplicationGradlePlugin,
                                          JavaGradlePlugin javaGradlePlugin,
@@ -97,7 +103,9 @@ public class ApplicationTypeDefaultFeature extends ApplicationTypeFeature {
                                          HttpClientTest httpClientTest) {
         super(gradle, micronautTestJunit5, micronautTestSpock, properties, logback, gitIgnore);
         this.maven = maven;
+        this.micronautMavenPlugin = micronautMavenPlugin;
         this.appName = appName;
+        this.micronautMavenCompilerPlugin = micronautMavenCompilerPlugin;
         this.netty = netty;
         this.micronautHttpValidation = micronautHttpValidation;
         this.micronautApplicationGradlePlugin = micronautApplicationGradlePlugin;
@@ -141,10 +149,11 @@ public class ApplicationTypeDefaultFeature extends ApplicationTypeFeature {
 
         featureContext.addFeatureIfNotPresent(MicronautHttpValidation.class, micronautHttpValidation);
         featureContext.addFeatureIfNotPresent(JsonFeature.class, serializationFeature);
+        featureContext.addFeatureIfNotPresent(MicronautAot.class, micronautAot);
+
         if (OptionUtils.hasGradleBuildTool(featureContext.getOptions())) {
             featureContext.addFeatureIfNotPresent(ShadePlugin.class, shadePlugin);
             featureContext.addFeatureIfNotPresent(MicronautApplicationGradlePluginFeature.class, micronautApplicationGradlePlugin);
-            featureContext.addFeatureIfNotPresent(MicronautAot.class, micronautAot);
             switch (featureContext.getOptions().language()) {
                 case JAVA:
                     featureContext.addFeatureIfNotPresent(JavaGradlePlugin.class, javaGradlePlugin);
@@ -160,8 +169,11 @@ public class ApplicationTypeDefaultFeature extends ApplicationTypeFeature {
             }
         }
         if (OptionUtils.hasMavenBuildTool(featureContext.getOptions())) {
-            featureContext.addFeatureIfNotPresent(Maven.class, maven);
             featureContext.addFeatureIfNotPresent(MicronautParentPomFeature.class, micronautParentPomFeature);
+            featureContext.addFeatureIfNotPresent(MicronautMavenPlugin.class, micronautMavenPlugin);
+            featureContext.addFeatureIfNotPresent(MicronautMavenCompilerPlugin.class, micronautMavenCompilerPlugin);
+            featureContext.addFeatureIfNotPresent(Maven.class, maven);
+
         }
 
         if (!featureContext.isPresent(HttpClientFeature.class)) {

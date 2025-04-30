@@ -33,11 +33,14 @@ public class GradleBuildTestVerifier implements BuildTestVerifier {
     private final Language language;
     private final TestFramework testFramework;
 
-    public GradleBuildTestVerifier(String template, Options options) {
-        this.buildTool = options.buildTools().stream().filter(BuildTool::isGradle).findFirst().orElseThrow();
+    public GradleBuildTestVerifier(String template,
+                                   BuildTool buildTool,
+                                   Language language,
+                                   TestFramework testFramework) {
+        this.buildTool = buildTool;
         this.template = template;
-        this.language = options.language();
-        this.testFramework = options.testFramework();
+        this.language = language;
+        this.testFramework = testFramework;
     }
 
     @Override

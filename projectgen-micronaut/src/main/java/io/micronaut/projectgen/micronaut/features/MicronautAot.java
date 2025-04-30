@@ -20,6 +20,7 @@ import io.micronaut.core.annotation.Nullable;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.projectgen.micronaut.gradle.MicronautAotGradlePlugin;
 import jakarta.inject.Singleton;
 
@@ -36,7 +37,9 @@ public class MicronautAot implements Feature {
 
     @Override
     public void processSelectedFeatures(FeatureContext featureContext) {
-        featureContext.addFeatureIfNotPresent(MicronautAotGradlePlugin.class, micronautAotGradlePlugin);
+        if (OptionUtils.hasGradleBuildTool(featureContext.getOptions())) {
+            featureContext.addFeatureIfNotPresent(MicronautAotGradlePlugin.class, micronautAotGradlePlugin);
+        }
     }
 
     @Override

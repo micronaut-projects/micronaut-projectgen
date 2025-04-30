@@ -17,6 +17,8 @@ package io.micronaut.projectgen.core.utils;
 
 import io.micronaut.core.annotation.Internal;
 
+import java.util.regex.Pattern;
+
 @Internal
 public final class StringUtils {
     private StringUtils() {
@@ -30,4 +32,12 @@ public final class StringUtils {
     public static String randomString() {
         return Long.toHexString(System.currentTimeMillis()) + Long.toHexString(System.nanoTime());
     }
+
+    public static int countOccurrences(String text, String searchStr) {
+        if (text == null || searchStr == null || searchStr.isEmpty()) {
+            return 0;
+        }
+        return text.split(Pattern.quote(searchStr), -1).length - 1;
+    }
+
 }

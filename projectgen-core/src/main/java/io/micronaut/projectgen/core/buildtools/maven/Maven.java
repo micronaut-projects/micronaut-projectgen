@@ -49,6 +49,11 @@ public class Maven implements BuildFeature {
     }
 
     @Override
+    public int getOrder() {
+        return BuildFeature.super.getOrder() + 10;
+    }
+
+    @Override
     @NonNull
     public String getName() {
         return "maven";

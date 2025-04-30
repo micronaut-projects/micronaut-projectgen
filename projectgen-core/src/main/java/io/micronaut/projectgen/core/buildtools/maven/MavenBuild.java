@@ -40,7 +40,7 @@ import java.util.stream.Collectors;
 public record MavenBuild(String name,
                          String description,
                          Coordinate coordinate,
-                         @Nullable Packaging packaging,
+                         @Nullable String packaging,
                          ParentPom parentPom,
                          MavenCombineAttribute annotationProcessorCombineAttribute,
                          MavenCombineAttribute testAnnotationProcessorCombineAttribute,
@@ -87,7 +87,7 @@ public record MavenBuild(String name,
         return dependencies
             .stream()
             .filter(it -> it.isPom() == pom)
-            .collect(Collectors.toList());
+            .toList();
     }
 
     /**

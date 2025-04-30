@@ -17,18 +17,11 @@ package io.micronaut.projectgen.core.buildtools.maven;
 
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.order.OrderUtil;
-import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.buildtools.*;
-import io.micronaut.projectgen.core.buildtools.dependencies.Coordinate;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
-import io.micronaut.projectgen.core.buildtools.dependencies.DependencyCoordinate;
-import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.generator.ModuleContext;
-import io.micronaut.projectgen.core.options.Language;
 import io.micronaut.projectgen.core.options.Options;
 import jakarta.inject.Singleton;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -36,7 +29,6 @@ import java.util.List;
  */
 @Singleton
 public class MavenBuildCreator {
-
     /**
      *
      * @param module Module Context
@@ -49,34 +41,7 @@ public class MavenBuildCreator {
         List<MavenDependency> dependencies = MavenDependency.listOf(module.dependencyContext(),
             options.language());
         BuildProperties buildProperties = module.buildProperties();
-        List<DependencyCoordinate> annotationProcessorsCoordinates = new ArrayList<>();
-        List<DependencyCoordinate> testAnnotationProcessorsCoordinates = new ArrayList<>();
-        boolean isKotlin = options.language() == Language.KOTLIN;
-        MavenCombineAttribute combineAttribute = isKotlin ? MavenCombineAttribute.OVERRIDE : MavenCombineAttribute.APPEND;
-        MavenCombineAttribute testCombineAttribute = combineAttribute;
 
-        for (Dependency dependency : module.getDependencies()) {
-            if (dependency.getScope().getPhases().contains(Phase.ANNOTATION_PROCESSING)) {
-                if (dependency.getScope().getSource() == Source.MAIN && options.language() != Language.GROOVY) {
-                    // Don't add these for Groovy projects: it results in multiple dependencies.
-                    // DependencyContext has already resolved Groovy annotation processors as dependencies
-                    annotationProcessorsCoordinates.add(new DependencyCoordinate(dependency, true));
-                    if (dependency.isAnnotationProcessorPriority()) {
-                        combineAttribute = MavenCombineAttribute.OVERRIDE;
-                    }
-                }
-                if (dependency.getScope().getSource() == Source.TEST) {
-                    testAnnotationProcessorsCoordinates.add(new DependencyCoordinate(dependency, true));
-                    if (dependency.isAnnotationProcessorPriority()) {
-                        testCombineAttribute = MavenCombineAttribute.OVERRIDE;
-                    }
-                }
-            }
-        }
-
-
-        annotationProcessorsCoordinates.sort(Coordinate.COMPARATOR);
-        testAnnotationProcessorsCoordinates.sort(Coordinate.COMPARATOR);
 
         List<MavenPlugin> plugins = module.buildPlugins()
             .stream()
@@ -85,6 +50,7 @@ public class MavenBuildCreator {
             .sorted(OrderUtil.COMPARATOR)
             .toList();
 
+        MavenCompilerPluginAnnotationProcessors ann = MavenCompilerPluginAnnotationProcessors.of(module, options.language());
         return MavenBuildBuilder.builder()
             .parentPom(module.moduleAttributes().getParentPom())
             .packaging(module.moduleAttributes().getPackaging())
@@ -94,12 +60,12 @@ public class MavenBuildCreator {
             .repositories(MavenRepository.listOf(module.repositories()))
             .plugins(plugins)
             .properties(buildProperties.getProperties())
-            .annotationProcessorCombineAttribute(combineAttribute)
-            .testAnnotationProcessorCombineAttribute(testCombineAttribute)
+            .annotationProcessorCombineAttribute(ann.combineAttribute())
+            .testAnnotationProcessorCombineAttribute(ann.testCombineAttribute())
             .profiles(module.profiles())
             .dependencies(dependencies)
-            .annotationProcessors(annotationProcessorsCoordinates)
-            .testAnnotationProcessors(testAnnotationProcessorsCoordinates)
+            .annotationProcessors(ann.annotationProcessors())
+            .testAnnotationProcessors(ann.testAnnotationProcessors())
             .build();
     }
 }

@@ -22,6 +22,7 @@ import io.micronaut.projectgen.core.buildtools.Scope;
 import io.micronaut.projectgen.core.options.Language;
 
 import java.util.Optional;
+import java.util.stream.Stream;
 
 /**
  * Maven Scope.
@@ -51,6 +52,34 @@ public enum MavenScope implements Ordered {
     @Override
     public int getOrder() {
         return this.order;
+    }
+
+    @NonNull
+    public Optional<Scope> toScope() {
+        switch (this) {
+            case COMPILE -> {
+                return Optional.of(Scope.COMPILE);
+            }
+            case PROVIDED -> {
+                return Optional.of(Scope.COMPILE_ONLY);
+            }
+            case RUNTIME -> {
+                return Optional.of(Scope.RUNTIME);
+            }
+            case TEST -> {
+                return Optional.of(Scope.TEST);
+            }
+            case SYSTEM, IMPORT -> {
+                return Optional.empty();
+            }
+        }
+        return Optional.empty();
+    }
+
+    public static Optional<MavenScope> of(String name) {
+        return Stream.of(values())
+            .filter(scope -> scope.toString().equalsIgnoreCase(name))
+            .findFirst();
     }
 
     @NonNull

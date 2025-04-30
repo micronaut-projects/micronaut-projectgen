@@ -58,7 +58,7 @@ import io.micronaut.projectgen.micronaut.template.buildtools.gradle.genericBuild
 import io.micronaut.projectgen.micronaut.template.buildtools.gradle.useJunitPlatform;
 import io.micronaut.projectgen.micronaut.template.buildtools.maven.execMavenPlugin;
 import io.micronaut.projectgen.micronaut.template.buildtools.maven.genericPom;
-import io.micronaut.projectgen.micronaut.template.buildtools.maven.mavenCompilerPlugin;
+//import io.micronaut.projectgen.micronaut.template.buildtools.maven.mavenCompilerPlugin;
 import io.micronaut.starter.feature.function.HandlerClassFeature;
 import io.micronaut.starter.feature.function.awslambda.AwsLambda;
 import io.micronaut.starter.feature.graalvm.GraalVM;
