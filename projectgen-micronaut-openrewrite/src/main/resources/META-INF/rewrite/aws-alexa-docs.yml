@@ -1,0 +1,8 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.aws-alexa-docs
+displayName: Append a link to Micronaut Aws Alexa documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-aws/latest/guide/index.html#alexa
+      appendNewline: true
