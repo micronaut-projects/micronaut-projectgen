@@ -21,7 +21,6 @@ class CracTest {
         assertNotNull(buildGradle);
         BuildTestVerifier verifier = BuildTestVerifier.of(buildGradle, options);
         assertTrue(verifier.hasDependency("io.micronaut.crac", "micronaut-crac", Scope.COMPILE), buildGradle);
-//        assertTrue(verifier.hasBuildPlugin("io.micronaut.crac"), buildGradle);
     }
 
     @Test

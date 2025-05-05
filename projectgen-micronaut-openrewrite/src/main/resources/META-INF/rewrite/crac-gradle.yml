@@ -1,6 +1,0 @@
-type: specs.openrewrite.org/v1beta/recipe
-name: io.micronaut.starter.feature.crac-gradle
-displayName: Add Gradle Crac Plugin
-recipeList:
-  - org.openrewrite.gradle.plugins.AddBuildPlugin:
-      pluginId: io.micronaut.crac
