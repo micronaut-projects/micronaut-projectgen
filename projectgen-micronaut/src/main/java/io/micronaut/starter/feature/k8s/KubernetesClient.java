@@ -19,6 +19,7 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
@@ -31,6 +32,9 @@ import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.options.Language;
 import jakarta.inject.Singleton;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Adds micronaut-kubernetes-client that integrates official K8S SDK.
  *
@@ -39,7 +43,7 @@ import jakarta.inject.Singleton;
  */
 @Requires(property = "micronaut.starter.feature.kubernetes.client.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class KubernetesClient implements Feature {
+public class KubernetesClient implements OpenRewriteFeature {
 
     public static final String MICRONAUT_KUBERNETES_GROUP_ID = "io.micronaut.kubernetes";
 
@@ -65,35 +69,16 @@ public class KubernetesClient implements Feature {
     }
 
     @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-kubernetes/latest/guide/#kubernetes-client";
-    }
-
-    @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://github.com/kubernetes-client/java/wiki";
-    }
-
-    @Override
-    public void apply(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
-        module.addDependency(Dependency.builder()
-                .groupId(MICRONAUT_KUBERNETES_GROUP_ID)
-                .artifactId("micronaut-kubernetes-client")
-                .compile());
-        fixupDependencies(generatorContext);
-    }
-
-    static void fixupDependencies(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        List<String> recipes = new ArrayList<>();
         if (!generatorContext.hasFeature(DiscoveryCore.class)
-                && OptionUtils.hasMavenBuildTool(generatorContext.getOptions())
-                && generatorContext.getLanguage() == Language.GROOVY
+            && OptionUtils.hasMavenBuildTool(generatorContext.getOptions())
+            && generatorContext.getLanguage() == Language.GROOVY
         ) {
-            // Maven requires discovery core provided to work with http-validation under groovy
-            module.addDependency(MicronautDependencyUtils.coreDependency()
-                    .artifactId(DiscoveryCore.ARTIFACT_ID_MICRONAUT_DISCOVERY_CORE)
-                    .compileOnly());
+            recipes.add("io.micronaut.starter.feature.discovery-core");
         }
+        recipes.add("io.micronaut.starter.feature.kubernetes-client");
+        return  recipes;
     }
+
 }
