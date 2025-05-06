@@ -19,14 +19,21 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
+import io.micronaut.projectgen.core.options.Language;
+import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.feature.FeatureContext;
+import io.micronaut.starter.feature.discovery.DiscoveryCore;
 import io.micronaut.starter.feature.rxjava.RxJava2;
 import jakarta.inject.Singleton;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Adds micronaut-kubernetes-rxjava2-client.
@@ -36,7 +43,7 @@ import jakarta.inject.Singleton;
  */
 @Requires(property = "micronaut.starter.feature.kubernetes.rxjava2.client.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class KubernetesRxJava2Client implements Feature {
+public class KubernetesRxJava2Client implements OpenRewriteFeature {
     @NonNull
     @Override
     public String getName() {
@@ -59,16 +66,6 @@ public class KubernetesRxJava2Client implements Feature {
     }
 
     @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-kubernetes/latest/guide/#kubernetes-client";
-    }
-
-    @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://github.com/kubernetes-client/java/wiki";
-    }
-
-    @Override
     public void processSelectedFeatures(FeatureContext featureContext) {
         if (featureContext.isPresent(KubernetesClient.class)) {
             featureContext.exclude(KubernetesClient.class::isInstance);
@@ -76,19 +73,19 @@ public class KubernetesRxJava2Client implements Feature {
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        List<String> recipes = new ArrayList<>();
         if (!generatorContext.isFeaturePresent(RxJava2.class)) {
-            module.addDependency(Dependency.builder()
-                    .groupId("io.reactivex.rxjava2")
-                    .artifactId("rxjava")
-                    .compile());
+            recipes.add("io.micronaut.starter.feature.reactivex-rxjava2");
         }
-        module.addDependency(Dependency.builder()
-                .groupId(KubernetesClient.MICRONAUT_KUBERNETES_GROUP_ID)
-                .artifactId("micronaut-kubernetes-client-rxjava2")
-                .compile());
-
-        KubernetesClient.fixupDependencies(generatorContext);
+        if (!generatorContext.hasFeature(DiscoveryCore.class)
+            && OptionUtils.hasMavenBuildTool(generatorContext.getOptions())
+            && generatorContext.getLanguage() == Language.GROOVY
+        ) {
+            recipes.add("io.micronaut.starter.feature.discovery-core");
+        }
+        recipes.add("io.micronaut.starter.feature.kubernetes-rxjava2-client");
+        return  recipes;
     }
+
 }
