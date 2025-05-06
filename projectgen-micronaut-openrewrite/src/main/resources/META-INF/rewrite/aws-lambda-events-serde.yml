@@ -1,0 +1,35 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.aws-lambda-events-serde
+displayName: Add Aws Lambda Events Serde dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.aws-lambda-events-serde.dependencies
+  - io.micronaut.starter.feature.aws-lambda-events-serde.micronaut.documentation
+  - io.micronaut.starter.feature.aws-lambda-events-serde.documentation.thirdparty
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.aws-lambda-events-serde.dependencies
+displayName: Add Aws Lambda Events Serde dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.aws
+      artifactId: micronaut-aws-lambda-events-serde
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.aws-lambda-events-serde.micronaut.documentation
+displayName: Append a link to Micronaut Aws Lambda Events Serde documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-aws/snapshot/guide/#eventsLambdaSerde
+      appendNewline: true
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.aws-lambda-events-serde.documentation.thirdparty
+displayName: Append a link to Aws Lambda Events Serde website
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://github.com/aws/aws-lambda-java-libs/tree/main/aws-lambda-java-events
+      appendNewline: true
