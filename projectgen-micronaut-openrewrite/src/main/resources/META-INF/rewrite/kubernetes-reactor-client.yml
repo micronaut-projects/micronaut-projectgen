@@ -4,7 +4,7 @@ displayName: Add Kubernetes Reactor Client dependency and link to README
 recipeList:
   - io.micronaut.starter.feature.kubernetes-reactor-client.dependencies
   - io.micronaut.starter.feature.kubernetes-reactor-client.micronaut.documentation
-  - io.micronaut.starter.feature.kubernetes-reactor-client.documentation.thirdparty
+  - io.micronaut.starter.feature.kubernetes-client-docs
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.kubernetes-reactor-client.dependencies
@@ -24,12 +24,4 @@ recipeList:
       relativeFileName: README.md
       content: https://micronaut-projects.github.io/micronaut-kubernetes/latest/guide/#kubernetes-client
       appendNewline: true
----
-type: specs.openrewrite.org/v1beta/recipe
-name: io.micronaut.starter.feature.kubernetes-reactor-client.documentation.thirdparty
-displayName: Append a link to Kubernetes Reactor Client website
-recipeList:
-  - org.openrewrite.text.AppendToTextFile:
-      relativeFileName: README.md
-      content: https://github.com/kubernetes-client/java/wiki
-      appendNewline: true
+

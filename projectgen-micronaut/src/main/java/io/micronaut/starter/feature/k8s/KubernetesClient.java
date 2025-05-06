@@ -45,8 +45,6 @@ import java.util.List;
 @Singleton
 public class KubernetesClient implements OpenRewriteFeature {
 
-    public static final String MICRONAUT_KUBERNETES_GROUP_ID = "io.micronaut.kubernetes";
-
     @NonNull
     @Override
     public String getName() {
