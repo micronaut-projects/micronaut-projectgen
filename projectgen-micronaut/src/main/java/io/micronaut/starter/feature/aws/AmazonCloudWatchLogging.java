@@ -19,26 +19,22 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 import static io.micronaut.starter.feature.Category.LOGGING;
 
 @Requires(property = "micronaut.starter.feature.amazon.cloudwatch.logging.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class AmazonCloudWatchLogging implements AwsFeature {
+public class AmazonCloudWatchLogging implements AwsFeature, OpenRewriteFeature {
 
     public static final String NAME = "amazon-cloudwatch-logging";
-
-    private static final String ARTIFACT_ID_MICRONAUT_AWS_CLOUDWATCH_LOGGING = "micronaut-aws-cloudwatch-logging";
-    private static final Dependency AWS_LOGGING_DEPENDENCY =
-            MicronautDependencyUtils.awsDependency()
-                    .artifactId(ARTIFACT_ID_MICRONAUT_AWS_CLOUDWATCH_LOGGING)
-                    .compile()
-                    .build();
 
     @Override
     public String getName() {
@@ -55,30 +51,14 @@ public class AmazonCloudWatchLogging implements AwsFeature {
         return "Provides integration with Amazon CloudWatch Logs";
     }
 
-    @Nullable
-    @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-aws/latest/guide/#cloudWatchLogging";
-    }
-
-    @Nullable
-    @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html";
-    }
-
     @Override
     public String getCategory() {
         return LOGGING;
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        addDependencies(generatorContext);
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.amazon-cloudwatch-logging");
     }
 
-    protected void addDependencies(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
-        module.addDependency(AWS_LOGGING_DEPENDENCY);
-    }
 }
