@@ -57,4 +57,9 @@
 }
   </modules>
 }
+@if(mavenBuild.profiles().size() > 0) {
+  <profiles>
+@mavenBuild.renderProfiles(4)
+  </profiles>
+}
 </project>

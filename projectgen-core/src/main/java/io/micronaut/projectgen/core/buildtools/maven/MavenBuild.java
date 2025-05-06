@@ -79,6 +79,21 @@ public record MavenBuild(String name,
 
     /**
      *
+     * @param indentationSpaces Indentation Spaces
+     * @return rendered string
+     */
+    @NonNull
+    public String renderProfiles(int indentationSpaces) {
+        List<Writable> writableList = profiles.stream()
+            .map(Profile::getExtension)
+            .filter(Objects::nonNull)
+            .toList();
+        return WritableUtils.renderWritableList(writableList, indentationSpaces);
+    }
+
+
+    /**
+     *
      * @param pom pom
      * @return Dependencies
      */
