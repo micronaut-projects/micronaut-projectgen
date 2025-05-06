@@ -20,17 +20,19 @@ import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.starter.feature.Category;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.aws.v2.sdk.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class AwsV2Sdk implements AwsFeature {
+public class AwsV2Sdk implements AwsFeature, OpenRewriteFeature {
 
-    public static final String ARTIFACT_ID_MICRONAUT_AWS_SDK_V_2 = "micronaut-aws-sdk-v2";
     public static final String NAME = "aws-v2-sdk";
     static final Dependency.Builder URL_CONNECTION_CLIENT = Dependency.builder()
             .groupId(GROUP_ID_AWS_SDK_V2)
@@ -67,24 +69,9 @@ public class AwsV2Sdk implements AwsFeature {
         return Category.CLOUD;
     }
 
-    @Nullable
     @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-aws/latest/guide/";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.aws-v2-sdk");
     }
 
-    @Nullable
-    @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://docs.aws.amazon.com/sdk-for-java/v2/developer-guide/welcome.html";
-    }
-
-    @Override
-    public void apply(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
-        module.addDependency(Dependency.builder()
-                .groupId(GROUP_ID_MICRONAUT_AWS)
-                .artifactId(ARTIFACT_ID_MICRONAUT_AWS_SDK_V_2)
-                .compile());
-    }
 }

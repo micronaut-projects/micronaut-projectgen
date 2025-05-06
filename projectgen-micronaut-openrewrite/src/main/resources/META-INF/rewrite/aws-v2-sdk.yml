@@ -1,0 +1,35 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.aws-v2-sdk
+displayName: Add Aws V2 Sdk dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.aws-v2-sdk.dependencies
+  - io.micronaut.starter.feature.aws-v2-sdk.micronaut.documentation
+  - io.micronaut.starter.feature.aws-v2-sdk.documentation.thirdparty
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.aws-v2-sdk.dependencies
+displayName: Add Aws V2 Sdk dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.aws
+      artifactId: micronaut-aws-sdk-v2
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.aws-v2-sdk.micronaut.documentation
+displayName: Append a link to Micronaut Aws V2 Sdk documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-aws/latest/guide/
+      appendNewline: true
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.aws-v2-sdk.documentation.thirdparty
+displayName: Append a link to Aws V2 Sdk website
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://docs.aws.amazon.com/sdk-for-java/v2/developer-guide/welcome.html
+      appendNewline: true
