@@ -82,6 +82,7 @@ import io.micronaut.projectgen.core.rocker.TestRockerModelProvider;
 import jakarta.inject.Singleton;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Requires(property = "micronaut.starter.feature.aws.alexa.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
@@ -111,7 +112,8 @@ public class AwsAlexa implements OpenRewriteFeature, AwsCloudFeature, CodeContri
     }
 
     @Override
-    public List<String> getRecipes(GeneratorContext generatorContext) {
+    public void apply(GeneratorContext generatorContext) {
+        OpenRewriteFeature.super.apply(generatorContext);
         Project project = generatorContext.getProject();
 
         cancelIntentHandler(generatorContext, project);
@@ -131,17 +133,19 @@ public class AwsAlexa implements OpenRewriteFeature, AwsCloudFeature, CodeContri
 
         stopIntentHandler(generatorContext, project);
         stopIntentHandlerTest(generatorContext, project);
-
-        List<String> recipes = new ArrayList<>();
-        if (generatorContext.getOptions() instanceof MicronautOptions micronautOptions && micronautOptions.applicationType() == ApplicationType.FUNCTION) {
-            recipes.add("io.micronaut.starter.feature.aws-alexa-function");
-        }
-        if (generatorContext.getOptions() instanceof MicronautOptions micronautOptions && micronautOptions.applicationType() == ApplicationType.DEFAULT) {
-            recipes.add("io.micronaut.starter.feature.aws-alexa-default");
-        }
-            return  recipes;
     }
 
+    @Override
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        if (generatorContext.getOptions() instanceof MicronautOptions micronautOptions) {
+            if (micronautOptions.applicationType() == ApplicationType.FUNCTION) {
+                return List.of("io.micronaut.starter.feature.aws-alexa-function");
+            } else if (micronautOptions.applicationType() == ApplicationType.DEFAULT) {
+                return List.of("io.micronaut.starter.feature.aws-alexa-default");
+            }
+        }
+        return Collections.emptyList();
+    }
 
     private void cancelIntentHandler(GeneratorContext generatorContext, Project project) {
         String cancelIntentHandler = generatorContext.getSourcePath("/{packagePath}/CancelIntentHandler");
