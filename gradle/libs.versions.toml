@@ -15,11 +15,13 @@ maven-plugin-api = "3.9.9"
 maven-invoker = "3.3.0"
 gradle-tooling-api = "8.12"
 sonatype-scan = "3.0.0"
+micronaut-picocli = "5.7.0"
 
 [libraries]
 micronaut-core = { module = 'io.micronaut:micronaut-core-bom', version.ref = 'micronaut' }
 micronaut-serde = { module = "io.micronaut.serde:micronaut-serde-bom", version.ref = "micronaut-serialization" }
 micronaut-sourcegen = { module = "io.micronaut.sourcegen:micronaut-sourcegen-bom", version.ref = "micronaut-sourcegen" }
+micronaut-picocli = { module = "io.micronaut.picocli:micronaut-picocli-bom", version.ref = "micronaut-picocli" }
 typesafeconfig = { module = "com.typesafe:config", version.ref = "typesafeconfig" }
 snakeyaml = { module = "org.yaml:snakeyaml", version.ref = "snakeyaml" }
 rocker-runtime = { module = "com.fizzed:rocker-runtime", version.ref = "rocker" }
