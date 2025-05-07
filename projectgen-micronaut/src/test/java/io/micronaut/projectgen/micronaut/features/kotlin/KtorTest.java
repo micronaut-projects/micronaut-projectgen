@@ -36,6 +36,12 @@ public class KtorTest {
         assertTrue(buildGradle.contains("2.3.13"));
         assertTrue(buildGradle.contains("demo.Application"), buildGradle);
 
+        assertTrue(project.containsKey("src/main/kotlin/demo/Application.kt"));
+        assertTrue(project.containsKey("src/main/kotlin/demo/HomeRoute.kt"));
+        assertTrue(project.containsKey("src/main/kotlin/demo/JacksonFeature.kt"));
+        assertTrue(project.containsKey("src/main/kotlin/demo/NameTransformer.kt"));
+        assertTrue(project.containsKey("src/main/kotlin/demo/UppercaseTransformer.kt"));
+
         String pom = project.get("pom.xml");
         assertNotNull(pom);
         assertTrue(pom.contains(" <exec.mainClass>demo.Application</exec.mainClass>"), pom);
