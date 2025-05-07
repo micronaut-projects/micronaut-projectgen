@@ -18,6 +18,7 @@ package io.micronaut.starter.feature.awsalexa;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.Project;
@@ -80,9 +81,13 @@ import io.micronaut.starter.options.DefaultTestRockerModelProvider;
 import io.micronaut.projectgen.core.rocker.TestRockerModelProvider;
 import jakarta.inject.Singleton;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.aws.alexa.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class AwsAlexa implements Feature, AwsCloudFeature, CodeContributingFeature {
+public class AwsAlexa implements OpenRewriteFeature, AwsCloudFeature, CodeContributingFeature {
     public static final String NAME = "aws-alexa";
 
     @Override
@@ -108,6 +113,7 @@ public class AwsAlexa implements Feature, AwsCloudFeature, CodeContributingFeatu
 
     @Override
     public void apply(GeneratorContext generatorContext) {
+        OpenRewriteFeature.super.apply(generatorContext);
         Project project = generatorContext.getProject();
 
         cancelIntentHandler(generatorContext, project);
@@ -127,20 +133,18 @@ public class AwsAlexa implements Feature, AwsCloudFeature, CodeContributingFeatu
 
         stopIntentHandler(generatorContext, project);
         stopIntentHandlerTest(generatorContext, project);
+    }
 
-        ModuleContext module = generatorContext.getRootModule();
-        if (generatorContext.getOptions() instanceof MicronautOptions micronautOptions && micronautOptions.applicationType() == ApplicationType.FUNCTION) {
-            module.addDependency(Dependency.builder()
-                    .groupId("io.micronaut.aws")
-                    .artifactId("micronaut-function-aws-alexa")
-                    .compile());
+    @Override
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        if (generatorContext.getOptions() instanceof MicronautOptions micronautOptions) {
+            if (micronautOptions.applicationType() == ApplicationType.FUNCTION) {
+                return List.of("io.micronaut.starter.feature.aws-alexa-function");
+            } else if (micronautOptions.applicationType() == ApplicationType.DEFAULT) {
+                return List.of("io.micronaut.starter.feature.aws-alexa-default");
+            }
         }
-        if (generatorContext.getOptions() instanceof MicronautOptions micronautOptions && micronautOptions.applicationType() == ApplicationType.DEFAULT) {
-            module.addDependency(Dependency.builder()
-                    .groupId("io.micronaut.aws")
-                    .artifactId("micronaut-aws-alexa-httpserver")
-                    .compile());
-        }
+        return Collections.emptyList();
     }
 
     private void cancelIntentHandler(GeneratorContext generatorContext, Project project) {
@@ -269,8 +273,4 @@ public class AwsAlexa implements Feature, AwsCloudFeature, CodeContributingFeatu
         return Category.IOT;
     }
 
-    @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-aws/latest/guide/index.html#alexa";
-    }
 }
