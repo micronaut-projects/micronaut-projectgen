@@ -19,6 +19,7 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
@@ -26,15 +27,12 @@ import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import io.micronaut.starter.feature.Category;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.aws.lambda.events.serde.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class AwsLambdaEventsSerde implements AwsFeature {
+public class AwsLambdaEventsSerde implements AwsFeature, OpenRewriteFeature {
     public static final String NAME = "aws-lambda-events-serde";
-
-    private static final Dependency DEPENDENCY_MICRONAUT_AWS_LAMBDA_EVENTS_SERDE = MicronautDependencyUtils.awsDependency()
-            .artifactId("micronaut-aws-lambda-events-serde")
-            .compile()
-            .build();
 
     @Override
     @NonNull
@@ -54,19 +52,8 @@ public class AwsLambdaEventsSerde implements AwsFeature {
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
-        module.addDependency(DEPENDENCY_MICRONAUT_AWS_LAMBDA_EVENTS_SERDE);
-    }
-
-    @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-aws/snapshot/guide/#eventsLambdaSerde";
-    }
-
-    @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://github.com/aws/aws-lambda-java-libs/tree/main/aws-lambda-java-events";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.aws-lambda-events-serde");
     }
 
     @Override
