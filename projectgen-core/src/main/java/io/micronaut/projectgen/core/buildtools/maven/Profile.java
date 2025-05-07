@@ -19,6 +19,9 @@ import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.annotation.Nullable;
 import io.micronaut.projectgen.core.buildtools.Property;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
+import io.micronaut.projectgen.core.rocker.RockerWritable;
+import io.micronaut.projectgen.core.template.Writable;
+import io.micronaut.projectgen.core.template.profile;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -33,6 +36,9 @@ public final class Profile {
     private final String id;
 
     @Nullable
+    private final Writable extension;
+
+    @Nullable
     private Set<Property> activationProperties;
 
     @Nullable
@@ -40,10 +46,12 @@ public final class Profile {
 
     public Profile(@NonNull String id,
                    @Nullable Set<Property> activationProperties,
-                   @Nullable Set<Dependency> dependencies) {
+                   @Nullable Set<Dependency> dependencies,
+                   @Nullable Writable extension) {
         this.id = id;
         this.activationProperties = activationProperties;
         this.dependencies = dependencies;
+        this.extension = extension;
     }
 
     /**
@@ -53,6 +61,11 @@ public final class Profile {
     @NonNull
     public String getId() {
         return id;
+    }
+
+    @Nullable
+    public Writable getExtension() {
+        return extension;
     }
 
     /**
@@ -132,6 +145,19 @@ public final class Profile {
         private String id;
         private Set<Dependency> dependencies;
         private Set<Property> activationProperties;
+        private Writable extension;
+
+        /**
+         *
+         * @param extension Extension
+         * @return Builder
+         */
+        @NonNull
+        public Builder extension(@NonNull Writable extension) {
+            this.extension = extension;
+            return this;
+        }
+
 
         /**
          *
@@ -177,7 +203,10 @@ public final class Profile {
          * @return Instantiate a profile
          */
         public Profile build() {
-            return new Profile(Objects.requireNonNull(id), activationProperties, dependencies);
+            if (extension == null) {
+                extension = new RockerWritable(profile.template(new Profile(id, activationProperties, dependencies, null)));
+            }
+            return new Profile(Objects.requireNonNull(id), activationProperties, dependencies, extension);
         }
     }
 }

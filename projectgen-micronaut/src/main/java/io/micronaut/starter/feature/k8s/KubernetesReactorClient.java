@@ -19,14 +19,21 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
+import io.micronaut.projectgen.core.options.Language;
+import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.feature.FeatureContext;
+import io.micronaut.starter.feature.discovery.DiscoveryCore;
 import io.micronaut.starter.feature.reactor.Reactor;
 import jakarta.inject.Singleton;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Adds micronaut-kubernetes-reactor-client.
@@ -36,7 +43,16 @@ import jakarta.inject.Singleton;
  */
 @Requires(property = "micronaut.starter.feature.kubernetes.reactor.client.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class KubernetesReactorClient implements Feature {
+public class KubernetesReactorClient implements OpenRewriteFeature {
+    private final Reactor reactor;
+    private final DiscoveryCore discoveryCore;
+
+    public KubernetesReactorClient(Reactor reactor,
+                                   DiscoveryCore discoveryCore) {
+        this.reactor = reactor;
+        this.discoveryCore = discoveryCore;
+    }
+
     @NonNull
     @Override
     public String getName() {
@@ -59,36 +75,23 @@ public class KubernetesReactorClient implements Feature {
     }
 
     @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-kubernetes/latest/guide/#kubernetes-client";
-    }
-
-    @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://github.com/kubernetes-client/java/wiki";
-    }
-
-    @Override
     public void processSelectedFeatures(FeatureContext featureContext) {
         if (featureContext.isPresent(KubernetesClient.class)) {
             featureContext.exclude(KubernetesClient.class::isInstance);
         }
+        if (!featureContext.isPresent(Reactor.class)) {
+            featureContext.addFeatureIfNotPresent(Reactor.class, reactor);
+        }
+        if (!featureContext.isPresent(DiscoveryCore.class)
+            && OptionUtils.hasMavenBuildTool(featureContext.getOptions())
+            && featureContext.getOptions().language() == Language.GROOVY
+        ) {
+            featureContext.addFeatureIfNotPresent(DiscoveryCore.class, discoveryCore);
+        }
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
-        if (!generatorContext.isFeaturePresent(Reactor.class)) {
-            module.addDependency(Dependency.builder()
-                    .groupId("io.projectreactor")
-                    .artifactId("reactor-core")
-                    .compile());
-        }
-        module.addDependency(Dependency.builder()
-                .groupId(KubernetesClient.MICRONAUT_KUBERNETES_GROUP_ID)
-                .artifactId("micronaut-kubernetes-client-reactor")
-                .compile());
-
-        KubernetesClient.fixupDependencies(generatorContext);
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.kubernetes-reactor-client");
     }
 }

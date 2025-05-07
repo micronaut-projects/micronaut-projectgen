@@ -19,6 +19,32 @@ package io.micronaut.projectgen.core.buildtools;
  * Source.
  */
 public enum Source {
-    MAIN,
-    TEST
+    MAIN("main"),
+    TEST("test"),
+    INTEGRATION_TEST("integration-test");
+
+    private final String path;
+
+    Source(String path) {
+        this.path = path;
+    }
+
+    public static Source of(String path) {
+        for (Source sourceSet : Source.values()) {
+            if (path.contains("src/" + sourceSet.getPath() + '/')) {
+                return sourceSet;
+            }
+        }
+
+        throw new IllegalStateException("unable to determine source set for " + path);
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    @Override
+    public String toString() {
+        return path;
+    }
 }

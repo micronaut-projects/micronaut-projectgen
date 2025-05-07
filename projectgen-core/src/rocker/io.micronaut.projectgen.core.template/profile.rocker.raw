@@ -1,0 +1,30 @@
+@import io.micronaut.projectgen.core.buildtools.maven.Profile
+@import io.micronaut.projectgen.core.buildtools.Property
+@import io.micronaut.projectgen.core.buildtools.dependencies.Dependency
+@args(Profile profile)
+<profile>
+  <id>@profile.getId()</id>
+@if (profile.getActivationProperties() != null) {
+  <activation>
+@for (Property property : profile.getActivationProperties()) {
+    <property>
+      <name>@property.getKey()</name>
+      <value>@property.getValue()</value>
+    </property>
+}
+  </activation>
+}
+@if (profile.getDependencies() != null) {
+  <dependencies>
+@for (Dependency dependency : profile.getDependencies()) {
+@if (dependency.getComment() != null) {
+    <!-- @dependency.getComment() -->
+}
+    <dependency>
+      <groupId>@dependency.getGroupId()</groupId>
+      <artifactId>@dependency.getArtifactId()</artifactId>
+    </dependency>
+}
+  </dependencies>
+}
+</profile>

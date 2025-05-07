@@ -1,0 +1,35 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.kubernetes-informer
+displayName: Add Kubernetes Informer dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.kubernetes-informer.dependencies
+  - io.micronaut.starter.feature.kubernetes-informer.micronaut.documentation
+  - io.micronaut.starter.feature.kubernetes-informer.documentation.thirdparty
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.kubernetes-informer.dependencies
+displayName: Add Kubernetes Informer dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.kubernetes
+      artifactId: micronaut-kubernetes-informer
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.kubernetes-informer.micronaut.documentation
+displayName: Append a link to Micronaut Kubernetes Informer documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-kubernetes/latest/guide/#kubernetes-informer
+      appendNewline: true
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.kubernetes-informer.documentation.thirdparty
+displayName: Append a link to Kubernetes Informer website
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://github.com/kubernetes-client/java/wiki
+      appendNewline: true

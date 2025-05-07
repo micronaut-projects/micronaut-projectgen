@@ -54,7 +54,6 @@ rocker-maven-plugin = "1.4.0"
 scram-client = "2.1"
 slf4j-simple-logger = "2.0.0"
 zeebe-micronaut-client = "1.19.0"
-ktor = "2.3.13"
 jakarta-validation-api = "3.1.0"
 micronaut-starter-aws-cdk = "4.6.3"
 graaljs = "24.0.2"  # Once this is bumped past 24.1, you should be able to remove the disabling of Loom in the config properties in the React feature.
@@ -108,9 +107,6 @@ kotlin-noarg = { module = "org.jetbrains.kotlin:kotlin-noarg", version.ref = "ko
 log4j-api = { module = "org.apache.logging.log4j:log4j-api", version.ref = "log4j" }
 log4j-core = { module = "org.apache.logging.log4j:log4j-core", version.ref = "log4j" }
 log4j-slf4j = { module = "org.apache.logging.log4j:log4j-slf4j-impl", version.ref = "log4j" }
-ktor-server-netty = { module = "io.ktor:ktor-server-netty-jvm", version.ref = "ktor" }
-ktor-serialization-jackson = { module = "io.ktor:ktor-serialization-jackson-jvm", version.ref = "ktor" }
-ktor-server-content-negotiation = { module = "io.ktor:ktor-server-content-negotiation-jvm", version.ref = "ktor" }
 micronaut-aot = { module = "io.micronaut.aot:micronaut-aot-core", version.ref = "micronaut-aot" }
 micronaut-build-plugins = { module = "io.micronaut.build.internal:micronaut-gradle-plugins", version.ref = "micronaut-build-plugins" }
 micronaut-crac-plugin = { module = "io.micronaut.gradle:micronaut-crac-plugin", version.ref = "micronaut-gradle-plugin" }

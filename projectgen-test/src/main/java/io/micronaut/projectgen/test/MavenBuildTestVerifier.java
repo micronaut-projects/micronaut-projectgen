@@ -22,6 +22,7 @@ import io.micronaut.projectgen.core.buildtools.dependencies.Coordinate;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.buildtools.maven.MavenScope;
 import io.micronaut.projectgen.core.buildtools.maven.ParentPom;
+import io.micronaut.projectgen.core.buildtools.maven.Profile;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -32,6 +33,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,6 +41,7 @@ import java.util.Optional;
 
 public class MavenBuildTestVerifier implements BuildTestVerifier {
     private ParentPom parentPom;
+    private final List<Profile> profiles = new ArrayList<>();
     private final List<Coordinate> buildPlugins  = new ArrayList<>();
     private final Map<String, String> properties = new HashMap<>();
     private final List<Dependency> dependencies = new ArrayList<>();
@@ -60,6 +63,7 @@ public class MavenBuildTestVerifier implements BuildTestVerifier {
                 throw new ConfigurationException("Pom does not have a project element");
             }
             this.parentPom = parseParent(projectElement);
+            this.profiles.addAll(parseProfiles(projectElement));
             this.dependencies.addAll(parseDependencies(projectElement));
             this.properties.putAll(parseProperties(projectElement));
             this.buildPlugins.addAll(parseBuildPlugins(projectElement));
@@ -155,6 +159,24 @@ public class MavenBuildTestVerifier implements BuildTestVerifier {
         }
 
 
+        return result;
+    }
+
+    private static List<Profile> parseProfiles(Element projectElement) {
+        List<Profile> result = new ArrayList<>();
+        NodeList profilesNodes = projectElement.getElementsByTagName("profiles");
+        if (profilesNodes.getLength() > 0) {
+            Element profilesElement = (Element) profilesNodes.item(0);
+            NodeList profileNodes = profilesElement.getElementsByTagName("profile");
+
+            for (int i = 0; i < profileNodes.getLength(); i++) {
+                Element profileElement = (Element) profileNodes.item(i);
+                String id = getElementText(profileElement, "id");
+                result.add(Profile.builder()
+                    .id(id)
+                    .build());
+            }
+        }
         return result;
     }
 
@@ -295,5 +317,10 @@ public class MavenBuildTestVerifier implements BuildTestVerifier {
             return false;
         }
         return parentPom.groupId().equals(groupId) && parentPom.artifactId().equals(artifactId);
+    }
+
+    @Override
+    public boolean hasProfile(String profileId) {
+        return profiles.stream().map(Profile::getId).anyMatch(id -> id.equals(profileId));
     }
 }

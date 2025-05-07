@@ -211,4 +211,8 @@ public interface BuildTestVerifier {
     default boolean hasParentPom(String groupId, String artifactId) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
+    default boolean hasProfile(String profileId) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }
