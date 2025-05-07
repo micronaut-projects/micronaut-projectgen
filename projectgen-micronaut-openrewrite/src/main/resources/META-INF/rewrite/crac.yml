@@ -1,0 +1,35 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.crac
+displayName: Add Crac dependency and a link to README
+recipeList:
+  - io.micronaut.starter.feature.crac.dependencies
+  - io.micronaut.starter.feature.crac.micronaut.documentation
+  - io.micronaut.starter.feature.crac.documentation.thirdparty
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.crac.dependencies
+displayName: Add Crac dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.crac
+      artifactId: micronaut-crac
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.crac.micronaut.documentation
+displayName: Append a link to Micronaut Crac documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-crac/latest/guide
+      appendNewline: true
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.crac.documentation.thirdparty
+displayName: Append a link to Crac Website
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://wiki.openjdk.org/display/CRaC
+      appendNewline: true
