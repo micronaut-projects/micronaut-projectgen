@@ -15,7 +15,9 @@
  */
 package io.micronaut.projectgen.core.feature.config;
 
+import io.micronaut.context.env.Environment;
 import io.micronaut.core.annotation.NonNull;
+import io.micronaut.projectgen.core.buildtools.Source;
 
 /**
  * Bootstrap configuration.
@@ -23,7 +25,7 @@ import io.micronaut.core.annotation.NonNull;
 public class BootstrapConfiguration extends Configuration {
 
     public BootstrapConfiguration(@NonNull String sourceSet, @NonNull String environment) {
-        super(sourceSet, "bootstrap-" + environment, "bootstrap-config-" + environment);
+        super(sourceSet, ConfigurationPhase.BOOTSTRAP + "-" + environment, ConfigurationPhase.BOOTSTRAP + "-config-" + environment);
     }
 
     public BootstrapConfiguration(@NonNull String environment) {
@@ -31,10 +33,10 @@ public class BootstrapConfiguration extends Configuration {
     }
 
     public BootstrapConfiguration() {
-        super("main", "bootstrap", "bootstrap-config");
+        super("main", ConfigurationPhase.BOOTSTRAP.toString(), ConfigurationPhase.BOOTSTRAP + "-config");
     }
 
     public static BootstrapConfiguration testConfig() {
-        return new BootstrapConfiguration("test", "test");
+        return new BootstrapConfiguration(Source.TEST.toString(), Environment.TEST);
     }
 }
