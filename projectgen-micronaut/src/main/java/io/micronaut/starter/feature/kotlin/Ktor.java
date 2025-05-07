@@ -29,6 +29,8 @@ import io.micronaut.projectgen.core.buildtools.dependencies.Coordinate;
 import io.micronaut.projectgen.core.buildtools.dependencies.CoordinateResolver;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.micronaut.MicronautOptions;
+import io.micronaut.projectgen.micronaut.features.validator.MicronautValidationFeature;
+import io.micronaut.projectgen.micronaut.features.validator.ValidationFeature;
 import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.Feature;
@@ -54,6 +56,11 @@ import java.util.Optional;
 public class Ktor implements KotlinApplicationFeature, ThirdPartyServerFeature, KotlinSpecificFeature, OpenRewriteFeature {
 
     public static final String NAME = "ktor";
+    private final MicronautValidationFeature micronautValidationFeature;
+
+    public Ktor(MicronautValidationFeature micronautValidationFeature) {
+        this.micronautValidationFeature = micronautValidationFeature;
+    }
 
     @Override
     public boolean supports(Options options) {
@@ -74,6 +81,9 @@ public class Ktor implements KotlinApplicationFeature, ThirdPartyServerFeature, 
                     return Optional.of("Ktor feature only supports Kotlin");
                 }
             });
+        }
+        if (!featureContext.isPresent(ValidationFeature.class)) {
+            featureContext.addFeatureIfNotPresent(ValidationFeature.class, micronautValidationFeature);
         }
     }
 

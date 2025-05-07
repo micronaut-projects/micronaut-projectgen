@@ -15,11 +15,6 @@ recipeList:
       configuration: implementation
       scope: compile
   - org.openrewrite.java.dependencies.AddDependency:
-      groupId: io.micronaut.validation
-      artifactId: micronaut-validation
-      configuration: implementation
-      scope: compile
-  - org.openrewrite.java.dependencies.AddDependency:
       groupId: io.ktor
       artifactId: ktor-serialization-jackson-jvm
       configuration: implementation
