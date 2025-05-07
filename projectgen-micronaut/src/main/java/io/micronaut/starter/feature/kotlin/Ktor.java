@@ -40,6 +40,7 @@ import io.micronaut.projectgen.micronaut.template.kotlin.homeRouteKotlin;
 import io.micronaut.projectgen.micronaut.template.kotlin.jacksonFeatureKotlin;
 import io.micronaut.projectgen.micronaut.template.kotlin.nameTransformerKotlin;
 import io.micronaut.projectgen.micronaut.template.kotlin.uppercaseTransformerKotlin;
+import io.micronaut.starter.feature.other.OpenRewrite;
 import io.micronaut.starter.feature.server.ThirdPartyServerFeature;
 import io.micronaut.projectgen.core.options.Language;
 import io.micronaut.projectgen.core.rocker.RockerTemplate;
@@ -50,15 +51,9 @@ import java.util.Optional;
 
 @Requires(property = "micronaut.starter.feature.ktor.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class Ktor implements  ThirdPartyServerFeature, KotlinSpecificFeature, OpenRewriteFeature {
+public class Ktor implements KotlinApplicationFeature, ThirdPartyServerFeature, KotlinSpecificFeature, OpenRewriteFeature {
 
     public static final String NAME = "ktor";
-
-    private final CoordinateResolver coordinateResolver;
-
-    public Ktor(CoordinateResolver coordinateResolver) {
-        this.coordinateResolver = coordinateResolver;
-    }
 
     @Override
     public boolean supports(Options options) {
@@ -103,11 +98,11 @@ public class Ktor implements  ThirdPartyServerFeature, KotlinSpecificFeature, Op
         return Category.SERVER;
     }
 
-//    @Override
-//    @Nullable
-//    public String mainClassName(GeneratorContext generatorContext) {
-//        return generatorContext.getProject().getPackageName() + ".Application";
-//    }
+    @Override
+    @Nullable
+    public String mainClassName(GeneratorContext generatorContext) {
+        return generatorContext.getProject().getPackageName() + ".Application";
+    }
 
     @Override
     public List<String> getRecipes(GeneratorContext generatorContext) {
@@ -126,4 +121,14 @@ public class Ktor implements  ThirdPartyServerFeature, KotlinSpecificFeature, Op
         return true;
     }
 
+    @Override
+    public int getOrder() {
+        return KotlinApplicationFeature.super.getOrder();
+    }
+
+    @Override
+    public void apply(GeneratorContext generatorContext) {
+        KotlinApplicationFeature.super.apply(generatorContext);
+        OpenRewriteFeature.super.apply(generatorContext);
+    }
 }
