@@ -1,0 +1,14 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.grpc
+displayName: Add Grpc dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: javax.annotation
+      artifactId: javax.annotation-api
+      configuration: implementation
+      scope: compile
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.grpc
+      artifactId: micronaut-grpc-runtime
+      configuration: implementation
+      scope: compile

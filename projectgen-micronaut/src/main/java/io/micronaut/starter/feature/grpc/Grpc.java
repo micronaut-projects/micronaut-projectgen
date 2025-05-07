@@ -18,7 +18,9 @@ package io.micronaut.starter.feature.grpc;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
@@ -39,22 +41,15 @@ import io.micronaut.projectgen.core.rocker.RockerTemplate;
 
 import jakarta.inject.Singleton;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Function;
+import java.util.stream.Stream;
 
 @Requires(property = "micronaut.starter.feature.grpc.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class Grpc implements DefaultFeature {
-    private static final Dependency DEPENDENCY_JAVAX_ANNOTATION_API = Dependency.builder()
-            .groupId("javax.annotation")
-            .artifactId("javax.annotation-api")
-            .compile()
-            .build();
-
-    private static final Dependency DEPENDENCY_MICRONAUT_GRPC_RUNTIME = MicronautDependencyUtils.grpcDependency()
-            .artifactId("micronaut-grpc-runtime")
-            .compile()
-            .build();
+public class Grpc implements DefaultFeature, OpenRewriteFeature {
 
     private final DiscoveryCore discoveryCore;
 
@@ -72,28 +67,16 @@ public class Grpc implements DefaultFeature {
         return options instanceof MicronautOptions mnOptions && mnOptions.applicationType() == ApplicationType.GRPC;
     }
 
-    @Override
-    public void apply(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
-        addDependencies(module);
-        module.addTemplate("proto", new RockerTemplate("src/main/proto/{propertyName}.proto", proto.template(generatorContext.getProject())));
-        if (OptionUtils.hasGradleBuildTool(generatorContext.getOptions())) {
-            module.addHelpLink("Protobuf Gradle Plugin", "https://plugins.gradle.org/plugin/com.google.protobuf");
-            module.addBuildPlugin(gradlePlugin(generatorContext));
-        }
-    }
-
-    protected void addDependencies(@NonNull ModuleContext module) {
-        module.addDependency(DEPENDENCY_MICRONAUT_GRPC_RUNTIME);
-        module.addDependency(DEPENDENCY_JAVAX_ANNOTATION_API);
-    }
-
     private BuildPlugin gradlePlugin(GeneratorContext generatorContext) {
         GradlePlugin.Builder builder = GradlePlugin.builder()
                 .id("com.google.protobuf")
                 .lookupArtifactId("protobuf-gradle-plugin");
-        Optional<GradleDsl> gradleDslOptional = generatorContext.getBuildTool().getGradleDsl();
-        if (gradleDslOptional.isPresent() && gradleDslOptional.get() == GradleDsl.KOTLIN) {
+        Optional<Optional<GradleDsl>> gradleDslOptional = generatorContext.getOptions()
+            .buildTools()
+            .stream()
+            .map(BuildTool::getGradleDsl)
+            .findFirst();
+        if (gradleDslOptional.isPresent() && gradleDslOptional.get().isPresent() && gradleDslOptional.get().get() == GradleDsl.KOTLIN) {
             builder.buildImports("import com.google.protobuf.gradle.*");
         }
         return builder.build();
@@ -113,4 +96,21 @@ public class Grpc implements DefaultFeature {
     public String getCategory() {
         return Category.API;
     }
+
+    @Override
+    public void apply(GeneratorContext generatorContext) {
+        OpenRewriteFeature.super.apply(generatorContext);
+        ModuleContext module = generatorContext.getRootModule();
+        module.addTemplate("proto", new RockerTemplate("src/main/proto/{propertyName}.proto", proto.template(generatorContext.getProject())));
+        if (OptionUtils.hasGradleBuildTool(generatorContext.getOptions())) {
+            module.addHelpLink("Protobuf Gradle Plugin", "https://plugins.gradle.org/plugin/com.google.protobuf");
+            module.addBuildPlugin(gradlePlugin(generatorContext));
+        }
+    }
+
+    @Override
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.grpc");
+    }
+
 }
