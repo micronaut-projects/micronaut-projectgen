@@ -44,6 +44,15 @@ import java.util.List;
 @Requires(property = "micronaut.starter.feature.kubernetes.reactor.client.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class KubernetesReactorClient implements OpenRewriteFeature {
+    private final Reactor reactor;
+    private final DiscoveryCore discoveryCore;
+
+    public KubernetesReactorClient(Reactor reactor,
+                                   DiscoveryCore discoveryCore) {
+        this.reactor = reactor;
+        this.discoveryCore = discoveryCore;
+    }
+
     @NonNull
     @Override
     public String getName() {
@@ -70,22 +79,19 @@ public class KubernetesReactorClient implements OpenRewriteFeature {
         if (featureContext.isPresent(KubernetesClient.class)) {
             featureContext.exclude(KubernetesClient.class::isInstance);
         }
+        if (!featureContext.isPresent(Reactor.class)) {
+            featureContext.addFeatureIfNotPresent(Reactor.class, reactor);
+        }
+        if (!featureContext.isPresent(DiscoveryCore.class)
+            && OptionUtils.hasMavenBuildTool(featureContext.getOptions())
+            && featureContext.getOptions().language() == Language.GROOVY
+        ) {
+            featureContext.addFeatureIfNotPresent(DiscoveryCore.class, discoveryCore);
+        }
     }
 
     @Override
     public List<String> getRecipes(GeneratorContext generatorContext) {
-        List<String> recipes = new ArrayList<>();
-        if (!generatorContext.isFeaturePresent(Reactor.class)) {
-           recipes.add("io.micronaut.starter.feature.reactor-core");
-        }
-        if (!generatorContext.hasFeature(DiscoveryCore.class)
-            && OptionUtils.hasMavenBuildTool(generatorContext.getOptions())
-            && generatorContext.getLanguage() == Language.GROOVY
-        ) {
-            recipes.add("io.micronaut.starter.feature.discovery-core");
-        }
-        recipes.add("io.micronaut.starter.feature.kubernetes-reactor-client");
-        return  recipes;
+        return List.of("io.micronaut.starter.feature.kubernetes-reactor-client");
     }
-
 }

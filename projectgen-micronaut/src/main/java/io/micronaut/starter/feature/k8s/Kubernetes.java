@@ -91,9 +91,14 @@ public class Kubernetes implements OpenRewriteFeature {
     }
 
     @Override
-    public List<String> getRecipes(GeneratorContext generatorContext) {
+    public void apply(GeneratorContext generatorContext) {
+        OpenRewriteFeature.super.apply(generatorContext);
         ModuleContext module = generatorContext.getRootModule();
         module.addTemplate("k8sYaml", new RockerTemplate("k8s.yml", k8sYaml.template(generatorContext.getProject())));
+    }
+
+    @Override
+    public List<String> getRecipes(GeneratorContext generatorContext) {
         return List.of("io.micronaut.starter.feature.kubernetes-docs");
     }
 

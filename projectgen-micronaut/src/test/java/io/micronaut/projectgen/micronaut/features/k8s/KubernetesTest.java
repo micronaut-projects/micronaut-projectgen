@@ -22,7 +22,13 @@ class KubernetesTest {
         assertNotNull(readme);
         assertTrue(readme.contains("https://micronaut-projects.github.io/micronaut-kubernetes/latest/guide/index.html"));
         assertTrue(readme.contains("https://kubernetes.io/docs/home/"));
+    }
 
+    @Test
+    void k8sYmlExists(MicronautProjectGenerator micronautProjectGenerator) throws Exception {
+        MicronautOptions options = MicronautOptions.builder().feature("kubernetes").build();
+        Map<String, String> project = generateProject(micronautProjectGenerator, options);
+        assertTrue(project.containsKey("k8s.yml"));
     }
 
     private static Map<String, String> generateProject(MicronautProjectGenerator micronautProjectGenerator,

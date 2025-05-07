@@ -1,9 +1,0 @@
-type: specs.openrewrite.org/v1beta/recipe
-name: io.micronaut.starter.feature.reactor-core
-displayName: Add Reactor Core dependency
-recipeList:
-  - org.openrewrite.java.dependencies.AddDependency:
-      groupId: io.projectreactor
-      artifactId: reactor-core
-      configuration: implementation
-      scope: compile

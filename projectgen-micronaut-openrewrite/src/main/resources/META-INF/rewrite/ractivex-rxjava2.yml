@@ -1,9 +1,0 @@
-type: specs.openrewrite.org/v1beta/recipe
-name: io.micronaut.starter.feature.reactivex-rxjava2
-displayName: Add Rxjava dependency
-recipeList:
-  - org.openrewrite.java.dependencies.AddDependency:
-      groupId: io.reactivex.rxjava2
-      artifactId: rxjava
-      configuration: implementation
-      scope: compile

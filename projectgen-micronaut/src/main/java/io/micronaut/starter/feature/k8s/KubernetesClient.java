@@ -18,6 +18,7 @@ package io.micronaut.starter.feature.k8s;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.utils.OptionUtils;
@@ -30,6 +31,7 @@ import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.starter.feature.discovery.DiscoveryCore;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.options.Language;
+import io.micronaut.starter.feature.reactor.Reactor;
 import jakarta.inject.Singleton;
 
 import java.util.ArrayList;
@@ -44,6 +46,11 @@ import java.util.List;
 @Requires(property = "micronaut.starter.feature.kubernetes.client.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class KubernetesClient implements OpenRewriteFeature {
+    private final DiscoveryCore discoveryCore;
+
+    public KubernetesClient(DiscoveryCore discoveryCore) {
+        this.discoveryCore = discoveryCore;
+    }
 
     @NonNull
     @Override
@@ -67,16 +74,17 @@ public class KubernetesClient implements OpenRewriteFeature {
     }
 
     @Override
-    public List<String> getRecipes(GeneratorContext generatorContext) {
-        List<String> recipes = new ArrayList<>();
-        if (!generatorContext.hasFeature(DiscoveryCore.class)
-            && OptionUtils.hasMavenBuildTool(generatorContext.getOptions())
-            && generatorContext.getLanguage() == Language.GROOVY
+    public void processSelectedFeatures(FeatureContext featureContext) {
+        if (!featureContext.isPresent(DiscoveryCore.class)
+            && OptionUtils.hasMavenBuildTool(featureContext.getOptions())
+            && featureContext.getOptions().language() == Language.GROOVY
         ) {
-            recipes.add("io.micronaut.starter.feature.discovery-core");
+            featureContext.addFeatureIfNotPresent(DiscoveryCore.class, discoveryCore);
         }
-        recipes.add("io.micronaut.starter.feature.kubernetes-client");
-        return  recipes;
     }
 
+    @Override
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.kubernetes-client");
+    }
 }

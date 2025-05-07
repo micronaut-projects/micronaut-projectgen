@@ -29,6 +29,7 @@ import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.starter.feature.discovery.DiscoveryCore;
+import io.micronaut.starter.feature.reactor.Reactor;
 import io.micronaut.starter.feature.rxjava.RxJava2;
 import jakarta.inject.Singleton;
 
@@ -44,6 +45,15 @@ import java.util.List;
 @Requires(property = "micronaut.starter.feature.kubernetes.rxjava2.client.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class KubernetesRxJava2Client implements OpenRewriteFeature {
+    private final DiscoveryCore discoveryCore;
+    private final RxJava2 rxJava2;
+
+    public KubernetesRxJava2Client(DiscoveryCore discoveryCore,
+                                   RxJava2 rxJava2) {
+        this.discoveryCore = discoveryCore;
+        this.rxJava2 = rxJava2;
+    }
+
     @NonNull
     @Override
     public String getName() {
@@ -70,22 +80,20 @@ public class KubernetesRxJava2Client implements OpenRewriteFeature {
         if (featureContext.isPresent(KubernetesClient.class)) {
             featureContext.exclude(KubernetesClient.class::isInstance);
         }
+        if (!featureContext.isPresent(RxJava2.class)) {
+            featureContext.addFeatureIfNotPresent(RxJava2.class, rxJava2);
+        }
+        if (!featureContext.isPresent(DiscoveryCore.class)
+            && OptionUtils.hasMavenBuildTool(featureContext.getOptions())
+            && featureContext.getOptions().language() == Language.GROOVY
+        ) {
+            featureContext.addFeatureIfNotPresent(DiscoveryCore.class, discoveryCore);
+        }
     }
 
     @Override
     public List<String> getRecipes(GeneratorContext generatorContext) {
-        List<String> recipes = new ArrayList<>();
-        if (!generatorContext.isFeaturePresent(RxJava2.class)) {
-            recipes.add("io.micronaut.starter.feature.reactivex-rxjava2");
-        }
-        if (!generatorContext.hasFeature(DiscoveryCore.class)
-            && OptionUtils.hasMavenBuildTool(generatorContext.getOptions())
-            && generatorContext.getLanguage() == Language.GROOVY
-        ) {
-            recipes.add("io.micronaut.starter.feature.discovery-core");
-        }
-        recipes.add("io.micronaut.starter.feature.kubernetes-rxjava2-client");
-        return  recipes;
+        return List.of("io.micronaut.starter.feature.kubernetes-rxjava2-client");
     }
 
 }
