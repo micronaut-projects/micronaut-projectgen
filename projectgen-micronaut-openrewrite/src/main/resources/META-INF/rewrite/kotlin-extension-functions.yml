@@ -1,0 +1,9 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.kotlin-extension-functions
+displayName: Add Kotlin Extension Functions dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.kotlin
+      artifactId: micronaut-kotlin-extension-functions
+      configuration: implementation
+      scope: compile
