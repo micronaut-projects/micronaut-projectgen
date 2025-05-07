@@ -1,7 +1,9 @@
 package io.micronaut.projectgen.micronaut.features.grpc;
 
+import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.buildtools.Scope;
 import io.micronaut.projectgen.core.io.MapOutputHandler;
+import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.micronaut.MicronautOptions;
 import io.micronaut.projectgen.micronaut.MicronautProjectGenerator;
 import io.micronaut.projectgen.test.BuildTestVerifier;
@@ -15,13 +17,14 @@ import static org.junit.jupiter.api.Assertions.*;
 class GrpcTest {
     @Test
     void managementFeaturesAddsTheDependency(MicronautProjectGenerator micronautProjectGenerator) throws Exception {
-        MicronautOptions options = MicronautOptions.builder().feature("grpc").build();
+        MicronautOptions options = MicronautOptions.builder().applicationType(ApplicationType.GRPC).build();
         Map<String, String> project = generateProject(micronautProjectGenerator, options);
         String buildGradle = project.get("build.gradle.kts");
         assertNotNull(buildGradle);
-        BuildTestVerifier verifier = BuildTestVerifier.of(buildGradle, options);
+        BuildTestVerifier verifier = BuildTestVerifier.of(buildGradle, BuildTool.GRADLE_KOTLIN, options.language(), options.testFramework());
         assertTrue(verifier.hasDependency("javax.annotation", "javax.annotation-api", Scope.COMPILE), buildGradle);
         assertTrue(verifier.hasDependency("io.micronaut.grpc", "micronaut-grpc-runtime", Scope.COMPILE), buildGradle);
+        assertTrue(verifier.hasBuildPlugin("com.google.protobuf"));
     }
 
     private static Map<String, String> generateProject(MicronautProjectGenerator micronautProjectGenerator,
