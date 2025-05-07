@@ -42,7 +42,7 @@ public class Crac implements RequireEagerSingletonInitializationFeature, OpenRew
 
     public static final String NAME = "crac";
 
-    // i will remove it after AwsLambda migration
+    //TODO i will remove it after AwsLambda migration
     public static final Dependency DEPENDENCY_MICRONAUT_CRAC = MicronautDependencyUtils.cracDependency()
         .artifactId("micronaut-crac")
         .compile()
