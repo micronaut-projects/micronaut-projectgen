@@ -1,0 +1,43 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.ktor
+displayName: Add Ktor dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.ktor.dependencies
+  - io.micronaut.starter.feature.ktor.micronaut.documentation
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.ktor.dependencies
+displayName: Add Ktor dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.kotlin
+      artifactId: micronaut-ktor
+      configuration: implementation
+      scope: compile
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.ktor
+      artifactId: ktor-serialization-jackson-jvm
+      configuration: implementation
+      scope: compile
+      version: 2.3.13
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.ktor
+      artifactId: ktor-server-content-negotiation-jvm
+      configuration: implementation
+      scope: compile
+      version: 2.3.13
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.ktor
+      artifactId: ktor-server-netty-jvm
+      configuration: implementation
+      scope: compile
+      version: 2.3.13
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.ktor.micronaut.documentation
+displayName: Append a link to Micronaut Ktor documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-kotlin/latest/guide/index.html#ktor
+      appendNewline: true

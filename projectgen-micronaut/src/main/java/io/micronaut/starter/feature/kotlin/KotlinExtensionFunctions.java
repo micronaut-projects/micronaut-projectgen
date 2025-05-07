@@ -21,6 +21,7 @@ import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.feature.FeatureContext;
@@ -29,11 +30,13 @@ import io.micronaut.projectgen.core.feature.KotlinSpecificFeature;
 import io.micronaut.projectgen.core.options.Language;
 
 import jakarta.inject.Singleton;
+
+import java.util.List;
 import java.util.Optional;
 
 @Requires(property = "micronaut.starter.feature.kotlin.extension.functions.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class KotlinExtensionFunctions implements Feature, KotlinSpecificFeature {
+public class KotlinExtensionFunctions implements OpenRewriteFeature, KotlinSpecificFeature {
 
     @Override
     public void processSelectedFeatures(FeatureContext featureContext) {
@@ -53,12 +56,8 @@ public class KotlinExtensionFunctions implements Feature, KotlinSpecificFeature 
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
-        module.addDependency(Dependency.builder()
-                .groupId("io.micronaut.kotlin")
-                .artifactId("micronaut-kotlin-extension-functions")
-                .compile());
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.kotlin-extension-functions");
     }
 
     @NonNull
