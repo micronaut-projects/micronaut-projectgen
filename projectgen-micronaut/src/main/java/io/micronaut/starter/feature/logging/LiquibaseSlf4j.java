@@ -19,16 +19,18 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.feature.LoggingFeature;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.starter.feature.ThirdPartyLibraryFeature;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.liquibase.slf4j.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class LiquibaseSlf4j implements ThirdPartyLibraryFeature, LoggingFeature {
-    private static final String ARTIFACT_ID_LIQUIBASE_SLF_4_J = "liquibase-slf4j";
+public class LiquibaseSlf4j implements ThirdPartyLibraryFeature, LoggingFeature, OpenRewriteFeature {
 
     @Override
     public String getName() {
@@ -46,17 +48,8 @@ public class LiquibaseSlf4j implements ThirdPartyLibraryFeature, LoggingFeature 
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        addDependencies(generatorContext);
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.liquibase-slf4j");
     }
 
-    protected void addDependencies(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
-        module.addDependency(Dependency.builder().lookupArtifactId(ARTIFACT_ID_LIQUIBASE_SLF_4_J).runtime());
-    }
-
-    @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://github.com/mattbertolini/liquibase-slf4j";
-    }
 }

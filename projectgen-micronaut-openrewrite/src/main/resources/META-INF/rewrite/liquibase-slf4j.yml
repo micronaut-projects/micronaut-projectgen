@@ -1,0 +1,26 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.liquibase-slf4j
+displayName: Add Liquibase Slf4j dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.liquibase-slf4j.dependencies
+  - io.micronaut.starter.feature.liquibase-slf4j.documentation.thirdparty
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.liquibase-slf4j.dependencies
+displayName: Add Liquibase Slf4j dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: com.mattbertolini
+      artifactId: liquibase-slf4j
+      configuration: runtimeOnly
+      scope: runtime
+      version: 5.0.0
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.liquibase-slf4j.documentation.thirdparty
+displayName: Append a link to Liquibase Slf4j website
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://github.com/mattbertolini/liquibase-slf4j
+      appendNewline: true
