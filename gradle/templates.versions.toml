@@ -39,8 +39,6 @@ kotest = "5.9.1"
 kotlin-gradle-plugin = "1.9.25"
 kotlin = "1.9.25"
 ksp = "1.9.25-1.0.20"
-log4j = "2.23.1"
-log4j-slf4j = "2.23.1"
 micronaut-aot = "2.5.0"
 micronaut-build-plugins = "6.7.1"
 mockserver-client-java = "5.15.0"
@@ -52,13 +50,11 @@ rewrite-micronaut = "2.8.4"
 rocker-gradle-plugin = "3.0.4"
 rocker-maven-plugin = "1.4.0"
 scram-client = "2.1"
-slf4j-simple-logger = "2.0.0"
 zeebe-micronaut-client = "1.19.0"
 jakarta-validation-api = "3.1.0"
 micronaut-starter-aws-cdk = "4.6.3"
 graaljs = "24.0.2"  # Once this is bumped past 24.1, you should be able to remove the disabling of Loom in the config properties in the React feature.
 frontend-maven-plugin = "1.15.0"
-liquibase-slf4j = "5.0.0"
 quarkus-bom  = "3.19.2"
 [libraries]
 quarkus-bom = { module = "io.quarkus.platform:quarkus-bom", version.ref = "quarkus-bom" }
@@ -101,12 +97,8 @@ kotest-assertions-core-jvm = { module = "io.kotest:kotest-assertions-core-jvm", 
 kotest-runner-junit5-jvm = { module = "io.kotest:kotest-runner-junit5-jvm", version.ref = "kotest" }
 kotlin-allopen = { module = "org.jetbrains.kotlin:kotlin-allopen", version.ref = "kotlin" }
 kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin-gradle-plugin" }
-
 ksp-gradle-plugin = { module = "com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
 kotlin-noarg = { module = "org.jetbrains.kotlin:kotlin-noarg", version.ref = "kotlin" }
-log4j-api = { module = "org.apache.logging.log4j:log4j-api", version.ref = "log4j" }
-log4j-core = { module = "org.apache.logging.log4j:log4j-core", version.ref = "log4j" }
-log4j-slf4j = { module = "org.apache.logging.log4j:log4j-slf4j-impl", version.ref = "log4j" }
 micronaut-aot = { module = "io.micronaut.aot:micronaut-aot-core", version.ref = "micronaut-aot" }
 micronaut-build-plugins = { module = "io.micronaut.build.internal:micronaut-gradle-plugins", version.ref = "micronaut-build-plugins" }
 micronaut-crac-plugin = { module = "io.micronaut.gradle:micronaut-crac-plugin", version.ref = "micronaut-gradle-plugin" }
@@ -121,11 +113,9 @@ rewrite-micronaut = { module = "org.openrewrite.recipe:rewrite-micronaut", versi
 rocker-gradle-plugin = { module = "nu.studer:gradle-rocker-plugin", version.ref = "rocker-gradle-plugin" }
 rocker-maven-plugin = { module = "com.fizzed:rocker-maven-plugin", version.ref = "rocker-maven-plugin" }
 scram-client = { module = "com.ongres.scram:client", version.ref = "scram-client" }
-slf4j-simple-logger = { module = "io.goodforgod:slf4j-simple-logger", version.ref = "slf4j-simple-logger" }
 zeebe-micronaut-client = { module = "info.novatec:micronaut-zeebe-client-feature", version.ref = "zeebe-micronaut-client" }
 buildless-gradle-plugin = { module = "build.less:buildless-plugin-gradle", version.ref = "buildless" }
 graaljs-community = { module = "org.graalvm.polyglot:js-community", version.ref = "graaljs" }
 frontend-maven-plugin = { module = "com.github.eirslett:frontend-maven-plugin", version.ref = "frontend-maven-plugin" }
-liquibase-slf4j = { module = "com.mattbertolini:liquibase-slf4j", version.ref = "liquibase-slf4j" }
 spotless-plugin-gradle = { module = "com.diffplug.spotless:spotless-plugin-gradle", version.ref = "spotless-plugin-gradle" }
 micronaut-parent = { module = "io.micronaut.platform:micronaut-parent", version.ref = "micronaut-platform" }
