@@ -1,0 +1,8 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.micronaut-jms-docs
+displayName: Append a link to Micronaut Jms documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-jms/snapshot/guide/index.html
+      appendNewline: true
