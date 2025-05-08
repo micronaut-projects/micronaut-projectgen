@@ -19,23 +19,19 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.feature.LoggingFeature;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.starter.feature.ThirdPartyLibraryFeature;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.slf4j.simple.logger.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class Slf4jSimpleLogger implements ThirdPartyLibraryFeature, LoggingFeature {
+public class Slf4jSimpleLogger implements ThirdPartyLibraryFeature, LoggingFeature, OpenRewriteFeature {
     public static final String NAME = "slf4j-simple-logger";
-
-    private static final String SLF4J_SIMPLE_LOGGER_ARTIFACT_ID = "slf4j-simple-logger";
-
-    private static final Dependency SLF4J_SIMPLE_LOGGER_DEPENDENCY = Dependency.builder()
-            .lookupArtifactId(SLF4J_SIMPLE_LOGGER_ARTIFACT_ID)
-            .runtime()
-            .build();
 
     @Override
     public String getName() {
@@ -53,13 +49,8 @@ public class Slf4jSimpleLogger implements ThirdPartyLibraryFeature, LoggingFeatu
     }
 
     @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://github.com/GoodforGod/slf4j-simple-logger";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.slf4j-simple-logger");
     }
 
-    @Override
-    public void apply(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
-        module.addDependency(SLF4J_SIMPLE_LOGGER_DEPENDENCY);
-    }
 }

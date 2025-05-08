@@ -1,0 +1,26 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.slf4j-simple-logger
+displayName: Add Slf4j Simple Logger dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.slf4j-simple-logger.dependencies
+  - io.micronaut.starter.feature.slf4j-simple-logger.micronaut.documentation
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.slf4j-simple-logger.dependencies
+displayName: Add Slf4j Simple Logger dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.goodforgod
+      artifactId: slf4j-simple-logger
+      configuration: runtimeOnly
+      scope: runtime
+      version: 2.0.0
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.slf4j-simple-logger.micronaut.documentation
+displayName: Append a link to Slf4j Simple Logger website
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://github.com/GoodforGod/slf4j-simple-logger
+      appendNewline: true
