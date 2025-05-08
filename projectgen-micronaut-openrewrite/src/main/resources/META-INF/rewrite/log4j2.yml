@@ -1,0 +1,25 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.log4j2
+displayName: Add Log4j2 dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: org.apache.logging.log4j
+      artifactId: log4j-bom
+      configuration: implementation
+      scope: compile
+      version: 2.23.1
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: org.apache.logging.log4j
+      artifactId: log4j-api
+      configuration: implementation
+      scope: compile
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: org.apache.logging.log4j
+      artifactId: log4j-core
+      configuration: runtimeOnly
+      scope: runtime
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: org.apache.logging.log4j
+      artifactId: log4j-slf4j-impl
+      configuration: runtimeOnly
+      scope: runtime
