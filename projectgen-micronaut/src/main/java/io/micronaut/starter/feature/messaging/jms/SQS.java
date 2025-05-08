@@ -21,6 +21,7 @@ import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.MavenCoordinate;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import io.micronaut.starter.feature.testresources.TestResourcesAdditionalModulesProvider;
 import io.micronaut.testresources.buildtools.KnownModules;
@@ -33,7 +34,7 @@ import static io.micronaut.starter.build.dependencies.MicronautDependencyUtils.G
 
 @Requires(property = "micronaut.starter.feature.jms.sqs.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class SQS extends AbstractJmsFeature implements TestResourcesAdditionalModulesProvider {
+public class SQS extends AbstractJmsFeature implements TestResourcesAdditionalModulesProvider, OpenRewriteFeature {
 
     public static final String NAME = "jms-sqs";
 
@@ -54,12 +55,8 @@ public class SQS extends AbstractJmsFeature implements TestResourcesAdditionalMo
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
-        module.configuration().put("micronaut.jms.sqs.enabled", true);
-        module.addDependency(MicronautDependencyUtils.jmsDependency()
-                .artifactId("micronaut-jms-sqs")
-                .compile());
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.jms-sqs");
     }
 
     @Override
