@@ -19,6 +19,7 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.feature.LoggingFeature;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
@@ -28,9 +29,11 @@ import io.micronaut.projectgen.core.rocker.RockerTemplate;
 
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.slf4j.simple.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class SimpleLogging implements LoggingFeature {
+public class SimpleLogging implements LoggingFeature, OpenRewriteFeature {
     @Override
     public String getName() {
         return "slf4j-simple";
@@ -38,12 +41,14 @@ public class SimpleLogging implements LoggingFeature {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
+        OpenRewriteFeature.super.apply(generatorContext);
         ModuleContext module = generatorContext.getRootModule();
         module.addTemplate("loggingConfig", new RockerTemplate("src/main/resources/simplelogger.properties", slf4jSimple.template()));
-        module.addDependency(Dependency.builder()
-                .groupId("org.slf4j")
-                .artifactId("slf4j-simple")
-                .runtime());
+    }
+
+    @Override
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.slf4j-simple");
     }
 
     @Override

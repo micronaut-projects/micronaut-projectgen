@@ -1,0 +1,9 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.slf4j-simple
+displayName: Add Slf4j Simple dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: org.slf4j
+      artifactId: slf4j-simple
+      configuration: runtimeOnly
+      scope: runtime
