@@ -30,7 +30,7 @@ public interface DiscoveryFeature extends OneOfFeature {
     @Override
     default boolean supports(Options options) {
         ApplicationType type = ApplicationType.of(options.template());
-        return type == ApplicationType.DEFAULT;
+        return type != ApplicationType.CLI;
     }
 
     @Override
