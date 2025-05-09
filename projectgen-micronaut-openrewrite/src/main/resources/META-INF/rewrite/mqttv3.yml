@@ -1,0 +1,9 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.mqttv3
+displayName: Add Mqttv3 dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.mqtt
+      artifactId: micronaut-mqttv3
+      configuration: implementation
+      scope: compile
