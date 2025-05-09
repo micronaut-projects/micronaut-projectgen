@@ -1,5 +1,13 @@
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.mqttv3
+displayName: Add Mqttv3 dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.mqttv3.dependencies
+  - io.micronaut.starter.feature.mqtt-docs
+  - io.micronaut.starter.feature.mqtt-conf
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.mqttv3.dependencies
 displayName: Add Mqttv3 dependency
 recipeList:
   - org.openrewrite.java.dependencies.AddDependency:

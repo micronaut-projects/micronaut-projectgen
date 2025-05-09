@@ -40,6 +40,6 @@ public interface MqttFeature extends MessagingFeature {
         if (!generatorContext.isFeaturePresent(TestResources.class)) {
             module.configuration().put("mqtt.client.server-uri", "tcp://localhost:1883");
         }
-        module.configuration().put("mqtt.client.client-id", "${random.uuid}");
     }
+
 }

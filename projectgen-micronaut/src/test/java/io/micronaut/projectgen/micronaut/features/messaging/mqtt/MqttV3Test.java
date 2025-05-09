@@ -5,14 +5,25 @@ import io.micronaut.projectgen.core.io.MapOutputHandler;
 import io.micronaut.projectgen.micronaut.MicronautOptions;
 import io.micronaut.projectgen.micronaut.MicronautProjectGenerator;
 import io.micronaut.projectgen.test.BuildTestVerifier;
+import io.micronaut.projectgen.test.ConfigurationUtils;
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
 import org.junit.jupiter.api.Test;
 import java.util.Map;
+import java.util.Properties;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @MicronautTest(startApplication = false)
 class MqttV3Test {
+    @Test
+    void mqttConfiguration(MicronautProjectGenerator micronautProjectGenerator) throws Exception {
+        MicronautOptions options = MicronautOptions.builder().feature("mqtt-hivemq").build();
+        Map<String, String> project = generateProject(micronautProjectGenerator, options);
+        Properties applicationProperties = ConfigurationUtils.loadApplicationProperties(project);
+        assertEquals("${random.uuid}", applicationProperties.getProperty("mqtt.client.client-id"));
+
+    }
+
     @Test
     void mqttv3FeaturesAddsTheDependency(MicronautProjectGenerator micronautProjectGenerator) throws Exception {
         MicronautOptions options = MicronautOptions.builder().feature("mqttv3").build();
@@ -29,7 +40,7 @@ class MqttV3Test {
         Map<String, String> project = generateProject(micronautProjectGenerator, options);
         String readme = project.get("README.md");
         assertNotNull(readme);
-//        assertTrue(readme.contains("https://micronaut-projects.github.io/micronaut-mqtt/latest/guide/index.html"));
+        assertTrue(readme.contains("https://micronaut-projects.github.io/micronaut-mqtt/latest/guide/index.html"));
 
     }
 
