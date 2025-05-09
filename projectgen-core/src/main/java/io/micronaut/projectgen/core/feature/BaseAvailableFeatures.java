@@ -15,7 +15,6 @@
  */
 package io.micronaut.projectgen.core.feature;
 
-import io.micronaut.context.annotation.Secondary;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.order.Ordered;
@@ -31,7 +30,6 @@ import java.util.stream.Stream;
 /**
  * Default implementation of {@link AvailableFeatures}.
  */
-@Secondary
 @Singleton
 public class BaseAvailableFeatures implements AvailableFeatures {
     private final Map<String, Feature> features;
