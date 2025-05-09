@@ -35,11 +35,6 @@ public interface MqttFeature extends MessagingFeature {
     }
 
     @Override
-    default String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-mqtt/latest/guide/index.html";
-    }
-
-    @Override
     default void apply(GeneratorContext generatorContext) {
         ModuleContext module = generatorContext.getRootModule();
         if (!generatorContext.isFeaturePresent(TestResources.class)) {
