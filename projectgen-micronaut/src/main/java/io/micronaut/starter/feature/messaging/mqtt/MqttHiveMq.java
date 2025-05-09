@@ -21,21 +21,20 @@ import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.feature.database.TestContainers;
 import io.micronaut.starter.feature.messaging.SharedTestResourceFeature;
 import io.micronaut.starter.feature.testresources.EaseTestingFeature;
 import io.micronaut.starter.feature.testresources.TestResources;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.mqtt.hivemq.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class MqttHiveMq extends EaseTestingFeature implements MqttFeature, SharedTestResourceFeature {
+public class MqttHiveMq extends EaseTestingFeature implements MqttFeature, SharedTestResourceFeature, OpenRewriteFeature {
 
     public static final String NAME = "mqtt-hivemq";
-    private static final Dependency.Builder DEPENDENCY_MICRONAUT_MQTT_HIVEMQ = Dependency.builder()
-            .groupId("io.micronaut.mqtt")
-            .artifactId("micronaut-mqtt-hivemq")
-            .compile();
 
     public MqttHiveMq(TestContainers testContainers, TestResources testResources) {
         super(testContainers, testResources);
@@ -60,17 +59,12 @@ public class MqttHiveMq extends EaseTestingFeature implements MqttFeature, Share
     @Override
     public void apply(GeneratorContext generatorContext) {
         MqttFeature.super.apply(generatorContext);
-        ModuleContext module = generatorContext.getRootModule();
-        module.addDependency(DEPENDENCY_MICRONAUT_MQTT_HIVEMQ);
+        OpenRewriteFeature.super.apply(generatorContext);
     }
 
     @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-mqtt/latest/guide/index.html#hiveMq";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.mqtt-hivemq");
     }
 
-    @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://github.com/hivemq/hivemq-mqtt-client";
-    }
 }
