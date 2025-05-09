@@ -17,7 +17,6 @@ package io.micronaut.starter.feature.view;
 
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.ApplicationType;
-import io.micronaut.projectgen.micronaut.MicronautOptions;
 import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.OneOfFeature;
 
@@ -32,7 +31,8 @@ public interface ViewFeature extends OneOfFeature {
 
     @Override
     default boolean supports(Options options) {
-        return options instanceof MicronautOptions mnOptions && mnOptions.applicationType() == ApplicationType.DEFAULT;
+        ApplicationType applicationType = ApplicationType.of(options.template());
+        return applicationType == ApplicationType.DEFAULT;
     }
 
     @Override

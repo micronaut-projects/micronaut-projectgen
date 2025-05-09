@@ -17,7 +17,6 @@ package io.micronaut.starter.feature.function;
 
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.ApplicationType;
-import io.micronaut.projectgen.micronaut.MicronautOptions;
 import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.Feature;
 
@@ -31,7 +30,8 @@ public interface FunctionFeature extends Feature {
 
     @Override
     default boolean supports(Options options) {
-        return options instanceof MicronautOptions mnOptions && (mnOptions.applicationType() == ApplicationType.DEFAULT || mnOptions.applicationType() == ApplicationType.FUNCTION);
+        ApplicationType type = ApplicationType.of(options.template());
+        return type == ApplicationType.DEFAULT || type == ApplicationType.FUNCTION;
     }
 
     @Override

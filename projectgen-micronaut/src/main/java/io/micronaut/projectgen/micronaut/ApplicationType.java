@@ -16,6 +16,7 @@
 package io.micronaut.projectgen.micronaut;
 
 import io.micronaut.core.annotation.NonNull;
+import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.naming.Named;
 
 import java.util.Locale;
@@ -41,6 +42,15 @@ public enum ApplicationType implements Named {
                     String description) {
         this.title = title;
         this.description = description;
+    }
+
+    public static ApplicationType of(@Nullable String template) {
+        for (ApplicationType type : values()) {
+            if (template.equals(type.toString())) {
+                return type;
+            }
+        }
+        throw new IllegalArgumentException(template +" cannot be matched to an ApplicationType");
     }
 
     /**

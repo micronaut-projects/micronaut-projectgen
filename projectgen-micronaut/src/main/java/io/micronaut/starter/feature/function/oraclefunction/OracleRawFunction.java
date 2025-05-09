@@ -28,7 +28,6 @@ import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.Project;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
-import io.micronaut.projectgen.micronaut.MicronautOptions;
 import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.projectgen.micronaut.template.function.oraclefunction.raw.oracleRawFunctionGroovy;
@@ -41,10 +40,11 @@ import io.micronaut.projectgen.micronaut.template.function.oraclefunction.raw.or
 import io.micronaut.projectgen.micronaut.template.function.oraclefunction.raw.oracleRawFunctionKotlinKoTest;
 import io.micronaut.starter.feature.json.JacksonDatabindFeature;
 import io.micronaut.starter.feature.logging.SimpleLogging;
-import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.options.Language;
 import io.micronaut.projectgen.core.rocker.RockerTemplate;
 import jakarta.inject.Singleton;
+
+import static io.micronaut.projectgen.micronaut.template.function.oraclefunction.OracleFunction.COM_FNPROJECT_RUNTIME;
 
 @Requires(property = "micronaut.starter.feature.oracle.function.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Requires(property = "micronaut.starter.feature.oracle.function.http.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
@@ -88,7 +88,8 @@ public class OracleRawFunction extends OracleFunction {
 
     @Override
     public void processSelectedFeatures(FeatureContext featureContext) {
-        if (featureContext.getOptions() instanceof MicronautOptions mnOptions && mnOptions.applicationType() == ApplicationType.DEFAULT) {
+        ApplicationType applicationType = ApplicationType.of(featureContext.getOptions().template());
+        if (applicationType == ApplicationType.DEFAULT) {
             featureContext.addFeature(httpFunction);
         }
         super.processSelectedFeatures(featureContext);
@@ -99,7 +100,7 @@ public class OracleRawFunction extends OracleFunction {
     @Override
     public void apply(GeneratorContext generatorContext) {
         ModuleContext module = generatorContext.getRootModule();
-        ApplicationType type = generatorContext.getOptions() instanceof MicronautOptions mnOptions ? mnOptions.applicationType() : null;
+        ApplicationType type = ApplicationType.of(generatorContext.getOptions().template());
         if (type == ApplicationType.FUNCTION) {
             applyFunction(generatorContext, type);
             Language language = generatorContext.getLanguage();
@@ -139,7 +140,8 @@ public class OracleRawFunction extends OracleFunction {
 
     @Override
     protected void addDependencies(Options options, ModuleContext module) {
-        if (options instanceof MicronautOptions micronautOptions && micronautOptions.applicationType() == ApplicationType.FUNCTION) {
+        ApplicationType applicationType = ApplicationType.of(options.template());
+        if (applicationType == ApplicationType.FUNCTION) {
             module.addDependency(MICRONAUT_OCI_FUNCTION);
             module.addDependency(COM_FNPROJECT_RUNTIME);
             module.addDependency(COM_FNPROJECT_API);

@@ -22,6 +22,7 @@ import io.micronaut.projectgen.core.buildtools.BuildTool;
 
 import java.util.Arrays;
 import java.util.Locale;
+import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -84,6 +85,15 @@ public enum Language implements IncludesDefaults<LanguageDefaults> {
                 .map(LanguageSpecificFeature::getRequiredLanguage)
                 .findFirst()
                 .orElse(null);
+    }
+
+    public static Optional<Language> of(String lang) {
+        for (Language l : values()) {
+            if (l.getName().equalsIgnoreCase(lang)) {
+                return Optional.of(l);
+            }
+        }
+        return Optional.empty();
     }
 
     @Override

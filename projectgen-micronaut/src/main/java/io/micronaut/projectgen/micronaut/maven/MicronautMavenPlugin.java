@@ -22,7 +22,6 @@ import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.rocker.RockerWritable;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.projectgen.micronaut.ApplicationType;
-import io.micronaut.projectgen.micronaut.MicronautOptions;
 import io.micronaut.projectgen.micronaut.features.MicronautAot;
 import io.micronaut.projectgen.micronaut.template.function.oraclefunction.OracleFunction;
 import io.micronaut.starter.feature.messaging.SharedTestResourceFeature;
@@ -53,8 +52,8 @@ public class MicronautMavenPlugin implements MavenSpecificFeature {
 
             List<String> nativeImageBuildArgs = null;
             List<String> appArguments = null;
-            if (generatorContext.getOptions() instanceof MicronautOptions micronautOptions &&
-                micronautOptions.applicationType() == ApplicationType.FUNCTION &&
+            ApplicationType applicationType = ApplicationType.of(generatorContext.getOptions().template());
+            if (applicationType == ApplicationType.FUNCTION &&
                 generatorContext.hasFeature(OracleFunction.class)) {
                 nativeImageBuildArgs = List.of("-H:+StaticExecutableWithDynamicLibC", "-Dfn.handler=${function.entrypoint}");
                 appArguments = List.of("${function.entrypoint}");

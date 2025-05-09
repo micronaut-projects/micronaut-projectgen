@@ -51,7 +51,7 @@ public class Features extends ArrayList<String> {
                 testFeature = testFeature1;
             }
         }
-        this.javaVersion = options.javaVersion();
+        this.javaVersion = options.java();
         this.buildTools = options.buildTools();
     }
 

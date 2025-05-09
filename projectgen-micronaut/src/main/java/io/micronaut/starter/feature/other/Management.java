@@ -21,7 +21,6 @@ import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.micronaut.MicronautOptions;
 import io.micronaut.starter.feature.Category;
 import io.micronaut.starter.feature.server.MicronautServerDependent;
 
@@ -50,7 +49,7 @@ public class Management implements OpenRewriteFeature, MicronautServerDependent 
 
     @Override
     public boolean supports(Options options) {
-        return options instanceof MicronautOptions mnOptions && mnOptions.applicationType() == ApplicationType.DEFAULT;
+        return ApplicationType.of(options.template()) == ApplicationType.DEFAULT;
     }
 
     @Override

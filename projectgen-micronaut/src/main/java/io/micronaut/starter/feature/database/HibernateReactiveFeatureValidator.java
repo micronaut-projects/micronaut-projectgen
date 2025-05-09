@@ -60,7 +60,7 @@ public class HibernateReactiveFeatureValidator implements FeatureValidator {
     @Override
     public void validatePostProcessing(Options options, Set<Feature> features) {
         if (features.stream().anyMatch(HibernateReactiveFeature.class::isInstance)
-                && options.javaVersion().majorVersion() < JdkVersion.JDK_11.majorVersion()) {
+                && options.java().majorVersion() < JdkVersion.JDK_11.majorVersion()) {
             throw new IllegalArgumentException("Hibernate Reactive requires at least JDK 11");
         }
     }

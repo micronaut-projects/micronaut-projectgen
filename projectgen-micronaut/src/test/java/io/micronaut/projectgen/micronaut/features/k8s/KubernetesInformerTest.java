@@ -2,14 +2,19 @@ package io.micronaut.projectgen.micronaut.features.k8s;
 
 import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.buildtools.Scope;
+import io.micronaut.projectgen.core.generator.ProjectGenerator;
 import io.micronaut.projectgen.core.io.MapOutputHandler;
+import io.micronaut.projectgen.core.options.GenericOptionsBuilder;
 import io.micronaut.projectgen.core.options.Language;
-import io.micronaut.projectgen.micronaut.MicronautOptions;
-import io.micronaut.projectgen.micronaut.MicronautProjectGenerator;
+import io.micronaut.projectgen.core.options.Options;
+import io.micronaut.projectgen.micronaut.ApplicationType;
+import io.micronaut.projectgen.micronaut.OptionsFixture;
 import io.micronaut.projectgen.test.BuildTestVerifier;
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -17,8 +22,8 @@ import static org.junit.jupiter.api.Assertions.*;
 @MicronautTest(startApplication = false)
 class KubernetesInformerTest {
     @Test
-    void kubernetesInformerFeaturesAddsTheDependency(MicronautProjectGenerator micronautProjectGenerator) throws Exception {
-        MicronautOptions options = MicronautOptions.builder().feature("kubernetes-informer").build();
+    void kubernetesInformerFeaturesAddsTheDependency(ProjectGenerator micronautProjectGenerator) throws Exception {
+        Options options = OptionsFixture.defaultGradle().features(List.of("kubernetes-informer")).build();
         Map<String, String> project = generateProject(micronautProjectGenerator, options);
         String buildGradle = project.get("build.gradle.kts");
         assertNotNull(buildGradle);
@@ -28,9 +33,9 @@ class KubernetesInformerTest {
 
     @Disabled //TODO enable this test
     @Test
-    void kubernetesInformerFeaturesAddsTheDiscoveryCoreDependencyForGroovyAndMaven(MicronautProjectGenerator micronautProjectGenerator) throws Exception {
-        MicronautOptions options = MicronautOptions.builder().buildTool(BuildTool.MAVEN)
-            .feature("kubernetes-informer")
+    void kubernetesInformerFeaturesAddsTheDiscoveryCoreDependencyForGroovyAndMaven(ProjectGenerator micronautProjectGenerator) throws Exception {
+        Options options = OptionsFixture.defaultGradle().buildTools(List.of(BuildTool.MAVEN))
+            .features(List.of("kubernetes-informer"))
             .language(Language.GROOVY).build();
         Map<String, String> project = generateProject(micronautProjectGenerator, options);
         String pom = project.get("pom.xml");
@@ -40,8 +45,8 @@ class KubernetesInformerTest {
     }
 
     @Test
-    void kubernetesInformerFeaturesAddsTheLinkInReadmeFile(MicronautProjectGenerator micronautProjectGenerator) throws Exception {
-        MicronautOptions options = MicronautOptions.builder().feature("kubernetes-informer").build();
+    void kubernetesInformerFeaturesAddsTheLinkInReadmeFile(ProjectGenerator micronautProjectGenerator) throws Exception {
+        Options options = OptionsFixture.defaultGradle().features(List.of("kubernetes-informer")).build();
         Map<String, String> project = generateProject(micronautProjectGenerator, options);
         String readme = project.get("README.md");
         assertNotNull(readme);
@@ -50,8 +55,8 @@ class KubernetesInformerTest {
 
     }
 
-    private static Map<String, String> generateProject(MicronautProjectGenerator micronautProjectGenerator,
-                                                       MicronautOptions options) throws Exception {
+    private static Map<String, String> generateProject(ProjectGenerator micronautProjectGenerator,
+                                                       Options options) throws Exception {
         MapOutputHandler outputHandler = new MapOutputHandler();
         micronautProjectGenerator.generate(options, outputHandler);
         return outputHandler.getProject();

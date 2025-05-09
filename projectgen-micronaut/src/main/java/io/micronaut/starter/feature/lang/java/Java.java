@@ -19,8 +19,9 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.feature.JavaApplicationFeature;
+import io.micronaut.projectgen.core.options.GenericOptions;
+import io.micronaut.projectgen.core.options.GenericOptionsBuilder;
 import io.micronaut.projectgen.micronaut.ApplicationType;
-import io.micronaut.projectgen.micronaut.MicronautOptions;
 import io.micronaut.starter.feature.ApplicationFeature;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.feature.FeatureContext;
@@ -56,10 +57,10 @@ public class Java implements LanguageFeature {
 
     protected void processSelectedFeatures(FeatureContext featureContext, Predicate<Feature> featureFilter) {
         if (!featureContext.isPresent(ApplicationFeature.class)) {
-            ApplicationType type = featureContext.getOptions() instanceof MicronautOptions mnOptions ? mnOptions.applicationType() : null;
+            ApplicationType type = ApplicationType.of(featureContext.getOptions().template());
             applicationFeatures.stream()
                     .filter(featureFilter)
-                    .filter(f -> f.supports(MicronautOptions.builder().applicationType(type).build()))
+                    .filter(f -> f.supports(GenericOptionsBuilder.builder().template(type.toString()).build()))
                     .findFirst()
                     .ifPresent(featureContext::addFeature);
         }
@@ -72,8 +73,8 @@ public class Java implements LanguageFeature {
 
     @Override
     public boolean shouldApply(Options options, Set<Feature> selectedFeatures) {
-        return options.language() == Language.JAVA && options
-            instanceof MicronautOptions mnOptions && mnOptions.applicationType() != ApplicationType.LIBRARY;
+        ApplicationType applicationType = ApplicationType.of(options.template());
+        return options.language() == Language.JAVA && applicationType != ApplicationType.LIBRARY;
         //TODO remove defaultFeature
     }
 }

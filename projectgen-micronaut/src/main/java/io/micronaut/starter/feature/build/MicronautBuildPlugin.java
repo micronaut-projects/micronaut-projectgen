@@ -26,7 +26,6 @@ import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.Property;
-import io.micronaut.projectgen.micronaut.MicronautOptions;
 import io.micronaut.starter.build.S01SonatypeSnapshots;
 import io.micronaut.projectgen.core.buildtools.dependencies.Coordinate;
 import io.micronaut.projectgen.core.buildtools.dependencies.CoordinateResolver;
@@ -44,8 +43,6 @@ import io.micronaut.starter.feature.function.LambdaRuntimeMainClass;
 import io.micronaut.starter.feature.function.awslambda.AwsLambda;
 import io.micronaut.starter.feature.graalvm.GraalVMFeatureValidator;
 import io.micronaut.starter.feature.messaging.SharedTestResourceFeature;
-import io.micronaut.starter.feature.security.SecurityJWT;
-import io.micronaut.starter.feature.security.SecurityOAuth2;
 import io.micronaut.starter.feature.testresources.TestResources;
 import io.micronaut.starter.feature.testresources.TestResourcesAdditionalModulesProvider;
 import io.micronaut.projectgen.core.options.JdkVersion;
@@ -206,10 +203,11 @@ public class MicronautBuildPlugin implements BuildPluginFeature, DefaultFeature 
     }
 
     protected MicronautApplicationGradlePlugin.Builder micronautGradleApplicationPluginBuilder(GeneratorContext generatorContext) {
+        ApplicationType applicationType = ApplicationType.of(generatorContext.getOptions().template());
         MicronautApplicationGradlePlugin.Builder builder = micronautGradleApplicationPluginBuilder(generatorContext, MicronautApplicationGradlePlugin.Builder.APPLICATION);
-        if (generatorContext.getFeatures().contains(AwsLambda.FEATURE_NAME_AWS_LAMBDA) && (generatorContext.getOptions() instanceof MicronautOptions micronautOptions && (
-                (micronautOptions.applicationType() == ApplicationType.FUNCTION && generatorContext.getFeatures().contains(FEATURE_NAME_GRAALVM)) ||
-                        (micronautOptions.applicationType() == ApplicationType.DEFAULT)))) {
+        if (generatorContext.getFeatures().contains(AwsLambda.FEATURE_NAME_AWS_LAMBDA) && ((
+                (applicationType == ApplicationType.FUNCTION && generatorContext.getFeatures().contains(FEATURE_NAME_GRAALVM)) ||
+                        (applicationType == ApplicationType.DEFAULT)))) {
             builder.dockerNative(Dockerfile.builder()
                     .javaVersion(generatorContext.getJdkVersion().asString())
                     .arg("-XX:MaximumHeapSizePercent=80")
@@ -242,9 +240,10 @@ public class MicronautBuildPlugin implements BuildPluginFeature, DefaultFeature 
     }
 
     private static boolean shouldApplyMicronautApplicationGradlePlugin(GeneratorContext generatorContext) {
+        ApplicationType applicationType = ApplicationType.of(generatorContext.getOptions().template());
         return generatorContext.getFeatures().mainClass().isPresent() ||
                 generatorContext.getFeatures().contains("oracle-function") ||
-                generatorContext.getOptions() instanceof MicronautOptions micronautOptions && micronautOptions.applicationType() == ApplicationType.DEFAULT && generatorContext.getFeatures().contains("aws-lambda");
+                applicationType == ApplicationType.DEFAULT && generatorContext.getFeatures().contains("aws-lambda");
     }
 
     @Override
