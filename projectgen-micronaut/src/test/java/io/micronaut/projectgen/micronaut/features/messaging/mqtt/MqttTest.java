@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class MqttTest {
     @Test
     void mqttConfiguration(MicronautProjectGenerator micronautProjectGenerator) throws Exception {
-        MicronautOptions options = MicronautOptions.builder().feature("mqtt-hivemq").build();
+        MicronautOptions options = MicronautOptions.builder().feature("mqtt").build();
         Map<String, String> project = generateProject(micronautProjectGenerator, options);
         Properties applicationProperties = ConfigurationUtils.loadApplicationProperties(project);
         assertEquals("${random.uuid}", applicationProperties.getProperty("mqtt.client.client-id"));
