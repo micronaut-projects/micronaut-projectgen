@@ -23,6 +23,7 @@ import io.micronaut.projectgen.core.generator.Project;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.feature.FeatureContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.feature.database.TestContainers;
 import io.micronaut.starter.feature.messaging.MessagingFeature;
 import io.micronaut.starter.feature.messaging.SharedTestResourceFeature;
@@ -36,9 +37,11 @@ import io.micronaut.starter.feature.testresources.EaseTestingFeature;
 import io.micronaut.starter.feature.testresources.TestResources;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.kafka.streams.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class KafkaStreams extends EaseTestingFeature implements MessagingFeature, SharedTestResourceFeature {
+public class KafkaStreams extends EaseTestingFeature implements MessagingFeature, SharedTestResourceFeature, OpenRewriteFeature {
 
     private final Kafka kafka;
 
@@ -71,15 +74,10 @@ public class KafkaStreams extends EaseTestingFeature implements MessagingFeature
     }
 
     @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-kafka/latest/guide/index.html#kafkaStream";
-    }
-
-    @Override
     public void apply(GeneratorContext generatorContext) {
         ModuleContext module = generatorContext.getRootModule();
         Project project = generatorContext.getProject();
-
+        OpenRewriteFeature.super.apply(generatorContext);
         String exampleListener = generatorContext.getSourcePath("/{packagePath}/ExampleListener");
         module.addTemplate(generatorContext.getOptions().language(),
             "exampleListener", exampleListener,
@@ -93,10 +91,11 @@ public class KafkaStreams extends EaseTestingFeature implements MessagingFeature
             exampleFactoryJava.template(project),
             exampleFactoryKotlin.template(project),
             exampleFactoryGroovy.template(project));
-
-        module.addDependency(Dependency.builder()
-                .groupId("io.micronaut.kafka")
-                .artifactId("micronaut-kafka-streams")
-                .compile());
     }
+
+    @Override
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.kafka-streams");
+    }
+
 }
