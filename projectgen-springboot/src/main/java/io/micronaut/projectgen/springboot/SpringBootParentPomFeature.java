@@ -48,8 +48,8 @@ public class SpringBootParentPomFeature implements ParentPomFeature {
     public void apply(GeneratorContext generatorContext) {
         ModuleContext moduleContext = generatorContext.getRootModule();
         if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())
-            && generatorContext.getOptions().javaVersion() != null) {
-            moduleContext.buildProperties().put(PROPERTY_JAVA_VERSION, generatorContext.getOptions().javaVersion().asString());
+            && generatorContext.getOptions().java() != null) {
+            moduleContext.buildProperties().put(PROPERTY_JAVA_VERSION, generatorContext.getOptions().java().asString());
         }
     }
 

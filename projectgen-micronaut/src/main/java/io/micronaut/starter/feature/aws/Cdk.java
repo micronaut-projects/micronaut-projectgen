@@ -15,66 +15,23 @@
  */
 package io.micronaut.starter.feature.aws;
 
-import com.fizzed.rocker.RockerModel;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
-import io.micronaut.projectgen.core.generator.ModuleContext;
-import io.micronaut.projectgen.core.generator.Project;
 import io.micronaut.projectgen.core.options.Options;
-import io.micronaut.projectgen.core.rocker.RockerWritable;
-import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.buildtools.dependencies.DependencyContextImpl;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.Property;
 import io.micronaut.projectgen.core.buildtools.dependencies.CoordinateResolver;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.buildtools.dependencies.DependencyContext;
-import io.micronaut.projectgen.micronaut.MicronautOptions;
-import io.micronaut.projectgen.micronaut.features.MicronautAot;
-import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
-import io.micronaut.projectgen.core.buildtools.gradle.GradleBuild;
-import io.micronaut.projectgen.core.buildtools.gradle.GradleDependency;
-import io.micronaut.projectgen.core.buildtools.gradle.GradleDsl;
-import io.micronaut.projectgen.core.buildtools.gradle.GradlePlugin;
-import io.micronaut.projectgen.core.buildtools.gradle.GradleRepository;
-import io.micronaut.projectgen.core.buildtools.maven.MavenBuild;
-import io.micronaut.projectgen.core.buildtools.maven.MavenDependency;
-import io.micronaut.projectgen.core.buildtools.maven.MavenPlugin;
-import io.micronaut.projectgen.core.buildtools.maven.ParentPom;
 import io.micronaut.starter.feature.Category;
 import io.micronaut.starter.feature.InfrastructureAsCodeFeature;
 import io.micronaut.projectgen.core.feature.MultiProjectFeature;
 import io.micronaut.starter.feature.architecture.CpuArchitecture;
 import io.micronaut.starter.feature.architecture.X86;
-import io.micronaut.projectgen.micronaut.template.aws.cdkappstack;
-import io.micronaut.projectgen.micronaut.template.aws.cdkappstacktest;
-import io.micronaut.projectgen.micronaut.template.aws.cdkhelp;
-import io.micronaut.projectgen.micronaut.template.aws.cdkjson;
-import io.micronaut.projectgen.micronaut.template.aws.cdkmain;
-import io.micronaut.projectgen.micronaut.template.aws.testlambda;
-import io.micronaut.projectgen.micronaut.template.buildtools.gradle.genericBuildGradle;
-import io.micronaut.projectgen.micronaut.template.buildtools.gradle.useJunitPlatform;
-import io.micronaut.projectgen.micronaut.template.buildtools.maven.execMavenPlugin;
-import io.micronaut.projectgen.micronaut.template.buildtools.maven.genericPom;
 //import io.micronaut.projectgen.micronaut.template.buildtools.maven.mavenCompilerPlugin;
-import io.micronaut.starter.feature.function.HandlerClassFeature;
-import io.micronaut.starter.feature.function.awslambda.AwsLambda;
-import io.micronaut.starter.feature.graalvm.GraalVM;
-import io.micronaut.projectgen.core.options.Language;
-import io.micronaut.projectgen.core.rocker.RockerTemplate;
-import io.micronaut.projectgen.core.template.Template;
-import io.micronaut.starter.util.FeaturesUtils;
-import io.micronaut.starter.util.VersionInfo;
 import jakarta.inject.Singleton;
-import org.openrewrite.jgit.transport.resolver.RepositoryResolver;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
 
 @Requires(property = "micronaut.starter.feature.aws.cdk.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
@@ -129,10 +86,9 @@ public class Cdk implements MultiProjectFeature, InfrastructureAsCodeFeature {
 
     @Override
     public boolean supports(Options options) {
-        return options instanceof MicronautOptions mnOptions &&
-                (mnOptions.applicationType() == ApplicationType.DEFAULT
-                        ||
-                        mnOptions.applicationType() == ApplicationType.FUNCTION);
+        ApplicationType applicationType = ApplicationType.of(options.template());
+        return applicationType == ApplicationType.DEFAULT ||
+            applicationType == ApplicationType.FUNCTION;
     }
 
     @Override

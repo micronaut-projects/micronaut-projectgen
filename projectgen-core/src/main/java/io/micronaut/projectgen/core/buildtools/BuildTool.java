@@ -86,6 +86,16 @@ public enum BuildTool {
         return Optional.empty();
     }
 
+    @NonNull
+    public static Optional<BuildTool> of(@NonNull String str) {
+        for (BuildTool bt : values()) {
+            if (bt.name().equalsIgnoreCase(str)) {
+                return Optional.of(bt);
+            }
+        }
+        return Optional.empty();
+    }
+
     public String getTitle() {
         return title;
     }

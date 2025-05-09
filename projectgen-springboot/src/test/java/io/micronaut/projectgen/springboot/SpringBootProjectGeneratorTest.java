@@ -4,6 +4,8 @@ import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.buildtools.Scope;
 import io.micronaut.projectgen.core.generator.ProjectGenerator;
 import io.micronaut.projectgen.core.io.MapOutputHandler;
+import io.micronaut.projectgen.core.options.GenericOptions;
+import io.micronaut.projectgen.core.options.GenericOptionsBuilder;
 import io.micronaut.projectgen.core.options.JdkVersion;
 import io.micronaut.projectgen.core.options.Language;
 import io.micronaut.projectgen.core.options.Options;
@@ -22,9 +24,9 @@ import static org.junit.jupiter.api.Assertions.*;
 class SpringBootProjectGeneratorTest {
 
     @Test
-    void testGenerateSpringBootMavenProject(SpringBootProjectGenerator projectGenerator) throws Exception {
+    void testGenerateSpringBootMavenProject(ProjectGenerator projectGenerator) throws Exception {
         MapOutputHandler outputHandler = new MapOutputHandler();
-        SpringBootOptions options = createOptions(List.of(BuildTool.MAVEN));
+        Options options = createOptions(List.of(BuildTool.MAVEN));
         projectGenerator.generate(options, outputHandler);
         Map<String, String> project = outputHandler.getProject();
         Set<String> expected = Set.of(
@@ -40,9 +42,9 @@ class SpringBootProjectGeneratorTest {
     }
 
     @Test
-    void testGenerateSpringBootGradleProject(SpringBootProjectGenerator projectGenerator) throws Exception {
+    void testGenerateSpringBootGradleProject(ProjectGenerator projectGenerator) throws Exception {
         MapOutputHandler outputHandler = new MapOutputHandler();
-        SpringBootOptions options = createOptions(List.of(BuildTool.GRADLE));
+        Options options = createOptions(List.of(BuildTool.GRADLE));
         projectGenerator.generate(options, outputHandler);
         Map<String, String> project = outputHandler.getProject();
 
@@ -69,12 +71,12 @@ class SpringBootProjectGeneratorTest {
         String gitignore = project.get(".gitignore");
     }
 
-    private static SpringBootOptions createOptions(List<BuildTool> buildTools) {
-        return SpringBootOptions.builder()
+    private static Options createOptions(List<BuildTool> buildTools) {
+        return GenericOptionsBuilder.builder().name("demo")
             .group("com.example")
             .name("demo")
             .packageName("com.example.demo")
-            .javaVersion(JdkVersion.JDK_21)
+            .java(JdkVersion.JDK_21)
             .buildTools(buildTools)
             .language(Language.JAVA)
             .features(Collections.emptyList())

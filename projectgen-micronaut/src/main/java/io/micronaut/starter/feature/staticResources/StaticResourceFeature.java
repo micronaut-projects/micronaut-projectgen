@@ -25,7 +25,6 @@ import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.feature.DefaultFeature;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.options.Options;
-import io.micronaut.projectgen.micronaut.MicronautOptions;
 import jakarta.inject.Singleton;
 
 import java.util.List;
@@ -67,11 +66,13 @@ public class StaticResourceFeature implements DefaultFeature {
 
     @Override
     public boolean supports(Options options) {
-        return options instanceof MicronautOptions mnOptions && mnOptions.applicationType() == ApplicationType.DEFAULT;
+        ApplicationType type = ApplicationType.of(options.template());
+        return type == ApplicationType.DEFAULT;
     }
 
     @Override
     public boolean shouldApply(Options options, Set<Feature> selectedFeatures) {
-        return options instanceof MicronautOptions mnOptions && mnOptions.applicationType() == ApplicationType.DEFAULT;
+        ApplicationType type = ApplicationType.of(options.template());
+        return type == ApplicationType.DEFAULT;
     }
 }

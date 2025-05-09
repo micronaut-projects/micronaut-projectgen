@@ -9,12 +9,14 @@ dependencies {
     implementation(libs.apache.commons.compress)
     annotationProcessor(mnSerde.micronaut.serde.processor)
     implementation(mnSerde.micronaut.serde.jackson)
+    compileOnly(libs.java.diff.utils)
     testAnnotationProcessor(mn.micronaut.inject.java)
     testImplementation(mnTest.micronaut.test.junit5)
     testRuntimeOnly(mnTest.junit.jupiter.engine)
     testImplementation(mnTest.junit.jupiter.params)
     compileOnly(libs.snakeyaml)
     compileOnly(libs.typesafeconfig)
+    testImplementation(libs.java.diff.utils)
 }
 rocker {
     configurations {

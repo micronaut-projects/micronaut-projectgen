@@ -20,6 +20,7 @@ import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.projectgen.core.feature.config.Properties;
 import io.micronaut.projectgen.core.feature.gitignore.GitIgnore;
+import io.micronaut.projectgen.core.options.GenericOptionsBuilder;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.javalibs.logging.Logback;
 import io.micronaut.projectgen.micronaut.features.httpclient.HttpClientFeature;
@@ -48,7 +49,8 @@ public class ApplicationTypeFunctionFeature extends ApplicationTypeFeature {
 
     @Override
     public boolean shouldApply(Options options, Set<Feature> selectedFeatures) {
-        return options instanceof MicronautOptions micronautOptions && micronautOptions.applicationType() == ApplicationType.FUNCTION;
+        ApplicationType applicationType = ApplicationType.of(options.template());
+        return applicationType == ApplicationType.FUNCTION;
     }
 
 

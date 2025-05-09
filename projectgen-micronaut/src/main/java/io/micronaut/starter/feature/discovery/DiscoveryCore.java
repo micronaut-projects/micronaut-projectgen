@@ -22,7 +22,6 @@ import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.micronaut.MicronautOptions;
 import io.micronaut.starter.feature.Category;
 import jakarta.inject.Singleton;
 
@@ -51,7 +50,7 @@ public class DiscoveryCore implements OpenRewriteFeature {
 
     @Override
     public boolean supports(Options options) {
-        return options instanceof MicronautOptions mnOptions && mnOptions.applicationType() != ApplicationType.CLI;
+        return ApplicationType.of(options.template()) != ApplicationType.CLI;
     }
 
     @Override
