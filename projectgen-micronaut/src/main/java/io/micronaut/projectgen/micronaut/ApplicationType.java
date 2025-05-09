@@ -46,7 +46,7 @@ public enum ApplicationType implements Named {
 
     public static ApplicationType of(@Nullable String template) {
         for (ApplicationType type : values()) {
-            if (template.equals(type.toString())) {
+            if (template.equalsIgnoreCase(type.toString())) {
                 return type;
             }
         }
