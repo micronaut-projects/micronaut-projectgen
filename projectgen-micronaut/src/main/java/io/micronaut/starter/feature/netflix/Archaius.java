@@ -22,11 +22,14 @@ import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.feature.DistributedConfigFeature;
 
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import jakarta.inject.Singleton;
+
+import java.util.List;
 
 @Requires(property = "micronaut.starter.feature.netflix.archaius.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class Archaius implements DistributedConfigFeature {
+public class Archaius implements DistributedConfigFeature, OpenRewriteFeature {
 
     @Override
     public String getName() {
@@ -44,11 +47,8 @@ public class Archaius implements DistributedConfigFeature {
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
-        module.addDependency(Dependency.builder()
-                .groupId("io.micronaut.netflix")
-                .artifactId("micronaut-netflix-archaius")
-                .compile());
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.netflix-archaius");
     }
+
 }
