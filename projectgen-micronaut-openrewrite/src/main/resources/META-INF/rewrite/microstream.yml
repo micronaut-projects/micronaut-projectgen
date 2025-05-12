@@ -1,0 +1,41 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.microstream
+displayName: Add Microstream dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.microstream.dependencies
+  - io.micronaut.starter.feature.microstream-annotations
+  - io.micronaut.starter.feature.microstream.micronaut.documentation
+  - io.micronaut.starter.feature.microstream.documentation.thirdparty
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.microstream.dependencies
+displayName: Add Microstream dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.microstream
+      artifactId: micronaut-microstream
+      configuration: implementation
+      scope: compile
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.microstream
+      artifactId: micronaut-microstream-annotations
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.microstream.micronaut.documentation
+displayName: Append a link to Micronaut Microstream documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-microstream/latest/guide
+      appendNewline: true
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.microstream.documentation.thirdparty
+displayName: Append a link to Microstream website
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://microstream.one/
+      appendNewline: true
