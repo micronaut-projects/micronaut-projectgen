@@ -20,6 +20,7 @@ import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
@@ -27,12 +28,13 @@ import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.microstream.rest.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class MicroStreamRest implements MicroStreamFeature {
+public class MicroStreamRest implements MicroStreamFeature, OpenRewriteFeature {
 
     public static final String NAME = "microstream-rest";
-    public static final String ARTIFACT_ID_MICRONAUT_MICROSTREAM_REST = "micronaut-microstream-rest";
 
     private final MicroStream microStream;
 
@@ -63,12 +65,8 @@ public class MicroStreamRest implements MicroStreamFeature {
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
-        module.addDependency(MicronautDependencyUtils.microstreamDependency()
-                .artifactId(ARTIFACT_ID_MICRONAUT_MICROSTREAM_REST)
-                .developmentOnly()
-        );
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.microstream-rest");
     }
 
     @Override
@@ -76,14 +74,4 @@ public class MicroStreamRest implements MicroStreamFeature {
         featureContext.addFeature(microStream);
     }
 
-    @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-microstream/latest/guide/#rest";
-    }
-
-    @Override
-    @Nullable
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://docs.microstream.one/manual/storage/rest-interface/index.html";
-    }
 }
