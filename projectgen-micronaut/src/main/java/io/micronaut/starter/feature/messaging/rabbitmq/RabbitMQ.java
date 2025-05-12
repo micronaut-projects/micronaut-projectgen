@@ -18,6 +18,7 @@ package io.micronaut.starter.feature.messaging.rabbitmq;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
@@ -28,9 +29,12 @@ import io.micronaut.starter.feature.testresources.EaseTestingFeature;
 import io.micronaut.starter.feature.testresources.TestResources;
 import jakarta.inject.Singleton;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.rabbitmq.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class RabbitMQ extends EaseTestingFeature implements MessagingFeature, SharedTestResourceFeature {
+public class RabbitMQ extends EaseTestingFeature implements MessagingFeature, SharedTestResourceFeature, OpenRewriteFeature {
 
     public static final String NAME = "rabbitmq";
 
@@ -54,19 +58,13 @@ public class RabbitMQ extends EaseTestingFeature implements MessagingFeature, Sh
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        List<String> recipes = new ArrayList<>();
         if (!generatorContext.isFeaturePresent(TestResources.class)) {
-            module.configuration().put("rabbitmq.uri", "amqp://localhost:5672");
+            recipes.add("io.micronaut.starter.feature.test-resources-conf");
         }
-        module.addDependency(Dependency.builder()
-                .groupId("io.micronaut.rabbitmq")
-                .artifactId("micronaut-rabbitmq")
-                .compile());
+        recipes.add("io.micronaut.starter.feature.rabbitmq");
+        return recipes;
     }
 
-    @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-rabbitmq/latest/guide/index.html";
-    }
 }
