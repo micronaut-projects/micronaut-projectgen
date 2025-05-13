@@ -15,89 +15,64 @@
  */
 package io.micronaut.projectgen.core.options;
 
+import io.micronaut.core.annotation.NonNull;
+import io.micronaut.core.annotation.Nullable;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
+import io.micronaut.projectgen.core.buildtools.gradle.GradleDsl;
+import io.micronaut.projectgen.core.buildtools.maven.Packaging;
+
 import java.util.*;
 
 /**
  * Project creation options.
 */
 public interface Options {
-    /**
-     *
-     * @return Operating System
-     */
-    default OperatingSystem operatingSystem() {
-        return null;
-    }
-
-    /**
-     *
-     * @return Project name
-     */
+    @NonNull
     String name();
 
-    /**
-     *
-     * @return Project Package name
-     */
-    String packageName();
+    @Nullable
+    OperatingSystem operatingSystem();
 
-    /**
-     *
-     * @return Features
-     */
-    List<String> features();
+    @Nullable
+    String template();
 
-    /**
-     *
-     * @return Language
-     */
+    @Nullable
     Language language();
 
-    /**
-     *
-     * @return Test framework
-     */
-    TestFramework testFramework();
-
-    /**
-     *
-     * @return Build Tool
-     */
+    @Nullable
     List<BuildTool> buildTools();
+
+    @Nullable
+    GradleDsl gradleDsl();
+
+    @Nullable
+    String group();
+
+    @Nullable
+    String artifact();
+
+    @Nullable
+    JdkVersion java();
+
+    @Nullable
+    String packageName();
+
+    @Nullable
+    String version();
+
+    @Nullable
+    Packaging packaging();
+
+    @NonNull
+    List<String> features();
+
+    @Nullable
+    TestFramework testFramework();
 
     default BuildTool getBuildTool() {
         List<BuildTool> tools = buildTools();
         return tools.isEmpty() ? null : tools.get(0);
     }
 
-    /**
-     *
-     * @return Java Version
-     */
-    JdkVersion javaVersion();
-
-    /**
-     *
-     * @return artifact
-     */
-    default String artifact() {
-        return null;
-    }
-
-    /**
-     *
-     * @return group
-     */
-    default String group() {
-        return null;
-    }
-
-    /**
-     *
-     * @return Version
-     */
-    default String version() {
-        return null;
-    }
+    Options withoutFeatures();
 }

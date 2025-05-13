@@ -27,7 +27,6 @@ import io.micronaut.projectgen.core.generator.Project;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.CoordinateResolver;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
-import io.micronaut.projectgen.micronaut.MicronautOptions;
 import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.micronaut.template.function.azure.azureFunctionGroovyJunit;
@@ -38,7 +37,6 @@ import io.micronaut.projectgen.micronaut.template.function.azure.azureFunctionSp
 import io.micronaut.projectgen.micronaut.template.function.azure.azureFunctionTriggerGroovy;
 import io.micronaut.projectgen.micronaut.template.function.azure.azureFunctionTriggerJava;
 import io.micronaut.projectgen.micronaut.template.function.azure.azureFunctionTriggerKotlin;
-import io.micronaut.projectgen.core.buildtools.BuildTool;
 import jakarta.inject.Singleton;
 
 @Requires(property = "micronaut.starter.feature.azure.function.http.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
@@ -101,7 +99,8 @@ public class AzureHttpFunction extends AbstractAzureFunction implements Feature 
 
     @Override
     protected void addFunctionTemplate(ModuleContext module, GeneratorContext generatorContext, Options options, Project project) {
-        if (generatorContext.getOptions() instanceof MicronautOptions micronautOptions && micronautOptions.applicationType() == ApplicationType.DEFAULT) {
+        ApplicationType applicationType = ApplicationType.of(generatorContext.getOptions().template());
+        if (applicationType == ApplicationType.DEFAULT) {
             String triggerFile = generatorContext.getSourcePath("/{packagePath}/Function");
             module.addTemplate(generatorContext.getOptions().language(), "trigger", triggerFile,
                     azureFunctionTriggerJava.template(project),

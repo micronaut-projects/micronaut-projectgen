@@ -21,11 +21,6 @@ import io.micronaut.projectgen.micronaut.ApplicationType;
 public abstract class AbstractJmsFeature implements JmsFeature {
 
     @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-jms/snapshot/guide/index.html";
-    }
-
-    @Override
     public boolean isPreview() {
         return true;
     }

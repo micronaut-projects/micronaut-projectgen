@@ -53,8 +53,8 @@ public class MicronautParentPomFeature implements ParentPomFeature {
     public void apply(GeneratorContext generatorContext) {
         ModuleContext module = generatorContext.getRootModule();
         if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())) {
-            if (generatorContext.getOptions().javaVersion() != null) {
-                String javaVersion = generatorContext.getOptions().javaVersion().asString();
+            if (generatorContext.getOptions().java() != null) {
+                String javaVersion = generatorContext.getOptions().java().asString();
                 module.buildProperties().put(PROPERTY_JDK_VERSION, javaVersion);
                 module.buildProperties().put("release.version", javaVersion);
             }

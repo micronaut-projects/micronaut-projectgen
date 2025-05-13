@@ -18,8 +18,9 @@ package io.micronaut.starter.application;
 import io.micronaut.projectgen.core.feature.BaseAvailableFeatures;
 import io.micronaut.projectgen.core.feature.Feature;
 
+import io.micronaut.projectgen.core.options.GenericOptionsBuilder;
+import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.ApplicationType;
-import io.micronaut.projectgen.micronaut.MicronautOptions;
 import jakarta.inject.Named;
 import jakarta.inject.Singleton;
 import java.util.List;
@@ -29,6 +30,16 @@ import java.util.List;
 public class MessagingAvailableFeatures extends BaseAvailableFeatures {
 
     public MessagingAvailableFeatures(List<Feature> features) {
-        super(features, f -> f.supports(MicronautOptions.builder().applicationType(ApplicationType.MESSAGING).build()));
+        super(features, f -> f.supports(GenericOptionsBuilder.builder().template(ApplicationType.MESSAGING.toString()).build()));
+    }
+
+    @Override
+    public boolean supports(Options options) {
+        return options.template().equals(ApplicationType.MESSAGING.toString());
+    }
+
+    @Override
+    public int getOrder() {
+        return 0;
     }
 }

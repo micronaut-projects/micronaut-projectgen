@@ -23,7 +23,6 @@ import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.micronaut.MicronautOptions;
 import io.micronaut.projectgen.micronaut.features.validation.MicronautHttpValidation;
 import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import io.micronaut.projectgen.core.buildtools.Scope;
@@ -54,6 +53,7 @@ public class HttpClientTest implements OpenRewriteFeature {
 
     @Override
     public List<String> getRecipes(GeneratorContext generatorContext) {
+        ApplicationType applicationType = ApplicationType.of(generatorContext.getOptions().template());
         if (hasHttpClientFeatureDependencyInScope(generatorContext, Scope.COMPILE)) {
             return Collections.emptyList();
         }
@@ -61,7 +61,7 @@ public class HttpClientTest implements OpenRewriteFeature {
         if (generatorContext.getFeatures().hasFeature(AwsLambdaCustomRuntime.class) || (generatorContext.getFeatures().hasFeature(AwsLambda.class) && generatorContext.getFeatures().hasFeature(GraalVM.class))) {
             recipes.add("io.micronaut.starter.feature.http-client-jdk.dependencies");
 
-        } else if (generatorContext.getOptions() instanceof MicronautOptions mnOptions && mnOptions.applicationType() == ApplicationType.DEFAULT) {
+        } else if (applicationType == ApplicationType.DEFAULT) {
             recipes.add(generatorContext.getFeatures().hasFeature(AwsLambda.class)
                 ? "io.micronaut.starter.feature.http-client-jdk.dependencies.test"
                 : "io.micronaut.starter.feature.http-client.dependencies.test");

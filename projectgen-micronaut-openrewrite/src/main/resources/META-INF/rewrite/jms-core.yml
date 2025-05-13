@@ -1,0 +1,16 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.jms-core
+displayName: Add Jms Core dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.jms-core.dependencies
+  - io.micronaut.starter.feature.micronaut-jms-docs
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.jms-core.dependencies
+displayName: Add Jms Core dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.jms
+      artifactId: micronaut-jms-core
+      configuration: implementation
+      scope: compile

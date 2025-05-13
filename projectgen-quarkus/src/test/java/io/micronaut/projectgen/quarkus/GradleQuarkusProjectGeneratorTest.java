@@ -2,10 +2,16 @@ package io.micronaut.projectgen.quarkus;
 
 import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.buildtools.Scope;
+import io.micronaut.projectgen.core.generator.ProjectGenerator;
 import io.micronaut.projectgen.core.io.MapOutputHandler;
+import io.micronaut.projectgen.core.options.GenericOptionsBuilder;
+import io.micronaut.projectgen.core.options.Options;
+import io.micronaut.projectgen.core.options.TestFramework;
 import io.micronaut.projectgen.test.BuildTestVerifier;
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -15,12 +21,14 @@ import static org.junit.jupiter.api.Assertions.*;
 class GradleQuarkusProjectGeneratorTest {
 
     @Test
-    void testGenerateQuarkusGradleProject(QuarkusProjectGenerator projectGenerator) throws Exception {
+    void testGenerateQuarkusGradleProject(ProjectGenerator projectGenerator) throws Exception {
         MapOutputHandler outputHandler = new MapOutputHandler();
-        QuarkusOptions options = QuarkusOptions.builder()
-            .buildTool(BuildTool.GRADLE_KOTLIN)
-            .feature("rest-assured")
-            .feature("quarkus-junit5-mockito")
+        Options options = GenericOptionsBuilder.builder()
+            .group("org.acme")
+            .artifact("code-with-quarkus")
+            .buildTools(List.of(BuildTool.GRADLE_KOTLIN))
+            .testFramework(TestFramework.JUNIT)
+            .features(List.of("rest-assured", "quarkus-junit5-mockito"))
             .build();
         projectGenerator.generate(options, outputHandler);
         Map<String, String> project = outputHandler.getProject();

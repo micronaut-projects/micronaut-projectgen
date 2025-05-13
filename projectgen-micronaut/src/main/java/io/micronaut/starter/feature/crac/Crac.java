@@ -25,7 +25,6 @@ import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
-import io.micronaut.projectgen.micronaut.MicronautOptions;
 import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import io.micronaut.projectgen.core.buildtools.gradle.GradlePlugin;
 import io.micronaut.starter.feature.Category;
@@ -67,8 +66,13 @@ public class Crac implements RequireEagerSingletonInitializationFeature, OpenRew
 
     @Override
     public boolean supports(Options options) {
-        return options instanceof MicronautOptions micronautOptions &&
-                (micronautOptions.applicationType() == ApplicationType.DEFAULT || micronautOptions.applicationType() == ApplicationType.CLI);
+        if (ApplicationType.of(options.template()) == ApplicationType.DEFAULT) {
+            return true;
+        }
+        if (ApplicationType.of(options.template()) == ApplicationType.CLI) {
+            return true;
+        }
+        return false;
     }
 
     @Override

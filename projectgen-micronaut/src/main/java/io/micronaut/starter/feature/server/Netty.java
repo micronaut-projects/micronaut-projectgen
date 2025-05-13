@@ -20,18 +20,10 @@ import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.utils.OptionUtils;
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.micronaut.MicronautOptions;
 import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
-import io.micronaut.projectgen.core.feature.DefaultFeature;
-import io.micronaut.projectgen.core.feature.Feature;
-import io.micronaut.starter.feature.function.FunctionFeature;
-import io.micronaut.projectgen.core.buildtools.BuildTool;
-import io.micronaut.projectgen.core.options.Options;
 
 import jakarta.inject.Singleton;
-import java.util.Set;
 
 @Requires(property = "micronaut.starter.feature.netty.server.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton

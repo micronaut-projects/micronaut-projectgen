@@ -5,8 +5,9 @@ import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.generator.DefaultProjectGenerator;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.generator.Project;
+import io.micronaut.projectgen.core.io.ConsoleOutput;
+import io.micronaut.projectgen.core.options.GenericOptionsBuilder;
 import io.micronaut.projectgen.core.options.Options;
-import io.micronaut.projectgen.core.options.OptionsImpl;
 import io.micronaut.projectgen.core.utils.NameUtils;
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
 import jakarta.inject.Inject;
@@ -21,9 +22,9 @@ class GradleDependencyTest {
 
     @Test
     void gradleDependencyWithComments() {
-        Options options = OptionsImpl.builder().name("demo").build();
+        Options options = GenericOptionsBuilder.builder().name("demo").build();
         Project project = NameUtils.parse(options.name());
-        GeneratorContext generatorContext = projectGenerator.createGeneratorContext(project, options, null, null);
+        GeneratorContext generatorContext = projectGenerator.createGeneratorContext(project, options, ConsoleOutput.NOOP);
         GradleDependency gradleDependency = new GradleDependency(
             Dependency.builder().groupId("org.codehaus.groovy").artifactId("groovy-nio").version("3.0.5").scope(Scope.COMPILE).build(),
             options,

@@ -1,0 +1,30 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.jms-activemq-artemis
+displayName: Add Jms Activemq Artemis dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.jms-activemq-artemis.dependencies
+  - io.micronaut.starter.feature.micronaut-jms-docs
+  - io.micronaut.starter.feature.jms-activemq-artemis.configuration
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.jms-activemq-artemis.dependencies
+displayName: Add Jms Activemq Artemis dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.jms
+      artifactId: micronaut-jms-activemq-artemis
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.jms-activemq-artemis.configuration
+displayName: Add Jms Activemq Artemis configuration
+preconditions:
+  - io.micronaut.starter.openrewrite.recipes.FindApplicationProperties
+recipeList:
+  - org.openrewrite.properties.AddProperty:
+      property: micronaut.jms.activemq.artemis.enabled
+      value: true
+  - org.openrewrite.properties.AddProperty:
+      property: micronaut.jms.activemq.artemis.connection-string
+      value: tcp://localhost:61616

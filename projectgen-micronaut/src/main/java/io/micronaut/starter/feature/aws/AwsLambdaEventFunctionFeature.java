@@ -17,7 +17,6 @@ package io.micronaut.starter.feature.aws;
 
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.ApplicationType;
-import io.micronaut.projectgen.micronaut.MicronautOptions;
 import io.micronaut.starter.feature.function.awslambda.AwsLambda;
 
 /**
@@ -31,6 +30,7 @@ public abstract class AwsLambdaEventFunctionFeature extends AwsLambdaRelatedFeat
 
     @Override
     public boolean supports(Options options) {
-        return options instanceof MicronautOptions mnOptions && mnOptions.applicationType() == ApplicationType.FUNCTION;
+        ApplicationType applicationType = ApplicationType.of(options.template());
+        return applicationType == ApplicationType.FUNCTION;
     }
 }

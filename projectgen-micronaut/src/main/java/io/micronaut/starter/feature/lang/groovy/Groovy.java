@@ -19,11 +19,11 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.feature.GroovyApplicationFeature;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.options.GenericOptionsBuilder;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
-import io.micronaut.projectgen.micronaut.MicronautOptions;
 import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import io.micronaut.starter.feature.ApplicationFeature;
 import io.micronaut.projectgen.core.feature.Feature;
@@ -81,10 +81,10 @@ public class Groovy implements LanguageFeature {
 
     protected void processSelectedFeatured(FeatureContext featureContext, Predicate<Feature> filter) {
         if (!featureContext.isPresent(ApplicationFeature.class)) {
-            ApplicationType type = featureContext.getOptions() instanceof MicronautOptions mnOptions ? mnOptions.applicationType() : null;
+            ApplicationType type = ApplicationType.of(featureContext.getOptions().template());
             applicationFeatures.stream()
                     .filter(filter)
-                    .filter(f -> f.supports(MicronautOptions.builder().applicationType(type).build()))
+                    .filter(f -> f.supports(GenericOptionsBuilder.builder().template(type.toString()).build()))
                     .findFirst()
                     .ifPresent(featureContext::addFeature);
         }

@@ -41,31 +41,34 @@ import java.util.function.Function;
 public class DefaultProjectGenerator implements ProjectGenerator {
     private final ContextFactory contextFactory;
     private final BeanContext beanContext;
+    private final List<AvailableFeatures> availableFeaturesList;
 
-    public DefaultProjectGenerator(ContextFactory contextFactory, BeanContext beanContext) {
+    public DefaultProjectGenerator(ContextFactory contextFactory,
+                                   BeanContext beanContext,
+                                   List<AvailableFeatures> availableFeaturesList) {
         this.contextFactory = contextFactory;
         this.beanContext = beanContext;
+        this.availableFeaturesList = availableFeaturesList;
     }
 
     @Override
     public void generate(Options options,
                          OutputHandler outputHandler,
-                         ConsoleOutput consoleOutput,
-                         Provider<AvailableFeatures> availableFeaturesProvider) throws Exception {
+                         ConsoleOutput consoleOutput) throws Exception {
         Project project = NameUtils.parse(options.name());
-        GeneratorContext generatorContext = createGeneratorContext(project, options, availableFeaturesProvider, consoleOutput);
+        GeneratorContext generatorContext = createGeneratorContext(project, options, consoleOutput);
         generatorContext.applyFeatures();
         renderTemplates(outputHandler, project, generatorContext);
     }
 
     public GeneratorContext createGeneratorContext(Project project,
                                                    Options options,
-                                                   Provider<AvailableFeatures> availableFeaturesProvider,
                                                    ConsoleOutput consoleOutput) {
         List<String> selectedFeatures = options.features();
-        AvailableFeatures availableFeatures = availableFeaturesProvider == null
-            ? beanContext.getBean(AvailableFeatures.class)
-            : availableFeaturesProvider.get();
+        AvailableFeatures availableFeatures = availableFeaturesList.stream()
+            .filter(feat -> feat.supports(options))
+            .findFirst()
+            .orElseThrow();
         FeatureContext featureContext = contextFactory.createFeatureContext(availableFeatures, selectedFeatures, options);
         return contextFactory.createGeneratorContext(project, featureContext, consoleOutput);
     }

@@ -16,6 +16,8 @@
 package io.micronaut.projectgen.core.feature;
 
 import io.micronaut.core.annotation.NonNull;
+import io.micronaut.core.order.Ordered;
+import io.micronaut.projectgen.core.options.Options;
 
 import java.util.Optional;
 import java.util.stream.Stream;
@@ -23,7 +25,9 @@ import java.util.stream.Stream;
 /**
  * Available Features.
  */
-public interface AvailableFeatures extends Iterable<String> {
+public interface AvailableFeatures extends Iterable<String>, Ordered {
+
+    boolean supports(Options options);
 
     Optional<Feature> findFeature(@NonNull String name);
 

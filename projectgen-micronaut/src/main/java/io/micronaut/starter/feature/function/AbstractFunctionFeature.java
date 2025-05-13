@@ -22,7 +22,6 @@ import io.micronaut.projectgen.core.rocker.RockerWritable;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.Project;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.micronaut.MicronautOptions;
 import io.micronaut.starter.feature.MicronautRuntimeFeature;
 import io.micronaut.starter.feature.chatbots.ChatBotsFeature;
 import io.micronaut.projectgen.micronaut.template.function.http.httpFunctionGroovyController;
@@ -47,8 +46,7 @@ public abstract class AbstractFunctionFeature implements FunctionFeature, Micron
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        ApplicationType applicationType = generatorContext.getOptions() instanceof MicronautOptions mnOptions
-                ? mnOptions.applicationType() : null;
+        ApplicationType applicationType = ApplicationType.of(generatorContext.getOptions().template());
         applyFunction(generatorContext, applicationType);
         addMicronautRuntimeBuildProperty(generatorContext);
     }

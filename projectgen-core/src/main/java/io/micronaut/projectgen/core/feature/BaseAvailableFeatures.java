@@ -17,6 +17,8 @@ package io.micronaut.projectgen.core.feature;
 
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.annotation.Nullable;
+import io.micronaut.core.order.Ordered;
+import io.micronaut.projectgen.core.options.Options;
 import jakarta.inject.Singleton;
 
 import java.util.*;
@@ -56,6 +58,11 @@ public class BaseAvailableFeatures implements AvailableFeatures {
     }
 
     @Override
+    public boolean supports(Options options) {
+        return true;
+    }
+
+    @Override
     public Optional<Feature> findFeature(@NonNull String name) {
         return findFeature(name, false);
     }
@@ -79,5 +86,10 @@ public class BaseAvailableFeatures implements AvailableFeatures {
     @Override
     public Stream<Feature> getAllFeatures() {
         return features.values().stream();
+    }
+
+    @Override
+    public int getOrder() {
+        return Ordered.LOWEST_PRECEDENCE;
     }
 }
