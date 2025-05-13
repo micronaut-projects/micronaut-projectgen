@@ -19,13 +19,13 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
-import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import jakarta.inject.Singleton;
+import java.util.List;
 
 @Requires(property = "micronaut.starter.feature.mqttv3.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class MqttV3 implements MqttFeature {
+public class MqttV3 implements MqttFeature, OpenRewriteFeature {
 
     public static final String NAME = "mqttv3";
 
@@ -41,12 +41,9 @@ public class MqttV3 implements MqttFeature {
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        MqttFeature.super.apply(generatorContext);
-        ModuleContext module = generatorContext.getRootModule();
-        module.addDependency(Dependency.builder()
-                .groupId("io.micronaut.mqtt")
-                .artifactId("micronaut-mqttv3")
-                .compile());
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        List<String> result = MqttFeature.super.getRecipes(generatorContext);
+        result.add("io.micronaut.starter.feature.mqttv3");
+        return result;
     }
 }

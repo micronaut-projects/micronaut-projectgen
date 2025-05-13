@@ -21,15 +21,18 @@ import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.feature.database.TestContainers;
 import io.micronaut.starter.feature.messaging.SharedTestResourceFeature;
 import io.micronaut.starter.feature.testresources.EaseTestingFeature;
 import io.micronaut.starter.feature.testresources.TestResources;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.mqtt.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class Mqtt extends EaseTestingFeature implements MqttFeature, SharedTestResourceFeature {
+public class Mqtt extends EaseTestingFeature implements MqttFeature, SharedTestResourceFeature, OpenRewriteFeature {
 
     public static final String NAME = "mqtt";
 
@@ -49,12 +52,10 @@ public class Mqtt extends EaseTestingFeature implements MqttFeature, SharedTestR
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        MqttFeature.super.apply(generatorContext);
-        ModuleContext module = generatorContext.getRootModule();
-        module.addDependency(Dependency.builder()
-                .groupId("io.micronaut.mqtt")
-                .artifactId("micronaut-mqttv5")
-                .compile());
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        List<String> result = MqttFeature.super.getRecipes(generatorContext);
+        result.add("io.micronaut.starter.feature.mqtt");
+        return result;
     }
+
 }

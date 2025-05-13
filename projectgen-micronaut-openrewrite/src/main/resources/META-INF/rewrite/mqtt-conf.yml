@@ -1,0 +1,10 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.mqtt-conf
+displayName: Add Mqtt configuration
+preconditions:
+  - io.micronaut.starter.openrewrite.recipes.FindApplicationProperties
+recipeList:
+  - org.openrewrite.properties.AddProperty:
+      property: mqtt.client.client-id
+      value: ${random.uuid}
+

@@ -15,11 +15,13 @@
  */
 package io.micronaut.starter.feature.messaging.mqtt;
 
-import io.micronaut.projectgen.core.generator.ModuleContext;
-import io.micronaut.projectgen.micronaut.ApplicationType;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.starter.feature.messaging.MessagingFeature;
 import io.micronaut.starter.feature.testresources.TestResources;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Sub interface for mqtt features.
@@ -27,7 +29,7 @@ import io.micronaut.starter.feature.testresources.TestResources;
  * @author James Kleeh
  * @since 2.2.0
  */
-public interface MqttFeature extends MessagingFeature {
+public interface MqttFeature extends OpenRewriteFeature, MessagingFeature {
 
     @Override
     default String getDescription() {
@@ -35,16 +37,11 @@ public interface MqttFeature extends MessagingFeature {
     }
 
     @Override
-    default String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-mqtt/latest/guide/index.html";
-    }
-
-    @Override
-    default void apply(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
+    default List<String> getRecipes(GeneratorContext generatorContext) {
+        List<String> result = new ArrayList<>();
         if (!generatorContext.isFeaturePresent(TestResources.class)) {
-            module.configuration().put("mqtt.client.server-uri", "tcp://localhost:1883");
+            result.add("io.micronaut.starter.feature.mqtt-uri-conf");
         }
-        module.configuration().put("mqtt.client.client-id", "${random.uuid}");
+        return result;
     }
 }
