@@ -22,12 +22,15 @@ import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.feature.database.Oracle;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.jms.oracle.aq.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class OracleAdvancedQueuing extends AbstractJmsFeature {
+public class OracleAdvancedQueuing extends AbstractJmsFeature implements OpenRewriteFeature {
 
     public static final String NAME = "jms-oracle-aq";
 
@@ -68,22 +71,8 @@ public class OracleAdvancedQueuing extends AbstractJmsFeature {
     }
 
     @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://docs.oracle.com/en/database/oracle/oracle-database/21/adque/aq-introduction.html";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.jms-oracle-aq");
     }
 
-    @Override
-    public void apply(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
-        module.addDependency(Dependency.builder()
-                .groupId("javax.transaction")
-                .artifactId("jta")
-                .version("1.1")
-                .compile());
-        module.addDependency(Dependency.builder()
-                .groupId("com.oracle.database.messaging")
-                .artifactId("aqapi")
-                .version("19.3.0.0")
-                .compile());
-    }
 }

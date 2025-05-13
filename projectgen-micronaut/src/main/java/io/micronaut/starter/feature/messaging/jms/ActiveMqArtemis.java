@@ -22,11 +22,14 @@ import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import jakarta.inject.Singleton;
+
+import java.util.List;
 
 @Requires(property = "micronaut.starter.feature.jms.activemq.artemis.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class ActiveMqArtemis extends AbstractJmsFeature {
+public class ActiveMqArtemis extends AbstractJmsFeature implements OpenRewriteFeature {
 
     public static final String NAME = "jms-activemq-artemis";
 
@@ -47,13 +50,8 @@ public class ActiveMqArtemis extends AbstractJmsFeature {
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
-        module.configuration().put("micronaut.jms.activemq.artemis.enabled", true);
-        module.configuration().put("micronaut.jms.activemq.artemis.connection-string", "tcp://localhost:61616");
-        module.addDependency(Dependency.builder()
-                .groupId("io.micronaut.jms")
-                .artifactId("micronaut-jms-activemq-artemis")
-                .compile());
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.jms-activemq-artemis");
     }
+
 }

@@ -1,0 +1,30 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.jms-activemq-classic
+displayName: Add Jms ActiveMq Classic dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.jms-activemq-classic.dependencies
+  - io.micronaut.starter.feature.micronaut-jms-docs
+  - io.micronaut.starter.feature.jms-activemq-classic.configuration
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.jms-activemq-classic.dependencies
+displayName: Add Jms ActiveMq Classic dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.jms
+      artifactId: micronaut-jms-activemq-classic
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.jms-activemq-classic.configuration
+displayName: Add Jms ActiveMq Classic Configuration
+preconditions:
+  - io.micronaut.starter.openrewrite.recipes.FindApplicationProperties
+recipeList:
+  - org.openrewrite.properties.AddProperty:
+      property: micronaut.jms.activemq.classic.enabled
+      value: true
+  - org.openrewrite.properties.AddProperty:
+      property: micronaut.jms.activemq.classic.connection-string
+      value: tcp://localhost:61616
