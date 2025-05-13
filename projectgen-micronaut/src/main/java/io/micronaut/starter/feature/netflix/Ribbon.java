@@ -19,6 +19,7 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.feature.config.Configuration;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
@@ -27,9 +28,11 @@ import io.micronaut.projectgen.core.feature.Feature;
 
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.netflix.ribbon.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class Ribbon implements Feature {
+public class Ribbon implements OpenRewriteFeature {
 
     @Override
     public String getName() {
@@ -47,24 +50,13 @@ public class Ribbon implements Feature {
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
-        Configuration configuration = module.configuration();
-        configuration.put("ribbon.VipAddress", "test");
-        configuration.put("ribbon.ServerListRefreshInterval", 2000);
-        module.addDependency(Dependency.builder()
-                .groupId("io.micronaut.netflix")
-                .artifactId("micronaut-netflix-ribbon")
-                .compile());
-    }
-
-    @Override
     public String getCategory() {
         return Category.CLIENT;
     }
 
     @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://docs.micronaut.io/latest/guide/index.html#netflixRibbon";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.netflix-ribbon");
     }
+
 }
