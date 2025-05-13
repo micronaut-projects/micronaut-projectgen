@@ -22,7 +22,7 @@ class Log4j2Test {
         String buildGradle = project.get("build.gradle.kts");
         assertNotNull(buildGradle);
         BuildTestVerifier verifier = BuildTestVerifier.of(buildGradle, options);
-        assertTrue(verifier.hasDependency("org.apache.logging.log4j", "log4j-bom", Scope.COMPILE), buildGradle);
+        assertTrue(verifier.hasBom("org.apache.logging.log4j", "log4j-bom", Scope.COMPILE), buildGradle);
         assertTrue(verifier.hasDependency("org.apache.logging.log4j", "log4j-api", Scope.COMPILE), buildGradle);
         assertTrue(verifier.hasDependency("org.apache.logging.log4j", "log4j-core", Scope.RUNTIME), buildGradle);
         assertTrue(verifier.hasDependency("org.apache.logging.log4j", "log4j-slf4j-impl", Scope.RUNTIME), buildGradle);
