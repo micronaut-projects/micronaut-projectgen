@@ -13,8 +13,8 @@ recipeList:
   - org.openrewrite.java.dependencies.AddDependency:
       groupId: io.micronaut.microstream
       artifactId: micronaut-microstream-rest
-      configuration: devlopmentOnly
-      scope: compile
+      configuration: developmentOnly
+      scope: provided
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.microstream-rest.micronaut.documentation
