@@ -1,0 +1,35 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.gcp-pubsub
+displayName: Add Gcp PubSub dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.gcp-pubsub.dependencies
+  - io.micronaut.starter.feature.gcp-pubsub.micronaut.documentation
+  - io.micronaut.starter.feature.gcp-pubsub.documentation.thirdparty
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.gcp-pubsub.dependencies
+displayName: Add Gcp PubSub dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.gcp
+      artifactId: micronaut-gcp-pubsub
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.gcp-pubsub.micronaut.documentation
+displayName: Append a link to Micronaut Gcp Pubsub documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-gcp/latest/guide/#pubsub
+      appendNewline: true
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.gcp-pubsub.documentation.thirdparty
+displayName: Append a link to Gcp Pubsub website
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://cloud.google.com/pubsub/docs
+      appendNewline: true
