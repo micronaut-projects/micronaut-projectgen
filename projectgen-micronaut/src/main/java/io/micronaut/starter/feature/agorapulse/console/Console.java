@@ -26,14 +26,12 @@ import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Coordinate;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
-import io.micronaut.projectgen.micronaut.MicronautOptions;
 import io.micronaut.starter.feature.Category;
 import io.micronaut.starter.feature.agorapulse.AgoraPulseFeature;
 import io.micronaut.projectgen.micronaut.template.agorapulse.console.consoleGroovyDsl;
 import io.micronaut.projectgen.micronaut.template.agorapulse.console.consoleGroovyHttp;
 import io.micronaut.projectgen.micronaut.template.agorapulse.console.consoleKotlinHttp;
 import io.micronaut.starter.feature.agorapulse.worker.Worker;
-import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.options.Language;
 import io.micronaut.projectgen.core.rocker.RockerTemplate;
 import io.micronaut.starter.util.VersionInfo;
@@ -44,7 +42,6 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
-import java.util.UUID;
 
 @Requires(property = "micronaut.starter.feature.agorapulse.micronaut.console.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
@@ -77,7 +74,8 @@ public class Console implements AgoraPulseFeature {
 
     @Override
     public boolean supports(Options options) {
-        return options instanceof MicronautOptions mnOptions && mnOptions.applicationType() == ApplicationType.DEFAULT;
+        ApplicationType applicationType = ApplicationType.of(options.template());
+        return applicationType == ApplicationType.DEFAULT;
     }
 
     @Override

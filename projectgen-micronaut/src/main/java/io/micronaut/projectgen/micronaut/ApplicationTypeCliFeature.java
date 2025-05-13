@@ -20,6 +20,7 @@ import io.micronaut.projectgen.core.buildtools.gradle.Gradle;
 import io.micronaut.projectgen.core.feature.*;
 import io.micronaut.projectgen.core.feature.config.Properties;
 import io.micronaut.projectgen.core.feature.gitignore.GitIgnore;
+import io.micronaut.projectgen.core.options.GenericOptionsBuilder;
 import io.micronaut.projectgen.core.options.Language;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.javalibs.logging.Logback;
@@ -49,7 +50,7 @@ public class ApplicationTypeCliFeature extends ApplicationTypeFeature {
                                      List<KotlinApplicationFeature> kotlinApplicationFeatures,
                                      List<GroovyApplicationFeature> groovyApplicationFeatures) {
         super(gradle, micronautTestJunit5, micronautTestSpock, properties, logback, gitIgnore);
-        Options options = MicronautOptions.builder().applicationType(ApplicationType.CLI).build();
+        Options options = GenericOptionsBuilder.builder().template(ApplicationType.CLI.toString()).build();
         this.javaApplicationFeature = javaApplicationFeatures.stream().filter(f -> f.supports(options)).findFirst().orElse(null);
         this.kotlinApplicationFeature = kotlinApplicationFeatures.stream().filter(f -> f.supports(options)).findFirst().orElse(null);
         this.groovyApplicationFeature = groovyApplicationFeatures.stream().filter(f -> f.supports(options)).findFirst().orElse(null);
@@ -71,7 +72,8 @@ public class ApplicationTypeCliFeature extends ApplicationTypeFeature {
 
     @Override
     public boolean shouldApply(Options options, Set<Feature> selectedFeatures) {
-        return options instanceof MicronautOptions micronautOptions && micronautOptions.applicationType() == ApplicationType.CLI;
+        ApplicationType applicationType = ApplicationType.of(options.template());
+        return applicationType == ApplicationType.CLI;
     }
 
     @Override

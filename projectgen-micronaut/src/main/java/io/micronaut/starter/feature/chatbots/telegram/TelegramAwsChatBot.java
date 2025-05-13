@@ -24,7 +24,6 @@ import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.Project;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
-import io.micronaut.projectgen.micronaut.MicronautOptions;
 import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.starter.feature.aws.AwsFeature;
@@ -67,7 +66,8 @@ public class TelegramAwsChatBot extends ChatBotsTelegram implements AwsFeature, 
 
     @Override
     public boolean supports(Options options) {
-        return options instanceof MicronautOptions mnOptions && mnOptions.applicationType() == ApplicationType.FUNCTION;
+        ApplicationType applicationType = ApplicationType.of(options.template());
+        return applicationType == ApplicationType.FUNCTION;
     }
 
     @NonNull

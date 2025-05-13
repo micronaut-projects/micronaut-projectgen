@@ -21,13 +21,13 @@ import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.options.GenericOptionsBuilder;
 import io.micronaut.projectgen.core.rocker.RockerWritable;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.Project;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
-import io.micronaut.projectgen.micronaut.MicronautOptions;
 import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import io.micronaut.starter.feature.ApplicationFeature;
 import io.micronaut.starter.feature.Category;
@@ -69,8 +69,8 @@ public class AwsLambdaCustomRuntime implements FunctionFeature, ApplicationFeatu
     @Override
     public void processSelectedFeatures(FeatureContext featureContext) {
         AwsLambda awsLambda = this.awsLambda.get();
-        ApplicationType applicationType = featureContext.getOptions() instanceof MicronautOptions mnOptions ? mnOptions.applicationType() : null;
-        if (awsLambda.supports(MicronautOptions.builder().applicationType(applicationType).build()) && !featureContext.isPresent(AwsLambda.class)) {
+        ApplicationType applicationType = ApplicationType.of(featureContext.getOptions().template());
+        if (awsLambda.supports(GenericOptionsBuilder.builder().template(applicationType.toString()).build()) && !featureContext.isPresent(AwsLambda.class)) {
             featureContext.addFeature(awsLambda);
         }
         if (!featureContext.isPresent(HttpClientFeature.class)) {
@@ -126,7 +126,8 @@ public class AwsLambdaCustomRuntime implements FunctionFeature, ApplicationFeatu
     }
 
     public boolean shouldGenerateMainClassForRuntime(GeneratorContext generatorContext) {
-        return generatorContext.getOptions() instanceof MicronautOptions micronautOptions && micronautOptions.applicationType() == ApplicationType.FUNCTION &&
+        ApplicationType applicationType = ApplicationType.of(generatorContext.getOptions().template());
+        return applicationType == ApplicationType.FUNCTION &&
                 generatorContext.getFeatures().isFeaturePresent(AwsLambda.class);
     }
 
@@ -135,7 +136,7 @@ public class AwsLambdaCustomRuntime implements FunctionFeature, ApplicationFeatu
     public String mainClassName(GeneratorContext generatorContext) {
         Features features = generatorContext.getFeatures();
         if (features.isFeaturePresent(AwsLambda.class)) {
-            ApplicationType applicationType = generatorContext.getOptions() instanceof MicronautOptions mnOptions ? mnOptions.applicationType() : null;
+            ApplicationType applicationType = ApplicationType.of(generatorContext.getOptions().template());
             if (applicationType == ApplicationType.DEFAULT) {
                 return AwsLambdaCustomRuntime.MAIN_CLASS_NAME;
             } else if (applicationType == ApplicationType.FUNCTION) {

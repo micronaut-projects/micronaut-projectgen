@@ -21,7 +21,6 @@ import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.micronaut.MicronautOptions;
 import io.micronaut.starter.feature.*;
 import io.micronaut.starter.feature.github.workflows.WorkflowsUtils;
 import io.micronaut.projectgen.micronaut.template.openApiProperties;
@@ -41,7 +40,8 @@ abstract class OpenApiView implements Feature, MicronautServerDependent, Contrib
 
     @Override
     public boolean supports(Options options) {
-        return options instanceof MicronautOptions mnOptions && mnOptions.applicationType() == ApplicationType.DEFAULT;
+        ApplicationType type = ApplicationType.of(options.template());
+        return type == ApplicationType.DEFAULT;
     }
 
     @Override

@@ -31,16 +31,10 @@ import jakarta.inject.Provider;
 public interface ProjectGenerator {
 
     default void generate(@NonNull Options options, @NonNull OutputHandler outputHandler) throws Exception {
-        generate(options, outputHandler, ConsoleOutput.NOOP, null);
-    }
-
-    default void generate(@NonNull Options options, @NonNull OutputHandler outputHandler, @Nullable Provider<AvailableFeatures> availableFeaturesProvider) throws Exception {
-        generate(options, outputHandler, ConsoleOutput.NOOP, availableFeaturesProvider);
+        generate(options, outputHandler, ConsoleOutput.NOOP);
     }
 
     default void generate(@NonNull Options options, @NonNull OutputHandler outputHandler, ConsoleOutput consoleOutput) throws Exception {
-        generate(options, outputHandler, consoleOutput, null);
+        generate(options, outputHandler, consoleOutput);
     }
-
-    void generate(@NonNull Options options, @NonNull OutputHandler outputHandler, ConsoleOutput consoleOutput, @Nullable Provider<AvailableFeatures> availableFeaturesProvider) throws Exception;
 }

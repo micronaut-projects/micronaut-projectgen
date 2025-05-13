@@ -46,7 +46,7 @@ public class GoogleCloudFunctionFeatureValidator implements FeatureValidator {
 
     @Override
     public void validatePostProcessing(Options options, Set<Feature> features) {
-        if (features.stream().anyMatch(GoogleCloudFunction.class::isInstance) && !supports(options.javaVersion())) {
+        if (features.stream().anyMatch(GoogleCloudFunction.class::isInstance) && !supports(options.java())) {
             throw new IllegalArgumentException("""
                     Google Cloud Function currently only supports JDK 11 and 17 -- \
                     https://cloud.google.com/functions/docs/concepts/java-runtime""");

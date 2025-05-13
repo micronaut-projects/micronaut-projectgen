@@ -21,7 +21,6 @@ import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.Project;
-import io.micronaut.projectgen.micronaut.MicronautOptions;
 import io.micronaut.starter.feature.function.HandlerClassFeature;
 import jakarta.inject.Singleton;
 
@@ -43,7 +42,8 @@ public class FunctionAwsLambdaHandlerProvider implements HandlerClassFeature {
 
     @Override
     public boolean supports(Options options) {
-        return options instanceof MicronautOptions mnOptions && mnOptions.applicationType() == ApplicationType.FUNCTION;
+        ApplicationType applicationType = ApplicationType.of(options.template());
+        return applicationType == ApplicationType.FUNCTION;
     }
 
     @Override

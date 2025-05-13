@@ -25,13 +25,8 @@ import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.dependencies.Coordinate;
-import io.micronaut.projectgen.core.buildtools.dependencies.CoordinateResolver;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
-import io.micronaut.projectgen.micronaut.MicronautOptions;
 import io.micronaut.projectgen.micronaut.features.validator.MicronautValidationFeature;
 import io.micronaut.projectgen.micronaut.features.validator.ValidationFeature;
-import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.feature.FeatureContext;
@@ -42,7 +37,6 @@ import io.micronaut.projectgen.micronaut.template.kotlin.homeRouteKotlin;
 import io.micronaut.projectgen.micronaut.template.kotlin.jacksonFeatureKotlin;
 import io.micronaut.projectgen.micronaut.template.kotlin.nameTransformerKotlin;
 import io.micronaut.projectgen.micronaut.template.kotlin.uppercaseTransformerKotlin;
-import io.micronaut.starter.feature.other.OpenRewrite;
 import io.micronaut.starter.feature.server.ThirdPartyServerFeature;
 import io.micronaut.projectgen.core.options.Language;
 import io.micronaut.projectgen.core.rocker.RockerTemplate;
@@ -64,7 +58,8 @@ public class Ktor implements KotlinApplicationFeature, ThirdPartyServerFeature, 
 
     @Override
     public boolean supports(Options options) {
-        return options instanceof MicronautOptions mnOptions && (mnOptions.applicationType() == ApplicationType.DEFAULT);
+        ApplicationType type = ApplicationType.of(options.template());
+        return type == ApplicationType.DEFAULT;
     }
 
     @Override
