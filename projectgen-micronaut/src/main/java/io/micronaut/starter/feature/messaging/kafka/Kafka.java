@@ -18,6 +18,7 @@ package io.micronaut.starter.feature.messaging.kafka;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
@@ -33,17 +34,13 @@ import io.micronaut.starter.feature.testresources.TestResources;
 import io.micronaut.projectgen.core.options.Options;
 import jakarta.inject.Singleton;
 
+import java.util.List;
 import java.util.Set;
 
 @Requires(property = "micronaut.starter.feature.kafka.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Kafka extends EaseTestingFeature
-        implements DefaultFeature, MessagingFeature, SharedTestResourceFeature, ContributingTestContainerArtifactId {
-    public static final Dependency MICRONAUT_KAFKA = MicronautDependencyUtils
-            .kafkaDependency()
-            .artifactId("micronaut-kafka")
-            .compile()
-            .build();
+        implements DefaultFeature, MessagingFeature, SharedTestResourceFeature, ContributingTestContainerArtifactId, OpenRewriteFeature {
 
     public static final String NAME = "kafka";
     private static final String TEST_CONTAINERS_ARTIFACT_ID_KAFKA = "kafka";
@@ -68,9 +65,8 @@ public class Kafka extends EaseTestingFeature
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
-        module.addDependency(MICRONAUT_KAFKA);
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.kafka");
     }
 
     @Override
@@ -78,11 +74,6 @@ public class Kafka extends EaseTestingFeature
         ApplicationType applicationType = ApplicationType.of(options.template());
         return applicationType == ApplicationType.MESSAGING &&
                 selectedFeatures.stream().noneMatch(MessagingFeature.class::isInstance);
-    }
-
-    @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-kafka/latest/guide/index.html";
     }
 
     @Override

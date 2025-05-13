@@ -1,0 +1,25 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.kafka-streams
+displayName: Add Kafka Streams dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.kafka-streams.dependencies
+  - io.micronaut.starter.feature.kafka-streams.micronaut.documentation
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.kafka-streams.dependencies
+displayName: Add Kafka Streams dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.kafka
+      artifactId: micronaut-kafka-streams
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.kafka-streams.micronaut.documentation
+displayName: Append a link to Micronaut Kafka Streams documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-kafka/latest/guide/index.html#kafkaStream
+      appendNewline: true
