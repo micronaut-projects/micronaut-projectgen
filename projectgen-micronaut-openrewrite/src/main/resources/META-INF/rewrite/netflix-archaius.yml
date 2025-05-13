@@ -1,0 +1,9 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.netflix-archaius
+displayName: Add Netflix Archaius dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.netflix
+      artifactId: micronaut-netflix-archaius
+      configuration: implementation
+      scope: compile

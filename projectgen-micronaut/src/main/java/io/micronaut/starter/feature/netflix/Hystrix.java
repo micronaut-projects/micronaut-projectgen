@@ -18,6 +18,7 @@ package io.micronaut.starter.feature.netflix;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
@@ -26,9 +27,11 @@ import io.micronaut.projectgen.core.feature.Feature;
 
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.netflix.hystrix.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class Hystrix implements Feature {
+public class Hystrix implements OpenRewriteFeature {
 
     @Override
     public String getName() {
@@ -46,13 +49,8 @@ public class Hystrix implements Feature {
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
-        module.configuration().put("hystrix.stream.enabled", false);
-        module.addDependency(Dependency.builder()
-                .groupId("io.micronaut.netflix")
-                .artifactId("micronaut-netflix-hystrix")
-                .compile());
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.netflix-hystrix");
     }
 
     @Override
@@ -60,8 +58,4 @@ public class Hystrix implements Feature {
         return Category.RESILIENCE;
     }
 
-    @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://docs.micronaut.io/latest/guide/index.html#netflixHystrix";
-    }
 }

@@ -1,0 +1,39 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.netflix-ribbon
+displayName: Add Netflix Ribbon dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.netflix-ribbon.dependencies
+  - io.micronaut.starter.feature.netflix-ribbon.configuration
+  - io.micronaut.starter.feature.netflix-ribbon.micronaut.documentation
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.netflix-ribbon.dependencies
+displayName: Add Netflix Ribbon dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.netflix
+      artifactId: micronaut-netflix-ribbon
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.netflix-ribbon.configuration
+displayName: Add netflix Ribbon configuration
+preconditions:
+  - io.micronaut.starter.openrewrite.recipes.FindApplicationProperties
+recipeList:
+  - org.openrewrite.properties.AddProperty:
+      property: ribbon.VipAddress
+      value: test
+  - org.openrewrite.properties.AddProperty:
+      property: ribbon.ServerListRefreshInterval
+      value: 2000
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.netflix-ribbon.micronaut.documentation
+displayName: Append a link to Micronaut Netflix Ribbon documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://docs.micronaut.io/latest/guide/index.html#netflixRibbon
+      appendNewline: true
