@@ -17,13 +17,17 @@ package io.micronaut.starter.feature.opensearch;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.feature.database.TestContainers;
 import io.micronaut.starter.feature.testresources.TestResources;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.opensearch.httpclient5.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class OpenSearchHttpClient5 extends OpenSearchFeature {
+public class OpenSearchHttpClient5 extends OpenSearchFeature implements OpenRewriteFeature {
 
     public static final String NAME = "opensearch-httpclient5";
 
@@ -48,4 +52,10 @@ public class OpenSearchHttpClient5 extends OpenSearchFeature {
     public String getDescription() {
         return "Adds support for OpenSearch using Apache HttpClient 5 Transport";
     }
+
+    @Override
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.opensearch-httpclient5");
+    }
+
 }
