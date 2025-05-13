@@ -42,27 +42,8 @@ public abstract class OpenSearchFeature extends EaseTestingFeature implements Op
     }
 
     @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-opensearch/latest/guide/";
-    }
-
-    @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://opensearch.org/docs/latest/clients/java/";
-    }
-
-    @Override
     public String getCategory() {
         return Category.SEARCH;
-    }
-
-    @Override
-    public void apply(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
-        module.addDependency(MicronautDependencyUtils
-                .opensearchDependency()
-                .artifactId("micronaut-" + getName())
-                .compile());
     }
 
     @Override
