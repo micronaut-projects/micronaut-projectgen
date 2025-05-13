@@ -23,7 +23,6 @@ import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.Project;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.feature.Feature;
-import io.micronaut.projectgen.micronaut.MicronautOptions;
 import io.micronaut.starter.feature.function.awslambda.DefaultAwsLambdaHandlerProvider;
 import io.micronaut.projectgen.micronaut.template.function.handlerReadme;
 import io.micronaut.starter.feature.aws.AwsFeature;
@@ -43,8 +42,7 @@ public interface HandlerClassFeature extends Feature, AwsFeature {
     static RockerModel readmeRockerModel(@NonNull HandlerClassFeature feature,
                                           @NonNull GeneratorContext generatorContext,
                                           @Nullable DocumentationLink documentationLink) {
-        ApplicationType applicationType = generatorContext.getOptions() instanceof MicronautOptions mnOptions
-                ? mnOptions.applicationType() : null;
+        ApplicationType applicationType = ApplicationType.of(generatorContext.getOptions().template());
         return handlerReadme.template(feature,
                 applicationType,
                 generatorContext.getProject(),
@@ -53,8 +51,7 @@ public interface HandlerClassFeature extends Feature, AwsFeature {
 
     @NonNull
     default String handlerClass(@NonNull GeneratorContext generatorContext) {
-        ApplicationType applicationType = generatorContext.getOptions() instanceof MicronautOptions mnOptions
-                ? mnOptions.applicationType() : null;
+        ApplicationType applicationType = ApplicationType.of(generatorContext.getOptions().template());
         return handlerClass(applicationType, generatorContext.getProject());
     }
 

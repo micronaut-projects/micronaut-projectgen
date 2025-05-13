@@ -19,7 +19,6 @@ import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.feature.FeaturePhase;
 import io.micronaut.projectgen.core.feature.TestFeature;
-import io.micronaut.projectgen.micronaut.MicronautOptions;
 
 public interface PicocliTestFeature extends TestFeature {
 
@@ -32,6 +31,7 @@ public interface PicocliTestFeature extends TestFeature {
 
     @Override
     default boolean supports(Options options) {
-        return options instanceof MicronautOptions mnOptions && mnOptions.applicationType() == ApplicationType.CLI;
+        ApplicationType applicationType = ApplicationType.of(options.template());
+        return applicationType == ApplicationType.CLI;
     }
 }

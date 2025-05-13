@@ -14,4 +14,12 @@ class BuildToolTest {
         assertTrue(BuildTool.valuesGradle().stream().allMatch(BuildTool::isGradle));
         assertEquals(List.of(BuildTool.GRADLE, BuildTool.GRADLE_KOTLIN), BuildTool.valuesGradle());
     }
+
+    @Test
+    void buildToolOf() {
+        assertTrue(BuildTool.of("foo").isEmpty());
+        assertEquals(BuildTool.GRADLE, BuildTool.of("gradle").get());
+        assertEquals(BuildTool.GRADLE_KOTLIN, BuildTool.of("gradle_kotlin").get());
+        assertEquals(BuildTool.MAVEN, BuildTool.of("maven").get());
+    }
 }

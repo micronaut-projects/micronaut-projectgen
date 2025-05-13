@@ -16,19 +16,16 @@
 package io.micronaut.starter.feature.dev;
 
 import io.micronaut.context.annotation.Requires;
-import io.micronaut.context.env.Environment;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.feature.config.Configuration;
 import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.micronaut.MicronautOptions;
 import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.feature.FeatureContext;
-import io.micronaut.projectgen.core.feature.config.ApplicationConfiguration;
 import io.micronaut.starter.feature.other.Management;
 import jakarta.inject.Singleton;
 
@@ -105,6 +102,7 @@ public class ControlPanel implements Feature {
 
     @Override
     public boolean supports(Options options) {
-        return options instanceof MicronautOptions micronautOptions && micronautOptions.applicationType() == ApplicationType.DEFAULT;
+        ApplicationType applicationType = ApplicationType.of(options.template());
+        return applicationType == ApplicationType.DEFAULT;
     }
 }

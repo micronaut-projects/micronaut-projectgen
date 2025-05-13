@@ -25,7 +25,6 @@ import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
-import io.micronaut.projectgen.micronaut.MicronautOptions;
 import io.micronaut.projectgen.micronaut.features.test.Mockito;
 import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.FeatureContext;
@@ -91,7 +90,8 @@ public class Worker implements AgoraPulseFeature {
 
     @Override
     public boolean supports(Options options) {
-        return options instanceof MicronautOptions mnOptions && mnOptions.applicationType() == ApplicationType.DEFAULT;
+        ApplicationType applicationType = ApplicationType.of(options.template());
+        return applicationType == ApplicationType.DEFAULT;
     }
 
     @Override

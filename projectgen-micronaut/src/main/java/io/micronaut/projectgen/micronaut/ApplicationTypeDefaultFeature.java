@@ -22,6 +22,7 @@ import io.micronaut.projectgen.core.feature.*;
 import io.micronaut.projectgen.core.feature.config.Properties;
 import io.micronaut.projectgen.core.feature.gitignore.GitIgnore;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.options.GenericOptionsBuilder;
 import io.micronaut.projectgen.core.options.Language;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.core.utils.OptionUtils;
@@ -116,7 +117,7 @@ public class ApplicationTypeDefaultFeature extends ApplicationTypeFeature {
         this.shadePlugin = shadePlugin;
         this.serializationFeature = serializationFeature;
         this.micronautParentPomFeature = micronautParentPomFeature;
-        Options options = MicronautOptions.builder().applicationType(ApplicationType.DEFAULT).build();
+        Options options = GenericOptionsBuilder.builder().template(ApplicationType.DEFAULT.toString()).build();
         this.javaApplicationFeature = javaApplicationFeatures.stream().filter(f -> f.supports(options)).findFirst().orElse(null);
         this.kotlinApplication = kotlinApplications.stream().filter(f -> f.supports(options)).findFirst().orElse(null);
         this.groovyApplicationFeature = groovyApplicationFeatures.stream().filter(f -> f.supports(options)).findFirst().orElse(null);
@@ -125,7 +126,8 @@ public class ApplicationTypeDefaultFeature extends ApplicationTypeFeature {
 
     @Override
     public boolean shouldApply(Options options, Set<Feature> selectedFeatures) {
-        return options instanceof MicronautOptions micronautOptions && micronautOptions.applicationType() == ApplicationType.DEFAULT;
+        ApplicationType applicationType = ApplicationType.of(options.template());
+        return applicationType == ApplicationType.DEFAULT;
     }
 
     @Override

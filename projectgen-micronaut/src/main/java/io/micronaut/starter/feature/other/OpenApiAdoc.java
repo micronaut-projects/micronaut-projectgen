@@ -22,7 +22,6 @@ import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
-import io.micronaut.projectgen.micronaut.MicronautOptions;
 import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.Feature;
@@ -76,7 +75,8 @@ public class OpenApiAdoc implements Feature, MicronautServerDependent {
 
     @Override
     public boolean supports(Options options) {
-        return options instanceof MicronautOptions mnOptions && mnOptions.applicationType() == ApplicationType.DEFAULT;
+        ApplicationType type = ApplicationType.of(options.template());
+        return type == ApplicationType.DEFAULT;
     }
 
     @Override

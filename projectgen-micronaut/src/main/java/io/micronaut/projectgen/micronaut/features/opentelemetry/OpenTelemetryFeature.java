@@ -16,19 +16,17 @@
 package io.micronaut.projectgen.micronaut.features.opentelemetry;
 
 import io.micronaut.core.annotation.NonNull;
-import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.feature.Feature;
-import io.micronaut.projectgen.micronaut.MicronautOptions;
 
-import static io.micronaut.projectgen.micronaut.ApplicationType.CLI;
 import static io.micronaut.starter.feature.Category.TRACING;
 
 public interface OpenTelemetryFeature extends Feature  {
     @Override
     default boolean supports(Options options) {
-        return options instanceof MicronautOptions mnOptions && mnOptions.applicationType() != ApplicationType.CLI;
+        ApplicationType applicationType = ApplicationType.of(options.template());
+        return applicationType != ApplicationType.CLI;
     }
 
     @Override

@@ -2,9 +2,12 @@ package io.micronaut.projectgen.micronaut;
 
 import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.buildtools.Scope;
+import io.micronaut.projectgen.core.generator.ProjectGenerator;
 import io.micronaut.projectgen.core.io.MapOutputHandler;
+import io.micronaut.projectgen.core.options.GenericOptionsBuilder;
 import io.micronaut.projectgen.core.options.JdkVersion;
 import io.micronaut.projectgen.core.options.Language;
+import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.core.options.TestFramework;
 import io.micronaut.projectgen.test.BuildTestVerifier;
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
@@ -29,8 +32,8 @@ class MicronautApplicationGenerationTest {
     );
 
     @Test
-    void generateMicronautMavenApplication(MicronautProjectGenerator projectGenerator) throws Exception {
-        MicronautOptions options = createOptions(List.of(BuildTool.MAVEN));
+    void generateMicronautMavenApplication(ProjectGenerator projectGenerator) throws Exception {
+        Options options = createOptions(List.of(BuildTool.MAVEN));
         MapOutputHandler outputHandler = new MapOutputHandler();
         projectGenerator.generate(options, outputHandler);
         Map<String, String> project = outputHandler.getProject();
@@ -59,8 +62,8 @@ class MicronautApplicationGenerationTest {
     }
 
     @Test
-    void generateMicronautGradleApplication(MicronautProjectGenerator projectGenerator) throws Exception {
-        MicronautOptions options = createOptions(List.of(BuildTool.GRADLE));
+    void generateMicronautGradleApplication(ProjectGenerator projectGenerator) throws Exception {
+        Options options = createOptions(List.of(BuildTool.GRADLE));
         MapOutputHandler outputHandler = new MapOutputHandler();
         projectGenerator.generate(options, outputHandler);
         Map<String, String> project = outputHandler.getProject();
@@ -98,12 +101,12 @@ class MicronautApplicationGenerationTest {
         assertTrue(buildGradle.contains("testRuntime(\"junit5\")"));
     }
 
-    private static MicronautOptions createOptions(List<BuildTool> buildTools) {
-        return MicronautOptions.builder()
-            .applicationType(ApplicationType.DEFAULT)
+    private static Options createOptions(List<BuildTool> buildTools) {
+        return OptionsFixture.defaultGradle()
+            .template(ApplicationType.DEFAULT.toString())
             .name("demo")
             .packageName("com.example")
-            .javaVersion(JdkVersion.JDK_21)
+            .java(JdkVersion.JDK_21)
             .buildTools(buildTools)
             .language(Language.JAVA)
             .testFramework(TestFramework.JUNIT)

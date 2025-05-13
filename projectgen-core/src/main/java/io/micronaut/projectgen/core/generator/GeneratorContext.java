@@ -133,7 +133,7 @@ public class GeneratorContext {
      * @return The JDK version
      */
     @NonNull public JdkVersion getJdkVersion() {
-        return options.javaVersion();
+        return options.java();
     }
 
     /**
