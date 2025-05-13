@@ -1,9 +1,10 @@
 package io.micronaut.projectgen.micronaut.features.messaging.jms;
 
 import io.micronaut.projectgen.core.buildtools.Scope;
+import io.micronaut.projectgen.core.generator.ProjectGenerator;
 import io.micronaut.projectgen.core.io.MapOutputHandler;
-import io.micronaut.projectgen.micronaut.MicronautOptions;
-import io.micronaut.projectgen.micronaut.MicronautProjectGenerator;
+import io.micronaut.projectgen.core.options.Options;
+import io.micronaut.projectgen.micronaut.OptionsFixture;
 import io.micronaut.projectgen.test.BuildTestVerifier;
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
 import org.junit.jupiter.api.Test;
@@ -14,9 +15,9 @@ import static org.junit.jupiter.api.Assertions.*;
 @MicronautTest(startApplication = false)
 class OracleAdvancedQueuingTest {
     @Test
-    void oracleAqFeaturesAddsTheDependency(MicronautProjectGenerator micronautProjectGenerator) throws Exception {
-        MicronautOptions options = MicronautOptions.builder().feature("jms-oracle-aq").build();
-        Map<String, String> project = generateProject(micronautProjectGenerator, options);
+    void oracleAqFeaturesAddsTheDependency(ProjectGenerator projectGenerator) throws Exception {
+        Options options = OptionsFixture.defaultGradle("jms-oracle-aq");
+        Map<String, String> project = generateProject(projectGenerator, options);
         String buildGradle = project.get("build.gradle.kts");
         assertNotNull(buildGradle);
         BuildTestVerifier verifier = BuildTestVerifier.of(buildGradle, options);
@@ -27,9 +28,9 @@ class OracleAdvancedQueuingTest {
     }
 
     @Test
-    void oracleAqFeaturesAddsTheLinkInReadmeFile(MicronautProjectGenerator micronautProjectGenerator) throws Exception {
-        MicronautOptions options = MicronautOptions.builder().feature("jms-oracle-aq").build();
-        Map<String, String> project = generateProject(micronautProjectGenerator, options);
+    void oracleAqFeaturesAddsTheLinkInReadmeFile(ProjectGenerator projectGenerator) throws Exception {
+        Options options = OptionsFixture.defaultGradle("jms-oracle-aq");
+        Map<String, String> project = generateProject(projectGenerator, options);
         String readme = project.get("README.md");
         assertNotNull(readme);
         assertTrue(readme.contains("https://micronaut-projects.github.io/micronaut-jms/snapshot/guide/index.html"));
@@ -37,10 +38,10 @@ class OracleAdvancedQueuingTest {
 
     }
 
-    private static Map<String, String> generateProject(MicronautProjectGenerator micronautProjectGenerator,
-                                                       MicronautOptions options) throws Exception {
+    private static Map<String, String> generateProject(ProjectGenerator projectGenerator,
+                                                       Options options) throws Exception {
         MapOutputHandler outputHandler = new MapOutputHandler();
-        micronautProjectGenerator.generate(options, outputHandler);
+        projectGenerator.generate(options, outputHandler);
         return outputHandler.getProject();
     }
 }
