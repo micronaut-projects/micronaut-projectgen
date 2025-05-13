@@ -21,10 +21,8 @@ class OracleAdvancedQueuingTest {
         String buildGradle = project.get("build.gradle.kts");
         assertNotNull(buildGradle);
         BuildTestVerifier verifier = BuildTestVerifier.of(buildGradle, options);
-        assertTrue(verifier.hasDependency("javax.transaction", "jta", Scope.COMPILE), buildGradle);
-        assertTrue(verifier.hasDependency("com.oracle.database.messaging", "aqapi", Scope.COMPILE), buildGradle);
-        assertTrue(buildGradle.contains("1.1"), buildGradle);
-        assertTrue(buildGradle.contains("19.3.0.0"), buildGradle);
+        assertTrue(verifier.hasDependency("javax.transaction", "jta", Scope.COMPILE, "1.1", false), buildGradle);
+        assertTrue(verifier.hasDependency("com.oracle.database.messaging", "aqapi", Scope.COMPILE, "19.3.0.0", false), buildGradle);
     }
 
     @Test
