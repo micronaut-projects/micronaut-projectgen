@@ -26,6 +26,7 @@ import jakarta.inject.Singleton;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Optional;
 import java.util.Set;
 
 @Singleton
@@ -38,12 +39,12 @@ public class MavenSpecificFeatureValidator implements FeatureValidator {
 
     @Override
     public void validatePostProcessing(Options options, Set<Feature> features) {
-        for (Feature feature : features.stream().filter(f -> f instanceof MavenSpecificFeature).toList()) {
-            LOG.info("feature {} is a MavenSpecificFeature", feature.getName());
-            if (!OptionUtils.hasMavenBuildTool(options)) {
-                throw new IllegalArgumentException("Feature " + feature.getName() + " only supported by Maven");
-            }
+        Optional<Feature> featureOptional = features.stream().filter(MavenSpecificFeature.class::isInstance).findFirst();
+        if (featureOptional.isPresent()) {
+            LOG.info("Feature {} only supported by Maven", featureOptional.get().getName());
         }
-
+        if (featureOptional.isPresent() && !OptionUtils.hasMavenBuildTool(options)) {
+            throw new IllegalArgumentException("Feature " + featureOptional.get().getName() + " only supported by Maven");
+        }
     }
 }
