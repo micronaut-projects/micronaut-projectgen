@@ -19,14 +19,17 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.feature.FeatureContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.feature.database.TestContainers;
 import io.micronaut.starter.feature.json.JacksonDatabindFeature;
 import io.micronaut.starter.feature.testresources.TestResources;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.opensearch.restclient.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class OpenSearchRestClient extends OpenSearchFeature {
+public class OpenSearchRestClient extends OpenSearchFeature implements OpenRewriteFeature {
 
     public static final String NAME = "opensearch-restclient";
 
@@ -52,11 +55,6 @@ public class OpenSearchRestClient extends OpenSearchFeature {
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        super.apply(generatorContext);
-    }
-
-    @Override
     public void processSelectedFeatures(FeatureContext featureContext) {
         super.processSelectedFeatures(featureContext);
         if (!featureContext.isPresent(JacksonDatabindFeature.class)) {
@@ -68,4 +66,10 @@ public class OpenSearchRestClient extends OpenSearchFeature {
     public String getDescription() {
         return "Adds support for OpenSearch RestClient-based transport";
     }
+
+    @Override
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.opensearch-restclient");
+    }
+
 }
