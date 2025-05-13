@@ -52,14 +52,10 @@ public class Mqtt extends EaseTestingFeature implements MqttFeature, SharedTestR
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        MqttFeature.super.apply(generatorContext);
-        OpenRewriteFeature.super.apply(generatorContext);
-    }
-
-    @Override
     public List<String> getRecipes(GeneratorContext generatorContext) {
-        return List.of("io.micronaut.starter.feature.mqtt");
+        List<String> result = MqttFeature.super.getRecipes(generatorContext);
+        result.add("io.micronaut.starter.feature.mqtt");
+        return result;
     }
 
 }

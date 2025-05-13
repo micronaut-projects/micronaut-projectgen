@@ -22,7 +22,8 @@ class MqttTest {
         Map<String, String> project = generateProject(projectGenerator, options);
         Properties applicationProperties = ConfigurationUtils.loadApplicationProperties(project);
         assertEquals("${random.uuid}", applicationProperties.getProperty("mqtt.client.client-id"));
-
+        // Test resources is added by default, hence mqtt.client.server-uri is not set
+        assertNull(applicationProperties.getProperty("mqtt.client.server-uri"));
     }
 
     @Test

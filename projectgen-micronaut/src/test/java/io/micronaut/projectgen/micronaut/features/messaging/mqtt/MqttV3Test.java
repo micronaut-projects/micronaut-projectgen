@@ -22,7 +22,7 @@ class MqttV3Test {
         Map<String, String> project = generateProject(micronautProjectGenerator, options);
         Properties applicationProperties = ConfigurationUtils.loadApplicationProperties(project);
         assertEquals("${random.uuid}", applicationProperties.getProperty("mqtt.client.client-id"));
-
+        assertEquals("tcp://localhost:1883", applicationProperties.getProperty("mqtt.client.server-uri"));
     }
 
     @Test

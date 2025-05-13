@@ -57,14 +57,9 @@ public class MqttHiveMq extends EaseTestingFeature implements MqttFeature, Share
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        MqttFeature.super.apply(generatorContext);
-        OpenRewriteFeature.super.apply(generatorContext);
-    }
-
-    @Override
     public List<String> getRecipes(GeneratorContext generatorContext) {
-        return List.of("io.micronaut.starter.feature.mqtt-hivemq");
+        List<String> result = MqttFeature.super.getRecipes(generatorContext);
+        result.add("io.micronaut.starter.feature.mqtt-hivemq");
+        return result;
     }
-
 }
