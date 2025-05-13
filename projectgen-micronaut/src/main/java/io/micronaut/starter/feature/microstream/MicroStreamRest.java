@@ -21,6 +21,7 @@ import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
+import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
@@ -28,6 +29,7 @@ import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import jakarta.inject.Singleton;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Requires(property = "micronaut.starter.feature.microstream.rest.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
@@ -37,6 +39,7 @@ public class MicroStreamRest implements MicroStreamFeature, OpenRewriteFeature {
     public static final String NAME = "microstream-rest";
 
     private final MicroStream microStream;
+    private static final String ARTIFACT_ID_MICRONAUT_MICROSTREAM_REST = "micronaut-microstream-rest";
 
     public MicroStreamRest(MicroStream microStream) {
         this.microStream = microStream;
