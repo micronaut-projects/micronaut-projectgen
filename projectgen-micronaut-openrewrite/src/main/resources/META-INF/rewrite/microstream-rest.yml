@@ -1,0 +1,35 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.microstream-rest
+displayName: Add Microstream Rest dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.microstream-rest.dependencies
+  - io.micronaut.starter.feature.microstream-rest.micronaut.documentation
+  - io.micronaut.starter.feature.microstream-rest.documentation.thirdparty
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.microstream-rest.dependencies
+displayName: Add Microstream Rest dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.microstream
+      artifactId: micronaut-microstream-rest
+      scope: provided
+      configuration: developmentOnly
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.microstream-rest.micronaut.documentation
+displayName: Append a link to Micronaut Microstream Rest documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-microstream/latest/guide/#rest
+      appendNewline: true
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.microstream-rest.documentation.thirdparty
+displayName: Append a link to Microstream Rest website
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://docs.microstream.one/manual/storage/rest-interface/index.html
+      appendNewline: true

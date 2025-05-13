@@ -20,6 +20,7 @@ import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
@@ -27,23 +28,14 @@ import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import io.micronaut.starter.feature.Category;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.microstream.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class MicroStream implements MicroStreamFeature {
+public class MicroStream implements MicroStreamFeature, OpenRewriteFeature {
 
     public static final String NAME = "microstream";
-    public static final String MICRONAUT_MICROSTREAM_ANNOTATIONS_ARTIFACT = "micronaut-microstream-annotations";
-    public static final String MICRONAUT_MICROSTREAM_VERSION = "micronaut.microstream.version";
-    public static final String ARTIFACT_ID_MICRONAUT_MICROSTREAM = "micronaut-microstream";
-    private static final Dependency DEPENDENCY_MICRONAUT_MICROSTREAM = MicronautDependencyUtils.microstreamDependency()
-            .artifactId(ARTIFACT_ID_MICRONAUT_MICROSTREAM)
-            .compile()
-            .build();
 
-    private static final Dependency DEPENDENCY_MICRONAUT_MICROSTREAM_ANNOTATIONS = MicronautDependencyUtils.microstreamDependency()
-            .artifactId(MICRONAUT_MICROSTREAM_ANNOTATIONS_ARTIFACT)
-            .compile()
-            .build();
 
     @Override
     @NonNull
@@ -68,26 +60,8 @@ public class MicroStream implements MicroStreamFeature {
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        addDependencies(generatorContext);
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.microstream");
     }
 
-    protected void addDependencies(@NonNull GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
-        module.addDependency(DEPENDENCY_MICRONAUT_MICROSTREAM);
-        module.addDependency(DEPENDENCY_MICRONAUT_MICROSTREAM_ANNOTATIONS);
-        module.addDependency(MicronautDependencyUtils.annotationProcessor(generatorContext.getBuildTool(),
-                MicronautDependencyUtils.GROUP_ID_MICRONAUT_MICROSTREAM, MICRONAUT_MICROSTREAM_ANNOTATIONS_ARTIFACT, MICRONAUT_MICROSTREAM_VERSION));
-    }
-
-    @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-microstream/latest/guide";
-    }
-
-    @Override
-    @Nullable
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://microstream.one/";
-    }
 }

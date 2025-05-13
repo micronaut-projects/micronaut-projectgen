@@ -180,7 +180,7 @@ public interface BuildTestVerifier {
             return new GradleBuildTestVerifier(template, buildTool, language, testFramework);
         }
         if (buildTool == BuildTool.MAVEN) {
-            return new MavenBuildTestVerifier(template);
+            return new MavenBuildTestVerifier(template, language);
         }
         return null;//TODO
     }
@@ -199,7 +199,7 @@ public interface BuildTestVerifier {
             return new GradleBuildTestVerifier(template, options.getBuildTool(), options.language(), options.testFramework());
         }
         if (OptionUtils.hasMavenBuildTool(options)) {
-            return new MavenBuildTestVerifier(template);
+            return new MavenBuildTestVerifier(template, options.language());
         }
         return null;//TODO
     }

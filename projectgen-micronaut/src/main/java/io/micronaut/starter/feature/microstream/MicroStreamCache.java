@@ -20,6 +20,7 @@ import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
@@ -27,16 +28,13 @@ import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import io.micronaut.starter.feature.Category;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.microstream.cache.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class MicroStreamCache implements MicroStreamFeature {
+public class MicroStreamCache implements MicroStreamFeature, OpenRewriteFeature {
 
     public static final String NAME = "microstream-cache";
-    public static final String ARTIFACT_ID_MICRONAUT_MICROSTREAM_CACHE = "micronaut-microstream-cache";
-    public static final Dependency DEPENDENCY_MICROSTREAM_CACHE = MicronautDependencyUtils.microstreamDependency()
-            .artifactId(ARTIFACT_ID_MICRONAUT_MICROSTREAM_CACHE)
-            .compile()
-            .build();
 
     @Override
     @NonNull
@@ -61,21 +59,7 @@ public class MicroStreamCache implements MicroStreamFeature {
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
-        module.configuration().put("microstream.cache.my-cache.key-type", "java.lang.Integer");
-        module.configuration().put("microstream.cache.my-cache.value-type", "java.lang.String");
-        module.addDependency(DEPENDENCY_MICROSTREAM_CACHE);
-    }
-
-    @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-microstream/latest/guide/#cache";
-    }
-
-    @Override
-    @Nullable
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://docs.microstream.one/manual/cache/index.html";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.microstream-cache");
     }
 }

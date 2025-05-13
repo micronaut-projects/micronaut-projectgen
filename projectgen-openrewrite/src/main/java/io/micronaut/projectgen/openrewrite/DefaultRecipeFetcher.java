@@ -211,6 +211,8 @@ public class DefaultRecipeFetcher implements RecipeFetcher {
     private static Optional<Scope> ofGradleConfiguration(String configuration) {
         if (configuration.equals("implementation")) {
             return Optional.of(Scope.COMPILE);
+        } else if (configuration.equals("developmentOnly")) {
+            return Optional.of(Scope.DEVELOPMENT_ONLY);
         } else if (configuration.equals("compileOnly")) {
             return Optional.of(Scope.COMPILE_ONLY);
         } else if (configuration.equals("annotationProcessor")) {
@@ -231,6 +233,8 @@ public class DefaultRecipeFetcher implements RecipeFetcher {
     private static Optional<Scope> ofMavenScope(String scope) {
         if (scope.equals("compile")) {
             return Optional.of(Scope.COMPILE);
+        } else if (scope.equals("provided")) {
+                return Optional.of(Scope.COMPILE_ONLY);
         } else if (scope.equals("runtime")) {
             return Optional.of(Scope.RUNTIME);
         } else if (scope.equals("test")) {
