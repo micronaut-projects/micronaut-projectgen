@@ -1,5 +1,5 @@
 [versions]
-micronaut = "4.8.4"
+micronaut = "4.8.13"
 rewrite-recipe-bom = "3.4.0"
 micronaut-docs = "2.0.0"
 micronaut-test = "4.7.0"
@@ -16,9 +16,13 @@ maven-invoker = "3.3.0"
 gradle-tooling-api = "8.12"
 sonatype-scan = "3.0.0"
 micronaut-picocli = "5.7.0"
+java-diff-utils = "4.15"
+micronaut-logging = "1.6.1"
 
 [libraries]
+java-diff-utils = { module = 'io.github.java-diff-utils:java-diff-utils', version.ref = 'java-diff-utils' }
 micronaut-core = { module = 'io.micronaut:micronaut-core-bom', version.ref = 'micronaut' }
+micronaut-logging = { module = 'io.micronaut.logging:micronaut-logging-bom', version.ref = 'micronaut-logging' }
 micronaut-serde = { module = "io.micronaut.serde:micronaut-serde-bom", version.ref = "micronaut-serialization" }
 micronaut-sourcegen = { module = "io.micronaut.sourcegen:micronaut-sourcegen-bom", version.ref = "micronaut-sourcegen" }
 micronaut-picocli = { module = "io.micronaut.picocli:micronaut-picocli-bom", version.ref = "micronaut-picocli" }

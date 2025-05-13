@@ -41,7 +41,8 @@ public class ApplicationTypeGrpcFeature extends ApplicationTypeFeature {
 
     @Override
     public boolean shouldApply(Options options, Set<Feature> selectedFeatures) {
-        return options instanceof MicronautOptions micronautOptions && micronautOptions.applicationType() == ApplicationType.GRPC;
+        ApplicationType applicationType = ApplicationType.of(options.template());
+        return applicationType == ApplicationType.GRPC;
     }
 
     @Override

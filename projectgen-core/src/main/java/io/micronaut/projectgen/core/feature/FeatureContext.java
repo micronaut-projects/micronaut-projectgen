@@ -115,7 +115,7 @@ public class FeatureContext {
      * @return Jdk Version
      */
     public JdkVersion getJavaVersion() {
-        return options.javaVersion();
+        return options.java();
     }
 
     /**

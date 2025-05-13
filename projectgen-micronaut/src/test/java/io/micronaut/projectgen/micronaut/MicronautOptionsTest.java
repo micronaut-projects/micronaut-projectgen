@@ -1,6 +1,8 @@
 package io.micronaut.projectgen.micronaut;
 
 import io.micronaut.projectgen.core.buildtools.BuildTool;
+import io.micronaut.projectgen.core.options.GenericOptions;
+import io.micronaut.projectgen.core.options.GenericOptionsBuilder;
 import io.micronaut.projectgen.core.options.Language;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.core.options.TestFramework;
@@ -11,32 +13,33 @@ import static org.junit.jupiter.api.Assertions.*;
 class MicronautOptionsTest {
     @Test
     void defaultApplicationTypeIsDefault() {
-        MicronautOptions options = MicronautOptions.builder().build();
-        assertEquals(ApplicationType.DEFAULT, options.applicationType());
+        Options options = OptionsFixture.defaultGradle().build();
+        assertEquals(ApplicationType.DEFAULT.toString(), options.template());
     }
 
     @Test
     void defaultBuildToolIsGradleKotlinDsl() {
-        Options options = MicronautOptions.builder().build();
+        Options options = OptionsFixture.defaultGradle().build();
         assertEquals(BuildTool.GRADLE_KOTLIN, options.getBuildTool());
     }
 
     @Test
     void defaultLanguageIsJava() {
-        Options options = MicronautOptions.builder().build();
+        Options options = OptionsFixture.defaultGradle().build();
         assertEquals(Language.JAVA, options.language());
     }
 
     @Test
     void defaultLanguageIsJavaAndTestFrameworkJunit() {
-        Options options = MicronautOptions.builder().build();
+        Options options = OptionsFixture.defaultGradle().build();
         assertEquals(Language.JAVA, options.language());
         assertEquals(TestFramework.JUNIT, options.testFramework());
     }
 
     @Test
     void languageIsGroovyAndTestFrameworkSpock() {
-        Options options = MicronautOptions.builder().language(Language.GROOVY).build();
+        Options options = OptionsFixture.defaultGradle().language(Language.GROOVY)
+            .testFramework(TestFramework.SPOCK).build();
         assertEquals(Language.GROOVY, options.language());
         assertEquals(TestFramework.SPOCK, options.testFramework());
     }

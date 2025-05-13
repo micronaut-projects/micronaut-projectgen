@@ -17,16 +17,13 @@ package io.micronaut.starter.feature.k8s;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
-import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.micronaut.MicronautOptions;
 import io.micronaut.starter.feature.Category;
-import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.projectgen.micronaut.template.distributedconfig.k8sYaml;
 import io.micronaut.starter.feature.jib.Jib;
@@ -87,7 +84,8 @@ public class Kubernetes implements OpenRewriteFeature {
 
     @Override
     public boolean supports(Options options) {
-        return options instanceof MicronautOptions mnOptions && (mnOptions.applicationType() == ApplicationType.DEFAULT || mnOptions.applicationType() == ApplicationType.GRPC);
+        ApplicationType type = ApplicationType.of(options.template());
+        return  type == ApplicationType.DEFAULT || type == ApplicationType.GRPC;
     }
 
     @Override

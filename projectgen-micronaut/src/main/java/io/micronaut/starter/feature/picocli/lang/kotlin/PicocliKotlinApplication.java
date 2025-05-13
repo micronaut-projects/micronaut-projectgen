@@ -24,7 +24,6 @@ import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.Project;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.micronaut.MicronautOptions;
 import io.micronaut.projectgen.micronaut.template.picocli.lang.kotlin.picocliApplication;
 import io.micronaut.starter.feature.RequireKaptFeature;
 import io.micronaut.projectgen.core.rocker.RockerTemplate;
@@ -48,7 +47,8 @@ public class PicocliKotlinApplication implements RequireKaptFeature, KotlinAppli
 
     @Override
     public boolean supports(Options options) {
-        return options instanceof MicronautOptions mnOptions && mnOptions.applicationType() == ApplicationType.CLI;
+        ApplicationType applicationType = ApplicationType.of(options.template());
+        return applicationType == ApplicationType.CLI;
     }
 
     @Override

@@ -78,7 +78,7 @@ public class SpringBootDefaultFeature implements DefaultFeature, RequiresReposit
 
     @Override
     public boolean shouldApply(Options options, Set<Feature> selectedFeatures) {
-        return options instanceof SpringBootOptions;
+        return true;
     }
 
     @Override

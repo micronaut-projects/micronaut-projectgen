@@ -3,6 +3,7 @@ package io.micronaut.projectgen.micronaut;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.generator.ProjectGenerator;
 import io.micronaut.projectgen.core.io.MapOutputHandler;
+import io.micronaut.projectgen.core.options.GenericOptionsBuilder;
 import io.micronaut.projectgen.core.options.JdkVersion;
 import io.micronaut.projectgen.core.options.Language;
 import io.micronaut.projectgen.core.options.Options;
@@ -19,8 +20,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class MicronautLibraryGenerationTest {
 
     @Test
-    void generateMicronautLibrary(MicronautProjectGenerator projectGenerator) throws Exception {
-        MicronautOptions options = createOptions();
+    void generateMicronautLibrary(ProjectGenerator projectGenerator) throws Exception {
+        Options options = createOptions();
         MapOutputHandler outputHandler = new MapOutputHandler();
         projectGenerator.generate(options, outputHandler);
         Map<String, String> project = outputHandler.getProject();
@@ -42,12 +43,12 @@ class MicronautLibraryGenerationTest {
         assertTrue(project.get("LICENSE").contains("Apache License"));
     }
 
-    private static MicronautOptions createOptions() {
-        return MicronautOptions.builder()
-            .applicationType(ApplicationType.LIBRARY)
+    private static Options createOptions() {
+        return OptionsFixture.defaultGradle()
+            .template(ApplicationType.LIBRARY.toString())
             .name("demo")
             .packageName("com.example")
-            .javaVersion(JdkVersion.JDK_21)
+            .java(JdkVersion.JDK_21)
             .buildTools(List.of(BuildTool.GRADLE))
             .language(Language.JAVA)
             .testFramework(TestFramework.JUNIT)

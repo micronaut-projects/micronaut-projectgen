@@ -1,14 +1,19 @@
 package io.micronaut.projectgen.micronaut.features.discovery;
 
 import io.micronaut.core.util.StringUtils;
-import io.micronaut.projectgen.core.buildtools.Scope;
+import io.micronaut.projectgen.core.buildtools.BuildTool;
+import io.micronaut.projectgen.core.generator.ProjectGenerator;
 import io.micronaut.projectgen.core.io.MapOutputHandler;
-import io.micronaut.projectgen.micronaut.MicronautOptions;
-import io.micronaut.projectgen.micronaut.MicronautProjectGenerator;
+import io.micronaut.projectgen.core.options.GenericOptionsBuilder;
+import io.micronaut.projectgen.core.options.Options;
+import io.micronaut.projectgen.micronaut.ApplicationType;
+import io.micronaut.projectgen.micronaut.OptionsFixture;
 import io.micronaut.projectgen.test.BuildTestVerifier;
 import io.micronaut.projectgen.test.ConfigurationUtils;
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
@@ -17,8 +22,8 @@ import static org.junit.jupiter.api.Assertions.*;
 @MicronautTest(startApplication = false)
 class DiscoveryEurekaTest {
     @Test
-    void eurekaConfiguration(MicronautProjectGenerator micronautProjectGenerator) throws Exception {
-        MicronautOptions options = MicronautOptions.builder().feature("discovery-eureka").build();
+    void eurekaConfiguration(ProjectGenerator micronautProjectGenerator) throws Exception {
+        Options options = OptionsFixture.defaultGradle().features(List.of("discovery-eureka")).build();
         Map<String, String> project = generateProject(micronautProjectGenerator, options);
         Properties applicationProperties = ConfigurationUtils.loadApplicationProperties(project);
         assertEquals("localhost:8761", applicationProperties.getProperty("eureka.client.defaultZone"));
@@ -26,8 +31,8 @@ class DiscoveryEurekaTest {
     }
 
     @Test
-    void discoveryEurekaFeaturesAddsTheDependency(MicronautProjectGenerator micronautProjectGenerator) throws Exception {
-        MicronautOptions options = MicronautOptions.builder().feature("discovery-eureka").build();
+    void discoveryEurekaFeaturesAddsTheDependency(ProjectGenerator micronautProjectGenerator) throws Exception {
+        Options options = OptionsFixture.defaultGradle().features(List.of("discovery-eureka")).build();
         Map<String, String> project = generateProject(micronautProjectGenerator, options);
         String buildGradle = project.get("build.gradle.kts");
         assertNotNull(buildGradle);
@@ -36,16 +41,16 @@ class DiscoveryEurekaTest {
     }
 
     @Test
-    void discoveryEurekaFeaturesAddsTheLinkInReadmeFile(MicronautProjectGenerator micronautProjectGenerator) throws Exception {
-        MicronautOptions options = MicronautOptions.builder().feature("discovery-eureka").build();
+    void discoveryEurekaFeaturesAddsTheLinkInReadmeFile(ProjectGenerator micronautProjectGenerator) throws Exception {
+        Options options = OptionsFixture.defaultGradle().features(List.of("discovery-eureka")).build();
         Map<String, String> project = generateProject(micronautProjectGenerator, options);
         String readme = project.get("README.md");
         assertNotNull(readme);
         assertTrue(readme.contains("https://docs.micronaut.io/latest/guide/index.html#serviceDiscoveryEureka"));
     }
 
-    private static Map<String, String> generateProject(MicronautProjectGenerator micronautProjectGenerator,
-                                                       MicronautOptions options) throws Exception {
+    private static Map<String, String> generateProject(ProjectGenerator micronautProjectGenerator,
+                                                       Options options) throws Exception {
         MapOutputHandler outputHandler = new MapOutputHandler();
         micronautProjectGenerator.generate(options, outputHandler);
         return outputHandler.getProject();

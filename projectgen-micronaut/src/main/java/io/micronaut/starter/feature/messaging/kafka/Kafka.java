@@ -22,7 +22,6 @@ import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
-import io.micronaut.projectgen.micronaut.MicronautOptions;
 import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import io.micronaut.projectgen.core.feature.DefaultFeature;
 import io.micronaut.projectgen.core.feature.Feature;
@@ -72,7 +71,8 @@ public class Kafka extends EaseTestingFeature
 
     @Override
     public boolean shouldApply(Options options, Set<Feature> selectedFeatures) {
-        return options instanceof MicronautOptions mnOptions && mnOptions.applicationType() == ApplicationType.MESSAGING &&
+        ApplicationType applicationType = ApplicationType.of(options.template());
+        return applicationType == ApplicationType.MESSAGING &&
                 selectedFeatures.stream().noneMatch(MessagingFeature.class::isInstance);
     }
 

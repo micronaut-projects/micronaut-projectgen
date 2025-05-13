@@ -1,13 +1,18 @@
 package io.micronaut.projectgen.micronaut.features.httpclient;
 
+import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.buildtools.Scope;
+import io.micronaut.projectgen.core.generator.ProjectGenerator;
 import io.micronaut.projectgen.core.io.MapOutputHandler;
+import io.micronaut.projectgen.core.options.GenericOptionsBuilder;
+import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.ApplicationType;
-import io.micronaut.projectgen.micronaut.MicronautOptions;
-import io.micronaut.projectgen.micronaut.MicronautProjectGenerator;
+import io.micronaut.projectgen.micronaut.OptionsFixture;
 import io.micronaut.projectgen.test.BuildTestVerifier;
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -15,28 +20,28 @@ import static org.junit.jupiter.api.Assertions.*;
 @MicronautTest(startApplication = false)
 class NettyHttpClientTest {
     @Test
-    void httpClientFeaturesAddsTheDependency(MicronautProjectGenerator micronautProjectGenerator) throws Exception {
-        MicronautOptions options = MicronautOptions.builder().feature("http-client").build();
+    void httpClientFeaturesAddsTheDependency(ProjectGenerator micronautProjectGenerator) throws Exception {
+        Options options = OptionsFixture.defaultGradle().features(List.of("http-client")).build();
         Map<String, String> project = generateProject(micronautProjectGenerator, options);
         String buildGradle = project.get("build.gradle.kts");
         assertNotNull(buildGradle);
         BuildTestVerifier verifier = BuildTestVerifier.of(buildGradle, options);
         assertTrue(verifier.hasDependency("io.micronaut", "micronaut-http-client", Scope.COMPILE), buildGradle);
 
-        options = MicronautOptions.builder().build();
+        options = OptionsFixture.defaultGradle().build();
         project = generateProject(micronautProjectGenerator, options);
         buildGradle = project.get("build.gradle.kts");
         verifier = BuildTestVerifier.of(buildGradle, options);
         assertFalse(verifier.hasDependency("io.micronaut", "micronaut-http-client", Scope.COMPILE), buildGradle);
 
-        options = MicronautOptions.builder().feature("aws-lambda-custom-runtime").build();
+        options = OptionsFixture.defaultGradle().features(List.of("aws-lambda-custom-runtime")).build();
         project = generateProject(micronautProjectGenerator, options);
         buildGradle = project.get("build.gradle.kts");
         verifier = BuildTestVerifier.of(buildGradle, options);
         assertFalse(verifier.hasDependency("io.micronaut", "micronaut-http-client", Scope.COMPILE), buildGradle);
         assertTrue(verifier.hasDependency("io.micronaut", "micronaut-http-client-jdk", Scope.COMPILE), buildGradle);
 
-        options = MicronautOptions.builder().feature("aws-lambda").build();
+        options = OptionsFixture.defaultGradle().features(List.of("aws-lambda")).build();
         project = generateProject(micronautProjectGenerator, options);
         buildGradle = project.get("build.gradle.kts");
         verifier = BuildTestVerifier.of(buildGradle, options);
@@ -44,7 +49,7 @@ class NettyHttpClientTest {
         assertFalse(verifier.hasDependency("io.micronaut", "micronaut-http-client-jdk", Scope.COMPILE), buildGradle);
         assertTrue(verifier.hasDependency("io.micronaut", "micronaut-http-client-jdk", Scope.COMPILE_ONLY), buildGradle);
 
-        options = MicronautOptions.builder().build();
+        options = OptionsFixture.defaultGradle().build();
         project = generateProject(micronautProjectGenerator, options);
         buildGradle = project.get("build.gradle.kts");
         verifier = BuildTestVerifier.of(buildGradle, options);
@@ -53,7 +58,7 @@ class NettyHttpClientTest {
         assertFalse(verifier.hasDependency("io.micronaut", "micronaut-http-client-jdk", Scope.COMPILE_ONLY), buildGradle);
         assertTrue(verifier.hasDependency("io.micronaut", "micronaut-http-client", Scope.COMPILE_ONLY), buildGradle);
 
-        options = MicronautOptions.builder().applicationType(ApplicationType.FUNCTION).feature("graalvm").feature("aws-lambda").build();
+        options = OptionsFixture.defaultGradle().template(ApplicationType.FUNCTION.toString()).features(List.of("graalvm", "aws-lambda")).build();
         project = generateProject(micronautProjectGenerator, options);
         buildGradle = project.get("build.gradle.kts");
         verifier = BuildTestVerifier.of(buildGradle, options);
@@ -64,8 +69,8 @@ class NettyHttpClientTest {
     }
 
     @Test
-    void httpClientFeaturesAddsTheLinkInReadmeFile(MicronautProjectGenerator micronautProjectGenerator) throws Exception {
-        MicronautOptions options = MicronautOptions.builder().feature("http-client").build();
+    void httpClientFeaturesAddsTheLinkInReadmeFile(ProjectGenerator micronautProjectGenerator) throws Exception {
+        Options options = OptionsFixture.defaultGradle().features(List.of("http-client")).build();
         Map<String, String> project = generateProject(micronautProjectGenerator, options);
         String readme = project.get("README.md");
         assertNotNull(readme);
@@ -73,8 +78,8 @@ class NettyHttpClientTest {
 
     }
 
-    private static Map<String, String> generateProject(MicronautProjectGenerator micronautProjectGenerator,
-                                                       MicronautOptions options) throws Exception {
+    private static Map<String, String> generateProject(ProjectGenerator micronautProjectGenerator,
+                                                       Options options) throws Exception {
         MapOutputHandler outputHandler = new MapOutputHandler();
         micronautProjectGenerator.generate(options, outputHandler);
         return outputHandler.getProject();

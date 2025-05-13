@@ -20,7 +20,6 @@ import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
-import io.micronaut.projectgen.micronaut.MicronautOptions;
 import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 
 public interface AwsApiFeature extends AwsLambdaEventFeature, LambdaTrigger {
@@ -41,7 +40,8 @@ public interface AwsApiFeature extends AwsLambdaEventFeature, LambdaTrigger {
 
     @Override
     default boolean supports(Options options) {
-        return options instanceof MicronautOptions mnOptions && (mnOptions.applicationType() == ApplicationType.CLI || mnOptions.applicationType() == ApplicationType.DEFAULT);
+        ApplicationType applicationType = ApplicationType.of(options.template());
+        return applicationType == ApplicationType.CLI || applicationType == ApplicationType.DEFAULT;
     }
 
     @Override

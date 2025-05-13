@@ -30,7 +30,6 @@ import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.buildtools.gradle.GradleDsl;
 import io.micronaut.projectgen.core.buildtools.gradle.GradlePlugin;
 import io.micronaut.projectgen.core.buildtools.maven.MavenPlugin;
-import io.micronaut.projectgen.micronaut.MicronautOptions;
 import io.micronaut.starter.feature.CodeContributingFeature;
 import io.micronaut.starter.feature.function.AbstractFunctionFeature;
 import io.micronaut.projectgen.micronaut.template.function.azure.azureFunctionMavenPlugin;
@@ -142,7 +141,8 @@ public abstract class AbstractAzureFunction extends AbstractFunctionFeature impl
     }
 
     protected void addFunctionTemplate(ModuleContext module, GeneratorContext generatorContext, Options options, Project project) {
-        if (options instanceof MicronautOptions micronautOptions && micronautOptions.applicationType() == ApplicationType.FUNCTION
+        ApplicationType applicationType = ApplicationType.of(generatorContext.getOptions().template());
+        if (applicationType == ApplicationType.FUNCTION
                 && generatorContext.isFeatureMissing(CodeContributingFeature.class)) {
             String triggerFile = generatorContext.getSourcePath("/{packagePath}/Function");
             module.addTemplate(options.language(), "trigger", triggerFile,

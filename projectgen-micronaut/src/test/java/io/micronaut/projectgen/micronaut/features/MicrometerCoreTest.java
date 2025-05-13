@@ -2,13 +2,18 @@ package io.micronaut.projectgen.micronaut.features;
 
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.buildtools.Scope;
+import io.micronaut.projectgen.core.generator.ProjectGenerator;
 import io.micronaut.projectgen.core.io.MapOutputHandler;
-import io.micronaut.projectgen.micronaut.MicronautOptions;
-import io.micronaut.projectgen.micronaut.MicronautProjectGenerator;
+import io.micronaut.projectgen.core.options.GenericOptionsBuilder;
+import io.micronaut.projectgen.core.options.Options;
+import io.micronaut.projectgen.micronaut.ApplicationType;
+import io.micronaut.projectgen.micronaut.OptionsFixture;
 import io.micronaut.projectgen.test.BuildTestVerifier;
 import io.micronaut.projectgen.test.ConfigurationUtils;
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
@@ -17,16 +22,16 @@ import static org.junit.jupiter.api.Assertions.*;
 @MicronautTest(startApplication = false)
 class MicrometerCoreTest {
     @Test
-    void coreConfiguration(MicronautProjectGenerator micronautProjectGenerator) throws Exception {
-        MicronautOptions options = MicronautOptions.builder().feature("micrometer").build();
+    void coreConfiguration(ProjectGenerator micronautProjectGenerator) throws Exception {
+        Options options = OptionsFixture.defaultGradle().features(List.of("micrometer")).build();
         Map<String, String> project = generateProject(micronautProjectGenerator, options);
         Properties applicationProperties = ConfigurationUtils.loadApplicationProperties(project);
         assertEquals(StringUtils.TRUE, applicationProperties.getProperty("micronaut.metrics.enabled"));
     }
 
     @Test
-    void coreFeaturesAddsTheDependency(MicronautProjectGenerator micronautProjectGenerator) throws Exception {
-        MicronautOptions options = MicronautOptions.builder().feature("micrometer").feature("r2dbc").build();
+    void coreFeaturesAddsTheDependency(ProjectGenerator micronautProjectGenerator) throws Exception {
+        Options options = OptionsFixture.defaultGradle().features(List.of("micrometer", "r2dbc")).build();
         Map<String, String> project = generateProject(micronautProjectGenerator, options);
         String buildGradle = project.get("build.gradle.kts");
         assertNotNull(buildGradle);
@@ -35,8 +40,8 @@ class MicrometerCoreTest {
         assertTrue(verifier.hasDependency("io.r2dbc", "r2dbc-pool", Scope.COMPILE), buildGradle);
     }
 
-    private static Map<String, String> generateProject(MicronautProjectGenerator micronautProjectGenerator,
-                                                       MicronautOptions options) throws Exception {
+    private static Map<String, String> generateProject(ProjectGenerator micronautProjectGenerator,
+                                                       Options options) throws Exception {
         MapOutputHandler outputHandler = new MapOutputHandler();
         micronautProjectGenerator.generate(options, outputHandler);
         return outputHandler.getProject();
