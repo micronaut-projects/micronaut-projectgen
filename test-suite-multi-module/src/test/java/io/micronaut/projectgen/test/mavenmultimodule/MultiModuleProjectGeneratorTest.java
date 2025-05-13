@@ -5,9 +5,8 @@ import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.buildtools.Scope;
 import io.micronaut.projectgen.core.generator.ProjectGenerator;
 import io.micronaut.projectgen.core.io.MapOutputHandler;
+import io.micronaut.projectgen.core.options.GenericOptionsBuilder;
 import io.micronaut.projectgen.core.options.Options;
-import io.micronaut.projectgen.core.options.OptionsImpl;
-import io.micronaut.projectgen.core.rocker.RockerTemplate;
 import io.micronaut.projectgen.test.BuildTestVerifier;
 import io.micronaut.projectgen.test.ConfigurationUtils;
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
@@ -34,7 +33,7 @@ class MultiModuleProjectGeneratorTest {
     void testMultiModule(ProjectGenerator projectGenerator,
                               ResourceLoader resourceLoader) throws Exception {
         MapOutputHandler outputHandler = new MapOutputHandler();
-        Options options = OptionsImpl.builder()
+        Options options = GenericOptionsBuilder.builder().name("demo")
             .buildTools(List.of(BuildTool.MAVEN, BuildTool.GRADLE))
             .name("org.springframework.gs-multi-module")
             .build();

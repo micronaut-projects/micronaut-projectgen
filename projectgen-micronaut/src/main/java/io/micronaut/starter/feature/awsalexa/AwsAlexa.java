@@ -23,11 +23,8 @@ import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.Project;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
-import io.micronaut.projectgen.micronaut.MicronautOptions;
 import io.micronaut.starter.feature.Category;
 import io.micronaut.starter.feature.CodeContributingFeature;
-import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.starter.feature.aws.AwsCloudFeature;
 import io.micronaut.projectgen.micronaut.template.awsalexa.cancelIntentHandlerGroovy;
 import io.micronaut.projectgen.micronaut.template.awsalexa.cancelIntentHandlerGroovyJunit;
@@ -81,7 +78,6 @@ import io.micronaut.starter.options.DefaultTestRockerModelProvider;
 import io.micronaut.projectgen.core.rocker.TestRockerModelProvider;
 import jakarta.inject.Singleton;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -107,8 +103,8 @@ public class AwsAlexa implements OpenRewriteFeature, AwsCloudFeature, CodeContri
 
     @Override
     public boolean supports(Options options) {
-        return options instanceof MicronautOptions mnOptions &&
-                (mnOptions.applicationType() == ApplicationType.FUNCTION || mnOptions.applicationType() == ApplicationType.DEFAULT);
+        return ApplicationType.of(options.template()) == ApplicationType.FUNCTION ||
+            ApplicationType.of(options.template()) == ApplicationType.DEFAULT;
     }
 
     @Override
@@ -137,13 +133,11 @@ public class AwsAlexa implements OpenRewriteFeature, AwsCloudFeature, CodeContri
 
     @Override
     public List<String> getRecipes(GeneratorContext generatorContext) {
-        if (generatorContext.getOptions() instanceof MicronautOptions micronautOptions) {
-            if (micronautOptions.applicationType() == ApplicationType.FUNCTION) {
+            if (ApplicationType.of(generatorContext.getOptions().template()) == ApplicationType.FUNCTION) {
                 return List.of("io.micronaut.starter.feature.aws-alexa-function");
-            } else if (micronautOptions.applicationType() == ApplicationType.DEFAULT) {
+            } else if (ApplicationType.of(generatorContext.getOptions().template()) == ApplicationType.DEFAULT) {
                 return List.of("io.micronaut.starter.feature.aws-alexa-default");
             }
-        }
         return Collections.emptyList();
     }
 

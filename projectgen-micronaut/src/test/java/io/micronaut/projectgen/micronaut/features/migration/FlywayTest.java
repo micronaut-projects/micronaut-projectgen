@@ -1,14 +1,13 @@
 package io.micronaut.projectgen.micronaut.features.migration;
 
 import io.micronaut.core.util.StringUtils;
-import io.micronaut.projectgen.core.buildtools.Phase;
 import io.micronaut.projectgen.core.buildtools.Scope;
-import io.micronaut.projectgen.core.buildtools.Source;
-import io.micronaut.projectgen.core.buildtools.maven.MavenScope;
+import io.micronaut.projectgen.core.generator.ProjectGenerator;
 import io.micronaut.projectgen.core.io.MapOutputHandler;
-import io.micronaut.projectgen.core.options.Language;
-import io.micronaut.projectgen.micronaut.MicronautOptions;
-import io.micronaut.projectgen.micronaut.MicronautProjectGenerator;
+import io.micronaut.projectgen.core.options.GenericOptionsBuilder;
+import io.micronaut.projectgen.core.options.Options;
+import io.micronaut.projectgen.micronaut.ApplicationType;
+import io.micronaut.projectgen.micronaut.OptionsFixture;
 import io.micronaut.projectgen.test.BuildTestVerifier;
 import io.micronaut.projectgen.test.ConfigurationUtils;
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
@@ -20,7 +19,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Properties;
 import java.util.stream.Stream;
 
@@ -30,11 +28,11 @@ import static org.junit.jupiter.api.Assertions.*;
 class FlywayTest {
 
     @Inject
-    MicronautProjectGenerator micronautProjectGenerator;
+    ProjectGenerator micronautProjectGenerator;
 
     @Test
     void flywayConfiguration() throws Exception {
-        MicronautOptions options = MicronautOptions.builder().feature("flyway").build();
+        Options options = OptionsFixture.defaultGradle().features(List.of("flyway")).build();
         Map<String, String> project = generateProject(micronautProjectGenerator, options);
         Properties applicationProperties = ConfigurationUtils.loadApplicationProperties(project);
         assertEquals(StringUtils.TRUE, applicationProperties.getProperty("flyway.datasources.default.enabled"));
@@ -42,7 +40,7 @@ class FlywayTest {
 
     @Test
     void flywayFeaturesAddsTheDependency() throws Exception {
-        MicronautOptions options = MicronautOptions.builder().feature("flyway").build();
+        Options options = OptionsFixture.defaultGradle().features(List.of("flyway")).build();
         Map<String, String> project = generateProject(micronautProjectGenerator, options);
         String buildGradle = project.get("build.gradle.kts");
         assertNotNull(buildGradle);
@@ -53,9 +51,8 @@ class FlywayTest {
     @ParameterizedTest
     @MethodSource("flywayDependencies")
     void testProjectNaturalName(String groupId, String artifactId, String feature) throws Exception {
-        MicronautOptions options = MicronautOptions.builder()
-            .feature("flyway")
-            .feature(feature)
+        Options options = OptionsFixture.defaultGradle()
+            .features(List.of("flyway", feature))
             .build();
         Map<String, String> project = generateProject(micronautProjectGenerator, options);
         String buildGradle = project.get("build.gradle.kts");
@@ -75,8 +72,8 @@ class FlywayTest {
     }
 
     @Test
-    void flywayFeaturesAddsTheLinkInReadmeFile(MicronautProjectGenerator micronautProjectGenerator) throws Exception {
-        MicronautOptions options = MicronautOptions.builder().feature("flyway").build();
+    void flywayFeaturesAddsTheLinkInReadmeFile(ProjectGenerator micronautProjectGenerator) throws Exception {
+        Options options = OptionsFixture.defaultGradle("flyway");
         Map<String, String> project = generateProject(micronautProjectGenerator, options);
         String readme = project.get("README.md");
         assertNotNull(readme);
@@ -85,8 +82,8 @@ class FlywayTest {
 
     }
 
-    private static Map<String, String> generateProject(MicronautProjectGenerator micronautProjectGenerator,
-                                                       MicronautOptions options) throws Exception {
+    private static Map<String, String> generateProject(ProjectGenerator micronautProjectGenerator,
+                                                       Options options) throws Exception {
         MapOutputHandler outputHandler = new MapOutputHandler();
         micronautProjectGenerator.generate(options, outputHandler);
         return outputHandler.getProject();

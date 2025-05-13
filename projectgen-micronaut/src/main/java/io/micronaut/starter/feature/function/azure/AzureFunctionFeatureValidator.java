@@ -40,7 +40,7 @@ public class AzureFunctionFeatureValidator implements FeatureValidator {
 
     @Override
     public void validatePostProcessing(Options options, Set<Feature> features) {
-        if (features.stream().anyMatch(AbstractAzureFunction.class::isInstance) && !supports(options.javaVersion())) {
+        if (features.stream().anyMatch(AbstractAzureFunction.class::isInstance) && !supports(options.java())) {
             throw new IllegalArgumentException("""
                     Azure Function currently only supports JDK 8, 11 and 17 -- \
                     https://learn.microsoft.com/en-us/azure/developer/java/fundamentals/java-support-on-azure""");

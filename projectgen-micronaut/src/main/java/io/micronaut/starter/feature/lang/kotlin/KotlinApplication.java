@@ -28,7 +28,6 @@ import io.micronaut.projectgen.javalibs.logging.Slf4jJulBridge;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.Project;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.micronaut.MicronautOptions;
 import io.micronaut.projectgen.micronaut.template.lang.kotlin.application;
 import io.micronaut.starter.feature.RequireEagerSingletonInitializationFeature;
 import io.micronaut.starter.feature.database.TransactionalNotSupported;
@@ -61,7 +60,8 @@ public class KotlinApplication implements KotlinApplicationFeature {
 
     @Override
     public boolean supports(Options options) {
-        return options instanceof MicronautOptions mnOptions && (mnOptions.applicationType() != ApplicationType.CLI && mnOptions.applicationType() != ApplicationType.FUNCTION);
+        ApplicationType applicationType = ApplicationType.of(options.template());
+        return applicationType != ApplicationType.CLI && applicationType != ApplicationType.FUNCTION;
     }
 
     @Override
@@ -75,7 +75,8 @@ public class KotlinApplication implements KotlinApplicationFeature {
     }
 
     protected boolean shouldGenerateApplicationFile(GeneratorContext generatorContext) {
-        return generatorContext.getOptions() instanceof MicronautOptions micronautOptions && micronautOptions.applicationType() == ApplicationType.DEFAULT
+        ApplicationType applicationType = ApplicationType.of(generatorContext.getOptions().template());
+        return applicationType == ApplicationType.DEFAULT
                 || !generatorContext.getFeatures().hasFeature(FunctionFeature.class);
     }
 

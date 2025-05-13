@@ -30,7 +30,7 @@ public class MinJdkFeatureValidator implements FeatureValidator {
 
     @Override
     public void validatePreProcessing(Options options, Set<Feature> features) {
-        JdkVersion jdk = options.javaVersion();
+        JdkVersion jdk = options.java();
         for (Feature f : features) {
             if (f instanceof MinJdkFeature feature) {
                 JdkVersion min = feature.minJdk();

@@ -13,10 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.projectgen.core.io;
+package io.micronaut.projectgen.core.io.zip;
 
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.Project;
+import io.micronaut.projectgen.core.io.OutputHandler;
 import io.micronaut.projectgen.core.template.Template;
 import org.apache.commons.compress.archivers.zip.UnixStat;
 import org.apache.commons.compress.archivers.zip.ZipArchiveEntry;

@@ -1,9 +1,12 @@
 package io.micronaut.projectgen.micronaut.features.langchain4j;
 
 import io.micronaut.projectgen.core.buildtools.Scope;
+import io.micronaut.projectgen.core.generator.ProjectGenerator;
 import io.micronaut.projectgen.core.io.MapOutputHandler;
-import io.micronaut.projectgen.micronaut.MicronautOptions;
-import io.micronaut.projectgen.micronaut.MicronautProjectGenerator;
+import io.micronaut.projectgen.core.options.GenericOptionsBuilder;
+import io.micronaut.projectgen.core.options.Options;
+import io.micronaut.projectgen.micronaut.ApplicationType;
+import io.micronaut.projectgen.micronaut.OptionsFixture;
 import io.micronaut.projectgen.test.BuildTestVerifier;
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
 import jakarta.inject.Inject;
@@ -11,6 +14,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
@@ -20,12 +24,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @MicronautTest(startApplication = false)
 class Lanchain4jTest {
     @Inject
-    MicronautProjectGenerator micronautProjectGenerator;
+    ProjectGenerator micronautProjectGenerator;
 
     @ParameterizedTest
     @MethodSource("laghcain4JArguments")
     void lanchain4JDependencies(String feature, String groupId, String artifactId, boolean hikari) throws Exception {
-        MicronautOptions options = MicronautOptions.builder().feature(feature).feature("test-resources").build();
+        Options options = OptionsFixture.defaultGradle().features(List.of(feature, "test-resources")).build();
         MapOutputHandler outputHandler = new MapOutputHandler();
         micronautProjectGenerator.generate(options, outputHandler);
         Map<String, String> project = outputHandler.getProject();

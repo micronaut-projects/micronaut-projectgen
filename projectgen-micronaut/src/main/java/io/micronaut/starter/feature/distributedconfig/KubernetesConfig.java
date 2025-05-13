@@ -22,13 +22,10 @@ import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.feature.FeatureContext;
-import io.micronaut.projectgen.micronaut.MicronautOptions;
 import io.micronaut.projectgen.micronaut.features.config.MicronautDistributedConfigurationFeature;
 import io.micronaut.starter.feature.k8s.Kubernetes;
 
-import io.micronaut.starter.feature.k8s.KubernetesClient;
 import jakarta.inject.Singleton;
 
 import java.util.List;
@@ -78,8 +75,8 @@ public class KubernetesConfig implements DistributedConfigFeature, OpenRewriteFe
 
     @Override
     public boolean supports(Options options) {
-        return options instanceof MicronautOptions mnOptions &&
-                (mnOptions.applicationType() != ApplicationType.CLI && mnOptions.applicationType() != ApplicationType.FUNCTION);
+        ApplicationType type = ApplicationType.of(options.template());
+        return type != ApplicationType.CLI && type != ApplicationType.FUNCTION;
     }
 
     @Override

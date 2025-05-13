@@ -16,7 +16,6 @@
 package io.micronaut.starter.feature.grpc;
 
 import io.micronaut.context.annotation.Requires;
-import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.generator.ModuleContext;
@@ -25,9 +24,6 @@ import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.BuildPlugin;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
-import io.micronaut.projectgen.micronaut.MicronautOptions;
-import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import io.micronaut.projectgen.core.buildtools.gradle.GradleDsl;
 import io.micronaut.projectgen.core.buildtools.gradle.GradlePlugin;
 import io.micronaut.starter.feature.Category;
@@ -44,8 +40,6 @@ import jakarta.inject.Singleton;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-import java.util.function.Function;
-import java.util.stream.Stream;
 
 @Requires(property = "micronaut.starter.feature.grpc.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
@@ -64,7 +58,7 @@ public class Grpc implements DefaultFeature, OpenRewriteFeature {
 
     @Override
     public boolean shouldApply(Options options, Set<Feature> selectedFeatures) {
-        return options instanceof MicronautOptions mnOptions && mnOptions.applicationType() == ApplicationType.GRPC;
+        return ApplicationType.of(options.template()) == ApplicationType.GRPC;
     }
 
     private BuildPlugin gradlePlugin(GeneratorContext generatorContext) {

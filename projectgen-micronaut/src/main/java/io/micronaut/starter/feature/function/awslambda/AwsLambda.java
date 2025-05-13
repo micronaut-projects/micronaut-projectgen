@@ -17,18 +17,17 @@ package io.micronaut.starter.feature.function.awslambda;
 
 import com.fizzed.rocker.RockerModel;
 import io.micronaut.context.annotation.Requires;
-import io.micronaut.context.env.Environment;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.feature.config.Configuration;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.options.GenericOptionsBuilder;
 import io.micronaut.projectgen.core.rocker.RockerWritable;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.Project;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
-import io.micronaut.projectgen.micronaut.MicronautOptions;
 import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import io.micronaut.starter.feature.Category;
 import io.micronaut.starter.feature.CodeContributingFeature;
@@ -44,7 +43,6 @@ import io.micronaut.starter.feature.aws.AwsLambdaEventsSerde;
 import io.micronaut.starter.feature.aws.AwsLambdaSnapstart;
 import io.micronaut.starter.feature.aws.AwsMicronautRuntimeFeature;
 import io.micronaut.starter.feature.awslambdacustomruntime.AwsLambdaCustomRuntime;
-import io.micronaut.projectgen.core.feature.config.ApplicationConfiguration;
 import io.micronaut.starter.feature.function.CloudFeature;
 import io.micronaut.starter.feature.function.DocumentationLink;
 import io.micronaut.starter.feature.function.FunctionFeature;
@@ -150,9 +148,9 @@ public class AwsLambda implements FunctionFeature, DefaultFeature, AwsCloudFeatu
 
     @Override
     public void processSelectedFeatures(FeatureContext featureContext) {
-        ApplicationType applicationType = featureContext.getOptions() instanceof MicronautOptions mnOptions ? mnOptions.applicationType() : null;
+        ApplicationType applicationType = ApplicationType.of(featureContext.getOptions().template());
         Stream.of(defaultAwsLambdaHandlerProvider, functionAwsLambdaHandlerProvider)
-                .filter(f -> f.supports(MicronautOptions.builder().applicationType(applicationType).build()))
+                .filter(f -> f.supports(GenericOptionsBuilder.builder().template(applicationType.toString()).build()))
                 .findFirst()
                 .ifPresent(f -> featureContext.addFeatureIfNotPresent(HandlerClassFeature.class, f));
 
@@ -161,7 +159,7 @@ public class AwsLambda implements FunctionFeature, DefaultFeature, AwsCloudFeatu
         if (featureContext.isPresent(GraalVM.class) &&
                 (
                         OptionUtils.hasMavenBuildTool(featureContext.getOptions()) ||
-                        (OptionUtils.hasGradleBuildTool(featureContext.getOptions()) && featureContext.getOptions() instanceof MicronautOptions mnOptions && mnOptions.applicationType() == FUNCTION)
+                        (OptionUtils.hasGradleBuildTool(featureContext.getOptions()) && applicationType == FUNCTION)
                 )
         ) {
             featureContext.addFeature(customRuntime);
@@ -211,7 +209,7 @@ public class AwsLambda implements FunctionFeature, DefaultFeature, AwsCloudFeatu
     public void apply(GeneratorContext generatorContext) {
         ModuleContext module = generatorContext.getRootModule();
         if (generatorContext.isFeatureMissing(CodeContributingFeature.class)) {
-            ApplicationType applicationType = generatorContext.getOptions() instanceof MicronautOptions mnOptions ? mnOptions.applicationType() : null;
+            ApplicationType applicationType = ApplicationType.of(generatorContext.getOptions().template());
             if (applicationType == DEFAULT || applicationType == FUNCTION) {
                 addCode(generatorContext, module);
                 if (applicationType == FUNCTION) {
@@ -226,10 +224,11 @@ public class AwsLambda implements FunctionFeature, DefaultFeature, AwsCloudFeatu
     }
 
     private void addDependencies(@NonNull ModuleContext module, GeneratorContext generatorContext) {
-        if (generatorContext.getOptions() instanceof MicronautOptions micronautOptions && micronautOptions.applicationType() == ApplicationType.FUNCTION) {
+        ApplicationType applicationType = ApplicationType.of(generatorContext.getOptions().template());
+        if (applicationType == ApplicationType.FUNCTION) {
             module.addDependency(DEPENDENCY_MICRONAUT_FUNCTION_AWS);
         }
-        if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions()) && generatorContext.getOptions() instanceof MicronautOptions micronautOptions && micronautOptions.applicationType() == DEFAULT) {
+        if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions()) && applicationType == DEFAULT) {
             module.addDependency(DEPENDENCY_MICRONAUT_FUNCTION_AWS_API_PROXY);
             module.addDependency(DEPENDENCY_MICRONAUT_FUNCTION_AWS_API_PROXY_TEST);
         }
@@ -250,7 +249,7 @@ public class AwsLambda implements FunctionFeature, DefaultFeature, AwsCloudFeatu
 
     protected void addCode(@NonNull GeneratorContext generatorContext, ModuleContext module) {
         Project project = generatorContext.getProject();
-        ApplicationType applicationType = generatorContext.getOptions() instanceof MicronautOptions mnOptions ? mnOptions.applicationType() : null;
+        ApplicationType applicationType = ApplicationType.of(generatorContext.getOptions().template());
         if (applicationType == DEFAULT) {
             addHomeController(generatorContext, module, project);
             addHomeControllerTest(generatorContext, module, project);
@@ -321,7 +320,8 @@ public class AwsLambda implements FunctionFeature, DefaultFeature, AwsCloudFeatu
 
     @Override
     public boolean shouldApply(Options options, Set<Feature> selectedFeatures) {
-        return options instanceof MicronautOptions mnOptions && mnOptions.applicationType() == FUNCTION &&
+        ApplicationType applicationType = ApplicationType.of(options.template());
+        return applicationType == FUNCTION &&
                 selectedFeatures.stream().filter(CloudFeature.class::isInstance)
                         .noneMatch(cloudFeature -> ((CloudFeature) cloudFeature).getCloud() != getCloud());
     }

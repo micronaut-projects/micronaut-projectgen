@@ -26,7 +26,6 @@ import io.micronaut.projectgen.core.generator.Project;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.CoordinateResolver;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
-import io.micronaut.projectgen.micronaut.MicronautOptions;
 import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import io.micronaut.starter.feature.CodeContributingFeature;
 import io.micronaut.projectgen.core.feature.FeatureContext;
@@ -61,14 +60,16 @@ public class AzureRawFunction extends AbstractAzureFunction {
     @Override
     public void processSelectedFeatures(FeatureContext featureContext) {
         featureContext.exclude(ShadePlugin.class::isInstance);
-        if (featureContext.getOptions() instanceof MicronautOptions mnOptions && mnOptions.applicationType() == ApplicationType.DEFAULT) {
+        ApplicationType applicationType = ApplicationType.of(featureContext.getOptions().template());
+        if (applicationType == ApplicationType.DEFAULT) {
             featureContext.addFeature(httpFunction);
         }
     }
 
     @Override
     protected void applyTestTemplate(GeneratorContext generatorContext, Project project, String name) {
-        if (generatorContext.getOptions() instanceof MicronautOptions micronautOptions && micronautOptions.applicationType() == ApplicationType.FUNCTION) {
+        ApplicationType applicationType = ApplicationType.of(generatorContext.getOptions().template());
+        if (applicationType == ApplicationType.FUNCTION) {
             super.applyTestTemplate(generatorContext, project, name);
         }
     }
