@@ -20,33 +20,33 @@ import java.util.Properties;
 import static org.junit.jupiter.api.Assertions.*;
 
 @MicronautTest(startApplication = false)
-class OracleCloudLoggingTest {
+class OracleCloudSdkTest {
     @Test
-    void oracleCloudLoggingConfiguration(ProjectGenerator micronautProjectGenerator) throws Exception {
-        Options options = OptionsFixture.defaultGradle().features(List.of("oracle-cloud-logging")).build();
+    void oracleCloudSdkConfiguration(ProjectGenerator micronautProjectGenerator) throws Exception {
+        Options options = OptionsFixture.defaultGradle().features(List.of("oracle-cloud-sdk")).build();
         Map<String, String> project = generateProject(micronautProjectGenerator, options);
         Properties applicationProperties = ConfigurationUtils.loadApplicationProperties(project);
         assertEquals("DEFAULT", applicationProperties.getProperty("oci.config.profile"));
     }
 
     @Test
-    void oracleCloudLoggingFeaturesAddsTheDependency(ProjectGenerator micronautProjectGenerator) throws Exception {
-        Options options = OptionsFixture.defaultGradle().features(List.of("oracle-cloud-logging")).build();
+    void oracleCloudSdkFeaturesAddsTheDependency(ProjectGenerator micronautProjectGenerator) throws Exception {
+        Options options = OptionsFixture.defaultGradle().features(List.of("oracle-cloud-sdk")).build();
         Map<String, String> project = generateProject(micronautProjectGenerator, options);
         String buildGradle = project.get("build.gradle.kts");
         assertNotNull(buildGradle);
         BuildTestVerifier verifier = BuildTestVerifier.of(buildGradle, options);
-        assertTrue(verifier.hasDependency("io.micronaut.oraclecloud", "micronaut-oraclecloud-logging", Scope.COMPILE), buildGradle);
+        assertTrue(verifier.hasDependency("io.micronaut.oraclecloud", "micronaut-oraclecloud-sdk", Scope.COMPILE), buildGradle);
     }
 
     @Test
-    void oracleCloudLoggingFeaturesAddsTheLinkInReadmeFile(ProjectGenerator micronautProjectGenerator) throws Exception {
-        Options options = OptionsFixture.defaultGradle().features(List.of("oracle-cloud-logging")).build();
+    void oracleCloudSdkFeaturesAddsTheLinkInReadmeFile(ProjectGenerator micronautProjectGenerator) throws Exception {
+        Options options = OptionsFixture.defaultGradle().features(List.of("oracle-cloud-sdk")).build();
         Map<String, String> project = generateProject(micronautProjectGenerator, options);
         String readme = project.get("README.md");
         assertNotNull(readme);
-        assertTrue(readme.contains("https://micronaut-projects.github.io/micronaut-oracle-cloud/latest/guide/#logging"));
-        assertTrue(readme.contains("https://docs.oracle.com/en-us/iaas/Content/Logging/Concepts/loggingoverview.htm"));
+        assertTrue(readme.contains("https://micronaut-projects.github.io/micronaut-oracle-cloud/latest/guide/"));
+        assertTrue(readme.contains("https://docs.cloud.oracle.com/en-us/iaas/Content/API/SDKDocs/javasdk.htm"));
 
     }
 
