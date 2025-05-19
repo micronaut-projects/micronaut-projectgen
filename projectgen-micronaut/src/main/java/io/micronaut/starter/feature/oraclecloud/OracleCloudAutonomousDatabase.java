@@ -19,6 +19,7 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
@@ -33,15 +34,12 @@ import io.micronaut.starter.feature.testresources.TestResources;
 import jakarta.inject.Singleton;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 @Requires(property = "micronaut.starter.feature.oracle.cloud.atp.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class OracleCloudAutonomousDatabase extends DatabaseDriverFeature {
-
-    private static final Dependency.Builder DEPENDENCY_MICRONAUT_ORACLECLOUD_ATP = MicronautDependencyUtils.oracleCloudDependency()
-            .artifactId("micronaut-oraclecloud-atp")
-            .compile();
+public class OracleCloudAutonomousDatabase extends DatabaseDriverFeature implements OpenRewriteFeature{
 
     private final OracleCloudSdk oracleCloudSdkFeature;
 
@@ -68,16 +66,6 @@ public class OracleCloudAutonomousDatabase extends DatabaseDriverFeature {
     @NonNull
     public String getDescription() {
         return "Provides integration with Oracle Cloud Autonomous Database";
-    }
-
-    @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-oracle-cloud/latest/guide/#_micronaut_oraclecloud_atp";
-    }
-
-    @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://www.oracle.com/autonomous-database/autonomous-transaction-processing/";
     }
 
     @Override
@@ -135,16 +123,14 @@ public class OracleCloudAutonomousDatabase extends DatabaseDriverFeature {
     }
 
     @Override
-    public Map<String, Object> getAdditionalConfig(GeneratorContext generatorContext) {
-        Map<String, Object> config = new LinkedHashMap<>(2);
-        config.put("datasources.default.ocid", "");
-        config.put("datasources.default.walletPassword", "");
-        return config;
+    public void apply(GeneratorContext generatorContext) {
+        ModuleContext module = generatorContext.getRootModule();
+        OpenRewriteFeature.super.apply(generatorContext);
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
-        module.addDependency(DEPENDENCY_MICRONAUT_ORACLECLOUD_ATP);
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.oracle-cloud-atp");
     }
+
 }
