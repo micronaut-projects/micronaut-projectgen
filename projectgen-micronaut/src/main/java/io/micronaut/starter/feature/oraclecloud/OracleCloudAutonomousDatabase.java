@@ -124,7 +124,6 @@ public class OracleCloudAutonomousDatabase extends DatabaseDriverFeature impleme
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
         OpenRewriteFeature.super.apply(generatorContext);
     }
 

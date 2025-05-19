@@ -57,12 +57,6 @@ public class OracleCloudLogging implements OracleCloudFeature, OpenRewriteFeatur
         return LOGGING;
     }
 
-//    @Override
-//    public void apply(GeneratorContext generatorContext) {
-//        ModuleContext module = generatorContext.getRootModule();
-//
-//    }
-
     @Override
     public List<String> getRecipes(GeneratorContext generatorContext) {
         return List.of("io.micronaut.starter.feature.oracle-cloud-logging");
