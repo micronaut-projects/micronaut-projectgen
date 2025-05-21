@@ -41,7 +41,6 @@ import java.util.Set;
  */
 @Singleton
 public class SpringBootDefaultFeature implements DefaultFeature, RequiresRepository {
-    private final Maven maven;
     private final SpringBootGradlePlugin springBootGradlePlugin;
     private final JavaGradlePlugin javaGradlePlugin;
     private final SpringDependencyManagementGradlePlugin springDependencyManagementGradlePlugin;
@@ -52,15 +51,13 @@ public class SpringBootDefaultFeature implements DefaultFeature, RequiresReposit
     private final SpringBootMavenPlugin springBootMavenPlugin;
     private final GitIgnore gitIgnore;
 
-    public SpringBootDefaultFeature(Maven maven,
-                                    SpringBootGradlePlugin springBootGradlePlugin,
+    public SpringBootDefaultFeature(SpringBootGradlePlugin springBootGradlePlugin,
                                     JavaGradlePlugin javaGradlePlugin,
                                     SpringDependencyManagementGradlePlugin springDependencyManagementGradlePlugin,
                                     SpringBootStarter springBootStarter,
                                     KotlinGradlePlugin kotlinGradlePlugin,
                                     GroovyGradlePlugin groovyGradlePlugin,
                                     SpringBootParentPomFeature springBootParentPomFeature, SpringBootMavenPlugin springBootMavenPlugin, GitIgnore gitIgnore) {
-        this.maven = maven;
         this.springBootGradlePlugin = springBootGradlePlugin;
         this.javaGradlePlugin = javaGradlePlugin;
         this.springDependencyManagementGradlePlugin = springDependencyManagementGradlePlugin;
@@ -99,7 +96,6 @@ public class SpringBootDefaultFeature implements DefaultFeature, RequiresReposit
             featureContext.addFeatureIfNotPresent(SpringBootStarter.class, springBootStarter);
         }
         if (OptionUtils.hasMavenBuildTool(featureContext.getOptions())) {
-            featureContext.addFeatureIfNotPresent(Maven.class, maven);
             featureContext.addFeatureIfNotPresent(SpringBootParentPomFeature.class, springBootParentPomFeature);
             featureContext.addFeatureIfNotPresent(SpringBootMavenPlugin.class, springBootMavenPlugin);
         }

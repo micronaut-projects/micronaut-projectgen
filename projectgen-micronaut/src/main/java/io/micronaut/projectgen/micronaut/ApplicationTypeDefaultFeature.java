@@ -16,7 +16,6 @@
 package io.micronaut.projectgen.micronaut;
 
 import io.micronaut.core.annotation.Nullable;
-import io.micronaut.projectgen.core.buildtools.maven.Maven;
 import io.micronaut.projectgen.core.feature.*;
 import io.micronaut.projectgen.core.feature.config.Properties;
 import io.micronaut.projectgen.core.feature.gitignore.GitIgnore;
@@ -55,7 +54,6 @@ import java.util.Set;
  */
 @Singleton
 public class ApplicationTypeDefaultFeature extends ApplicationTypeFeature {
-    private final Maven maven;
     private final MicronautMavenPlugin micronautMavenPlugin;
     private final MicronautMavenCompilerPlugin micronautMavenCompilerPlugin;
     private final AppName appName;
@@ -78,8 +76,7 @@ public class ApplicationTypeDefaultFeature extends ApplicationTypeFeature {
     private HttpClientTest httpClientTest;
 
     @SuppressWarnings("ParameterNumber")
-    public ApplicationTypeDefaultFeature(Maven maven,
-                                         MicronautMavenPlugin micronautMavenPlugin,
+    public ApplicationTypeDefaultFeature(MicronautMavenPlugin micronautMavenPlugin,
                                          Properties properties,
                                          AppName appName,
                                          Logback logback,
@@ -100,7 +97,6 @@ public class ApplicationTypeDefaultFeature extends ApplicationTypeFeature {
                                          List<GroovyApplicationFeature> groovyApplicationFeatures,
                                          HttpClientTest httpClientTest) {
         super(micronautTestJunit5, micronautTestSpock, properties, logback, gitIgnore);
-        this.maven = maven;
         this.micronautMavenPlugin = micronautMavenPlugin;
         this.appName = appName;
         this.micronautMavenCompilerPlugin = micronautMavenCompilerPlugin;
@@ -171,8 +167,6 @@ public class ApplicationTypeDefaultFeature extends ApplicationTypeFeature {
             featureContext.addFeatureIfNotPresent(MicronautParentPomFeature.class, micronautParentPomFeature);
             featureContext.addFeatureIfNotPresent(MicronautMavenPlugin.class, micronautMavenPlugin);
             featureContext.addFeatureIfNotPresent(MicronautMavenCompilerPlugin.class, micronautMavenCompilerPlugin);
-            featureContext.addFeatureIfNotPresent(Maven.class, maven);
-
         }
 
         if (!featureContext.isPresent(HttpClientFeature.class)) {
