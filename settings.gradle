@@ -27,6 +27,7 @@ include 'projectgen-micronaut'
 include 'projectgen-quarkus'
 include 'projectgen-micronaut-openrewrite'
 include 'test-suite-multi-module'
+include 'micronaut-monolith'
 
 enableFeaturePreview 'TYPESAFE_PROJECT_ACCESSORS'
 

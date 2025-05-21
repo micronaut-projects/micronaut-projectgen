@@ -1,0 +1,49 @@
+<th:block th:fragment="modal(tree, treeJson, codeSamples)" xmlns:th="http://www.thymeleaf.org">
+    <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Preview</h5>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-3 bg-light">
+                            <div id="tree"></div>
+                        </div>
+                        <div class="col-9 bg-white">
+                            <th:block th:each="codeSample : ${codeSamples}">
+<pre th:class="codeSample" th:id="${codeSample.idAttribute()}" style="display: none;">
+<code th:class="${codeSample.classAttribute()}" th:utext="${codeSample.content()}"></code>
+</pre>
+                            </th:block>
+                        </div>
+                    </div>
+                </div>
+                <div id="tree-data" th:utext="${treeJson}" style="display:none;"></div>
+                <script>
+                    var tree = JSON.parse(document.getElementById("tree-data").innerText);
+                    var t = new TreeView(tree, 'tree');
+                    t.on('select', function (e) {
+                        var codeSampleId = toValidHtmlId(e.data.path)
+                        document.querySelectorAll('.codeSample').forEach(el => {
+                            el.style.display = 'none';
+                        });
+                        const target = document.getElementById(codeSampleId);
+                        if (target) {
+                            target.style.display = 'block';
+                            Prism.highlightElement(target.querySelector('code'));
+                        }
+                    });
+                    t.expandAll();
+                    t.on('expand', function () { });
+                    t.on('collapse', function () { });
+                    t.on('expandAll', function () { });
+                    t.on('collapseAll', function () { });
+                </script>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</th:block>

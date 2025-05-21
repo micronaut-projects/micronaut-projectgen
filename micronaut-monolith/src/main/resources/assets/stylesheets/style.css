@@ -1,0 +1,29 @@
+.diff {
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border: 1px solid #dee2e6;
+    border-radius: 0.5rem;
+    font-family: monospace;
+    overflow-x: auto;
+    white-space: pre;
+}
+
+.diff code {
+    display: block;
+}
+
+.diff code .line-add {
+    background-color: #e6ffed;
+    color: #22863a;
+}
+
+.diff code .line-remove {
+    background-color: #ffeef0;
+    color: #b31d28;
+}
+
+.diff code .line-header {
+    background-color: #f1f8ff;
+    color: #0366d6;
+    font-weight: bold;
+}

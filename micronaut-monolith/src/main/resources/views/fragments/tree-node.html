@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="treeNode(node)">
+    {
+    path: [[${node.path}]],
+    name: [[${node.name}]],
+    children: [
+    <th:block th:each="child : ${node.children}">
+        <th:include="fragments/tree-node :: treeNode(node=${child})"/><th:if="${!#lists.isLast(child)}">,</th:if>
+    </th:block>
+    ]
+    }
+</th:block>
+</html>

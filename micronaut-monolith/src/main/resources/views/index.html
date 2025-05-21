@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/assets/stylesheets/style.css" rel="stylesheet"/>
+    <link href="/assets/stylesheets/treeview.css" rel="stylesheet"/>
+    <link href="/assets/stylesheets/prism.css" rel="stylesheet"/>
+    <link href="/assets/stylesheets/bootstrap-5.3.6/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+    <script src="/assets/javascripts/treeview.js"></script>
+    <script src="/assets/javascripts/prism.js"></script>
+    <script src="/assets/javascripts/htmx.2.0.4.min.js"></script>
+</head>
+<body class="bg-body-tertiary">
+<div class="container bg-body mt-4 p-4 border-2 shadow-sm mx-auto" style="max-width: 700px;">
+    <main>
+        <form method="post" action="/download" id="project-gen-form">
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" name="name" id="name" th:value="${form.name()}" required class="form-control"/>
+            </div>
+            <div class="form-check">
+                <input checked disabled class="form-check-input" type="checkbox" name="features" value="geb-core" id="features-geb-core">
+                <label class="form-check-label" for="features-geb-core">Geb Core</label>
+            </div>
+            <h3>Driver:</h3>
+            <div class="form-check">
+                <input checked class="form-check-input" type="checkbox" name="features" value="selenium-driver-firefox" id="features-selenium-driver-firefox">
+                <label class="form-check-label" for="features-selenium-driver-firefox">Firefox</label>
+            </div>
+            <div class="form-check">
+                <input checked class="form-check-input" type="checkbox" name="features" value="selenium-driver-chrome" id="features-selenium-driver-chrome">
+                <label class="form-check-label" for="features-selenium-driver-chrome">chrome</label>
+            </div>
+            <div class="mt-2">
+            <button
+                    name="action"
+                    value="preview"
+                    hx-post="/download"
+                    hx-include="#project-gen-form"
+                    hx-target="#preview-modal"
+                    hx-trigger="click"
+                    data-bs-toggle="modal"
+                    data-bs-target="#preview-modal"
+                    class="btn btn-primary">Preview</button>
+
+            <button
+                    name="action"
+                    value="diff"
+                    hx-post="/download"
+                    hx-include="#project-gen-form"
+                    hx-target="#preview-modal"
+                    hx-trigger="click"
+                    data-bs-toggle="modal"
+                    data-bs-target="#preview-modal"
+                    class="btn btn-primary">Diff</button>
+
+            <button name="action" value="zip" class="btn btn-primary">Download</button>
+            </div>
+        </form>
+        <div id="preview-modal"
+             class="modal modal-blur fade"
+             style="display: none"
+             aria-hidden="false"
+             tabindex="-1">
+            <div class="modal-dialog modal-fullscreen" role="document">
+                <div class="modal-content"></div>
+            </div>
+        </div>
+    </main>
+</div>
+<script src="/assets/javascripts/bootstrap-5.3.6/bootstrap.bundle.min.js"></script>
+<script src="/assets/javascripts/utils.js"></script>
+</body>
+</html>
