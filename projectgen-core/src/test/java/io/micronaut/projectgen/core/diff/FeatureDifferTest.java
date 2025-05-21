@@ -53,22 +53,9 @@ class FeatureDifferTest {
     @Singleton
     static class GradleBuildDefaultFeature implements DefaultFeature {
 
-        private final Gradle gradle;
-
-        GradleBuildDefaultFeature(Gradle gradle) {
-            this.gradle = gradle;
-        }
-
         @Override
         public String getName() {
             return "geb-default-feature";
-        }
-
-        @Override
-        public void processSelectedFeatures(FeatureContext featureContext) {
-            if (OptionUtils.hasGradleBuildTool(featureContext.getOptions())) {
-                featureContext.addFeatureIfNotPresent(Gradle.class, gradle);
-            }
         }
 
         @Override

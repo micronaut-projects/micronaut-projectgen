@@ -16,12 +16,10 @@
 package io.micronaut.projectgen.micronaut;
 
 import io.micronaut.core.annotation.Nullable;
-import io.micronaut.projectgen.core.buildtools.gradle.Gradle;
 import io.micronaut.projectgen.core.buildtools.maven.Maven;
 import io.micronaut.projectgen.core.feature.*;
 import io.micronaut.projectgen.core.feature.config.Properties;
 import io.micronaut.projectgen.core.feature.gitignore.GitIgnore;
-import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.options.GenericOptionsBuilder;
 import io.micronaut.projectgen.core.options.Language;
 import io.micronaut.projectgen.core.options.Options;
@@ -80,8 +78,7 @@ public class ApplicationTypeDefaultFeature extends ApplicationTypeFeature {
     private HttpClientTest httpClientTest;
 
     @SuppressWarnings("ParameterNumber")
-    public ApplicationTypeDefaultFeature(Gradle gradle,
-                                         Maven maven,
+    public ApplicationTypeDefaultFeature(Maven maven,
                                          MicronautMavenPlugin micronautMavenPlugin,
                                          Properties properties,
                                          AppName appName,
@@ -102,7 +99,7 @@ public class ApplicationTypeDefaultFeature extends ApplicationTypeFeature {
                                          List<KotlinApplication> kotlinApplications,
                                          List<GroovyApplicationFeature> groovyApplicationFeatures,
                                          HttpClientTest httpClientTest) {
-        super(gradle, micronautTestJunit5, micronautTestSpock, properties, logback, gitIgnore);
+        super(micronautTestJunit5, micronautTestSpock, properties, logback, gitIgnore);
         this.maven = maven;
         this.micronautMavenPlugin = micronautMavenPlugin;
         this.appName = appName;
