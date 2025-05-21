@@ -52,7 +52,7 @@ class DownloadDiffController {
     HttpResponse<?> download(@Body Map<String, Object> form) {
         Options options = optionsBuilder.createOptions(form);
         try {
-            return attachment(featureDiffer.diff(options),
+            return AttachmentUtils.attachment(featureDiffer.diff(options),
                 MediaType.TEXT_PLAIN_TYPE,
                 options.name() + FILE_EXTENSION_DIFF);
         } catch (Exception e) {

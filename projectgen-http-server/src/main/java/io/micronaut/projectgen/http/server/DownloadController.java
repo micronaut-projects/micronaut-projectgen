@@ -21,6 +21,7 @@ import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.io.Writable;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.http.HttpHeaders;
+import io.micronaut.http.HttpRequest;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.Body;
@@ -39,50 +40,15 @@ import java.util.Map;
 @Requires(property = DownloadControllerConfiguration.PREFIX + ".enabled", notEquals = StringUtils.FALSE, defaultValue = StringUtils.TRUE)
 @Controller("${" + DownloadControllerConfiguration.PREFIX + ".path:/download}")
 class DownloadController {
-    public static final String ATTACHMENT_FILENAME = "attachment; filename=";
-    public static final String FILE_EXTENSION_ZIP = ".zip";
-    private final ZipGenerator zipGenerator;
-    private final OptionsBuilder optionsBuilder;
-    private final FeatureDiffer featureDiffer;
-
-    DownloadController(ZipGenerator zipGenerator,
-                       OptionsBuilder optionsBuilder,
-                       @Nullable FeatureDiffer featureDiffer) {
-        this.zipGenerator = zipGenerator;
-        this.optionsBuilder = optionsBuilder;
-        this.featureDiffer = featureDiffer;
+    private final DownloadHttpResponseGenerator downloadHttpResponseGenerator;
+    DownloadController(DownloadHttpResponseGenerator downloadHttpResponseGenerator) {
+        this.downloadHttpResponseGenerator = downloadHttpResponseGenerator;
     }
 
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Post
-    HttpResponse<?> download(@NonNull @Body Map<String, Object> form) {
-        Options options = optionsBuilder.createOptions(form);
-        Object actionObject = form.get("action");
-        if (actionObject == null) {
-            return HttpResponse.unprocessableEntity();
-        }
-        String action = actionObject.toString();
-        if (action.equals("zip")) {
-            return attachment(zipGenerator.zip(options),
-                MediaType.TEXT_PLAIN_TYPE,
-                options.name() + FILE_EXTENSION_ZIP);
-        } else if (action.equals("diff")) {
-            try {
-                return attachment(featureDiffer.diff(options),
-                    MediaType.ZIP_TYPE,
-                    options.name() + DownloadDiffController.FILE_EXTENSION_DIFF);
-            } catch (Exception e) {
-                return HttpResponse.serverError();
-            }
-        }
-        return HttpResponse.unprocessableEntity();
-    }
-
-    public static HttpResponse<?> attachment(Object body,
-                                          MediaType contentType,
-                                          String fileName) {
-        return HttpResponse.ok(body)
-            .header(HttpHeaders.CONTENT_TYPE, contentType)
-            .header(HttpHeaders.CONTENT_DISPOSITION, ATTACHMENT_FILENAME + fileName);
+    HttpResponse<?> download(@NonNull HttpRequest<?> request,
+                             @NonNull @Body Map<String, Object> form) {
+        return downloadHttpResponseGenerator.generate(request, form);
     }
 }

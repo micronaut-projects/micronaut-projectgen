@@ -23,13 +23,11 @@ import io.micronaut.http.annotation.Body;
 import io.micronaut.http.annotation.Consumes;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Post;
-import io.micronaut.http.annotation.Produces;
 import io.micronaut.projectgen.core.diff.FeatureDiffer;
 import io.micronaut.projectgen.core.options.Options;
 
 import java.util.Map;
 
-import static io.micronaut.projectgen.http.server.DownloadController.attachment;
 
 @Requires(beans = FeatureDiffer.class)
 @Requires(property = DiffControllerConfiguration.PREFIX + ".enabled", notEquals = StringUtils.FALSE, defaultValue = StringUtils.TRUE)

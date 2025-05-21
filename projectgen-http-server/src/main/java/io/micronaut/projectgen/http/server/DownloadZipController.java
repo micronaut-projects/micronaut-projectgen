@@ -30,6 +30,7 @@ import io.micronaut.projectgen.core.options.Options;
 
 import java.util.Map;
 
+import static io.micronaut.projectgen.http.server.DefaultDownloadHttpResponseGenerator.FILE_EXTENSION_ZIP;
 import static io.micronaut.projectgen.http.server.DownloadController.*;
 
 @Requires(property = DownloadZipControllerConfiguration.PREFIX + ".enabled", notEquals = StringUtils.FALSE, defaultValue = StringUtils.TRUE)
@@ -48,7 +49,7 @@ class DownloadZipController {
     @Post
     HttpResponse<?> download(@Body Map<String, Object> form) {
         Options options = optionsBuilder.createOptions(form);
-        return attachment(zipGenerator.zip(options),
+        return AttachmentUtils.attachment(zipGenerator.zip(options),
             MediaType.ZIP_TYPE,
             options.name() + FILE_EXTENSION_ZIP);
     }
