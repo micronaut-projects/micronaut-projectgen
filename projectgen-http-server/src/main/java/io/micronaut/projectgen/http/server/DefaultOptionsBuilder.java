@@ -24,6 +24,7 @@ import io.micronaut.projectgen.core.options.Options;
 import jakarta.inject.Singleton;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -66,7 +67,7 @@ public class DefaultOptionsBuilder implements OptionsBuilder {
                 }
             }
         } else if (featuresObj instanceof String feature) {
-            features.add(feature);
+            features.addAll(Arrays.asList(feature.split(",")));
         }
         builder.features(features);
 
