@@ -22,25 +22,30 @@ import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.buildtools.Property;
 import io.micronaut.projectgen.core.feature.BuildFeature;
+import io.micronaut.projectgen.core.feature.DefaultFeature;
+import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.core.rocker.RockerTemplate;
 import io.micronaut.projectgen.core.template.BinaryTemplate;
 import io.micronaut.projectgen.core.template.Template;
 import io.micronaut.projectgen.core.template.URLTemplate;
+import io.micronaut.projectgen.core.utils.OptionUtils;
 import jakarta.inject.Singleton;
 import io.micronaut.projectgen.core.template.genericBuildGradle;
 import io.micronaut.projectgen.core.template.gradleProperties;
 import io.micronaut.projectgen.core.template.settingsGradle;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Gradle Feature.
  */
 @Requires(property = "micronaut.projectgen.core.features.gradle.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class Gradle implements BuildFeature {
+public class Gradle implements BuildFeature, DefaultFeature {
     private static final String SLASH = "/";
     private static final String GRADLE = "gradle";
     private static final String WRAPPER = "wrapper";
@@ -141,6 +146,11 @@ public class Gradle implements BuildFeature {
         module.addTemplate("gradleSettings",
             new RockerTemplate(settingsFile,
                 settingsGradle.template(generatorContext.getProject(), build, hasMultiProjectFeature, generatorContext.getModuleNames())));
+    }
+
+    @Override
+    public boolean shouldApply(Options options, Set<Feature> selectedFeatures) {
+        return OptionUtils.hasGradleBuildTool(options);
     }
 }
 

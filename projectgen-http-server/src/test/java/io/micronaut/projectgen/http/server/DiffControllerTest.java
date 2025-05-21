@@ -65,40 +65,7 @@ class DiffControllerTest {
 
             """, diff);
     }
-
-    @Requires(property = "spec.name", value = "DiffControllerTest")
-    @Singleton
-    static class GradleBuildDefaultFeature implements DefaultFeature {
-
-        private final Gradle gradle;
-
-        GradleBuildDefaultFeature(Gradle gradle) {
-            this.gradle = gradle;
-        }
-
-        @Override
-        public String getName() {
-            return "geb-default-feature";
-        }
-
-        @Override
-        public void processSelectedFeatures(FeatureContext featureContext) {
-            if (OptionUtils.hasGradleBuildTool(featureContext.getOptions())) {
-                featureContext.addFeatureIfNotPresent(Gradle.class, gradle);
-            }
-        }
-
-        @Override
-        public boolean isVisible() {
-            return false;
-        }
-
-        @Override
-        public boolean shouldApply(Options options, Set<Feature> selectedFeatures) {
-            return true;
-        }
-    }
-
+    
     @Requires(property = "spec.name", value = "DiffControllerTest")
     @Singleton
     static class GebFeature implements Feature {

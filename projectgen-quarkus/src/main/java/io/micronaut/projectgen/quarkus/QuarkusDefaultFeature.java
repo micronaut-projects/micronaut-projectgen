@@ -15,7 +15,6 @@
  */
 package io.micronaut.projectgen.quarkus;
 
-import io.micronaut.projectgen.core.buildtools.gradle.Gradle;
 import io.micronaut.projectgen.core.feature.DefaultFeature;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.feature.FeatureContext;
@@ -35,7 +34,6 @@ import java.util.Set;
 
 @Singleton
 public class QuarkusDefaultFeature implements DefaultFeature {
-    private final Gradle gradle;
     private final GitIgnore gitIgnore;
     private final JavaGradlePlugin javaGradlePlugin;
     private final QuarkusGradlePlugin quarkusGradlePlugin;
@@ -44,15 +42,13 @@ public class QuarkusDefaultFeature implements DefaultFeature {
     private final QuarkusJunit5 quarkusJunit5;
     private final QuarkusBom quarkusBom;
 
-    public QuarkusDefaultFeature(Gradle gradle,
-                                 GitIgnore gitIgnore,
+    public QuarkusDefaultFeature(GitIgnore gitIgnore,
                                  JavaGradlePlugin javaGradlePlugin,
                                  QuarkusGradlePlugin quarkusGradlePlugin,
                                  QuarkusArc quarkusArc,
                                  QuarkusRest quarkusRest,
                                  QuarkusJunit5 quarkusJunit5,
                                  QuarkusBom quarkusBom) {
-        this.gradle = gradle;
         this.gitIgnore = gitIgnore;
         this.javaGradlePlugin = javaGradlePlugin;
         this.quarkusGradlePlugin = quarkusGradlePlugin;
@@ -71,7 +67,6 @@ public class QuarkusDefaultFeature implements DefaultFeature {
     public void processSelectedFeatures(FeatureContext featureContext) {
         featureContext.addFeatureIfNotPresent(GitIgnore.class, gitIgnore);
         if (OptionUtils.hasGradleBuildTool(featureContext.getOptions())) {
-            featureContext.addFeatureIfNotPresent(Gradle.class, gradle);
             featureContext.addFeatureIfNotPresent(JavaGradlePlugin.class, javaGradlePlugin);
             featureContext.addFeatureIfNotPresent(QuarkusGradlePlugin.class, quarkusGradlePlugin);
         }
