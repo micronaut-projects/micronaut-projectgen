@@ -15,18 +15,15 @@ import java.util.Set;
 
 @Singleton
 public class MultiModuleDefaultFeature implements DefaultFeature {
-    private final Maven maven;
     private final ApplicationModule applicationModule;
     private final LibraryModule libraryModule;
     private final RootModule rootModule;
     private final Properties properties;
 
-    public MultiModuleDefaultFeature(Maven maven,
-                                     ApplicationModule applicationModule,
+    public MultiModuleDefaultFeature(ApplicationModule applicationModule,
                                      LibraryModule libraryModule,
                                      RootModule rootModule,
                                      Properties properties) {
-        this.maven = maven;
         this.applicationModule = applicationModule;
         this.libraryModule = libraryModule;
         this.rootModule = rootModule;
@@ -46,9 +43,6 @@ public class MultiModuleDefaultFeature implements DefaultFeature {
     @Override
     public void processSelectedFeatures(FeatureContext featureContext) {
         featureContext.addFeatureIfNotPresent(ConfigurationFeature.class, properties);
-        if (OptionUtils.hasMavenBuildTool(featureContext.getOptions())) {
-            featureContext.addFeatureIfNotPresent(Maven.class, maven);
-        }
         featureContext.addFeatureIfNotPresent(ApplicationModule.class, applicationModule);
         featureContext.addFeatureIfNotPresent(LibraryModule.class, libraryModule);
         featureContext.addFeatureIfNotPresent(RootModule.class, rootModule);
