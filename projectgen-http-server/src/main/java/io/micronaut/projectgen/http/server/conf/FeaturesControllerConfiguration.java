@@ -19,7 +19,7 @@ import io.micronaut.context.annotation.ConfigurationProperties;
 
 @ConfigurationProperties(FeaturesControllerConfiguration.PREFIX)
 public class FeaturesControllerConfiguration implements ControllerConfiguration {
-    public static final String PREFIX = "controllers.features";
+    public static final String PREFIX = "projectgen.controllers.features";
     private boolean enabled = true;
     private String path = API_V1 + "/features";
 

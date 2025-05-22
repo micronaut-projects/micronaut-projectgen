@@ -19,7 +19,7 @@ import io.micronaut.context.annotation.ConfigurationProperties;
 
 @ConfigurationProperties(DiffControllerConfiguration.PREFIX)
 public class DiffControllerConfiguration implements ControllerConfiguration {
-    public static final String PREFIX = "controllers.diff";
+    public static final String PREFIX = "project.controllers.diff";
     private boolean enabled = true;
     private String path = API_V1 + "/diff";
 

@@ -19,7 +19,7 @@ import io.micronaut.context.annotation.ConfigurationProperties;
 
 @ConfigurationProperties(DownloadZipControllerConfiguration.PREFIX)
 public class DownloadZipControllerConfiguration implements ControllerConfiguration {
-    public static final String PREFIX = "controllers.download-zip";
+    public static final String PREFIX = "projectgen.controllers.download-zip";
     private boolean enabled = true;
     private String path = API_V1 + "/download";
 

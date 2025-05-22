@@ -19,7 +19,7 @@ import io.micronaut.context.annotation.ConfigurationProperties;
 
 @ConfigurationProperties(DownloadDiffControllerConfiguration.PREFIX)
 public class DownloadDiffControllerConfiguration implements ControllerConfiguration {
-    public static final String PREFIX = "controllers.download-diff";
+    public static final String PREFIX = "projectgen.controllers.download-diff";
     private boolean enabled = true;
     private String path = API_V1 + "/download/diff";
 
