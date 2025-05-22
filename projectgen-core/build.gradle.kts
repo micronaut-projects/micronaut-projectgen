@@ -7,6 +7,11 @@ dependencies {
     annotationProcessor(mnSerde.micronaut.serde.processor)
     implementation(mnSerde.micronaut.serde.jackson)
 
+    // Validation
+    annotationProcessor(mnValidation.micronaut.validation.processor)
+    testAnnotationProcessor(mnValidation.micronaut.validation.processor)
+    implementation(mnValidation.micronaut.validation)
+
     // SourceGen
     annotationProcessor(mnSourcegen.micronaut.sourcegen.generator.java)
     implementation(mnSourcegen.micronaut.sourcegen.annotations)

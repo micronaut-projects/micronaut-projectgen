@@ -15,6 +15,8 @@
  */
 package io.micronaut.projectgen.test;
 
+import io.micronaut.context.env.Environment;
+
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;

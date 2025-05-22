@@ -410,4 +410,8 @@ public record ModuleContext(CoordinateResolver coordinateResolver,
             .filter(dependency -> dependency.getGroupId().equals(groupId))
             .count();
     }
+
+    public Configuration devBootstrapConfiguration() {
+        return getBootstrapConfigurationByEnvironment(Environment.DEVELOPMENT);
+    }
 }
