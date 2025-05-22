@@ -28,5 +28,15 @@ document.addEventListener("DOMContentLoaded", function () {
             Prism.highlightAll();
         }
     });
+    const form = document.getElementById("projectGenForm");
+    const previewButton = document.getElementById("previewBtn");
+    const diffButton = document.getElementById("diffBtn");
+    function toggleButtonState() {
+        previewButton.disabled = !form.checkValidity();
+        diffButton.disabled = !form.checkValidity();
+    }
+    form.addEventListener("input", toggleButtonState);
+    form.addEventListener("change", toggleButtonState);
+    toggleButtonState();
 });
 

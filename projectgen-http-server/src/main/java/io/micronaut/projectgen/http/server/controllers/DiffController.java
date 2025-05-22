@@ -13,35 +13,34 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.projectgen.http.server;
+package io.micronaut.projectgen.http.server.controllers;
 
 import io.micronaut.context.annotation.Requires;
-import io.micronaut.core.io.Writable;
 import io.micronaut.core.util.StringUtils;
-import io.micronaut.http.HttpHeaders;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.Body;
 import io.micronaut.http.annotation.Consumes;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Post;
-import io.micronaut.projectgen.core.io.zip.ZipGenerator;
+import io.micronaut.projectgen.core.diff.FeatureDiffer;
 import io.micronaut.projectgen.core.options.Options;
+import io.micronaut.projectgen.http.server.OptionsBuilder;
+import io.micronaut.projectgen.http.server.conf.DiffControllerConfiguration;
 
 import java.util.Map;
 
-import static io.micronaut.projectgen.http.server.DefaultDownloadHttpResponseGenerator.FILE_EXTENSION_ZIP;
-import static io.micronaut.projectgen.http.server.DownloadController.*;
 
-@Requires(property = DownloadZipControllerConfiguration.PREFIX + ".enabled", notEquals = StringUtils.FALSE, defaultValue = StringUtils.TRUE)
-@Controller("${" + DownloadZipControllerConfiguration.PREFIX + ".path:/download/zip}")
-class DownloadZipController {
-    private final ZipGenerator zipGenerator;
+@Requires(beans = FeatureDiffer.class)
+@Requires(property = DiffControllerConfiguration.PREFIX + ".enabled", notEquals = StringUtils.FALSE, defaultValue = StringUtils.TRUE)
+@Controller("${" + DiffControllerConfiguration.PREFIX + ".path:/api/v1/diff}")
+class DiffController {
+    private final FeatureDiffer featureDiffer;
     private final OptionsBuilder optionsBuilder;
 
-    DownloadZipController(ZipGenerator zipGenerator,
-                          OptionsBuilder optionsBuilder) {
-        this.zipGenerator = zipGenerator;
+    DiffController(FeatureDiffer featureDiffer,
+                   OptionsBuilder optionsBuilder) {
+        this.featureDiffer = featureDiffer;
         this.optionsBuilder = optionsBuilder;
     }
 
@@ -49,8 +48,13 @@ class DownloadZipController {
     @Post
     HttpResponse<?> download(@Body Map<String, Object> form) {
         Options options = optionsBuilder.createOptions(form);
-        return AttachmentUtils.attachment(zipGenerator.zip(options),
-            MediaType.ZIP_TYPE,
-            options.name() + FILE_EXTENSION_ZIP);
+        try {
+            String diff = featureDiffer.diff(options);
+            return HttpResponse.ok(diff).contentType(MediaType.TEXT_PLAIN_TYPE);
+        } catch (IllegalArgumentException e) {
+            return HttpResponse.unprocessableEntity();
+        } catch (Exception e) {
+            return HttpResponse.serverError();
+        }
     }
 }

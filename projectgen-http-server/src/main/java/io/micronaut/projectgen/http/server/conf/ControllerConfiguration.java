@@ -13,13 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.projectgen.http.server;
+package io.micronaut.projectgen.http.server.conf;
 
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.Toggleable;
 
 @FunctionalInterface
 public interface ControllerConfiguration extends Toggleable {
+    String V1 = "/v1";
+    String API_V1 = "/api" + V1;
 
     /**
      * @return the path where the controller is enabled.

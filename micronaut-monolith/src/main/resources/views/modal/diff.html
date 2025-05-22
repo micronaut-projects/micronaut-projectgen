@@ -10,7 +10,7 @@
                 </pre>
             </div>
             <div class="modal-footer">
-                <form action="/download/diff" method="post">
+                <form action="/api/v1/download/diff" method="post">
                     <input type="hidden" name="action" th:value="diff">
                     <input type="hidden" name="features" th:value="${#strings.listJoin(form.get('features'), ',')}">
                     <input type="hidden" name="name" th:value="${form.get('name')}">

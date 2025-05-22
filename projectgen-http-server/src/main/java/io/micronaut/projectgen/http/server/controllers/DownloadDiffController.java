@@ -13,12 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.projectgen.http.server;
+package io.micronaut.projectgen.http.server.controllers;
 
 import io.micronaut.context.annotation.Requires;
-import io.micronaut.core.io.Writable;
 import io.micronaut.core.util.StringUtils;
-import io.micronaut.http.HttpHeaders;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.Body;
@@ -26,16 +24,17 @@ import io.micronaut.http.annotation.Consumes;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Post;
 import io.micronaut.projectgen.core.diff.FeatureDiffer;
-import io.micronaut.projectgen.core.io.zip.ZipGenerator;
 import io.micronaut.projectgen.core.options.Options;
+import io.micronaut.projectgen.http.server.utils.AttachmentUtils;
+import io.micronaut.projectgen.http.server.OptionsBuilder;
+import io.micronaut.projectgen.http.server.conf.DownloadDiffControllerConfiguration;
 
 import java.util.Map;
 
-import static io.micronaut.projectgen.http.server.DownloadController.*;
 
 @Requires(beans = FeatureDiffer.class)
 @Requires(property = DownloadDiffControllerConfiguration.PREFIX + ".enabled", notEquals = StringUtils.FALSE, defaultValue = StringUtils.TRUE)
-@Controller("${" + DownloadDiffControllerConfiguration.PREFIX + ".path:/download/diff}")
+@Controller("${" + DownloadDiffControllerConfiguration.PREFIX + ".path:/api/v1/download/diff}")
 class DownloadDiffController {
     private final FeatureDiffer featureDiffer;
     private final OptionsBuilder optionsBuilder;

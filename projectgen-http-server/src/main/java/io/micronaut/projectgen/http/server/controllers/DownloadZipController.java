@@ -13,42 +13,43 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.projectgen.http.server;
+package io.micronaut.projectgen.http.server.controllers;
 
 import io.micronaut.context.annotation.Requires;
-import io.micronaut.core.annotation.NonNull;
-import io.micronaut.core.annotation.Nullable;
-import io.micronaut.core.io.Writable;
 import io.micronaut.core.util.StringUtils;
-import io.micronaut.http.HttpHeaders;
-import io.micronaut.http.HttpRequest;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.Body;
 import io.micronaut.http.annotation.Consumes;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Post;
-import io.micronaut.projectgen.core.buildtools.BuildTool;
-import io.micronaut.projectgen.core.diff.FeatureDiffer;
 import io.micronaut.projectgen.core.io.zip.ZipGenerator;
-import io.micronaut.projectgen.core.options.GenericOptionsBuilder;
 import io.micronaut.projectgen.core.options.Options;
+import io.micronaut.projectgen.http.server.utils.AttachmentUtils;
+import io.micronaut.projectgen.http.server.OptionsBuilder;
+import io.micronaut.projectgen.http.server.conf.DownloadZipControllerConfiguration;
 
-import java.util.List;
 import java.util.Map;
 
-@Requires(property = DownloadControllerConfiguration.PREFIX + ".enabled", notEquals = StringUtils.FALSE, defaultValue = StringUtils.TRUE)
-@Controller("${" + DownloadControllerConfiguration.PREFIX + ".path:/download}")
-class DownloadController {
-    private final DownloadHttpResponseGenerator downloadHttpResponseGenerator;
-    DownloadController(DownloadHttpResponseGenerator downloadHttpResponseGenerator) {
-        this.downloadHttpResponseGenerator = downloadHttpResponseGenerator;
+@Requires(property = DownloadZipControllerConfiguration.PREFIX + ".enabled", notEquals = StringUtils.FALSE, defaultValue = StringUtils.TRUE)
+@Controller("${" + DownloadZipControllerConfiguration.PREFIX + ".path:/download/zip}")
+class DownloadZipController {
+    public static final String ZIP = ".zip";
+    private final ZipGenerator zipGenerator;
+    private final OptionsBuilder optionsBuilder;
+
+    DownloadZipController(ZipGenerator zipGenerator,
+                          OptionsBuilder optionsBuilder) {
+        this.zipGenerator = zipGenerator;
+        this.optionsBuilder = optionsBuilder;
     }
 
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Post
-    HttpResponse<?> download(@NonNull HttpRequest<?> request,
-                             @NonNull @Body Map<String, Object> form) {
-        return downloadHttpResponseGenerator.generate(request, form);
+    HttpResponse<?> download(@Body Map<String, Object> form) {
+        Options options = optionsBuilder.createOptions(form);
+        return AttachmentUtils.attachment(zipGenerator.zip(options),
+            MediaType.ZIP_TYPE,
+            options.name() + ZIP);
     }
 }

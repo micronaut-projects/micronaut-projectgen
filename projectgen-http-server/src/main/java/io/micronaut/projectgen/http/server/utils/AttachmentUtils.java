@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.projectgen.http.server;
+package io.micronaut.projectgen.http.server.utils;
 
 import io.micronaut.http.HttpHeaders;
 import io.micronaut.http.HttpResponse;

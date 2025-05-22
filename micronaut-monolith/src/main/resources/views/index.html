@@ -15,10 +15,10 @@
 <body class="bg-body-tertiary">
 <div class="container bg-body mt-4 p-4 border-2 shadow-sm mx-auto" style="max-width: 700px;">
     <main>
-        <form method="post" action="/download" id="project-gen-form">
+        <form method="post" action="/api/v1/download" id="projectGenForm">
             <div class="mb-3">
                 <label for="name" class="form-label">Name</label>
-                <input type="text" name="name" id="name" th:value="${form.name()}" required class="form-control"/>
+                <input type="text" name="name" id="name" required class="form-control"/>
             </div>
             <div class="form-check">
                 <input checked disabled class="form-check-input" type="checkbox" name="features" value="geb-core" id="features-geb-core">
@@ -35,9 +35,10 @@
             </div>
             <div class="mt-2">
             <button
+                    id="previewBtn"
                     name="action"
                     value="preview"
-                    hx-post="/download"
+                    hx-post="/modal/preview"
                     hx-include="#project-gen-form"
                     hx-target="#preview-modal"
                     hx-trigger="click"
@@ -46,9 +47,10 @@
                     class="btn btn-primary">Preview</button>
 
             <button
+                    id="diffBtn"
                     name="action"
                     value="diff"
-                    hx-post="/download"
+                    hx-post="/modal/diff"
                     hx-include="#project-gen-form"
                     hx-target="#preview-modal"
                     hx-trigger="click"

@@ -13,16 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.projectgen.http.server;
+package io.micronaut.projectgen.http.server.conf;
 
 import io.micronaut.context.annotation.ConfigurationProperties;
 
-@ConfigurationProperties(DownloadControllerConfiguration.PREFIX)
-public class DownloadControllerConfiguration implements ControllerConfiguration {
-    public static final String PREFIX = "controllers.download";
-    public static final String PREFIX_DOWNLOAD = "/download";
+@ConfigurationProperties(DownloadZipControllerConfiguration.PREFIX)
+public class DownloadZipControllerConfiguration implements ControllerConfiguration {
+    public static final String PREFIX = "controllers.download-zip";
     private boolean enabled = true;
-    private String path = PREFIX_DOWNLOAD;
+    private String path = API_V1 + "/download";
 
     @Override
     public boolean isEnabled() {
