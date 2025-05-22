@@ -17,39 +17,32 @@ package io.micronaut.projectgen.http.server.controllers;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
-import io.micronaut.http.HttpResponse;
 import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.Body;
 import io.micronaut.http.annotation.Consumes;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Post;
-import io.micronaut.projectgen.core.io.zip.ZipGenerator;
+import io.micronaut.projectgen.core.feature.FeatureFetcher;
 import io.micronaut.projectgen.core.options.Options;
-import io.micronaut.projectgen.http.server.utils.AttachmentUtils;
 import io.micronaut.projectgen.http.server.OptionsBuilder;
-import io.micronaut.projectgen.http.server.conf.DownloadZipControllerConfiguration;
+import io.micronaut.projectgen.http.server.conf.FeaturesControllerConfiguration;
 
 import java.util.Map;
 
-@Requires(property = DownloadZipControllerConfiguration.PREFIX + ".enabled", notEquals = StringUtils.FALSE, defaultValue = StringUtils.TRUE)
-@Controller("${" + DownloadZipControllerConfiguration.PREFIX + ".path:/api/v1/download/zip}")
-class DownloadZipController {
-    public static final String ZIP = ".zip";
-    private final ZipGenerator zipGenerator;
+@Requires(property = FeaturesControllerConfiguration.PREFIX + ".enabled", notEquals = StringUtils.FALSE, defaultValue = StringUtils.TRUE)
+@Controller("${" + FeaturesControllerConfiguration.PREFIX + ".path:/api/v1/features}")
+class FeaturesController {
     private final OptionsBuilder optionsBuilder;
-
-    DownloadZipController(ZipGenerator zipGenerator,
-                          OptionsBuilder optionsBuilder) {
-        this.zipGenerator = zipGenerator;
+    private final FeatureFetcher featureFetcher;
+    FeaturesController(FeatureFetcher featureFetcher, OptionsBuilder optionsBuilder) {
+        this.featureFetcher = featureFetcher;
         this.optionsBuilder = optionsBuilder;
     }
 
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Post
-    HttpResponse<?> download(@Body Map<String, Object> form) {
+    FeaturesResponse features(@Body Map<String, Object> form) {
         Options options = optionsBuilder.createOptions(form);
-        return AttachmentUtils.attachment(zipGenerator.zip(options),
-            MediaType.ZIP_TYPE,
-            options.name() + ZIP);
+        return new FeaturesResponse(featureFetcher.fetch(options));
     }
 }

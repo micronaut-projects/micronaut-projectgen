@@ -28,7 +28,7 @@ import java.util.function.Function;
 /**
  * {@link ConfigurationFeature} for Properties.
  */
-@Requires(property = "micronaut.starter.feature.properties.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
+@Requires(property = "projectgen.features.properties.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Properties implements ConfigurationFeature {
 

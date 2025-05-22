@@ -13,14 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.projectgen.core.io;
+package io.micronaut.projectgen.http.server.controllers;
 
-import io.micronaut.core.annotation.Introspected;
+import io.micronaut.projectgen.core.feature.FeatureResponse;
+import io.micronaut.serde.annotation.Serdeable;
 
 import java.util.List;
 
-@Introspected
-public record TreeNode(String path,
-                       String name,
-                       List<TreeNode> children) {
+@Serdeable
+public record FeaturesResponse(List<FeatureResponse> features) {
 }

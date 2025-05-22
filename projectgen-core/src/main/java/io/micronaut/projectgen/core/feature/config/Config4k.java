@@ -27,7 +27,7 @@ import jakarta.inject.Singleton;
 import java.util.Optional;
 import java.util.function.Function;
 
-@Requires(property = "micronaut.starter.feature.config4k.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
+@Requires(property = "projectgen.features.config4k.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Config4k implements ConfigurationFeature, KotlinSpecificFeature {
 

@@ -30,13 +30,12 @@ import java.util.Set;
 @Singleton
 public class ApplicationTypeMessagingFeature extends ApplicationTypeFeature {
 
-    public ApplicationTypeMessagingFeature(Gradle gradle,
-                                           MicronautTestJunit5 micronautTestJunit5,
+    public ApplicationTypeMessagingFeature(MicronautTestJunit5 micronautTestJunit5,
                                            MicronautTestSpock micronautTestSpock,
                                            Properties properties,
                                            Logback logback,
                                            GitIgnore gitIgnore) {
-        super(gradle, micronautTestJunit5, micronautTestSpock, properties, logback, gitIgnore);
+        super(micronautTestJunit5, micronautTestSpock, properties, logback, gitIgnore);
     }
 
     @Override

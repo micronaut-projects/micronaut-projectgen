@@ -16,7 +16,6 @@
 package io.micronaut.projectgen.micronaut;
 
 import io.micronaut.core.annotation.Nullable;
-import io.micronaut.projectgen.core.buildtools.gradle.Gradle;
 import io.micronaut.projectgen.core.feature.*;
 import io.micronaut.projectgen.core.feature.config.Properties;
 import io.micronaut.projectgen.core.feature.gitignore.GitIgnore;
@@ -40,8 +39,7 @@ public class ApplicationTypeCliFeature extends ApplicationTypeFeature {
     @Nullable
     private final GroovyApplicationFeature groovyApplicationFeature;
 
-    public ApplicationTypeCliFeature(Gradle gradle,
-                                     MicronautTestJunit5 micronautTestJunit5,
+    public ApplicationTypeCliFeature(MicronautTestJunit5 micronautTestJunit5,
                                      MicronautTestSpock micronautTestSpock,
                                      Properties properties,
                                      Logback logback,
@@ -49,7 +47,7 @@ public class ApplicationTypeCliFeature extends ApplicationTypeFeature {
                                      List<JavaApplicationFeature> javaApplicationFeatures,
                                      List<KotlinApplicationFeature> kotlinApplicationFeatures,
                                      List<GroovyApplicationFeature> groovyApplicationFeatures) {
-        super(gradle, micronautTestJunit5, micronautTestSpock, properties, logback, gitIgnore);
+        super(micronautTestJunit5, micronautTestSpock, properties, logback, gitIgnore);
         Options options = GenericOptionsBuilder.builder().template(ApplicationType.CLI.toString()).build();
         this.javaApplicationFeature = javaApplicationFeatures.stream().filter(f -> f.supports(options)).findFirst().orElse(null);
         this.kotlinApplicationFeature = kotlinApplicationFeatures.stream().filter(f -> f.supports(options)).findFirst().orElse(null);

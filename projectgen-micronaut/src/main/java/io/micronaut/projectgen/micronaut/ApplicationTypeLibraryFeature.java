@@ -44,7 +44,6 @@ public class ApplicationTypeLibraryFeature extends ApplicationTypeFeature {
     private final SpotlessGradlePlugin spotlessGradlePlugin;
 
     public ApplicationTypeLibraryFeature(Apache2LicenseFeature license,
-                                         Gradle gradle,
                                          MicronautTestJunit5 micronautTestJunit5,
                                          MicronautTestSpock micronautTestSpock,
                                          MicronautLibraryGradlePlugin micronautLibraryGradlePlugin,
@@ -54,7 +53,7 @@ public class ApplicationTypeLibraryFeature extends ApplicationTypeFeature {
                                          Properties properties,
                                          Logback logback,
                                          GitIgnore gitIgnore) {
-        super(gradle, micronautTestJunit5, micronautTestSpock, properties, logback, gitIgnore);
+        super(micronautTestJunit5, micronautTestSpock, properties, logback, gitIgnore);
         this.license = license;
         this.micronautLibraryGradlePlugin = micronautLibraryGradlePlugin;
         this.mavenPublishGradlePlugin = mavenPublishGradlePlugin;

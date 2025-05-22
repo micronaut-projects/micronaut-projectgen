@@ -1,13 +1,31 @@
+/*
+ * Copyright 2017-2025 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package io.micronaut.projectgen.core.utils;
+
+import io.micronaut.core.util.StringUtils;
+
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @see <a href="https://prismjs.com">Prism</a>
+ */
 public class PrismLanguageHelper {
-
     private static final Map<String, String> EXTENSION_TO_LANGUAGE_CLASS = new HashMap<>();
-
     static {
-        // Core languages
         EXTENSION_TO_LANGUAGE_CLASS.put("properties", "language-properties");
         EXTENSION_TO_LANGUAGE_CLASS.put("html", "language-markup");
         EXTENSION_TO_LANGUAGE_CLASS.put("xml", "language-markup");
@@ -104,7 +122,6 @@ public class PrismLanguageHelper {
         EXTENSION_TO_LANGUAGE_CLASS.put("yaml", "language-yaml");
         EXTENSION_TO_LANGUAGE_CLASS.put("yml", "language-yaml");
         EXTENSION_TO_LANGUAGE_CLASS.put("zsh", "language-bash");
-        // Add more mappings as needed
     }
 
     /**
@@ -114,24 +131,18 @@ public class PrismLanguageHelper {
      * @return The corresponding Prism.js language class, or "language-none" if unknown.
      */
     public static String getPrismLanguageClass(String filename) {
-        if (filename == null || filename.isEmpty()) {
+        if (StringUtils.isEmpty(filename)) {
             return "language-none";
         }
-
         String lowerCaseFilename = filename.toLowerCase();
-
-        // Check for exact matches first (e.g., "build.gradle.kts")
         if (EXTENSION_TO_LANGUAGE_CLASS.containsKey(lowerCaseFilename)) {
             return EXTENSION_TO_LANGUAGE_CLASS.get(lowerCaseFilename);
         }
-
-        // Extract the extension
         int lastDotIndex = lowerCaseFilename.lastIndexOf('.');
         if (lastDotIndex != -1 && lastDotIndex < lowerCaseFilename.length() - 1) {
             String extension = lowerCaseFilename.substring(lastDotIndex + 1);
             return EXTENSION_TO_LANGUAGE_CLASS.getOrDefault(extension, "language-none");
         }
-
         return "language-none";
     }
 }

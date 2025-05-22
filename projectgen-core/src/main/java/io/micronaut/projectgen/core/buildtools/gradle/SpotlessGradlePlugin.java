@@ -54,6 +54,11 @@ public class SpotlessGradlePlugin implements BuildPluginFeature, GradleSpecificF
     }
 
     @Override
+    public boolean isVisible() {
+        return false;
+    }
+
+    @Override
     public void apply(GeneratorContext generatorContext) {
         ModuleContext rootModule = generatorContext.getRootModule();
         rootModule.addBuildPlugin(GradlePlugin.builder()

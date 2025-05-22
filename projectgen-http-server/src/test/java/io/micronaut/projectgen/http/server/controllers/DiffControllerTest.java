@@ -92,13 +92,8 @@ class DiffControllerTest {
 
     private static Map<String, Object> form() {
         Map<String, Object> form = new HashMap<>();
-
-        form.put("packageName", "com.example");
         form.put("name", "demo");
-        form.put("lang", "JAVA");
-        form.put("build", "GRADLE_KOTLIN");
-        form.put("test", "JUNIT");
-        form.put("java", "JDK_21");
+        form.put("build", "GRADLE");
         form.put("features", List.of("geb-core"));
         return form;
     }

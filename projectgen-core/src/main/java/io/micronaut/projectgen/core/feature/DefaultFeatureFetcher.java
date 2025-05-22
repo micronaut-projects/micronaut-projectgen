@@ -13,26 +13,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.projectgen.core.io;
+package io.micronaut.projectgen.core.feature;
 
-import io.micronaut.projectgen.core.generator.ProjectGenerator;
 import io.micronaut.projectgen.core.options.Options;
 import jakarta.inject.Singleton;
 
-import java.util.Map;
+import java.util.List;
 
 @Singleton
-class DefaultPreviewGenerator implements PreviewGenerator {
-    private final ProjectGenerator projectGenerator;
+class DefaultFeatureFetcher implements FeatureFetcher {
 
-    DefaultPreviewGenerator(ProjectGenerator projectGenerator) {
-        this.projectGenerator = projectGenerator;
+    private final List<Feature> features;
+
+    DefaultFeatureFetcher(List<Feature> features) {
+        this.features = features;
     }
 
     @Override
-    public Map<String, String> generate(Options options) throws Exception {
-        MapOutputHandler outputHandler = new MapOutputHandler();
-        projectGenerator.generate(options, outputHandler);
-        return outputHandler.getProject();
+    public List<FeatureResponse> fetch(Options options) {
+        return features.stream()
+            .filter(Feature::isVisible)
+            .filter(f -> f.supports(options))
+            .map(f -> new FeatureResponse(f.getName(),
+                f.getTitle(),
+                f.getDescription(),
+                f.isPreview(),
+                f.isCommunity()))
+            .toList();
     }
 }

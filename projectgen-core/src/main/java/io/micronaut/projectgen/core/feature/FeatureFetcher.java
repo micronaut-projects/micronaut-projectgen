@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.projectgen.core.io;
+package io.micronaut.projectgen.core.feature;
 
-import io.micronaut.core.annotation.Introspected;
+import io.micronaut.core.annotation.NonNull;
+import io.micronaut.projectgen.core.options.Options;
 
 import java.util.List;
 
-@Introspected
-public record TreeNode(String path,
-                       String name,
-                       List<TreeNode> children) {
+public interface FeatureFetcher {
+    @NonNull
+    List<FeatureResponse> fetch(@NonNull Options options);
 }

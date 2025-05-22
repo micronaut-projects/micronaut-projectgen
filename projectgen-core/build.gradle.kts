@@ -3,12 +3,16 @@ plugins {
     id("nu.studer.rocker") version "3.0.4"
 }
 dependencies {
-    annotationProcessor(mnSourcegen.micronaut.sourcegen.generator.java)
-    implementation(mnSourcegen.micronaut.sourcegen.annotations)
-    api(libs.rocker.runtime)
-    implementation(libs.apache.commons.compress)
+    // Serialization
     annotationProcessor(mnSerde.micronaut.serde.processor)
     implementation(mnSerde.micronaut.serde.jackson)
+
+    // SourceGen
+    annotationProcessor(mnSourcegen.micronaut.sourcegen.generator.java)
+    implementation(mnSourcegen.micronaut.sourcegen.annotations)
+
+    api(libs.rocker.runtime)
+    implementation(libs.apache.commons.compress)
     compileOnly(libs.java.diff.utils)
     testAnnotationProcessor(mn.micronaut.inject.java)
     testImplementation(mnTest.micronaut.test.junit5)
