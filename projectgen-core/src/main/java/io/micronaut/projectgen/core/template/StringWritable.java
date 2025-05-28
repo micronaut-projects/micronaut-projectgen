@@ -13,17 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.projectgen.http.server;
+package io.micronaut.projectgen.core.template;
 
-import io.micronaut.core.annotation.NonNull;
-import io.micronaut.core.util.Toggleable;
+import java.io.IOException;
+import java.io.OutputStream;
 
-@FunctionalInterface
-public interface ControllerConfiguration extends Toggleable {
+public class StringWritable implements Writable {
+    private final byte[] stringBytes;
 
-    /**
-     * @return the path where the controller is enabled.
-     */
-    @NonNull
-    String getPath();
+    public StringWritable(String data) {
+        this.stringBytes = data.getBytes();
+    }
+
+    @Override
+    public void write(OutputStream outputStream) throws IOException {
+        outputStream.write(stringBytes);
+    }
 }

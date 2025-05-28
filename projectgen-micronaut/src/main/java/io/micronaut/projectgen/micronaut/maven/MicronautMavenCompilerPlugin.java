@@ -15,16 +15,15 @@
  */
 package io.micronaut.projectgen.micronaut.maven;
 
-import io.micronaut.projectgen.core.buildtools.maven.MavenCompilerPluginAnnotationProcessors;
-import io.micronaut.projectgen.core.buildtools.maven.MavenPlugin;
 import io.micronaut.projectgen.core.buildtools.maven.MavenSpecificFeature;
 import io.micronaut.projectgen.core.buildtools.maven.Packaging;
 import io.micronaut.projectgen.core.feature.BuildFeature;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.generator.ModuleContext;
-import io.micronaut.projectgen.core.rocker.RockerTemplate;
 import io.micronaut.projectgen.core.utils.OptionUtils;
-import io.micronaut.projectgen.features.maven.template.mavenCompilerPlugin;
+import io.micronaut.projectgen.features.maven.MavenCompilerPlugin;
+import io.micronaut.projectgen.features.maven.MavenCompilerPluginConfiguration;
+import io.micronaut.projectgen.features.maven.MavenCompilerPluginConfigurationBuilder;
 import jakarta.inject.Singleton;
 
 import java.util.List;
@@ -45,35 +44,16 @@ public class MicronautMavenCompilerPlugin implements MavenSpecificFeature, Build
     public void apply(GeneratorContext generatorContext) {
         ModuleContext module = generatorContext.getRootModule();
         if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())) {
-            module.addBuildPlugin(mavenCompilerPlugin(module, generatorContext));
+            List<String> compilerArgs = List.of("-Amicronaut.processing.group=" + generatorContext.getProject().getPackageName(),
+                "-Amicronaut.processing.module=" + generatorContext.getOptions().name());
+            MavenCompilerPluginConfiguration configuration = MavenCompilerPluginConfigurationBuilder.builder()
+                .compilerArgs(compilerArgs)
+                .build();
+            MavenCompilerPlugin.mavenCompilerPlugin(generatorContext, module, configuration)
+                .ifPresent(module::addBuildPlugin);
             module.moduleAttributes().setPackaging("${packaging}");
             module.buildProperties().put("packaging", Packaging.JAR.toString());
         }
     }
 
-    private MavenPlugin mavenCompilerPlugin(ModuleContext module, GeneratorContext generatorContext) {
-        String version = null;
-        String configurationCombine = null;
-        Boolean incrementalCompilation = null;
-        String source = null;
-        String target = null;
-
-        MavenCompilerPluginAnnotationProcessors ann = MavenCompilerPluginAnnotationProcessors.of(module, generatorContext.getOptions().language());
-
-        List<String> compilerArgs = List.of("-Amicronaut.processing.group=" + generatorContext.getProject().getPackageName(),
-                "-Amicronaut.processing.module=" + generatorContext.getOptions().name());
-
-        return MavenPlugin.builder()
-                .groupId("org.apache.maven.plugins")
-                .artifactId("maven-compiler-plugin")
-                .extension(
-                        new RockerTemplate(mavenCompilerPlugin.template(version,
-                                configurationCombine,
-                                incrementalCompilation,
-                                source,
-                                target,
-                                ann,
-                                compilerArgs)))
-                .build();
-    }
 }

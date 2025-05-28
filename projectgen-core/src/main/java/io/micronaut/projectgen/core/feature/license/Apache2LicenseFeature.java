@@ -37,6 +37,11 @@ public class Apache2LicenseFeature implements LicenseFeature {
     }
 
     @Override
+    public boolean isVisible() {
+        return false;
+    }
+
+    @Override
     public RockerModel licenseModel(GeneratorContext generatorContext) {
         return licenseApache20.template();
     }

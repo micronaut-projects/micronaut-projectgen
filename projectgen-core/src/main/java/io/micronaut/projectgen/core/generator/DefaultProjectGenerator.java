@@ -40,14 +40,11 @@ import java.util.function.Function;
 @Singleton
 public class DefaultProjectGenerator implements ProjectGenerator {
     private final ContextFactory contextFactory;
-    private final BeanContext beanContext;
     private final List<AvailableFeatures> availableFeaturesList;
 
     public DefaultProjectGenerator(ContextFactory contextFactory,
-                                   BeanContext beanContext,
                                    List<AvailableFeatures> availableFeaturesList) {
         this.contextFactory = contextFactory;
-        this.beanContext = beanContext;
         this.availableFeaturesList = availableFeaturesList;
     }
 

@@ -33,6 +33,7 @@ enableFeaturePreview 'TYPESAFE_PROJECT_ACCESSORS'
 micronautBuild {
     useStandardizedProjectNames=true
     importMicronautCatalog()
+    importMicronautCatalog("micronaut-validation")
     importMicronautCatalog("micronaut-serde")
     importMicronautCatalog("micronaut-sourcegen")
     importMicronautCatalog("micronaut-picocli")

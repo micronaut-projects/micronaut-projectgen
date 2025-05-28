@@ -4,6 +4,10 @@ plugins {
 }
 dependencies {
     api(project(":micronaut-projectgen-core"))
+
+    // SourceGen
+    annotationProcessor(mnSourcegen.micronaut.sourcegen.generator.java)
+    implementation(mnSourcegen.micronaut.sourcegen.annotations)
 }
 rocker {
     configurations {

@@ -15,6 +15,9 @@
  */
 package io.micronaut.projectgen.core.feature.gitignore;
 
+import io.micronaut.context.annotation.Property;
+import io.micronaut.context.annotation.Requires;
+import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.generator.ModuleContext;
@@ -27,6 +30,7 @@ import java.util.List;
 /**
  * Creates a .gitignore file.
  */
+@Requires(property = "projectgen.features.gitignore.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class GitIgnore implements Feature {
     private final List<ContributesGitIgnoreEntries> contributesGitIgnoreEntries;

@@ -30,7 +30,7 @@ import jakarta.inject.Singleton;
 
 import java.util.function.Function;
 
-@Requires(property = "micronaut.starter.feature.toml.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
+@Requires(property = "projectgen.features.toml.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Toml implements ConfigurationFeature {
 
