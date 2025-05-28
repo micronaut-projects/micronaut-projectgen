@@ -20,10 +20,13 @@ class PreviewGeneratorTest {
         Map<String, String> preview = previewGenerator.generate(options);
         assertNotNull(preview);
         assertFalse(preview.keySet().isEmpty());
+        assertEquals(6, preview.keySet().size());
         assertTrue(preview.containsKey("gradle/wrapper/gradle-wrapper.properties"));
         assertTrue(preview.containsKey("gradle/wrapper/gradle-wrapper.jar"));
         assertTrue(preview.containsKey("gradlew"));
         assertTrue(preview.containsKey("gradlew.bat"));
+        assertTrue(preview.containsKey("settings.gradle"));
+        assertTrue(preview.containsKey("build.gradle"));
     }
 
 }
