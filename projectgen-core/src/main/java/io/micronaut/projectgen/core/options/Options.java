@@ -44,6 +44,9 @@ public interface Options {
     List<BuildTool> buildTools();
 
     @Nullable
+    ConfigurationFormat configurationFormat();
+
+    @Nullable
     GradleDsl gradleDsl();
 
     @Nullable

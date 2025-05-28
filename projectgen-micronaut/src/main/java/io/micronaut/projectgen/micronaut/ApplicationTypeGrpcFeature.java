@@ -32,10 +32,9 @@ public class ApplicationTypeGrpcFeature extends ApplicationTypeFeature {
 
     public ApplicationTypeGrpcFeature(MicronautTestJunit5 micronautTestJunit5,
                                       MicronautTestSpock micronautTestSpock,
-                                      Properties properties,
                                       Logback logback,
                                       GitIgnore gitIgnore) {
-        super(micronautTestJunit5, micronautTestSpock, properties, logback, gitIgnore);
+        super(micronautTestJunit5, micronautTestSpock, logback, gitIgnore);
     }
 
     @Override

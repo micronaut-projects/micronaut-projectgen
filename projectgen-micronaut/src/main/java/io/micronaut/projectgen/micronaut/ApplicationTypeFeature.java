@@ -34,18 +34,15 @@ import java.util.List;
 public abstract class ApplicationTypeFeature implements DefaultFeature, RequiresRepository {
     private final MicronautTestJunit5 micronautTestJunit5;
     private final MicronautTestSpock micronautTestSpock;
-    private final Properties properties;
     private final Logback logback;
     private final GitIgnore gitIgnore;
 
     protected ApplicationTypeFeature(MicronautTestJunit5 micronautTestJunit5,
                                      MicronautTestSpock micronautTestSpock,
-                                     Properties properties,
                                      Logback logback,
                                      GitIgnore gitIgnore) {
         this.micronautTestJunit5 = micronautTestJunit5;
         this.micronautTestSpock = micronautTestSpock;
-        this.properties = properties;
         this.logback = logback;
         this.gitIgnore = gitIgnore;
     }
@@ -53,7 +50,6 @@ public abstract class ApplicationTypeFeature implements DefaultFeature, Requires
     @Override
     public void processSelectedFeatures(FeatureContext featureContext) {
         featureContext.addFeatureIfNotPresent(GitIgnore.class, gitIgnore);
-        featureContext.addFeatureIfNotPresent(ConfigurationFeature.class, properties);
         featureContext.addFeatureIfNotPresent(LoggingFeature.class, logback);
         if (featureContext.getOptions().testFramework() == null ||
             featureContext.getOptions().testFramework() == TestFramework.JUNIT) {

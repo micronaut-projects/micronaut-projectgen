@@ -77,7 +77,6 @@ public class ApplicationTypeDefaultFeature extends ApplicationTypeFeature {
 
     @SuppressWarnings("ParameterNumber")
     public ApplicationTypeDefaultFeature(MicronautMavenPlugin micronautMavenPlugin,
-                                         Properties properties,
                                          AppName appName,
                                          Logback logback,
                                          MicronautTestJunit5 micronautTestJunit5,
@@ -96,7 +95,7 @@ public class ApplicationTypeDefaultFeature extends ApplicationTypeFeature {
                                          List<KotlinApplication> kotlinApplications,
                                          List<GroovyApplicationFeature> groovyApplicationFeatures,
                                          HttpClientTest httpClientTest) {
-        super(micronautTestJunit5, micronautTestSpock, properties, logback, gitIgnore);
+        super(micronautTestJunit5, micronautTestSpock, logback, gitIgnore);
         this.micronautMavenPlugin = micronautMavenPlugin;
         this.appName = appName;
         this.micronautMavenCompilerPlugin = micronautMavenCompilerPlugin;

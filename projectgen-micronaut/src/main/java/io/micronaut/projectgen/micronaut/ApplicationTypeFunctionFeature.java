@@ -36,11 +36,10 @@ public class ApplicationTypeFunctionFeature extends ApplicationTypeFeature {
 
     public ApplicationTypeFunctionFeature(MicronautTestJunit5 micronautTestJunit5,
                                           MicronautTestSpock micronautTestSpock,
-                                          Properties properties,
                                           Logback logback,
                                           GitIgnore gitIgnore,
                                           HttpClientTest httpClientTest) {
-        super(micronautTestJunit5, micronautTestSpock, properties, logback, gitIgnore);
+        super(micronautTestJunit5, micronautTestSpock, logback, gitIgnore);
 
         this.httpClientTest = httpClientTest;
     }

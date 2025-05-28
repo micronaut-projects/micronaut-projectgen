@@ -36,6 +36,7 @@ public record GenericOptions(@NonNull String name,
                              @Nullable String template,
                              @Nullable Language language,
                              @Nullable List<BuildTool> buildTools,
+                             @Nullable ConfigurationFormat configurationFormat,
                              @Nullable GradleDsl gradleDsl,
                              @Nullable String group,
                              @Nullable String artifact,
@@ -48,6 +49,7 @@ public record GenericOptions(@NonNull String name,
     public Options withoutFeatures() {
         return GenericOptionsBuilder.builder()
             .name(this.name())
+            .configurationFormat(this.configurationFormat())
             .operatingSystem(this.operatingSystem())
             .template(this.template())
             .buildTools(this.buildTools())

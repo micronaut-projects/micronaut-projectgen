@@ -24,6 +24,7 @@ import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.projectgen.core.feature.FeaturePhase;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.options.ConfigurationFormat;
 import io.micronaut.projectgen.core.template.Template;
 import io.micronaut.projectgen.core.template.TomlTemplate;
 import jakarta.inject.Singleton;
@@ -86,5 +87,10 @@ public class Toml implements ConfigurationFeature {
                 : module + "/" + cfg.getFullPath(EXTENSION);
             return new TomlTemplate(path, cfg);
         };
+    }
+
+    @Override
+    public ConfigurationFormat configurationFormat() {
+        return ConfigurationFormat.TOML;
     }
 }

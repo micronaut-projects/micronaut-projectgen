@@ -17,14 +17,19 @@ package io.micronaut.projectgen.core.feature.config;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
+import io.micronaut.core.util.CollectionUtils;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.feature.*;
+import io.micronaut.projectgen.core.options.ConfigurationFormat;
 import io.micronaut.projectgen.core.options.Language;
+import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.core.template.Config4kTemplate;
 import io.micronaut.projectgen.core.template.Template;
 import jakarta.inject.Singleton;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.function.Function;
 
 @Requires(property = "projectgen.features.config4k.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
@@ -83,4 +88,8 @@ public class Config4k implements ConfigurationFeature, KotlinSpecificFeature {
         };
     }
 
+    @Override
+    public ConfigurationFormat configurationFormat() {
+        return ConfigurationFormat.CONFIG4K;
+    }
 }
