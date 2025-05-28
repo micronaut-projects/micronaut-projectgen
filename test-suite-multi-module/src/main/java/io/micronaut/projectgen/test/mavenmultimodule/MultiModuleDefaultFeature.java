@@ -18,16 +18,13 @@ public class MultiModuleDefaultFeature implements DefaultFeature {
     private final ApplicationModule applicationModule;
     private final LibraryModule libraryModule;
     private final RootModule rootModule;
-    private final Properties properties;
 
     public MultiModuleDefaultFeature(ApplicationModule applicationModule,
                                      LibraryModule libraryModule,
-                                     RootModule rootModule,
-                                     Properties properties) {
+                                     RootModule rootModule) {
         this.applicationModule = applicationModule;
         this.libraryModule = libraryModule;
         this.rootModule = rootModule;
-        this.properties = properties;
     }
 
     @Override
@@ -42,7 +39,6 @@ public class MultiModuleDefaultFeature implements DefaultFeature {
 
     @Override
     public void processSelectedFeatures(FeatureContext featureContext) {
-        featureContext.addFeatureIfNotPresent(ConfigurationFeature.class, properties);
         featureContext.addFeatureIfNotPresent(ApplicationModule.class, applicationModule);
         featureContext.addFeatureIfNotPresent(LibraryModule.class, libraryModule);
         featureContext.addFeatureIfNotPresent(RootModule.class, rootModule);

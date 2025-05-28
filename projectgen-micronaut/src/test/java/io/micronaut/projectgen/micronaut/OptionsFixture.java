@@ -1,6 +1,7 @@
 package io.micronaut.projectgen.micronaut;
 
 import io.micronaut.projectgen.core.buildtools.BuildTool;
+import io.micronaut.projectgen.core.options.ConfigurationFormat;
 import io.micronaut.projectgen.core.options.GenericOptionsBuilder;
 import io.micronaut.projectgen.core.options.JdkVersion;
 import io.micronaut.projectgen.core.options.Language;
@@ -40,6 +41,7 @@ public class OptionsFixture {
         return GenericOptionsBuilder.builder()
             .name("demo")
             .packageName("com.example")
+            .configurationFormat(ConfigurationFormat.PROPERTIES)
             .language(Language.JAVA)
             .testFramework(TestFramework.JUNIT)
             .java(JdkVersion.JDK_21)

@@ -41,13 +41,12 @@ public class ApplicationTypeCliFeature extends ApplicationTypeFeature {
 
     public ApplicationTypeCliFeature(MicronautTestJunit5 micronautTestJunit5,
                                      MicronautTestSpock micronautTestSpock,
-                                     Properties properties,
                                      Logback logback,
                                      GitIgnore gitIgnore,
                                      List<JavaApplicationFeature> javaApplicationFeatures,
                                      List<KotlinApplicationFeature> kotlinApplicationFeatures,
                                      List<GroovyApplicationFeature> groovyApplicationFeatures) {
-        super(micronautTestJunit5, micronautTestSpock, properties, logback, gitIgnore);
+        super(micronautTestJunit5, micronautTestSpock, logback, gitIgnore);
         Options options = GenericOptionsBuilder.builder().template(ApplicationType.CLI.toString()).build();
         this.javaApplicationFeature = javaApplicationFeatures.stream().filter(f -> f.supports(options)).findFirst().orElse(null);
         this.kotlinApplicationFeature = kotlinApplicationFeatures.stream().filter(f -> f.supports(options)).findFirst().orElse(null);

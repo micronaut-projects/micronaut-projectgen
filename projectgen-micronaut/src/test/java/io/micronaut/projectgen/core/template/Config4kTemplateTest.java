@@ -9,6 +9,7 @@ import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.generator.ProjectGenerator;
 import io.micronaut.projectgen.core.io.MapOutputHandler;
+import io.micronaut.projectgen.core.options.ConfigurationFormat;
 import io.micronaut.projectgen.core.options.GenericOptions;
 import io.micronaut.projectgen.core.options.GenericOptionsBuilder;
 import io.micronaut.projectgen.core.options.Language;
@@ -30,7 +31,8 @@ class Config4kTemplateTest {
     @Test
     void propertyWithComments(ProjectGenerator projectGenerator) throws Exception {
         GenericOptions options = OptionsFixture.defaultGradle().language(Language.KOTLIN)
-            .features(List.of("default-port-feature", "config4k")).build();
+            .configurationFormat(ConfigurationFormat.CONFIG4K)
+            .features(List.of("default-port-feature")).build();
         MapOutputHandler outputHandler = new MapOutputHandler();
         projectGenerator.generate(options, outputHandler);
         Map<String, String> project = outputHandler.getProject();

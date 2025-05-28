@@ -50,10 +50,9 @@ public class ApplicationTypeLibraryFeature extends ApplicationTypeFeature {
                                          MavenPublishGradlePlugin mavenPublishGradlePlugin,
                                          SigningGradlePlugin signingGradlePlugin,
                                          SpotlessGradlePlugin spotlessGradlePlugin,
-                                         Properties properties,
                                          Logback logback,
                                          GitIgnore gitIgnore) {
-        super(micronautTestJunit5, micronautTestSpock, properties, logback, gitIgnore);
+        super(micronautTestJunit5, micronautTestSpock, logback, gitIgnore);
         this.license = license;
         this.micronautLibraryGradlePlugin = micronautLibraryGradlePlugin;
         this.mavenPublishGradlePlugin = mavenPublishGradlePlugin;
