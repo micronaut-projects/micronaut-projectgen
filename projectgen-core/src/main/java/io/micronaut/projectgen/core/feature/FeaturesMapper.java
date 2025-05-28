@@ -15,29 +15,17 @@
  */
 package io.micronaut.projectgen.core.feature;
 
-import io.micronaut.projectgen.core.options.Options;
+import io.micronaut.core.annotation.NonNull;
 import jakarta.inject.Singleton;
 
-import java.util.List;
-
 @Singleton
-class DefaultFeatureFetcher implements FeatureFetcher {
-
-    private final FeaturesMapper featuresMapper;
-    private final List<Feature> features;
-
-    DefaultFeatureFetcher(FeaturesMapper featuresMapper,
-                          List<Feature> features) {
-        this.featuresMapper = featuresMapper;
-        this.features = features;
-    }
-
-    @Override
-    public List<FeatureResponse> fetch(Options options) {
-        return features.stream()
-            .filter(Feature::isVisible)
-            .filter(f -> f.supports(options))
-            .map(featuresMapper::toFeatureResponse)
-            .toList();
+public class FeaturesMapper {
+    @NonNull
+    FeatureResponse toFeatureResponse(@NonNull Feature feature) {
+        return new FeatureResponse(feature.getName(),
+            feature.getTitle(),
+            feature.getDescription(),
+            feature.isPreview(),
+            feature.isCommunity());
     }
 }
