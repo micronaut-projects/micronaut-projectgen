@@ -21,7 +21,7 @@ import jakarta.inject.Singleton;
 @Singleton
 public class FeaturesMapper {
     @NonNull
-    FeatureResponse toFeatureResponse(@NonNull Feature feature) {
+    public FeatureResponse toFeatureResponse(@NonNull Feature feature) {
         return new FeatureResponse(feature.getName(),
             feature.getTitle(),
             feature.getDescription(),
