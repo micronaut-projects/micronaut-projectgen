@@ -31,7 +31,7 @@ import jakarta.inject.Singleton;
 
 import java.util.function.Function;
 
-@Requires(property = "micronaut.starter.feature.yaml.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
+@Requires(property = "projectgen.features.yaml.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Yaml implements ConfigurationFeature {
     public static final String NAME = "yaml";

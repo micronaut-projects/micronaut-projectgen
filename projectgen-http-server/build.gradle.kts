@@ -2,6 +2,10 @@ plugins {
     id("io.micronaut.build.internal.projectgen-module")
 }
 dependencies {
+    annotationProcessor(mnValidation.micronaut.validation.processor)
+    implementation(mnValidation.micronaut.validation)
+    annotationProcessor(mnSerde.micronaut.serde.processor)
+    implementation(mnSerde.micronaut.serde.jackson)
     api(mn.micronaut.http.server)
     api(project(":micronaut-projectgen-core"))
     testAnnotationProcessor(mn.micronaut.inject.java)

@@ -62,4 +62,9 @@ public class MavenPublishGradlePlugin implements BuildPluginFeature, GradleSpeci
         props.put("developerName", "TODO");
         props.put("developerEmail", "TODO");
     }
+
+    @Override
+    public boolean isVisible() {
+        return false;
+    }
 }

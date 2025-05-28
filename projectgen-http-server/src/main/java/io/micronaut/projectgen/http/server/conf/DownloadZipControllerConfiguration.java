@@ -13,15 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.projectgen.http.server;
+package io.micronaut.projectgen.http.server.conf;
 
 import io.micronaut.context.annotation.ConfigurationProperties;
 
-@ConfigurationProperties(DiffControllerConfiguration.PREFIX)
-public class DiffControllerConfiguration implements ControllerConfiguration {
-    public static final String PREFIX = "controllers.diff";
+@ConfigurationProperties(DownloadZipControllerConfiguration.PREFIX)
+public class DownloadZipControllerConfiguration implements ControllerConfiguration {
+    public static final String PREFIX = "projectgen.controllers.download-zip";
     private boolean enabled = true;
-    private String path = "/diff";
+    private String path = API_V1 + "/download";
 
     @Override
     public boolean isEnabled() {

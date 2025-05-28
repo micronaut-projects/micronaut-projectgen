@@ -44,4 +44,9 @@ public class SigningGradlePlugin implements BuildPluginFeature, GradleSpecificFe
         ModuleContext rootModule = generatorContext.getRootModule();
         rootModule.addBuildPlugin(SIGNING_GRADLE_PLUGIN);
     }
+
+    @Override
+    public boolean isVisible() {
+        return false;
+    }
 }

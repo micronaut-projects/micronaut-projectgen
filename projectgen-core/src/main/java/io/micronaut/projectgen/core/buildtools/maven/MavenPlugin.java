@@ -20,9 +20,8 @@ import io.micronaut.core.annotation.Nullable;
 import io.micronaut.projectgen.core.buildtools.BuildPlugin;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.buildtools.dependencies.CoordinateResolver;
-import io.micronaut.projectgen.core.rocker.RockerWritable;
+import io.micronaut.projectgen.core.template.StringWritable;
 import io.micronaut.projectgen.core.template.Writable;
-import io.micronaut.projectgen.core.template.mavenPlugin;
 import java.util.Objects;
 
 /**
@@ -138,7 +137,11 @@ public class MavenPlugin implements BuildPlugin {
         public MavenPlugin build() {
             Objects.requireNonNull(artifactId, "The artifact id must be set");
             if (groupId != null && extension == null) {
-                extension = new RockerWritable(mavenPlugin.template(groupId, artifactId));
+                extension = new StringWritable(
+"<plugin>\n" +
+    "  <groupId>" + groupId + "</groupId>\n" +
+    "  <artifactId>" + artifactId + "</artifactId>\n" +
+    "</plugin>\n");
             }
             Objects.requireNonNull(extension, "Maven plugins require an extension or a groupId");
             return new MavenPlugin(artifactId, extension, order);
