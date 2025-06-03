@@ -26,6 +26,7 @@ include 'projectgen-http-server'
 include 'projectgen-micronaut'
 include 'projectgen-quarkus'
 include 'projectgen-micronaut-openrewrite'
+include 'projectgen-micronaut-openrewrite-recipes'
 include 'test-suite-multi-module'
 
 enableFeaturePreview 'TYPESAFE_PROJECT_ACCESSORS'

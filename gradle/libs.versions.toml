@@ -1,6 +1,6 @@
 [versions]
 micronaut = "4.8.13"
-rewrite-recipe-bom = "3.4.0"
+rewrite-recipe-bom = "3.9.0"
 micronaut-docs = "2.0.0"
 micronaut-test = "4.7.0"
 groovy = "4.0.24"
@@ -39,6 +39,9 @@ rewrite-gradle = { module = "org.openrewrite:rewrite-gradle" }
 rewrite-java-dependencies = { module = "org.openrewrite.recipe:rewrite-java-dependencies" }
 rewrite-maven = { module = "org.openrewrite:rewrite-maven" }
 rewrite-java = { module = "org.openrewrite:rewrite-java" }
+rewrite-java17 = { module = "org.openrewrite:rewrite-java-17" }
+rewrite-yaml = { module = "org.openrewrite:rewrite-yaml" }
+rewrite-test = { module = "org.openrewrite:rewrite-test" }
 maven-invoker = { module = "org.apache.maven.shared:maven-invoker", version.ref = "maven-invoker" }
 gradle-tooling-api = { module = "org.gradle:gradle-tooling-api", version.ref = "gradle-tooling-api" }
 sonatype-scan = { module = "org.sonatype.gradle.plugins:scan-gradle-plugin", version.ref = "sonatype-scan" }
