@@ -15,4 +15,16 @@ class BuildToolTest {
         assertEquals(BuildTool.GRADLE, BuildTool.of("gradle").get());
         assertEquals(BuildTool.MAVEN, BuildTool.of("maven").get());
     }
+
+    @Test
+    void buildToolTitle() {
+        assertEquals("Gradle", BuildTool.GRADLE.getTitle());
+        assertEquals("Maven", BuildTool.MAVEN.getTitle());
+    }
+
+    @Test
+    void getJarDirectory() {
+        assertEquals("build/libs", BuildTool.GRADLE.getJarDirectory());
+        assertEquals("target", BuildTool.MAVEN.getJarDirectory());
+    }
 }
