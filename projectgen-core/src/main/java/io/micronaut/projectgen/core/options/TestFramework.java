@@ -21,6 +21,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 
 /**
  * Test Framework.
@@ -40,6 +41,15 @@ public enum TestFramework {
 
     public static boolean isKotlinTestFramework(TestFramework testFramework) {
         return testFramework == KOTEST;
+    }
+
+    public static Optional<TestFramework> of(String testFramework) {
+        for (TestFramework l : values()) {
+            if (l.getName().equalsIgnoreCase(testFramework)) {
+                return Optional.of(l);
+            }
+        }
+        return Optional.empty();
     }
 
     public boolean isKotlinTestFramework() {

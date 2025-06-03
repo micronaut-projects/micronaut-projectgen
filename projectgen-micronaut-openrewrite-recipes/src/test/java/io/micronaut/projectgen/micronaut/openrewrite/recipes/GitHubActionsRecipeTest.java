@@ -3,13 +3,15 @@ package io.micronaut.projectgen.micronaut.openrewrite.recipes;
 import org.junit.jupiter.api.Test;
 import org.openrewrite.test.RecipeSpec;
 import org.openrewrite.test.RewriteTest;
+import org.openrewrite.test.SourceSpecs;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.openrewrite.yaml.Assertions.yaml;
 
-class GenerateConfFileRecipeTest implements RewriteTest {
+class GitHubActionsRecipeTest implements RewriteTest {
     @Override
     public void defaults(RecipeSpec spec) {
-        spec.recipe(new GenerateConfFileRecipe());
+        spec.recipe(new GitHubActionsRecipe());
     }
 
     @Test
