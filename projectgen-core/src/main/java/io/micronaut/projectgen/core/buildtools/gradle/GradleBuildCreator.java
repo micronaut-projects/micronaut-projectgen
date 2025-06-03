@@ -37,6 +37,8 @@ import java.util.List;
  * Gradle Build Creator.
  */
 public final class GradleBuildCreator {
+    private static final GradleDsl DEFAULT_GRADLE_DSL = GradleDsl.KOTLIN;
+
     private GradleBuildCreator() {
     }
 
@@ -72,7 +74,7 @@ public final class GradleBuildCreator {
         }
         GradleDsl gradleDsl = options.gradleDsl();
         if (gradleDsl == null) {
-            gradleDsl = GradleDsl.KOTLIN;
+            gradleDsl = DEFAULT_GRADLE_DSL;
         }
         List<GradlePlugin> gradlePlugins = module.buildPlugins()
                 .stream()
@@ -98,7 +100,7 @@ public final class GradleBuildCreator {
                                                      Collection<Repository> repositories) {
         BuildTool buildTool = options.buildTools().stream()
             .filter(bt -> bt == BuildTool.GRADLE).findFirst().orElseThrow();
-        return GradleRepository.listOf(options.gradleDsl() == null ? GradleDsl.GROOVY : options.gradleDsl(), repositories);
+        return GradleRepository.listOf(options.gradleDsl() == null ? DEFAULT_GRADLE_DSL : options.gradleDsl(), repositories);
     }
 
 }
