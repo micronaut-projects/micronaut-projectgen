@@ -28,9 +28,7 @@ public enum BuildTool {
     MAVEN("target");
 
     public static final BuildTool DEFAULT_OPTION = BuildTool.GRADLE;
-
     private final String jarDirectory;
-
     BuildTool(String jarDirectory) {
         this.jarDirectory = jarDirectory;
     }
@@ -38,7 +36,6 @@ public enum BuildTool {
     public String getJarDirectory() {
         return jarDirectory;
     }
-
 
     @Override
     public String toString() {
