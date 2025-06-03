@@ -129,9 +129,15 @@ implements <a href="LicenseFeature.html" title="interface in io.micronaut.projec
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getTitle()" class="member-name-link">getTitle</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>com.fizzed.rocker.RockerModel</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#licenseModel(io.micronaut.projectgen.core.generator.GeneratorContext)" class="member-name-link">licenseModel</a><wbr>(<a href="../../generator/GeneratorContext.html" title="class in io.micronaut.projectgen.core.generator">GeneratorContext</a>&nbsp;generatorContext)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isVisible()" class="member-name-link">isVisible</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Some features should not be visible to the user because they are a common parent of other
+ selectable features, or they should always be applied, or any other reason.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>com.fizzed.rocker.RockerModel</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#licenseModel(io.micronaut.projectgen.core.generator.GeneratorContext)" class="member-name-link">licenseModel</a><wbr>(<a href="../../generator/GeneratorContext.html" title="class in io.micronaut.projectgen.core.generator">GeneratorContext</a>&nbsp;generatorContext)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 </div>
 </div>
 </div>
@@ -143,7 +149,7 @@ implements <a href="LicenseFeature.html" title="interface in io.micronaut.projec
 <code>getDescription</code></div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-io.micronaut.projectgen.core.feature.Feature">Methods inherited from interface&nbsp;io.micronaut.projectgen.core.feature.<a href="../Feature.html" title="interface in io.micronaut.projectgen.core.feature">Feature</a></h3>
-<code><a href="../Feature.html#getCategory()">getCategory</a>, <a href="../Feature.html#getDescription()">getDescription</a>, <a href="../Feature.html#getFrameworkDocumentation(io.micronaut.projectgen.core.generator.GeneratorContext)">getFrameworkDocumentation</a>, <a href="../Feature.html#getOrder()">getOrder</a>, <a href="../Feature.html#getThirdPartyDocumentation(io.micronaut.projectgen.core.generator.GeneratorContext)">getThirdPartyDocumentation</a>, <a href="../Feature.html#isCommunity()">isCommunity</a>, <a href="../Feature.html#isPreview()">isPreview</a>, <a href="../Feature.html#isVisible()">isVisible</a>, <a href="../Feature.html#processSelectedFeatures(io.micronaut.projectgen.core.feature.FeatureContext)">processSelectedFeatures</a>, <a href="../Feature.html#supports(io.micronaut.projectgen.core.options.Options)">supports</a></code></div>
+<code><a href="../Feature.html#getCategory()">getCategory</a>, <a href="../Feature.html#getDescription()">getDescription</a>, <a href="../Feature.html#getFrameworkDocumentation(io.micronaut.projectgen.core.generator.GeneratorContext)">getFrameworkDocumentation</a>, <a href="../Feature.html#getOrder()">getOrder</a>, <a href="../Feature.html#getThirdPartyDocumentation(io.micronaut.projectgen.core.generator.GeneratorContext)">getThirdPartyDocumentation</a>, <a href="../Feature.html#isCommunity()">isCommunity</a>, <a href="../Feature.html#isPreview()">isPreview</a>, <a href="../Feature.html#processSelectedFeatures(io.micronaut.projectgen.core.feature.FeatureContext)">processSelectedFeatures</a>, <a href="../Feature.html#supports(io.micronaut.projectgen.core.options.Options)">supports</a></code></div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-io.micronaut.projectgen.core.feature.license.LicenseFeature">Methods inherited from interface&nbsp;io.micronaut.projectgen.core.feature.license.<a href="LicenseFeature.html" title="interface in io.micronaut.projectgen.core.feature.license">LicenseFeature</a></h3>
 <code><a href="LicenseFeature.html#apply(io.micronaut.projectgen.core.generator.GeneratorContext)">apply</a>, <a href="LicenseFeature.html#getFeatureClass()">getFeatureClass</a></code></div>
@@ -197,6 +203,21 @@ implements <a href="LicenseFeature.html" title="interface in io.micronaut.projec
 <dd><code>getName</code>&nbsp;in interface&nbsp;<code>io.micronaut.core.naming.Named</code></dd>
 <dt>Returns:</dt>
 <dd>the name of the feature</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="isVisible()">
+<h3>isVisible</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isVisible</span>()</div>
+<div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="../Feature.html#isVisible()">Feature</a></code></span></div>
+<div class="block">Some features should not be visible to the user because they are a common parent of other
+ selectable features, or they should always be applied, or any other reason.</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="../Feature.html#isVisible()">isVisible</a></code>&nbsp;in interface&nbsp;<code><a href="../Feature.html" title="interface in io.micronaut.projectgen.core.feature">Feature</a></code></dd>
+<dt>Returns:</dt>
+<dd>True if the feature should be able to be selected by the user</dd>
 </dl>
 </section>
 </li>

@@ -155,10 +155,10 @@ implements <a href="../../aws/AwsFeature.html" title="interface in io.micronaut.
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addConfigurations(io.micronaut.projectgen.core.generator.GeneratorContext)" class="member-name-link">addConfigurations</a><wbr>(<a href="../../../../projectgen/core/generator/GeneratorContext.html" title="class in io.micronaut.projectgen.core.generator">GeneratorContext</a>&nbsp;generatorContext)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addConfigurations(io.micronaut.projectgen.core.generator.ModuleContext)" class="member-name-link">addConfigurations</a><wbr>(<a href="../../../../projectgen/core/generator/ModuleContext.html" title="class in io.micronaut.projectgen.core.generator">ModuleContext</a>&nbsp;module)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addDependencies(io.micronaut.projectgen.core.generator.GeneratorContext)" class="member-name-link">addDependencies</a><wbr>(<a href="../../../../projectgen/core/generator/GeneratorContext.html" title="class in io.micronaut.projectgen.core.generator">GeneratorContext</a>&nbsp;generatorContext)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addDependencies(io.micronaut.projectgen.core.generator.ModuleContext)" class="member-name-link">addDependencies</a><wbr>(<a href="../../../../projectgen/core/generator/ModuleContext.html" title="class in io.micronaut.projectgen.core.generator">ModuleContext</a>&nbsp;module)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#apply(io.micronaut.projectgen.core.generator.GeneratorContext)" class="member-name-link">apply</a><wbr>(<a href="../../../../projectgen/core/generator/GeneratorContext.html" title="class in io.micronaut.projectgen.core.generator">GeneratorContext</a>&nbsp;generatorContext)</code></div>
@@ -195,7 +195,8 @@ implements <a href="../../aws/AwsFeature.html" title="interface in io.micronaut.
  or was included by default as a result of <a href="../../../../projectgen/core/feature/DefaultFeature.html#shouldApply(io.micronaut.projectgen.core.options.Options,java.util.Set)"><code>DefaultFeature.shouldApply(io.micronaut.starter.options.Options, java.util.Set)</code></a>.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#renderTemplates(io.micronaut.projectgen.core.generator.GeneratorContext)" class="member-name-link">renderTemplates</a><wbr>(<a href="../../../../projectgen/core/generator/GeneratorContext.html" title="class in io.micronaut.projectgen.core.generator">GeneratorContext</a>&nbsp;generatorContext)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#renderTemplates(io.micronaut.projectgen.core.generator.GeneratorContext,io.micronaut.projectgen.core.generator.ModuleContext)" class="member-name-link">renderTemplates</a><wbr>(<a href="../../../../projectgen/core/generator/GeneratorContext.html" title="class in io.micronaut.projectgen.core.generator">GeneratorContext</a>&nbsp;generatorContext,
+ <a href="../../../../projectgen/core/generator/ModuleContext.html" title="class in io.micronaut.projectgen.core.generator">ModuleContext</a>&nbsp;module)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../../../projectgen/core/rocker/RockerTemplate.html" title="class in io.micronaut.projectgen.core.rocker">RockerTemplate</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#rootReadMeTemplate(io.micronaut.projectgen.core.generator.GeneratorContext)" class="member-name-link">rootReadMeTemplate</a><wbr>(<a href="../../../../projectgen/core/generator/GeneratorContext.html" title="class in io.micronaut.projectgen.core.generator">GeneratorContext</a>&nbsp;generatorContext)</code></div>
@@ -395,11 +396,7 @@ implements <a href="../../aws/AwsFeature.html" title="interface in io.micronaut.
  included by default as a result of <a href="../../../../projectgen/core/feature/DefaultFeature.html#shouldApply(io.micronaut.projectgen.core.options.Options,java.util.Set)"><code>DefaultFeature.shouldApply(io.micronaut.starter.options.Options, java.util.Set)</code></a>,
  or added explicitly by another feature through <a href="../../../../projectgen/core/feature/FeatureContext.html#addFeature(io.micronaut.projectgen.core.feature.Feature)"><code>FeatureContext.addFeature(Feature)</code></a>.
 
- At this point the feature list is set and cannot change.
-
- This method can be implemented to modify the generated project. The feature can add templates
- by executing <a href="../../../../projectgen/core/generator/GeneratorContext.html#addTemplate(java.lang.String,io.micronaut.projectgen.core.template.Template)"><code>GeneratorContext.addTemplate(String, io.micronaut.starter.template.Template)</code></a>, modify configuration
- by modifying <a href="../../../../projectgen/core/generator/GeneratorContext.html#getConfiguration()"><code>GeneratorContext.getConfiguration()</code></a> or <a href="../../../../projectgen/core/generator/GeneratorContext.html#getBootstrapConfiguration()"><code>GeneratorContext.getBootstrapConfiguration()</code></a>, or modify build properties through <a href="../../../../projectgen/core/generator/GeneratorContext.html#getBuildProperties()"><code>GeneratorContext.getBuildProperties()</code></a>.</div>
+ At this point the feature list is set and cannot change.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="../../../../projectgen/core/feature/Feature.html#apply(io.micronaut.projectgen.core.generator.GeneratorContext)">apply</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../projectgen/core/feature/Feature.html" title="interface in io.micronaut.projectgen.core.feature">Feature</a></code></dd>
@@ -411,12 +408,12 @@ implements <a href="../../aws/AwsFeature.html" title="interface in io.micronaut.
 </section>
 </li>
 <li>
-<section class="detail" id="addDependencies(io.micronaut.projectgen.core.generator.GeneratorContext)">
+<section class="detail" id="addDependencies(io.micronaut.projectgen.core.generator.ModuleContext)">
 <h3>addDependencies</h3>
-<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">addDependencies</span><wbr><span class="parameters">(<a href="../../../../projectgen/core/generator/GeneratorContext.html" title="class in io.micronaut.projectgen.core.generator">GeneratorContext</a>&nbsp;generatorContext)</span></div>
+<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">addDependencies</span><wbr><span class="parameters">(<a href="../../../../projectgen/core/generator/ModuleContext.html" title="class in io.micronaut.projectgen.core.generator">ModuleContext</a>&nbsp;module)</span></div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="../ChatBots.html#addDependencies(io.micronaut.projectgen.core.generator.GeneratorContext)">addDependencies</a></code>&nbsp;in class&nbsp;<code><a href="../ChatBots.html" title="class in io.micronaut.starter.feature.chatbots">ChatBots</a></code></dd>
+<dd><code><a href="../ChatBots.html#addDependencies(io.micronaut.projectgen.core.generator.ModuleContext)">addDependencies</a></code>&nbsp;in class&nbsp;<code><a href="../ChatBots.html" title="class in io.micronaut.starter.feature.chatbots">ChatBots</a></code></dd>
 </dl>
 </section>
 </li>
@@ -457,22 +454,23 @@ implements <a href="../../aws/AwsFeature.html" title="interface in io.micronaut.
 </section>
 </li>
 <li>
-<section class="detail" id="addConfigurations(io.micronaut.projectgen.core.generator.GeneratorContext)">
+<section class="detail" id="addConfigurations(io.micronaut.projectgen.core.generator.ModuleContext)">
 <h3>addConfigurations</h3>
-<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">addConfigurations</span><wbr><span class="parameters">(<a href="../../../../projectgen/core/generator/GeneratorContext.html" title="class in io.micronaut.projectgen.core.generator">GeneratorContext</a>&nbsp;generatorContext)</span></div>
+<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">addConfigurations</span><wbr><span class="parameters">(<a href="../../../../projectgen/core/generator/ModuleContext.html" title="class in io.micronaut.projectgen.core.generator">ModuleContext</a>&nbsp;module)</span></div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="../ChatBots.html#addConfigurations(io.micronaut.projectgen.core.generator.GeneratorContext)">addConfigurations</a></code>&nbsp;in class&nbsp;<code><a href="../ChatBots.html" title="class in io.micronaut.starter.feature.chatbots">ChatBots</a></code></dd>
+<dd><code><a href="../ChatBots.html#addConfigurations(io.micronaut.projectgen.core.generator.ModuleContext)">addConfigurations</a></code>&nbsp;in class&nbsp;<code><a href="../ChatBots.html" title="class in io.micronaut.starter.feature.chatbots">ChatBots</a></code></dd>
 </dl>
 </section>
 </li>
 <li>
-<section class="detail" id="renderTemplates(io.micronaut.projectgen.core.generator.GeneratorContext)">
+<section class="detail" id="renderTemplates(io.micronaut.projectgen.core.generator.GeneratorContext,io.micronaut.projectgen.core.generator.ModuleContext)">
 <h3>renderTemplates</h3>
-<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">renderTemplates</span><wbr><span class="parameters">(<a href="../../../../projectgen/core/generator/GeneratorContext.html" title="class in io.micronaut.projectgen.core.generator">GeneratorContext</a>&nbsp;generatorContext)</span></div>
+<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">renderTemplates</span><wbr><span class="parameters">(<a href="../../../../projectgen/core/generator/GeneratorContext.html" title="class in io.micronaut.projectgen.core.generator">GeneratorContext</a>&nbsp;generatorContext,
+ <a href="../../../../projectgen/core/generator/ModuleContext.html" title="class in io.micronaut.projectgen.core.generator">ModuleContext</a>&nbsp;module)</span></div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="../ChatBots.html#renderTemplates(io.micronaut.projectgen.core.generator.GeneratorContext)">renderTemplates</a></code>&nbsp;in class&nbsp;<code><a href="../ChatBots.html" title="class in io.micronaut.starter.feature.chatbots">ChatBots</a></code></dd>
+<dd><code><a href="../ChatBots.html#renderTemplates(io.micronaut.projectgen.core.generator.GeneratorContext,io.micronaut.projectgen.core.generator.ModuleContext)">renderTemplates</a></code>&nbsp;in class&nbsp;<code><a href="../ChatBots.html" title="class in io.micronaut.starter.feature.chatbots">ChatBots</a></code></dd>
 </dl>
 </section>
 </li>

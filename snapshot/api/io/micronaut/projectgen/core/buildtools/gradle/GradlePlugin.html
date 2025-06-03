@@ -130,9 +130,11 @@ implements <a href="../BuildPlugin.html" title="interface in io.micronaut.projec
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(io.micronaut.projectgen.core.buildtools.gradle.GradleFile,java.lang.String,java.lang.String,java.lang.String,io.micronaut.projectgen.core.template.Writable,io.micronaut.projectgen.core.template.Writable,java.util.List,boolean,int,java.util.Set)" class="member-name-link">GradlePlugin</a><wbr>(@NonNull <a href="GradleFile.html" title="enum class in io.micronaut.projectgen.core.buildtools.gradle">GradleFile</a>&nbsp;gradleFile,
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(io.micronaut.projectgen.core.buildtools.gradle.GradleFile,java.lang.String,java.lang.String,java.lang.String,java.lang.Boolean,java.lang.String,io.micronaut.projectgen.core.template.Writable,io.micronaut.projectgen.core.template.Writable,java.util.List,boolean,int,java.util.Set)" class="member-name-link">GradlePlugin</a><wbr>(@NonNull <a href="GradleFile.html" title="enum class in io.micronaut.projectgen.core.buildtools.gradle">GradleFile</a>&nbsp;gradleFile,
  @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;id,
  @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;version,
+ @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;alias,
+ @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&nbsp;apply,
  @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;artifactId,
  @Nullable <a href="../../template/Writable.html" title="interface in io.micronaut.projectgen.core.template">Writable</a>&nbsp;extension,
  @Nullable <a href="../../template/Writable.html" title="interface in io.micronaut.projectgen.core.template">Writable</a>&nbsp;settingsExtension,
@@ -143,9 +145,11 @@ implements <a href="../BuildPlugin.html" title="interface in io.micronaut.projec
 <div class="col-last even-row-color">
 <div class="block"><span class="deprecated-label">Deprecated, for removal: This API element is subject to removal in a future version.</span></div>
 </div>
-<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(io.micronaut.projectgen.core.buildtools.gradle.GradleFile,java.lang.String,java.lang.String,java.lang.String,io.micronaut.projectgen.core.template.Writable,io.micronaut.projectgen.core.template.Writable,java.util.List,boolean,int,java.util.Set,java.util.Set)" class="member-name-link">GradlePlugin</a><wbr>(@NonNull <a href="GradleFile.html" title="enum class in io.micronaut.projectgen.core.buildtools.gradle">GradleFile</a>&nbsp;gradleFile,
+<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(io.micronaut.projectgen.core.buildtools.gradle.GradleFile,java.lang.String,java.lang.String,java.lang.String,java.lang.Boolean,java.lang.String,io.micronaut.projectgen.core.template.Writable,io.micronaut.projectgen.core.template.Writable,java.util.List,boolean,int,java.util.Set,java.util.Set)" class="member-name-link">GradlePlugin</a><wbr>(@NonNull <a href="GradleFile.html" title="enum class in io.micronaut.projectgen.core.buildtools.gradle">GradleFile</a>&nbsp;gradleFile,
  @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;id,
  @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;version,
+ @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;alias,
+ @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&nbsp;apply,
  @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;artifactId,
  @Nullable <a href="../../template/Writable.html" title="interface in io.micronaut.projectgen.core.template">Writable</a>&nbsp;extension,
  @Nullable <a href="../../template/Writable.html" title="interface in io.micronaut.projectgen.core.template">Writable</a>&nbsp;settingsExtension,
@@ -174,6 +178,12 @@ implements <a href="../BuildPlugin.html" title="interface in io.micronaut.projec
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#equals(java.lang.Object)" class="member-name-link">equals</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;o)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getAlias()" class="member-name-link">getAlias</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getApply()" class="member-name-link">getApply</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getBuildImports()" class="member-name-link">getBuildImports</a>()</code></div>
@@ -258,7 +268,7 @@ implements <a href="../BuildPlugin.html" title="interface in io.micronaut.projec
 <h2>Constructor Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="&lt;init&gt;(io.micronaut.projectgen.core.buildtools.gradle.GradleFile,java.lang.String,java.lang.String,java.lang.String,io.micronaut.projectgen.core.template.Writable,io.micronaut.projectgen.core.template.Writable,java.util.List,boolean,int,java.util.Set)">
+<section class="detail" id="&lt;init&gt;(io.micronaut.projectgen.core.buildtools.gradle.GradleFile,java.lang.String,java.lang.String,java.lang.String,java.lang.Boolean,java.lang.String,io.micronaut.projectgen.core.template.Writable,io.micronaut.projectgen.core.template.Writable,java.util.List,boolean,int,java.util.Set)">
 <h3>GradlePlugin</h3>
 <div class="member-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Deprecated.html" title="class or interface in java.lang" class="external-link">@Deprecated</a>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Deprecated.html#since()" title="class or interface in java.lang" class="external-link">since</a>="4.2.0",
             <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Deprecated.html#forRemoval()" title="class or interface in java.lang" class="external-link">forRemoval</a>=true)
@@ -268,6 +278,10 @@ implements <a href="../BuildPlugin.html" title="interface in io.micronaut.projec
  @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;id,
  @Nullable
  @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;version,
+ @Nullable
+ @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;alias,
+ @Nullable
+ @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&nbsp;apply,
  @Nullable
  @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;artifactId,
  @Nullable
@@ -282,7 +296,7 @@ implements <a href="../BuildPlugin.html" title="interface in io.micronaut.projec
 </section>
 </li>
 <li>
-<section class="detail" id="&lt;init&gt;(io.micronaut.projectgen.core.buildtools.gradle.GradleFile,java.lang.String,java.lang.String,java.lang.String,io.micronaut.projectgen.core.template.Writable,io.micronaut.projectgen.core.template.Writable,java.util.List,boolean,int,java.util.Set,java.util.Set)">
+<section class="detail" id="&lt;init&gt;(io.micronaut.projectgen.core.buildtools.gradle.GradleFile,java.lang.String,java.lang.String,java.lang.String,java.lang.Boolean,java.lang.String,io.micronaut.projectgen.core.template.Writable,io.micronaut.projectgen.core.template.Writable,java.util.List,boolean,int,java.util.Set,java.util.Set)">
 <h3>GradlePlugin</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">GradlePlugin</span><wbr><span class="parameters">(@NonNull
  @NonNull <a href="GradleFile.html" title="enum class in io.micronaut.projectgen.core.buildtools.gradle">GradleFile</a>&nbsp;gradleFile,
@@ -290,6 +304,10 @@ implements <a href="../BuildPlugin.html" title="interface in io.micronaut.projec
  @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;id,
  @Nullable
  @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;version,
+ @Nullable
+ @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;alias,
+ @Nullable
+ @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&nbsp;apply,
  @Nullable
  @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;artifactId,
  @Nullable
@@ -311,6 +329,12 @@ implements <a href="../BuildPlugin.html" title="interface in io.micronaut.projec
 <section class="method-details" id="method-detail">
 <h2>Method Details</h2>
 <ul class="member-list">
+<li>
+<section class="detail" id="getApply()">
+<h3>getApply</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a></span>&nbsp;<span class="element-name">getApply</span>()</div>
+</section>
+</li>
 <li>
 <section class="detail" id="of(java.lang.String,java.lang.String)">
 <h3>of</h3>
@@ -360,6 +384,13 @@ implements <a href="../BuildPlugin.html" title="interface in io.micronaut.projec
 <dt>Returns:</dt>
 <dd>plugin id</dd>
 </dl>
+</section>
+</li>
+<li>
+<section class="detail" id="getAlias()">
+<h3>getAlias</h3>
+<div class="member-signature"><span class="annotations">@Nullable
+</span><span class="modifiers">public</span>&nbsp;<span class="return-type">@Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getAlias</span>()</div>
 </section>
 </li>
 <li>

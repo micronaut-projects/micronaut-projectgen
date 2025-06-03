@@ -75,6 +75,12 @@ loadScripts(document, 'script');</script>
 <li class="circle">io.micronaut.projectgen.core.feature.<a href="BaseAvailableFeatures.html" class="type-name-link" title="class in io.micronaut.projectgen.core.feature">BaseAvailableFeatures</a> (implements io.micronaut.projectgen.core.feature.<a href="AvailableFeatures.html" title="interface in io.micronaut.projectgen.core.feature">AvailableFeatures</a>)</li>
 <li class="circle">io.micronaut.projectgen.core.feature.<a href="CompositeFeatureValidator.html" class="type-name-link" title="class in io.micronaut.projectgen.core.feature">CompositeFeatureValidator</a> (implements io.micronaut.projectgen.core.feature.<a href="FeatureValidator.html" title="interface in io.micronaut.projectgen.core.feature">FeatureValidator</a>)</li>
 <li class="circle">io.micronaut.projectgen.core.feature.<a href="FeatureContext.html" class="type-name-link" title="class in io.micronaut.projectgen.core.feature">FeatureContext</a></li>
+<li class="circle">io.micronaut.projectgen.core.feature.<a href="FeaturesMapper.html" class="type-name-link" title="class in io.micronaut.projectgen.core.feature">FeaturesMapper</a></li>
+<li class="circle">java.lang.<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Record.html" class="type-name-link external-link" title="class or interface in java.lang">Record</a>
+<ul>
+<li class="circle">io.micronaut.projectgen.core.feature.<a href="FeatureResponse.html" class="type-name-link" title="class in io.micronaut.projectgen.core.feature">FeatureResponse</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -97,6 +103,7 @@ loadScripts(document, 'script');</script>
 <li class="circle">io.micronaut.projectgen.core.feature.<a href="BuildPluginFeature.html" class="type-name-link" title="interface in io.micronaut.projectgen.core.feature">BuildPluginFeature</a></li>
 <li class="circle">io.micronaut.projectgen.core.feature.<a href="DefaultFeature.html" class="type-name-link" title="interface in io.micronaut.projectgen.core.feature">DefaultFeature</a>
 <ul>
+<li class="circle">io.micronaut.projectgen.core.feature.<a href="ConfigurationFeature.html" class="type-name-link" title="interface in io.micronaut.projectgen.core.feature">ConfigurationFeature</a> (also extends io.micronaut.projectgen.core.feature.<a href="OneOfFeature.html" title="interface in io.micronaut.projectgen.core.feature">OneOfFeature</a>)</li>
 <li class="circle">io.micronaut.projectgen.core.feature.<a href="LanguageFeature.html" class="type-name-link" title="interface in io.micronaut.projectgen.core.feature">LanguageFeature</a></li>
 </ul>
 </li>
@@ -111,7 +118,7 @@ loadScripts(document, 'script');</script>
 <li class="circle">io.micronaut.projectgen.core.feature.<a href="MultiProjectFeature.html" class="type-name-link" title="interface in io.micronaut.projectgen.core.feature">MultiProjectFeature</a></li>
 <li class="circle">io.micronaut.projectgen.core.feature.<a href="OneOfFeature.html" class="type-name-link" title="interface in io.micronaut.projectgen.core.feature">OneOfFeature</a>
 <ul>
-<li class="circle">io.micronaut.projectgen.core.feature.<a href="ConfigurationFeature.html" class="type-name-link" title="interface in io.micronaut.projectgen.core.feature">ConfigurationFeature</a></li>
+<li class="circle">io.micronaut.projectgen.core.feature.<a href="ConfigurationFeature.html" class="type-name-link" title="interface in io.micronaut.projectgen.core.feature">ConfigurationFeature</a> (also extends io.micronaut.projectgen.core.feature.<a href="DefaultFeature.html" title="interface in io.micronaut.projectgen.core.feature">DefaultFeature</a>)</li>
 <li class="circle">io.micronaut.projectgen.core.feature.<a href="LoggingFeature.html" class="type-name-link" title="interface in io.micronaut.projectgen.core.feature">LoggingFeature</a></li>
 </ul>
 </li>
@@ -120,10 +127,11 @@ loadScripts(document, 'script');</script>
 </li>
 </ul>
 </li>
+<li class="circle">io.micronaut.projectgen.core.feature.<a href="FeatureFetcher.html" class="type-name-link" title="interface in io.micronaut.projectgen.core.feature">FeatureFetcher</a></li>
 <li class="circle">io.micronaut.projectgen.core.feature.<a href="FeatureValidator.html" class="type-name-link" title="interface in io.micronaut.projectgen.core.feature">FeatureValidator</a></li>
 <li class="circle">java.lang.<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Iterable.html" class="type-name-link external-link" title="class or interface in java.lang">Iterable</a>&lt;T&gt;
 <ul>
-<li class="circle">io.micronaut.projectgen.core.feature.<a href="AvailableFeatures.html" class="type-name-link" title="interface in io.micronaut.projectgen.core.feature">AvailableFeatures</a></li>
+<li class="circle">io.micronaut.projectgen.core.feature.<a href="AvailableFeatures.html" class="type-name-link" title="interface in io.micronaut.projectgen.core.feature">AvailableFeatures</a> (also extends io.micronaut.core.order.Ordered)</li>
 </ul>
 </li>
 <li class="circle">io.micronaut.core.naming.Named
@@ -141,6 +149,7 @@ loadScripts(document, 'script');</script>
 <li class="circle">io.micronaut.projectgen.core.feature.<a href="BuildPluginFeature.html" class="type-name-link" title="interface in io.micronaut.projectgen.core.feature">BuildPluginFeature</a></li>
 <li class="circle">io.micronaut.projectgen.core.feature.<a href="DefaultFeature.html" class="type-name-link" title="interface in io.micronaut.projectgen.core.feature">DefaultFeature</a>
 <ul>
+<li class="circle">io.micronaut.projectgen.core.feature.<a href="ConfigurationFeature.html" class="type-name-link" title="interface in io.micronaut.projectgen.core.feature">ConfigurationFeature</a> (also extends io.micronaut.projectgen.core.feature.<a href="OneOfFeature.html" title="interface in io.micronaut.projectgen.core.feature">OneOfFeature</a>)</li>
 <li class="circle">io.micronaut.projectgen.core.feature.<a href="LanguageFeature.html" class="type-name-link" title="interface in io.micronaut.projectgen.core.feature">LanguageFeature</a></li>
 </ul>
 </li>
@@ -155,7 +164,7 @@ loadScripts(document, 'script');</script>
 <li class="circle">io.micronaut.projectgen.core.feature.<a href="MultiProjectFeature.html" class="type-name-link" title="interface in io.micronaut.projectgen.core.feature">MultiProjectFeature</a></li>
 <li class="circle">io.micronaut.projectgen.core.feature.<a href="OneOfFeature.html" class="type-name-link" title="interface in io.micronaut.projectgen.core.feature">OneOfFeature</a>
 <ul>
-<li class="circle">io.micronaut.projectgen.core.feature.<a href="ConfigurationFeature.html" class="type-name-link" title="interface in io.micronaut.projectgen.core.feature">ConfigurationFeature</a></li>
+<li class="circle">io.micronaut.projectgen.core.feature.<a href="ConfigurationFeature.html" class="type-name-link" title="interface in io.micronaut.projectgen.core.feature">ConfigurationFeature</a> (also extends io.micronaut.projectgen.core.feature.<a href="DefaultFeature.html" title="interface in io.micronaut.projectgen.core.feature">DefaultFeature</a>)</li>
 <li class="circle">io.micronaut.projectgen.core.feature.<a href="LoggingFeature.html" class="type-name-link" title="interface in io.micronaut.projectgen.core.feature">LoggingFeature</a></li>
 </ul>
 </li>
@@ -166,6 +175,7 @@ loadScripts(document, 'script');</script>
 </li>
 <li class="circle">io.micronaut.core.order.Ordered
 <ul>
+<li class="circle">io.micronaut.projectgen.core.feature.<a href="AvailableFeatures.html" class="type-name-link" title="interface in io.micronaut.projectgen.core.feature">AvailableFeatures</a> (also extends java.lang.<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Iterable.html" title="class or interface in java.lang" class="external-link">Iterable</a>&lt;T&gt;)</li>
 <li class="circle">io.micronaut.projectgen.core.feature.<a href="Feature.html" class="type-name-link" title="interface in io.micronaut.projectgen.core.feature">Feature</a> (also extends io.micronaut.core.naming.Described, io.micronaut.core.naming.Named)
 <ul>
 <li class="circle">io.micronaut.projectgen.core.feature.<a href="ApplicationFeature.html" class="type-name-link" title="interface in io.micronaut.projectgen.core.feature">ApplicationFeature</a>
@@ -179,6 +189,7 @@ loadScripts(document, 'script');</script>
 <li class="circle">io.micronaut.projectgen.core.feature.<a href="BuildPluginFeature.html" class="type-name-link" title="interface in io.micronaut.projectgen.core.feature">BuildPluginFeature</a></li>
 <li class="circle">io.micronaut.projectgen.core.feature.<a href="DefaultFeature.html" class="type-name-link" title="interface in io.micronaut.projectgen.core.feature">DefaultFeature</a>
 <ul>
+<li class="circle">io.micronaut.projectgen.core.feature.<a href="ConfigurationFeature.html" class="type-name-link" title="interface in io.micronaut.projectgen.core.feature">ConfigurationFeature</a> (also extends io.micronaut.projectgen.core.feature.<a href="OneOfFeature.html" title="interface in io.micronaut.projectgen.core.feature">OneOfFeature</a>)</li>
 <li class="circle">io.micronaut.projectgen.core.feature.<a href="LanguageFeature.html" class="type-name-link" title="interface in io.micronaut.projectgen.core.feature">LanguageFeature</a></li>
 </ul>
 </li>
@@ -193,7 +204,7 @@ loadScripts(document, 'script');</script>
 <li class="circle">io.micronaut.projectgen.core.feature.<a href="MultiProjectFeature.html" class="type-name-link" title="interface in io.micronaut.projectgen.core.feature">MultiProjectFeature</a></li>
 <li class="circle">io.micronaut.projectgen.core.feature.<a href="OneOfFeature.html" class="type-name-link" title="interface in io.micronaut.projectgen.core.feature">OneOfFeature</a>
 <ul>
-<li class="circle">io.micronaut.projectgen.core.feature.<a href="ConfigurationFeature.html" class="type-name-link" title="interface in io.micronaut.projectgen.core.feature">ConfigurationFeature</a></li>
+<li class="circle">io.micronaut.projectgen.core.feature.<a href="ConfigurationFeature.html" class="type-name-link" title="interface in io.micronaut.projectgen.core.feature">ConfigurationFeature</a> (also extends io.micronaut.projectgen.core.feature.<a href="DefaultFeature.html" title="interface in io.micronaut.projectgen.core.feature">DefaultFeature</a>)</li>
 <li class="circle">io.micronaut.projectgen.core.feature.<a href="LoggingFeature.html" class="type-name-link" title="interface in io.micronaut.projectgen.core.feature">LoggingFeature</a></li>
 </ul>
 </li>

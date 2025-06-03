@@ -77,7 +77,7 @@ loadScripts(document, 'script');</script>
 <section class="class-description" id="class-description">
 <dl class="notes">
 <dt>All Implemented Interfaces:</dt>
-<dd><code>io.micronaut.core.naming.Described</code>, <code>io.micronaut.core.naming.Named</code>, <code>io.micronaut.core.order.Ordered</code>, <code><a href="../../feature/BuildFeature.html" title="interface in io.micronaut.projectgen.core.feature">BuildFeature</a></code>, <code><a href="../../feature/Feature.html" title="interface in io.micronaut.projectgen.core.feature">Feature</a></code></dd>
+<dd><code>io.micronaut.core.naming.Described</code>, <code>io.micronaut.core.naming.Named</code>, <code>io.micronaut.core.order.Ordered</code>, <code><a href="../../feature/BuildFeature.html" title="interface in io.micronaut.projectgen.core.feature">BuildFeature</a></code>, <code><a href="../../feature/DefaultFeature.html" title="interface in io.micronaut.projectgen.core.feature">DefaultFeature</a></code>, <code><a href="../../feature/Feature.html" title="interface in io.micronaut.projectgen.core.feature">Feature</a></code></dd>
 </dl>
 <hr>
 <div class="type-signature"><span class="annotations">@Requires(property="micronaut.starter.feature.maven.enabled",
@@ -86,7 +86,7 @@ loadScripts(document, 'script');</script>
 @Singleton
 </span><span class="modifiers">public class </span><span class="element-name type-name-label">Maven</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
-implements <a href="../../feature/BuildFeature.html" title="interface in io.micronaut.projectgen.core.feature">BuildFeature</a></span></div>
+implements <a href="../../feature/BuildFeature.html" title="interface in io.micronaut.projectgen.core.feature">BuildFeature</a>, <a href="../../feature/DefaultFeature.html" title="interface in io.micronaut.projectgen.core.feature">DefaultFeature</a></span></div>
 <div class="block">Maven Feature.</div>
 </section>
 <section class="summary">
@@ -100,24 +100,21 @@ implements <a href="../../feature/BuildFeature.html" title="interface in io.micr
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Field</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color"><code>protected final <a href="MavenBuildCreator.html" title="class in io.micronaut.projectgen.core.buildtools.maven">MavenBuildCreator</a></code></div>
-<div class="col-second even-row-color"><code><a href="#dependencyResolver" class="member-name-link">dependencyResolver</a></code></div>
+<div class="col-first even-row-color"><code>protected static final <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color"><code><a href="#MAVEN_PREFIX" class="member-name-link">MAVEN_PREFIX</a></code></div>
 <div class="col-last even-row-color">&nbsp;</div>
-<div class="col-first odd-row-color"><code>protected static final <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color"><code><a href="#MAVEN_PREFIX" class="member-name-link">MAVEN_PREFIX</a></code></div>
+<div class="col-first odd-row-color"><code>protected final <a href="MavenBuildCreator.html" title="class in io.micronaut.projectgen.core.buildtools.maven">MavenBuildCreator</a></code></div>
+<div class="col-second odd-row-color"><code><a href="#mavenBuildCreator" class="member-name-link">mavenBuildCreator</a></code></div>
 <div class="col-last odd-row-color">&nbsp;</div>
 <div class="col-first even-row-color"><code>static final <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color"><code><a href="#MICRONAUT_MAVEN_DOCS_URL" class="member-name-link">MICRONAUT_MAVEN_DOCS_URL</a></code></div>
 <div class="col-last even-row-color">&nbsp;</div>
-<div class="col-first odd-row-color"><code>protected final <a href="../RepositoryResolver.html" title="interface in io.micronaut.projectgen.core.buildtools">RepositoryResolver</a></code></div>
-<div class="col-second odd-row-color"><code><a href="#repositoryResolver" class="member-name-link">repositoryResolver</a></code></div>
+<div class="col-first odd-row-color"><code>protected static final <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color"><code><a href="#WRAPPER_JAR" class="member-name-link">WRAPPER_JAR</a></code></div>
 <div class="col-last odd-row-color">&nbsp;</div>
 <div class="col-first even-row-color"><code>protected static final <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color"><code><a href="#WRAPPER_JAR" class="member-name-link">WRAPPER_JAR</a></code></div>
+<div class="col-second even-row-color"><code><a href="#WRAPPER_PROPS" class="member-name-link">WRAPPER_PROPS</a></code></div>
 <div class="col-last even-row-color">&nbsp;</div>
-<div class="col-first odd-row-color"><code>protected static final <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color"><code><a href="#WRAPPER_PROPS" class="member-name-link">WRAPPER_PROPS</a></code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
 </div>
 <div class="inherited-list">
 <h3 id="fields-inherited-from-class-io.micronaut.core.order.Ordered">Fields inherited from interface&nbsp;io.micronaut.core.order.Ordered</h3>
@@ -132,8 +129,7 @@ implements <a href="../../feature/BuildFeature.html" title="interface in io.micr
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(io.micronaut.projectgen.core.buildtools.maven.MavenBuildCreator,io.micronaut.projectgen.core.buildtools.RepositoryResolver)" class="member-name-link">Maven</a><wbr>(<a href="MavenBuildCreator.html" title="class in io.micronaut.projectgen.core.buildtools.maven">MavenBuildCreator</a>&nbsp;dependencyResolver,
- <a href="../RepositoryResolver.html" title="interface in io.micronaut.projectgen.core.buildtools">RepositoryResolver</a>&nbsp;repositoryResolver)</code></div>
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(io.micronaut.projectgen.core.buildtools.maven.MavenBuildCreator)" class="member-name-link">Maven</a><wbr>(<a href="MavenBuildCreator.html" title="class in io.micronaut.projectgen.core.buildtools.maven">MavenBuildCreator</a>&nbsp;mavenBuildCreator)</code></div>
 <div class="col-last even-row-color">&nbsp;</div>
 </div>
 </section>
@@ -160,7 +156,8 @@ implements <a href="../../feature/BuildFeature.html" title="interface in io.micr
  or added explicitly by another feature through <a href="../../feature/FeatureContext.html#addFeature(io.micronaut.projectgen.core.feature.Feature)"><code>FeatureContext.addFeature(Feature)</code></a>.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected <a href="MavenBuild.html" title="class in io.micronaut.projectgen.core.buildtools.maven">MavenBuild</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#createBuild(io.micronaut.projectgen.core.generator.GeneratorContext)" class="member-name-link">createBuild</a><wbr>(<a href="../../generator/GeneratorContext.html" title="class in io.micronaut.projectgen.core.generator">GeneratorContext</a>&nbsp;generatorContext)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#createBuild(io.micronaut.projectgen.core.generator.ModuleContext,io.micronaut.projectgen.core.options.Options)" class="member-name-link">createBuild</a><wbr>(<a href="../../generator/ModuleContext.html" title="class in io.micronaut.projectgen.core.generator">ModuleContext</a>&nbsp;moduleContext,
+ <a href="../../options/Options.html" title="interface in io.micronaut.projectgen.core.options">Options</a>&nbsp;options)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#generatePom(io.micronaut.projectgen.core.generator.GeneratorContext)" class="member-name-link">generatePom</a><wbr>(<a href="../../generator/GeneratorContext.html" title="class in io.micronaut.projectgen.core.generator">GeneratorContext</a>&nbsp;generatorContext)</code></div>
@@ -170,12 +167,23 @@ implements <a href="../../feature/BuildFeature.html" title="interface in io.micr
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">The name of the feature.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getThirdPartyDocumentation(io.micronaut.projectgen.core.generator.GeneratorContext)" class="member-name-link">getThirdPartyDocumentation</a><wbr>(<a href="../../generator/GeneratorContext.html" title="class in io.micronaut.projectgen.core.generator">GeneratorContext</a>&nbsp;generatorContext)</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getOrder()" class="member-name-link">getOrder</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">The order of a feature controls the order in which it applies.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getThirdPartyDocumentation(io.micronaut.projectgen.core.generator.GeneratorContext)" class="member-name-link">getThirdPartyDocumentation</a><wbr>(<a href="../../generator/GeneratorContext.html" title="class in io.micronaut.projectgen.core.generator">GeneratorContext</a>&nbsp;generatorContext)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isMaven()" class="member-name-link">isMaven</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isMaven()" class="member-name-link">isMaven</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#shouldApply(io.micronaut.projectgen.core.options.Options,java.util.Set)" class="member-name-link">shouldApply</a><wbr>(<a href="../../options/Options.html" title="interface in io.micronaut.projectgen.core.options">Options</a>&nbsp;options,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="../../feature/Feature.html" title="interface in io.micronaut.projectgen.core.feature">Feature</a>&gt;&nbsp;selectedFeatures)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Determines if the feature should be applied to the project.</div>
+</div>
 </div>
 </div>
 </div>
@@ -184,7 +192,7 @@ implements <a href="../../feature/BuildFeature.html" title="interface in io.micr
 <code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#clone()" title="class or interface in java.lang" class="external-link">clone</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object)" title="class or interface in java.lang" class="external-link">equals</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#finalize()" title="class or interface in java.lang" class="external-link">finalize</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#getClass()" title="class or interface in java.lang" class="external-link">getClass</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#hashCode()" title="class or interface in java.lang" class="external-link">hashCode</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#notify()" title="class or interface in java.lang" class="external-link">notify</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#notifyAll()" title="class or interface in java.lang" class="external-link">notifyAll</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#toString()" title="class or interface in java.lang" class="external-link">toString</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait()" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait(long)" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait(long,int)" title="class or interface in java.lang" class="external-link">wait</a></code></div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-io.micronaut.projectgen.core.feature.BuildFeature">Methods inherited from interface&nbsp;io.micronaut.projectgen.core.feature.<a href="../../feature/BuildFeature.html" title="interface in io.micronaut.projectgen.core.feature">BuildFeature</a></h3>
-<code><a href="../../feature/BuildFeature.html#getOrder()">getOrder</a>, <a href="../../feature/BuildFeature.html#isGradle()">isGradle</a>, <a href="../../feature/BuildFeature.html#isVisible()">isVisible</a></code></div>
+<code><a href="../../feature/BuildFeature.html#isGradle()">isGradle</a>, <a href="../../feature/BuildFeature.html#isVisible()">isVisible</a></code></div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-io.micronaut.core.naming.Described">Methods inherited from interface&nbsp;io.micronaut.core.naming.Described</h3>
 <code>getDescription</code></div>
@@ -259,15 +267,9 @@ implements <a href="../../feature/BuildFeature.html" title="interface in io.micr
 </section>
 </li>
 <li>
-<section class="detail" id="dependencyResolver">
-<h3>dependencyResolver</h3>
-<div class="member-signature"><span class="modifiers">protected final</span>&nbsp;<span class="return-type"><a href="MavenBuildCreator.html" title="class in io.micronaut.projectgen.core.buildtools.maven">MavenBuildCreator</a></span>&nbsp;<span class="element-name">dependencyResolver</span></div>
-</section>
-</li>
-<li>
-<section class="detail" id="repositoryResolver">
-<h3>repositoryResolver</h3>
-<div class="member-signature"><span class="modifiers">protected final</span>&nbsp;<span class="return-type"><a href="../RepositoryResolver.html" title="interface in io.micronaut.projectgen.core.buildtools">RepositoryResolver</a></span>&nbsp;<span class="element-name">repositoryResolver</span></div>
+<section class="detail" id="mavenBuildCreator">
+<h3>mavenBuildCreator</h3>
+<div class="member-signature"><span class="modifiers">protected final</span>&nbsp;<span class="return-type"><a href="MavenBuildCreator.html" title="class in io.micronaut.projectgen.core.buildtools.maven">MavenBuildCreator</a></span>&nbsp;<span class="element-name">mavenBuildCreator</span></div>
 </section>
 </li>
 </ul>
@@ -279,10 +281,9 @@ implements <a href="../../feature/BuildFeature.html" title="interface in io.micr
 <h2>Constructor Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="&lt;init&gt;(io.micronaut.projectgen.core.buildtools.maven.MavenBuildCreator,io.micronaut.projectgen.core.buildtools.RepositoryResolver)">
+<section class="detail" id="&lt;init&gt;(io.micronaut.projectgen.core.buildtools.maven.MavenBuildCreator)">
 <h3>Maven</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Maven</span><wbr><span class="parameters">(<a href="MavenBuildCreator.html" title="class in io.micronaut.projectgen.core.buildtools.maven">MavenBuildCreator</a>&nbsp;dependencyResolver,
- <a href="../RepositoryResolver.html" title="interface in io.micronaut.projectgen.core.buildtools">RepositoryResolver</a>&nbsp;repositoryResolver)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Maven</span><wbr><span class="parameters">(<a href="MavenBuildCreator.html" title="class in io.micronaut.projectgen.core.buildtools.maven">MavenBuildCreator</a>&nbsp;mavenBuildCreator)</span></div>
 </section>
 </li>
 </ul>
@@ -293,6 +294,27 @@ implements <a href="../../feature/BuildFeature.html" title="interface in io.micr
 <section class="method-details" id="method-detail">
 <h2>Method Details</h2>
 <ul class="member-list">
+<li>
+<section class="detail" id="getOrder()">
+<h3>getOrder</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getOrder</span>()</div>
+<div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="../../feature/Feature.html#getOrder()">Feature</a></code></span></div>
+<div class="block">The order of a feature controls the order in which it applies. The
+ order of a feature is important to ensure that any previous work done
+ by other features that may be required is done. See <a href="../../feature/FeaturePhase.html" title="enum class in io.micronaut.projectgen.core.feature"><code>FeaturePhase</code></a>
+ for a list of phases to choose from.</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="../../feature/BuildFeature.html#getOrder()">getOrder</a></code>&nbsp;in interface&nbsp;<code><a href="../../feature/BuildFeature.html" title="interface in io.micronaut.projectgen.core.feature">BuildFeature</a></code></dd>
+<dt>Specified by:</dt>
+<dd><code><a href="../../feature/Feature.html#getOrder()">getOrder</a></code>&nbsp;in interface&nbsp;<code><a href="../../feature/Feature.html" title="interface in io.micronaut.projectgen.core.feature">Feature</a></code></dd>
+<dt>Specified by:</dt>
+<dd><code>getOrder</code>&nbsp;in interface&nbsp;<code>io.micronaut.core.order.Ordered</code></dd>
+<dt>Returns:</dt>
+<dd>The order of the feature</dd>
+</dl>
+</section>
+</li>
 <li>
 <section class="detail" id="getName()">
 <h3>getName</h3>
@@ -319,11 +341,7 @@ implements <a href="../../feature/BuildFeature.html" title="interface in io.micr
  included by default as a result of <a href="../../feature/DefaultFeature.html#shouldApply(io.micronaut.projectgen.core.options.Options,java.util.Set)"><code>DefaultFeature.shouldApply(io.micronaut.starter.options.Options, java.util.Set)</code></a>,
  or added explicitly by another feature through <a href="../../feature/FeatureContext.html#addFeature(io.micronaut.projectgen.core.feature.Feature)"><code>FeatureContext.addFeature(Feature)</code></a>.
 
- At this point the feature list is set and cannot change.
-
- This method can be implemented to modify the generated project. The feature can add templates
- by executing <a href="../../generator/GeneratorContext.html#addTemplate(java.lang.String,io.micronaut.projectgen.core.template.Template)"><code>GeneratorContext.addTemplate(String, io.micronaut.starter.template.Template)</code></a>, modify configuration
- by modifying <a href="../../generator/GeneratorContext.html#getConfiguration()"><code>GeneratorContext.getConfiguration()</code></a> or <a href="../../generator/GeneratorContext.html#getBootstrapConfiguration()"><code>GeneratorContext.getBootstrapConfiguration()</code></a>, or modify build properties through <a href="../../generator/GeneratorContext.html#getBuildProperties()"><code>GeneratorContext.getBuildProperties()</code></a>.</div>
+ At this point the feature list is set and cannot change.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="../../feature/Feature.html#apply(io.micronaut.projectgen.core.generator.GeneratorContext)">apply</a></code>&nbsp;in interface&nbsp;<code><a href="../../feature/Feature.html" title="interface in io.micronaut.projectgen.core.feature">Feature</a></code></dd>
@@ -377,14 +395,39 @@ implements <a href="../../feature/BuildFeature.html" title="interface in io.micr
 </section>
 </li>
 <li>
-<section class="detail" id="createBuild(io.micronaut.projectgen.core.generator.GeneratorContext)">
+<section class="detail" id="createBuild(io.micronaut.projectgen.core.generator.ModuleContext,io.micronaut.projectgen.core.options.Options)">
 <h3>createBuild</h3>
-<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type"><a href="MavenBuild.html" title="class in io.micronaut.projectgen.core.buildtools.maven">MavenBuild</a></span>&nbsp;<span class="element-name">createBuild</span><wbr><span class="parameters">(<a href="../../generator/GeneratorContext.html" title="class in io.micronaut.projectgen.core.generator">GeneratorContext</a>&nbsp;generatorContext)</span></div>
+<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type"><a href="MavenBuild.html" title="class in io.micronaut.projectgen.core.buildtools.maven">MavenBuild</a></span>&nbsp;<span class="element-name">createBuild</span><wbr><span class="parameters">(<a href="../../generator/ModuleContext.html" title="class in io.micronaut.projectgen.core.generator">ModuleContext</a>&nbsp;moduleContext,
+ <a href="../../options/Options.html" title="interface in io.micronaut.projectgen.core.options">Options</a>&nbsp;options)</span></div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>generatorContext</code> - Generator Context</dd>
+<dd><code>moduleContext</code> - Generator Context</dd>
+<dd><code>options</code> - Options</dd>
 <dt>Returns:</dt>
 <dd>Maven Build</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="shouldApply(io.micronaut.projectgen.core.options.Options,java.util.Set)">
+<h3>shouldApply</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">shouldApply</span><wbr><span class="parameters">(<a href="../../options/Options.html" title="interface in io.micronaut.projectgen.core.options">Options</a>&nbsp;options,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="../../feature/Feature.html" title="interface in io.micronaut.projectgen.core.feature">Feature</a>&gt;&nbsp;selectedFeatures)</span></div>
+<div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="../../feature/DefaultFeature.html#shouldApply(io.micronaut.projectgen.core.options.Options,java.util.Set)">DefaultFeature</a></code></span></div>
+<div class="block">Determines if the feature should be applied to the project.
+
+ Default features do not need to be concerned if the feature was already
+ selected and therefore is already in the list of selected features. The
+ addition to the set is based on the identity of the feature instance and
+ all features are singletons.</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="../../feature/DefaultFeature.html#shouldApply(io.micronaut.projectgen.core.options.Options,java.util.Set)">shouldApply</a></code>&nbsp;in interface&nbsp;<code><a href="../../feature/DefaultFeature.html" title="interface in io.micronaut.projectgen.core.feature">DefaultFeature</a></code></dd>
+<dt>Parameters:</dt>
+<dd><code>options</code> - The options</dd>
+<dd><code>selectedFeatures</code> - The features manually selected by the user</dd>
+<dt>Returns:</dt>
+<dd>True if the feature should apply</dd>
 </dl>
 </section>
 </li>

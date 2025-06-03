@@ -287,11 +287,7 @@ implements <a href="../../../projectgen/core/feature/TestFeature.html" title="in
  included by default as a result of <a href="../../../projectgen/core/feature/DefaultFeature.html#shouldApply(io.micronaut.projectgen.core.options.Options,java.util.Set)"><code>DefaultFeature.shouldApply(io.micronaut.starter.options.Options, java.util.Set)</code></a>,
  or added explicitly by another feature through <a href="../../../projectgen/core/feature/FeatureContext.html#addFeature(io.micronaut.projectgen.core.feature.Feature)"><code>FeatureContext.addFeature(Feature)</code></a>.
 
- At this point the feature list is set and cannot change.
-
- This method can be implemented to modify the generated project. The feature can add templates
- by executing <a href="../../../projectgen/core/generator/GeneratorContext.html#addTemplate(java.lang.String,io.micronaut.projectgen.core.template.Template)"><code>GeneratorContext.addTemplate(String, io.micronaut.starter.template.Template)</code></a>, modify configuration
- by modifying <a href="../../../projectgen/core/generator/GeneratorContext.html#getConfiguration()"><code>GeneratorContext.getConfiguration()</code></a> or <a href="../../../projectgen/core/generator/GeneratorContext.html#getBootstrapConfiguration()"><code>GeneratorContext.getBootstrapConfiguration()</code></a>, or modify build properties through <a href="../../../projectgen/core/generator/GeneratorContext.html#getBuildProperties()"><code>GeneratorContext.getBuildProperties()</code></a>.</div>
+ At this point the feature list is set and cannot change.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="../../../projectgen/core/feature/Feature.html#apply(io.micronaut.projectgen.core.generator.GeneratorContext)">apply</a></code>&nbsp;in interface&nbsp;<code><a href="../../../projectgen/core/feature/Feature.html" title="interface in io.micronaut.projectgen.core.feature">Feature</a></code></dd>

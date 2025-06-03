@@ -15,7 +15,11 @@
 <script type="text/javascript" src="../../../../../../script-dir/jquery-ui.min.js"></script>
 </head>
 <body class="package-declaration-page">
-<script type="text/javascript">var pathtoroot = "../../../../../../";
+<script type="text/javascript">var evenRowColor = "even-row-color";
+var oddRowColor = "odd-row-color";
+var tableTab = "table-tab";
+var activeTableTab = "active-table-tab";
+var pathtoroot = "../../../../../../";
 loadScripts(document, 'script');</script>
 <noscript>
 <div>JavaScript is disabled on your browser.</div>
@@ -79,8 +83,9 @@ loadScripts(document, 'script');</script>
 </li>
 <li>
 <div id="class-summary">
-<div class="caption"><span>Classes</span></div>
-<div class="summary-table two-column-summary">
+<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="class-summary-tab0" role="tab" aria-selected="true" aria-controls="class-summary.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('class-summary', 'class-summary', 2)" class="active-table-tab">All Classes and Interfaces</button><button id="class-summary-tab2" role="tab" aria-selected="false" aria-controls="class-summary.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('class-summary', 'class-summary-tab2', 2)" class="table-tab">Classes</button><button id="class-summary-tab3" role="tab" aria-selected="false" aria-controls="class-summary.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('class-summary', 'class-summary-tab3', 2)" class="table-tab">Enum Classes</button></div>
+<div id="class-summary.tabpanel" role="tabpanel">
+<div class="summary-table two-column-summary" aria-labelledby="class-summary-tab0">
 <div class="table-header col-first">Class</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color class-summary class-summary-tab2"><a href="ApplicationConfiguration.html" title="class in io.micronaut.projectgen.core.feature.config">ApplicationConfiguration</a></div>
@@ -97,18 +102,21 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color class-summary class-summary-tab2">
 <div class="block">Models application environment configuration to specify where the configuration is rooted for the given configuration values (key/value pairs).</div>
 </div>
-<div class="col-first even-row-color class-summary class-summary-tab2"><a href="NestedConfiguration.html" title="class in io.micronaut.projectgen.core.feature.config">NestedConfiguration</a></div>
-<div class="col-last even-row-color class-summary class-summary-tab2">
+<div class="col-first even-row-color class-summary class-summary-tab3"><a href="ConfigurationPhase.html" title="enum class in io.micronaut.projectgen.core.feature.config">ConfigurationPhase</a></div>
+<div class="col-last even-row-color class-summary class-summary-tab3">&nbsp;</div>
+<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="NestedConfiguration.html" title="class in io.micronaut.projectgen.core.feature.config">NestedConfiguration</a></div>
+<div class="col-last odd-row-color class-summary class-summary-tab2">
 <div class="block">A utility class to supply nested configuration via <a href="Configuration.html#addNested(io.micronaut.projectgen.core.feature.config.NestedConfiguration)"><code>Configuration.addNested(NestedConfiguration)</code></a>.</div>
 </div>
-<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="Properties.html" title="class in io.micronaut.projectgen.core.feature.config">Properties</a></div>
-<div class="col-last odd-row-color class-summary class-summary-tab2">
+<div class="col-first even-row-color class-summary class-summary-tab2"><a href="Properties.html" title="class in io.micronaut.projectgen.core.feature.config">Properties</a></div>
+<div class="col-last even-row-color class-summary class-summary-tab2">
 <div class="block"><a href="../ConfigurationFeature.html" title="interface in io.micronaut.projectgen.core.feature"><code>ConfigurationFeature</code></a> for Properties.</div>
 </div>
-<div class="col-first even-row-color class-summary class-summary-tab2"><a href="Toml.html" title="class in io.micronaut.projectgen.core.feature.config">Toml</a></div>
-<div class="col-last even-row-color class-summary class-summary-tab2">&nbsp;</div>
-<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="Yaml.html" title="class in io.micronaut.projectgen.core.feature.config">Yaml</a></div>
+<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="Toml.html" title="class in io.micronaut.projectgen.core.feature.config">Toml</a></div>
 <div class="col-last odd-row-color class-summary class-summary-tab2">&nbsp;</div>
+<div class="col-first even-row-color class-summary class-summary-tab2"><a href="Yaml.html" title="class in io.micronaut.projectgen.core.feature.config">Yaml</a></div>
+<div class="col-last even-row-color class-summary class-summary-tab2">&nbsp;</div>
+</div>
 </div>
 </div>
 </li>

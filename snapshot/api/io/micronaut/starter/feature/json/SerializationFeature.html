@@ -76,10 +76,6 @@ loadScripts(document, 'script');</script>
 <dt>All Superinterfaces:</dt>
 <dd><code>io.micronaut.core.naming.Described</code>, <code><a href="../../../projectgen/core/feature/Feature.html" title="interface in io.micronaut.projectgen.core.feature">Feature</a></code>, <code><a href="JsonFeature.html" title="interface in io.micronaut.starter.feature.json">JsonFeature</a></code>, <code>io.micronaut.core.naming.Named</code>, <code>io.micronaut.core.order.Ordered</code></dd>
 </dl>
-<dl class="notes">
-<dt>All Known Implementing Classes:</dt>
-<dd><code><a href="SerializationBsonFeature.html" title="class in io.micronaut.starter.feature.json">SerializationBsonFeature</a></code>, <code><a href="SerializationJsonpFeature.html" title="class in io.micronaut.starter.feature.json">SerializationJsonpFeature</a></code></dd>
-</dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public interface </span><span class="element-name type-name-label">SerializationFeature</span><span class="extends-implements">
 extends <a href="JsonFeature.html" title="interface in io.micronaut.starter.feature.json">JsonFeature</a></span></div>
@@ -105,9 +101,6 @@ extends <a href="JsonFeature.html" title="interface in io.micronaut.starter.feat
 <div class="col-second even-row-color"><code><a href="#MICRONAUT_SERIALIZATION" class="member-name-link">MICRONAUT_SERIALIZATION</a></code></div>
 <div class="col-last even-row-color">&nbsp;</div>
 </div>
-<div class="inherited-list">
-<h3 id="fields-inherited-from-class-io.micronaut.starter.feature.json.JsonFeature">Fields inherited from interface&nbsp;io.micronaut.starter.feature.json.<a href="JsonFeature.html" title="interface in io.micronaut.starter.feature.json">JsonFeature</a></h3>
-<code><a href="JsonFeature.html#ARTIFACT_ID_MICRONAUT_JACKSON_DATABIND">ARTIFACT_ID_MICRONAUT_JACKSON_DATABIND</a>, <a href="JsonFeature.html#DEPENDENCY_MICRONAUT_JACKSON_DATABIND">DEPENDENCY_MICRONAUT_JACKSON_DATABIND</a></code></div>
 <div class="inherited-list">
 <h3 id="fields-inherited-from-class-io.micronaut.core.order.Ordered">Fields inherited from interface&nbsp;io.micronaut.core.order.Ordered</h3>
 <code>HIGHEST_PRECEDENCE, LOWEST_PRECEDENCE</code></div>
@@ -254,11 +247,7 @@ extends <a href="JsonFeature.html" title="interface in io.micronaut.starter.feat
  included by default as a result of <a href="../../../projectgen/core/feature/DefaultFeature.html#shouldApply(io.micronaut.projectgen.core.options.Options,java.util.Set)"><code>DefaultFeature.shouldApply(io.micronaut.starter.options.Options, java.util.Set)</code></a>,
  or added explicitly by another feature through <a href="../../../projectgen/core/feature/FeatureContext.html#addFeature(io.micronaut.projectgen.core.feature.Feature)"><code>FeatureContext.addFeature(Feature)</code></a>.
 
- At this point the feature list is set and cannot change.
-
- This method can be implemented to modify the generated project. The feature can add templates
- by executing <a href="../../../projectgen/core/generator/GeneratorContext.html#addTemplate(java.lang.String,io.micronaut.projectgen.core.template.Template)"><code>GeneratorContext.addTemplate(String, io.micronaut.starter.template.Template)</code></a>, modify configuration
- by modifying <a href="../../../projectgen/core/generator/GeneratorContext.html#getConfiguration()"><code>GeneratorContext.getConfiguration()</code></a> or <a href="../../../projectgen/core/generator/GeneratorContext.html#getBootstrapConfiguration()"><code>GeneratorContext.getBootstrapConfiguration()</code></a>, or modify build properties through <a href="../../../projectgen/core/generator/GeneratorContext.html#getBuildProperties()"><code>GeneratorContext.getBuildProperties()</code></a>.</div>
+ At this point the feature list is set and cannot change.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="../../../projectgen/core/feature/Feature.html#apply(io.micronaut.projectgen.core.generator.GeneratorContext)">apply</a></code>&nbsp;in interface&nbsp;<code><a href="../../../projectgen/core/feature/Feature.html" title="interface in io.micronaut.projectgen.core.feature">Feature</a></code></dd>

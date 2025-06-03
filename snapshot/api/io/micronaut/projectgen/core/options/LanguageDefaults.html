@@ -97,8 +97,9 @@ implements <a href="HasDefaultTest.html" title="interface in io.micronaut.projec
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(io.micronaut.projectgen.core.options.TestFramework,io.micronaut.projectgen.core.buildtools.BuildTool)" class="member-name-link">LanguageDefaults</a><wbr>(<a href="TestFramework.html" title="enum class in io.micronaut.projectgen.core.options">TestFramework</a>&nbsp;test,
- <a href="../buildtools/BuildTool.html" title="enum class in io.micronaut.projectgen.core.buildtools">BuildTool</a>&nbsp;build)</code></div>
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(io.micronaut.projectgen.core.options.TestFramework,io.micronaut.projectgen.core.buildtools.BuildTool,io.micronaut.projectgen.core.buildtools.gradle.GradleDsl)" class="member-name-link">LanguageDefaults</a><wbr>(<a href="TestFramework.html" title="enum class in io.micronaut.projectgen.core.options">TestFramework</a>&nbsp;test,
+ <a href="../buildtools/BuildTool.html" title="enum class in io.micronaut.projectgen.core.buildtools">BuildTool</a>&nbsp;build,
+ @Nullable <a href="../buildtools/gradle/GradleDsl.html" title="enum class in io.micronaut.projectgen.core.buildtools.gradle">GradleDsl</a>&nbsp;gradleDsl)</code></div>
 <div class="col-last even-row-color">&nbsp;</div>
 </div>
 </section>
@@ -117,9 +118,12 @@ implements <a href="HasDefaultTest.html" title="interface in io.micronaut.projec
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../buildtools/BuildTool.html" title="enum class in io.micronaut.projectgen.core.buildtools">BuildTool</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getBuild()" class="member-name-link">getBuild</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="TestFramework.html" title="enum class in io.micronaut.projectgen.core.options">TestFramework</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getTest()" class="member-name-link">getTest</a>()</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="../buildtools/gradle/GradleDsl.html" title="enum class in io.micronaut.projectgen.core.buildtools.gradle">GradleDsl</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getGradleDsl()" class="member-name-link">getGradleDsl</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="TestFramework.html" title="enum class in io.micronaut.projectgen.core.options">TestFramework</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getTest()" class="member-name-link">getTest</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 </div>
 </div>
 </div>
@@ -138,11 +142,13 @@ implements <a href="HasDefaultTest.html" title="interface in io.micronaut.projec
 <h2>Constructor Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="&lt;init&gt;(io.micronaut.projectgen.core.options.TestFramework,io.micronaut.projectgen.core.buildtools.BuildTool)">
+<section class="detail" id="&lt;init&gt;(io.micronaut.projectgen.core.options.TestFramework,io.micronaut.projectgen.core.buildtools.BuildTool,io.micronaut.projectgen.core.buildtools.gradle.GradleDsl)">
 <h3>LanguageDefaults</h3>
 <div class="member-signature"><span class="annotations">@Creator
 </span><span class="modifiers">public</span>&nbsp;<span class="element-name">LanguageDefaults</span><wbr><span class="parameters">(<a href="TestFramework.html" title="enum class in io.micronaut.projectgen.core.options">TestFramework</a>&nbsp;test,
- <a href="../buildtools/BuildTool.html" title="enum class in io.micronaut.projectgen.core.buildtools">BuildTool</a>&nbsp;build)</span></div>
+ <a href="../buildtools/BuildTool.html" title="enum class in io.micronaut.projectgen.core.buildtools">BuildTool</a>&nbsp;build,
+ @Nullable
+ @Nullable <a href="../buildtools/gradle/GradleDsl.html" title="enum class in io.micronaut.projectgen.core.buildtools.gradle">GradleDsl</a>&nbsp;gradleDsl)</span></div>
 </section>
 </li>
 </ul>
@@ -171,6 +177,13 @@ implements <a href="HasDefaultTest.html" title="interface in io.micronaut.projec
 <dt>Specified by:</dt>
 <dd><code><a href="HasDefaultBuild.html#getBuild()">getBuild</a></code>&nbsp;in interface&nbsp;<code><a href="HasDefaultBuild.html" title="interface in io.micronaut.projectgen.core.options">HasDefaultBuild</a></code></dd>
 </dl>
+</section>
+</li>
+<li>
+<section class="detail" id="getGradleDsl()">
+<h3>getGradleDsl</h3>
+<div class="member-signature"><span class="annotations">@Nullable
+</span><span class="modifiers">public</span>&nbsp;<span class="return-type">@Nullable <a href="../buildtools/gradle/GradleDsl.html" title="enum class in io.micronaut.projectgen.core.buildtools.gradle">GradleDsl</a></span>&nbsp;<span class="element-name">getGradleDsl</span>()</div>
 </section>
 </li>
 </ul>

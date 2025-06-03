@@ -81,7 +81,7 @@ loadScripts(document, 'script');</script>
 <section class="class-description" id="class-description">
 <dl class="notes">
 <dt>All Implemented Interfaces:</dt>
-<dd><code>io.micronaut.core.naming.Described</code>, <code>io.micronaut.core.naming.Named</code>, <code>io.micronaut.core.order.Ordered</code>, <code><a href="../../../projectgen/core/feature/Feature.html" title="interface in io.micronaut.projectgen.core.feature">Feature</a></code>, <code><a href="OpenSearchContributingTestContainerDependency.html" title="interface in io.micronaut.starter.feature.opensearch">OpenSearchContributingTestContainerDependency</a></code>, <code><a href="../testcontainers/ContributingTestContainerDependency.html" title="interface in io.micronaut.starter.feature.testcontainers">ContributingTestContainerDependency</a></code>, <code><a href="../testresources/TestResourcesAdditionalModulesProvider.html" title="interface in io.micronaut.starter.feature.testresources">TestResourcesAdditionalModulesProvider</a></code></dd>
+<dd><code>io.micronaut.core.naming.Described</code>, <code>io.micronaut.core.naming.Named</code>, <code>io.micronaut.core.order.Ordered</code>, <code><a href="../../../projectgen/core/feature/Feature.html" title="interface in io.micronaut.projectgen.core.feature">Feature</a></code>, <code><a href="../../../projectgen/core/openrewrite/OpenRewriteFeature.html" title="interface in io.micronaut.projectgen.core.openrewrite">OpenRewriteFeature</a></code>, <code><a href="OpenSearchContributingTestContainerDependency.html" title="interface in io.micronaut.starter.feature.opensearch">OpenSearchContributingTestContainerDependency</a></code>, <code><a href="../testcontainers/ContributingTestContainerDependency.html" title="interface in io.micronaut.starter.feature.testcontainers">ContributingTestContainerDependency</a></code>, <code><a href="../testresources/TestResourcesAdditionalModulesProvider.html" title="interface in io.micronaut.starter.feature.testresources">TestResourcesAdditionalModulesProvider</a></code></dd>
 </dl>
 <hr>
 <div class="type-signature"><span class="annotations">@Requires(property="micronaut.starter.feature.opensearch.httpclient5.enabled",
@@ -89,7 +89,8 @@ loadScripts(document, 'script');</script>
           defaultValue="true")
 @Singleton
 </span><span class="modifiers">public class </span><span class="element-name type-name-label">OpenSearchHttpClient5</span>
-<span class="extends-implements">extends <a href="OpenSearchFeature.html" title="class in io.micronaut.starter.feature.opensearch">OpenSearchFeature</a></span></div>
+<span class="extends-implements">extends <a href="OpenSearchFeature.html" title="class in io.micronaut.starter.feature.opensearch">OpenSearchFeature</a>
+implements <a href="../../../projectgen/core/openrewrite/OpenRewriteFeature.html" title="interface in io.micronaut.projectgen.core.openrewrite">OpenRewriteFeature</a></span></div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -147,15 +148,18 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">The name of the feature.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getTitle()" class="member-name-link">getTitle</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getRecipes(io.micronaut.projectgen.core.generator.GeneratorContext)" class="member-name-link">getRecipes</a><wbr>(<a href="../../../projectgen/core/generator/GeneratorContext.html" title="class in io.micronaut.projectgen.core.generator">GeneratorContext</a>&nbsp;generatorContext)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getTitle()" class="member-name-link">getTitle</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 </div>
 </div>
 </div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-io.micronaut.starter.feature.opensearch.OpenSearchFeature">Methods inherited from class&nbsp;io.micronaut.starter.feature.opensearch.<a href="OpenSearchFeature.html" title="class in io.micronaut.starter.feature.opensearch">OpenSearchFeature</a></h3>
-<code><a href="OpenSearchFeature.html#apply(io.micronaut.projectgen.core.generator.GeneratorContext)">apply</a>, <a href="OpenSearchFeature.html#getCategory()">getCategory</a>, <a href="OpenSearchFeature.html#getFrameworkDocumentation(io.micronaut.projectgen.core.generator.GeneratorContext)">getFrameworkDocumentation</a>, <a href="OpenSearchFeature.html#getTestResourcesAdditionalModules(io.micronaut.projectgen.core.generator.GeneratorContext)">getTestResourcesAdditionalModules</a>, <a href="OpenSearchFeature.html#getTestResourcesDependencies(io.micronaut.projectgen.core.generator.GeneratorContext)">getTestResourcesDependencies</a>, <a href="OpenSearchFeature.html#getThirdPartyDocumentation(io.micronaut.projectgen.core.generator.GeneratorContext)">getThirdPartyDocumentation</a></code></div>
+<code><a href="OpenSearchFeature.html#getCategory()">getCategory</a>, <a href="OpenSearchFeature.html#getTestResourcesAdditionalModules(io.micronaut.projectgen.core.generator.GeneratorContext)">getTestResourcesAdditionalModules</a>, <a href="OpenSearchFeature.html#getTestResourcesDependencies(io.micronaut.projectgen.core.generator.GeneratorContext)">getTestResourcesDependencies</a></code></div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-io.micronaut.starter.feature.testresources.EaseTestingFeature">Methods inherited from class&nbsp;io.micronaut.starter.feature.testresources.<a href="../testresources/EaseTestingFeature.html" title="class in io.micronaut.starter.feature.testresources">EaseTestingFeature</a></h3>
 <code><a href="../testresources/EaseTestingFeature.html#processSelectedFeatures(io.micronaut.projectgen.core.feature.FeatureContext)">processSelectedFeatures</a></code></div>
@@ -167,7 +171,10 @@ loadScripts(document, 'script');</script>
 <code>getDescription</code></div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-io.micronaut.projectgen.core.feature.Feature">Methods inherited from interface&nbsp;io.micronaut.projectgen.core.feature.<a href="../../../projectgen/core/feature/Feature.html" title="interface in io.micronaut.projectgen.core.feature">Feature</a></h3>
-<code><a href="../../../projectgen/core/feature/Feature.html#getOrder()">getOrder</a>, <a href="../../../projectgen/core/feature/Feature.html#isCommunity()">isCommunity</a>, <a href="../../../projectgen/core/feature/Feature.html#isPreview()">isPreview</a>, <a href="../../../projectgen/core/feature/Feature.html#isVisible()">isVisible</a>, <a href="../../../projectgen/core/feature/Feature.html#supports(io.micronaut.projectgen.core.options.Options)">supports</a></code></div>
+<code><a href="../../../projectgen/core/feature/Feature.html#getCategory()">getCategory</a>, <a href="../../../projectgen/core/feature/Feature.html#getOrder()">getOrder</a>, <a href="../../../projectgen/core/feature/Feature.html#isCommunity()">isCommunity</a>, <a href="../../../projectgen/core/feature/Feature.html#isPreview()">isPreview</a>, <a href="../../../projectgen/core/feature/Feature.html#isVisible()">isVisible</a>, <a href="../../../projectgen/core/feature/Feature.html#processSelectedFeatures(io.micronaut.projectgen.core.feature.FeatureContext)">processSelectedFeatures</a>, <a href="../../../projectgen/core/feature/Feature.html#supports(io.micronaut.projectgen.core.options.Options)">supports</a></code></div>
+<div class="inherited-list">
+<h3 id="methods-inherited-from-class-io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature">Methods inherited from interface&nbsp;io.micronaut.projectgen.core.openrewrite.<a href="../../../projectgen/core/openrewrite/OpenRewriteFeature.html" title="interface in io.micronaut.projectgen.core.openrewrite">OpenRewriteFeature</a></h3>
+<code><a href="../../../projectgen/core/openrewrite/OpenRewriteFeature.html#apply(io.micronaut.projectgen.core.generator.GeneratorContext)">apply</a>, <a href="../../../projectgen/core/openrewrite/OpenRewriteFeature.html#getFrameworkDocumentation(io.micronaut.projectgen.core.generator.GeneratorContext)">getFrameworkDocumentation</a>, <a href="../../../projectgen/core/openrewrite/OpenRewriteFeature.html#getThirdPartyDocumentation(io.micronaut.projectgen.core.generator.GeneratorContext)">getThirdPartyDocumentation</a>, <a href="../../../projectgen/core/openrewrite/OpenRewriteFeature.html#processRecipes(io.micronaut.projectgen.core.generator.GeneratorContext)">processRecipes</a></code></div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-io.micronaut.starter.feature.opensearch.OpenSearchContributingTestContainerDependency">Methods inherited from interface&nbsp;io.micronaut.starter.feature.opensearch.<a href="OpenSearchContributingTestContainerDependency.html" title="interface in io.micronaut.starter.feature.opensearch">OpenSearchContributingTestContainerDependency</a></h3>
 <code><a href="OpenSearchContributingTestContainerDependency.html#testContainersDependencies()">testContainersDependencies</a></code></div>
@@ -226,6 +233,10 @@ loadScripts(document, 'script');</script>
 <div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="../../../projectgen/core/feature/Feature.html#getName()">Feature</a></code></span></div>
 <div class="block">The name of the feature. It must be unique.</div>
 <dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="../../../projectgen/core/feature/Feature.html#getName()">getName</a></code>&nbsp;in interface&nbsp;<code><a href="../../../projectgen/core/feature/Feature.html" title="interface in io.micronaut.projectgen.core.feature">Feature</a></code></dd>
+<dt>Specified by:</dt>
+<dd><code>getName</code>&nbsp;in interface&nbsp;<code>io.micronaut.core.naming.Named</code></dd>
 <dt>Returns:</dt>
 <dd>the name of the feature</dd>
 </dl>
@@ -236,6 +247,8 @@ loadScripts(document, 'script');</script>
 <h3>getTitle</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getTitle</span>()</div>
 <dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="../../../projectgen/core/feature/Feature.html#getTitle()">getTitle</a></code>&nbsp;in interface&nbsp;<code><a href="../../../projectgen/core/feature/Feature.html" title="interface in io.micronaut.projectgen.core.feature">Feature</a></code></dd>
 <dt>Returns:</dt>
 <dd>The title of the feature</dd>
 </dl>
@@ -245,6 +258,22 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="getDescription()">
 <h3>getDescription</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getDescription</span>()</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code>getDescription</code>&nbsp;in interface&nbsp;<code>io.micronaut.core.naming.Described</code></dd>
+<dt>Specified by:</dt>
+<dd><code><a href="../../../projectgen/core/feature/Feature.html#getDescription()">getDescription</a></code>&nbsp;in interface&nbsp;<code><a href="../../../projectgen/core/feature/Feature.html" title="interface in io.micronaut.projectgen.core.feature">Feature</a></code></dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="getRecipes(io.micronaut.projectgen.core.generator.GeneratorContext)">
+<h3>getRecipes</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</span>&nbsp;<span class="element-name">getRecipes</span><wbr><span class="parameters">(<a href="../../../projectgen/core/generator/GeneratorContext.html" title="class in io.micronaut.projectgen.core.generator">GeneratorContext</a>&nbsp;generatorContext)</span></div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="../../../projectgen/core/openrewrite/OpenRewriteFeature.html#getRecipes(io.micronaut.projectgen.core.generator.GeneratorContext)">getRecipes</a></code>&nbsp;in interface&nbsp;<code><a href="../../../projectgen/core/openrewrite/OpenRewriteFeature.html" title="interface in io.micronaut.projectgen.core.openrewrite">OpenRewriteFeature</a></code></dd>
+</dl>
 </section>
 </li>
 </ul>

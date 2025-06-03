@@ -75,14 +75,9 @@ loadScripts(document, 'script');</script>
 <div class="inheritance">io.micronaut.projectgen.core.generator.GeneratorContext</div>
 </div>
 <section class="class-description" id="class-description">
-<dl class="notes">
-<dt>All Implemented Interfaces:</dt>
-<dd><code><a href="../buildtools/dependencies/DependencyContext.html" title="interface in io.micronaut.projectgen.core.buildtools.dependencies">DependencyContext</a></code></dd>
-</dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">GeneratorContext</span>
-<span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
-implements <a href="../buildtools/dependencies/DependencyContext.html" title="interface in io.micronaut.projectgen.core.buildtools.dependencies">DependencyContext</a></span></div>
+<span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
 <div class="block">A context object used when generating projects.</div>
 <dl class="notes">
 <dt>Since:</dt>
@@ -106,9 +101,6 @@ implements <a href="../buildtools/dependencies/DependencyContext.html" title="in
 <div class="col-second even-row-color"><code><a href="#ROOT_PROJECT" class="member-name-link">ROOT_PROJECT</a></code></div>
 <div class="col-last even-row-color">&nbsp;</div>
 </div>
-<div class="inherited-list">
-<h3 id="fields-inherited-from-class-io.micronaut.projectgen.core.buildtools.dependencies.DependencyContext">Fields inherited from interface&nbsp;io.micronaut.projectgen.core.buildtools.dependencies.<a href="../buildtools/dependencies/DependencyContext.html" title="interface in io.micronaut.projectgen.core.buildtools.dependencies">DependencyContext</a></h3>
-<code><a href="../buildtools/dependencies/DependencyContext.html#IS_COMPILE_API_OR_RUNTIME">IS_COMPILE_API_OR_RUNTIME</a></code></div>
 </section>
 </li>
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
@@ -140,161 +132,35 @@ implements <a href="../buildtools/dependencies/DependencyContext.html" title="in
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addBootstrapConfigurationByRecipeName(java.lang.String)" class="member-name-link">addBootstrapConfigurationByRecipeName</a><wbr>(@NonNull <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;recipeName)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addBuildPlugin(io.micronaut.projectgen.core.buildtools.BuildPlugin)" class="member-name-link">addBuildPlugin</a><wbr>(<a href="../buildtools/BuildPlugin.html" title="interface in io.micronaut.projectgen.core.buildtools">BuildPlugin</a>&nbsp;buildPlugin)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addBuildPluginByModule(java.lang.String,io.micronaut.projectgen.core.buildtools.BuildPlugin)" class="member-name-link">addBuildPluginByModule</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;module,
- <a href="../buildtools/BuildPlugin.html" title="interface in io.micronaut.projectgen.core.buildtools">BuildPlugin</a>&nbsp;buildPlugin)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addConfiguration(io.micronaut.projectgen.core.feature.config.Configuration)" class="member-name-link">addConfiguration</a><wbr>(@NonNull <a href="../feature/config/Configuration.html" title="class in io.micronaut.projectgen.core.feature.config">Configuration</a>&nbsp;configuration)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addConfigurationByModule(java.lang.String,io.micronaut.projectgen.core.feature.config.Configuration)" class="member-name-link">addConfigurationByModule</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;module,
- @NonNull <a href="../feature/config/Configuration.html" title="class in io.micronaut.projectgen.core.feature.config">Configuration</a>&nbsp;configuration)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addConfigurationByRecipeName(java.lang.String)" class="member-name-link">addConfigurationByRecipeName</a><wbr>(@NonNull <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;recipeName)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addDependenciesByRecipeName(java.lang.String)" class="member-name-link">addDependenciesByRecipeName</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;recipeName)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addDependency(io.micronaut.projectgen.core.buildtools.dependencies.Dependency)" class="member-name-link">addDependency</a><wbr>(@NonNull <a href="../buildtools/dependencies/Dependency.html" title="class in io.micronaut.projectgen.core.buildtools.dependencies">Dependency</a>&nbsp;dependency)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addHelpLink(java.lang.String,java.lang.String)" class="member-name-link">addHelpLink</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;label,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;href)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#applyFeatures()" class="member-name-link">applyFeatures</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Ads a Link to a single help file.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addHelpTemplate(io.micronaut.projectgen.core.template.Writable)" class="member-name-link">addHelpTemplate</a><wbr>(<a href="../template/Writable.html" title="interface in io.micronaut.projectgen.core.template">Writable</a>&nbsp;writable)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Adds a template which will be consolidated into a single help file.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addProfile(io.micronaut.projectgen.core.buildtools.maven.Profile)" class="member-name-link">addProfile</a><wbr>(@NonNull <a href="../buildtools/maven/Profile.html" title="class in io.micronaut.projectgen.core.buildtools.maven">Profile</a>&nbsp;profile)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addTemplate(java.lang.String,io.micronaut.projectgen.core.template.Template)" class="member-name-link">addTemplate</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name,
- <a href="../template/Template.html" title="interface in io.micronaut.projectgen.core.template">Template</a>&nbsp;template)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Adds a template.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addTemplate(java.lang.String,java.lang.String,com.fizzed.rocker.RockerModel,com.fizzed.rocker.RockerModel,com.fizzed.rocker.RockerModel)" class="member-name-link">addTemplate</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;templateName,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;triggerFile,
- com.fizzed.rocker.RockerModel&nbsp;javaTemplate,
- com.fizzed.rocker.RockerModel&nbsp;kotlinTemplate,
- com.fizzed.rocker.RockerModel&nbsp;groovyTemplate)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addTemplate(java.lang.String,java.lang.String,io.micronaut.projectgen.core.rocker.TestRockerModelProvider)" class="member-name-link">addTemplate</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;path,
- <a href="../rocker/TestRockerModelProvider.html" title="interface in io.micronaut.projectgen.core.rocker">TestRockerModelProvider</a>&nbsp;testRockerModelProvider)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addTemplatesByRecipeName(java.lang.String)" class="member-name-link">addTemplatesByRecipeName</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;recipeName)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#applyFeatures()" class="member-name-link">applyFeatures</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Apply features.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>long</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#countDependencies(java.lang.String)" class="member-name-link">countDependencies</a><wbr>(@NonNull <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;groupId)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#findFrameworkDocumentationByRecipeName(java.lang.String)" class="member-name-link">findFrameworkDocumentationByRecipeName</a><wbr>(@NonNull <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;recipeName)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#findThirdPartyDocumentationByRecipeName(java.lang.String)" class="member-name-link">findThirdPartyDocumentationByRecipeName</a><wbr>(@NonNull <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;recipeName)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@NonNull <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="../feature/config/Configuration.html" title="class in io.micronaut.projectgen.core.feature.config">Configuration</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getAllConfigurations()" class="member-name-link">getAllConfigurations</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@NonNull <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="../feature/config/Configuration.html" title="class in io.micronaut.projectgen.core.feature.config">Configuration</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getAllConfigurationsByModule(java.lang.String)" class="member-name-link">getAllConfigurationsByModule</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;module)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@NonNull <a href="../feature/config/BootstrapConfiguration.html" title="class in io.micronaut.projectgen.core.feature.config">BootstrapConfiguration</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getBootstrapConfiguration()" class="member-name-link">getBootstrapConfiguration</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="../feature/config/BootstrapConfiguration.html" title="class in io.micronaut.projectgen.core.feature.config">BootstrapConfiguration</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getBootstrapConfigurationByEnvironment(java.lang.String)" class="member-name-link">getBootstrapConfigurationByEnvironment</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;env)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@NonNull <a href="../feature/config/BootstrapConfiguration.html" title="class in io.micronaut.projectgen.core.feature.config">BootstrapConfiguration</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getBootstrapConfigurationByEnvironmentOrDefaultConfig(java.lang.String,io.micronaut.projectgen.core.feature.config.BootstrapConfiguration)" class="member-name-link">getBootstrapConfigurationByEnvironmentOrDefaultConfig</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;env,
- <a href="../feature/config/BootstrapConfiguration.html" title="class in io.micronaut.projectgen.core.feature.config">BootstrapConfiguration</a>&nbsp;defaultConfig)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@NonNull <a href="../feature/config/BootstrapConfiguration.html" title="class in io.micronaut.projectgen.core.feature.config">BootstrapConfiguration</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getBootstrapConfigurationByModule(java.lang.String)" class="member-name-link">getBootstrapConfigurationByModule</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;module)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="../feature/config/BootstrapConfiguration.html" title="class in io.micronaut.projectgen.core.feature.config">BootstrapConfiguration</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getBootstrapConfigurationByModuleAndEnvironment(java.lang.String,java.lang.String)" class="member-name-link">getBootstrapConfigurationByModuleAndEnvironment</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;module,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;env)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@NonNull <a href="../feature/config/BootstrapConfiguration.html" title="class in io.micronaut.projectgen.core.feature.config">BootstrapConfiguration</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getBootstrapConfigurationByModuleAndEnvironmentOrDefaultConfig(java.lang.String,java.lang.String,io.micronaut.projectgen.core.feature.config.BootstrapConfiguration)" class="member-name-link">getBootstrapConfigurationByModuleAndEnvironmentOrDefaultConfig</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;module,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;env,
- <a href="../feature/config/BootstrapConfiguration.html" title="class in io.micronaut.projectgen.core.feature.config">BootstrapConfiguration</a>&nbsp;defaultConfig)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="../buildtools/BuildPlugin.html" title="interface in io.micronaut.projectgen.core.buildtools">BuildPlugin</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getBuildPlugins()" class="member-name-link">getBuildPlugins</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="../buildtools/BuildPlugin.html" title="interface in io.micronaut.projectgen.core.buildtools">BuildPlugin</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getBuildPluginsByModule(java.lang.String)" class="member-name-link">getBuildPluginsByModule</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;module)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@NonNull <a href="../buildtools/BuildProperties.html" title="class in io.micronaut.projectgen.core.buildtools">BuildProperties</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getBuildProperties()" class="member-name-link">getBuildProperties</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code>@NonNull <a href="../buildtools/BuildTool.html" title="enum class in io.micronaut.projectgen.core.buildtools">BuildTool</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#getBuildTool()" class="member-name-link">getBuildTool</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code>@NonNull <a href="../buildtools/BuildTool.html" title="enum class in io.micronaut.projectgen.core.buildtools">BuildTool</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#getBuildTool()" class="member-name-link">getBuildTool</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6">
 <div class="block"><span class="deprecated-label">Deprecated, for removal: This API element is subject to removal in a future version.</span></div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@NonNull <a href="../feature/config/ApplicationConfiguration.html" title="class in io.micronaut.projectgen.core.feature.config">ApplicationConfiguration</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getConfiguration()" class="member-name-link">getConfiguration</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@NonNull <a href="../feature/config/ApplicationConfiguration.html" title="class in io.micronaut.projectgen.core.feature.config">ApplicationConfiguration</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getConfigurationByEnvironment(java.lang.String)" class="member-name-link">getConfigurationByEnvironment</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;environment)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@NonNull <a href="../feature/config/ApplicationConfiguration.html" title="class in io.micronaut.projectgen.core.feature.config">ApplicationConfiguration</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getConfigurationByEnvironmentOrDefaultConfig(java.lang.String,io.micronaut.projectgen.core.feature.config.ApplicationConfiguration)" class="member-name-link">getConfigurationByEnvironmentOrDefaultConfig</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;env,
- <a href="../feature/config/ApplicationConfiguration.html" title="class in io.micronaut.projectgen.core.feature.config">ApplicationConfiguration</a>&nbsp;defaultConfig)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@NonNull <a href="../feature/config/ApplicationConfiguration.html" title="class in io.micronaut.projectgen.core.feature.config">ApplicationConfiguration</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getConfigurationByModule(java.lang.String)" class="member-name-link">getConfigurationByModule</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;module)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="../feature/config/ApplicationConfiguration.html" title="class in io.micronaut.projectgen.core.feature.config">ApplicationConfiguration</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getConfigurationByModuleAndEnvironment(java.lang.String,java.lang.String)" class="member-name-link">getConfigurationByModuleAndEnvironment</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;module,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;environment)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@NonNull <a href="../feature/config/ApplicationConfiguration.html" title="class in io.micronaut.projectgen.core.feature.config">ApplicationConfiguration</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getConfigurationByModuleEnvironmentOrDefaultConfig(java.lang.String,java.lang.String,io.micronaut.projectgen.core.feature.config.ApplicationConfiguration)" class="member-name-link">getConfigurationByModuleEnvironmentOrDefaultConfig</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;module,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;env,
- <a href="../feature/config/ApplicationConfiguration.html" title="class in io.micronaut.projectgen.core.feature.config">ApplicationConfiguration</a>&nbsp;defaultConfig)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@NonNull <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link">Collection</a>&lt;<a href="../buildtools/dependencies/Dependency.html" title="class in io.micronaut.projectgen.core.buildtools.dependencies">Dependency</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getDependencies()" class="member-name-link">getDependencies</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>&lt;T extends <a href="../feature/Feature.html" title="interface in io.micronaut.projectgen.core.feature">Feature</a>&gt;<br><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;T&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getFeature(java.lang.Class)" class="member-name-link">getFeature</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;feature)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@NonNull <a href="../feature/Features.html" title="class in io.micronaut.projectgen.core.feature">Features</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getFeatures()" class="member-name-link">getFeatures</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@NonNull <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../template/Writable.html" title="interface in io.micronaut.projectgen.core.template">Writable</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getHelpTemplates()" class="member-name-link">getHelpTemplates</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@NonNull <a href="../options/JdkVersion.html" title="class in io.micronaut.projectgen.core.options">JdkVersion</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getJdkVersion()" class="member-name-link">getJdkVersion</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@NonNull <a href="../options/JdkVersion.html" title="class in io.micronaut.projectgen.core.options">JdkVersion</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getJdkVersion()" class="member-name-link">getJdkVersion</a>()</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@NonNull <a href="../options/Language.html" title="enum class in io.micronaut.projectgen.core.options">Language</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getLanguage()" class="member-name-link">getLanguage</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@NonNull <a href="../options/Language.html" title="enum class in io.micronaut.projectgen.core.options">Language</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getLanguage()" class="member-name-link">getLanguage</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="ModuleContext.html" title="class in io.micronaut.projectgen.core.generator">ModuleContext</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getModuleByName(java.lang.String)" class="member-name-link">getModuleByName</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link">Collection</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getModuleNames()" class="member-name-link">getModuleNames</a>()</code></div>
@@ -302,74 +168,42 @@ implements <a href="../buildtools/dependencies/DependencyContext.html" title="in
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@NonNull <a href="../options/Options.html" title="interface in io.micronaut.projectgen.core.options">Options</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getOptions()" class="member-name-link">getOptions</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@NonNull <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link">Collection</a>&lt;<a href="../buildtools/maven/Profile.html" title="class in io.micronaut.projectgen.core.buildtools.maven">Profile</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getProfiles()" class="member-name-link">getProfiles</a>()</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@NonNull <a href="Project.html" title="class in io.micronaut.projectgen.core.generator">Project</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getProject()" class="member-name-link">getProject</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@NonNull <a href="Project.html" title="class in io.micronaut.projectgen.core.generator">Project</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getProject()" class="member-name-link">getProject</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>&lt;T extends <a href="../feature/Feature.html" title="interface in io.micronaut.projectgen.core.feature">Feature</a>&gt;<br>T</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getRequiredFeature(java.lang.Class)" class="member-name-link">getRequiredFeature</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;feature)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>&lt;T extends <a href="../feature/Feature.html" title="interface in io.micronaut.projectgen.core.feature">Feature</a>&gt;<br>T</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getRequiredFeature(java.lang.Class)" class="member-name-link">getRequiredFeature</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;feature)</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="ModuleContext.html" title="class in io.micronaut.projectgen.core.generator">ModuleContext</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getRootModule()" class="member-name-link">getRootModule</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getSourcePath(java.lang.String)" class="member-name-link">getSourcePath</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;path)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@NonNull <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="../template/Template.html" title="interface in io.micronaut.projectgen.core.template">Template</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getTemplates()" class="member-name-link">getTemplates</a>()</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@NonNull <a href="../options/TestFramework.html" title="enum class in io.micronaut.projectgen.core.options">TestFramework</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getTestFramework()" class="member-name-link">getTestFramework</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@NonNull <a href="../options/TestFramework.html" title="enum class in io.micronaut.projectgen.core.options">TestFramework</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getTestFramework()" class="member-name-link">getTestFramework</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getTestSourcePath(java.lang.String)" class="member-name-link">getTestSourcePath</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;path)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getTestSourcePath(java.lang.String)" class="member-name-link">getTestSourcePath</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;path)</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>&lt;T extends <a href="../feature/Feature.html" title="interface in io.micronaut.projectgen.core.feature">Feature</a>&gt;<br>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hasFeature(java.lang.Class)" class="member-name-link">hasFeature</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;featureClass)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hasConfigurationByEnvironment(java.lang.String)" class="member-name-link">hasConfigurationByEnvironment</a><wbr>(@NonNull <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;env)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isFeatureMissing(java.lang.Class)" class="member-name-link">isFeatureMissing</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;? extends <a href="../feature/Feature.html" title="interface in io.micronaut.projectgen.core.feature">Feature</a>&gt;&nbsp;feature)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hasConfigurationByModuleAndEnvironment(java.lang.String,java.lang.String)" class="member-name-link">hasConfigurationByModuleAndEnvironment</a><wbr>(@NonNull <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;module,
- @NonNull <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;env)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isFeaturePresent(java.lang.Class)" class="member-name-link">isFeaturePresent</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;? extends <a href="../feature/Feature.html" title="interface in io.micronaut.projectgen.core.feature">Feature</a>&gt;&nbsp;feature)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hasDependency(java.lang.String,java.lang.String)" class="member-name-link">hasDependency</a><wbr>(@NonNull <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;groupId,
- @NonNull <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;artifactId)</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../buildtools/dependencies/Coordinate.html" title="interface in io.micronaut.projectgen.core.buildtools.dependencies">Coordinate</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#resolveCoordinate(java.lang.String)" class="member-name-link">resolveCoordinate</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;artifactId)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hasDependencyInScope(java.lang.String,java.lang.String,io.micronaut.projectgen.core.buildtools.Scope)" class="member-name-link">hasDependencyInScope</a><wbr>(@NonNull <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;groupId,
- @NonNull <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;artifactId,
- @NonNull <a href="../buildtools/Scope.html" title="class in io.micronaut.projectgen.core.buildtools">Scope</a>&nbsp;scope)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>&lt;T extends <a href="../feature/Feature.html" title="interface in io.micronaut.projectgen.core.feature">Feature</a>&gt;<br>boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hasFeature(java.lang.Class)" class="member-name-link">hasFeature</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;featureClass)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isFeatureMissing(java.lang.Class)" class="member-name-link">isFeatureMissing</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;? extends <a href="../feature/Feature.html" title="interface in io.micronaut.projectgen.core.feature">Feature</a>&gt;&nbsp;feature)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isFeaturePresent(java.lang.Class)" class="member-name-link">isFeaturePresent</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;? extends <a href="../feature/Feature.html" title="interface in io.micronaut.projectgen.core.feature">Feature</a>&gt;&nbsp;feature)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected com.fizzed.rocker.RockerModel</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#parseModel(com.fizzed.rocker.RockerModel,com.fizzed.rocker.RockerModel,com.fizzed.rocker.RockerModel)" class="member-name-link">parseModel</a><wbr>(com.fizzed.rocker.RockerModel&nbsp;javaTemplate,
- com.fizzed.rocker.RockerModel&nbsp;kotlinTemplate,
- com.fizzed.rocker.RockerModel&nbsp;groovyTemplate)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#removeTemplate(java.lang.String)" class="member-name-link">removeTemplate</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Adds a template.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../buildtools/dependencies/Coordinate.html" title="interface in io.micronaut.projectgen.core.buildtools.dependencies">Coordinate</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#resolveCoordinate(java.lang.String)" class="member-name-link">resolveCoordinate</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;artifactId)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 </div>
 </div>
 </div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-java.lang.Object">Methods inherited from class&nbsp;java.lang.<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></h3>
 <code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#clone()" title="class or interface in java.lang" class="external-link">clone</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object)" title="class or interface in java.lang" class="external-link">equals</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#finalize()" title="class or interface in java.lang" class="external-link">finalize</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#getClass()" title="class or interface in java.lang" class="external-link">getClass</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#hashCode()" title="class or interface in java.lang" class="external-link">hashCode</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#notify()" title="class or interface in java.lang" class="external-link">notify</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#notifyAll()" title="class or interface in java.lang" class="external-link">notifyAll</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#toString()" title="class or interface in java.lang" class="external-link">toString</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait()" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait(long)" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait(long,int)" title="class or interface in java.lang" class="external-link">wait</a></code></div>
-<div class="inherited-list">
-<h3 id="methods-inherited-from-class-io.micronaut.projectgen.core.buildtools.dependencies.DependencyContext">Methods inherited from interface&nbsp;io.micronaut.projectgen.core.buildtools.dependencies.<a href="../buildtools/dependencies/DependencyContext.html" title="interface in io.micronaut.projectgen.core.buildtools.dependencies">DependencyContext</a></h3>
-<code><a href="../buildtools/dependencies/DependencyContext.html#addDependency(io.micronaut.projectgen.core.buildtools.dependencies.Dependency.Builder)">addDependency</a>, <a href="../buildtools/dependencies/DependencyContext.html#removeDuplicates(java.util.Collection,io.micronaut.projectgen.core.options.Language,io.micronaut.projectgen.core.buildtools.BuildTool)">removeDuplicates</a></code></div>
 </section>
 </li>
 </ul>
@@ -422,329 +256,15 @@ implements <a href="../buildtools/dependencies/DependencyContext.html" title="in
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="addTemplate(java.lang.String,io.micronaut.projectgen.core.template.Template)">
-<h3>addTemplate</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">addTemplate</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name,
- <a href="../template/Template.html" title="interface in io.micronaut.projectgen.core.template">Template</a>&nbsp;template)</span></div>
-<div class="block">Adds a template.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>name</code> - The name of the template</dd>
-<dd><code>template</code> - The template</dd>
-</dl>
+<section class="detail" id="getRootModule()">
+<h3>getRootModule</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="ModuleContext.html" title="class in io.micronaut.projectgen.core.generator">ModuleContext</a></span>&nbsp;<span class="element-name">getRootModule</span>()</div>
 </section>
 </li>
 <li>
-<section class="detail" id="removeTemplate(java.lang.String)">
-<h3>removeTemplate</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">removeTemplate</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</span></div>
-<div class="block">Adds a template.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>name</code> - The name of the template</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="addHelpTemplate(io.micronaut.projectgen.core.template.Writable)">
-<h3>addHelpTemplate</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">addHelpTemplate</span><wbr><span class="parameters">(<a href="../template/Writable.html" title="interface in io.micronaut.projectgen.core.template">Writable</a>&nbsp;writable)</span></div>
-<div class="block">Adds a template which will be consolidated into a single help file.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>writable</code> - The template</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="addHelpLink(java.lang.String,java.lang.String)">
-<h3>addHelpLink</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">addHelpLink</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;label,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;href)</span></div>
-<div class="block">Ads a Link to a single help file.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>label</code> - Link's label</dd>
-<dd><code>href</code> - Link's uri</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="getBuildProperties()">
-<h3>getBuildProperties</h3>
-<div class="member-signature"><span class="annotations">@NonNull
-</span><span class="modifiers">public</span>&nbsp;<span class="return-type">@NonNull <a href="../buildtools/BuildProperties.html" title="class in io.micronaut.projectgen.core.buildtools">BuildProperties</a></span>&nbsp;<span class="element-name">getBuildProperties</span>()</div>
-<dl class="notes">
-<dt>Returns:</dt>
-<dd>The build properties</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="getConfiguration()">
-<h3>getConfiguration</h3>
-<div class="member-signature"><span class="annotations">@NonNull
-</span><span class="modifiers">public</span>&nbsp;<span class="return-type">@NonNull <a href="../feature/config/ApplicationConfiguration.html" title="class in io.micronaut.projectgen.core.feature.config">ApplicationConfiguration</a></span>&nbsp;<span class="element-name">getConfiguration</span>()</div>
-<dl class="notes">
-<dt>Returns:</dt>
-<dd>The configuration</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="getConfigurationByModule(java.lang.String)">
-<h3>getConfigurationByModule</h3>
-<div class="member-signature"><span class="annotations">@NonNull
-</span><span class="modifiers">public</span>&nbsp;<span class="return-type">@NonNull <a href="../feature/config/ApplicationConfiguration.html" title="class in io.micronaut.projectgen.core.feature.config">ApplicationConfiguration</a></span>&nbsp;<span class="element-name">getConfigurationByModule</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;module)</span></div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>module</code> - Module</dd>
-<dt>Returns:</dt>
-<dd>The configuration</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="getConfigurationByEnvironment(java.lang.String)">
-<h3>getConfigurationByEnvironment</h3>
-<div class="member-signature"><span class="annotations">@NonNull
-</span><span class="modifiers">public</span>&nbsp;<span class="return-type">@NonNull <a href="../feature/config/ApplicationConfiguration.html" title="class in io.micronaut.projectgen.core.feature.config">ApplicationConfiguration</a></span>&nbsp;<span class="element-name">getConfigurationByEnvironment</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;environment)</span></div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>environment</code> - Environment</dd>
-<dt>Returns:</dt>
-<dd>application configuration</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="getConfigurationByModuleAndEnvironment(java.lang.String,java.lang.String)">
-<h3>getConfigurationByModuleAndEnvironment</h3>
-<div class="member-signature"><span class="annotations">@Nullable
-</span><span class="modifiers">public</span>&nbsp;<span class="return-type">@Nullable <a href="../feature/config/ApplicationConfiguration.html" title="class in io.micronaut.projectgen.core.feature.config">ApplicationConfiguration</a></span>&nbsp;<span class="element-name">getConfigurationByModuleAndEnvironment</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;module,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;environment)</span></div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>module</code> - module</dd>
-<dd><code>environment</code> - Environment</dd>
-<dt>Returns:</dt>
-<dd>application configuration</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="hasConfigurationByEnvironment(java.lang.String)">
-<h3>hasConfigurationByEnvironment</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">hasConfigurationByEnvironment</span><wbr><span class="parameters">(@NonNull
- @NonNull <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;env)</span></div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>env</code> - Environment</dd>
-<dt>Returns:</dt>
-<dd>whether it has configuration for a particular environment</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="hasConfigurationByModuleAndEnvironment(java.lang.String,java.lang.String)">
-<h3>hasConfigurationByModuleAndEnvironment</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">hasConfigurationByModuleAndEnvironment</span><wbr><span class="parameters">(@NonNull
- @NonNull <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;module,
- @NonNull
- @NonNull <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;env)</span></div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>module</code> - module</dd>
-<dd><code>env</code> - Environment</dd>
-<dt>Returns:</dt>
-<dd>whether it has configuration for a particular environment</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="getBootstrapConfigurationByEnvironment(java.lang.String)">
-<h3>getBootstrapConfigurationByEnvironment</h3>
-<div class="member-signature"><span class="annotations">@Nullable
-</span><span class="modifiers">public</span>&nbsp;<span class="return-type">@Nullable <a href="../feature/config/BootstrapConfiguration.html" title="class in io.micronaut.projectgen.core.feature.config">BootstrapConfiguration</a></span>&nbsp;<span class="element-name">getBootstrapConfigurationByEnvironment</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;env)</span></div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>env</code> - Environment</dd>
-<dt>Returns:</dt>
-<dd>The configuration</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="getBootstrapConfigurationByModuleAndEnvironment(java.lang.String,java.lang.String)">
-<h3>getBootstrapConfigurationByModuleAndEnvironment</h3>
-<div class="member-signature"><span class="annotations">@Nullable
-</span><span class="modifiers">public</span>&nbsp;<span class="return-type">@Nullable <a href="../feature/config/BootstrapConfiguration.html" title="class in io.micronaut.projectgen.core.feature.config">BootstrapConfiguration</a></span>&nbsp;<span class="element-name">getBootstrapConfigurationByModuleAndEnvironment</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;module,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;env)</span></div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>module</code> - Module</dd>
-<dd><code>env</code> - Environment</dd>
-<dt>Returns:</dt>
-<dd>The configuration</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="getConfigurationByModuleEnvironmentOrDefaultConfig(java.lang.String,java.lang.String,io.micronaut.projectgen.core.feature.config.ApplicationConfiguration)">
-<h3>getConfigurationByModuleEnvironmentOrDefaultConfig</h3>
-<div class="member-signature"><span class="annotations">@NonNull
-</span><span class="modifiers">public</span>&nbsp;<span class="return-type">@NonNull <a href="../feature/config/ApplicationConfiguration.html" title="class in io.micronaut.projectgen.core.feature.config">ApplicationConfiguration</a></span>&nbsp;<span class="element-name">getConfigurationByModuleEnvironmentOrDefaultConfig</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;module,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;env,
- <a href="../feature/config/ApplicationConfiguration.html" title="class in io.micronaut.projectgen.core.feature.config">ApplicationConfiguration</a>&nbsp;defaultConfig)</span></div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>module</code> - Module</dd>
-<dd><code>env</code> - Environment</dd>
-<dd><code>defaultConfig</code> - Default Configuration</dd>
-<dt>Returns:</dt>
-<dd>Application Configuration</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="getConfigurationByEnvironmentOrDefaultConfig(java.lang.String,io.micronaut.projectgen.core.feature.config.ApplicationConfiguration)">
-<h3>getConfigurationByEnvironmentOrDefaultConfig</h3>
-<div class="member-signature"><span class="annotations">@NonNull
-</span><span class="modifiers">public</span>&nbsp;<span class="return-type">@NonNull <a href="../feature/config/ApplicationConfiguration.html" title="class in io.micronaut.projectgen.core.feature.config">ApplicationConfiguration</a></span>&nbsp;<span class="element-name">getConfigurationByEnvironmentOrDefaultConfig</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;env,
- <a href="../feature/config/ApplicationConfiguration.html" title="class in io.micronaut.projectgen.core.feature.config">ApplicationConfiguration</a>&nbsp;defaultConfig)</span></div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>env</code> - Environment</dd>
-<dd><code>defaultConfig</code> - Default Configuration</dd>
-<dt>Returns:</dt>
-<dd>Application Configuration</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="getBootstrapConfigurationByEnvironmentOrDefaultConfig(java.lang.String,io.micronaut.projectgen.core.feature.config.BootstrapConfiguration)">
-<h3>getBootstrapConfigurationByEnvironmentOrDefaultConfig</h3>
-<div class="member-signature"><span class="annotations">@NonNull
-</span><span class="modifiers">public</span>&nbsp;<span class="return-type">@NonNull <a href="../feature/config/BootstrapConfiguration.html" title="class in io.micronaut.projectgen.core.feature.config">BootstrapConfiguration</a></span>&nbsp;<span class="element-name">getBootstrapConfigurationByEnvironmentOrDefaultConfig</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;env,
- <a href="../feature/config/BootstrapConfiguration.html" title="class in io.micronaut.projectgen.core.feature.config">BootstrapConfiguration</a>&nbsp;defaultConfig)</span></div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>env</code> - environment</dd>
-<dd><code>defaultConfig</code> - Bootstrap Configuration</dd>
-<dt>Returns:</dt>
-<dd>Bootstrap configuration</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="getBootstrapConfigurationByModuleAndEnvironmentOrDefaultConfig(java.lang.String,java.lang.String,io.micronaut.projectgen.core.feature.config.BootstrapConfiguration)">
-<h3>getBootstrapConfigurationByModuleAndEnvironmentOrDefaultConfig</h3>
-<div class="member-signature"><span class="annotations">@NonNull
-</span><span class="modifiers">public</span>&nbsp;<span class="return-type">@NonNull <a href="../feature/config/BootstrapConfiguration.html" title="class in io.micronaut.projectgen.core.feature.config">BootstrapConfiguration</a></span>&nbsp;<span class="element-name">getBootstrapConfigurationByModuleAndEnvironmentOrDefaultConfig</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;module,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;env,
- <a href="../feature/config/BootstrapConfiguration.html" title="class in io.micronaut.projectgen.core.feature.config">BootstrapConfiguration</a>&nbsp;defaultConfig)</span></div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>module</code> - Module</dd>
-<dd><code>env</code> - environment</dd>
-<dd><code>defaultConfig</code> - Bootstrap Configuration</dd>
-<dt>Returns:</dt>
-<dd>Bootstrap configuration</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="getBootstrapConfiguration()">
-<h3>getBootstrapConfiguration</h3>
-<div class="member-signature"><span class="annotations">@NonNull
-</span><span class="modifiers">public</span>&nbsp;<span class="return-type">@NonNull <a href="../feature/config/BootstrapConfiguration.html" title="class in io.micronaut.projectgen.core.feature.config">BootstrapConfiguration</a></span>&nbsp;<span class="element-name">getBootstrapConfiguration</span>()</div>
-<dl class="notes">
-<dt>Returns:</dt>
-<dd>The bootstrap config</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="getBootstrapConfigurationByModule(java.lang.String)">
-<h3>getBootstrapConfigurationByModule</h3>
-<div class="member-signature"><span class="annotations">@NonNull
-</span><span class="modifiers">public</span>&nbsp;<span class="return-type">@NonNull <a href="../feature/config/BootstrapConfiguration.html" title="class in io.micronaut.projectgen.core.feature.config">BootstrapConfiguration</a></span>&nbsp;<span class="element-name">getBootstrapConfigurationByModule</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;module)</span></div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>module</code> - Module</dd>
-<dt>Returns:</dt>
-<dd>The bootstrap config</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="addConfiguration(io.micronaut.projectgen.core.feature.config.Configuration)">
-<h3>addConfiguration</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">addConfiguration</span><wbr><span class="parameters">(@NonNull
- @NonNull <a href="../feature/config/Configuration.html" title="class in io.micronaut.projectgen.core.feature.config">Configuration</a>&nbsp;configuration)</span></div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>configuration</code> - Configuration</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="addConfigurationByModule(java.lang.String,io.micronaut.projectgen.core.feature.config.Configuration)">
-<h3>addConfigurationByModule</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">addConfigurationByModule</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;module,
- @NonNull
- @NonNull <a href="../feature/config/Configuration.html" title="class in io.micronaut.projectgen.core.feature.config">Configuration</a>&nbsp;configuration)</span></div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>module</code> - Module</dd>
-<dd><code>configuration</code> - Configuration</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="getAllConfigurations()">
-<h3>getAllConfigurations</h3>
-<div class="member-signature"><span class="annotations">@NonNull
-</span><span class="modifiers">public</span>&nbsp;<span class="return-type">@NonNull <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="../feature/config/Configuration.html" title="class in io.micronaut.projectgen.core.feature.config">Configuration</a>&gt;</span>&nbsp;<span class="element-name">getAllConfigurations</span>()</div>
-<dl class="notes">
-<dt>Returns:</dt>
-<dd>All Configurations</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="getAllConfigurationsByModule(java.lang.String)">
-<h3>getAllConfigurationsByModule</h3>
-<div class="member-signature"><span class="annotations">@NonNull
-</span><span class="modifiers">public</span>&nbsp;<span class="return-type">@NonNull <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="../feature/config/Configuration.html" title="class in io.micronaut.projectgen.core.feature.config">Configuration</a>&gt;</span>&nbsp;<span class="element-name">getAllConfigurationsByModule</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;module)</span></div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>module</code> - Module</dd>
-<dt>Returns:</dt>
-<dd>All Configurations</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="getTemplates()">
-<h3>getTemplates</h3>
-<div class="member-signature"><span class="annotations">@NonNull
-</span><span class="modifiers">public</span>&nbsp;<span class="return-type">@NonNull <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="../template/Template.html" title="interface in io.micronaut.projectgen.core.template">Template</a>&gt;</span>&nbsp;<span class="element-name">getTemplates</span>()</div>
-<dl class="notes">
-<dt>Returns:</dt>
-<dd>The templates</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="getHelpTemplates()">
-<h3>getHelpTemplates</h3>
-<div class="member-signature"><span class="annotations">@NonNull
-</span><span class="modifiers">public</span>&nbsp;<span class="return-type">@NonNull <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../template/Writable.html" title="interface in io.micronaut.projectgen.core.template">Writable</a>&gt;</span>&nbsp;<span class="element-name">getHelpTemplates</span>()</div>
-<dl class="notes">
-<dt>Returns:</dt>
-<dd>The templates</dd>
-</dl>
+<section class="detail" id="getModuleByName(java.lang.String)">
+<h3>getModuleByName</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="ModuleContext.html" title="class in io.micronaut.projectgen.core.generator">ModuleContext</a></span>&nbsp;<span class="element-name">getModuleByName</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</span></div>
 </section>
 </li>
 <li>
@@ -910,71 +430,6 @@ implements <a href="../buildtools/dependencies/DependencyContext.html" title="in
 </section>
 </li>
 <li>
-<section class="detail" id="parseModel(com.fizzed.rocker.RockerModel,com.fizzed.rocker.RockerModel,com.fizzed.rocker.RockerModel)">
-<h3>parseModel</h3>
-<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type">com.fizzed.rocker.RockerModel</span>&nbsp;<span class="element-name">parseModel</span><wbr><span class="parameters">(com.fizzed.rocker.RockerModel&nbsp;javaTemplate,
- com.fizzed.rocker.RockerModel&nbsp;kotlinTemplate,
- com.fizzed.rocker.RockerModel&nbsp;groovyTemplate)</span></div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>javaTemplate</code> - </dd>
-<dd><code>kotlinTemplate</code> - </dd>
-<dd><code>groovyTemplate</code> - </dd>
-<dt>Returns:</dt>
-<dd>Rocker Model</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="addTemplate(java.lang.String,java.lang.String,io.micronaut.projectgen.core.rocker.TestRockerModelProvider)">
-<h3>addTemplate</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">addTemplate</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;path,
- <a href="../rocker/TestRockerModelProvider.html" title="interface in io.micronaut.projectgen.core.rocker">TestRockerModelProvider</a>&nbsp;testRockerModelProvider)</span></div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>name</code> - name</dd>
-<dd><code>path</code> - path</dd>
-<dd><code>testRockerModelProvider</code> - testRockerModelProvider</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="addTemplate(java.lang.String,java.lang.String,com.fizzed.rocker.RockerModel,com.fizzed.rocker.RockerModel,com.fizzed.rocker.RockerModel)">
-<h3>addTemplate</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">addTemplate</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;templateName,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;triggerFile,
- com.fizzed.rocker.RockerModel&nbsp;javaTemplate,
- com.fizzed.rocker.RockerModel&nbsp;kotlinTemplate,
- com.fizzed.rocker.RockerModel&nbsp;groovyTemplate)</span></div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>templateName</code> - template name</dd>
-<dd><code>triggerFile</code> - trigger file</dd>
-<dd><code>javaTemplate</code> - java template</dd>
-<dd><code>kotlinTemplate</code> - kotlin template</dd>
-<dd><code>groovyTemplate</code> - groovy template</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="addBuildPlugin(io.micronaut.projectgen.core.buildtools.BuildPlugin)">
-<h3>addBuildPlugin</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">addBuildPlugin</span><wbr><span class="parameters">(<a href="../buildtools/BuildPlugin.html" title="interface in io.micronaut.projectgen.core.buildtools">BuildPlugin</a>&nbsp;buildPlugin)</span></div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>buildPlugin</code> - Build plugin</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="addBuildPluginByModule(java.lang.String,io.micronaut.projectgen.core.buildtools.BuildPlugin)">
-<h3>addBuildPluginByModule</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">addBuildPluginByModule</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;module,
- <a href="../buildtools/BuildPlugin.html" title="interface in io.micronaut.projectgen.core.buildtools">BuildPlugin</a>&nbsp;buildPlugin)</span></div>
-</section>
-</li>
-<li>
 <section class="detail" id="resolveCoordinate(java.lang.String)">
 <h3>resolveCoordinate</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../buildtools/dependencies/Coordinate.html" title="interface in io.micronaut.projectgen.core.buildtools.dependencies">Coordinate</a></span>&nbsp;<span class="element-name">resolveCoordinate</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;artifactId)</span></div>
@@ -983,52 +438,6 @@ implements <a href="../buildtools/dependencies/DependencyContext.html" title="in
 <dd><code>artifactId</code> - Artifact ID</dd>
 <dt>Returns:</dt>
 <dd>The coordinate</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="addDependency(io.micronaut.projectgen.core.buildtools.dependencies.Dependency)">
-<h3>addDependency</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">addDependency</span><wbr><span class="parameters">(@NonNull
- @NonNull <a href="../buildtools/dependencies/Dependency.html" title="class in io.micronaut.projectgen.core.buildtools.dependencies">Dependency</a>&nbsp;dependency)</span></div>
-<dl class="notes">
-<dt>Specified by:</dt>
-<dd><code><a href="../buildtools/dependencies/DependencyContext.html#addDependency(io.micronaut.projectgen.core.buildtools.dependencies.Dependency)">addDependency</a></code>&nbsp;in interface&nbsp;<code><a href="../buildtools/dependencies/DependencyContext.html" title="interface in io.micronaut.projectgen.core.buildtools.dependencies">DependencyContext</a></code></dd>
-<dt>Parameters:</dt>
-<dd><code>dependency</code> - dependency</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="getDependencies()">
-<h3>getDependencies</h3>
-<div class="member-signature"><span class="annotations">@NonNull
-</span><span class="modifiers">public</span>&nbsp;<span class="return-type">@NonNull <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link">Collection</a>&lt;<a href="../buildtools/dependencies/Dependency.html" title="class in io.micronaut.projectgen.core.buildtools.dependencies">Dependency</a>&gt;</span>&nbsp;<span class="element-name">getDependencies</span>()</div>
-<dl class="notes">
-<dt>Specified by:</dt>
-<dd><code><a href="../buildtools/dependencies/DependencyContext.html#getDependencies()">getDependencies</a></code>&nbsp;in interface&nbsp;<code><a href="../buildtools/dependencies/DependencyContext.html" title="interface in io.micronaut.projectgen.core.buildtools.dependencies">DependencyContext</a></code></dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="getBuildPlugins()">
-<h3>getBuildPlugins</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="../buildtools/BuildPlugin.html" title="interface in io.micronaut.projectgen.core.buildtools">BuildPlugin</a>&gt;</span>&nbsp;<span class="element-name">getBuildPlugins</span>()</div>
-<dl class="notes">
-<dt>Returns:</dt>
-<dd>Build plugins</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="getBuildPluginsByModule(java.lang.String)">
-<h3>getBuildPluginsByModule</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="../buildtools/BuildPlugin.html" title="interface in io.micronaut.projectgen.core.buildtools">BuildPlugin</a>&gt;</span>&nbsp;<span class="element-name">getBuildPluginsByModule</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;module)</span></div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>module</code> - Module</dd>
-<dt>Returns:</dt>
-<dd>Build plugins</dd>
 </dl>
 </section>
 </li>
@@ -1043,28 +452,6 @@ implements <a href="../buildtools/dependencies/DependencyContext.html" title="in
 </section>
 </li>
 <li>
-<section class="detail" id="addProfile(io.micronaut.projectgen.core.buildtools.maven.Profile)">
-<h3>addProfile</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">addProfile</span><wbr><span class="parameters">(@NonNull
- @NonNull <a href="../buildtools/maven/Profile.html" title="class in io.micronaut.projectgen.core.buildtools.maven">Profile</a>&nbsp;profile)</span></div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>profile</code> - Profile</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="getProfiles()">
-<h3>getProfiles</h3>
-<div class="member-signature"><span class="annotations">@NonNull
-</span><span class="modifiers">public</span>&nbsp;<span class="return-type">@NonNull <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link">Collection</a>&lt;<a href="../buildtools/maven/Profile.html" title="class in io.micronaut.projectgen.core.buildtools.maven">Profile</a>&gt;</span>&nbsp;<span class="element-name">getProfiles</span>()</div>
-<dl class="notes">
-<dt>Returns:</dt>
-<dd>Profiles</dd>
-</dl>
-</section>
-</li>
-<li>
 <section class="detail" id="hasFeature(java.lang.Class)">
 <h3>hasFeature</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="type-parameters">&lt;T extends <a href="../feature/Feature.html" title="interface in io.micronaut.projectgen.core.feature">Feature</a>&gt;</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">hasFeature</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;featureClass)</span></div>
@@ -1075,86 +462,6 @@ implements <a href="../buildtools/dependencies/DependencyContext.html" title="in
 <dd><code>featureClass</code> - Feature class</dd>
 <dt>Returns:</dt>
 <dd>Whether the feature is present</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="hasDependencyInScope(java.lang.String,java.lang.String,io.micronaut.projectgen.core.buildtools.Scope)">
-<h3>hasDependencyInScope</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">hasDependencyInScope</span><wbr><span class="parameters">(@NonNull
- @NonNull <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;groupId,
- @NonNull
- @NonNull <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;artifactId,
- @NonNull
- @NonNull <a href="../buildtools/Scope.html" title="class in io.micronaut.projectgen.core.buildtools">Scope</a>&nbsp;scope)</span></div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>groupId</code> - Group ID</dd>
-<dd><code>artifactId</code> - Artifact ID</dd>
-<dd><code>scope</code> - Scope</dd>
-<dt>Returns:</dt>
-<dd>Whether the dependency is present</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="hasDependency(java.lang.String,java.lang.String)">
-<h3>hasDependency</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">hasDependency</span><wbr><span class="parameters">(@NonNull
- @NonNull <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;groupId,
- @NonNull
- @NonNull <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;artifactId)</span></div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>groupId</code> - Group ID</dd>
-<dd><code>artifactId</code> - artifact ID</dd>
-<dt>Returns:</dt>
-<dd>Whether the dependency is present</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="countDependencies(java.lang.String)">
-<h3>countDependencies</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">long</span>&nbsp;<span class="element-name">countDependencies</span><wbr><span class="parameters">(@NonNull
- @NonNull <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;groupId)</span></div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>groupId</code> - groupID</dd>
-<dt>Returns:</dt>
-<dd>number of dependencies with groupId</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="addDependenciesByRecipeName(java.lang.String)">
-<h3>addDependenciesByRecipeName</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">addDependenciesByRecipeName</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;recipeName)</span></div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>recipeName</code> - recipe Name</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="addConfigurationByRecipeName(java.lang.String)">
-<h3>addConfigurationByRecipeName</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">addConfigurationByRecipeName</span><wbr><span class="parameters">(@NonNull
- @NonNull <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;recipeName)</span></div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>recipeName</code> - recipe Name</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="addBootstrapConfigurationByRecipeName(java.lang.String)">
-<h3>addBootstrapConfigurationByRecipeName</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">addBootstrapConfigurationByRecipeName</span><wbr><span class="parameters">(@NonNull
- @NonNull <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;recipeName)</span></div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>recipeName</code> - recipe Name</dd>
 </dl>
 </section>
 </li>
@@ -1182,12 +489,6 @@ implements <a href="../buildtools/dependencies/DependencyContext.html" title="in
 <dt>Returns:</dt>
 <dd>documentation</dd>
 </dl>
-</section>
-</li>
-<li>
-<section class="detail" id="addTemplatesByRecipeName(java.lang.String)">
-<h3>addTemplatesByRecipeName</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">addTemplatesByRecipeName</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;recipeName)</span></div>
 </section>
 </li>
 </ul>

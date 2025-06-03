@@ -77,7 +77,7 @@ loadScripts(document, 'script');</script>
 <section class="class-description" id="class-description">
 <dl class="notes">
 <dt>All Implemented Interfaces:</dt>
-<dd><code>io.micronaut.core.naming.Described</code>, <code>io.micronaut.core.naming.Named</code>, <code>io.micronaut.core.order.Ordered</code>, <code><a href="../../../projectgen/core/feature/ApplicationFeature.html" title="interface in io.micronaut.projectgen.core.feature">ApplicationFeature</a></code>, <code><a href="../../../projectgen/core/feature/Feature.html" title="interface in io.micronaut.projectgen.core.feature">Feature</a></code>, <code><a href="../../../projectgen/core/feature/KotlinApplicationFeature.html" title="interface in io.micronaut.projectgen.core.feature">KotlinApplicationFeature</a></code>, <code><a href="../../../projectgen/core/feature/KotlinSpecificFeature.html" title="interface in io.micronaut.projectgen.core.feature">KotlinSpecificFeature</a></code>, <code><a href="../../../projectgen/core/feature/LanguageSpecificFeature.html" title="interface in io.micronaut.projectgen.core.feature">LanguageSpecificFeature</a></code>, <code><a href="../../../projectgen/core/feature/OneOfFeature.html" title="interface in io.micronaut.projectgen.core.feature">OneOfFeature</a></code>, <code><a href="../server/ServerFeature.html" title="interface in io.micronaut.starter.feature.server">ServerFeature</a></code>, <code><a href="../server/ThirdPartyServerFeature.html" title="interface in io.micronaut.starter.feature.server">ThirdPartyServerFeature</a></code></dd>
+<dd><code>io.micronaut.core.naming.Described</code>, <code>io.micronaut.core.naming.Named</code>, <code>io.micronaut.core.order.Ordered</code>, <code><a href="../../../projectgen/core/feature/ApplicationFeature.html" title="interface in io.micronaut.projectgen.core.feature">ApplicationFeature</a></code>, <code><a href="../../../projectgen/core/feature/Feature.html" title="interface in io.micronaut.projectgen.core.feature">Feature</a></code>, <code><a href="../../../projectgen/core/feature/KotlinApplicationFeature.html" title="interface in io.micronaut.projectgen.core.feature">KotlinApplicationFeature</a></code>, <code><a href="../../../projectgen/core/feature/KotlinSpecificFeature.html" title="interface in io.micronaut.projectgen.core.feature">KotlinSpecificFeature</a></code>, <code><a href="../../../projectgen/core/feature/LanguageSpecificFeature.html" title="interface in io.micronaut.projectgen.core.feature">LanguageSpecificFeature</a></code>, <code><a href="../../../projectgen/core/feature/OneOfFeature.html" title="interface in io.micronaut.projectgen.core.feature">OneOfFeature</a></code>, <code><a href="../../../projectgen/core/openrewrite/OpenRewriteFeature.html" title="interface in io.micronaut.projectgen.core.openrewrite">OpenRewriteFeature</a></code>, <code><a href="../server/ServerFeature.html" title="interface in io.micronaut.starter.feature.server">ServerFeature</a></code>, <code><a href="../server/ThirdPartyServerFeature.html" title="interface in io.micronaut.starter.feature.server">ThirdPartyServerFeature</a></code></dd>
 </dl>
 <hr>
 <div class="type-signature"><span class="annotations">@Requires(property="micronaut.starter.feature.ktor.enabled",
@@ -86,7 +86,7 @@ loadScripts(document, 'script');</script>
 @Singleton
 </span><span class="modifiers">public class </span><span class="element-name type-name-label">Ktor</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
-implements <a href="../../../projectgen/core/feature/KotlinApplicationFeature.html" title="interface in io.micronaut.projectgen.core.feature">KotlinApplicationFeature</a>, <a href="../server/ThirdPartyServerFeature.html" title="interface in io.micronaut.starter.feature.server">ThirdPartyServerFeature</a>, <a href="../../../projectgen/core/feature/KotlinSpecificFeature.html" title="interface in io.micronaut.projectgen.core.feature">KotlinSpecificFeature</a></span></div>
+implements <a href="../../../projectgen/core/feature/KotlinApplicationFeature.html" title="interface in io.micronaut.projectgen.core.feature">KotlinApplicationFeature</a>, <a href="../server/ThirdPartyServerFeature.html" title="interface in io.micronaut.starter.feature.server">ThirdPartyServerFeature</a>, <a href="../../../projectgen/core/feature/KotlinSpecificFeature.html" title="interface in io.micronaut.projectgen.core.feature">KotlinSpecificFeature</a>, <a href="../../../projectgen/core/openrewrite/OpenRewriteFeature.html" title="interface in io.micronaut.projectgen.core.openrewrite">OpenRewriteFeature</a></span></div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -99,18 +99,6 @@ implements <a href="../../../projectgen/core/feature/KotlinApplicationFeature.ht
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Field</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color"><code>static final <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color"><code><a href="#ARTIFACT_ID_KTOR_SERIALIZATION_JACKSON" class="member-name-link">ARTIFACT_ID_KTOR_SERIALIZATION_JACKSON</a></code></div>
-<div class="col-last even-row-color">&nbsp;</div>
-<div class="col-first odd-row-color"><code>static final <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color"><code><a href="#ARTIFACT_ID_KTOR_SERVER_CONTENT_NEGOTIATION" class="member-name-link">ARTIFACT_ID_KTOR_SERVER_CONTENT_NEGOTIATION</a></code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
-<div class="col-first even-row-color"><code>static final <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color"><code><a href="#ARTIFACT_ID_KTOR_SERVER_NETTY" class="member-name-link">ARTIFACT_ID_KTOR_SERVER_NETTY</a></code></div>
-<div class="col-last even-row-color">&nbsp;</div>
-<div class="col-first odd-row-color"><code>static final <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color"><code><a href="#GROUP_ID_IO_KTOR" class="member-name-link">GROUP_ID_IO_KTOR</a></code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
 <div class="col-first even-row-color"><code>static final <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color"><code><a href="#NAME" class="member-name-link">NAME</a></code></div>
 <div class="col-last even-row-color">&nbsp;</div>
@@ -128,7 +116,7 @@ implements <a href="../../../projectgen/core/feature/KotlinApplicationFeature.ht
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(io.micronaut.projectgen.core.buildtools.dependencies.CoordinateResolver)" class="member-name-link">Ktor</a><wbr>(<a href="../../../projectgen/core/buildtools/dependencies/CoordinateResolver.html" title="interface in io.micronaut.projectgen.core.buildtools.dependencies">CoordinateResolver</a>&nbsp;coordinateResolver)</code></div>
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(io.micronaut.projectgen.micronaut.features.validator.MicronautValidationFeature)" class="member-name-link">Ktor</a><wbr>(<a href="../../../projectgen/micronaut/features/validator/MicronautValidationFeature.html" title="class in io.micronaut.projectgen.micronaut.features.validator">MicronautValidationFeature</a>&nbsp;micronautValidationFeature)</code></div>
 <div class="col-last even-row-color">&nbsp;</div>
 </div>
 </section>
@@ -144,30 +132,32 @@ implements <a href="../../../projectgen/core/feature/KotlinApplicationFeature.ht
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addDependencies(io.micronaut.projectgen.core.generator.GeneratorContext)" class="member-name-link">addDependencies</a><wbr>(@NonNull <a href="../../../projectgen/core/generator/GeneratorContext.html" title="class in io.micronaut.projectgen.core.generator">GeneratorContext</a>&nbsp;generatorContext)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#apply(io.micronaut.projectgen.core.generator.GeneratorContext)" class="member-name-link">apply</a><wbr>(<a href="../../../projectgen/core/generator/GeneratorContext.html" title="class in io.micronaut.projectgen.core.generator">GeneratorContext</a>&nbsp;generatorContext)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#apply(io.micronaut.projectgen.core.generator.GeneratorContext)" class="member-name-link">apply</a><wbr>(<a href="../../../projectgen/core/generator/GeneratorContext.html" title="class in io.micronaut.projectgen.core.generator">GeneratorContext</a>&nbsp;generatorContext)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">If this method is called for a given feature that means the feature was explicitly selected,
  included by default as a result of <a href="../../../projectgen/core/feature/DefaultFeature.html#shouldApply(io.micronaut.projectgen.core.options.Options,java.util.Set)"><code>DefaultFeature.shouldApply(io.micronaut.starter.options.Options, java.util.Set)</code></a>,
  or added explicitly by another feature through <a href="../../../projectgen/core/feature/FeatureContext.html#addFeature(io.micronaut.projectgen.core.feature.Feature)"><code>FeatureContext.addFeature(Feature)</code></a>.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getCategory()" class="member-name-link">getCategory</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getDescription()" class="member-name-link">getDescription</a>()</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getCategory()" class="member-name-link">getCategory</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getFrameworkDocumentation(io.micronaut.projectgen.core.generator.GeneratorContext)" class="member-name-link">getFrameworkDocumentation</a><wbr>(<a href="../../../projectgen/core/generator/GeneratorContext.html" title="class in io.micronaut.projectgen.core.generator">GeneratorContext</a>&nbsp;generatorContext)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getDescription()" class="member-name-link">getDescription</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@NonNull <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getName()" class="member-name-link">getName</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">The name of the feature.</div>
 </div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getOrder()" class="member-name-link">getOrder</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">The order of a feature controls the order in which it applies.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getRecipes(io.micronaut.projectgen.core.generator.GeneratorContext)" class="member-name-link">getRecipes</a><wbr>(<a href="../../../projectgen/core/generator/GeneratorContext.html" title="class in io.micronaut.projectgen.core.generator">GeneratorContext</a>&nbsp;generatorContext)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getTitle()" class="member-name-link">getTitle</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
@@ -203,13 +193,13 @@ implements <a href="../../../projectgen/core/feature/KotlinApplicationFeature.ht
 <code>getDescription</code></div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-io.micronaut.projectgen.core.feature.Feature">Methods inherited from interface&nbsp;io.micronaut.projectgen.core.feature.<a href="../../../projectgen/core/feature/Feature.html" title="interface in io.micronaut.projectgen.core.feature">Feature</a></h3>
-<code><a href="../../../projectgen/core/feature/Feature.html#getThirdPartyDocumentation(io.micronaut.projectgen.core.generator.GeneratorContext)">getThirdPartyDocumentation</a>, <a href="../../../projectgen/core/feature/Feature.html#isCommunity()">isCommunity</a>, <a href="../../../projectgen/core/feature/Feature.html#isPreview()">isPreview</a></code></div>
-<div class="inherited-list">
-<h3 id="methods-inherited-from-class-io.micronaut.projectgen.core.feature.KotlinApplicationFeature">Methods inherited from interface&nbsp;io.micronaut.projectgen.core.feature.<a href="../../../projectgen/core/feature/KotlinApplicationFeature.html" title="interface in io.micronaut.projectgen.core.feature">KotlinApplicationFeature</a></h3>
-<code><a href="../../../projectgen/core/feature/KotlinApplicationFeature.html#getOrder()">getOrder</a></code></div>
+<code><a href="../../../projectgen/core/feature/Feature.html#isCommunity()">isCommunity</a>, <a href="../../../projectgen/core/feature/Feature.html#isPreview()">isPreview</a></code></div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-io.micronaut.projectgen.core.feature.KotlinSpecificFeature">Methods inherited from interface&nbsp;io.micronaut.projectgen.core.feature.<a href="../../../projectgen/core/feature/KotlinSpecificFeature.html" title="interface in io.micronaut.projectgen.core.feature">KotlinSpecificFeature</a></h3>
 <code><a href="../../../projectgen/core/feature/KotlinSpecificFeature.html#getRequiredLanguage()">getRequiredLanguage</a></code></div>
+<div class="inherited-list">
+<h3 id="methods-inherited-from-class-io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature">Methods inherited from interface&nbsp;io.micronaut.projectgen.core.openrewrite.<a href="../../../projectgen/core/openrewrite/OpenRewriteFeature.html" title="interface in io.micronaut.projectgen.core.openrewrite">OpenRewriteFeature</a></h3>
+<code><a href="../../../projectgen/core/openrewrite/OpenRewriteFeature.html#getFrameworkDocumentation(io.micronaut.projectgen.core.generator.GeneratorContext)">getFrameworkDocumentation</a>, <a href="../../../projectgen/core/openrewrite/OpenRewriteFeature.html#getThirdPartyDocumentation(io.micronaut.projectgen.core.generator.GeneratorContext)">getThirdPartyDocumentation</a>, <a href="../../../projectgen/core/openrewrite/OpenRewriteFeature.html#processRecipes(io.micronaut.projectgen.core.generator.GeneratorContext)">processRecipes</a></code></div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-io.micronaut.starter.feature.server.ServerFeature">Methods inherited from interface&nbsp;io.micronaut.starter.feature.server.<a href="../server/ServerFeature.html" title="interface in io.micronaut.starter.feature.server">ServerFeature</a></h3>
 <code><a href="../server/ServerFeature.html#getFeatureClass()">getFeatureClass</a></code></div>
@@ -238,62 +228,6 @@ implements <a href="../../../projectgen/core/feature/KotlinApplicationFeature.ht
 </dl>
 </section>
 </li>
-<li>
-<section class="detail" id="GROUP_ID_IO_KTOR">
-<h3>GROUP_ID_IO_KTOR</h3>
-<div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">GROUP_ID_IO_KTOR</span></div>
-<dl class="notes">
-<dt>See Also:</dt>
-<dd>
-<ul class="see-list">
-<li><a href="../../../../../constant-values.html#io.micronaut.starter.feature.kotlin.Ktor.GROUP_ID_IO_KTOR">Constant Field Values</a></li>
-</ul>
-</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="ARTIFACT_ID_KTOR_SERVER_NETTY">
-<h3>ARTIFACT_ID_KTOR_SERVER_NETTY</h3>
-<div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">ARTIFACT_ID_KTOR_SERVER_NETTY</span></div>
-<dl class="notes">
-<dt>See Also:</dt>
-<dd>
-<ul class="see-list">
-<li><a href="../../../../../constant-values.html#io.micronaut.starter.feature.kotlin.Ktor.ARTIFACT_ID_KTOR_SERVER_NETTY">Constant Field Values</a></li>
-</ul>
-</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="ARTIFACT_ID_KTOR_SERIALIZATION_JACKSON">
-<h3>ARTIFACT_ID_KTOR_SERIALIZATION_JACKSON</h3>
-<div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">ARTIFACT_ID_KTOR_SERIALIZATION_JACKSON</span></div>
-<dl class="notes">
-<dt>See Also:</dt>
-<dd>
-<ul class="see-list">
-<li><a href="../../../../../constant-values.html#io.micronaut.starter.feature.kotlin.Ktor.ARTIFACT_ID_KTOR_SERIALIZATION_JACKSON">Constant Field Values</a></li>
-</ul>
-</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="ARTIFACT_ID_KTOR_SERVER_CONTENT_NEGOTIATION">
-<h3>ARTIFACT_ID_KTOR_SERVER_CONTENT_NEGOTIATION</h3>
-<div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">ARTIFACT_ID_KTOR_SERVER_CONTENT_NEGOTIATION</span></div>
-<dl class="notes">
-<dt>See Also:</dt>
-<dd>
-<ul class="see-list">
-<li><a href="../../../../../constant-values.html#io.micronaut.starter.feature.kotlin.Ktor.ARTIFACT_ID_KTOR_SERVER_CONTENT_NEGOTIATION">Constant Field Values</a></li>
-</ul>
-</dd>
-</dl>
-</section>
-</li>
 </ul>
 </section>
 </li>
@@ -303,9 +237,9 @@ implements <a href="../../../projectgen/core/feature/KotlinApplicationFeature.ht
 <h2>Constructor Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="&lt;init&gt;(io.micronaut.projectgen.core.buildtools.dependencies.CoordinateResolver)">
+<section class="detail" id="&lt;init&gt;(io.micronaut.projectgen.micronaut.features.validator.MicronautValidationFeature)">
 <h3>Ktor</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Ktor</span><wbr><span class="parameters">(<a href="../../../projectgen/core/buildtools/dependencies/CoordinateResolver.html" title="interface in io.micronaut.projectgen.core.buildtools.dependencies">CoordinateResolver</a>&nbsp;coordinateResolver)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Ktor</span><wbr><span class="parameters">(<a href="../../../projectgen/micronaut/features/validator/MicronautValidationFeature.html" title="class in io.micronaut.projectgen.micronaut.features.validator">MicronautValidationFeature</a>&nbsp;micronautValidationFeature)</span></div>
 </section>
 </li>
 </ul>
@@ -424,34 +358,13 @@ implements <a href="../../../projectgen/core/feature/KotlinApplicationFeature.ht
 </section>
 </li>
 <li>
-<section class="detail" id="apply(io.micronaut.projectgen.core.generator.GeneratorContext)">
-<h3>apply</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">apply</span><wbr><span class="parameters">(<a href="../../../projectgen/core/generator/GeneratorContext.html" title="class in io.micronaut.projectgen.core.generator">GeneratorContext</a>&nbsp;generatorContext)</span></div>
-<div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="../../../projectgen/core/feature/Feature.html#apply(io.micronaut.projectgen.core.generator.GeneratorContext)">Feature</a></code></span></div>
-<div class="block">If this method is called for a given feature that means the feature was explicitly selected,
- included by default as a result of <a href="../../../projectgen/core/feature/DefaultFeature.html#shouldApply(io.micronaut.projectgen.core.options.Options,java.util.Set)"><code>DefaultFeature.shouldApply(io.micronaut.starter.options.Options, java.util.Set)</code></a>,
- or added explicitly by another feature through <a href="../../../projectgen/core/feature/FeatureContext.html#addFeature(io.micronaut.projectgen.core.feature.Feature)"><code>FeatureContext.addFeature(Feature)</code></a>.
-
- At this point the feature list is set and cannot change.
-
- This method can be implemented to modify the generated project. The feature can add templates
- by executing <a href="../../../projectgen/core/generator/GeneratorContext.html#addTemplate(java.lang.String,io.micronaut.projectgen.core.template.Template)"><code>GeneratorContext.addTemplate(String, io.micronaut.starter.template.Template)</code></a>, modify configuration
- by modifying <a href="../../../projectgen/core/generator/GeneratorContext.html#getConfiguration()"><code>GeneratorContext.getConfiguration()</code></a> or <a href="../../../projectgen/core/generator/GeneratorContext.html#getBootstrapConfiguration()"><code>GeneratorContext.getBootstrapConfiguration()</code></a>, or modify build properties through <a href="../../../projectgen/core/generator/GeneratorContext.html#getBuildProperties()"><code>GeneratorContext.getBuildProperties()</code></a>.</div>
+<section class="detail" id="getRecipes(io.micronaut.projectgen.core.generator.GeneratorContext)">
+<h3>getRecipes</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</span>&nbsp;<span class="element-name">getRecipes</span><wbr><span class="parameters">(<a href="../../../projectgen/core/generator/GeneratorContext.html" title="class in io.micronaut.projectgen.core.generator">GeneratorContext</a>&nbsp;generatorContext)</span></div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="../../../projectgen/core/feature/ApplicationFeature.html#apply(io.micronaut.projectgen.core.generator.GeneratorContext)">apply</a></code>&nbsp;in interface&nbsp;<code><a href="../../../projectgen/core/feature/ApplicationFeature.html" title="interface in io.micronaut.projectgen.core.feature">ApplicationFeature</a></code></dd>
-<dt>Specified by:</dt>
-<dd><code><a href="../../../projectgen/core/feature/Feature.html#apply(io.micronaut.projectgen.core.generator.GeneratorContext)">apply</a></code>&nbsp;in interface&nbsp;<code><a href="../../../projectgen/core/feature/Feature.html" title="interface in io.micronaut.projectgen.core.feature">Feature</a></code></dd>
-<dt>Parameters:</dt>
-<dd><code>generatorContext</code> - THe generator context</dd>
+<dd><code><a href="../../../projectgen/core/openrewrite/OpenRewriteFeature.html#getRecipes(io.micronaut.projectgen.core.generator.GeneratorContext)">getRecipes</a></code>&nbsp;in interface&nbsp;<code><a href="../../../projectgen/core/openrewrite/OpenRewriteFeature.html" title="interface in io.micronaut.projectgen.core.openrewrite">OpenRewriteFeature</a></code></dd>
 </dl>
-</section>
-</li>
-<li>
-<section class="detail" id="addDependencies(io.micronaut.projectgen.core.generator.GeneratorContext)">
-<h3>addDependencies</h3>
-<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">addDependencies</span><wbr><span class="parameters">(@NonNull
- @NonNull <a href="../../../projectgen/core/generator/GeneratorContext.html" title="class in io.micronaut.projectgen.core.generator">GeneratorContext</a>&nbsp;generatorContext)</span></div>
 </section>
 </li>
 <li>
@@ -472,16 +385,45 @@ implements <a href="../../../projectgen/core/feature/KotlinApplicationFeature.ht
 </section>
 </li>
 <li>
-<section class="detail" id="getFrameworkDocumentation(io.micronaut.projectgen.core.generator.GeneratorContext)">
-<h3>getFrameworkDocumentation</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getFrameworkDocumentation</span><wbr><span class="parameters">(<a href="../../../projectgen/core/generator/GeneratorContext.html" title="class in io.micronaut.projectgen.core.generator">GeneratorContext</a>&nbsp;generatorContext)</span></div>
+<section class="detail" id="getOrder()">
+<h3>getOrder</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getOrder</span>()</div>
+<div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="../../../projectgen/core/feature/Feature.html#getOrder()">Feature</a></code></span></div>
+<div class="block">The order of a feature controls the order in which it applies. The
+ order of a feature is important to ensure that any previous work done
+ by other features that may be required is done. See <a href="../../../projectgen/core/feature/FeaturePhase.html" title="enum class in io.micronaut.projectgen.core.feature"><code>FeaturePhase</code></a>
+ for a list of phases to choose from.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="../../../projectgen/core/feature/Feature.html#getFrameworkDocumentation(io.micronaut.projectgen.core.generator.GeneratorContext)">getFrameworkDocumentation</a></code>&nbsp;in interface&nbsp;<code><a href="../../../projectgen/core/feature/Feature.html" title="interface in io.micronaut.projectgen.core.feature">Feature</a></code></dd>
-<dt>Parameters:</dt>
-<dd><code>generatorContext</code> - Generator Context</dd>
+<dd><code><a href="../../../projectgen/core/feature/Feature.html#getOrder()">getOrder</a></code>&nbsp;in interface&nbsp;<code><a href="../../../projectgen/core/feature/Feature.html" title="interface in io.micronaut.projectgen.core.feature">Feature</a></code></dd>
+<dt>Specified by:</dt>
+<dd><code><a href="../../../projectgen/core/feature/KotlinApplicationFeature.html#getOrder()">getOrder</a></code>&nbsp;in interface&nbsp;<code><a href="../../../projectgen/core/feature/KotlinApplicationFeature.html" title="interface in io.micronaut.projectgen.core.feature">KotlinApplicationFeature</a></code></dd>
+<dt>Specified by:</dt>
+<dd><code>getOrder</code>&nbsp;in interface&nbsp;<code>io.micronaut.core.order.Ordered</code></dd>
 <dt>Returns:</dt>
-<dd>Returns a link to Framework documentation about the feature. eg. https://micronaut-projects.github.io/micronaut-cache/latest/guide/index.html#hazelcast</dd>
+<dd>The order of the feature</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="apply(io.micronaut.projectgen.core.generator.GeneratorContext)">
+<h3>apply</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">apply</span><wbr><span class="parameters">(<a href="../../../projectgen/core/generator/GeneratorContext.html" title="class in io.micronaut.projectgen.core.generator">GeneratorContext</a>&nbsp;generatorContext)</span></div>
+<div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="../../../projectgen/core/feature/Feature.html#apply(io.micronaut.projectgen.core.generator.GeneratorContext)">Feature</a></code></span></div>
+<div class="block">If this method is called for a given feature that means the feature was explicitly selected,
+ included by default as a result of <a href="../../../projectgen/core/feature/DefaultFeature.html#shouldApply(io.micronaut.projectgen.core.options.Options,java.util.Set)"><code>DefaultFeature.shouldApply(io.micronaut.starter.options.Options, java.util.Set)</code></a>,
+ or added explicitly by another feature through <a href="../../../projectgen/core/feature/FeatureContext.html#addFeature(io.micronaut.projectgen.core.feature.Feature)"><code>FeatureContext.addFeature(Feature)</code></a>.
+
+ At this point the feature list is set and cannot change.</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="../../../projectgen/core/feature/ApplicationFeature.html#apply(io.micronaut.projectgen.core.generator.GeneratorContext)">apply</a></code>&nbsp;in interface&nbsp;<code><a href="../../../projectgen/core/feature/ApplicationFeature.html" title="interface in io.micronaut.projectgen.core.feature">ApplicationFeature</a></code></dd>
+<dt>Specified by:</dt>
+<dd><code><a href="../../../projectgen/core/feature/Feature.html#apply(io.micronaut.projectgen.core.generator.GeneratorContext)">apply</a></code>&nbsp;in interface&nbsp;<code><a href="../../../projectgen/core/feature/Feature.html" title="interface in io.micronaut.projectgen.core.feature">Feature</a></code></dd>
+<dt>Specified by:</dt>
+<dd><code><a href="../../../projectgen/core/openrewrite/OpenRewriteFeature.html#apply(io.micronaut.projectgen.core.generator.GeneratorContext)">apply</a></code>&nbsp;in interface&nbsp;<code><a href="../../../projectgen/core/openrewrite/OpenRewriteFeature.html" title="interface in io.micronaut.projectgen.core.openrewrite">OpenRewriteFeature</a></code></dd>
+<dt>Parameters:</dt>
+<dd><code>generatorContext</code> - THe generator context</dd>
 </dl>
 </section>
 </li>

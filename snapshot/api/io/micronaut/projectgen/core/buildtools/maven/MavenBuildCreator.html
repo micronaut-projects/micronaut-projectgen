@@ -108,8 +108,8 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@NonNull <a href="MavenBuild.html" title="class in io.micronaut.projectgen.core.buildtools.maven">MavenBuild</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#create(io.micronaut.projectgen.core.generator.GeneratorContext,java.util.List)" class="member-name-link">create</a><wbr>(<a href="../../generator/GeneratorContext.html" title="class in io.micronaut.projectgen.core.generator">GeneratorContext</a>&nbsp;generatorContext,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../Repository.html" title="interface in io.micronaut.projectgen.core.buildtools">Repository</a>&gt;&nbsp;repositories)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#create(io.micronaut.projectgen.core.generator.ModuleContext,io.micronaut.projectgen.core.options.Options)" class="member-name-link">create</a><wbr>(<a href="../../generator/ModuleContext.html" title="class in io.micronaut.projectgen.core.generator">ModuleContext</a>&nbsp;module,
+ <a href="../../options/Options.html" title="interface in io.micronaut.projectgen.core.options">Options</a>&nbsp;options)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 </div>
 </div>
@@ -143,15 +143,15 @@ loadScripts(document, 'script');</script>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="create(io.micronaut.projectgen.core.generator.GeneratorContext,java.util.List)">
+<section class="detail" id="create(io.micronaut.projectgen.core.generator.ModuleContext,io.micronaut.projectgen.core.options.Options)">
 <h3>create</h3>
 <div class="member-signature"><span class="annotations">@NonNull
-</span><span class="modifiers">public</span>&nbsp;<span class="return-type">@NonNull <a href="MavenBuild.html" title="class in io.micronaut.projectgen.core.buildtools.maven">MavenBuild</a></span>&nbsp;<span class="element-name">create</span><wbr><span class="parameters">(<a href="../../generator/GeneratorContext.html" title="class in io.micronaut.projectgen.core.generator">GeneratorContext</a>&nbsp;generatorContext,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../Repository.html" title="interface in io.micronaut.projectgen.core.buildtools">Repository</a>&gt;&nbsp;repositories)</span></div>
+</span><span class="modifiers">public</span>&nbsp;<span class="return-type">@NonNull <a href="MavenBuild.html" title="class in io.micronaut.projectgen.core.buildtools.maven">MavenBuild</a></span>&nbsp;<span class="element-name">create</span><wbr><span class="parameters">(<a href="../../generator/ModuleContext.html" title="class in io.micronaut.projectgen.core.generator">ModuleContext</a>&nbsp;module,
+ <a href="../../options/Options.html" title="interface in io.micronaut.projectgen.core.options">Options</a>&nbsp;options)</span></div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>generatorContext</code> - Generator Context</dd>
-<dd><code>repositories</code> - repositories</dd>
+<dd><code>module</code> - Module Context</dd>
+<dd><code>options</code> - Options</dd>
 <dt>Returns:</dt>
 <dd>Maven Build</dd>
 </dl>
