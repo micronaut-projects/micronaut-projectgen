@@ -17,3 +17,9 @@ micronautBuild {
         enabled = false
     }
 }
+
+tasks {
+    prepareJavadocAggregation {
+        sources.from(layout.buildDirectory.dir("generated/sources/annotationProcessor/java/main"))
+    }
+}
