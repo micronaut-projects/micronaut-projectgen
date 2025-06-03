@@ -27,7 +27,7 @@ class MicroStreamRestTest {
         Map<String, String> project = generateProject(micronautProjectGenerator, options);
         String buildGradle = project.get("build.gradle.kts");
         assertNotNull(buildGradle);
-        BuildTestVerifier verifier = BuildTestVerifier.of(buildGradle, BuildTool.GRADLE_KOTLIN, options.language(), options.testFramework());
+        BuildTestVerifier verifier = BuildTestVerifier.of(buildGradle, BuildTool.GRADLE, options.language(), options.testFramework());
         assertTrue(verifier.hasDependency("io.micronaut.microstream", "micronaut-microstream-rest", Scope.DEVELOPMENT_ONLY), buildGradle);
 
         String pom = project.get("pom.xml");

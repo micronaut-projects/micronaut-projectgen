@@ -101,7 +101,8 @@ public class MicronautBuildPlugin implements BuildPluginFeature, DefaultFeature 
 
         if (shouldAddRepositoriesForSnapshots(builder)) {
             builder.pluginsManagementRepository(new GradlePluginPortal())
-                    .pluginsManagementRepository(GradleRepository.of(generatorContext.getBuildTool().getGradleDsl().orElse(GradleDsl.GROOVY), new S01SonatypeSnapshots()));
+                    .pluginsManagementRepository(GradleRepository.of(
+                        generatorContext.getOptions().gradleDsl() == null ? GradleDsl.GROOVY : generatorContext.getOptions().gradleDsl(), new S01SonatypeSnapshots()));
         }
         return builder.build();
     }
@@ -162,9 +163,9 @@ public class MicronautBuildPlugin implements BuildPluginFeature, DefaultFeature 
                 .map(f -> ((LambdaRuntimeMainClass) f).getLambdaRuntimeMainClass())
                 .findFirst()
                 .ifPresent(builder::lambdaRuntimeMainClass);
-        Optional<GradleDsl> gradleDsl = generatorContext.getBuildTool().getGradleDsl();
-        if (gradleDsl.isPresent()) {
-            builder = builder.dsl(gradleDsl.get());
+        GradleDsl gradleDsl = generatorContext.getOptions().gradleDsl();
+        if (gradleDsl != null) {
+            builder = builder.dsl(gradleDsl);
         }
 
         Optional<String> runtimeOptional = resolveRuntime(generatorContext);

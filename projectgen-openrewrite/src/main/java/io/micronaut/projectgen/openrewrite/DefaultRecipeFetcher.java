@@ -154,7 +154,7 @@ public class DefaultRecipeFetcher implements RecipeFetcher {
         Recipe resolvedRecipe = resolveRecipe(recipe);
         if (resolvedRecipe instanceof org.openrewrite.java.dependencies.AddDependency d) {
             dependencies.add(findDependency(d));
-        } else if (buildTool.isGradle() && resolvedRecipe instanceof org.openrewrite.gradle.AddDependency d) {
+        } else if (buildTool == BuildTool.GRADLE && resolvedRecipe instanceof org.openrewrite.gradle.AddDependency d) {
             dependencies.add(findGradleDependency(d));
         } else if (buildTool == BuildTool.MAVEN && resolvedRecipe instanceof org.openrewrite.maven.AddDependency d) {
             dependencies.add(findMavenDependency(d));

@@ -22,7 +22,7 @@ class RetryTest {
     @Test
     void retryFeaturesAddsTheDependency(ProjectGenerator micronautProjectGenerator) throws Exception {
         Options options = OptionsFixture.defaultGradle()
-            .buildTools(List.of(BuildTool.MAVEN, BuildTool.GRADLE_KOTLIN))
+            .buildTools(List.of(BuildTool.MAVEN, BuildTool.GRADLE))
             .features(List.of("retry"))
             .build();
         Map<String, String> project = generateProject(micronautProjectGenerator, options);

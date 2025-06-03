@@ -1,6 +1,7 @@
 package io.micronaut.projectgen.micronaut;
 
 import io.micronaut.projectgen.core.buildtools.BuildTool;
+import io.micronaut.projectgen.core.buildtools.gradle.GradleDsl;
 import io.micronaut.projectgen.core.options.ConfigurationFormat;
 import io.micronaut.projectgen.core.options.GenericOptionsBuilder;
 import io.micronaut.projectgen.core.options.JdkVersion;
@@ -18,13 +19,15 @@ public class OptionsFixture {
 
     public static GenericOptionsBuilder defaultGradle() {
         return defaultNoBuildTool()
-            .buildTools(List.of(BuildTool.GRADLE_KOTLIN));
+            .buildTools(List.of(BuildTool.GRADLE))
+            .gradleDsl(GradleDsl.KOTLIN);
     }
 
     public static Options defaultGradleAndMaven(String feature) {
         return defaultNoBuildTool()
             .features(List.of(feature))
-            .buildTools(List.of(BuildTool.GRADLE_KOTLIN, BuildTool.MAVEN))
+            .buildTools(List.of(BuildTool.GRADLE, BuildTool.MAVEN))
+            .gradleDsl(GradleDsl.KOTLIN)
             .build();
     }
 
@@ -37,7 +40,7 @@ public class OptionsFixture {
             .buildTools(List.of(BuildTool.MAVEN));
     }
 
-    private static GenericOptionsBuilder defaultNoBuildTool() {
+    public static GenericOptionsBuilder defaultNoBuildTool() {
         return GenericOptionsBuilder.builder()
             .name("demo")
             .packageName("com.example")

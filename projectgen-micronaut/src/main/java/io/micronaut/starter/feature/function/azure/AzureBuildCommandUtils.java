@@ -28,7 +28,7 @@ public final class AzureBuildCommandUtils {
     public static String getBuildCommand(BuildTool buildTool) {
         if (buildTool == BuildTool.MAVEN) {
             return MAVEN_AZURE_DEPLOY_COMMAND;
-        } else if (buildTool.isGradle()) {
+        } else if (buildTool == BuildTool.GRADLE) {
             return GRADLE_AZURE_DEPLOY_COMMAND;
         } else {
             throw new IllegalStateException("Unsupported build tool");

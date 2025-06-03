@@ -30,7 +30,7 @@ steps:
     args: ["package"]
 # [END cloudbuild_maven]
 
-    } else if (buildTool.isGradle()) {
+    } else if (buildTool == BuildTool.GRADLE) {
 
 # [START cloudbuild_gradle]
 steps:

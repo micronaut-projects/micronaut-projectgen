@@ -18,7 +18,7 @@ package io.micronaut.projectgen.core.buildtools.gradle;
 import io.micronaut.projectgen.core.feature.Feature;
 
 /**
- * A feature that only works with {@link io.micronaut.projectgen.core.buildtools.BuildTool#isGradle()}.
+ * A feature that only works with {@link io.micronaut.projectgen.core.buildtools.BuildTool#GRADLE}.
  */
 public interface GradleSpecificFeature extends Feature {
 }

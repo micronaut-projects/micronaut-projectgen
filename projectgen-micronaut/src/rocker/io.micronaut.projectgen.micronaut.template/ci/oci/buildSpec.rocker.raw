@@ -32,7 +32,7 @@ steps:
     command: |
     @if (buildTool.equals(BuildTool.MAVEN)) {
       ./mvnw verify
-    } else if (buildTool.isGradle()) {
+    } else if (buildTool == BuildTool.GRADLE) {
       ./gradlew build
     }
   - type: Command
@@ -40,7 +40,7 @@ steps:
     command: |
     @if (buildTool.equals(BuildTool.MAVEN)) {
       ./mvnw package -Dpackaging=docker
-    } else if (buildTool.isGradle()) {
+    } else if (buildTool == BuildTool.GRADLE) {
       ./gradlew dockerBuild
     }
 
@@ -49,7 +49,7 @@ outputArtifacts:
     type: BINARY
     @if (buildTool.equals(BuildTool.MAVEN)) {
     location: target/@projectName-0.1.jar
-    } else if (buildTool.isGradle()) {
+    } else if (buildTool == BuildTool.GRADLE) {
     location: build/libs/@projectName-0.1-all.jar
     }
   - name: build-service-demo

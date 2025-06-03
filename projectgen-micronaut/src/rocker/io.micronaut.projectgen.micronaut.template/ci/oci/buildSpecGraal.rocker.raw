@@ -39,7 +39,7 @@ steps:
     }
     @if (buildTool.equals(BuildTool.MAVEN)) {
       ./mvnw verify
-    } else if (buildTool.isGradle()) {
+    } else if (buildTool == BuildTool.GRADLE) {
       ./gradlew build
     }
   - type: Command
@@ -52,7 +52,7 @@ steps:
     }
     @if (buildTool.equals(BuildTool.MAVEN)) {
       ./mvnw package -Dpackaging=native-image
-    } else if (buildTool.isGradle()) {
+    } else if (buildTool == BuildTool.GRADLE) {
       ./gradlew nativeCompile
     }
   - type: Command
@@ -65,7 +65,7 @@ steps:
     }
     @if (buildTool.equals(BuildTool.MAVEN)) {
       ./mvnw package -Dpackaging=docker-native
-    } else if (buildTool.isGradle()) {
+    } else if (buildTool == BuildTool.GRADLE) {
       ./gradlew dockerBuildNative
     }
 
@@ -74,7 +74,7 @@ outputArtifacts:
     type: BINARY
     @if (buildTool.equals(BuildTool.MAVEN)) {
     location: target/@projectName-0.1.jar
-    } else if (buildTool.isGradle()) {
+    } else if (buildTool == BuildTool.GRADLE) {
     location: build/libs/@projectName-0.1-all.jar
     }
   - name: build-service-demo
@@ -84,6 +84,6 @@ outputArtifacts:
     type: BINARY
     @if (buildTool.equals(BuildTool.MAVEN)) {
     location: target/@projectName
-    } else if (buildTool.isGradle()) {
+    } else if (buildTool == BuildTool.GRADLE) {
     location: build/native/nativeCompile/@projectName
     }

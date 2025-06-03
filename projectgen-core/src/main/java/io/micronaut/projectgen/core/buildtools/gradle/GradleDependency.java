@@ -70,7 +70,8 @@ public class GradleDependency extends DependencyCoordinate {
             generatorContext
         ).orElseThrow(() ->
             new IllegalArgumentException("Cannot map the dependency scope: [%s] to a Gradle specific scope".formatted(dependency.getScope())));
-        isKotlinDSL = generatorContext.getOptions().buildTools().stream().anyMatch(bt -> bt.isGradle() && bt.getGradleDsl().isPresent() && bt.getGradleDsl().get() == GradleDsl.KOTLIN);
+        isKotlinDSL = generatorContext.getOptions().buildTools().stream()
+            .anyMatch(bt -> bt == BuildTool.GRADLE && options.gradleDsl() != null && options.gradleDsl() == GradleDsl.KOTLIN);
         this.useVersionCatalogue = useVersionCatalogue;
         this.project = project;
         this.comment = comment;
@@ -176,7 +177,8 @@ public class GradleDependency extends DependencyCoordinate {
 
     @NonNull
     public static List<GradleDependency> listOf(GeneratorContext generatorContext, DependencyContext dependencyContext, Options options, boolean useVersionCatalogue) {
-        BuildTool buildTool = options.buildTools().stream().filter(BuildTool::isGradle).findFirst().orElseThrow();
+        BuildTool buildTool = options.buildTools().stream()
+            .filter(bt -> bt == BuildTool.GRADLE).findFirst().orElseThrow();
         return dependencyContext.removeDuplicates(dependencyContext.getDependencies(), options.language(), buildTool)
             .stream()
             .map(dep -> new GradleDependency(dep, options, generatorContext, useVersionCatalogue, dep.getProject(), dep.getComment()))

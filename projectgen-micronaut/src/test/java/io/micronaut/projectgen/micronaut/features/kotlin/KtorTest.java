@@ -23,14 +23,14 @@ public class KtorTest {
     @Test
     void ktorFeaturesAddsTheDependency(ProjectGenerator micronautProjectGenerator) throws Exception {
         Options options = OptionsFixture.defaultGradle()
-            .buildTools(List.of(BuildTool.MAVEN, BuildTool.GRADLE_KOTLIN))
+            .buildTools(List.of(BuildTool.MAVEN, BuildTool.GRADLE))
             .features(List.of("ktor"))
             .language(Language.KOTLIN)
             .build();
         Map<String, String> project = generateProject(micronautProjectGenerator, options);
         String buildGradle = project.get("build.gradle.kts");
         assertNotNull(buildGradle);
-        BuildTestVerifier verifier = BuildTestVerifier.of(buildGradle, BuildTool.GRADLE_KOTLIN, options.language(), options.testFramework());
+        BuildTestVerifier verifier = BuildTestVerifier.of(buildGradle, BuildTool.GRADLE, options.language(), options.testFramework());
         assertTrue(verifier.hasDependency("io.micronaut.kotlin", "micronaut-ktor", Scope.COMPILE), buildGradle);
         assertTrue(verifier.hasDependency("io.micronaut.validation", "micronaut-validation", Scope.COMPILE), buildGradle);
         assertTrue(verifier.hasDependency("io.ktor", "ktor-serialization-jackson-jvm", Scope.COMPILE), buildGradle);

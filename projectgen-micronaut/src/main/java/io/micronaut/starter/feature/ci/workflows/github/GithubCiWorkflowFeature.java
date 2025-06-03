@@ -20,6 +20,7 @@ import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.starter.feature.ci.workflows.CIWorkflowFeature;
 import io.micronaut.projectgen.micronaut.template.ci.github.javaAction;
 import io.micronaut.projectgen.core.options.JdkDistribution;
@@ -77,14 +78,11 @@ public class GithubCiWorkflowFeature extends CIWorkflowFeature {
     @NonNull
     @Override
     public String getWorkflowFileName(GeneratorContext generatorContext) {
-        switch (generatorContext.getBuildTool()) {
-            case GRADLE:
-            case GRADLE_KOTLIN:
-                return "gradle.yml";
-            case MAVEN:
-                return "maven.yml";
-            default:
-                throw new IllegalArgumentException("Unexpected constant for BuildTool enum");
+        if (OptionUtils.hasGradleBuildTool(generatorContext.getOptions())) {
+            return "gradle.yml";
+        } else if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())) {
+            return "maven.yml";
         }
+        throw new IllegalArgumentException("Unexpected constant for BuildTool enum");
     }
 }

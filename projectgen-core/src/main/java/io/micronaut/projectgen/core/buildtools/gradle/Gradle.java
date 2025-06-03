@@ -20,6 +20,7 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
+import io.micronaut.projectgen.core.buildtools.BuildToolUtils;
 import io.micronaut.projectgen.core.buildtools.Property;
 import io.micronaut.projectgen.core.feature.BuildFeature;
 import io.micronaut.projectgen.core.feature.DefaultFeature;
@@ -67,8 +68,6 @@ public class Gradle implements BuildFeature, DefaultFeature {
     private static final String NAME_GRADLE_WRAPPER_BAT = "gradleWrapperBat";
     private static final String NAME = "gradle";
     private static final String NAME_BUILD_GRADLE = "build.gradle";
-    private static final String SETTINGS_GRADLE = "settings.gradle";
-    private static final String SETTINGS_GRADLE_KTS = "settings.gradle.kts";
     private static final String GRADLE_PROPERTIES = "gradle.properties";
 
     @Override
@@ -101,7 +100,8 @@ public class Gradle implements BuildFeature, DefaultFeature {
         }
         generateBuildFiles(generatorContext, rootModule, "");
 
-        BuildTool buildTool = generatorContext.getOptions().buildTools().stream().filter(BuildTool::isGradle).findFirst().orElseThrow();
+        BuildTool buildTool = generatorContext.getOptions().buildTools().stream()
+            .filter(bt -> bt == BuildTool.GRADLE).findFirst().orElseThrow();
         GradleBuild build = GradleBuildCreator.create(generatorContext, rootModule, generatorContext.getOptions());
         addSettingsFile(buildTool, generatorContext, build, rootModule);
     }
@@ -142,7 +142,7 @@ public class Gradle implements BuildFeature, DefaultFeature {
      */
     protected void addSettingsFile(BuildTool buildTool, GeneratorContext generatorContext, GradleBuild build, ModuleContext module) {
         boolean hasMultiProjectFeature = generatorContext.getFeatures().hasMultiProjectFeature();
-        String settingsFile = buildTool == BuildTool.GRADLE ? SETTINGS_GRADLE : SETTINGS_GRADLE_KTS;
+        String settingsFile = BuildToolUtils.settingsFileName(buildTool, generatorContext.getOptions().gradleDsl());
         module.addTemplate("gradleSettings",
             new RockerTemplate(settingsFile,
                 settingsGradle.template(generatorContext.getProject(), build, hasMultiProjectFeature, generatorContext.getModuleNames())));

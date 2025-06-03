@@ -176,7 +176,7 @@ public interface BuildTestVerifier {
                                 @NonNull BuildTool buildTool,
                                 @NonNull Language language,
                                 @NonNull TestFramework testFramework) {
-        if (buildTool.isGradle()) {
+        if (buildTool == BuildTool.GRADLE) {
             return new GradleBuildTestVerifier(template, buildTool, language, testFramework);
         }
         if (buildTool == BuildTool.MAVEN) {

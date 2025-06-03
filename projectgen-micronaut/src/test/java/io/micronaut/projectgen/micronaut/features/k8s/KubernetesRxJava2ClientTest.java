@@ -27,7 +27,7 @@ class KubernetesRxJava2ClientTest {
         Map<String, String> project = generateProject(micronautProjectGenerator, options);
         String buildGradle = project.get("build.gradle.kts");
         assertNotNull(buildGradle);
-        BuildTestVerifier verifier = BuildTestVerifier.of(buildGradle, BuildTool.GRADLE_KOTLIN, options.language(), options.testFramework());
+        BuildTestVerifier verifier = BuildTestVerifier.of(buildGradle, BuildTool.GRADLE, options.language(), options.testFramework());
         assertTrue(verifier.hasDependency("io.micronaut.kubernetes", "micronaut-kubernetes-client-rxjava2", Scope.COMPILE), buildGradle);
         assertTrue(verifier.hasDependency("io.micronaut.rxjava2", "micronaut-rxjava2", Scope.COMPILE), buildGradle);
     }
