@@ -95,15 +95,18 @@ public abstract class AbstractAzureFunction extends AbstractFunctionFeature impl
         super.apply(generatorContext);
         loadTemplates(module);
         Project project = generatorContext.getProject();
-        BuildTool buildTool = generatorContext.getBuildTool();
-        if (buildTool.isGradle()) {
+
+        if (OptionUtils.hasGradleBuildTool(generatorContext.getOptions())) {
             module.addHelpLink("Azure Functions Plugin for Gradle", "https://plugins.gradle.org/plugin/com.microsoft.azure.azurefunctions");
             module.addBuildPlugin(GradlePlugin.builder()
                     .id("com.microsoft.azure.azurefunctions")
                     .lookupArtifactId("azure-functions-gradle-plugin")
-                    .extension(new RockerWritable(azurefunctions.template(generatorContext.getProject(), generatorContext.getBuildTool().getGradleDsl().orElse(GradleDsl.GROOVY), javaVersionValue(generatorContext).orElse("null"))))
+                    .extension(new RockerWritable(azurefunctions.template(generatorContext.getProject(),
+                        generatorContext.getOptions().gradleDsl() == null ? GradleDsl.GROOVY : generatorContext.getOptions().gradleDsl(),
+                        javaVersionValue(generatorContext).orElse("null"))))
                     .build());
-        } else if (buildTool == BuildTool.MAVEN) {
+        }
+        if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())) {
             String mavenPluginArtifactId = "azure-functions-maven-plugin";
             module.addBuildPlugin(MavenPlugin.builder()
                     .artifactId(mavenPluginArtifactId)

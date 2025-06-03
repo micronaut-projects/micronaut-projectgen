@@ -17,6 +17,7 @@ package io.micronaut.projectgen.http.server;
 
 import io.micronaut.context.annotation.Secondary;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
+import io.micronaut.projectgen.core.buildtools.gradle.GradleDsl;
 import io.micronaut.projectgen.core.options.GenericOptionsBuilder;
 import io.micronaut.projectgen.core.options.JdkVersion;
 import io.micronaut.projectgen.core.options.Language;
@@ -37,6 +38,7 @@ public class DefaultOptionsBuilder implements OptionsBuilder {
     private static final String FIELD_LANG = "lang";
     private static final String FIELD_BUILD = "build";
     private static final String FIELD_JAVA = "java";
+    private static final String FIELD_GRADLE_DSL = "gradleDsl";
     private static final String FIELD_FEATURES = "features";
 
     @Override
@@ -52,6 +54,10 @@ public class DefaultOptionsBuilder implements OptionsBuilder {
             .flatMap(BuildTool::of)
             .map(Collections::singletonList)
             .ifPresent(builder::buildTools);
+        getField(form, FIELD_GRADLE_DSL)
+            .map(GradleDsl::valueOf)
+            .ifPresent(builder::gradleDsl);
+
 
         getField(form, FIELD_LANG)
             .flatMap(Language::of)
@@ -79,8 +85,6 @@ public class DefaultOptionsBuilder implements OptionsBuilder {
         if (nameObject != null) {
             builder = builder.name(nameObject.toString());
         }
-        builder.buildTools(List.of(BuildTool.GRADLE_KOTLIN));
-        builder.language(Language.JAVA);
         return builder;
     }
 

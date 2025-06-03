@@ -28,7 +28,7 @@ public final class OptionUtils {
     }
 
     public static boolean hasGradleBuildTool(Options options) {
-        return options.buildTools().stream().anyMatch(BuildTool::isGradle);
+        return options.buildTools().stream().anyMatch(bt -> bt == BuildTool.GRADLE);
     }
 
     public static boolean hasMavenBuildTool(Options options) {

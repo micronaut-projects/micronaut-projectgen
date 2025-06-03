@@ -2,6 +2,7 @@ package io.micronaut.projectgen.micronaut;
 
 import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.buildtools.Scope;
+import io.micronaut.projectgen.core.buildtools.gradle.GradleDsl;
 import io.micronaut.projectgen.core.generator.ProjectGenerator;
 import io.micronaut.projectgen.core.io.MapOutputHandler;
 import io.micronaut.projectgen.core.options.GenericOptionsBuilder;
@@ -33,7 +34,7 @@ class MicronautApplicationGenerationTest {
 
     @Test
     void generateMicronautMavenApplication(ProjectGenerator projectGenerator) throws Exception {
-        Options options = createOptions(List.of(BuildTool.MAVEN));
+        Options options = createOptionsBuilder().buildTools(List.of(BuildTool.MAVEN)).gradleDsl(GradleDsl.GROOVY).build();
         MapOutputHandler outputHandler = new MapOutputHandler();
         projectGenerator.generate(options, outputHandler);
         Map<String, String> project = outputHandler.getProject();
@@ -63,7 +64,7 @@ class MicronautApplicationGenerationTest {
 
     @Test
     void generateMicronautGradleApplication(ProjectGenerator projectGenerator) throws Exception {
-        Options options = createOptions(List.of(BuildTool.GRADLE));
+        Options options = createOptionsBuilder().buildTools(List.of(BuildTool.GRADLE)).gradleDsl(GradleDsl.GROOVY).build();
         MapOutputHandler outputHandler = new MapOutputHandler();
         projectGenerator.generate(options, outputHandler);
         Map<String, String> project = outputHandler.getProject();
@@ -101,16 +102,15 @@ class MicronautApplicationGenerationTest {
         assertTrue(buildGradle.contains("testRuntime(\"junit5\")"));
     }
 
-    private static Options createOptions(List<BuildTool> buildTools) {
-        return OptionsFixture.defaultGradle()
+    public static GenericOptionsBuilder createOptionsBuilder() {
+        return OptionsFixture.defaultNoBuildTool()
             .template(ApplicationType.DEFAULT.toString())
             .name("demo")
             .packageName("com.example")
             .java(JdkVersion.JDK_21)
-            .buildTools(buildTools)
+            .gradleDsl(GradleDsl.KOTLIN)
             .language(Language.JAVA)
             .testFramework(TestFramework.JUNIT)
-            .features(Collections.emptyList())
-            .build();
+            .features(Collections.emptyList());
     }
 }

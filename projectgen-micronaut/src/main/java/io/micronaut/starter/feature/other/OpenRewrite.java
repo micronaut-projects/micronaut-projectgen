@@ -20,6 +20,7 @@ import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.rocker.RockerWritable;
+import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.BuildProperties;
@@ -69,10 +70,10 @@ public class OpenRewrite implements LanguageSpecificFeature {
     @Override
     public void apply(GeneratorContext generatorContext) {
         ModuleContext module = generatorContext.getRootModule();
-        BuildTool buildTool = generatorContext.getBuildTool();
-        if (buildTool.isGradle()) {
+        if (OptionUtils.hasGradleBuildTool(generatorContext.getOptions())) {
             addGradlePlugin(module);
-        } else if (buildTool == MAVEN) {
+        }
+        if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())) {
             addMavenPlugin(module);
         }
     }

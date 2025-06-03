@@ -23,13 +23,13 @@ class JaxRsTest {
     @Test
     void jaxRsFeaturesAddsTheDependency(ProjectGenerator micronautProjectGenerator) throws Exception {
         Options options = OptionsFixture.defaultGradle()
-            .buildTools(List.of(BuildTool.MAVEN, BuildTool.GRADLE_KOTLIN))
+            .buildTools(List.of(BuildTool.MAVEN, BuildTool.GRADLE))
             .features(List.of("jax-rs"))
             .build();
         Map<String, String> project = generateProject(micronautProjectGenerator, options);
         String buildGradle = project.get("build.gradle.kts");
         assertNotNull(buildGradle);
-        BuildTestVerifier verifier = BuildTestVerifier.of(buildGradle, BuildTool.GRADLE_KOTLIN, options.language(), options.testFramework());
+        BuildTestVerifier verifier = BuildTestVerifier.of(buildGradle, BuildTool.GRADLE, options.language(), options.testFramework());
         assertTrue(verifier.hasDependency("io.micronaut.jaxrs", "micronaut-jaxrs-server", Scope.COMPILE), buildGradle);
         assertTrue(verifier.hasAnnotationProcessor("io.micronaut.jaxrs", "micronaut-jaxrs-processor"), buildGradle);
 

@@ -12,13 +12,13 @@
 ### Generate the deployable artifact
 
 ```
-@if(buildTool.isGradle() && nativeImage) {
+@if(buildTool == BuildTool.GRADLE && nativeImage) {
 ./gradlew :app:buildNativeLambda
 ./gradlew test
-} else if(buildTool.isGradle() && !nativeImage && optimized) {
+} else if(buildTool == BuildTool.GRADLE && !nativeImage && optimized) {
 ./gradlew :app:optimizedJitJarAll
 ./gradlew test
-} else if(buildTool.isGradle() && !nativeImage) {
+} else if(buildTool == BuildTool.GRADLE && !nativeImage) {
 ./gradlew :app:shadowJar
 ./gradlew test
 } else if(buildTool == BuildTool.MAVEN && nativeImage) {

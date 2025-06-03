@@ -17,7 +17,9 @@ package io.micronaut.projectgen.core.options;
 
 import io.micronaut.core.annotation.Creator;
 import io.micronaut.core.annotation.Introspected;
+import io.micronaut.core.annotation.Nullable;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
+import io.micronaut.projectgen.core.buildtools.gradle.GradleDsl;
 
 /**
  * Default values to be applied when a given.
@@ -25,14 +27,17 @@ import io.micronaut.projectgen.core.buildtools.BuildTool;
  */
 @Introspected
 public class LanguageDefaults implements HasDefaultTest, HasDefaultBuild {
-
     TestFramework test;
     BuildTool build;
 
+    @Nullable
+    GradleDsl gradleDsl;
+
     @Creator
-    public LanguageDefaults(TestFramework test, BuildTool build) {
+    public LanguageDefaults(TestFramework test, BuildTool build, @Nullable GradleDsl gradleDsl) {
         this.test = test;
         this.build = build;
+        this.gradleDsl = gradleDsl;
     }
 
     @Override
@@ -43,5 +48,10 @@ public class LanguageDefaults implements HasDefaultTest, HasDefaultBuild {
     @Override
     public BuildTool getBuild() {
         return build;
+    }
+
+    @Nullable
+    public GradleDsl getGradleDsl() {
+        return gradleDsl;
     }
 }

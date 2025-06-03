@@ -65,12 +65,8 @@ public class Grpc implements DefaultFeature, OpenRewriteFeature {
         GradlePlugin.Builder builder = GradlePlugin.builder()
                 .id("com.google.protobuf")
                 .lookupArtifactId("protobuf-gradle-plugin");
-        Optional<Optional<GradleDsl>> gradleDslOptional = generatorContext.getOptions()
-            .buildTools()
-            .stream()
-            .map(BuildTool::getGradleDsl)
-            .findFirst();
-        if (gradleDslOptional.isPresent() && gradleDslOptional.get().isPresent() && gradleDslOptional.get().get() == GradleDsl.KOTLIN) {
+        GradleDsl gradleDsl = generatorContext.getOptions().gradleDsl();
+        if (gradleDsl == GradleDsl.KOTLIN) {
             builder.buildImports("import com.google.protobuf.gradle.*");
         }
         return builder.build();

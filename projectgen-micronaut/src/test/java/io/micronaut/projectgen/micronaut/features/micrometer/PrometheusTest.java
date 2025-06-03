@@ -35,7 +35,7 @@ class PrometheusTest {
 
     @Test
     void prometheusFeaturesAddsTheDependency(ProjectGenerator micronautProjectGenerator) throws Exception {
-        Options options = OptionsFixture.defaultGradle().buildTools(List.of(BuildTool.GRADLE_KOTLIN)).features(List.of("micrometer-prometheus")).build();
+        Options options = OptionsFixture.defaultGradle().buildTools(List.of(BuildTool.GRADLE)).features(List.of("micrometer-prometheus")).build();
         Map<String, String> project = generateProject(micronautProjectGenerator, options);
         String buildGradle = project.get("build.gradle.kts");
         assertNotNull(buildGradle);

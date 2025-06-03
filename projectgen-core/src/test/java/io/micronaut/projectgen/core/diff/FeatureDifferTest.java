@@ -31,7 +31,7 @@ class FeatureDifferTest {
     void featureDiff(FeatureDiffer featureDiffer) throws Exception {
         Options options = GenericOptionsBuilder.builder().name("demo")
             .name("demo")
-            .buildTools(List.of(BuildTool.GRADLE_KOTLIN))
+            .buildTools(List.of(BuildTool.GRADLE))
             .gradleDsl(GradleDsl.KOTLIN)
             .features(List.of("geb-core"))
             .build();

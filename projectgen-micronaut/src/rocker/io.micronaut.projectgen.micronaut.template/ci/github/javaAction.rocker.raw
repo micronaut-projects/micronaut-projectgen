@@ -18,7 +18,7 @@ on:
   pull_request:
     branches: [ @branch ]
 
-@if (buildTool.isGradle()) {
+@if (buildTool == BuildTool.GRADLE) {
 permissions:
   contents: read
 }
@@ -37,7 +37,7 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn -B verify --file pom.xml
-} else if (buildTool.isGradle()) {
+} else if (buildTool == BuildTool.GRADLE) {
     - name: Validate Gradle wrapper
       uses: gradle/wrapper-validation-action@@v1.0.4
     - name: Build with Gradle

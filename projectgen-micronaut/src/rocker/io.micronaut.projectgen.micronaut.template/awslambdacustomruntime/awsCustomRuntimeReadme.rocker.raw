@@ -5,7 +5,7 @@
 
 If you want to deploy to AWS Lambda as a GraalVM native image, run:
 
-@if(buildTool.isGradle()) {
+@if(buildTool == BuildTool.GRADLE) {
 ```bash
 ./gradlew buildNativeLambda -Pmicronaut.runtime=lambda
 ```

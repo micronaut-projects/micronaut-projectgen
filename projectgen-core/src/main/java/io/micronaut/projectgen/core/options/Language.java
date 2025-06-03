@@ -28,19 +28,15 @@ import java.util.Set;
 /**
  * JVM Programming Language.
  */
-public enum Language implements IncludesDefaults<LanguageDefaults> {
-    JAVA("java", new LanguageDefaults(TestFramework.JUNIT, BuildTool.GRADLE_KOTLIN)),
-    GROOVY("groovy", new LanguageDefaults(TestFramework.SPOCK, BuildTool.GRADLE_KOTLIN)),
-    KOTLIN("kt", new LanguageDefaults(TestFramework.JUNIT, BuildTool.GRADLE_KOTLIN));
-
-    public static final Language DEFAULT_OPTION = JAVA;
+public enum Language {
+    JAVA("java"),
+    GROOVY("groovy"),
+    KOTLIN("kt");
 
     private final String extension;
-    private final LanguageDefaults defaults;
 
-    Language(String extension, LanguageDefaults defaults) {
+    Language(String extension) {
         this.extension = extension;
-        this.defaults = defaults;
     }
 
     /**
@@ -104,10 +100,5 @@ public enum Language implements IncludesDefaults<LanguageDefaults> {
     @NonNull
     public String getName() {
         return name().toLowerCase(Locale.ENGLISH);
-    }
-
-    @Override
-    public LanguageDefaults getDefaults() {
-        return defaults;
     }
 }

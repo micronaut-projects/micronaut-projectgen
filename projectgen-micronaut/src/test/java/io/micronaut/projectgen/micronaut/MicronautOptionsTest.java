@@ -20,7 +20,7 @@ class MicronautOptionsTest {
     @Test
     void defaultBuildToolIsGradleKotlinDsl() {
         Options options = OptionsFixture.defaultGradle().build();
-        assertEquals(BuildTool.GRADLE_KOTLIN, options.getBuildTool());
+        assertEquals(BuildTool.GRADLE, options.getBuildTool());
     }
 
     @Test

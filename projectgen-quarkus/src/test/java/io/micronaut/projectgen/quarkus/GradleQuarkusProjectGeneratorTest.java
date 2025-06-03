@@ -2,6 +2,7 @@ package io.micronaut.projectgen.quarkus;
 
 import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.buildtools.Scope;
+import io.micronaut.projectgen.core.buildtools.gradle.GradleDsl;
 import io.micronaut.projectgen.core.generator.ProjectGenerator;
 import io.micronaut.projectgen.core.io.MapOutputHandler;
 import io.micronaut.projectgen.core.options.GenericOptionsBuilder;
@@ -26,7 +27,8 @@ class GradleQuarkusProjectGeneratorTest {
         Options options = GenericOptionsBuilder.builder()
             .group("org.acme")
             .artifact("code-with-quarkus")
-            .buildTools(List.of(BuildTool.GRADLE_KOTLIN))
+            .buildTools(List.of(BuildTool.GRADLE))
+            .gradleDsl(GradleDsl.KOTLIN)
             .testFramework(TestFramework.JUNIT)
             .features(List.of("rest-assured", "quarkus-junit5-mockito"))
             .build();

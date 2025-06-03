@@ -12,7 +12,6 @@ class BuildToolConverterTest {
     void buildToolConverter() throws Exception {
         BuildToolConverter converter = new BuildToolConverter();
         assertEquals(BuildTool.GRADLE, converter.convert("gradle"));
-        assertEquals(BuildTool.GRADLE_KOTLIN, converter.convert("gradle_kotlin"));
         assertEquals(BuildTool.MAVEN, converter.convert("maven"));
         assertThrows(CommandLine.TypeConversionException.class, () -> converter.convert("foo"));
     }

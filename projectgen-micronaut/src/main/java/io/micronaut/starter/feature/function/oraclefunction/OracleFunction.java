@@ -126,7 +126,7 @@ public class OracleFunction extends AbstractFunctionFeature implements OracleClo
     protected String getBuildCommand(BuildTool buildTool) {
         if (buildTool == BuildTool.MAVEN) {
             return "mvnw clean package";
-        } else if (buildTool.isGradle()) {
+        } else if (buildTool == BuildTool.GRADLE) {
             return "gradlew clean assemble";
         } else {
             throw new IllegalStateException("Unsupported build tool");

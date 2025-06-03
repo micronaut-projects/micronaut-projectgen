@@ -1,6 +1,7 @@
 package io.micronaut.projectgen.micronaut;
 
 import io.micronaut.projectgen.core.buildtools.BuildTool;
+import io.micronaut.projectgen.core.buildtools.gradle.GradleDsl;
 import io.micronaut.projectgen.core.generator.ProjectGenerator;
 import io.micronaut.projectgen.core.io.MapOutputHandler;
 import io.micronaut.projectgen.core.options.GenericOptionsBuilder;
@@ -50,6 +51,7 @@ class MicronautLibraryGenerationTest {
             .packageName("com.example")
             .java(JdkVersion.JDK_21)
             .buildTools(List.of(BuildTool.GRADLE))
+            .gradleDsl(GradleDsl.GROOVY)
             .language(Language.JAVA)
             .testFramework(TestFramework.JUNIT)
             .features(Collections.emptyList())

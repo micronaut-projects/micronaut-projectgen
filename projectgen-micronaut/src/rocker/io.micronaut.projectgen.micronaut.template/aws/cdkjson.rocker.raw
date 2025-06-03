@@ -1,7 +1,7 @@
 @import io.micronaut.projectgen.core.buildtools.BuildTool;
 @args(BuildTool buildTool, String infrastructureModuleName)
 {
-@if(buildTool.isGradle()) {
+@if(buildTool == BuildTool.GRADLE) {
   "app": "../gradlew :@(infrastructureModuleName):run",
 } else {
   "app": "../mvnw -e -q compile exec:java --pl @(infrastructureModuleName) -f ../pom.xml",

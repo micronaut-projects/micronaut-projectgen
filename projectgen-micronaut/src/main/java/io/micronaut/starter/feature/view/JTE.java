@@ -90,8 +90,6 @@ public class JTE implements ViewFeature, MicronautServerDependent {
     }
 
     private BuildPlugin gradlePlugin(GeneratorContext generatorContext) {
-        Optional<GradleDsl> gradleDsl = generatorContext.getBuildTool().getGradleDsl();
-
         boolean patchKapt = OptionUtils.hasGradleBuildTool(generatorContext.getOptions())
                 && generatorContext.getLanguage() == Language.KOTLIN
                 && generatorContext.hasFeature(Kapt.class);

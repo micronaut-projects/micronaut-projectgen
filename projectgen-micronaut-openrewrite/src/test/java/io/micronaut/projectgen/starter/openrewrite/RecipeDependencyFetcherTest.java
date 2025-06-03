@@ -25,7 +25,7 @@ class RecipeDependencyFetcherTest {
         Dependency dependency = dependencies.get(0);
         assertMockitoDependency(dependency);
 
-        dependencies = fetcher.findAllByRecipeNameAndBuildTool(RECIPE_MOCKITO, BuildTool.GRADLE_KOTLIN);
+        dependencies = fetcher.findAllByRecipeNameAndBuildTool(RECIPE_MOCKITO, BuildTool.GRADLE);
         assertEquals(1, dependencies.size());
         dependency = dependencies.get(0);
         assertMockitoDependency(dependency);

@@ -7,10 +7,9 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class BuildToolCandidatesTest {
-
     @Test
     void buildToolCandidates() {
-        assertEquals(List.of("gradle", "gradle_kotlin", "maven"),
+        assertEquals(List.of("gradle", "maven"),
             new BuildToolCandidates());
     }
 }

@@ -3,6 +3,7 @@ package io.micronaut.projectgen.test.mavenmultimodule;
 import io.micronaut.core.io.ResourceLoader;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.buildtools.Scope;
+import io.micronaut.projectgen.core.buildtools.gradle.GradleDsl;
 import io.micronaut.projectgen.core.generator.ProjectGenerator;
 import io.micronaut.projectgen.core.io.MapOutputHandler;
 import io.micronaut.projectgen.core.options.ConfigurationFormat;
@@ -37,6 +38,7 @@ class MultiModuleProjectGeneratorTest {
         Options options = GenericOptionsBuilder.builder().name("demo")
             .configurationFormat(ConfigurationFormat.PROPERTIES)
             .buildTools(List.of(BuildTool.MAVEN, BuildTool.GRADLE))
+            .gradleDsl(GradleDsl.GROOVY)
             .name("org.springframework.gs-multi-module")
             .build();
         projectGenerator.generate(options, outputHandler);
