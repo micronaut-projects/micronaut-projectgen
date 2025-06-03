@@ -16,38 +16,25 @@
 package io.micronaut.projectgen.core.buildtools;
 
 import io.micronaut.core.annotation.NonNull;
-import io.micronaut.projectgen.core.generator.Project;
-
+import io.micronaut.core.util.StringUtils;
 import java.util.Locale;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
  * Build tool.
  */
 public enum BuildTool {
-    GRADLE("build/libs", "-*-all.jar", "Gradle (Groovy)"),
-    MAVEN("target", "-*.jar", "Maven");
+    GRADLE("build/libs"),
+    MAVEN("target");
 
     public static final BuildTool DEFAULT_OPTION = BuildTool.GRADLE;
-
     private final String jarDirectory;
-    private final String shadeJarPattern;
-    private final String title;
-
-    BuildTool(String jarDirectory, String shadeJarPattern, String title) {
+    BuildTool(String jarDirectory) {
         this.jarDirectory = jarDirectory;
-        this.shadeJarPattern = shadeJarPattern;
-        this.title = title;
     }
 
     public String getJarDirectory() {
         return jarDirectory;
-    }
-
-    public String getShadeJarDirectoryPattern(Project project) {
-        Objects.requireNonNull(project, "Project should not be null");
-        return getJarDirectory() + '/' + project.getName() + shadeJarPattern;
     }
 
     @Override
@@ -71,6 +58,6 @@ public enum BuildTool {
     }
 
     public String getTitle() {
-        return title;
+        return StringUtils.capitalize(name().toLowerCase(Locale.ENGLISH));
     }
 }
