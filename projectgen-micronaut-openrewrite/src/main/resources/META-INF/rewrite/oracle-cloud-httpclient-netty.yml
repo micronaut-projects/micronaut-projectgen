@@ -1,0 +1,25 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.oracle-cloud-httpclient-netty
+displayName: Add Oracle Cloud HttpClient Netty dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.oracle-cloud-httpclient-netty.dependencies
+  - io.micronaut.starter.feature.oracle-cloud-httpclient-netty.micronaut.documentation
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.oracle-cloud-httpclient-netty.dependencies
+displayName: Add Oracle Cloud HttpClient Netty dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.oraclecloud
+      artifactId: micronaut-oraclecloud-httpclient-netty
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.oracle-cloud-httpclient-netty.micronaut.documentation
+displayName: Append a link to Micronaut Oracle Cloud HttpClient Netty
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: RAEDME.md
+      content: https://micronaut-projects.github.io/micronaut-oracle-cloud/latest/guide/
+      appendNewline: true

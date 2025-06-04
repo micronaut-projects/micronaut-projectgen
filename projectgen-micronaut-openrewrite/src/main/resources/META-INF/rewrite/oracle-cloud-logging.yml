@@ -1,0 +1,37 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.oracle-cloud-logging
+displayName: Add Oracle Cloud Logging dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.oracle-cloud-logging.dependencies
+  - io.micronaut.starter.feature.oracle-cloud-logging.micronaut.documentation
+  - io.micronaut.starter.feature.oracle-cloud-logging.documentation.thirdparty
+  - io.micronaut.starter.feature.oci-config-profile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.oracle-cloud-logging.dependencies
+displayName: Add Oracle Cloud Logging dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.oraclecloud
+      artifactId: micronaut-oraclecloud-logging
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.oracle-cloud-logging.micronaut.documentation
+displayName: Append a link to Micronaut Oracle Cloud Logging documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-oracle-cloud/latest/guide/#logging
+      appendNewline: true
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.oracle-cloud-logging.documentation.thirdparty
+displayName: Append a link to Oracle Cloud Logging website
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://docs.oracle.com/en-us/iaas/Content/Logging/Concepts/loggingoverview.htm
+      appendNewline: true
+

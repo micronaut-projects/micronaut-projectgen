@@ -1,0 +1,53 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.oracle-cloud-vault
+displayName: Add Oracle Cloud Vault dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.oracle-cloud-vault.dependencies
+  - io.micronaut.starter.feature.oracle-cloud-vault.micronaut.documentation
+  - io.micronaut.starter.feature.oracle-cloud-vault.documentation.thirdparty
+  - io.micronaut.starter.feature.oracle-cloud-vault.configuration
+  - io.micronaut.starter.feature.oci-config-profile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.oracle-cloud-vault.dependencies
+displayName: Add Oracle Cloud Vault dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.oraclecloud
+      artifactId: micronaut-oraclecloud-vault
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.oracle-cloud-vault.micronaut.documentation
+displayName: Append a link to Micronaut Oracle Cloud vault documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-oracle-cloud/latest/guide/#vault
+      appendNewline: true
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.oracle-cloud-vault.documentation.thirdparty
+displayName: Append a link to Oracle Cloud Vault website
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://docs.oracle.com/en-us/iaas/Content/KeyManagement/home.htm
+      appendNewline: true
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.oracle-cloud-vault.configuration
+displayName: Add Oracle Cloud Vault configuration
+preconditions:
+  - io.micronaut.starter.openrewrite.recipes.FindBootstrapProperties
+recipeList:
+  - org.openrewrite.properties.AddProperty:
+      property: oci.vault.config.enabled
+      value: true
+  - org.openrewrite.properties.AddProperty:
+      property: oci.vault.vaults.ocid
+      value: changeme
+  - org.openrewrite.properties.AddProperty:
+      property: oci.vault.vaults.compartment-ocid
+      value: changeme

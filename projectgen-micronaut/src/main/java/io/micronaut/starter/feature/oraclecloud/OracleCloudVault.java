@@ -22,6 +22,7 @@ import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.micronaut.features.config.MicronautDistributedConfigurationFeature;
 import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import io.micronaut.projectgen.core.feature.DistributedConfigFeature;
@@ -29,11 +30,12 @@ import jakarta.inject.Singleton;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Requires(property = "micronaut.starter.feature.oracle.cloud.vault.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class OracleCloudVault implements DistributedConfigFeature {
+public class OracleCloudVault implements DistributedConfigFeature, OpenRewriteFeature {
     private final MicronautDistributedConfigurationFeature micronautDistributedConfigurationFeature;
 
     public OracleCloudVault(MicronautDistributedConfigurationFeature micronautDistributedConfigurationFeature) {
@@ -64,31 +66,9 @@ public class OracleCloudVault implements DistributedConfigFeature {
         return "Adds support for Distributed Configuration with Oracle Cloud Vault";
     }
 
-    @Nullable
     @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-oracle-cloud/latest/guide/#vault";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.oracle-cloud-vault");
     }
 
-    @Nullable
-    @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://docs.oracle.com/en-us/iaas/Content/KeyManagement/home.htm";
-    }
-
-    @Override
-    public void apply(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
-        module.addDependency(MicronautDependencyUtils.oracleCloudDependency()
-                .artifactId("micronaut-oraclecloud-vault")
-                .compile());
-        module.configuration().put("oci.config.profile", "DEFAULT");
-
-        Map<String, Object> bootstrapConfiguration = module.bootstrapConfiguration();
-        bootstrapConfiguration.put("oci.vault.config.enabled", true);
-        Map<String, String> map = new HashMap<>();
-        map.put("ocid", "");
-        map.put("compartment-ocid", "");
-        bootstrapConfiguration.put("oci.vault.vaults", Collections.singletonList(map));
-    }
 }
