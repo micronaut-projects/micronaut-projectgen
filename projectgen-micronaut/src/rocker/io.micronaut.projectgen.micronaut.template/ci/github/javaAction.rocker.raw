@@ -2,14 +2,12 @@
 @import io.micronaut.projectgen.core.options.JdkDistribution
 @import io.micronaut.projectgen.core.options.JdkVersion
 @import io.micronaut.projectgen.core.buildtools.BuildTool
-
 @args (
 JdkVersion jdkVersion,
 JdkDistribution jdkDistribution,
 BuildTool buildTool,
 String branch
 )
-
 name: Java CI with @buildTool.getTitle()
 
 on:
@@ -27,9 +25,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@@v3
+    - uses: actions/checkout@@v4.2.2 # https://github.com/actions/checkout
     - name: Set up JDK @jdkVersion.majorVersion()
-      uses: actions/setup-java@@v3
+      uses: actions/setup-java@@v3.14.1 # https://github.com/actions/setup-java
       with:
         java-version: @jdkVersion.majorVersion()
         distribution: @jdkDistribution.distribution()
@@ -39,12 +37,12 @@ jobs:
       run: mvn -B verify --file pom.xml
 } else if (buildTool == BuildTool.GRADLE) {
     - name: Validate Gradle wrapper
-      uses: gradle/wrapper-validation-action@@v1.0.4
+      uses: gradle/actions/wrapper-validation@@v4.4.0 # https://github.com/gradle/actions/tree/main/wrapper-validation
     - name: Build with Gradle
-      uses: gradle/gradle-build-action@@v2.2.0
+      uses: gradle/actions/setup-gradle@@v4.4.0 # https://github.com/gradle/actions/tree/main/setup-gradle
       with:
         arguments: build
-    - uses: actions/upload-artifact@@v3.1.0
+    - uses: actions/upload-artifact@@v4.6.2 # https://github.com/actions/upload-artifact
       with:
         name: Build Artifacts
         path: |
