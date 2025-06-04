@@ -110,6 +110,12 @@ public class MavenPlugin implements BuildPlugin {
         }
 
         @NonNull
+        public MavenPlugin.Builder extension(@Nullable String extension) {
+            this.extension = new StringWritable(extension);
+            return this;
+        }
+
+        @NonNull
         public MavenPlugin.Builder extension(@Nullable Writable extension) {
             this.extension = extension;
             return this;

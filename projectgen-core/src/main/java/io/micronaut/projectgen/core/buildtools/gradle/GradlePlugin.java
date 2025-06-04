@@ -24,6 +24,7 @@ import io.micronaut.projectgen.core.buildtools.dependencies.Coordinate;
 import io.micronaut.projectgen.core.buildtools.dependencies.CoordinateResolver;
 import io.micronaut.projectgen.core.buildtools.dependencies.LookupFailedException;
 import io.micronaut.projectgen.core.buildtools.maven.ParentPomBuilder;
+import io.micronaut.projectgen.core.template.StringWritable;
 import io.micronaut.projectgen.core.template.Writable;
 
 import java.util.ArrayList;
@@ -326,6 +327,12 @@ public class GradlePlugin implements BuildPlugin {
         @NonNull
         public GradlePlugin.Builder extension(@Nullable Writable extension) {
             this.extension = extension;
+            return this;
+        }
+
+        @NonNull
+        public GradlePlugin.Builder extension(@Nullable String extension) {
+            this.extension = new StringWritable(extension);
             return this;
         }
 
