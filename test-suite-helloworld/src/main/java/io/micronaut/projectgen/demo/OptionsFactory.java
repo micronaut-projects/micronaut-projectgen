@@ -8,11 +8,11 @@ import io.micronaut.projectgen.core.options.Options;
 
 import java.util.List;
 
-public final class OptionsUtils {
-    private OptionsUtils() {
+public final class OptionsFactory {
+    private OptionsFactory() {
     }
 
-    public static Options createOptions() {
+    public static Options create() {
         return GenericOptionsBuilder.builder()
             .name("demo")
             .packageName("com.example")

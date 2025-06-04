@@ -1,0 +1,9 @@
+To generate a project, you need an implementation of the interface api:projectgen.core.options.Options[].
+
+For example:
+
+[source, java]
+----
+include::test-suite-helloworld/src/main/java/io/micronaut/projectgen/demo/OptionsFactory.java[]
+----
+

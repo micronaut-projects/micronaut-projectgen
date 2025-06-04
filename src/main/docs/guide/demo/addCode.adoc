@@ -1,0 +1,9 @@
+The following feature adds source code:
+
+[source, java]
+----
+include::test-suite-helloworld/src/main/java/io/micronaut/projectgen/demo/SampleCode.java[]
+----
+
+You can add files to the generated project. The previous example shows a String, but you can use the api:projectgen.core.rocker.RockerWritable[] API to render files with https://github.com/fizzed/rocker[Rocker Templates].
+

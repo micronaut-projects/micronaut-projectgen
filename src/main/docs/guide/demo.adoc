@@ -1,0 +1,30 @@
+To talk about the ProjectGen API, let's discuss the following demo: a Hello World application with Maven and Gradle.
+
+The project structure will be like this:
+
+[source, bash]
+----
+├── build.gradle.kts
+├── gradle
+│   └── wrapper
+│       ├── gradle-wrapper.jar
+│       └── gradle-wrapper.properties
+├── gradle.properties
+├── gradlew
+├── gradlew.bat
+├── mvnw
+├── mvnw.bat
+├── pom.xml
+├── settings.gradle.kts
+└── src
+    ├── main
+    │   └── java
+    │       └── com
+    │           └── example
+    │               └── HelloWorld.java
+    └── test
+        └── java
+            └── com
+                └── example
+                    └── HelloWorldTest.java
+----

@@ -1,0 +1,11 @@
+You can create beans of type api:projectgen.core.feature.DefaultFeature[] to be
+automatically applied if the method `DefaultFeature::shouldApply` evaluates to true.
+
+A common pattern is to define a `DefaultFeature` to act as the entry point of the project generation.
+
+A feature can apply other features as shown below:
+
+[source, java]
+----
+include::test-suite-helloworld/src/main/java/io/micronaut/projectgen/demo/Root.java[]
+----

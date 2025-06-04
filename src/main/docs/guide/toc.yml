@@ -3,9 +3,18 @@ introduction:
 releaseHistory: Release History
 micronautProjectGenerationCore: Micronaut ProjectGen Core
 micronautProjectGenerationTest: Micronaut ProjectGen Test
-helloWorldOptions: Project Generation Demo Options
-helloWorldExample: Project Generation Demo Default Feature
-helloWorldExampleCli: Project Generation Command Line Application Example
+features: Features
+demo:
+  title: Demo
+  defineOptions: Options
+  addDependency: Add Dependency
+  addBuildProperties: Add Build Properties
+  addGradlePlugins: Add Gradle Plugins
+  addMavenPlugin: Add Maven Plugins
+  addCode: Add Code
+  root: Default Feature
+  cli: Project Generation in a Command Line Application
+  test: Test Project Generation
 micronautProjectGeneration: Micronaut Project Generation
 openrewriteIntegration: OpenRewrite Integration
 repository: Repository

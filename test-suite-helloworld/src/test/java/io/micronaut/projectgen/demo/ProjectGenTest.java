@@ -19,7 +19,7 @@ class ProjectGenTest {
 
     @Test
     void testProjectGeneration(PreviewGenerator previewGenerator) throws Exception {
-        Options options = OptionsUtils.createOptions();
+        Options options = OptionsFactory.create();
         Map<String, String> project = previewGenerator.generate(options);
         assertTrue(project.containsKey("mvnw"));
         assertTrue(project.containsKey("mvnw.bat"));
@@ -33,7 +33,6 @@ class ProjectGenTest {
         assertEquals("21", verifier.getProperty("maven.compiler.target"));
         assertTrue(verifier.hasBuildPlugin("org.apache.maven.plugins", "maven-jar-plugin"));
         String buildGradleKts = project.get("build.gradle.kts");
-        System.out.println(buildGradleKts);
         verifier = new GradleBuildTestVerifier(buildGradleKts, BuildTool.GRADLE, options.language(), options.testFramework());
         assertTrue(verifier.hasBuildPlugin("java"));
         assertTrue(verifier.hasBuildPlugin("application"));

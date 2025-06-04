@@ -10,7 +10,7 @@ import java.io.File;
 
 @Command(
     name = "projectgen",
-    description = "Generates a ZIP file for a project",
+    description = "Generates a project in the supplied folder",
     mixinStandardHelpOptions = true
 )
 public class ProjectGenCommand implements Runnable {
@@ -31,7 +31,7 @@ public class ProjectGenCommand implements Runnable {
         if (!outputDir.exists() || !outputDir.isDirectory()) {
             System.err.println("Provided path is not an existing directory: " + outputDir);
         } else {
-            Options options = OptionsUtils.createOptions();
+            Options options = OptionsFactory.create();
             projectGenerator.writeTo(options, outputDir);
         }
     }
