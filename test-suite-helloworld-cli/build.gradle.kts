@@ -9,8 +9,7 @@ repositories {
 }
 dependencies {
     annotationProcessor("info.picocli:picocli-codegen")
-    implementation(project(":micronaut-projectgen-core"))
-    testImplementation(project(":micronaut-projectgen-test"))
+    implementation(project(":test-suite-helloworld"))
     implementation("info.picocli:picocli")
     implementation("io.micronaut.picocli:micronaut-picocli")
     runtimeOnly("ch.qos.logback:logback-classic")
@@ -24,7 +23,7 @@ java {
 }
 
 micronaut {
-    version("4.8.2")
+    version(libs.versions.micronaut.platform.get())
     testRuntime("junit5")
     processing {
         incremental(true)

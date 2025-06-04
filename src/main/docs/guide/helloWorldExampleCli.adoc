@@ -1,0 +1,9 @@
+The following example shows how a Micronaut CLI application to generate a Hello World application with Maven and Gradle.
+
+[source, java]
+----
+include::test-suite-cli/src/main/java/io/micronaut/projectgen/demo/ProjectGenCommand.java[]
+----
+
+<1> To generate a project into a folder, you can use the api:projectgen.core.generator.ProjectGenerator[] API.
+

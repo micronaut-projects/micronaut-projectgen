@@ -1,0 +1,9 @@
+To generate a project, you need an implementation of the interface api:projectgen.core.options.Options[].
+
+For example, to generate a Hello World application with both Maven and Gradle you could get an `Options` implementation:
+
+[source, java]
+----
+include::test-suite-helloworld/src/main/java/io/micronaut/projectgen/demo/OptionsUtils.java[]
+----
+

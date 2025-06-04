@@ -19,7 +19,7 @@ class ProjectGenTest {
 
     @Test
     void testProjectGeneration(PreviewGenerator previewGenerator) throws Exception {
-        Options options = ProjectGenCommand.createOptions("demo");
+        Options options = OptionsUtils.createOptions();
         Map<String, String> project = previewGenerator.generate(options);
         assertTrue(project.containsKey("mvnw"));
         assertTrue(project.containsKey("mvnw.bat"));

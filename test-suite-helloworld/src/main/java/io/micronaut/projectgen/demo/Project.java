@@ -1,6 +1,8 @@
 package io.micronaut.projectgen.demo;
 
+import io.micronaut.core.annotation.NonNull;
 import io.micronaut.projectgen.core.buildtools.BuildProperties;
+import io.micronaut.projectgen.core.buildtools.MavenCentral;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.buildtools.gradle.GradlePlugin;
 import io.micronaut.projectgen.core.buildtools.maven.MavenPlugin;
@@ -16,20 +18,56 @@ import java.util.Set;
 
 @Singleton
 class Project implements DefaultFeature {
+    private static final Dependency DEPENDENCY_JUNIT_JUPITER = Dependency.builder()
+        .groupId("org.junit.jupiter")
+        .artifactId("junit-jupiter")
+        .version("5.10.2")
+        .test()
+        .build();
+    private static final @NonNull MavenPlugin MAVEN_PLUGIN_SUREFIRE = MavenPlugin.builder()
+        .groupId("org.apache.maven.plugins")
+        .artifactId("maven-surefire-plugin")
+        .version("3.1.2")
+        .build();
+
+    @Override
+    public boolean shouldApply(Options options, Set<Feature> selectedFeatures) {
+        return true;
+    }
+
+    @Override
+    public String getName() {
+        return "entry-point";
+    }
+
+    @Override
+    public String getDescription() {
+        return "It generates a Hello World Maven and Gradle project";
+    }
+
+    @Override
+    public boolean isVisible() {
+        return false;
+    }
+
     @Override
     public void apply(GeneratorContext generatorContext) {
         ModuleContext module = generatorContext.getRootModule();
+        module.addDependency(DEPENDENCY_JUNIT_JUPITER);
         Options options = generatorContext.getOptions();
         populateModuleAttributes(module, options);
         if (OptionUtils.hasMavenBuildTool(options)) {
             addMavenBuildProperties(module, options);
             addMavenJarPlugin(module, options);
+            module.addBuildPlugin(MAVEN_PLUGIN_SUREFIRE);
         }
         if (OptionUtils.hasGradleBuildTool(options)) {
             addJavaGradlePlugin(module, options);
             addApplicationGradlePlugin(module, options);
+            module.repositories().add(new MavenCentral());
         }
         addHelloWorldJavaClass(module);
+        addHelloWorldTestJavaClass(module);
     }
 
     private void populateModuleAttributes(ModuleContext module, Options options) {
@@ -48,6 +86,9 @@ class Project implements DefaultFeature {
     java {
         sourceCompatibility = JavaVersion.VERSION_%1$d
         targetCompatibility = JavaVersion.VERSION_%1$d
+    }
+    tasks.test {
+        useJUnitPlatform()
     }
     """, javaVersion))
             .build());
@@ -97,18 +138,31 @@ class Project implements DefaultFeature {
 
             public class HelloWorld {
                 public static void main(String[] args) {
-                    System.out.println("Hello, World!");
+                    System.out.println(hello());
+                }
+
+                public static String hello() {
+                    return "Hello, World!";
+                }
+            }
+            """));
+    }
+
+    private void addHelloWorldTestJavaClass(ModuleContext module) {
+        String path = "src/test/java/com/example/HelloWorldTest.java";
+        module.addTemplate("HelloWorldTest.java", new StringTemplate(path, """
+            package com.example;
+
+            import org.junit.jupiter.api.Test;
+
+            import static org.junit.jupiter.api.Assertions.assertEquals;
+
+            class HelloWorldTest {
+
+                @Test
+                void testHello() {
+                    assertEquals("Hello, World!", HelloWorld.hello());
                 }
             }"""));
-    }
-
-    @Override
-    public boolean shouldApply(Options options, Set<Feature> selectedFeatures) {
-        return true;
-    }
-
-    @Override
-    public String getName() {
-        return "project";
     }
 }

@@ -1,0 +1,5 @@
+The following dependency contains the core APIs to generate applications.
+
+dependency:micronaut-projectgen-core[groupId=io.micronaut.projectgen]
+
+

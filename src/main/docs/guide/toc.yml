@@ -1,8 +1,12 @@
 introduction:
   title: Introduction
 releaseHistory: Release History
+micronautProjectGenerationCore: Micronaut ProjectGen Core
+micronautProjectGenerationTest: Micronaut ProjectGen Test
+helloWorldOptions: Project Generation Demo Options
+helloWorldExample: Project Generation Demo Default Feature
+helloWorldExampleCli: Project Generation Command Line Application Example
 micronautProjectGeneration: Micronaut Project Generation
 openrewriteIntegration: OpenRewrite Integration
-springBootProjectGeneration: Spring Boot Project Generation
 repository: Repository
 

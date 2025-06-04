@@ -1,4 +1,4 @@
-To generate a https://micronaut.io[Micronaut] application add the following dependencies:
+To generate a https://micronaut.io[Micronaut] application, add the following dependencies:
 
 dependency:micronaut-projectgen-micronaut[groupId=io.micronaut.projectgen]
 
