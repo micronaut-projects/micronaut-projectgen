@@ -20,6 +20,7 @@ import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Coordinate;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.rocker.RockerWritable;
 import io.micronaut.projectgen.micronaut.template.view.gradlePluginRocker;
 import io.micronaut.projectgen.micronaut.template.view.mvnPluginRocker;
@@ -29,11 +30,11 @@ import io.micronaut.projectgen.core.buildtools.maven.MavenPlugin;
 import io.micronaut.starter.feature.server.MicronautServerDependent;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.views.rocker.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class Rocker implements ViewFeature, MicronautServerDependent {
-
-    private static final String ARTIFACT_ID_MICRONAUT_VIEWS_ROCKER = "micronaut-views-rocker";
+public class Rocker implements ViewFeature, MicronautServerDependent, OpenRewriteFeature {
 
     @Override
     public String getName() {
@@ -51,21 +52,9 @@ public class Rocker implements ViewFeature, MicronautServerDependent {
     }
 
     @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://github.com/fizzed/rocker";
-    }
-
-    @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-views/latest/guide/index.html#rocker";
-    }
-
-    @Override
     public void apply(GeneratorContext generatorContext) {
         ModuleContext module = generatorContext.getRootModule();
-        module.addDependency(MicronautDependencyUtils.viewsDependency()
-                .artifactId(ARTIFACT_ID_MICRONAUT_VIEWS_ROCKER)
-                .compile());
+        OpenRewriteFeature.super.apply(generatorContext);
         module.addBuildPlugin(GradlePlugin.builder()
                 .id("nu.studer.rocker")
                 .extension(new RockerWritable(gradlePluginRocker.template(rockerSrcDir(module))))
@@ -89,4 +78,10 @@ public class Rocker implements ViewFeature, MicronautServerDependent {
         }
         return path;
     }
+
+    @Override
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.views-rocker");
+    }
+
 }
