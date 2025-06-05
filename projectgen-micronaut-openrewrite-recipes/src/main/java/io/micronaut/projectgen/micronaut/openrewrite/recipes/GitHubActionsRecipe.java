@@ -44,7 +44,6 @@ public class GitHubActionsRecipe extends ScanningRecipe<GenericOptionsBuilder> {
     private static final String MICRONAUT_CLI_DEFAULT_PACKAGE = "defaultPackage";
     private static final String MICRONAUT_CLI_TEST_FRAMEWORK = "testFramework";
     private static final String MICRONAUT_CLI_SOURCE_LANGUAGE = "sourceLanguage";
-    //TODO ADD constants for the keys in micronaut-cli.yml
     private final String FILENAME_MICRONAUT_CLI = "micronaut-cli.yml";
     private AtomicBoolean done = new AtomicBoolean(false);
 

@@ -53,7 +53,7 @@ features: [app-name, gradle, http-client-test, java, junit, logback, micronaut-b
                             cache: maven
                        - name: Build with Maven
                          run: mvn -B verify --file pom.xml""",
-                spec -> spec.path(Path.of(".github/workflows/gradle.yml"))
+                spec -> spec.path(Path.of(".github/workflows/gradle.ym"))
             )
         );
   }
