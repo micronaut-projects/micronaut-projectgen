@@ -18,6 +18,7 @@ package io.micronaut.starter.feature.view;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
@@ -33,14 +34,9 @@ import java.util.List;
 
 @Requires(property = "micronaut.starter.feature.views.fieldset.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class ViewsFieldset implements Feature {
+public class ViewsFieldset implements OpenRewriteFeature {
 
     public static final String NAME = "views-fieldset";
-    private static final String ARTIFACT_ID_MICRONAUT_VIEWS_FIELDSET = "micronaut-views-fieldset";
-    private static final Dependency DEPENDENCY_VIEWS_FIELDSET =
-            MicronautDependencyUtils.viewsDependency().artifactId(ARTIFACT_ID_MICRONAUT_VIEWS_FIELDSET)
-                    .compile()
-                    .build();
     private static final String ERRORS_HTML = "errors.html";
     private static final String FIELDSET_HTML = "fieldset.html";
     private static final String FORM_HTML = "form.html";
@@ -127,7 +123,7 @@ public class ViewsFieldset implements Feature {
         if (generatorContext.hasFeature(Thymeleaf.class)) {
             addThymeleafTemplates(generatorContext, module);
         }
-        addDependencies(generatorContext);
+        OpenRewriteFeature.super.apply(generatorContext);
     }
 
     private void addThymeleafTemplates(GeneratorContext generatorContext, ModuleContext module) {
@@ -137,8 +133,9 @@ public class ViewsFieldset implements Feature {
         }
     }
 
-    private void addDependencies(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
-        module.addDependency(DEPENDENCY_VIEWS_FIELDSET);
+    @Override
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.views-fieldset");
     }
+
 }
