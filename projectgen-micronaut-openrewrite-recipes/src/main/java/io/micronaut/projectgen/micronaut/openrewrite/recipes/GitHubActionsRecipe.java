@@ -67,8 +67,7 @@ public class GitHubActionsRecipe extends ScanningRecipe<GenericOptionsBuilder> {
                 if (sourceFile != null) {
                     Path sourcePath = sourceFile.getSourcePath();
                     if (sourcePath != null && (
-                        FILENAME_MICRONAUT_CLI.equals(sourcePath.getFileName().toString()) ||
-                            "file.yaml".equals(sourcePath.getFileName().toString()) // TODO it seems test names the yaml file file.yml
+                        FILENAME_MICRONAUT_CLI.equals(sourcePath.getFileName().toString())
                     )) {
                         return super.visitDocument(document, ctx);
                     }

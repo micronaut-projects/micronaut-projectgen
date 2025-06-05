@@ -5,6 +5,8 @@ import org.openrewrite.test.RecipeSpec;
 import org.openrewrite.test.RewriteTest;
 import org.openrewrite.test.SourceSpecs;
 
+import java.nio.file.Path;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.openrewrite.yaml.Assertions.yaml;
 
@@ -25,7 +27,8 @@ testFramework: junit
 sourceLanguage: java
 buildTool: gradle_kotlin
 features: [app-name, gradle, http-client-test, java, junit, logback, micronaut-build, picocli, picocli-java-application, picocli-junit, properties, readme, serialization-jackson, shade]
-                    """
+                    """,
+                spec -> spec.path(Path.of("micronaut-cli.yml"))
             )
         );
         assertTrue(true);
