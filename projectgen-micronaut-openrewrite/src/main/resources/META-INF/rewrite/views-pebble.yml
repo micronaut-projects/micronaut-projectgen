@@ -1,0 +1,35 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.views-pebble
+displayName: Add Pebble Views dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.views-pebble.dependencies
+  - io.micronaut.starter.feature.views-pebble.micronaut.documentation
+  - io.micronaut.starter.feature.views-pebble.documentation.thirdparty
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.views-pebble.dependencies
+displayName: Add Pebble Views dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.views
+      artifactId: micronaut-views-pebble
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.views-pebble.micronaut.documentation
+displayName: Append a link to Micronaut Pebble Views documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-views/latest/guide/index.html#pebble
+      appendNewline: true
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.views-pebble.documentation.thirdparty
+displayName: Append a link to Pebble Views website
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://pebbletemplates.io/
+      appendNewline: true
