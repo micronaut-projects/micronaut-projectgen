@@ -22,15 +22,19 @@ import io.micronaut.projectgen.core.options.Language;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.core.options.TestFramework;
 import org.openrewrite.*;
+import org.openrewrite.marker.Markers;
+import org.openrewrite.text.PlainText;
 import org.openrewrite.yaml.YamlIsoVisitor;
 import org.openrewrite.yaml.tree.Yaml;
 
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class GitHubActionsRecipe extends ScanningRecipe<GenericOptionsBuilder> {
 
@@ -42,6 +46,7 @@ public class GitHubActionsRecipe extends ScanningRecipe<GenericOptionsBuilder> {
     private static final String MICRONAUT_CLI_SOURCE_LANGUAGE = "sourceLanguage";
     //TODO ADD constants for the keys in micronaut-cli.yml
     private final String FILENAME_MICRONAUT_CLI = "micronaut-cli.yml";
+    private AtomicBoolean done = new AtomicBoolean(false);
 
     @Override
     public String getDisplayName() {
@@ -57,7 +62,6 @@ public class GitHubActionsRecipe extends ScanningRecipe<GenericOptionsBuilder> {
         return GenericOptionsBuilder.builder();
     }
 
-    //get the yaml file
     @Override
     public TreeVisitor<?, ExecutionContext> getScanner(GenericOptionsBuilder optionsBuilder) {
         return new YamlIsoVisitor<ExecutionContext>() {
@@ -75,7 +79,6 @@ public class GitHubActionsRecipe extends ScanningRecipe<GenericOptionsBuilder> {
                 return document;
             }
 
-            //extract the value from sourceLanguage
             @Override
             public Yaml.Mapping.Entry visitMappingEntry(Yaml.Mapping.Entry entry, ExecutionContext ctx) {
                 parseValue(entry, MICRONAUT_CLI_SOURCE_LANGUAGE).ifPresent(value -> {
@@ -109,21 +112,36 @@ public class GitHubActionsRecipe extends ScanningRecipe<GenericOptionsBuilder> {
     @Override
     public Collection<SourceFile> generate(GenericOptionsBuilder optionsBuilder, ExecutionContext ctx) {
         Options options = optionsBuilder.build();
-//        if (acc.sourceLanguage == null) {
-//            return Collections.emptyList();
-//        }
-//
-//        // Generate projectgen.conf with Hello {sourceLanguage value}
-//        String content = "Hello " + acc.sourceLanguage;
-//
-//        PlainText plainText = PlainText.builder()
-//                .text(content)
-//                .sourcePath(Paths.get("projectgen.conf"))
-//                .markers(Markers.EMPTY)
-//                .build();
-//
-//        return Collections.singletonList(plainText);
-        return Collections.emptyList();
+        Path path = Paths.get(".github/workflows/gradle.ym");
+        if (!done.get()) {
+            done.compareAndSet(false, true);
+            return Collections.emptyList();
+        }
+        PlainText plainText = PlainText.builder()
+                .text("""
+                    name: Java CI with Maven
+                    on:
+                      push:
+                        branches: [ main ]
+                      pull_request:
+                        branches: [ main ]
+
+                    jobs:
+                      build:
+                        runs-on: ubuntu-latest
+                        steps:
+                        - uses: actions/checkout@v3
+                        - name: Set up JDK 21
+                          uses: actions/setup-java@v3
+                          with:
+                            java-version: 21
+                            distribution: temurin
+                            cache: maven
+                       - name: Build with Maven
+                         run: mvn -B verify --file pom.xml""")
+                .sourcePath(path)
+                .build();
+        return Collections.singletonList(plainText);
     }
 
     private static List<String> parseValues(Yaml.Mapping.Entry entry, String keyName) {
