@@ -21,6 +21,7 @@ import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Coordinate;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.rocker.RockerWritable;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.projectgen.micronaut.template.view.exampleJTE;
@@ -29,6 +30,8 @@ import io.micronaut.projectgen.micronaut.template.view.mvnPluginJTE;
 import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import io.micronaut.projectgen.core.buildtools.gradle.GradlePlugin;
 import io.micronaut.projectgen.core.buildtools.gradle.GradleDsl;
+
+import java.util.List;
 import java.util.Optional;
 import io.micronaut.projectgen.core.buildtools.maven.MavenPlugin;
 import io.micronaut.projectgen.core.buildtools.BuildPlugin;
@@ -41,9 +44,7 @@ import jakarta.inject.Singleton;
 
 @Requires(property = "micronaut.starter.feature.views.jte.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class JTE implements ViewFeature, MicronautServerDependent {
-
-    public static final String ARTIFACT_ID_MICRONAUT_VIEWS_JTE = "micronaut-views-jte";
+public class JTE implements ViewFeature, MicronautServerDependent, OpenRewriteFeature {
 
     private static final String MAVEN_PLUGIN_ARTIFACT_ID = "jte-maven-plugin";
     private static final String JTE_SRC_DIR = "src/main/jte";
@@ -66,21 +67,9 @@ public class JTE implements ViewFeature, MicronautServerDependent {
     }
 
     @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://jte.gg/";
-    }
-
-    @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-views/latest/guide/#jte";
-    }
-
-    @Override
     public void apply(GeneratorContext generatorContext) {
+        OpenRewriteFeature.super.apply(generatorContext);
         ModuleContext module = generatorContext.getRootModule();
-        module.addDependency(MicronautDependencyUtils.viewsDependency()
-                .artifactId(ARTIFACT_ID_MICRONAUT_VIEWS_JTE)
-                .compile());
         if (OptionUtils.hasGradleBuildTool(generatorContext.getOptions())) {
             module.addBuildPlugin(gradlePlugin(generatorContext));
         } else if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())) {
@@ -110,6 +99,11 @@ public class JTE implements ViewFeature, MicronautServerDependent {
                         coordinate.getVersion(),
                         JTE_SRC_DIR)))
                 .build();
+    }
+
+    @Override
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.views-jte");
     }
 
 }
