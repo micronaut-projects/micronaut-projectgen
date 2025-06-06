@@ -23,7 +23,7 @@ import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.options.Language;
 import io.micronaut.projectgen.core.options.TestFramework;
 import io.micronaut.projectgen.core.utils.OptionUtils;
-import io.micronaut.projectgen.features.maven.GroovyMavenPlusPlugin;
+import io.micronaut.projectgen.micronaut.maven.GroovyMavenPlusPlugin;
 import jakarta.inject.Singleton;
 
 @Singleton

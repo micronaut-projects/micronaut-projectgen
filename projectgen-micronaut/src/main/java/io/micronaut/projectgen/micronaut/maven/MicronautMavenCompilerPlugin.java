@@ -15,15 +15,15 @@
  */
 package io.micronaut.projectgen.micronaut.maven;
 
+import io.micronaut.projectgen.core.buildtools.maven.MavenCompilerPluginConfigurationBuilder;
 import io.micronaut.projectgen.core.buildtools.maven.MavenSpecificFeature;
 import io.micronaut.projectgen.core.buildtools.maven.Packaging;
 import io.micronaut.projectgen.core.feature.BuildFeature;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.utils.OptionUtils;
-import io.micronaut.projectgen.features.maven.MavenCompilerPlugin;
-import io.micronaut.projectgen.features.maven.MavenCompilerPluginConfiguration;
-import io.micronaut.projectgen.features.maven.MavenCompilerPluginConfigurationBuilder;
+import io.micronaut.projectgen.core.buildtools.maven.MavenCompilerPlugin;
+import io.micronaut.projectgen.core.buildtools.maven.MavenCompilerPluginConfiguration;
 import jakarta.inject.Singleton;
 
 import java.util.List;

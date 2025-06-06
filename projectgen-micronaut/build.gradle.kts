@@ -6,7 +6,6 @@ dependencies {
     api(project(":micronaut-projectgen-core"))
     api(project(":micronaut-projectgen-features-javalibs"))
     api(project(":micronaut-projectgen-features-gradle"))
-    api(project(":micronaut-projectgen-features-maven"))
     api(project(":micronaut-projectgen-micronaut-openrewrite"))
     annotationProcessor(mnSourcegen.micronaut.sourcegen.generator.java)
     implementation(mnSourcegen.micronaut.sourcegen.annotations)

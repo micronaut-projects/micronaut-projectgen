@@ -33,7 +33,7 @@ import io.micronaut.projectgen.core.options.Language;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.starter.util.VersionInfo;
 import jakarta.inject.Singleton;
-import io.micronaut.projectgen.features.maven.GroovyMavenPlusPlugin;
+import io.micronaut.projectgen.micronaut.maven.GroovyMavenPlusPlugin;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;

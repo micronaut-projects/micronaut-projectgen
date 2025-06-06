@@ -13,10 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.projectgen.features.maven;
+package io.micronaut.projectgen.core.buildtools.maven;
 
-import io.micronaut.projectgen.core.buildtools.maven.MavenCompilerPluginAnnotationProcessors;
-import io.micronaut.projectgen.core.buildtools.maven.MavenPlugin;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.rocker.RockerTemplate;
@@ -38,7 +36,7 @@ public class MavenCompilerPlugin {
                 .groupId("org.apache.maven.plugins")
                 .artifactId("maven-compiler-plugin")
                 .extension(
-                    new RockerTemplate(io.micronaut.projectgen.features.maven.template.mavenCompilerPlugin.template(configuration.version(),
+                    new RockerTemplate(io.micronaut.projectgen.core.template.mavenCompilerPlugin.template(configuration.version(),
                         configuration.configurationCombine(),
                         configuration.incrementalCompilation(),
                         configuration.source(),

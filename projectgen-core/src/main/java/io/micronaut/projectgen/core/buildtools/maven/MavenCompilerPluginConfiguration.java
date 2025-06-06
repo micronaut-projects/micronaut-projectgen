@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.projectgen.features.maven;
+package io.micronaut.projectgen.core.buildtools.maven;
 
 import io.micronaut.sourcegen.annotations.Builder;
 
