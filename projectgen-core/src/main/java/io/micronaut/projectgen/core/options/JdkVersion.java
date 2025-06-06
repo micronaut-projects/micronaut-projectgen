@@ -107,6 +107,10 @@ public final class JdkVersion {
         if (StringUtils.isEmpty(jdkVersion)) {
             throw new IllegalArgumentException("cannot parse JdkVersion from " + jdkVersion);
         }
+        try {
+            return valueOf(Integer.parseInt(jdkVersion));
+        } catch (NumberFormatException e) {
+        }
         if (!jdkVersion.startsWith(PREFIX_JDK)) {
             throw new IllegalArgumentException("cannot parse JdkVersion from " + jdkVersion);
         }

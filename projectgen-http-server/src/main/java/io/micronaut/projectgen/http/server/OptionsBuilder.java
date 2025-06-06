@@ -16,6 +16,7 @@
 package io.micronaut.projectgen.http.server;
 
 import io.micronaut.core.annotation.NonNull;
+import io.micronaut.core.annotation.Nullable;
 import io.micronaut.projectgen.core.options.Options;
 
 import java.util.Map;
@@ -32,5 +33,5 @@ public interface OptionsBuilder {
      * @return Project Options
      */
     @NonNull
-    Options createOptions(@NonNull Map<String, Object> form);
+    Options createOptions(@Nullable Map<String, Object> form);
 }

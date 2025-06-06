@@ -1,8 +1,6 @@
 introduction:
   title: Introduction
 releaseHistory: Release History
-micronautProjectGenerationCore: Micronaut ProjectGen Core
-micronautProjectGenerationTest: Micronaut ProjectGen Test
 features: Features
 demo:
   title: Demo
@@ -14,6 +12,7 @@ demo:
   addCode: Add Code
   root: Default Feature
   cli: Project Generation in a Command Line Application
+  httpServer: Project Generation in a HTTP Server
   test: Test Project Generation
 repository: Repository
 

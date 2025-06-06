@@ -1,0 +1,12 @@
+If you want to expose your project generator in an HTTP Server add the following dependency:
+
+dependency:micronaut-projectgen-http-server[groupId=io.micronaut.projectgen]
+
+The following controller renders an HTML with a button that downloads a ZIP file with a project:
+
+[source, java]
+----
+include::test-suite-helloworld-http/src/main/java/io/micronaut/projectgen/demo/HomeController.java[]
+----
+
+NOTE: To render server-side HTML, use https://micronaut-projects.github.io/micronaut-views/latest/guide/[Micronaut Views].

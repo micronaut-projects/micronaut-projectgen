@@ -16,6 +16,7 @@
 package io.micronaut.projectgen.http.server.controllers;
 
 import io.micronaut.context.annotation.Requires;
+import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.MediaType;
@@ -46,7 +47,7 @@ class DownloadZipController {
 
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Post
-    HttpResponse<?> download(@Body Map<String, Object> form) {
+    HttpResponse<?> download(@Body @Nullable Map<String, Object> form) {
         Options options = optionsBuilder.createOptions(form);
         return AttachmentUtils.attachment(zipGenerator.zip(options),
             MediaType.ZIP_TYPE,

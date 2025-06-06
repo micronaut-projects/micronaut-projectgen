@@ -1,3 +1,7 @@
+The following dependency contains the core APIs to generate applications.
+
+dependency:micronaut-projectgen-core[groupId=io.micronaut.projectgen]
+
 To generate a project, you create beans of type api:projectgen.core.feature.Feature[].
 
 Each feature has a unique identifier; you can offer a https://launch.micronaut.io[UI] to allow users to select a feature.
