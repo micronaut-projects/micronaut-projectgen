@@ -25,6 +25,7 @@ import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.core.utils.OptionUtils;
+import io.micronaut.projectgen.micronaut.gradle.ShadePlugin;
 import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import io.micronaut.projectgen.micronaut.template.function.gcp.gcpFunctionGroovyJunit;
 import io.micronaut.projectgen.micronaut.template.function.gcp.gcpFunctionJavaJunit;
@@ -32,7 +33,6 @@ import io.micronaut.projectgen.micronaut.template.function.gcp.gcpFunctionKoTest
 import io.micronaut.projectgen.micronaut.template.function.gcp.gcpFunctionKotlinJunit;
 import io.micronaut.projectgen.micronaut.template.function.gcp.gcpFunctionSpock;
 import io.micronaut.starter.feature.json.JacksonDatabindFeature;
-import io.micronaut.projectgen.features.gradle.ShadePlugin;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
 import jakarta.inject.Singleton;
 

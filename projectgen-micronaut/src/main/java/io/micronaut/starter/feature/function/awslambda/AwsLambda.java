@@ -28,6 +28,7 @@ import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.Project;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
+import io.micronaut.projectgen.micronaut.gradle.ShadePlugin;
 import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import io.micronaut.starter.feature.Category;
 import io.micronaut.starter.feature.CodeContributingFeature;
@@ -66,7 +67,6 @@ import io.micronaut.projectgen.micronaut.template.function.awslambda.homeControl
 import io.micronaut.starter.feature.graalvm.GraalVM;
 import io.micronaut.projectgen.micronaut.features.httpclient.HttpClientFeature;
 import io.micronaut.projectgen.micronaut.features.httpclient.HttpClientJdk;
-import io.micronaut.projectgen.features.gradle.ShadePlugin;
 import io.micronaut.starter.feature.security.SecurityFeature;
 import io.micronaut.starter.options.DefaultTestRockerModelProvider;
 import io.micronaut.projectgen.core.options.Options;

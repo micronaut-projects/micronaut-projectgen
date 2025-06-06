@@ -22,7 +22,7 @@ import io.micronaut.projectgen.core.feature.gitignore.GitIgnore;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.core.options.TestFramework;
 import io.micronaut.projectgen.core.utils.OptionUtils;
-import io.micronaut.projectgen.features.gradle.JavaGradlePlugin;
+import io.micronaut.projectgen.quarkus.features.buildtools.gradle.JavaGradlePlugin;
 import io.micronaut.projectgen.quarkus.features.QuarkusArc;
 import io.micronaut.projectgen.quarkus.features.QuarkusBom;
 import io.micronaut.projectgen.quarkus.features.QuarkusJunit5;

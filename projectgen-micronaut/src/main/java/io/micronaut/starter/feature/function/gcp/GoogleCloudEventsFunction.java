@@ -25,6 +25,7 @@ import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.Project;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
+import io.micronaut.projectgen.micronaut.gradle.ShadePlugin;
 import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import io.micronaut.projectgen.micronaut.template.function.gcp.cloudevents.gcpCloudEventsFunctionGroovy;
 import io.micronaut.projectgen.micronaut.template.function.gcp.cloudevents.gcpCloudEventsFunctionGroovyJunit;
@@ -36,7 +37,6 @@ import io.micronaut.projectgen.micronaut.template.function.gcp.cloudevents.gcpCl
 import io.micronaut.projectgen.micronaut.template.function.gcp.cloudevents.gcpCloudEventsFunctionSpock;
 import io.micronaut.projectgen.micronaut.template.function.gcp.gcpFunctionReadme;
 import io.micronaut.starter.feature.json.JacksonDatabindFeature;
-import io.micronaut.projectgen.features.gradle.ShadePlugin;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.options.Language;
 import io.micronaut.projectgen.core.rocker.RockerTemplate;

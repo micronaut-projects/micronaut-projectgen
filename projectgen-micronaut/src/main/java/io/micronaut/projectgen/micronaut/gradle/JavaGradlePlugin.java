@@ -1,5 +1,5 @@
 /*
- * Copyright 2017-2025 original authors
+ * Copyright 2017-2023 original authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.projectgen.features.gradle;
+package io.micronaut.projectgen.micronaut.gradle;
 
 import io.micronaut.projectgen.core.buildtools.gradle.GradlePlugin;
 import io.micronaut.projectgen.core.buildtools.gradle.GradleSpecificFeature;
@@ -24,29 +24,41 @@ import io.micronaut.projectgen.core.utils.OptionUtils;
 import jakarta.inject.Singleton;
 
 @Singleton
-public class GroovyGradlePlugin implements GradleSpecificFeature, BuildPluginFeature {
-    public static final GradlePlugin GROOVY_GRADLE_PLUGIN = GradlePlugin.builder().id("groovy").build();
+public class JavaGradlePlugin implements GradleSpecificFeature, BuildPluginFeature {
+    private static final String GRADLE_PLUGIN_JAVA_ID = "java";
+
+    @Override
+    public String getName() {
+        return "java-gradle-plugin";
+    }
 
     @Override
     public String getTitle() {
-        return "Groovy Gradle Plugin";
+        return "Java Gradle Plugin";
+    }
+
+    @Override
+    public boolean isVisible() {
+        return false;
+    }
+
+    @Override
+    public String getDescription() {
+        return "Adds the Java Gradle Plugin which adds Java compilation along with testing and bundling capabilities to a project.";
     }
 
     @Override
     public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://docs.gradle.org/current/userguide/groovy_plugin.html";
-    }
-
-    @Override
-    public String getName() {
-        return "groovy-gradle-plugin";
+        return "https://docs.gradle.org/current/userguide/java_plugin.html";
     }
 
     @Override
     public void apply(GeneratorContext generatorContext) {
         ModuleContext module = generatorContext.getRootModule();
         if (OptionUtils.hasGradleBuildTool(generatorContext.getOptions())) {
-            module.addBuildPlugin(GROOVY_GRADLE_PLUGIN);
+            module.addBuildPlugin(GradlePlugin.builder()
+                    .id(GRADLE_PLUGIN_JAVA_ID)
+                    .build());
         }
     }
 }

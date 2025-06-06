@@ -1,5 +1,5 @@
 /*
- * Copyright 2017-2022 original authors
+ * Copyright 2017-2023 original authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,71 +13,52 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.projectgen.features.gradle;
+package io.micronaut.projectgen.quarkus.features.buildtools.gradle;
 
-import io.micronaut.context.annotation.Requires;
-import io.micronaut.core.annotation.NonNull;
-import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.buildtools.gradle.GradlePlugin;
 import io.micronaut.projectgen.core.buildtools.gradle.GradleSpecificFeature;
 import io.micronaut.projectgen.core.feature.BuildPluginFeature;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.generator.ModuleContext;
-import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import jakarta.inject.Singleton;
 
-/**
- * Adds a shaded JAR feature.
- */
-@Requires(property = "micronaut.starter.feature.shade.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class ShadePlugin implements BuildPluginFeature, GradleSpecificFeature {
+public class JavaGradlePlugin implements GradleSpecificFeature, BuildPluginFeature {
+    private static final String GRADLE_PLUGIN_JAVA_ID = "java";
 
-    @NonNull
     @Override
     public String getName() {
-        return "shade";
-    }
-
-    @Override
-    public boolean isVisible() {
-        return true;
-    }
-
-    @Override
-    public boolean supports(Options applicationType) {
-        return true;
+        return "java-gradle-plugin";
     }
 
     @Override
     public String getTitle() {
-        return "Fat/Shaded JAR Support";
+        return "Java Gradle Plugin";
+    }
+
+    @Override
+    public boolean isVisible() {
+        return false;
     }
 
     @Override
     public String getDescription() {
-        return "Adds the ability to build a Fat/Shaded JAR";
+        return "Adds the Java Gradle Plugin which adds Java compilation along with testing and bundling capabilities to a project.";
     }
 
     @Override
-    public String getCategory() {
-        return "Packaging";
+    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
+        return "https://docs.gradle.org/current/userguide/java_plugin.html";
     }
 
     @Override
     public void apply(GeneratorContext generatorContext) {
         ModuleContext module = generatorContext.getRootModule();
         if (OptionUtils.hasGradleBuildTool(generatorContext.getOptions())) {
-            GradlePlugin.Builder builder = GradlePlugin.builder()
-                .id("com.github.johnrengelman.shadow")
-                .lookupArtifactId("shadow");
-            module.addBuildPlugin(builder.build());
+            module.addBuildPlugin(GradlePlugin.builder()
+                    .id(GRADLE_PLUGIN_JAVA_ID)
+                    .build());
         }
-    }
-
-    @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://plugins.gradle.org/plugin/com.github.johnrengelman.shadow";
     }
 }
