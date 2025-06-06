@@ -12,5 +12,9 @@ dependencies {
     testAnnotationProcessor(platform("io.micronaut.platform:micronaut-platform:4.8.2"))
 
     testAnnotationProcessor("io.micronaut:micronaut-inject-java")
+}
 
+java {
+    sourceCompatibility = JavaVersion.toVersion("17")
+    targetCompatibility = JavaVersion.toVersion("17")
 }
