@@ -119,11 +119,11 @@ public class ViewsFieldset implements OpenRewriteFeature {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
+        OpenRewriteFeature.super.apply(generatorContext);
         ModuleContext module = generatorContext.getRootModule();
         if (generatorContext.hasFeature(Thymeleaf.class)) {
             addThymeleafTemplates(generatorContext, module);
         }
-        OpenRewriteFeature.super.apply(generatorContext);
     }
 
     private void addThymeleafTemplates(GeneratorContext generatorContext, ModuleContext module) {
