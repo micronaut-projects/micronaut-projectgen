@@ -1,12 +1,8 @@
 package io.micronaut.projectgen.micronaut.features.views;
 
 import io.micronaut.projectgen.core.buildtools.Scope;
-import io.micronaut.projectgen.core.generator.ProjectGenerator;
-import io.micronaut.projectgen.core.io.MapOutputHandler;
 import io.micronaut.projectgen.core.io.PreviewGenerator;
-import io.micronaut.projectgen.core.options.GenericOptionsBuilder;
 import io.micronaut.projectgen.core.options.Options;
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.micronaut.OptionsFixture;
 import io.micronaut.projectgen.test.BuildTestVerifier;
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
