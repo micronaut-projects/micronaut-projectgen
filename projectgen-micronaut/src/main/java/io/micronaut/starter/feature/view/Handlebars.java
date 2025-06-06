@@ -50,5 +50,4 @@ public class Handlebars implements ViewFeature, MicronautServerDependent, OpenRe
     public List<String> getRecipes(GeneratorContext generatorContext) {
         return List.of("io.micronaut.starter.feature.views-handlebars");
     }
-
 }

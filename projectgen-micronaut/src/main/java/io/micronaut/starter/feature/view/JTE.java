@@ -105,5 +105,4 @@ public class JTE implements ViewFeature, MicronautServerDependent, OpenRewriteFe
     public List<String> getRecipes(GeneratorContext generatorContext) {
         return List.of("io.micronaut.starter.feature.views-jte");
     }
-
 }
