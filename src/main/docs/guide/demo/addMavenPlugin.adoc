@@ -1,0 +1,15 @@
+You can use ProjectGen api:projectgen.core.buildtools.maven.MavenPlugin[] API to add Maven Plugins to a project.
+
+The following feature adds the https://maven.apache.org/plugins/maven-jar-plugin/[Maven Jar Plugin].
+
+[source, java]
+----
+include::test-suite-helloworld/src/main/java/io/micronaut/projectgen/demo/MavenJarPluginFeature.java[]
+----
+
+The following feature adds https://maven.apache.org/surefire/maven-surefire-plugin/[Maven Surefire Plugin]:
+
+[source, java]
+----
+include::test-suite-helloworld/src/main/java/io/micronaut/projectgen/demo/MavenSurefirePlugin.java[]
+----

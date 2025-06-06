@@ -19,6 +19,9 @@ import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.io.Writable;
 import io.micronaut.projectgen.core.options.Options;
 
+import java.io.File;
+import java.nio.file.Path;
+
 public interface ZipGenerator {
     @NonNull
     Writable zip(@NonNull Options options);

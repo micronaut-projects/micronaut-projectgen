@@ -1,8 +1,21 @@
 introduction:
   title: Introduction
 releaseHistory: Release History
+micronautProjectGenerationCore: Micronaut ProjectGen Core
+micronautProjectGenerationTest: Micronaut ProjectGen Test
+features: Features
+demo:
+  title: Demo
+  defineOptions: Options
+  addDependency: Add Dependency
+  addBuildProperties: Add Build Properties
+  addGradlePlugins: Add Gradle Plugins
+  addMavenPlugin: Add Maven Plugins
+  addCode: Add Code
+  root: Default Feature
+  cli: Project Generation in a Command Line Application
+  test: Test Project Generation
 micronautProjectGeneration: Micronaut Project Generation
 openrewriteIntegration: OpenRewrite Integration
-springBootProjectGeneration: Spring Boot Project Generation
 repository: Repository
 

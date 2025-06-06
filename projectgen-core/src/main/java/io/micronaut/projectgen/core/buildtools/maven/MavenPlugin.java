@@ -20,6 +20,7 @@ import io.micronaut.core.annotation.Nullable;
 import io.micronaut.projectgen.core.buildtools.BuildPlugin;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.buildtools.dependencies.CoordinateResolver;
+import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.template.StringWritable;
 import io.micronaut.projectgen.core.template.Writable;
 import java.util.Objects;
@@ -28,32 +29,36 @@ import java.util.Objects;
  * Maven Plugin.
  */
 public class MavenPlugin implements BuildPlugin {
-
+    private final String groupId;
     private final String artifactId;
+    private final String version;
     private final Writable extension;
     private final int order;
 
-    public MavenPlugin(String artifactId, Writable extension, int order) {
+    public MavenPlugin(String groupId,
+                       String artifactId,
+                       String version,
+                       Writable extension, int order) {
+        this.groupId = groupId;
         this.artifactId = artifactId;
+        this.version = version;
         this.extension = extension;
         this.order = order;
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        MavenPlugin that = (MavenPlugin) o;
-        return artifactId.equals(that.artifactId);
+    public final boolean equals(Object o) {
+        if (!(o instanceof MavenPlugin that)) return false;
+
+        return Objects.equals(groupId, that.groupId) && Objects.equals(artifactId, that.artifactId) && Objects.equals(version, that.version);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(artifactId);
+        int result = Objects.hashCode(groupId);
+        result = 31 * result + Objects.hashCode(artifactId);
+        result = 31 * result + Objects.hashCode(version);
+        return result;
     }
 
     @Override
@@ -87,6 +92,16 @@ public class MavenPlugin implements BuildPlugin {
         return extension;
     }
 
+    @Nullable
+    public String getGroupId() {
+        return groupId;
+    }
+
+    @Nullable
+    public String getVersion() {
+        return version;
+    }
+
     /**
      *
      * @return artifact ID
@@ -103,10 +118,17 @@ public class MavenPlugin implements BuildPlugin {
 
         private String artifactId;
         private String groupId;
+        private String version;
         private Writable extension;
         private int order;
 
         private Builder() {
+        }
+
+        @NonNull
+        public MavenPlugin.Builder extension(@Nullable String extension) {
+            this.extension = new StringWritable(extension);
+            return this;
         }
 
         @NonNull
@@ -132,6 +154,10 @@ public class MavenPlugin implements BuildPlugin {
             this.groupId = groupId;
             return this;
         }
+        public MavenPlugin.Builder version(String version) {
+            this.version = version;
+            return this;
+        }
 
         @NonNull
         public MavenPlugin build() {
@@ -141,10 +167,11 @@ public class MavenPlugin implements BuildPlugin {
 "<plugin>\n" +
     "  <groupId>" + groupId + "</groupId>\n" +
     "  <artifactId>" + artifactId + "</artifactId>\n" +
+    (version != null ? "  <version>" + version + "</version>\n" : "") +
     "</plugin>\n");
             }
             Objects.requireNonNull(extension, "Maven plugins require an extension or a groupId");
-            return new MavenPlugin(artifactId, extension, order);
+            return new MavenPlugin(groupId, artifactId, version, extension, order);
         }
     }
 }

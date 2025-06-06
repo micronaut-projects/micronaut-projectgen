@@ -1,0 +1,15 @@
+You can use ProjectGen api:projectgen.core.buildtools.gradle.GradlePlugin[] API to add Gradle Plugins to a project.
+
+The following feature adds the https://docs.gradle.org/current/userguide/java_plugin.html[Gradle Java Plugin].
+
+[source, java]
+----
+include::test-suite-helloworld/src/main/java/io/micronaut/projectgen/demo/GradleJavaPluginFeature.java[]
+----
+
+The following feature adds https://docs.gradle.org/current/userguide/application_plugin.html[Gradle Application Plugin]:
+
+[source, java]
+----
+include::test-suite-helloworld/src/main/java/io/micronaut/projectgen/demo/GradleApplicationPluginFeature.java[]
+----

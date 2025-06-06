@@ -114,7 +114,18 @@ public record GradleBuild(Coordinate coordinate,
      */
     @NonNull
     public String renderSettingsExtensions() {
-        return renderWritableExtensions(plugins.stream().map(GradlePlugin::getSettingsExtension));
+        return renderWritableExtensions(getSettingsExtensionsStream());
+    }
+
+    public List<Writable> getSettingsExtensions() {
+        return getSettingsExtensionsStream()
+            .toList();
+    }
+
+    private Stream<Writable> getSettingsExtensionsStream() {
+        return plugins.stream()
+            .map(GradlePlugin::getSettingsExtension)
+            .filter(Objects::nonNull);
     }
 
     /**
@@ -139,14 +150,18 @@ public record GradleBuild(Coordinate coordinate,
      */
     @NonNull
     public String renderSettingsPluginsManagement() {
-        List<GradleRepository> repos = plugins.stream()
-            .flatMap(plugin -> plugin.getPluginsManagementRepositories().stream())
-            .distinct()
-            .toList();
+        List<GradleRepository> repos = getPluginsManagementRepositories();
         if (CollectionUtils.isEmpty(repos)) {
             return "";
         }
         return WritableUtils.renderWritable(new RockerWritable(settingsPluginManagement.template(repos)), 0);
+    }
+
+    public List<GradleRepository> getPluginsManagementRepositories() {
+        return plugins.stream()
+            .flatMap(plugin -> plugin.getPluginsManagementRepositories().stream())
+            .distinct()
+            .toList();
     }
 
     /**
