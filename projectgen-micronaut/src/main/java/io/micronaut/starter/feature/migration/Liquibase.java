@@ -21,7 +21,7 @@ import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
-import io.micronaut.projectgen.javalibs.logging.Slf4jJulBridge;
+import io.micronaut.projectgen.micronaut.features.logging.Slf4jJulBridge;
 import io.micronaut.starter.feature.logging.LiquibaseSlf4j;
 import io.micronaut.projectgen.micronaut.template.liquibase.liquibaseChangelog;
 import io.micronaut.projectgen.micronaut.template.liquibase.liquibaseSchema;

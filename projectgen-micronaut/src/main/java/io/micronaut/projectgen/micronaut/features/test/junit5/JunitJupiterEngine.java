@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.projectgen.javalibs.test;
+package io.micronaut.projectgen.micronaut.features.test.junit5;
 
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
@@ -22,24 +22,24 @@ import jakarta.inject.Singleton;
 import java.util.List;
 
 @Singleton
-public class RestAssured implements OpenRewriteFeature {
+public class JunitJupiterEngine implements OpenRewriteFeature {
     @Override
     public List<String> getRecipes(GeneratorContext generatorContext) {
-        return List.of("io.micronaut.feature.javalibs.rest-assured");
+        return List.of("io.micronaut.feature.javalibs.junit-jupiter-engine");
     }
 
     @Override
     public String getName() {
-        return "rest-assured";
+        return "junit-jupiter-engine";
     }
 
     @Override
     public String getTitle() {
-        return "REST Assured";
+        return "JUnit Jupiter Engine";
     }
 
     @Override
     public String getDescription() {
-        return "Adds the REST Assured dependency to the test classpath";
+        return "Adds the JUnit Jupiter Engine dependency to the test classpath";
     }
 }

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.projectgen.javalibs.test.junit;
+package io.micronaut.projectgen.micronaut.features.test.junit5;
 
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
@@ -22,24 +22,24 @@ import jakarta.inject.Singleton;
 import java.util.List;
 
 @Singleton
-public class JunitJupiterEngine implements OpenRewriteFeature {
+public class JunitJupiterApi implements OpenRewriteFeature {
     @Override
     public List<String> getRecipes(GeneratorContext generatorContext) {
-        return List.of("io.micronaut.feature.javalibs.junit-jupiter-engine");
+        return List.of("io.micronaut.feature.javalibs.junit-jupiter-api");
     }
 
     @Override
     public String getName() {
-        return "junit-jupiter-engine";
+        return "junit-jupiter-api";
     }
 
     @Override
     public String getTitle() {
-        return "JUnit Jupiter Engine";
+        return "JUnit Jupiter API";
     }
 
     @Override
     public String getDescription() {
-        return "Adds the JUnit Jupiter Engine dependency to the test classpath";
+        return "Adds the JUnit Jupiter API dependency to the test classpath";
     }
 }

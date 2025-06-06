@@ -25,7 +25,7 @@ import io.micronaut.projectgen.core.feature.LoggingFeature;
 import io.micronaut.projectgen.core.feature.config.Properties;
 import io.micronaut.projectgen.core.feature.gitignore.GitIgnore;
 import io.micronaut.projectgen.core.options.TestFramework;
-import io.micronaut.projectgen.javalibs.logging.Logback;
+import io.micronaut.projectgen.micronaut.features.logging.Logback;
 import io.micronaut.projectgen.micronaut.features.test.MicronautTestJunit5;
 import io.micronaut.projectgen.micronaut.features.test.MicronautTestSpock;
 

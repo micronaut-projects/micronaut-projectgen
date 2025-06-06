@@ -27,7 +27,7 @@ import io.micronaut.projectgen.core.feature.license.Apache2LicenseFeature;
 import io.micronaut.projectgen.core.feature.license.LicenseFeature;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.core.utils.OptionUtils;
-import io.micronaut.projectgen.javalibs.logging.Logback;
+import io.micronaut.projectgen.micronaut.features.logging.Logback;
 import io.micronaut.projectgen.micronaut.features.test.MicronautTestJunit5;
 import io.micronaut.projectgen.micronaut.features.test.MicronautTestSpock;
 import io.micronaut.projectgen.micronaut.gradle.MicronautLibraryGradlePlugin;

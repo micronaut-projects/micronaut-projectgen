@@ -21,8 +21,8 @@ import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.options.TestFramework;
 import io.micronaut.projectgen.core.utils.OptionUtils;
-import io.micronaut.projectgen.javalibs.test.junit.JunitJupiterApi;
-import io.micronaut.projectgen.javalibs.test.junit.JunitJupiterEngine;
+import io.micronaut.projectgen.micronaut.features.test.junit5.JunitJupiterApi;
+import io.micronaut.projectgen.micronaut.features.test.junit5.JunitJupiterEngine;
 import jakarta.inject.Singleton;
 
 import java.util.List;

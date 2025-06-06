@@ -13,8 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.projectgen.javalibs.test.junit;
+package io.micronaut.projectgen.micronaut.features.logging;
 
+import io.micronaut.core.annotation.NonNull;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import jakarta.inject.Singleton;
@@ -22,24 +23,37 @@ import jakarta.inject.Singleton;
 import java.util.List;
 
 @Singleton
-public class JunitJupiterApi implements OpenRewriteFeature {
+public class Slf4jJulBridge implements OpenRewriteFeature {
     @Override
     public List<String> getRecipes(GeneratorContext generatorContext) {
-        return List.of("io.micronaut.feature.javalibs.junit-jupiter-api");
+        return List.of("io.micronaut.feature.javalibs.jul-to-slf4j");
     }
 
     @Override
+    @NonNull
     public String getName() {
-        return "junit-jupiter-api";
+        return "jul-to-slf4j";
     }
 
     @Override
     public String getTitle() {
-        return "JUnit Jupiter API";
+        return "SLF4J JUL Bridge";
     }
 
     @Override
-    public String getDescription() {
-        return "Adds the JUnit Jupiter API dependency to the test classpath";
+    public String getCategory() {
+        return "Logging";
     }
+
+    @Override
+    @NonNull
+    public String getDescription() {
+        return "Java Util Logging bridge for SLF4J with Logback.";
+    }
+
+    @Override
+    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
+        return "https://www.slf4j.org/legacy.html#jul-to-slf4jBridge";
+    }
+
 }

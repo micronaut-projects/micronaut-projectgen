@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.projectgen.javalibs.logging;
+package io.micronaut.projectgen.micronaut.features.logging;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
@@ -24,8 +24,8 @@ import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.options.OperatingSystem;
 import io.micronaut.projectgen.core.rocker.RockerTemplate;
+import io.micronaut.projectgen.micronaut.template.logging.logback;
 import jakarta.inject.Singleton;
-import io.micronaut.projectgen.javalibs.template.logback;
 
 import java.util.List;
 

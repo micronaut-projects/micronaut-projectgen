@@ -13,9 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.projectgen.javalibs.logging;
+package io.micronaut.projectgen.quarkus.features;
 
-import io.micronaut.core.annotation.NonNull;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import jakarta.inject.Singleton;
@@ -23,37 +22,24 @@ import jakarta.inject.Singleton;
 import java.util.List;
 
 @Singleton
-public class Slf4jJulBridge implements OpenRewriteFeature {
+public class RestAssured implements OpenRewriteFeature {
     @Override
     public List<String> getRecipes(GeneratorContext generatorContext) {
-        return List.of("io.micronaut.feature.javalibs.jul-to-slf4j");
+        return List.of("io.micronaut.feature.javalibs.rest-assured");
     }
 
     @Override
-    @NonNull
     public String getName() {
-        return "jul-to-slf4j";
+        return "rest-assured";
     }
 
     @Override
     public String getTitle() {
-        return "SLF4J JUL Bridge";
+        return "REST Assured";
     }
 
     @Override
-    public String getCategory() {
-        return "Logging";
-    }
-
-    @Override
-    @NonNull
     public String getDescription() {
-        return "Java Util Logging bridge for SLF4J with Logback.";
+        return "Adds the REST Assured dependency to the test classpath";
     }
-
-    @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://www.slf4j.org/legacy.html#jul-to-slf4jBridge";
-    }
-
 }
