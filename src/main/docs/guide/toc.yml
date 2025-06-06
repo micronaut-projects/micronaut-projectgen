@@ -15,7 +15,5 @@ demo:
   root: Default Feature
   cli: Project Generation in a Command Line Application
   test: Test Project Generation
-micronautProjectGeneration: Micronaut Project Generation
-openrewriteIntegration: OpenRewrite Integration
 repository: Repository
 
