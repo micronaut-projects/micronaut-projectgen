@@ -48,13 +48,19 @@
                                 
                                 <div class="toc-item" style="margin-left:0"><a href="#releaseHistory"><strong>2</strong><span>Release History</span></a></div>
                                 
-                                <div class="toc-item" style="margin-left:0"><a href="#micronautProjectGeneration"><strong>3</strong><span>Micronaut Project Generation</span></a></div>
+                                <div class="toc-item" style="margin-left:0"><a href="#micronautProjectGenerationCore"><strong>3</strong><span>Micronaut ProjectGen Core</span></a></div>
                                 
-                                <div class="toc-item" style="margin-left:0"><a href="#openrewriteIntegration"><strong>4</strong><span>OpenRewrite Integration</span></a></div>
+                                <div class="toc-item" style="margin-left:0"><a href="#micronautProjectGenerationTest"><strong>4</strong><span>Micronaut ProjectGen Test</span></a></div>
                                 
-                                <div class="toc-item" style="margin-left:0"><a href="#springBootProjectGeneration"><strong>5</strong><span>Spring Boot Project Generation</span></a></div>
+                                <div class="toc-item" style="margin-left:0"><a href="#features"><strong>5</strong><span>Features</span></a></div>
                                 
-                                <div class="toc-item" style="margin-left:0"><a href="#repository"><strong>6</strong><span>Repository</span></a></div>
+                                <div class="toc-item" style="margin-left:0"><a href="#demo"><strong>6</strong><span>Demo</span></a></div>
+                                
+                                <div class="toc-item" style="margin-left:0"><a href="#micronautProjectGeneration"><strong>7</strong><span>Micronaut Project Generation</span></a></div>
+                                
+                                <div class="toc-item" style="margin-left:0"><a href="#openrewriteIntegration"><strong>8</strong><span>OpenRewrite Integration</span></a></div>
+                                
+                                <div class="toc-item" style="margin-left:0"><a href="#repository"><strong>9</strong><span>Repository</span></a></div>
                                 
                             </div>
                         </div>
@@ -89,13 +95,37 @@
         
         <div class="toc-item" style="margin-left:0px" id="toc-item-releaseHistory"><a href="#releaseHistory"><strong>2</strong><span>Release History</span></a></div>
         
-        <div class="toc-item" style="margin-left:0px" id="toc-item-micronautProjectGeneration"><a href="#micronautProjectGeneration"><strong>3</strong><span>Micronaut Project Generation</span></a></div>
+        <div class="toc-item" style="margin-left:0px" id="toc-item-micronautProjectGenerationCore"><a href="#micronautProjectGenerationCore"><strong>3</strong><span>Micronaut ProjectGen Core</span></a></div>
         
-        <div class="toc-item" style="margin-left:0px" id="toc-item-openrewriteIntegration"><a href="#openrewriteIntegration"><strong>4</strong><span>OpenRewrite Integration</span></a></div>
+        <div class="toc-item" style="margin-left:0px" id="toc-item-micronautProjectGenerationTest"><a href="#micronautProjectGenerationTest"><strong>4</strong><span>Micronaut ProjectGen Test</span></a></div>
         
-        <div class="toc-item" style="margin-left:0px" id="toc-item-springBootProjectGeneration"><a href="#springBootProjectGeneration"><strong>5</strong><span>Spring Boot Project Generation</span></a></div>
+        <div class="toc-item" style="margin-left:0px" id="toc-item-features"><a href="#features"><strong>5</strong><span>Features</span></a></div>
         
-        <div class="toc-item" style="margin-left:0px" id="toc-item-repository"><a href="#repository"><strong>6</strong><span>Repository</span></a></div>
+        <div class="toc-item" style="margin-left:0px" id="toc-item-demo"><a href="#demo"><strong>6</strong><span>Demo</span></a></div>
+        
+        <div class="toc-item" style="margin-left:10px" id="toc-item-defineOptions"><a href="#defineOptions"><strong>6.1</strong><span>Options</span></a></div>
+        
+        <div class="toc-item" style="margin-left:10px" id="toc-item-addDependency"><a href="#addDependency"><strong>6.2</strong><span>Add Dependency</span></a></div>
+        
+        <div class="toc-item" style="margin-left:10px" id="toc-item-addBuildProperties"><a href="#addBuildProperties"><strong>6.3</strong><span>Add Build Properties</span></a></div>
+        
+        <div class="toc-item" style="margin-left:10px" id="toc-item-addGradlePlugins"><a href="#addGradlePlugins"><strong>6.4</strong><span>Add Gradle Plugins</span></a></div>
+        
+        <div class="toc-item" style="margin-left:10px" id="toc-item-addMavenPlugin"><a href="#addMavenPlugin"><strong>6.5</strong><span>Add Maven Plugins</span></a></div>
+        
+        <div class="toc-item" style="margin-left:10px" id="toc-item-addCode"><a href="#addCode"><strong>6.6</strong><span>Add Code</span></a></div>
+        
+        <div class="toc-item" style="margin-left:10px" id="toc-item-root"><a href="#root"><strong>6.7</strong><span>Default Feature</span></a></div>
+        
+        <div class="toc-item" style="margin-left:10px" id="toc-item-cli"><a href="#cli"><strong>6.8</strong><span>Project Generation in a Command Line Application</span></a></div>
+        
+        <div class="toc-item" style="margin-left:10px" id="toc-item-test"><a href="#test"><strong>6.9</strong><span>Test Project Generation</span></a></div>
+        
+        <div class="toc-item" style="margin-left:0px" id="toc-item-micronautProjectGeneration"><a href="#micronautProjectGeneration"><strong>7</strong><span>Micronaut Project Generation</span></a></div>
+        
+        <div class="toc-item" style="margin-left:0px" id="toc-item-openrewriteIntegration"><a href="#openrewriteIntegration"><strong>8</strong><span>OpenRewrite Integration</span></a></div>
+        
+        <div class="toc-item" style="margin-left:0px" id="toc-item-repository"><a href="#repository"><strong>9</strong><span>Repository</span></a></div>
         
         </div>
     </div>
@@ -137,7 +167,871 @@
 <p><a href="https://github.com/micronaut-projects/micronaut-projectgen/releases">https://github.com/micronaut-projects/micronaut-projectgen/releases</a></p>
 </div>
 
-<h1 id="micronautProjectGeneration"><a class="anchor" href="#micronautProjectGeneration"></a>3 Micronaut Project Generation</h1>
+<h1 id="micronautProjectGenerationCore"><a class="anchor" href="#micronautProjectGenerationCore"></a>3 Micronaut ProjectGen Core</h1>
+
+<div class='contribute-btn'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-projectgen/edit/0.0.x/src/main/docs/guide/micronautProjectGenerationCore.adoc"'>
+        <i class='fa fa-pencil-square-o'></i> Improve this doc
+    </button>
+</div>
+
+
+<div class="paragraph">
+<p>The following dependency contains the core APIs to generate applications.</p>
+</div>
+<div class="paragraph">
+<p>        <div class="listingblock multi-language-sample">
+<div class="title"></div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-kotlin hljs" data-lang="gradle">implementation(<span class="hljs-string">"io.micronaut.projectgen:micronaut-projectgen-core")</span></code></pre>
+</div>
+</div>
+<div class="listingblock multi-language-sample">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="maven">&lt;dependency&gt;
+    &lt;groupId&gt;io.micronaut.projectgen&lt;/groupId&gt;
+    &lt;artifactId&gt;micronaut-projectgen-core&lt;/artifactId&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div></p>
+</div>
+
+<h1 id="micronautProjectGenerationTest"><a class="anchor" href="#micronautProjectGenerationTest"></a>4 Micronaut ProjectGen Test</h1>
+
+<div class='contribute-btn'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-projectgen/edit/0.0.x/src/main/docs/guide/micronautProjectGenerationTest.adoc"'>
+        <i class='fa fa-pencil-square-o'></i> Improve this doc
+    </button>
+</div>
+
+
+<div class="paragraph">
+<p>The following dependency contains utilities to test the generated application.</p>
+</div>
+<div class="paragraph">
+<p>        <div class="listingblock multi-language-sample">
+<div class="title"></div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-kotlin hljs" data-lang="gradle">testImplementation(<span class="hljs-string">"io.micronaut.projectgen:micronaut-projectgen-test")</span></code></pre>
+</div>
+</div>
+<div class="listingblock multi-language-sample">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="maven">&lt;dependency&gt;
+    &lt;groupId&gt;io.micronaut.projectgen&lt;/groupId&gt;
+    &lt;artifactId&gt;micronaut-projectgen-test&lt;/artifactId&gt;
+    &lt;scope&gt;test&lt;/scope&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div></p>
+</div>
+
+<h1 id="features"><a class="anchor" href="#features"></a>5 Features</h1>
+
+<div class='contribute-btn'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-projectgen/edit/0.0.x/src/main/docs/guide/features.adoc"'>
+        <i class='fa fa-pencil-square-o'></i> Improve this doc
+    </button>
+</div>
+
+
+<div class="paragraph">
+<p>To generate a project, you create beans of type <a href="../api/io/micronaut/projectgen/core/feature/Feature.html">Feature</a>.</p>
+</div>
+<div class="paragraph">
+<p>Each feature has a unique identifier; you can offer a <a href="https://launch.micronaut.io">UI</a> to allow users to select a feature.</p>
+</div>
+
+<h1 id="demo"><a class="anchor" href="#demo"></a>6 Demo</h1>
+
+<div class='contribute-btn'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-projectgen/edit/0.0.x/src/main/docs/guide/demo.adoc"'>
+        <i class='fa fa-pencil-square-o'></i> Improve this doc
+    </button>
+</div>
+
+
+<div class="paragraph">
+<p>To talk about the ProjectGen API, let&#8217;s discuss the following demo: a Hello World application with Maven and Gradle.</p>
+</div>
+<div class="paragraph">
+<p>The project structure will be like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">├── build.gradle.kts
+├── gradle
+│   └── wrapper
+│       ├── gradle-wrapper.jar
+│       └── gradle-wrapper.properties
+├── gradle.properties
+├── gradlew
+├── gradlew.bat
+├── mvnw
+├── mvnw.bat
+├── pom.xml
+├── settings.gradle.kts
+└── src
+    ├── main
+    │   └── java
+    │       └── com
+    │           └── example
+    │               └── HelloWorld.java
+    └── test
+        └── java
+            └── com
+                └── example
+                    └── HelloWorldTest.java</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You want to generate a <code>build.gradle.kts</code> with the following content:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-kotlin hljs" data-lang="kotlin">plugins {
+    id("java")
+    id("application")
+}
+group = "io.micronaut.projectgen"
+version = "1.0.0"
+repositories {
+    mavenCentral()
+}
+dependencies {
+    testImplementation("org.junit.jupiter:junit-jupiter:5.10.2")
+}
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}
+tasks.test {
+    useJUnitPlatform()
+}
+
+application {
+    mainClass.set("com.example.HelloWorld")
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>and a <code>pom.xml</code> with the following content:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
+  &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+  &lt;groupId&gt;io.micronaut.projectgen&lt;/groupId&gt;
+  &lt;artifactId&gt;demo-project&lt;/artifactId&gt;
+  &lt;version&gt;1.0.0&lt;/version&gt;
+  &lt;properties&gt;
+    &lt;maven.compiler.source&gt;21&lt;/maven.compiler.source&gt;
+    &lt;maven.compiler.target&gt;21&lt;/maven.compiler.target&gt;
+  &lt;/properties&gt;
+  &lt;dependencies&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.junit.jupiter&lt;/groupId&gt;
+      &lt;artifactId&gt;junit-jupiter&lt;/artifactId&gt;
+      &lt;version&gt;5.10.2&lt;/version&gt;
+      &lt;scope&gt;test&lt;/scope&gt;
+    &lt;/dependency&gt;
+  &lt;/dependencies&gt;
+  &lt;build&gt;
+    &lt;plugins&gt;
+      &lt;plugin&gt;
+        &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+        &lt;artifactId&gt;maven-surefire-plugin&lt;/artifactId&gt;
+        &lt;version&gt;3.1.2&lt;/version&gt;
+      &lt;/plugin&gt;
+      &lt;plugin&gt;
+          &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+          &lt;artifactId&gt;maven-jar-plugin&lt;/artifactId&gt;
+          &lt;version&gt;3.3.0&lt;/version&gt;
+          &lt;configuration&gt;
+              &lt;archive&gt;
+                  &lt;manifest&gt;
+                      &lt;mainClass&gt;com.example.HelloWorld&lt;/mainClass&gt;
+                  &lt;/manifest&gt;
+              &lt;/archive&gt;
+          &lt;/configuration&gt;
+      &lt;/plugin&gt;
+    &lt;/plugins&gt;
+  &lt;/build&gt;
+&lt;/project&gt;</code></pre>
+</div>
+</div>
+
+<h2 id="defineOptions"><a class="anchor" href="#defineOptions"></a>6.1 Options</h2>
+
+<div class='contribute-btn'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-projectgen/edit/0.0.x/src/main/docs/guide/demo/defineOptions.adoc"'>
+        <i class='fa fa-pencil-square-o'></i> Improve this doc
+    </button>
+</div>
+
+
+<div class="paragraph">
+<p>To generate a project, you need an implementation of the interface <a href="../api/io/micronaut/projectgen/core/options/Options.html">Options</a>.</p>
+</div>
+<div class="paragraph">
+<p>For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">package io.micronaut.projectgen.demo;
+
+import io.micronaut.projectgen.core.buildtools.BuildTool;
+import io.micronaut.projectgen.core.buildtools.gradle.GradleDsl;
+import io.micronaut.projectgen.core.options.GenericOptionsBuilder;
+import io.micronaut.projectgen.core.options.JdkVersion;
+import io.micronaut.projectgen.core.options.Options;
+
+import java.util.List;
+
+public final class OptionsFactory {
+    private OptionsFactory() {
+    }
+
+    public static Options create() {
+        return GenericOptionsBuilder.builder()
+            .name("demo")
+            .packageName("com.example")
+            .group("io.micronaut.projectgen")
+            .artifact("demo-project")
+            .version("1.0.0")
+            .buildTools(List.of(BuildTool.MAVEN, BuildTool.GRADLE))
+            .gradleDsl(GradleDsl.KOTLIN)
+            .java(JdkVersion.JDK_21)
+            .build();
+    }
+}</code></pre>
+</div>
+</div>
+
+<h2 id="addDependency"><a class="anchor" href="#addDependency"></a>6.2 Add Dependency</h2>
+
+<div class='contribute-btn'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-projectgen/edit/0.0.x/src/main/docs/guide/demo/addDependency.adoc"'>
+        <i class='fa fa-pencil-square-o'></i> Improve this doc
+    </button>
+</div>
+
+
+<div class="paragraph">
+<p>The following feature adds a dependency:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">package io.micronaut.projectgen.demo;
+
+import io.micronaut.projectgen.core.buildtools.MavenCentral;
+import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
+import io.micronaut.projectgen.core.feature.Feature;
+import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.utils.OptionUtils;
+import jakarta.inject.Singleton;
+
+@Singleton
+class JunitJupiter implements Feature {
+    private static final Dependency DEPENDENCY_JUNIT_JUPITER = Dependency.builder() <i class="conum" data-value="1"></i><b>(1)</b>
+        .groupId("org.junit.jupiter")
+        .artifactId("junit-jupiter")
+        .version("5.10.2")
+        .test()
+        .build();
+
+    @Override
+    public String getName() {
+        return "junit-jupiter";
+    }
+
+    @Override
+    public String getDescription() {
+        return "Adds the JUnit Jupiter dependency to the project";
+    }
+
+    @Override
+    public void apply(GeneratorContext generatorContext) {
+        ModuleContext module = generatorContext.getRootModule();
+        if (OptionUtils.hasGradleBuildTool(generatorContext.getOptions())) {
+            module.repositories().add(new MavenCentral()); <i class="conum" data-value="1"></i><b>(1)</b>
+        }
+        module.addDependency(DEPENDENCY_JUNIT_JUPITER); <i class="conum" data-value="2"></i><b>(2)</b>
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>A feature can add repository.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>You can use fluid <a href="../api/io/micronaut/projectgen/core/buildtools/dependencies/Dependency.html">Dependency</a> API to add dependencies to your project.</td>
+</tr>
+</table>
+</div>
+
+<h2 id="addBuildProperties"><a class="anchor" href="#addBuildProperties"></a>6.3 Add Build Properties</h2>
+
+<div class='contribute-btn'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-projectgen/edit/0.0.x/src/main/docs/guide/demo/addBuildProperties.adoc"'>
+        <i class='fa fa-pencil-square-o'></i> Improve this doc
+    </button>
+</div>
+
+
+<div class="paragraph">
+<p>The following feature adds build properties:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">package io.micronaut.projectgen.demo;
+
+import io.micronaut.projectgen.core.buildtools.BuildProperties;
+import io.micronaut.projectgen.core.feature.Feature;
+import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.options.Options;
+import io.micronaut.projectgen.core.utils.OptionUtils;
+import jakarta.inject.Singleton;
+
+@Singleton
+class MavenCompilerProperties implements Feature {
+    @Override
+    public String getName() {
+        return "maven-compiler-properties";
+    }
+
+    @Override
+    public void apply(GeneratorContext generatorContext) {
+        Options options = generatorContext.getOptions();
+        if (OptionUtils.hasMavenBuildTool(options)) {
+            BuildProperties buildProperties = generatorContext.getRootModule()
+                .buildProperties();
+            String java = String.valueOf(options
+                .java()
+                .majorVersion());
+            buildProperties.put("maven.compiler.source", java);
+            buildProperties.put("maven.compiler.target", java);
+        }
+    }
+}</code></pre>
+</div>
+</div>
+
+<h2 id="addGradlePlugins"><a class="anchor" href="#addGradlePlugins"></a>6.4 Add Gradle Plugins</h2>
+
+<div class='contribute-btn'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-projectgen/edit/0.0.x/src/main/docs/guide/demo/addGradlePlugins.adoc"'>
+        <i class='fa fa-pencil-square-o'></i> Improve this doc
+    </button>
+</div>
+
+
+<div class="paragraph">
+<p>You can use ProjectGen <a href="../api/io/micronaut/projectgen/core/buildtools/gradle/GradlePlugin.html">GradlePlugin</a> API to add Gradle Plugins to a project.</p>
+</div>
+<div class="paragraph">
+<p>The following feature adds the <a href="https://docs.gradle.org/current/userguide/java_plugin.html">Gradle Java Plugin</a>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">package io.micronaut.projectgen.demo;
+
+import io.micronaut.projectgen.core.buildtools.gradle.GradlePlugin;
+import io.micronaut.projectgen.core.feature.Feature;
+import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.utils.OptionUtils;
+import jakarta.inject.Singleton;
+
+@Singleton
+class GradleJavaPluginFeature implements Feature {
+    @Override
+    public String getName() {
+        return "gradle-plugin-java";
+    }
+
+    @Override
+    public void apply(GeneratorContext generatorContext) {
+        if (OptionUtils.hasGradleBuildTool(generatorContext.getOptions())) {
+            int javaVersion = generatorContext.getOptions()
+                .java()
+                .majorVersion();
+            generatorContext.getRootModule()
+                .addBuildPlugin(GradlePlugin.builder()
+                    .id("java")
+                    .extension(String.format("""
+                        java {
+                            sourceCompatibility = JavaVersion.VERSION_%1$d
+                            targetCompatibility = JavaVersion.VERSION_%1$d
+                        }
+                        tasks.test {
+                            useJUnitPlatform()
+                        }""", javaVersion))
+                .build());
+        }
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following feature adds <a href="https://docs.gradle.org/current/userguide/application_plugin.html">Gradle Application Plugin</a>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">package io.micronaut.projectgen.demo;
+
+import io.micronaut.projectgen.core.buildtools.gradle.GradlePlugin;
+import io.micronaut.projectgen.core.feature.Feature;
+import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.utils.OptionUtils;
+import jakarta.inject.Singleton;
+
+@Singleton
+class GradleApplicationPluginFeature implements Feature {
+    @Override
+    public String getName() {
+        return "gradle-plugin-application";
+    }
+
+    @Override
+    public void apply(GeneratorContext generatorContext) {
+        if (OptionUtils.hasGradleBuildTool(generatorContext.getOptions())) {
+            generatorContext.getRootModule()
+                .addBuildPlugin(GradlePlugin.builder()
+                    .id("application")
+                    .extension("""
+                application {
+                    mainClass.set("%s.HelloWorld")
+                }""".formatted(generatorContext.getOptions().packageName()))
+                    .build());
+        }
+
+    }
+}</code></pre>
+</div>
+</div>
+
+<h2 id="addMavenPlugin"><a class="anchor" href="#addMavenPlugin"></a>6.5 Add Maven Plugins</h2>
+
+<div class='contribute-btn'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-projectgen/edit/0.0.x/src/main/docs/guide/demo/addMavenPlugin.adoc"'>
+        <i class='fa fa-pencil-square-o'></i> Improve this doc
+    </button>
+</div>
+
+
+<div class="paragraph">
+<p>You can use ProjectGen <a href="../api/io/micronaut/projectgen/core/buildtools/maven/MavenPlugin.html">MavenPlugin</a> API to add Maven Plugins to a project.</p>
+</div>
+<div class="paragraph">
+<p>The following feature adds the <a href="https://maven.apache.org/plugins/maven-jar-plugin/">Maven Jar Plugin</a>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">package io.micronaut.projectgen.demo;
+
+import io.micronaut.projectgen.core.buildtools.maven.MavenPlugin;
+import io.micronaut.projectgen.core.feature.Feature;
+import io.micronaut.projectgen.core.generator.GeneratorContext;
+import jakarta.inject.Singleton;
+
+@Singleton
+class MavenJarPluginFeature implements Feature {
+    @Override
+    public String getName() {
+        return "maven-jar-plugin";
+    }
+
+    @Override
+    public void apply(GeneratorContext generatorContext) {
+        generatorContext.getRootModule().addBuildPlugin(MavenPlugin.builder()
+            .groupId("org.apache.maven.plugins")
+            .artifactId("maven-jar-plugin")
+            .extension(String.format("""
+            &lt;plugin&gt;
+                &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+                &lt;artifactId&gt;maven-jar-plugin&lt;/artifactId&gt;
+                &lt;version&gt;3.3.0&lt;/version&gt;
+                &lt;configuration&gt;
+                    &lt;archive&gt;
+                        &lt;manifest&gt;
+                            &lt;mainClass&gt;%s.HelloWorld&lt;/mainClass&gt;
+                        &lt;/manifest&gt;
+                    &lt;/archive&gt;
+                &lt;/configuration&gt;
+            &lt;/plugin&gt;""", generatorContext.getOptions().packageName()))
+            .build());
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following feature adds <a href="https://maven.apache.org/surefire/maven-surefire-plugin/">Maven Surefire Plugin</a>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">package io.micronaut.projectgen.demo;
+
+import io.micronaut.core.annotation.NonNull;
+import io.micronaut.projectgen.core.buildtools.maven.MavenPlugin;
+import io.micronaut.projectgen.core.feature.Feature;
+import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.utils.OptionUtils;
+import jakarta.inject.Singleton;
+
+@Singleton
+class MavenSurefirePlugin implements Feature {
+    private static final @NonNull MavenPlugin MAVEN_PLUGIN_SUREFIRE = MavenPlugin.builder() <i class="conum" data-value="1"></i><b>(1)</b>
+        .groupId("org.apache.maven.plugins")
+        .artifactId("maven-surefire-plugin")
+        .version("3.1.2")
+        .build();
+
+    @Override
+    public String getName() {
+        return "maven-surefire-plugin";
+    }
+
+    @Override
+    public void apply(GeneratorContext generatorContext) {
+        if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())) {
+            generatorContext.getRootModule().addBuildPlugin(MAVEN_PLUGIN_SUREFIRE);
+        }
+    }
+}</code></pre>
+</div>
+</div>
+
+<h2 id="addCode"><a class="anchor" href="#addCode"></a>6.6 Add Code</h2>
+
+<div class='contribute-btn'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-projectgen/edit/0.0.x/src/main/docs/guide/demo/addCode.adoc"'>
+        <i class='fa fa-pencil-square-o'></i> Improve this doc
+    </button>
+</div>
+
+
+<div class="paragraph">
+<p>The following feature adds source code:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">package io.micronaut.projectgen.demo;
+
+import io.micronaut.projectgen.core.feature.Feature;
+import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.template.StringTemplate;
+import jakarta.inject.Singleton;
+
+@Singleton
+class SampleCode implements Feature {
+    @Override
+    public String getName() {
+        return "sample-code";
+    }
+
+    @Override
+    public void apply(GeneratorContext generatorContext) {
+        ModuleContext module = generatorContext.getRootModule();
+        addHelloWorldJavaClass(module);
+        addHelloWorldTestJavaClass(module);
+    }
+
+    private void addHelloWorldJavaClass(ModuleContext module) {
+        String path = "src/main/java/com/example/HelloWorld.java";
+        module.addTemplate("HelloWorld.java", new io.micronaut.projectgen.core.template.StringTemplate(path, """
+            package com.example;
+
+            public class HelloWorld {
+                public static void main(String[] args) {
+                    System.out.println(hello());
+                }
+
+                public static String hello() {
+                    return "Hello, World!";
+                }
+            }
+            """));
+    }
+
+    private void addHelloWorldTestJavaClass(ModuleContext module) {
+        String path = "src/test/java/com/example/HelloWorldTest.java";
+        module.addTemplate("HelloWorldTest.java", new StringTemplate(path, """
+            package com.example;
+
+            import org.junit.jupiter.api.Test;
+
+            import static org.junit.jupiter.api.Assertions.assertEquals;
+
+            class HelloWorldTest {
+
+                @Test
+                void testHello() {
+                    assertEquals("Hello, World!", HelloWorld.hello());
+                }
+            }"""));
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can add files to the generated project. The previous example shows a String, but you can use the <a href="../api/io/micronaut/projectgen/core/rocker/RockerWritable.html">RockerWritable</a> API to render files with <a href="https://github.com/fizzed/rocker">Rocker Templates</a>.</p>
+</div>
+
+<h2 id="root"><a class="anchor" href="#root"></a>6.7 Default Feature</h2>
+
+<div class='contribute-btn'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-projectgen/edit/0.0.x/src/main/docs/guide/demo/root.adoc"'>
+        <i class='fa fa-pencil-square-o'></i> Improve this doc
+    </button>
+</div>
+
+
+<div class="paragraph">
+<p>You can create beans of type <a href="../api/io/micronaut/projectgen/core/feature/DefaultFeature.html">DefaultFeature</a> to be
+automatically applied if the method <code>DefaultFeature::shouldApply</code> evaluates to true.</p>
+</div>
+<div class="paragraph">
+<p>A common pattern is to define a <code>DefaultFeature</code> to act as the entry point of the project generation.</p>
+</div>
+<div class="paragraph">
+<p>A feature can apply other features as shown below:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">package io.micronaut.projectgen.demo;
+
+import io.micronaut.core.annotation.NonNull;
+import io.micronaut.projectgen.core.buildtools.BuildProperties;
+import io.micronaut.projectgen.core.buildtools.MavenCentral;
+import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
+import io.micronaut.projectgen.core.buildtools.gradle.GradlePlugin;
+import io.micronaut.projectgen.core.buildtools.maven.MavenPlugin;
+import io.micronaut.projectgen.core.feature.DefaultFeature;
+import io.micronaut.projectgen.core.feature.Feature;
+import io.micronaut.projectgen.core.feature.FeatureContext;
+import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.options.Options;
+import io.micronaut.projectgen.core.utils.OptionUtils;
+import jakarta.inject.Singleton;
+import io.micronaut.projectgen.core.template.StringTemplate;
+import java.util.Set;
+
+@Singleton
+class Root implements DefaultFeature {
+
+    private final GradleJavaPluginFeature gradleJavaPluginFeature;
+    private final GradleApplicationPluginFeature gradleApplicationPluginFeature;
+    private final JunitJupiter junitJupiter;
+    private final MavenSurefirePlugin mavenSurefirePlugin;
+    private final MavenJarPluginFeature mavenJarPluginFeature;
+    private final SampleCode sampleCode;
+    private final MavenCompilerProperties mavenCompilerProperties;
+
+    Root(GradleJavaPluginFeature gradleJavaPluginFeature,
+         GradleApplicationPluginFeature gradleApplicationPluginFeature,
+         JunitJupiter junitJupiter,
+         MavenSurefirePlugin mavenSurefirePlugin,
+         MavenJarPluginFeature mavenJarPluginFeature,
+         SampleCode sampleCode, MavenCompilerProperties mavenCompilerProperties) {
+        this.gradleJavaPluginFeature = gradleJavaPluginFeature;
+        this.gradleApplicationPluginFeature = gradleApplicationPluginFeature;
+        this.junitJupiter = junitJupiter;
+        this.mavenSurefirePlugin = mavenSurefirePlugin;
+        this.mavenJarPluginFeature = mavenJarPluginFeature;
+        this.sampleCode = sampleCode;
+        this.mavenCompilerProperties = mavenCompilerProperties;
+    }
+
+    @Override
+    public void processSelectedFeatures(FeatureContext featureContext) {
+        featureContext.addFeature(gradleJavaPluginFeature);
+        featureContext.addFeature(gradleApplicationPluginFeature);
+        featureContext.addFeature(junitJupiter);
+        featureContext.addFeature(mavenSurefirePlugin);
+        featureContext.addFeature(mavenJarPluginFeature);
+        featureContext.addFeature(sampleCode);
+        featureContext.addFeature(mavenCompilerProperties);
+    }
+
+    @Override
+    public boolean shouldApply(Options options, Set&lt;Feature&gt; selectedFeatures) {
+        return true;
+    }
+
+    @Override
+    public String getName() {
+        return "entry-point";
+    }
+
+    @Override
+    public String getDescription() {
+        return "It generates a Hello World Maven and Gradle project";
+    }
+
+    @Override
+    public boolean isVisible() {
+        return false;
+    }
+
+    @Override
+    public void apply(GeneratorContext generatorContext) {
+        ModuleContext module = generatorContext.getRootModule();
+        Options options = generatorContext.getOptions();
+        populateModuleAttributes(module, options);
+    }
+
+    private void populateModuleAttributes(ModuleContext module, Options options) {
+        module.moduleAttributes()
+            .setCoordinate(Dependency.builder()
+                .groupId(options.group())
+                .artifactId(options.artifact())
+                .version(options.version())
+                .build());
+    }
+}</code></pre>
+</div>
+</div>
+
+<h2 id="cli"><a class="anchor" href="#cli"></a>6.8 Project Generation in a Command Line Application</h2>
+
+<div class='contribute-btn'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-projectgen/edit/0.0.x/src/main/docs/guide/demo/cli.adoc"'>
+        <i class='fa fa-pencil-square-o'></i> Improve this doc
+    </button>
+</div>
+
+
+<div class="paragraph">
+<p>Generate projects in a command line application is a common use case of project generation.
+The following example shows a Micronaut CLI application which generates a project:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">package io.micronaut.projectgen.demo;
+
+import io.micronaut.configuration.picocli.PicocliRunner;
+import io.micronaut.projectgen.core.generator.ProjectGenerator;
+import io.micronaut.projectgen.core.options.Options;
+import jakarta.inject.Inject;
+import picocli.CommandLine;
+import picocli.CommandLine.Command;
+import java.io.File;
+
+@Command(
+    name = "projectgen",
+    description = "Generates a project in the supplied folder",
+    mixinStandardHelpOptions = true
+)
+public class ProjectGenCommand implements Runnable {
+    @CommandLine.Option(
+        names = { "--output", "-o" },
+        required = true,
+        description = "The output folder where the project file will be generated")
+    private File outputDir;
+
+    @Inject
+    ProjectGenerator projectGenerator; <i class="conum" data-value="1"></i><b>(1)</b>
+
+    public static void main(String[] args) {
+        PicocliRunner.run(ProjectGenCommand.class, args);
+    }
+
+    public void run() {
+        if (!outputDir.exists() || !outputDir.isDirectory()) {
+            System.err.println("Provided path is not an existing directory: " + outputDir);
+        } else {
+            Options options = OptionsFactory.create();
+            projectGenerator.writeTo(options, outputDir);
+        }
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>To generate a project into a folder, you can use the <a href="../api/io/micronaut/projectgen/core/generator/ProjectGenerator.html">ProjectGenerator</a> API.</td>
+</tr>
+</table>
+</div>
+
+<h2 id="test"><a class="anchor" href="#test"></a>6.9 Test Project Generation</h2>
+
+<div class='contribute-btn'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-projectgen/edit/0.0.x/src/main/docs/guide/demo/test.adoc"'>
+        <i class='fa fa-pencil-square-o'></i> Improve this doc
+    </button>
+</div>
+
+
+<div class="paragraph">
+<p>You can test the project generation easily:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">package io.micronaut.projectgen.demo;
+
+import io.micronaut.projectgen.core.buildtools.BuildTool;
+import io.micronaut.projectgen.core.io.PreviewGenerator;
+import io.micronaut.projectgen.core.options.Options;
+import io.micronaut.projectgen.test.BuildTestVerifier;
+import io.micronaut.projectgen.test.GradleBuildTestVerifier;
+import io.micronaut.projectgen.test.MavenBuildTestVerifier;
+import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
+import org.junit.jupiter.api.Test;
+
+import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+@MicronautTest(startApplication = false)
+class ProjectGenTest {
+
+    @Test
+    void testProjectGeneration(PreviewGenerator previewGenerator) throws Exception {
+        Options options = OptionsFactory.create();
+        Map&lt;String, String&gt; project = previewGenerator.generate(options);
+        assertTrue(project.containsKey("mvnw"));
+        assertTrue(project.containsKey("mvnw.bat"));
+        assertTrue(project.containsKey(".mvn/wrapper/maven-wrapper.jar"));
+        assertTrue(project.containsKey(".mvn/wrapper/maven-wrapper.properties"));
+        assertTrue(project.containsKey("pom.xml"));
+        assertTrue(project.containsKey("src/main/java/com/example/HelloWorld.java"));
+        String pom = project.get("pom.xml");
+        BuildTestVerifier verifier = new MavenBuildTestVerifier(pom, options.language());
+        assertEquals("21", verifier.getProperty("maven.compiler.source"));
+        assertEquals("21", verifier.getProperty("maven.compiler.target"));
+        assertTrue(verifier.hasBuildPlugin("org.apache.maven.plugins", "maven-jar-plugin"));
+        String buildGradleKts = project.get("build.gradle.kts");
+        verifier = new GradleBuildTestVerifier(buildGradleKts, BuildTool.GRADLE, options.language(), options.testFramework());
+        assertTrue(verifier.hasBuildPlugin("java"));
+        assertTrue(verifier.hasBuildPlugin("application"));
+        assertTrue(project.containsKey("settings.gradle.kts"));
+        String settings = project.get("settings.gradle.kts");
+        assertEquals("""
+        rootProject.name="demo"
+        """, settings);
+        assertTrue(project.containsKey("gradlew"));
+        assertTrue(project.containsKey("gradlew.bat"));
+        assertTrue(project.containsKey("gradle/wrapper/gradle-wrapper.jar"));
+        assertTrue(project.containsKey("gradle/wrapper/gradle-wrapper.properties"));
+    }
+}</code></pre>
+</div>
+</div>
+
+<h1 id="micronautProjectGeneration"><a class="anchor" href="#micronautProjectGeneration"></a>7 Micronaut Project Generation</h1>
 
 <div class='contribute-btn'>
     <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-projectgen/edit/0.0.x/src/main/docs/guide/micronautProjectGeneration.adoc"'>
@@ -147,7 +1041,7 @@
 
 
 <div class="paragraph">
-<p>To generate a <a href="https://micronaut.io">Micronaut</a> application add the following dependencies:</p>
+<p>To generate a <a href="https://micronaut.io">Micronaut</a> application, add the following dependencies:</p>
 </div>
 <div class="paragraph">
 <p>        <div class="listingblock multi-language-sample">
@@ -169,7 +1063,7 @@
 <p>To generate a Micronaut application, inject a bean of type <a href="../api/io/micronaut/projectgen/micronaut/MicronautProjectGenerator.html">MicronautProjectGenerator</a></p>
 </div>
 
-<h1 id="openrewriteIntegration"><a class="anchor" href="#openrewriteIntegration"></a>4 OpenRewrite Integration</h1>
+<h1 id="openrewriteIntegration"><a class="anchor" href="#openrewriteIntegration"></a>8 OpenRewrite Integration</h1>
 
 <div class='contribute-btn'>
     <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-projectgen/edit/0.0.x/src/main/docs/guide/openrewriteIntegration.adoc"'>
@@ -220,39 +1114,7 @@
 </div></p>
 </div>
 
-<h1 id="springBootProjectGeneration"><a class="anchor" href="#springBootProjectGeneration"></a>5 Spring Boot Project Generation</h1>
-
-<div class='contribute-btn'>
-    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-projectgen/edit/0.0.x/src/main/docs/guide/springBootProjectGeneration.adoc"'>
-        <i class='fa fa-pencil-square-o'></i> Improve this doc
-    </button>
-</div>
-
-
-<div class="paragraph">
-<p>To generate a <a href="https://spring.io/projects/spring-boot">Spring Boot</a> application add the following dependencies:</p>
-</div>
-<div class="paragraph">
-<p>        <div class="listingblock multi-language-sample">
-<div class="title"></div>
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-kotlin hljs" data-lang="gradle">implementation(<span class="hljs-string">"io.micronaut.projectgen:micronaut-projectgen-springboot")</span></code></pre>
-</div>
-</div>
-<div class="listingblock multi-language-sample">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="maven">&lt;dependency&gt;
-    &lt;groupId&gt;io.micronaut.projectgen&lt;/groupId&gt;
-    &lt;artifactId&gt;micronaut-projectgen-springboot&lt;/artifactId&gt;
-&lt;/dependency&gt;</code></pre>
-</div>
-</div></p>
-</div>
-<div class="paragraph">
-<p>To generate a Spring Boot application, inject a bean of type <a href="../api/io/micronaut/projectgen/springboot/SpringBootProjectGenerator.html">SpringBootProjectGenerator</a></p>
-</div>
-
-<h1 id="repository"><a class="anchor" href="#repository"></a>6 Repository</h1>
+<h1 id="repository"><a class="anchor" href="#repository"></a>9 Repository</h1>
 
 <div class='contribute-btn'>
     <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-projectgen/edit/0.0.x/src/main/docs/guide/repository.adoc"'>
