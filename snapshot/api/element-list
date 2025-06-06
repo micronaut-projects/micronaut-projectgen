@@ -18,9 +18,6 @@ io.micronaut.projectgen.core.rocker
 io.micronaut.projectgen.core.template
 io.micronaut.projectgen.core.utils
 io.micronaut.projectgen.core.validation
-io.micronaut.projectgen.features.gradle
-io.micronaut.projectgen.features.maven
-io.micronaut.projectgen.features.maven.template
 io.micronaut.projectgen.http.server
 io.micronaut.projectgen.http.server.conf
 io.micronaut.projectgen.http.server.controllers
