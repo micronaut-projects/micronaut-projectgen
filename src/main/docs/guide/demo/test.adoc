@@ -1,7 +1,3 @@
-The following dependency contains utilities to test the generated application.
-
-dependency:micronaut-projectgen-test[groupId=io.micronaut.projectgen,scope=test]
-
 You can test the project generation easily:
 
 [source, java]

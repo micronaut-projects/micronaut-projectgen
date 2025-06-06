@@ -1,0 +1,11 @@
+Adding the following dependency, a bean of type api:projectgen.core.diff.FeatureDiffer[] is registered:
+
+dependency:java-diff-utils[groupId=io.github.java-diff-utils,version=4.15]
+
+Once you have a bean of type api:projectgen.core.diff.FeatureDiffer[] and
+the `io.micronaut.projectgen:micronaut-projectgen-http-server` dependency the following endpoints which accept aPOST endpoints
+with a `application/x-www-form-urlencoded` content type.
+
+include::{includedir}configurationProperties/io.micronaut.projectgen.http.server.conf.DiffControllerConfiguration.adoc[]
+
+include::{includedir}configurationProperties/io.micronaut.projectgen.http.server.conf.DownloadDiffControllerConfiguration.adoc[]

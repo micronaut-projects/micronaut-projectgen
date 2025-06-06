@@ -14,6 +14,11 @@ class GradleJavaPluginFeature implements Feature {
     }
 
     @Override
+    public boolean isVisible() {
+        return false;
+    }
+
+    @Override
     public void apply(GeneratorContext generatorContext) {
         if (OptionUtils.hasGradleBuildTool(generatorContext.getOptions())) {
             int javaVersion = generatorContext.getOptions()

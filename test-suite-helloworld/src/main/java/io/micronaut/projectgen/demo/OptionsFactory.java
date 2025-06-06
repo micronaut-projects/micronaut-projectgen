@@ -12,16 +12,17 @@ public final class OptionsFactory {
     private OptionsFactory() {
     }
 
-    public static Options create() {
+    public static Options create(List<String> features) {
         return GenericOptionsBuilder.builder()
-            .name("demo")
-            .packageName("com.example")
-            .group("io.micronaut.projectgen")
-            .artifact("demo-project")
-            .version("1.0.0")
-            .buildTools(List.of(BuildTool.MAVEN, BuildTool.GRADLE))
-            .gradleDsl(GradleDsl.KOTLIN)
-            .java(JdkVersion.JDK_21)
-            .build();
+                .name("demo")
+                .packageName("com.example")
+                .group("io.micronaut.projectgen")
+                .artifact("demo-project")
+                .version("1.0.0")
+                .features(features)
+                .buildTools(List.of(BuildTool.MAVEN, BuildTool.GRADLE))
+                .gradleDsl(GradleDsl.KOTLIN)
+                .java(JdkVersion.JDK_21)
+                .build();
     }
 }

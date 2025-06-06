@@ -1,0 +1,3 @@
+A POST endpoint with a `application/x-www-form-urlencoded` content type allows you to get a JSON payload with the visible features.
+
+include::{includedir}configurationProperties/io.micronaut.projectgen.http.server.conf.FeaturesControllerConfiguration.adoc[]

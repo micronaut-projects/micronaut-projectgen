@@ -7,6 +7,7 @@ import jakarta.inject.Inject;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
 import java.io.File;
+import java.util.List;
 
 @Command(
     name = "projectgen",
@@ -20,6 +21,12 @@ public class ProjectGenCommand implements Runnable {
         description = "The output folder where the project file will be generated")
     private File outputDir;
 
+    @CommandLine.Option(
+        names = { "--features", "-f" },
+        description = "Comma-separated list of features to include",
+        split = ",")
+    private List<String> features;
+
     @Inject
     ProjectGenerator projectGenerator; // <1>
 
@@ -31,7 +38,7 @@ public class ProjectGenCommand implements Runnable {
         if (!outputDir.exists() || !outputDir.isDirectory()) {
             System.err.println("Provided path is not an existing directory: " + outputDir);
         } else {
-            Options options = OptionsFactory.create();
+            Options options = OptionsFactory.create(features);
             projectGenerator.writeTo(options, outputDir);
         }
     }

@@ -57,6 +57,11 @@ public class Properties implements ConfigurationFeature {
     }
 
     @Override
+    public boolean isVisible() {
+        return false;
+    }
+
+    @Override
     public Function<Configuration, Template> createTemplate(String module) {
         return config -> {
             String path = StringUtils.isEmpty(module)

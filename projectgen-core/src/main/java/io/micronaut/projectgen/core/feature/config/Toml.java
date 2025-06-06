@@ -42,6 +42,11 @@ public class Toml implements ConfigurationFeature {
     private static final String EXTENSION = "toml";
 
     @Override
+    public boolean isVisible() {
+        return false;
+    }
+
+    @Override
     public void processSelectedFeatures(FeatureContext featureContext) {
         // as a config feature, we're processed last, after the build tools. We need to add the dependency to
         // micronaut-toml before that.

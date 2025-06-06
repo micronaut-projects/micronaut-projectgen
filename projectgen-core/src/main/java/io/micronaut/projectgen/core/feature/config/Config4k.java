@@ -50,6 +50,11 @@ public class Config4k implements ConfigurationFeature, KotlinSpecificFeature {
     }
 
     @Override
+    public boolean isVisible() {
+        return false;
+    }
+
+    @Override
     public void processSelectedFeatures(FeatureContext featureContext) {
         if (featureContext.getLanguage() != Language.KOTLIN) {
             featureContext.exclude(new FeaturePredicate() {

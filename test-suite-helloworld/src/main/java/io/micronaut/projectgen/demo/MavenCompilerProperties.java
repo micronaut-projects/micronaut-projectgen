@@ -15,6 +15,11 @@ class MavenCompilerProperties implements Feature {
     }
 
     @Override
+    public boolean isVisible() {
+        return false;
+    }
+
+    @Override
     public void apply(GeneratorContext generatorContext) {
         Options options = generatorContext.getOptions();
         if (OptionUtils.hasMavenBuildTool(options)) {

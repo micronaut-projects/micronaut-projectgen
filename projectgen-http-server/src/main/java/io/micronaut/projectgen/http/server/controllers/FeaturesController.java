@@ -30,7 +30,7 @@ import io.micronaut.projectgen.http.server.conf.FeaturesControllerConfiguration;
 import java.util.Map;
 
 @Requires(property = FeaturesControllerConfiguration.PREFIX + ".enabled", notEquals = StringUtils.FALSE, defaultValue = StringUtils.TRUE)
-@Controller("${" + FeaturesControllerConfiguration.PREFIX + ".path:/api/v1/features}")
+@Controller("${" + FeaturesControllerConfiguration.PREFIX + ".path:" + FeaturesControllerConfiguration.DEFAULT_PATH + "}")
 class FeaturesController {
     private final OptionsBuilder optionsBuilder;
     private final FeatureFetcher featureFetcher;

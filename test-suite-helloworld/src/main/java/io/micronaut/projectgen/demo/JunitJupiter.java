@@ -18,6 +18,11 @@ class JunitJupiter implements Feature {
         .build();
 
     @Override
+    public boolean isVisible() {
+        return false;
+    }
+
+    @Override
     public String getName() {
         return "junit-jupiter";
     }

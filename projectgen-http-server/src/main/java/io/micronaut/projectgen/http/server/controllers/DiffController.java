@@ -23,6 +23,7 @@ import io.micronaut.http.annotation.Body;
 import io.micronaut.http.annotation.Consumes;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Post;
+import io.micronaut.http.annotation.Produces;
 import io.micronaut.projectgen.core.diff.FeatureDiffer;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.http.server.OptionsBuilder;
@@ -33,7 +34,7 @@ import java.util.Map;
 
 @Requires(beans = FeatureDiffer.class)
 @Requires(property = DiffControllerConfiguration.PREFIX + ".enabled", notEquals = StringUtils.FALSE, defaultValue = StringUtils.TRUE)
-@Controller("${" + DiffControllerConfiguration.PREFIX + ".path:/api/v1/diff}")
+@Controller("${" + DiffControllerConfiguration.PREFIX + ".path:" + DiffControllerConfiguration.DEFAULT_PATH + "}")
 class DiffController {
     private final FeatureDiffer featureDiffer;
     private final OptionsBuilder optionsBuilder;
@@ -44,6 +45,7 @@ class DiffController {
         this.optionsBuilder = optionsBuilder;
     }
 
+    @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Post
     HttpResponse<?> download(@Body Map<String, Object> form) {

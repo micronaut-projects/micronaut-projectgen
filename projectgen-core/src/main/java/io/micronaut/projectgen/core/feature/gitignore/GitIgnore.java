@@ -43,6 +43,11 @@ public class GitIgnore implements Feature {
     }
 
     @Override
+    public boolean isVisible() {
+        return false;
+    }
+
+    @Override
     public void apply(GeneratorContext generatorContext) {
         ModuleContext module = generatorContext.getRootModule();
         List<GitIgnoreGroup> groups = contributesGitIgnoreEntries.stream()

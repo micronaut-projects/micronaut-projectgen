@@ -34,7 +34,7 @@ import java.util.Map;
 
 @Requires(beans = FeatureDiffer.class)
 @Requires(property = DownloadDiffControllerConfiguration.PREFIX + ".enabled", notEquals = StringUtils.FALSE, defaultValue = StringUtils.TRUE)
-@Controller("${" + DownloadDiffControllerConfiguration.PREFIX + ".path:/api/v1/download/diff}")
+@Controller("${" + DownloadDiffControllerConfiguration.PREFIX + ".path:" + DownloadDiffControllerConfiguration.DEFAULT_PATH + "}")
 class DownloadDiffController {
     private static final String FILE_EXTENSION_DIFF = ".diff";
     private final FeatureDiffer featureDiffer;

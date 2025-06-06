@@ -33,7 +33,7 @@ import io.micronaut.projectgen.http.server.conf.DownloadZipControllerConfigurati
 import java.util.Map;
 
 @Requires(property = DownloadZipControllerConfiguration.PREFIX + ".enabled", notEquals = StringUtils.FALSE, defaultValue = StringUtils.TRUE)
-@Controller("${" + DownloadZipControllerConfiguration.PREFIX + ".path:/api/v1/download/zip}")
+@Controller("${" + DownloadZipControllerConfiguration.PREFIX + ".path:" + DownloadZipControllerConfiguration.DEFAULT_PATH + "}")
 class DownloadZipController {
     public static final String ZIP = ".zip";
     private final ZipGenerator zipGenerator;

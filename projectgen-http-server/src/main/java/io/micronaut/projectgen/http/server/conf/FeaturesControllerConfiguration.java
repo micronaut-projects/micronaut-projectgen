@@ -23,9 +23,10 @@ import io.micronaut.context.annotation.ConfigurationProperties;
 @ConfigurationProperties(FeaturesControllerConfiguration.PREFIX)
 public class FeaturesControllerConfiguration implements ControllerConfiguration {
     public static final String PREFIX = "projectgen.controllers.features";
+    public static final String DEFAULT_PATH = API_V1 + "/features";
     private static final boolean DEFAULT_ENABLED = true;
     private boolean enabled = DEFAULT_ENABLED;
-    private String path = API_V1 + "/features";
+    private String path = DEFAULT_PATH;
 
     @Override
     public boolean isEnabled() {
@@ -47,7 +48,7 @@ public class FeaturesControllerConfiguration implements ControllerConfiguration 
 
     /**
      *
-     * @param path Controller path
+     * @param path Controller path. Default value: /api/v1/features
      */
     public void setPath(String path) {
         this.path = path;

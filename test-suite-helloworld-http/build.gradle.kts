@@ -16,6 +16,8 @@ dependencies {
     compileOnly("io.micronaut:micronaut-http-client")
     runtimeOnly("ch.qos.logback:logback-classic")
     testImplementation("io.micronaut:micronaut-http-client")
+    testImplementation("org.skyscreamer:jsonassert:1.5.3")
+    implementation(libs.java.diff.utils)
 }
 application {
     mainClass = "io.micronaut.projectgen.demo.Application"

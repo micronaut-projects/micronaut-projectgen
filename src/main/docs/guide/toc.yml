@@ -1,6 +1,15 @@
 introduction:
   title: Introduction
 releaseHistory: Release History
+modules:
+  title: Modules
+  coreModule: Core Module
+  testModule: Test Module
+  httpServer:
+    title: HTTP Server Module
+    downloadZip: Download ZIP
+    featuresHttpServer: Features
+    diff: Diff
 features: Features
 demo:
   title: Demo
@@ -12,7 +21,7 @@ demo:
   addCode: Add Code
   root: Default Feature
   cli: Project Generation in a Command Line Application
-  httpServer: Project Generation in a HTTP Server
+  httpServerDemo: Project Generation in a HTTP Server
   test: Test Project Generation
 repository: Repository
 

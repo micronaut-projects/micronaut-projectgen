@@ -23,9 +23,10 @@ import io.micronaut.context.annotation.ConfigurationProperties;
 @ConfigurationProperties(DownloadDiffControllerConfiguration.PREFIX)
 public class DownloadDiffControllerConfiguration implements ControllerConfiguration {
     public static final String PREFIX = "projectgen.controllers.download-diff";
+    public static final String DEFAULT_PATH = API_V1 + "/download/diff";
     private static final boolean DEFAULT_ENABLED = true;
     private boolean enabled = DEFAULT_ENABLED;
-    private String path = API_V1 + "/download/diff";
+    private String path = DEFAULT_PATH;
 
     @Override
     public boolean isEnabled() {
@@ -47,7 +48,7 @@ public class DownloadDiffControllerConfiguration implements ControllerConfigurat
 
     /**
      *
-     * @param path Controller path
+     * @param path Controller path. Default value: /api/v1/download/diff
      */
     public void setPath(String path) {
         this.path = path;

@@ -13,6 +13,11 @@ class MavenJarPluginFeature implements Feature {
     }
 
     @Override
+    public boolean isVisible() {
+        return false;
+    }
+
+    @Override
     public void apply(GeneratorContext generatorContext) {
         generatorContext.getRootModule().addBuildPlugin(MavenPlugin.builder()
             .groupId("org.apache.maven.plugins")

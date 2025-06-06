@@ -17,7 +17,11 @@ class SampleCode implements Feature {
     public void apply(GeneratorContext generatorContext) {
         ModuleContext module = generatorContext.getRootModule();
         addHelloWorldJavaClass(module);
-        addHelloWorldTestJavaClass(module);
+    }
+
+    @Override
+    public boolean isVisible() {
+        return false;
     }
 
     private void addHelloWorldJavaClass(ModuleContext module) {
@@ -35,23 +39,5 @@ class SampleCode implements Feature {
                 }
             }
             """));
-    }
-
-    private void addHelloWorldTestJavaClass(ModuleContext module) {
-        String path = "src/test/java/com/example/HelloWorldTest.java";
-        module.addTemplate("HelloWorldTest.java", new StringTemplate(path, """
-            package com.example;
-
-            import org.junit.jupiter.api.Test;
-
-            import static org.junit.jupiter.api.Assertions.assertEquals;
-
-            class HelloWorldTest {
-
-                @Test
-                void testHello() {
-                    assertEquals("Hello, World!", HelloWorld.hello());
-                }
-            }"""));
     }
 }

@@ -22,7 +22,6 @@ class Root implements DefaultFeature {
 
     private final GradleJavaPluginFeature gradleJavaPluginFeature;
     private final GradleApplicationPluginFeature gradleApplicationPluginFeature;
-    private final JunitJupiter junitJupiter;
     private final MavenSurefirePlugin mavenSurefirePlugin;
     private final MavenJarPluginFeature mavenJarPluginFeature;
     private final SampleCode sampleCode;
@@ -30,13 +29,11 @@ class Root implements DefaultFeature {
 
     Root(GradleJavaPluginFeature gradleJavaPluginFeature,
          GradleApplicationPluginFeature gradleApplicationPluginFeature,
-         JunitJupiter junitJupiter,
          MavenSurefirePlugin mavenSurefirePlugin,
          MavenJarPluginFeature mavenJarPluginFeature,
          SampleCode sampleCode, MavenCompilerProperties mavenCompilerProperties) {
         this.gradleJavaPluginFeature = gradleJavaPluginFeature;
         this.gradleApplicationPluginFeature = gradleApplicationPluginFeature;
-        this.junitJupiter = junitJupiter;
         this.mavenSurefirePlugin = mavenSurefirePlugin;
         this.mavenJarPluginFeature = mavenJarPluginFeature;
         this.sampleCode = sampleCode;
@@ -47,7 +44,6 @@ class Root implements DefaultFeature {
     public void processSelectedFeatures(FeatureContext featureContext) {
         featureContext.addFeature(gradleJavaPluginFeature);
         featureContext.addFeature(gradleApplicationPluginFeature);
-        featureContext.addFeature(junitJupiter);
         featureContext.addFeature(mavenSurefirePlugin);
         featureContext.addFeature(mavenJarPluginFeature);
         featureContext.addFeature(sampleCode);
