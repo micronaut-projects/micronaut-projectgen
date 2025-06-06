@@ -19,6 +19,7 @@ import com.fizzed.rocker.RockerModel;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
@@ -33,16 +34,13 @@ import io.micronaut.projectgen.core.options.Language;
 import io.micronaut.projectgen.core.rocker.RockerTemplate;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.views.fieldset.tck.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class ViewsFieldsetTck implements Feature {
+public class ViewsFieldsetTck implements OpenRewriteFeature {
 
     public static final String NAME = "views-fieldset-tck";
-    private static final String ARTIFACT_ID_MICRONAUT_VIEWS_FIELDSET_TCK = "micronaut-views-fieldset-tck";
-    private static final Dependency DEPENDENCY_VIEWS_FIELDSET_TCK =
-            MicronautDependencyUtils.viewsDependency().artifactId(ARTIFACT_ID_MICRONAUT_VIEWS_FIELDSET_TCK)
-                    .test()
-                    .build();
 
     private final JunitPlatformSuiteEngine junitPlatformSuiteEngine;
 
@@ -92,7 +90,7 @@ public class ViewsFieldsetTck implements Feature {
     public void apply(GeneratorContext generatorContext) {
         ModuleContext module = generatorContext.getRootModule();
         addThymeleafSuite(generatorContext, module);
-        addDependencies(module);
+        OpenRewriteFeature.super.apply(generatorContext);
     }
 
     private void addThymeleafSuite(GeneratorContext generatorContext, ModuleContext module) {
@@ -106,7 +104,9 @@ public class ViewsFieldsetTck implements Feature {
         }
     }
 
-    private void addDependencies(ModuleContext module) {
-        module.addDependency(DEPENDENCY_VIEWS_FIELDSET_TCK);
+    @Override
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.views-fieldset-tck");
     }
+
 }

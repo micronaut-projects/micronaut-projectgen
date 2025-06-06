@@ -1,0 +1,35 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.views-rocker
+displayName: Add Rocker Views dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.views-rocker.dependencies
+  - io.micronaut.starter.feature.views-rocker.micronaut.documentation
+  - io.micronaut.starter.feature.views-rocker.documentation.thirdparty
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.views-rocker.dependencies
+displayName: Add Rocker Views dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.views
+      artifactId: micronaut-views-rocker
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.views-rocker.micronaut.documentation
+displayName: Append a link to Micronaut Rocker Views documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-views/latest/guide/index.html#rocker
+      appendNewline: true
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.views-rocker.documentation.thirdparty
+displayName: Append a link to Rocker Views website
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://github.com/fizzed/rocker
+      appendNewline: true
