@@ -47,11 +47,6 @@ public class Freemarker implements ViewFeature, MicronautServerDependent, OpenRe
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        OpenRewriteFeature.super.apply(generatorContext);
-    }
-
-    @Override
     public List<String> getRecipes(GeneratorContext generatorContext) {
         return List.of("io.micronaut.starter.feature.views-freemarker");
     }
