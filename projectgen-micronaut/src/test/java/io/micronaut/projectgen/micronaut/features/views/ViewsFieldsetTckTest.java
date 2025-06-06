@@ -25,7 +25,7 @@ class ViewsFieldsetTckTest {
         String buildGradle = project.get("build.gradle.kts");
         assertNotNull(buildGradle);
         BuildTestVerifier verifier = BuildTestVerifier.of(buildGradle, options);
-        assertTrue(verifier.hasDependency("io.micronaut.views", "micronaut-views-fieldset-tck", Scope.COMPILE), buildGradle);
+        assertTrue(verifier.hasDependency("io.micronaut.views", "micronaut-views-fieldset-tck", Scope.TEST), buildGradle);
     }
 
     private static Map<String, String> generateProject(ProjectGenerator micronautProjectGenerator,
