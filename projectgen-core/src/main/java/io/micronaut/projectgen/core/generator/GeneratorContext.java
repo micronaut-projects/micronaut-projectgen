@@ -15,35 +15,15 @@
  */
 package io.micronaut.projectgen.core.generator;
 
-import io.micronaut.projectgen.core.openrewrite.FileContents;
-import io.micronaut.projectgen.core.template.StringTemplate;
-import io.micronaut.projectgen.core.template.Writable;
-import io.micronaut.projectgen.core.template.markdownLink;
-import com.fizzed.rocker.RockerModel;
 import io.micronaut.core.annotation.NonNull;
-import io.micronaut.core.annotation.Nullable;
-import io.micronaut.projectgen.core.buildtools.BuildPlugin;
-import io.micronaut.projectgen.core.buildtools.BuildProperties;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
-import io.micronaut.projectgen.core.buildtools.Scope;
 import io.micronaut.projectgen.core.buildtools.dependencies.*;
-import io.micronaut.projectgen.core.buildtools.maven.Profile;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.feature.Features;
-import io.micronaut.projectgen.core.feature.config.ApplicationConfiguration;
-import io.micronaut.projectgen.core.feature.config.BootstrapConfiguration;
-import io.micronaut.projectgen.core.feature.config.Configuration;
 import io.micronaut.projectgen.core.openrewrite.RecipeFetcher;
 import io.micronaut.projectgen.core.options.*;
-import io.micronaut.projectgen.core.rocker.RockerTemplate;
-import io.micronaut.projectgen.core.rocker.RockerWritable;
-import io.micronaut.projectgen.core.rocker.TestRockerModelProvider;
-import io.micronaut.projectgen.core.template.Template;
-import io.micronaut.projectgen.core.utils.OptionUtils;
 
 import java.util.*;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 /**
  * A context object used when generating projects.
@@ -74,10 +54,19 @@ public class GeneratorContext {
         this.recipeFetcher = recipeFetcher;
     }
 
+    /**
+     *
+     * @return Root Module
+     */
     public ModuleContext getRootModule() {
         return rootModule;
     }
 
+    /**
+     *
+     * @param name Module Name
+     * @return A Module
+     */
     public ModuleContext getModuleByName(String name) {
         return modules.computeIfAbsent(name, k -> new ModuleContext(k, coordinateResolver, recipeFetcher));
     }

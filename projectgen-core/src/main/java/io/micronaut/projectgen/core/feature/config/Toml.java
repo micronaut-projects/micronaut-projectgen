@@ -31,6 +31,9 @@ import jakarta.inject.Singleton;
 
 import java.util.function.Function;
 
+/**
+ * {@link ConfigurationFeature} for TOML.
+ */
 @Requires(property = "projectgen.features.toml.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Toml implements ConfigurationFeature {

@@ -65,6 +65,7 @@ public final class Dependency implements Coordinate {
     @Nullable
     private final List<Substitution> substitutions;
 
+    @SuppressWarnings("ParameterNumber")
     private Dependency(Scope scope,
                        String groupId,
                        String artifactId,

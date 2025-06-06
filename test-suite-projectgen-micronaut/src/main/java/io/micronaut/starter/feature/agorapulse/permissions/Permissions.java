@@ -21,7 +21,6 @@ import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.ModuleContext;
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.micronaut.features.test.Mockito;
@@ -51,7 +50,6 @@ import static io.micronaut.starter.feature.agorapulse.AgoraPulseFeature.addMain;
 import static io.micronaut.starter.feature.agorapulse.AgoraPulseFeature.addTest;
 import static io.micronaut.starter.feature.agorapulse.AgoraPulseFeature.mainModel;
 import static io.micronaut.starter.feature.agorapulse.AgoraPulseFeature.testModel;
-
 
 @Requires(property = "micronaut.starter.feature.agorapulse.micronaut.permissions.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton

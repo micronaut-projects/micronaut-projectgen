@@ -1,0 +1,16 @@
+plugins {
+    id 'io.micronaut.build.internal.projectgen-base'
+    id 'java-library'
+}
+repositories {
+    mavenCentral()
+}
+dependencies {
+    annotationProcessor(platform("io.micronaut.platform:micronaut-platform:4.8.2"))
+    implementation(platform("io.micronaut.platform:micronaut-platform:4.8.2"))
+    annotationProcessor("io.micronaut:micronaut-inject-java")
+    testAnnotationProcessor(platform("io.micronaut.platform:micronaut-platform:4.8.2"))
+
+    testAnnotationProcessor("io.micronaut:micronaut-inject-java")
+
+}

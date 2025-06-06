@@ -21,12 +21,25 @@ import io.micronaut.projectgen.core.options.Options;
 
 import java.util.Map;
 
+/**
+ * API to generate a Tree representation for a project.
+ */
 @DefaultImplementation(DefaultTreeNodeGenerator.class)
 public interface TreeNodeGenerator {
 
+    /**
+     *
+     * @param project Project
+     * @return Tree Node
+     */
     @NonNull
     TreeNode generate(@NonNull Map<String, String> project);
 
+    /**
+     *
+     * @param options Project Options
+     * @return Tree Node
+     */
     @NonNull
     TreeNode generate(@NonNull Options options) throws Exception;
 }

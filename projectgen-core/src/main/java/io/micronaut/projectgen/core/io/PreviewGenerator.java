@@ -17,10 +17,19 @@ package io.micronaut.projectgen.core.io;
 
 import io.micronaut.context.annotation.DefaultImplementation;
 import io.micronaut.projectgen.core.options.Options;
-
 import java.util.Map;
 
+
+/**
+ * API to generate a project preview.
+ */
 @DefaultImplementation(DefaultPreviewGenerator.class)
 public interface PreviewGenerator {
+    /**
+     *
+     * @param options Project Options
+     * @return Project Preview
+     * @throws Exception Exception generating preview
+     */
     Map<String, String> generate(Options options) throws Exception;
 }

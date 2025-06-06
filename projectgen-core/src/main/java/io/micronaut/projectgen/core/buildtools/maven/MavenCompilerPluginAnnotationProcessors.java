@@ -26,6 +26,13 @@ import io.micronaut.projectgen.core.options.Language;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *
+ * @param combineAttribute combine attribute
+ * @param annotationProcessors annotation processors
+ * @param testCombineAttribute test combine attribute
+ * @param testAnnotationProcessors test annotation processors
+ */
 public record MavenCompilerPluginAnnotationProcessors(
     MavenCombineAttribute combineAttribute,
     List<DependencyCoordinate> annotationProcessors,
@@ -58,7 +65,10 @@ public record MavenCompilerPluginAnnotationProcessors(
         }
         annotationProcessors.sort(Coordinate.COMPARATOR);
         testAnnotationProcessors.sort(Coordinate.COMPARATOR);
-        return new MavenCompilerPluginAnnotationProcessors(combineAttribute, annotationProcessors, testCombineAttribute ,testAnnotationProcessors);
+        return new MavenCompilerPluginAnnotationProcessors(combineAttribute,
+            annotationProcessors,
+            testCombineAttribute,
+            testAnnotationProcessors);
     }
 
     public static MavenCombineAttribute mavenCombineAttribute(Language language) {

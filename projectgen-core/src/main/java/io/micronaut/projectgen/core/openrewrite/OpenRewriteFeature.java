@@ -18,14 +18,8 @@ package io.micronaut.projectgen.core.openrewrite;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.generator.ModuleContext;
-import io.micronaut.projectgen.core.template.StringTemplate;
-
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * A feature backed by an OpenRewrite recipe.

@@ -16,6 +16,7 @@
 package io.micronaut.projectgen.http.server;
 
 import io.micronaut.context.annotation.Secondary;
+import io.micronaut.core.annotation.Internal;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.buildtools.gradle.GradleDsl;
 import io.micronaut.projectgen.core.options.GenericOptionsBuilder;
@@ -31,8 +32,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+/**
+ * Default implementation of {@link OptionsBuilder}.
+ */
 @Secondary
 @Singleton
+@Internal
 public class DefaultOptionsBuilder implements OptionsBuilder {
     private static final String FIELD_NAME = "name";
     private static final String FIELD_LANG = "lang";
@@ -46,6 +51,11 @@ public class DefaultOptionsBuilder implements OptionsBuilder {
         return createOptionsBuilder(form).build();
     }
 
+    /**
+     *
+     * @param form form
+     * @return Builder
+     */
     protected GenericOptionsBuilder createOptionsBuilder(Map<String, Object> form) {
         GenericOptionsBuilder builder = GenericOptionsBuilder.builder();
         getField(form, FIELD_NAME).ifPresent(builder::name);

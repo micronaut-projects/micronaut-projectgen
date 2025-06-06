@@ -20,7 +20,15 @@ import io.micronaut.projectgen.core.options.Options;
 
 import java.util.List;
 
+/**
+ * Fetches visible features.
+ */
 public interface FeatureFetcher {
+    /**
+     *
+     * @param options project options
+     * @return features
+     */
     @NonNull
     List<FeatureResponse> fetch(@NonNull Options options);
 }

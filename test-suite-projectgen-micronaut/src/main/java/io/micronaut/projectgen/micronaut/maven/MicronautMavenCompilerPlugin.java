@@ -22,7 +22,7 @@ import io.micronaut.projectgen.core.feature.BuildFeature;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.utils.OptionUtils;
-import io.micronaut.projectgen.core.buildtools.maven.MavenCompilerPlugin;
+import io.micronaut.projectgen.core.buildtools.maven.MavenCompilerPluginUtils;
 import io.micronaut.projectgen.core.buildtools.maven.MavenCompilerPluginConfiguration;
 import jakarta.inject.Singleton;
 
@@ -49,7 +49,7 @@ public class MicronautMavenCompilerPlugin implements MavenSpecificFeature, Build
             MavenCompilerPluginConfiguration configuration = MavenCompilerPluginConfigurationBuilder.builder()
                 .compilerArgs(compilerArgs)
                 .build();
-            MavenCompilerPlugin.mavenCompilerPlugin(generatorContext, module, configuration)
+            MavenCompilerPluginUtils.mavenCompilerPlugin(generatorContext, module, configuration)
                 .ifPresent(module::addBuildPlugin);
             module.moduleAttributes().setPackaging("${packaging}");
             module.buildProperties().put("packaging", Packaging.JAR.toString());

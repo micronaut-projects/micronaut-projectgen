@@ -18,6 +18,9 @@ package io.micronaut.projectgen.core.diff;
 import io.micronaut.core.annotation.Internal;
 import io.micronaut.projectgen.core.io.ConsoleOutput;
 
+/**
+ * {@link ConsoleOutput} implementation backed by a StringBuilder.
+ */
 @Internal
 public class StringBuilderConsoleOutput implements ConsoleOutput {
     private final String lineSeparator;

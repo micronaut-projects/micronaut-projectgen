@@ -11,12 +11,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class BuildToolUtilsTest {
     @ParameterizedTest
-    @MethodSource("fileExtensionTestCases")
-    void testFileExtension(String expected, BuildTool buildTool, GradleDsl gradleDsl) {
-        assertEquals(expected, BuildToolUtils.fileExtension(buildTool, gradleDsl));
-    }
-
-    @ParameterizedTest
     @MethodSource("settingsFileNameTestCases")
     void testSettingsFileName(String expected, BuildTool buildTool, GradleDsl gradleDsl) {
         assertEquals(expected, BuildToolUtils.settingsFileName(buildTool, gradleDsl));
@@ -47,14 +41,4 @@ class BuildToolUtilsTest {
         );
     }
 
-    private static Stream<Arguments> fileExtensionTestCases() {
-        return Stream.of(
-            Arguments.of(".xml", BuildTool.MAVEN, GradleDsl.KOTLIN),
-            Arguments.of(".xml", BuildTool.MAVEN, GradleDsl.GROOVY),
-            Arguments.of(".xml", BuildTool.MAVEN, null),
-            Arguments.of(".gradle", BuildTool.GRADLE, null),
-            Arguments.of(".gradle", BuildTool.GRADLE, GradleDsl.GROOVY),
-            Arguments.of(".gradle.kts", BuildTool.GRADLE, GradleDsl.KOTLIN)
-        );
-    }
 }

@@ -17,10 +17,8 @@ package io.micronaut.projectgen.core.feature.config;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
-import io.micronaut.core.util.CollectionUtils;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.feature.ConfigurationFeature;
-import io.micronaut.projectgen.core.feature.DefaultFeature;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.feature.Feature;
@@ -28,15 +26,15 @@ import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.projectgen.core.feature.FeaturePhase;
 import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.options.ConfigurationFormat;
-import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.core.template.Template;
 import io.micronaut.projectgen.core.template.YamlTemplate;
 import jakarta.inject.Singleton;
 
-import java.util.List;
-import java.util.Set;
 import java.util.function.Function;
 
+/**
+ * {@link ConfigurationFeature} for YAML.
+ */
 @Requires(property = "projectgen.features.yaml.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Yaml implements ConfigurationFeature {

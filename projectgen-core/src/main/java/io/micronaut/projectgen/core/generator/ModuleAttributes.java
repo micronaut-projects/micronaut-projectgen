@@ -19,6 +19,9 @@ import io.micronaut.projectgen.core.buildtools.dependencies.Coordinate;
 import io.micronaut.projectgen.core.buildtools.maven.Packaging;
 import io.micronaut.projectgen.core.buildtools.maven.ParentPom;
 
+/**
+ * Module Attributes.
+ */
 public class ModuleAttributes {
     private ParentPom parentPom;
     private String packaging;
@@ -26,46 +29,90 @@ public class ModuleAttributes {
     private String name;
     private String description;
 
+    /**
+     *
+     * @return Parent POM
+     */
     public ParentPom getParentPom() {
         return parentPom;
     }
 
+    /**
+     *
+     * @param parentPom Parent POM
+     */
     public void setParentPom(ParentPom parentPom) {
         this.parentPom = parentPom;
     }
 
+    /**
+     *
+     * @return Coordinate
+     */
     public Coordinate getCoordinate() {
         return coordinate;
     }
 
+    /**
+     *
+     * @param coordinate Coordinate
+     */
     public void setCoordinate(Coordinate coordinate) {
         this.coordinate = coordinate;
     }
 
+    /**
+     *
+     * @return name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     *
+     * @param name name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     *
+     * @return Description
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     *
+     * @param description Description
+     */
     public void setDescription(String description) {
         this.description = description;
     }
 
+    /**
+     *
+     * @return Packaging
+     */
     public String getPackaging() {
         return packaging;
     }
 
+    /**
+     *
+     * @param packaging packaging
+     */
     public void setPackaging(Packaging packaging) {
         setPackaging(packaging.toString());
     }
 
+    /**
+     *
+     * @param packaging packaging
+     */
     public void setPackaging(String packaging) {
         this.packaging = packaging;
     }

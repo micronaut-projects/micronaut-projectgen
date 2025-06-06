@@ -17,10 +17,14 @@ package io.micronaut.projectgen.http.server.conf;
 
 import io.micronaut.context.annotation.ConfigurationProperties;
 
+/**
+ * {@link ControllerConfiguration} for Download Diff Controller.
+ */
 @ConfigurationProperties(DownloadDiffControllerConfiguration.PREFIX)
 public class DownloadDiffControllerConfiguration implements ControllerConfiguration {
     public static final String PREFIX = "projectgen.controllers.download-diff";
-    private boolean enabled = true;
+    private static final boolean DEFAULT_ENABLED = true;
+    private boolean enabled = DEFAULT_ENABLED;
     private String path = API_V1 + "/download/diff";
 
     @Override
@@ -28,6 +32,10 @@ public class DownloadDiffControllerConfiguration implements ControllerConfigurat
         return enabled;
     }
 
+    /**
+     *
+     * @param enabled Whether the controller is enabled. Default value: {@value #DEFAULT_ENABLED}.
+     */
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
@@ -37,6 +45,10 @@ public class DownloadDiffControllerConfiguration implements ControllerConfigurat
         return path;
     }
 
+    /**
+     *
+     * @param path Controller path
+     */
     public void setPath(String path) {
         this.path = path;
     }

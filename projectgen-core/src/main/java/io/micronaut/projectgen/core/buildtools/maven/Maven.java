@@ -93,6 +93,13 @@ public class Maven implements BuildFeature, DefaultFeature {
         generatePom("", module, generatorContext.getOptions(), generatorContext.getModuleNames());
     }
 
+    /**
+     *
+     * @param name module name
+     * @param module Module
+     * @param options Project options
+     * @param modules module names
+     */
     void generatePom(String name, ModuleContext module, Options options, Collection<String> modules) {
         MavenBuild mavenBuild = createBuild(module, options);
         RockerModel rockerModel = genericPom.template(mavenBuild, modules);

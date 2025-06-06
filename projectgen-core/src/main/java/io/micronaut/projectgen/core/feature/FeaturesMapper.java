@@ -18,8 +18,16 @@ package io.micronaut.projectgen.core.feature;
 import io.micronaut.core.annotation.NonNull;
 import jakarta.inject.Singleton;
 
+/**
+ * Bean Mapping Utils for {@link Feature}.
+ */
 @Singleton
 public class FeaturesMapper {
+    /**
+     * Maps from {@link Feature} to {@link FeatureResponse}.
+     * @param feature Feature
+     * @return A FeatureResponse
+     */
     @NonNull
     public FeatureResponse toFeatureResponse(@NonNull Feature feature) {
         return new FeatureResponse(feature.getName(),

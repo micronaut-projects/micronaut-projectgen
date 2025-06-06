@@ -19,6 +19,15 @@ import io.micronaut.sourcegen.annotations.Builder;
 
 import java.util.List;
 
+/**
+ * Configuration for the Maven Compiler Plugin
+ * @param version version
+ * @param configurationCombine Configuration combine attribute
+ * @param incrementalCompilation incremental compilation
+ * @param source source
+ * @param target target
+ * @param compilerArgs compiler args
+ */
 @Builder
 public record MavenCompilerPluginConfiguration(
     String version,

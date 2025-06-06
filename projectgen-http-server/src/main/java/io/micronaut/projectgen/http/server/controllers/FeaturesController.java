@@ -34,6 +34,7 @@ import java.util.Map;
 class FeaturesController {
     private final OptionsBuilder optionsBuilder;
     private final FeatureFetcher featureFetcher;
+
     FeaturesController(FeatureFetcher featureFetcher, OptionsBuilder optionsBuilder) {
         this.featureFetcher = featureFetcher;
         this.optionsBuilder = optionsBuilder;

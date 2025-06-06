@@ -17,12 +17,9 @@ package io.micronaut.projectgen.core.generator;
 
 import io.micronaut.context.annotation.DefaultImplementation;
 import io.micronaut.core.annotation.NonNull;
-import io.micronaut.core.annotation.Nullable;
-import io.micronaut.projectgen.core.feature.AvailableFeatures;
 import io.micronaut.projectgen.core.io.ConsoleOutput;
 import io.micronaut.projectgen.core.io.OutputHandler;
 import io.micronaut.projectgen.core.options.Options;
-import jakarta.inject.Provider;
 
 import java.io.File;
 

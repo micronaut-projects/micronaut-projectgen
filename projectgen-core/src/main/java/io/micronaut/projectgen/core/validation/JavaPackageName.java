@@ -25,6 +25,9 @@ import java.lang.annotation.Target;
 
 import static java.lang.annotation.ElementType.TYPE_USE;
 
+/**
+ * Annotation to validate that a string contains a valid java package name.
+ */
 @Documented
 @Constraint(validatedBy = JavaPackageNameValidator.class)
 @Target({ TYPE_USE })

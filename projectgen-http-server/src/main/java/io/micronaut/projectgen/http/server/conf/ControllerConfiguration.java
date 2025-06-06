@@ -18,6 +18,9 @@ package io.micronaut.projectgen.http.server.conf;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.Toggleable;
 
+/**
+ * Controller configuration.
+ */
 @FunctionalInterface
 public interface ControllerConfiguration extends Toggleable {
     String V1 = "/v1";

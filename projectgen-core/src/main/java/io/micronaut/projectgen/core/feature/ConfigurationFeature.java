@@ -15,7 +15,6 @@
  */
 package io.micronaut.projectgen.core.feature;
 
-import io.micronaut.core.util.CollectionUtils;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.feature.config.Configuration;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
@@ -24,7 +23,6 @@ import io.micronaut.projectgen.core.options.ConfigurationFormat;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.core.template.Template;
 
-import java.util.List;
 import java.util.Set;
 import java.util.function.Function;
 

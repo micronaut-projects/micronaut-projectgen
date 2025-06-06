@@ -15,6 +15,9 @@
  */
 package io.micronaut.projectgen.core.feature;
 
+/**
+ * {@link ApplicationFeature} for Java.
+ */
 public interface JavaApplicationFeature extends ApplicationFeature {
     @Override
     default int getOrder() {

@@ -17,6 +17,14 @@ package io.micronaut.projectgen.core.feature;
 
 import io.micronaut.serde.annotation.Serdeable;
 
+/**
+ *
+ * @param name Feature Name
+ * @param title Feature title
+ * @param description Feature description
+ * @param preview Whether the feature is in preview state.
+ * @param community Whether the feature is a community feature
+ */
 @Serdeable
 public record FeatureResponse(String name,
                              String title,

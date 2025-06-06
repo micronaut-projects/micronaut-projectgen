@@ -1,5 +1,5 @@
 plugins {
-    id("io.micronaut.build.internal.projectgen-module")
+    id("io.micronaut.build.internal.projectgen-test-module")
 }
 dependencies {
     api(project(":micronaut-projectgen-openrewrite"))

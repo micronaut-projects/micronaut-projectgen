@@ -22,6 +22,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ *
+ * @param idAttribute HTML id attribute
+ * @param classAttribute HTML class attribute
+ * @param content content
+ */
 @Introspected
 public record CodeSample(String idAttribute,
                   String classAttribute,

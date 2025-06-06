@@ -20,23 +20,15 @@ import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.io.Writable;
 import io.micronaut.projectgen.core.generator.ProjectGenerator;
-import io.micronaut.projectgen.core.io.ConsoleOutput;
-import io.micronaut.projectgen.core.io.FileSystemOutputHandler;
-import io.micronaut.projectgen.core.io.OutputHandler;
 import io.micronaut.projectgen.core.options.Options;
 import jakarta.inject.Singleton;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.Writer;
 import java.nio.charset.Charset;
-import java.nio.file.Path;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipOutputStream;
 
 @Singleton
 @Internal

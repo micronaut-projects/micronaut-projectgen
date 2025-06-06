@@ -42,6 +42,11 @@ import io.micronaut.projectgen.core.template.substitutions;
 
 /**
  * Representation of a Gradle Build.
+ * @param coordinate Coordinate
+ * @param dsl Gradle DSL
+ * @param dependencies dependencies
+ * @param plugins Plugins
+ * @param repositories Repositories
  */
 @Builder
 public record GradleBuild(Coordinate coordinate,

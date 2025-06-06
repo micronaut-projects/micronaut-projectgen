@@ -26,7 +26,6 @@ import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.core.rocker.RockerTemplate;
-import io.micronaut.projectgen.core.template.Template;
 import io.micronaut.projectgen.core.template.genericBuildGradle;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 
@@ -38,11 +37,10 @@ import java.util.List;
  */
 public final class GradleBuildCreator {
     private static final GradleDsl DEFAULT_GRADLE_DSL = GradleDsl.KOTLIN;
+    private static final boolean DEFAULT_USER_VERSION_CATALOGUE = false;
 
     private GradleBuildCreator() {
     }
-
-    public static final boolean DEFAULT_USER_VERSION_CATALOGUE = false;
 
     public static RockerTemplate buildFileTemplate(GeneratorContext generatorContext, ModuleContext moduleContext, String module) {
         GradleBuild build = create(generatorContext, moduleContext, generatorContext.getOptions());

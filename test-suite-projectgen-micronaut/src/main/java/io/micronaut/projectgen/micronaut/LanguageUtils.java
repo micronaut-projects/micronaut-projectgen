@@ -13,12 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.projectgen.core.options;
+package io.micronaut.projectgen.micronaut;
 
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.buildtools.gradle.GradleDsl;
+import io.micronaut.projectgen.core.options.Language;
+import io.micronaut.projectgen.core.options.TestFramework;
 
+/**
+ *
+ */
 public final class LanguageUtils {
 
     private LanguageUtils() {

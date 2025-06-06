@@ -29,7 +29,7 @@ class DefaultTreeNodeGenerator implements TreeNodeGenerator {
     }
 
     @Override
-    public TreeNode generate(Map<String, String> project){
+    public TreeNode generate(Map<String, String> project) {
         return TreeBuilder.buildTree(project.keySet());
     }
 

@@ -25,6 +25,8 @@ import java.util.Map;
  */
 public class PrismLanguageHelper {
     private static final Map<String, String> EXTENSION_TO_LANGUAGE_CLASS = new HashMap<>();
+    private static final String LANGUAGE_NONE = "language-none";
+
     static {
         EXTENSION_TO_LANGUAGE_CLASS.put("properties", "language-properties");
         EXTENSION_TO_LANGUAGE_CLASS.put("html", "language-markup");
@@ -132,7 +134,7 @@ public class PrismLanguageHelper {
      */
     public static String getPrismLanguageClass(String filename) {
         if (StringUtils.isEmpty(filename)) {
-            return "language-none";
+            return LANGUAGE_NONE;
         }
         String lowerCaseFilename = filename.toLowerCase();
         if (EXTENSION_TO_LANGUAGE_CLASS.containsKey(lowerCaseFilename)) {
@@ -141,8 +143,8 @@ public class PrismLanguageHelper {
         int lastDotIndex = lowerCaseFilename.lastIndexOf('.');
         if (lastDotIndex != -1 && lastDotIndex < lowerCaseFilename.length() - 1) {
             String extension = lowerCaseFilename.substring(lastDotIndex + 1);
-            return EXTENSION_TO_LANGUAGE_CLASS.getOrDefault(extension, "language-none");
+            return EXTENSION_TO_LANGUAGE_CLASS.getOrDefault(extension, LANGUAGE_NONE);
         }
-        return "language-none";
+        return LANGUAGE_NONE;
     }
 }

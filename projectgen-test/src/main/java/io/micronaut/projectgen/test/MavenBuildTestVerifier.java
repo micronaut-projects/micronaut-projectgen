@@ -34,12 +34,14 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.StringReader;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+/**
+ * {@link BuildTestVerifier} for Maven builds.
+ */
 public class MavenBuildTestVerifier implements BuildTestVerifier {
     private ParentPom parentPom;
     private final List<Profile> profiles = new ArrayList<>();
@@ -130,6 +132,7 @@ public class MavenBuildTestVerifier implements BuildTestVerifier {
         }
         return properties;
     }
+
     private List<Dependency> parseAnnotationProcessors(Element projectElement) {
         List<Dependency> result = new ArrayList<>();
 
@@ -261,6 +264,13 @@ public class MavenBuildTestVerifier implements BuildTestVerifier {
             d.getGroupId().equals(groupId) && d.getArtifactId().equals(artifactId) && d.getScope().equals(scope));
     }
 
+    /**
+     *
+     * @param groupId Group ID
+     * @param artifactId Artifact ID
+     * @param scope Scope
+     * @return Whether the build has a dependency with the supplied groupId, artifactId and scope
+     */
     public boolean hasDependency(String groupId, String artifactId, MavenScope scope) {
         return dependencies.stream().anyMatch(d ->
             d.getGroupId().equals(groupId) && d.getArtifactId().equals(artifactId) &&

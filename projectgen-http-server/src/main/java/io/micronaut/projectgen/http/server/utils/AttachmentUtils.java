@@ -19,11 +19,22 @@ import io.micronaut.http.HttpHeaders;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.MediaType;
 
+/**
+ * Utility class for controller attachment responses.
+ */
 public final class AttachmentUtils {
     private static final String ATTACHMENT_FILENAME = "attachment; filename=";
+
     private AttachmentUtils() {
     }
 
+    /**
+     *
+     * @param body Response Body
+     * @param contentType Response Content-Type
+     * @param fileName attachment file name
+     * @return HTTP Response
+     */
     public static HttpResponse<?> attachment(Object body,
                                              MediaType contentType,
                                              String fileName) {

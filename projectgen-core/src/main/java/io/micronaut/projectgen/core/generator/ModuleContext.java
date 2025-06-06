@@ -55,6 +55,23 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
+/**
+ *
+ * @param coordinateResolver Coordinate resovler
+ * @param recipeFetcher Recipe Fetcher
+ * @param moduleAttributes Module Attributes
+ * @param buildProperties Build Properties
+ * @param configuration Configuration
+ * @param configurationByEnvironment Configuration by environment
+ * @param bootstrapConfiguration Bootstrap Configuration
+ * @param bootstrapConfigurationByEnvironment Bootstrap Configuration By Environment
+ * @param dependencyContext Dependency Context
+ * @param buildPlugins Build Plugins
+ * @param templates Templates
+ * @param profiles Profiles
+ * @param repositories Repositories
+ * @param helpTemplates Help Templates
+ */
 public record ModuleContext(CoordinateResolver coordinateResolver,
                             RecipeFetcher recipeFetcher,
                             ModuleAttributes moduleAttributes,
@@ -70,6 +87,7 @@ public record ModuleContext(CoordinateResolver coordinateResolver,
                             Set<Repository> repositories,
                             List<Writable> helpTemplates) {
 
+    @SuppressWarnings("ParameterNumber")
     public ModuleContext(CoordinateResolver coordinateResolver,
                          RecipeFetcher recipeFetcher,
                          ModuleAttributes moduleAttributes,
@@ -271,8 +289,6 @@ public record ModuleContext(CoordinateResolver coordinateResolver,
                 ? path
                 : moduleAttributes().getName() + "/" + path, rockerModel));
     }
-
-
 
     /**
      *

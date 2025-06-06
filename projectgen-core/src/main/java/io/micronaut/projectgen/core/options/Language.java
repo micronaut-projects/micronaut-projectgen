@@ -18,7 +18,6 @@ package io.micronaut.projectgen.core.options;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.feature.LanguageSpecificFeature;
-import io.micronaut.projectgen.core.buildtools.BuildTool;
 
 import java.util.Arrays;
 import java.util.Locale;

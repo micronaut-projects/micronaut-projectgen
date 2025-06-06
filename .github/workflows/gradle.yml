@@ -68,7 +68,7 @@ jobs:
       - name: "🛠 Build with Gradle"
         id: gradle
         run: |
-          ./gradlew check --no-daemon --continue -x checkstyleMain
+          ./gradlew check --no-daemon --continue
 
       - name: "📊 Publish Test Report"
         if: always()

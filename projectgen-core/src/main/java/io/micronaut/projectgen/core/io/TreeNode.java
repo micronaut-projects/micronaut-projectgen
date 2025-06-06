@@ -19,6 +19,12 @@ import io.micronaut.core.annotation.Introspected;
 
 import java.util.List;
 
+/**
+ *
+ * @param path path
+ * @param name node name
+ * @param children children
+ */
 @Introspected
 public record TreeNode(String path,
                        String name,

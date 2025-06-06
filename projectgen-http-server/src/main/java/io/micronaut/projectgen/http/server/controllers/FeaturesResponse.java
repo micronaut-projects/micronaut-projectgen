@@ -20,6 +20,10 @@ import io.micronaut.serde.annotation.Serdeable;
 
 import java.util.List;
 
+/**
+ *
+ * @param features Features
+ */
 @Serdeable
 public record FeaturesResponse(List<FeatureResponse> features) {
 }

@@ -13,13 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.projectgen.core.options;
+package io.micronaut.projectgen.micronaut;
 
 import io.micronaut.core.annotation.Creator;
 import io.micronaut.core.annotation.Introspected;
 import io.micronaut.core.annotation.Nullable;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.buildtools.gradle.GradleDsl;
+import io.micronaut.projectgen.core.options.HasDefaultBuild;
+import io.micronaut.projectgen.core.options.HasDefaultTest;
+import io.micronaut.projectgen.core.options.TestFramework;
 
 /**
  * Default values to be applied when a given.

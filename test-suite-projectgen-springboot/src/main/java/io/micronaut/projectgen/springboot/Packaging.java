@@ -15,6 +15,9 @@
  */
 package io.micronaut.projectgen.springboot;
 
+/**
+ * Specify the type of artifact the project produces.
+ */
 public enum Packaging {
     JAR,
     WAR

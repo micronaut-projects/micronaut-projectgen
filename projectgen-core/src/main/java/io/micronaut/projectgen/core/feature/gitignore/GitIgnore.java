@@ -15,7 +15,6 @@
  */
 package io.micronaut.projectgen.core.feature.gitignore;
 
-import io.micronaut.context.annotation.Property;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.feature.Feature;
@@ -24,7 +23,6 @@ import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.rocker.RockerTemplate;
 import jakarta.inject.Singleton;
 import io.micronaut.projectgen.core.template.gitignore;
-
 import java.util.List;
 
 /**

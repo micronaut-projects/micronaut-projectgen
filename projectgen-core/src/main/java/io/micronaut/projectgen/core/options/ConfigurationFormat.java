@@ -15,6 +15,9 @@
  */
 package io.micronaut.projectgen.core.options;
 
+/**
+ * Configuration format.
+ */
 public enum ConfigurationFormat {
     CONFIG4K,
     GROOVY,

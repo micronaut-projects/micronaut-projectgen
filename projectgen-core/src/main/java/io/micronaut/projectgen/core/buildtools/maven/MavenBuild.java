@@ -23,18 +23,28 @@ import io.micronaut.projectgen.core.buildtools.dependencies.DependencyCoordinate
 import io.micronaut.projectgen.core.template.Writable;
 import io.micronaut.projectgen.core.template.WritableUtils;
 import io.micronaut.sourcegen.annotations.Builder;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.Collection;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 /**
  * Maven Build.
+ * @param name Name
+ * @param description description
+ * @param coordinate coordinate
+ * @param packaging packaging
+ * @param parentPom Parent Pom
+ * @param annotationProcessorCombineAttribute Annotation Processor combine attribute
+ * @param testAnnotationProcessorCombineAttribute Test Annotation Processor combine attribute
+ * @param testAnnotationProcessors Test annotation processors
+ * @param annotationProcessors annotation processors
+ * @param dependencies Dependencies
+ * @param plugins Plugins
+ * @param properties properties
+ * @param profiles profiles
+ * @param repositories repositories
  */
 @Builder
 public record MavenBuild(String name,

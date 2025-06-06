@@ -17,7 +17,6 @@ package io.micronaut.projectgen.micronaut;
 
 import io.micronaut.core.annotation.Nullable;
 import io.micronaut.projectgen.core.feature.*;
-import io.micronaut.projectgen.core.feature.config.Properties;
 import io.micronaut.projectgen.core.feature.gitignore.GitIgnore;
 import io.micronaut.projectgen.core.options.GenericOptionsBuilder;
 import io.micronaut.projectgen.core.options.Language;

@@ -17,10 +17,14 @@ package io.micronaut.projectgen.http.server.conf;
 
 import io.micronaut.context.annotation.ConfigurationProperties;
 
+/**
+ * {@link ControllerConfiguration} for Download ZIP Controller.
+ */
 @ConfigurationProperties(DownloadZipControllerConfiguration.PREFIX)
 public class DownloadZipControllerConfiguration implements ControllerConfiguration {
     public static final String PREFIX = "projectgen.controllers.download-zip";
-    private boolean enabled = true;
+    private static final boolean DEFAULT_ENABLED = true;
+    private boolean enabled = DEFAULT_ENABLED;
     private String path = API_V1 + "/download";
 
     @Override
@@ -28,6 +32,10 @@ public class DownloadZipControllerConfiguration implements ControllerConfigurati
         return enabled;
     }
 
+    /**
+     *
+     * @param enabled Whether the controller is enabled. Default value: {@value #DEFAULT_ENABLED}.
+     */
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
@@ -37,6 +45,10 @@ public class DownloadZipControllerConfiguration implements ControllerConfigurati
         return path;
     }
 
+    /**
+     *
+     * @param path Controller path
+     */
     public void setPath(String path) {
         this.path = path;
     }

@@ -21,7 +21,12 @@ import io.micronaut.projectgen.core.rocker.RockerTemplate;
 
 import java.util.Optional;
 
-public class MavenCompilerPlugin {
+/**
+ * Utils class to generate a {@link MavenPlugin} for the Maven Compiler Plugin.
+ */
+public final class MavenCompilerPluginUtils {
+    private MavenCompilerPluginUtils() {
+    }
 
     public static Optional<MavenPlugin> mavenCompilerPlugin(GeneratorContext generatorContext,
                                                             ModuleContext module,

@@ -15,7 +15,6 @@
  */
 package io.micronaut.projectgen.core.generator;
 
-import io.micronaut.context.BeanContext;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.projectgen.core.feature.AvailableFeatures;
 import io.micronaut.projectgen.core.feature.FeatureContext;
@@ -27,17 +26,13 @@ import io.micronaut.projectgen.core.template.RenderResult;
 import io.micronaut.projectgen.core.template.Template;
 import io.micronaut.projectgen.core.template.TemplateRenderer;
 import io.micronaut.projectgen.core.utils.NameUtils;
-import jakarta.inject.Provider;
 import jakarta.inject.Singleton;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
-import java.util.function.Function;
 
 /**
  * Default implementation of {@link ProjectGenerator}.
@@ -78,6 +73,13 @@ public class DefaultProjectGenerator implements ProjectGenerator {
         }
     }
 
+    /**
+     *
+     * @param project Project
+     * @param options Options
+     * @param consoleOutput ConsoleOutput
+     * @return A Generator Context
+     */
     public GeneratorContext createGeneratorContext(Project project,
                                                    Options options,
                                                    ConsoleOutput consoleOutput) {

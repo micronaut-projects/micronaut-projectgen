@@ -22,7 +22,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Stream;
 
 /**
  * Dependency scope.
@@ -117,7 +116,6 @@ public class Scope implements Ordered {
     public int hashCode() {
         return Objects.hash(source, phases);
     }
-
 
     @Override
     public String toString() {

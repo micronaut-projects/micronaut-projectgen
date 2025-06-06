@@ -20,7 +20,6 @@ import io.micronaut.core.annotation.Nullable;
 import io.micronaut.projectgen.core.buildtools.BuildPlugin;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.buildtools.dependencies.CoordinateResolver;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.template.StringWritable;
 import io.micronaut.projectgen.core.template.Writable;
 import java.util.Objects;
@@ -48,8 +47,9 @@ public class MavenPlugin implements BuildPlugin {
 
     @Override
     public final boolean equals(Object o) {
-        if (!(o instanceof MavenPlugin that)) return false;
-
+        if (!(o instanceof MavenPlugin that)) {
+            return false;
+        }
         return Objects.equals(groupId, that.groupId) && Objects.equals(artifactId, that.artifactId) && Objects.equals(version, that.version);
     }
 
@@ -92,11 +92,19 @@ public class MavenPlugin implements BuildPlugin {
         return extension;
     }
 
+    /**
+     *
+     * @return Group ID
+     */
     @Nullable
     public String getGroupId() {
         return groupId;
     }
 
+    /**
+     *
+     * @return Version
+     */
     @Nullable
     public String getVersion() {
         return version;
@@ -154,6 +162,7 @@ public class MavenPlugin implements BuildPlugin {
             this.groupId = groupId;
             return this;
         }
+
         public MavenPlugin.Builder version(String version) {
             this.version = version;
             return this;

@@ -36,7 +36,12 @@ public interface BuildTestVerifier {
      */
     boolean hasAnnotationProcessor(String groupId, String artifactId);
 
-    default public String getProperty(String propertyName) {
+    /**
+     *
+     * @param propertyName property name
+     * @return the value associated with the property
+     */
+    default String getProperty(String propertyName) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
@@ -176,20 +181,17 @@ public interface BuildTestVerifier {
                                 @NonNull BuildTool buildTool,
                                 @NonNull Language language,
                                 @NonNull TestFramework testFramework) {
-        if (buildTool == BuildTool.GRADLE) {
-            return new GradleBuildTestVerifier(template, buildTool, language, testFramework);
-        }
-        if (buildTool == BuildTool.MAVEN) {
-            return new MavenBuildTestVerifier(template, language);
-        }
-        return null;//TODO
+        return switch (buildTool) {
+            case GRADLE -> new GradleBuildTestVerifier(template, buildTool, language, testFramework);
+            case MAVEN -> new MavenBuildTestVerifier(template, language);
+        };
     }
 
     /**
      *
-     * @param template
-     * @param options
-     * @return
+     * @param template build file
+     * @param options options
+     * @return BuildTestVerifier instance
      * @deprecated Use {@link BuildTestVerifier#of(String, BuildTool, Language, TestFramework)} instead.
      */
     @Deprecated(forRemoval = true)
@@ -201,7 +203,7 @@ public interface BuildTestVerifier {
         if (OptionUtils.hasMavenBuildTool(options)) {
             return new MavenBuildTestVerifier(template, options.language());
         }
-        return null;//TODO
+        throw new IllegalArgumentException("Options does not support Gradle or Maven");
     }
 
     default boolean hasBuildPlugin(String groupId, String artifactId) {

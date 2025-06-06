@@ -15,8 +15,6 @@
  */
 package io.micronaut.projectgen.test;
 
-import io.micronaut.context.env.Environment;
-
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
@@ -24,6 +22,9 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Properties;
 
+/**
+ * Utility class to load properties.
+ */
 public final class ConfigurationUtils {
 
     public static final String SRC_MAIN_RESOURCES_APPLICATION_PROPERTIES = "src/main/resources/application.properties";
@@ -32,28 +33,61 @@ public final class ConfigurationUtils {
     private ConfigurationUtils() {
     }
 
+    /**
+     *
+     * @param project project preview
+     * @return The project properties
+     * @throws Exception Exception loading properties
+     */
     public static Properties loadApplicationProperties(Map<String, String> project) throws Exception {
         return loadPropertiesByPath(project, SRC_MAIN_RESOURCES_APPLICATION_PROPERTIES);
     }
 
+    /**
+     *
+     * @param project project preview
+     * @param path Path
+     * @return The project properties
+     * @throws Exception Exception loading properties
+     */
     public static Properties loadPropertiesByPath(Map<String, String> project, String path) throws Exception {
         String applicationProperties = project.get(path);
         return loadProperties(Objects.requireNonNull(applicationProperties));
     }
 
+    /**
+     *
+     * @param project project preview
+     * @param module module
+     * @return The project properties
+     * @throws Exception Exception loading properties
+     */
     public static Properties loadApplicationPropertiesByModule(Map<String, String> project, String module) throws Exception {
         return loadPropertiesByPath(project, module + "/" + SRC_MAIN_RESOURCES_APPLICATION_PROPERTIES);
     }
 
+    /**
+     *
+     * @param project project preview
+     * @return bootstrap properties
+     * @throws Exception Exception loading bootstrap properties
+     */
     public static Properties loadBootstrapProperties(Map<String, String> project) throws Exception {
         return loadPropertiesByPath(project, SRC_MAIN_RESOURCES_BOOTSTRAP_PROPERTIES);
     }
 
+    /**
+     *
+     * @param project project preview
+     * @param module module
+     * @return bootstrap properties
+     * @throws Exception Exception loading bootstrap properties
+     */
     public static Properties loadBootstrapPropertiesByModule(Map<String, String> project, String module) throws Exception {
         return loadPropertiesByPath(project, module + "/" + SRC_MAIN_RESOURCES_BOOTSTRAP_PROPERTIES);
     }
 
-    public static Properties loadProperties(String propertiesString) throws Exception {
+    private static Properties loadProperties(String propertiesString) throws Exception {
         Properties properties = new Properties();
         try (InputStream inputStream = new ByteArrayInputStream(propertiesString.getBytes(StandardCharsets.UTF_8))) {
             properties.load(inputStream);

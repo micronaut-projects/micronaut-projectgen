@@ -20,7 +20,17 @@ import io.micronaut.projectgen.core.options.Options;
 
 import java.util.Map;
 
+/**
+ * API to instantiate an instance of {@link Options} given a form payload.
+ */
+@FunctionalInterface
 public interface OptionsBuilder {
+
+    /**
+     * Instantiate an instance of {@link Options} given a form payload.
+     * @param form Form
+     * @return Project Options
+     */
     @NonNull
     Options createOptions(@NonNull Map<String, Object> form);
 }

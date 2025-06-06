@@ -24,6 +24,9 @@ import io.micronaut.validation.validator.constraints.ConstraintValidator;
 import io.micronaut.validation.validator.constraints.ConstraintValidatorContext;
 import jakarta.inject.Singleton;
 
+/**
+ * {@link ConstraintValidator} for {@link JavaPackageName}.
+ */
 @Introspected
 @Singleton
 public class JavaPackageNameValidator implements ConstraintValidator<JavaPackageName, String> {

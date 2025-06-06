@@ -29,6 +29,7 @@ public enum BuildTool {
 
     public static final BuildTool DEFAULT_OPTION = BuildTool.GRADLE;
     private final String jarDirectory;
+
     BuildTool(String jarDirectory) {
         this.jarDirectory = jarDirectory;
     }

@@ -15,6 +15,9 @@
  */
 package io.micronaut.projectgen.core.feature;
 
+/**
+ * Features related with Distributed Configuration.
+ */
 public interface DistributedConfigFeature extends Feature {
     @Override
     default String getCategory() {

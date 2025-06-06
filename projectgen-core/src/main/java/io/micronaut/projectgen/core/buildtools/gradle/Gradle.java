@@ -15,7 +15,6 @@
  */
 package io.micronaut.projectgen.core.buildtools.gradle;
 
-import com.fizzed.rocker.RockerModel;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
@@ -30,11 +29,9 @@ import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.core.rocker.RockerTemplate;
 import io.micronaut.projectgen.core.template.BinaryTemplate;
-import io.micronaut.projectgen.core.template.Template;
 import io.micronaut.projectgen.core.template.URLTemplate;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import jakarta.inject.Singleton;
-import io.micronaut.projectgen.core.template.genericBuildGradle;
 import io.micronaut.projectgen.core.template.gradleProperties;
 import io.micronaut.projectgen.core.template.settingsGradle;
 
@@ -92,6 +89,7 @@ public class Gradle implements BuildFeature, DefaultFeature {
     /**
      *
      * @param generatorContext Generator Context
+     * @param rootModule Root Module
      */
     protected void generateBuildFiles(GeneratorContext generatorContext, ModuleContext rootModule) {
         for (String module : generatorContext.getModuleNames()) {
@@ -106,6 +104,12 @@ public class Gradle implements BuildFeature, DefaultFeature {
         addSettingsFile(buildTool, generatorContext, build, rootModule);
     }
 
+    /**
+     *
+     * @param generatorContext Generator Context
+     * @param moduleContext Module context
+     * @param module Module name
+     */
     protected void generateBuildFiles(GeneratorContext generatorContext, ModuleContext moduleContext, String module) {
         moduleContext.addTemplate(module + NAME_BUILD_GRADLE,
             GradleBuildCreator.buildFileTemplate(generatorContext, moduleContext, module));
@@ -123,7 +127,6 @@ public class Gradle implements BuildFeature, DefaultFeature {
         module.addTemplate(NAME_GRADLE_WRAPPER_BAT, new URLTemplate(GRADLEW_BAT_PATH, classLoader.getResource(GRADLEW_BAT), false));
     }
 
-
     /**
      *
      * @param module Module
@@ -139,6 +142,7 @@ public class Gradle implements BuildFeature, DefaultFeature {
      * @param buildTool Gradle Build Tool
      * @param generatorContext  Generator Context
      * @param build Gradle Build
+     * @param module Module
      */
     protected void addSettingsFile(BuildTool buildTool, GeneratorContext generatorContext, GradleBuild build, ModuleContext module) {
         boolean hasMultiProjectFeature = generatorContext.getFeatures().hasMultiProjectFeature();
