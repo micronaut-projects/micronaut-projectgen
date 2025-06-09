@@ -319,6 +319,22 @@ implements <a href="../BuildPlugin.html" title="interface in io.micronaut.projec
  int&nbsp;order,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;buildImports,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;settingsImports)</span></div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>gradleFile</code> - Gradle File</dd>
+<dd><code>id</code> - Id</dd>
+<dd><code>version</code> - version</dd>
+<dd><code>alias</code> - alias</dd>
+<dd><code>apply</code> - apply</dd>
+<dd><code>artifactId</code> - ArtifactID</dd>
+<dd><code>extension</code> - extension</dd>
+<dd><code>settingsExtension</code> - settings extensions</dd>
+<dd><code>pluginsManagementRepositories</code> - plugin management repositories</dd>
+<dd><code>requiresLookup</code> - requires lookup</dd>
+<dd><code>order</code> - order</dd>
+<dd><code>buildImports</code> - build imports</dd>
+<dd><code>settingsImports</code> - settings imports</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -333,6 +349,10 @@ implements <a href="../BuildPlugin.html" title="interface in io.micronaut.projec
 <section class="detail" id="getApply()">
 <h3>getApply</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a></span>&nbsp;<span class="element-name">getApply</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>apply</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -340,6 +360,13 @@ implements <a href="../BuildPlugin.html" title="interface in io.micronaut.projec
 <h3>of</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="GradlePlugin.html" title="class in io.micronaut.projectgen.core.buildtools.gradle">GradlePlugin</a></span>&nbsp;<span class="element-name">of</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;id,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;lookupArtifactId)</span></div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>id</code> - Plugin ID</dd>
+<dd><code>lookupArtifactId</code> - Plugin Artifact ID</dd>
+<dt>Returns:</dt>
+<dd>Gradle Plugin</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -391,6 +418,10 @@ implements <a href="../BuildPlugin.html" title="interface in io.micronaut.projec
 <h3>getAlias</h3>
 <div class="member-signature"><span class="annotations">@Nullable
 </span><span class="modifiers">public</span>&nbsp;<span class="return-type">@Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getAlias</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>Alias</dd>
+</dl>
 </section>
 </li>
 <li>

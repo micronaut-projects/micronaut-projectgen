@@ -76,8 +76,14 @@ loadScripts(document, 'script');</script>
 <dt>All Known Implementing Classes:</dt>
 <dd><code><a href="DefaultOptionsBuilder.html" title="class in io.micronaut.projectgen.http.server">DefaultOptionsBuilder</a></code></dd>
 </dl>
+<dl class="notes">
+<dt>Functional Interface:</dt>
+<dd>This is a functional interface and can therefore be used as the assignment target for a lambda expression or method reference.</dd>
+</dl>
 <hr>
-<div class="type-signature"><span class="modifiers">public interface </span><span class="element-name type-name-label">OptionsBuilder</span></div>
+<div class="type-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/FunctionalInterface.html" title="class or interface in java.lang" class="external-link">@FunctionalInterface</a>
+</span><span class="modifiers">public interface </span><span class="element-name type-name-label">OptionsBuilder</span></div>
+<div class="block">API to instantiate an instance of <a href="../../core/options/Options.html" title="interface in io.micronaut.projectgen.core.options"><code>Options</code></a> given a form payload.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -93,8 +99,10 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>@NonNull <a href="../../core/options/Options.html" title="interface in io.micronaut.projectgen.core.options">Options</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#createOptions(java.util.Map)" class="member-name-link">createOptions</a><wbr>(@NonNull <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;&nbsp;form)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#createOptions(java.util.Map)" class="member-name-link">createOptions</a><wbr>(@Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;&nbsp;form)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Instantiate an instance of <a href="../../core/options/Options.html" title="interface in io.micronaut.projectgen.core.options"><code>Options</code></a> given a form payload.</div>
+</div>
 </div>
 </div>
 </div>
@@ -113,8 +121,15 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="createOptions(java.util.Map)">
 <h3>createOptions</h3>
 <div class="member-signature"><span class="annotations">@NonNull
-</span><span class="return-type">@NonNull <a href="../../core/options/Options.html" title="interface in io.micronaut.projectgen.core.options">Options</a></span>&nbsp;<span class="element-name">createOptions</span><wbr><span class="parameters">(@NonNull
- @NonNull <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;&nbsp;form)</span></div>
+</span><span class="return-type">@NonNull <a href="../../core/options/Options.html" title="interface in io.micronaut.projectgen.core.options">Options</a></span>&nbsp;<span class="element-name">createOptions</span><wbr><span class="parameters">(@Nullable
+ @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;&nbsp;form)</span></div>
+<div class="block">Instantiate an instance of <a href="../../core/options/Options.html" title="interface in io.micronaut.projectgen.core.options"><code>Options</code></a> given a form payload.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>form</code> - Form</dd>
+<dt>Returns:</dt>
+<dd>Project Options</dd>
+</dl>
 </section>
 </li>
 </ul>

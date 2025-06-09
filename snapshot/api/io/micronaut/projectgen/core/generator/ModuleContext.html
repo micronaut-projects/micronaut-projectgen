@@ -77,6 +77,23 @@ loadScripts(document, 'script');</script>
 </div>
 </div>
 <section class="class-description" id="class-description">
+<dl class="notes">
+<dt>Record Components:</dt>
+<dd><code><span id="param-coordinateResolver">coordinateResolver</span></code> - Coordinate resovler</dd>
+<dd><code><span id="param-recipeFetcher">recipeFetcher</span></code> - Recipe Fetcher</dd>
+<dd><code><span id="param-moduleAttributes">moduleAttributes</span></code> - Module Attributes</dd>
+<dd><code><span id="param-buildProperties">buildProperties</span></code> - Build Properties</dd>
+<dd><code><span id="param-configuration">configuration</span></code> - Configuration</dd>
+<dd><code><span id="param-configurationByEnvironment">configurationByEnvironment</span></code> - Configuration by environment</dd>
+<dd><code><span id="param-bootstrapConfiguration">bootstrapConfiguration</span></code> - Bootstrap Configuration</dd>
+<dd><code><span id="param-bootstrapConfigurationByEnvironment">bootstrapConfigurationByEnvironment</span></code> - Bootstrap Configuration By Environment</dd>
+<dd><code><span id="param-dependencyContext">dependencyContext</span></code> - Dependency Context</dd>
+<dd><code><span id="param-buildPlugins">buildPlugins</span></code> - Build Plugins</dd>
+<dd><code><span id="param-templates">templates</span></code> - Templates</dd>
+<dd><code><span id="param-profiles">profiles</span></code> - Profiles</dd>
+<dd><code><span id="param-repositories">repositories</span></code> - Repositories</dd>
+<dd><code><span id="param-helpTemplates">helpTemplates</span></code> - Help Templates</dd>
+</dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public record </span><span class="element-name type-name-label">ModuleContext</span>(<a href="../buildtools/dependencies/CoordinateResolver.html" title="interface in io.micronaut.projectgen.core.buildtools.dependencies">CoordinateResolver</a>&nbsp;coordinateResolver, <a href="../openrewrite/RecipeFetcher.html" title="interface in io.micronaut.projectgen.core.openrewrite">RecipeFetcher</a>&nbsp;recipeFetcher, <a href="ModuleAttributes.html" title="class in io.micronaut.projectgen.core.generator">ModuleAttributes</a>&nbsp;moduleAttributes, <a href="../buildtools/BuildProperties.html" title="class in io.micronaut.projectgen.core.buildtools">BuildProperties</a>&nbsp;buildProperties, <a href="../feature/config/ApplicationConfiguration.html" title="class in io.micronaut.projectgen.core.feature.config">ApplicationConfiguration</a>&nbsp;configuration, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="../feature/config/ApplicationConfiguration.html" title="class in io.micronaut.projectgen.core.feature.config">ApplicationConfiguration</a>&gt;&nbsp;configurationByEnvironment, <a href="../feature/config/BootstrapConfiguration.html" title="class in io.micronaut.projectgen.core.feature.config">BootstrapConfiguration</a>&nbsp;bootstrapConfiguration, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="../feature/config/BootstrapConfiguration.html" title="class in io.micronaut.projectgen.core.feature.config">BootstrapConfiguration</a>&gt;&nbsp;bootstrapConfigurationByEnvironment, <a href="../buildtools/dependencies/DependencyContext.html" title="interface in io.micronaut.projectgen.core.buildtools.dependencies">DependencyContext</a>&nbsp;dependencyContext, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="../buildtools/BuildPlugin.html" title="interface in io.micronaut.projectgen.core.buildtools">BuildPlugin</a>&gt;&nbsp;buildPlugins, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="../template/Template.html" title="interface in io.micronaut.projectgen.core.template">Template</a>&gt;&nbsp;templates, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="../buildtools/maven/Profile.html" title="class in io.micronaut.projectgen.core.buildtools.maven">Profile</a>&gt;&nbsp;profiles, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="../buildtools/Repository.html" title="interface in io.micronaut.projectgen.core.buildtools">Repository</a>&gt;&nbsp;repositories, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../template/Writable.html" title="interface in io.micronaut.projectgen.core.template">Writable</a>&gt;&nbsp;helpTemplates)
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Record.html" title="class or interface in java.lang" class="external-link">Record</a></span></div>
@@ -193,37 +210,37 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../feature/config/BootstrapConfiguration.html" title="class in io.micronaut.projectgen.core.feature.config">BootstrapConfiguration</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#bootstrapConfiguration()" class="member-name-link">bootstrapConfiguration</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>bootstrapConfiguration</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-bootstrapConfiguration"><code>bootstrapConfiguration</code></a> record component.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="../feature/config/BootstrapConfiguration.html" title="class in io.micronaut.projectgen.core.feature.config">BootstrapConfiguration</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#bootstrapConfigurationByEnvironment()" class="member-name-link">bootstrapConfigurationByEnvironment</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>bootstrapConfigurationByEnvironment</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-bootstrapConfigurationByEnvironment"><code>bootstrapConfigurationByEnvironment</code></a> record component.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="../buildtools/BuildPlugin.html" title="interface in io.micronaut.projectgen.core.buildtools">BuildPlugin</a>&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#buildPlugins()" class="member-name-link">buildPlugins</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>buildPlugins</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-buildPlugins"><code>buildPlugins</code></a> record component.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../buildtools/BuildProperties.html" title="class in io.micronaut.projectgen.core.buildtools">BuildProperties</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#buildProperties()" class="member-name-link">buildProperties</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>buildProperties</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-buildProperties"><code>buildProperties</code></a> record component.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../feature/config/ApplicationConfiguration.html" title="class in io.micronaut.projectgen.core.feature.config">ApplicationConfiguration</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#configuration()" class="member-name-link">configuration</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>configuration</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-configuration"><code>configuration</code></a> record component.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="../feature/config/ApplicationConfiguration.html" title="class in io.micronaut.projectgen.core.feature.config">ApplicationConfiguration</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#configurationByEnvironment()" class="member-name-link">configurationByEnvironment</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>configurationByEnvironment</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-configurationByEnvironment"><code>configurationByEnvironment</code></a> record component.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../buildtools/dependencies/CoordinateResolver.html" title="interface in io.micronaut.projectgen.core.buildtools.dependencies">CoordinateResolver</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#coordinateResolver()" class="member-name-link">coordinateResolver</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>coordinateResolver</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-coordinateResolver"><code>coordinateResolver</code></a> record component.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>long</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#countDependencies(java.lang.String)" class="member-name-link">countDependencies</a><wbr>(@NonNull <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;groupId)</code></div>
@@ -231,7 +248,7 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../buildtools/dependencies/DependencyContext.html" title="interface in io.micronaut.projectgen.core.buildtools.dependencies">DependencyContext</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#dependencyContext()" class="member-name-link">dependencyContext</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>dependencyContext</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-dependencyContext"><code>dependencyContext</code></a> record component.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../feature/config/Configuration.html" title="class in io.micronaut.projectgen.core.feature.config">Configuration</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#devBootstrapConfiguration()" class="member-name-link">devBootstrapConfiguration</a>()</code></div>
@@ -287,22 +304,22 @@ loadScripts(document, 'script');</script>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../template/Writable.html" title="interface in io.micronaut.projectgen.core.template">Writable</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#helpTemplates()" class="member-name-link">helpTemplates</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>helpTemplates</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-helpTemplates"><code>helpTemplates</code></a> record component.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="ModuleAttributes.html" title="class in io.micronaut.projectgen.core.generator">ModuleAttributes</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#moduleAttributes()" class="member-name-link">moduleAttributes</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>moduleAttributes</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-moduleAttributes"><code>moduleAttributes</code></a> record component.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="../buildtools/maven/Profile.html" title="class in io.micronaut.projectgen.core.buildtools.maven">Profile</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#profiles()" class="member-name-link">profiles</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>profiles</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-profiles"><code>profiles</code></a> record component.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../openrewrite/RecipeFetcher.html" title="interface in io.micronaut.projectgen.core.openrewrite">RecipeFetcher</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#recipeFetcher()" class="member-name-link">recipeFetcher</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>recipeFetcher</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-recipeFetcher"><code>recipeFetcher</code></a> record component.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#removeTemplate(java.lang.String)" class="member-name-link">removeTemplate</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</code></div>
@@ -312,12 +329,12 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="../buildtools/Repository.html" title="interface in io.micronaut.projectgen.core.buildtools">Repository</a>&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#repositories()" class="member-name-link">repositories</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>repositories</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-repositories"><code>repositories</code></a> record component.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="../template/Template.html" title="interface in io.micronaut.projectgen.core.template">Template</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#templates()" class="member-name-link">templates</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>templates</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-templates"><code>templates</code></a> record component.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../feature/config/Configuration.html" title="class in io.micronaut.projectgen.core.feature.config">Configuration</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#testConfiguration()" class="member-name-link">testConfiguration</a>()</code></div>
@@ -364,20 +381,20 @@ loadScripts(document, 'script');</script>
 <div class="block">Creates an instance of a <code>ModuleContext</code> record class.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>coordinateResolver</code> - the value for the <code>coordinateResolver</code> record component</dd>
-<dd><code>recipeFetcher</code> - the value for the <code>recipeFetcher</code> record component</dd>
-<dd><code>moduleAttributes</code> - the value for the <code>moduleAttributes</code> record component</dd>
-<dd><code>buildProperties</code> - the value for the <code>buildProperties</code> record component</dd>
-<dd><code>configuration</code> - the value for the <code>configuration</code> record component</dd>
-<dd><code>configurationByEnvironment</code> - the value for the <code>configurationByEnvironment</code> record component</dd>
-<dd><code>bootstrapConfiguration</code> - the value for the <code>bootstrapConfiguration</code> record component</dd>
-<dd><code>bootstrapConfigurationByEnvironment</code> - the value for the <code>bootstrapConfigurationByEnvironment</code> record component</dd>
-<dd><code>dependencyContext</code> - the value for the <code>dependencyContext</code> record component</dd>
-<dd><code>buildPlugins</code> - the value for the <code>buildPlugins</code> record component</dd>
-<dd><code>templates</code> - the value for the <code>templates</code> record component</dd>
-<dd><code>profiles</code> - the value for the <code>profiles</code> record component</dd>
-<dd><code>repositories</code> - the value for the <code>repositories</code> record component</dd>
-<dd><code>helpTemplates</code> - the value for the <code>helpTemplates</code> record component</dd>
+<dd><code>coordinateResolver</code> - the value for the <a href="#param-coordinateResolver"><code>coordinateResolver</code></a> record component</dd>
+<dd><code>recipeFetcher</code> - the value for the <a href="#param-recipeFetcher"><code>recipeFetcher</code></a> record component</dd>
+<dd><code>moduleAttributes</code> - the value for the <a href="#param-moduleAttributes"><code>moduleAttributes</code></a> record component</dd>
+<dd><code>buildProperties</code> - the value for the <a href="#param-buildProperties"><code>buildProperties</code></a> record component</dd>
+<dd><code>configuration</code> - the value for the <a href="#param-configuration"><code>configuration</code></a> record component</dd>
+<dd><code>configurationByEnvironment</code> - the value for the <a href="#param-configurationByEnvironment"><code>configurationByEnvironment</code></a> record component</dd>
+<dd><code>bootstrapConfiguration</code> - the value for the <a href="#param-bootstrapConfiguration"><code>bootstrapConfiguration</code></a> record component</dd>
+<dd><code>bootstrapConfigurationByEnvironment</code> - the value for the <a href="#param-bootstrapConfigurationByEnvironment"><code>bootstrapConfigurationByEnvironment</code></a> record component</dd>
+<dd><code>dependencyContext</code> - the value for the <a href="#param-dependencyContext"><code>dependencyContext</code></a> record component</dd>
+<dd><code>buildPlugins</code> - the value for the <a href="#param-buildPlugins"><code>buildPlugins</code></a> record component</dd>
+<dd><code>templates</code> - the value for the <a href="#param-templates"><code>templates</code></a> record component</dd>
+<dd><code>profiles</code> - the value for the <a href="#param-profiles"><code>profiles</code></a> record component</dd>
+<dd><code>repositories</code> - the value for the <a href="#param-repositories"><code>repositories</code></a> record component</dd>
+<dd><code>helpTemplates</code> - the value for the <a href="#param-helpTemplates"><code>helpTemplates</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -736,10 +753,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="coordinateResolver()">
 <h3>coordinateResolver</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../buildtools/dependencies/CoordinateResolver.html" title="interface in io.micronaut.projectgen.core.buildtools.dependencies">CoordinateResolver</a></span>&nbsp;<span class="element-name">coordinateResolver</span>()</div>
-<div class="block">Returns the value of the <code>coordinateResolver</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-coordinateResolver"><code>coordinateResolver</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the value of the <code>coordinateResolver</code> record component</dd>
+<dd>the value of the <a href="#param-coordinateResolver"><code>coordinateResolver</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -747,10 +764,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="recipeFetcher()">
 <h3>recipeFetcher</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../openrewrite/RecipeFetcher.html" title="interface in io.micronaut.projectgen.core.openrewrite">RecipeFetcher</a></span>&nbsp;<span class="element-name">recipeFetcher</span>()</div>
-<div class="block">Returns the value of the <code>recipeFetcher</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-recipeFetcher"><code>recipeFetcher</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the value of the <code>recipeFetcher</code> record component</dd>
+<dd>the value of the <a href="#param-recipeFetcher"><code>recipeFetcher</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -758,10 +775,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="moduleAttributes()">
 <h3>moduleAttributes</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="ModuleAttributes.html" title="class in io.micronaut.projectgen.core.generator">ModuleAttributes</a></span>&nbsp;<span class="element-name">moduleAttributes</span>()</div>
-<div class="block">Returns the value of the <code>moduleAttributes</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-moduleAttributes"><code>moduleAttributes</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the value of the <code>moduleAttributes</code> record component</dd>
+<dd>the value of the <a href="#param-moduleAttributes"><code>moduleAttributes</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -769,10 +786,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="buildProperties()">
 <h3>buildProperties</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../buildtools/BuildProperties.html" title="class in io.micronaut.projectgen.core.buildtools">BuildProperties</a></span>&nbsp;<span class="element-name">buildProperties</span>()</div>
-<div class="block">Returns the value of the <code>buildProperties</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-buildProperties"><code>buildProperties</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the value of the <code>buildProperties</code> record component</dd>
+<dd>the value of the <a href="#param-buildProperties"><code>buildProperties</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -780,10 +797,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="configuration()">
 <h3>configuration</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../feature/config/ApplicationConfiguration.html" title="class in io.micronaut.projectgen.core.feature.config">ApplicationConfiguration</a></span>&nbsp;<span class="element-name">configuration</span>()</div>
-<div class="block">Returns the value of the <code>configuration</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-configuration"><code>configuration</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the value of the <code>configuration</code> record component</dd>
+<dd>the value of the <a href="#param-configuration"><code>configuration</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -791,10 +808,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="configurationByEnvironment()">
 <h3>configurationByEnvironment</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="../feature/config/ApplicationConfiguration.html" title="class in io.micronaut.projectgen.core.feature.config">ApplicationConfiguration</a>&gt;</span>&nbsp;<span class="element-name">configurationByEnvironment</span>()</div>
-<div class="block">Returns the value of the <code>configurationByEnvironment</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-configurationByEnvironment"><code>configurationByEnvironment</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the value of the <code>configurationByEnvironment</code> record component</dd>
+<dd>the value of the <a href="#param-configurationByEnvironment"><code>configurationByEnvironment</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -802,10 +819,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="bootstrapConfiguration()">
 <h3>bootstrapConfiguration</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../feature/config/BootstrapConfiguration.html" title="class in io.micronaut.projectgen.core.feature.config">BootstrapConfiguration</a></span>&nbsp;<span class="element-name">bootstrapConfiguration</span>()</div>
-<div class="block">Returns the value of the <code>bootstrapConfiguration</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-bootstrapConfiguration"><code>bootstrapConfiguration</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the value of the <code>bootstrapConfiguration</code> record component</dd>
+<dd>the value of the <a href="#param-bootstrapConfiguration"><code>bootstrapConfiguration</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -813,10 +830,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="bootstrapConfigurationByEnvironment()">
 <h3>bootstrapConfigurationByEnvironment</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="../feature/config/BootstrapConfiguration.html" title="class in io.micronaut.projectgen.core.feature.config">BootstrapConfiguration</a>&gt;</span>&nbsp;<span class="element-name">bootstrapConfigurationByEnvironment</span>()</div>
-<div class="block">Returns the value of the <code>bootstrapConfigurationByEnvironment</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-bootstrapConfigurationByEnvironment"><code>bootstrapConfigurationByEnvironment</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the value of the <code>bootstrapConfigurationByEnvironment</code> record component</dd>
+<dd>the value of the <a href="#param-bootstrapConfigurationByEnvironment"><code>bootstrapConfigurationByEnvironment</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -824,10 +841,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="dependencyContext()">
 <h3>dependencyContext</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../buildtools/dependencies/DependencyContext.html" title="interface in io.micronaut.projectgen.core.buildtools.dependencies">DependencyContext</a></span>&nbsp;<span class="element-name">dependencyContext</span>()</div>
-<div class="block">Returns the value of the <code>dependencyContext</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-dependencyContext"><code>dependencyContext</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the value of the <code>dependencyContext</code> record component</dd>
+<dd>the value of the <a href="#param-dependencyContext"><code>dependencyContext</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -835,10 +852,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="buildPlugins()">
 <h3>buildPlugins</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="../buildtools/BuildPlugin.html" title="interface in io.micronaut.projectgen.core.buildtools">BuildPlugin</a>&gt;</span>&nbsp;<span class="element-name">buildPlugins</span>()</div>
-<div class="block">Returns the value of the <code>buildPlugins</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-buildPlugins"><code>buildPlugins</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the value of the <code>buildPlugins</code> record component</dd>
+<dd>the value of the <a href="#param-buildPlugins"><code>buildPlugins</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -846,10 +863,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="templates()">
 <h3>templates</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="../template/Template.html" title="interface in io.micronaut.projectgen.core.template">Template</a>&gt;</span>&nbsp;<span class="element-name">templates</span>()</div>
-<div class="block">Returns the value of the <code>templates</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-templates"><code>templates</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the value of the <code>templates</code> record component</dd>
+<dd>the value of the <a href="#param-templates"><code>templates</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -857,10 +874,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="profiles()">
 <h3>profiles</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="../buildtools/maven/Profile.html" title="class in io.micronaut.projectgen.core.buildtools.maven">Profile</a>&gt;</span>&nbsp;<span class="element-name">profiles</span>()</div>
-<div class="block">Returns the value of the <code>profiles</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-profiles"><code>profiles</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the value of the <code>profiles</code> record component</dd>
+<dd>the value of the <a href="#param-profiles"><code>profiles</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -868,10 +885,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="repositories()">
 <h3>repositories</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="../buildtools/Repository.html" title="interface in io.micronaut.projectgen.core.buildtools">Repository</a>&gt;</span>&nbsp;<span class="element-name">repositories</span>()</div>
-<div class="block">Returns the value of the <code>repositories</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-repositories"><code>repositories</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the value of the <code>repositories</code> record component</dd>
+<dd>the value of the <a href="#param-repositories"><code>repositories</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -879,10 +896,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="helpTemplates()">
 <h3>helpTemplates</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../template/Writable.html" title="interface in io.micronaut.projectgen.core.template">Writable</a>&gt;</span>&nbsp;<span class="element-name">helpTemplates</span>()</div>
-<div class="block">Returns the value of the <code>helpTemplates</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-helpTemplates"><code>helpTemplates</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the value of the <code>helpTemplates</code> record component</dd>
+<dd>the value of the <a href="#param-helpTemplates"><code>helpTemplates</code></a> record component</dd>
 </dl>
 </section>
 </li>

@@ -77,6 +77,14 @@ loadScripts(document, 'script');</script>
 </div>
 </div>
 <section class="class-description" id="class-description">
+<dl class="notes">
+<dt>Record Components:</dt>
+<dd><code><span id="param-coordinate">coordinate</span></code> - Coordinate</dd>
+<dd><code><span id="param-dsl">dsl</span></code> - Gradle DSL</dd>
+<dd><code><span id="param-dependencies">dependencies</span></code> - dependencies</dd>
+<dd><code><span id="param-plugins">plugins</span></code> - Plugins</dd>
+<dd><code><span id="param-repositories">repositories</span></code> - Repositories</dd>
+</dl>
 <hr>
 <div class="type-signature"><span class="annotations">@Builder
 </span><span class="modifiers">public record </span><span class="element-name type-name-label">GradleBuild</span>(<a href="../dependencies/Coordinate.html" title="interface in io.micronaut.projectgen.core.buildtools.dependencies">Coordinate</a>&nbsp;coordinate, <a href="GradleDsl.html" title="enum class in io.micronaut.projectgen.core.buildtools.gradle">GradleDsl</a>&nbsp;dsl, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="GradleDependency.html" title="class in io.micronaut.projectgen.core.buildtools.gradle">GradleDependency</a>&gt;&nbsp;dependencies, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="GradlePlugin.html" title="class in io.micronaut.projectgen.core.buildtools.gradle">GradlePlugin</a>&gt;&nbsp;plugins, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="GradleRepository.html" title="class in io.micronaut.projectgen.core.buildtools.gradle">GradleRepository</a>&gt;&nbsp;repositories)
@@ -118,17 +126,17 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../dependencies/Coordinate.html" title="interface in io.micronaut.projectgen.core.buildtools.dependencies">Coordinate</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#coordinate()" class="member-name-link">coordinate</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>coordinate</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-coordinate"><code>coordinate</code></a> record component.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="GradleDependency.html" title="class in io.micronaut.projectgen.core.buildtools.gradle">GradleDependency</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#dependencies()" class="member-name-link">dependencies</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>dependencies</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-dependencies"><code>dependencies</code></a> record component.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="GradleDsl.html" title="enum class in io.micronaut.projectgen.core.buildtools.gradle">GradleDsl</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#dsl()" class="member-name-link">dsl</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>dsl</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-dsl"><code>dsl</code></a> record component.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#equals(java.lang.Object)" class="member-name-link">equals</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;o)</code></div>
@@ -161,7 +169,7 @@ loadScripts(document, 'script');</script>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="GradlePlugin.html" title="class in io.micronaut.projectgen.core.buildtools.gradle">GradlePlugin</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#plugins()" class="member-name-link">plugins</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>plugins</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-plugins"><code>plugins</code></a> record component.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@NonNull <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#renderExtensions()" class="member-name-link">renderExtensions</a>()</code></div>
@@ -181,7 +189,7 @@ loadScripts(document, 'script');</script>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="GradleRepository.html" title="class in io.micronaut.projectgen.core.buildtools.gradle">GradleRepository</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#repositories()" class="member-name-link">repositories</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>repositories</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-repositories"><code>repositories</code></a> record component.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toString()" class="member-name-link">toString</a>()</code></div>
@@ -216,11 +224,11 @@ loadScripts(document, 'script');</script>
 <div class="block">Creates an instance of a <code>GradleBuild</code> record class.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>coordinate</code> - the value for the <code>coordinate</code> record component</dd>
-<dd><code>dsl</code> - the value for the <code>dsl</code> record component</dd>
-<dd><code>dependencies</code> - the value for the <code>dependencies</code> record component</dd>
-<dd><code>plugins</code> - the value for the <code>plugins</code> record component</dd>
-<dd><code>repositories</code> - the value for the <code>repositories</code> record component</dd>
+<dd><code>coordinate</code> - the value for the <a href="#param-coordinate"><code>coordinate</code></a> record component</dd>
+<dd><code>dsl</code> - the value for the <a href="#param-dsl"><code>dsl</code></a> record component</dd>
+<dd><code>dependencies</code> - the value for the <a href="#param-dependencies"><code>dependencies</code></a> record component</dd>
+<dd><code>plugins</code> - the value for the <a href="#param-plugins"><code>plugins</code></a> record component</dd>
+<dd><code>repositories</code> - the value for the <a href="#param-repositories"><code>repositories</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -388,10 +396,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="coordinate()">
 <h3>coordinate</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../dependencies/Coordinate.html" title="interface in io.micronaut.projectgen.core.buildtools.dependencies">Coordinate</a></span>&nbsp;<span class="element-name">coordinate</span>()</div>
-<div class="block">Returns the value of the <code>coordinate</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-coordinate"><code>coordinate</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the value of the <code>coordinate</code> record component</dd>
+<dd>the value of the <a href="#param-coordinate"><code>coordinate</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -399,10 +407,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="dsl()">
 <h3>dsl</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="GradleDsl.html" title="enum class in io.micronaut.projectgen.core.buildtools.gradle">GradleDsl</a></span>&nbsp;<span class="element-name">dsl</span>()</div>
-<div class="block">Returns the value of the <code>dsl</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-dsl"><code>dsl</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the value of the <code>dsl</code> record component</dd>
+<dd>the value of the <a href="#param-dsl"><code>dsl</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -410,10 +418,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="dependencies()">
 <h3>dependencies</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="GradleDependency.html" title="class in io.micronaut.projectgen.core.buildtools.gradle">GradleDependency</a>&gt;</span>&nbsp;<span class="element-name">dependencies</span>()</div>
-<div class="block">Returns the value of the <code>dependencies</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-dependencies"><code>dependencies</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the value of the <code>dependencies</code> record component</dd>
+<dd>the value of the <a href="#param-dependencies"><code>dependencies</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -421,10 +429,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="plugins()">
 <h3>plugins</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="GradlePlugin.html" title="class in io.micronaut.projectgen.core.buildtools.gradle">GradlePlugin</a>&gt;</span>&nbsp;<span class="element-name">plugins</span>()</div>
-<div class="block">Returns the value of the <code>plugins</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-plugins"><code>plugins</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the value of the <code>plugins</code> record component</dd>
+<dd>the value of the <a href="#param-plugins"><code>plugins</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -432,10 +440,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="repositories()">
 <h3>repositories</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="GradleRepository.html" title="class in io.micronaut.projectgen.core.buildtools.gradle">GradleRepository</a>&gt;</span>&nbsp;<span class="element-name">repositories</span>()</div>
-<div class="block">Returns the value of the <code>repositories</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-repositories"><code>repositories</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the value of the <code>repositories</code> record component</dd>
+<dd>the value of the <a href="#param-repositories"><code>repositories</code></a> record component</dd>
 </dl>
 </section>
 </li>

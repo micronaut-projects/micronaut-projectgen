@@ -78,6 +78,24 @@ loadScripts(document, 'script');</script>
 </div>
 <section class="class-description" id="class-description">
 <dl class="notes">
+<dt>Record Components:</dt>
+<dd><code><span id="param-name">name</span></code> - Project name</dd>
+<dd><code><span id="param-version">version</span></code> - Project Version</dd>
+<dd><code><span id="param-operatingSystem">operatingSystem</span></code> - Operating System</dd>
+<dd><code><span id="param-template">template</span></code> - template</dd>
+<dd><code><span id="param-language">language</span></code> - language</dd>
+<dd><code><span id="param-buildTools">buildTools</span></code> - build tools</dd>
+<dd><code><span id="param-configurationFormat">configurationFormat</span></code> - configuration format</dd>
+<dd><code><span id="param-gradleDsl">gradleDsl</span></code> - Gradle DSL</dd>
+<dd><code><span id="param-group">group</span></code> - group</dd>
+<dd><code><span id="param-artifact">artifact</span></code> - artifact</dd>
+<dd><code><span id="param-java">java</span></code> - Java version</dd>
+<dd><code><span id="param-packageName">packageName</span></code> - package name</dd>
+<dd><code><span id="param-packaging">packaging</span></code> - packaging</dd>
+<dd><code><span id="param-features">features</span></code> - Features</dd>
+<dd><code><span id="param-testFramework">testFramework</span></code> - Test framework</dd>
+</dl>
+<dl class="notes">
 <dt>All Implemented Interfaces:</dt>
 <dd><code><a href="Options.html" title="interface in io.micronaut.projectgen.core.options">Options</a></code></dd>
 </dl>
@@ -133,17 +151,17 @@ implements <a href="Options.html" title="interface in io.micronaut.projectgen.co
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#artifact()" class="member-name-link">artifact</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>artifact</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-artifact"><code>artifact</code></a> record component.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../buildtools/BuildTool.html" title="enum class in io.micronaut.projectgen.core.buildtools">BuildTool</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#buildTools()" class="member-name-link">buildTools</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>buildTools</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-buildTools"><code>buildTools</code></a> record component.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="ConfigurationFormat.html" title="enum class in io.micronaut.projectgen.core.options">ConfigurationFormat</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#configurationFormat()" class="member-name-link">configurationFormat</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>configurationFormat</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-configurationFormat"><code>configurationFormat</code></a> record component.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#equals(java.lang.Object)" class="member-name-link">equals</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;o)</code></div>
@@ -153,17 +171,17 @@ implements <a href="Options.html" title="interface in io.micronaut.projectgen.co
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#features()" class="member-name-link">features</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>features</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-features"><code>features</code></a> record component.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="../buildtools/gradle/GradleDsl.html" title="enum class in io.micronaut.projectgen.core.buildtools.gradle">GradleDsl</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#gradleDsl()" class="member-name-link">gradleDsl</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>gradleDsl</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-gradleDsl"><code>gradleDsl</code></a> record component.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#group()" class="member-name-link">group</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>group</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-group"><code>group</code></a> record component.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final int</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hashCode()" class="member-name-link">hashCode</a>()</code></div>
@@ -173,42 +191,42 @@ implements <a href="Options.html" title="interface in io.micronaut.projectgen.co
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="JdkVersion.html" title="class in io.micronaut.projectgen.core.options">JdkVersion</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#java()" class="member-name-link">java</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>java</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-java"><code>java</code></a> record component.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="Language.html" title="enum class in io.micronaut.projectgen.core.options">Language</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#language()" class="member-name-link">language</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>language</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-language"><code>language</code></a> record component.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#name()" class="member-name-link">name</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>name</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-name"><code>name</code></a> record component.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="OperatingSystem.html" title="enum class in io.micronaut.projectgen.core.options">OperatingSystem</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#operatingSystem()" class="member-name-link">operatingSystem</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>operatingSystem</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-operatingSystem"><code>operatingSystem</code></a> record component.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#packageName()" class="member-name-link">packageName</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>packageName</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-packageName"><code>packageName</code></a> record component.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="../buildtools/maven/Packaging.html" title="enum class in io.micronaut.projectgen.core.buildtools.maven">Packaging</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#packaging()" class="member-name-link">packaging</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>packaging</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-packaging"><code>packaging</code></a> record component.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#template()" class="member-name-link">template</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>template</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-template"><code>template</code></a> record component.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="TestFramework.html" title="enum class in io.micronaut.projectgen.core.options">TestFramework</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#testFramework()" class="member-name-link">testFramework</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>testFramework</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-testFramework"><code>testFramework</code></a> record component.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toString()" class="member-name-link">toString</a>()</code></div>
@@ -218,7 +236,7 @@ implements <a href="Options.html" title="interface in io.micronaut.projectgen.co
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#version()" class="member-name-link">version</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>version</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-version"><code>version</code></a> record component.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Options.html" title="interface in io.micronaut.projectgen.core.options">Options</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#withoutFeatures()" class="member-name-link">withoutFeatures</a>()</code></div>
@@ -279,21 +297,21 @@ implements <a href="Options.html" title="interface in io.micronaut.projectgen.co
 <div class="block">Creates an instance of a <code>GenericOptions</code> record class.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>name</code> - the value for the <code>name</code> record component</dd>
-<dd><code>version</code> - the value for the <code>version</code> record component</dd>
-<dd><code>operatingSystem</code> - the value for the <code>operatingSystem</code> record component</dd>
-<dd><code>template</code> - the value for the <code>template</code> record component</dd>
-<dd><code>language</code> - the value for the <code>language</code> record component</dd>
-<dd><code>buildTools</code> - the value for the <code>buildTools</code> record component</dd>
-<dd><code>configurationFormat</code> - the value for the <code>configurationFormat</code> record component</dd>
-<dd><code>gradleDsl</code> - the value for the <code>gradleDsl</code> record component</dd>
-<dd><code>group</code> - the value for the <code>group</code> record component</dd>
-<dd><code>artifact</code> - the value for the <code>artifact</code> record component</dd>
-<dd><code>java</code> - the value for the <code>java</code> record component</dd>
-<dd><code>packageName</code> - the value for the <code>packageName</code> record component</dd>
-<dd><code>packaging</code> - the value for the <code>packaging</code> record component</dd>
-<dd><code>features</code> - the value for the <code>features</code> record component</dd>
-<dd><code>testFramework</code> - the value for the <code>testFramework</code> record component</dd>
+<dd><code>name</code> - the value for the <a href="#param-name"><code>name</code></a> record component</dd>
+<dd><code>version</code> - the value for the <a href="#param-version"><code>version</code></a> record component</dd>
+<dd><code>operatingSystem</code> - the value for the <a href="#param-operatingSystem"><code>operatingSystem</code></a> record component</dd>
+<dd><code>template</code> - the value for the <a href="#param-template"><code>template</code></a> record component</dd>
+<dd><code>language</code> - the value for the <a href="#param-language"><code>language</code></a> record component</dd>
+<dd><code>buildTools</code> - the value for the <a href="#param-buildTools"><code>buildTools</code></a> record component</dd>
+<dd><code>configurationFormat</code> - the value for the <a href="#param-configurationFormat"><code>configurationFormat</code></a> record component</dd>
+<dd><code>gradleDsl</code> - the value for the <a href="#param-gradleDsl"><code>gradleDsl</code></a> record component</dd>
+<dd><code>group</code> - the value for the <a href="#param-group"><code>group</code></a> record component</dd>
+<dd><code>artifact</code> - the value for the <a href="#param-artifact"><code>artifact</code></a> record component</dd>
+<dd><code>java</code> - the value for the <a href="#param-java"><code>java</code></a> record component</dd>
+<dd><code>packageName</code> - the value for the <a href="#param-packageName"><code>packageName</code></a> record component</dd>
+<dd><code>packaging</code> - the value for the <a href="#param-packaging"><code>packaging</code></a> record component</dd>
+<dd><code>features</code> - the value for the <a href="#param-features"><code>features</code></a> record component</dd>
+<dd><code>testFramework</code> - the value for the <a href="#param-testFramework"><code>testFramework</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -319,12 +337,12 @@ implements <a href="Options.html" title="interface in io.micronaut.projectgen.co
 <section class="detail" id="features()">
 <h3>features</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</span>&nbsp;<span class="element-name">features</span>()</div>
-<div class="block">Returns the value of the <code>features</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-features"><code>features</code></a> record component.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="Options.html#features()">features</a></code>&nbsp;in interface&nbsp;<code><a href="Options.html" title="interface in io.micronaut.projectgen.core.options">Options</a></code></dd>
 <dt>Returns:</dt>
-<dd>the value of the <code>features</code> record component</dd>
+<dd>the value of the <a href="#param-features"><code>features</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -332,12 +350,12 @@ implements <a href="Options.html" title="interface in io.micronaut.projectgen.co
 <section class="detail" id="buildTools()">
 <h3>buildTools</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../buildtools/BuildTool.html" title="enum class in io.micronaut.projectgen.core.buildtools">BuildTool</a>&gt;</span>&nbsp;<span class="element-name">buildTools</span>()</div>
-<div class="block">Returns the value of the <code>buildTools</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-buildTools"><code>buildTools</code></a> record component.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="Options.html#buildTools()">buildTools</a></code>&nbsp;in interface&nbsp;<code><a href="Options.html" title="interface in io.micronaut.projectgen.core.options">Options</a></code></dd>
 <dt>Returns:</dt>
-<dd>the value of the <code>buildTools</code> record component</dd>
+<dd>the value of the <a href="#param-buildTools"><code>buildTools</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -345,12 +363,12 @@ implements <a href="Options.html" title="interface in io.micronaut.projectgen.co
 <section class="detail" id="name()">
 <h3>name</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">name</span>()</div>
-<div class="block">Returns the value of the <code>name</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-name"><code>name</code></a> record component.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="Options.html#name()">name</a></code>&nbsp;in interface&nbsp;<code><a href="Options.html" title="interface in io.micronaut.projectgen.core.options">Options</a></code></dd>
 <dt>Returns:</dt>
-<dd>the value of the <code>name</code> record component</dd>
+<dd>the value of the <a href="#param-name"><code>name</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -400,12 +418,12 @@ implements <a href="Options.html" title="interface in io.micronaut.projectgen.co
 <h3>version</h3>
 <div class="member-signature"><span class="annotations">@Nullable
 </span><span class="modifiers">public</span>&nbsp;<span class="return-type">@Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">version</span>()</div>
-<div class="block">Returns the value of the <code>version</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-version"><code>version</code></a> record component.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="Options.html#version()">version</a></code>&nbsp;in interface&nbsp;<code><a href="Options.html" title="interface in io.micronaut.projectgen.core.options">Options</a></code></dd>
 <dt>Returns:</dt>
-<dd>the value of the <code>version</code> record component</dd>
+<dd>the value of the <a href="#param-version"><code>version</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -414,12 +432,12 @@ implements <a href="Options.html" title="interface in io.micronaut.projectgen.co
 <h3>operatingSystem</h3>
 <div class="member-signature"><span class="annotations">@Nullable
 </span><span class="modifiers">public</span>&nbsp;<span class="return-type">@Nullable <a href="OperatingSystem.html" title="enum class in io.micronaut.projectgen.core.options">OperatingSystem</a></span>&nbsp;<span class="element-name">operatingSystem</span>()</div>
-<div class="block">Returns the value of the <code>operatingSystem</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-operatingSystem"><code>operatingSystem</code></a> record component.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="Options.html#operatingSystem()">operatingSystem</a></code>&nbsp;in interface&nbsp;<code><a href="Options.html" title="interface in io.micronaut.projectgen.core.options">Options</a></code></dd>
 <dt>Returns:</dt>
-<dd>the value of the <code>operatingSystem</code> record component</dd>
+<dd>the value of the <a href="#param-operatingSystem"><code>operatingSystem</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -428,12 +446,12 @@ implements <a href="Options.html" title="interface in io.micronaut.projectgen.co
 <h3>template</h3>
 <div class="member-signature"><span class="annotations">@Nullable
 </span><span class="modifiers">public</span>&nbsp;<span class="return-type">@Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">template</span>()</div>
-<div class="block">Returns the value of the <code>template</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-template"><code>template</code></a> record component.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="Options.html#template()">template</a></code>&nbsp;in interface&nbsp;<code><a href="Options.html" title="interface in io.micronaut.projectgen.core.options">Options</a></code></dd>
 <dt>Returns:</dt>
-<dd>the value of the <code>template</code> record component</dd>
+<dd>the value of the <a href="#param-template"><code>template</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -442,12 +460,12 @@ implements <a href="Options.html" title="interface in io.micronaut.projectgen.co
 <h3>language</h3>
 <div class="member-signature"><span class="annotations">@Nullable
 </span><span class="modifiers">public</span>&nbsp;<span class="return-type">@Nullable <a href="Language.html" title="enum class in io.micronaut.projectgen.core.options">Language</a></span>&nbsp;<span class="element-name">language</span>()</div>
-<div class="block">Returns the value of the <code>language</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-language"><code>language</code></a> record component.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="Options.html#language()">language</a></code>&nbsp;in interface&nbsp;<code><a href="Options.html" title="interface in io.micronaut.projectgen.core.options">Options</a></code></dd>
 <dt>Returns:</dt>
-<dd>the value of the <code>language</code> record component</dd>
+<dd>the value of the <a href="#param-language"><code>language</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -456,12 +474,12 @@ implements <a href="Options.html" title="interface in io.micronaut.projectgen.co
 <h3>configurationFormat</h3>
 <div class="member-signature"><span class="annotations">@Nullable
 </span><span class="modifiers">public</span>&nbsp;<span class="return-type">@Nullable <a href="ConfigurationFormat.html" title="enum class in io.micronaut.projectgen.core.options">ConfigurationFormat</a></span>&nbsp;<span class="element-name">configurationFormat</span>()</div>
-<div class="block">Returns the value of the <code>configurationFormat</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-configurationFormat"><code>configurationFormat</code></a> record component.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="Options.html#configurationFormat()">configurationFormat</a></code>&nbsp;in interface&nbsp;<code><a href="Options.html" title="interface in io.micronaut.projectgen.core.options">Options</a></code></dd>
 <dt>Returns:</dt>
-<dd>the value of the <code>configurationFormat</code> record component</dd>
+<dd>the value of the <a href="#param-configurationFormat"><code>configurationFormat</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -470,12 +488,12 @@ implements <a href="Options.html" title="interface in io.micronaut.projectgen.co
 <h3>gradleDsl</h3>
 <div class="member-signature"><span class="annotations">@Nullable
 </span><span class="modifiers">public</span>&nbsp;<span class="return-type">@Nullable <a href="../buildtools/gradle/GradleDsl.html" title="enum class in io.micronaut.projectgen.core.buildtools.gradle">GradleDsl</a></span>&nbsp;<span class="element-name">gradleDsl</span>()</div>
-<div class="block">Returns the value of the <code>gradleDsl</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-gradleDsl"><code>gradleDsl</code></a> record component.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="Options.html#gradleDsl()">gradleDsl</a></code>&nbsp;in interface&nbsp;<code><a href="Options.html" title="interface in io.micronaut.projectgen.core.options">Options</a></code></dd>
 <dt>Returns:</dt>
-<dd>the value of the <code>gradleDsl</code> record component</dd>
+<dd>the value of the <a href="#param-gradleDsl"><code>gradleDsl</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -484,12 +502,12 @@ implements <a href="Options.html" title="interface in io.micronaut.projectgen.co
 <h3>group</h3>
 <div class="member-signature"><span class="annotations">@Nullable
 </span><span class="modifiers">public</span>&nbsp;<span class="return-type">@Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">group</span>()</div>
-<div class="block">Returns the value of the <code>group</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-group"><code>group</code></a> record component.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="Options.html#group()">group</a></code>&nbsp;in interface&nbsp;<code><a href="Options.html" title="interface in io.micronaut.projectgen.core.options">Options</a></code></dd>
 <dt>Returns:</dt>
-<dd>the value of the <code>group</code> record component</dd>
+<dd>the value of the <a href="#param-group"><code>group</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -498,12 +516,12 @@ implements <a href="Options.html" title="interface in io.micronaut.projectgen.co
 <h3>artifact</h3>
 <div class="member-signature"><span class="annotations">@Nullable
 </span><span class="modifiers">public</span>&nbsp;<span class="return-type">@Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">artifact</span>()</div>
-<div class="block">Returns the value of the <code>artifact</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-artifact"><code>artifact</code></a> record component.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="Options.html#artifact()">artifact</a></code>&nbsp;in interface&nbsp;<code><a href="Options.html" title="interface in io.micronaut.projectgen.core.options">Options</a></code></dd>
 <dt>Returns:</dt>
-<dd>the value of the <code>artifact</code> record component</dd>
+<dd>the value of the <a href="#param-artifact"><code>artifact</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -512,12 +530,12 @@ implements <a href="Options.html" title="interface in io.micronaut.projectgen.co
 <h3>java</h3>
 <div class="member-signature"><span class="annotations">@Nullable
 </span><span class="modifiers">public</span>&nbsp;<span class="return-type">@Nullable <a href="JdkVersion.html" title="class in io.micronaut.projectgen.core.options">JdkVersion</a></span>&nbsp;<span class="element-name">java</span>()</div>
-<div class="block">Returns the value of the <code>java</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-java"><code>java</code></a> record component.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="Options.html#java()">java</a></code>&nbsp;in interface&nbsp;<code><a href="Options.html" title="interface in io.micronaut.projectgen.core.options">Options</a></code></dd>
 <dt>Returns:</dt>
-<dd>the value of the <code>java</code> record component</dd>
+<dd>the value of the <a href="#param-java"><code>java</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -526,12 +544,12 @@ implements <a href="Options.html" title="interface in io.micronaut.projectgen.co
 <h3>packageName</h3>
 <div class="member-signature"><span class="annotations">@Nullable
 </span><span class="modifiers">public</span>&nbsp;<span class="return-type">@Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">packageName</span>()</div>
-<div class="block">Returns the value of the <code>packageName</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-packageName"><code>packageName</code></a> record component.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="Options.html#packageName()">packageName</a></code>&nbsp;in interface&nbsp;<code><a href="Options.html" title="interface in io.micronaut.projectgen.core.options">Options</a></code></dd>
 <dt>Returns:</dt>
-<dd>the value of the <code>packageName</code> record component</dd>
+<dd>the value of the <a href="#param-packageName"><code>packageName</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -540,12 +558,12 @@ implements <a href="Options.html" title="interface in io.micronaut.projectgen.co
 <h3>packaging</h3>
 <div class="member-signature"><span class="annotations">@Nullable
 </span><span class="modifiers">public</span>&nbsp;<span class="return-type">@Nullable <a href="../buildtools/maven/Packaging.html" title="enum class in io.micronaut.projectgen.core.buildtools.maven">Packaging</a></span>&nbsp;<span class="element-name">packaging</span>()</div>
-<div class="block">Returns the value of the <code>packaging</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-packaging"><code>packaging</code></a> record component.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="Options.html#packaging()">packaging</a></code>&nbsp;in interface&nbsp;<code><a href="Options.html" title="interface in io.micronaut.projectgen.core.options">Options</a></code></dd>
 <dt>Returns:</dt>
-<dd>the value of the <code>packaging</code> record component</dd>
+<dd>the value of the <a href="#param-packaging"><code>packaging</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -554,12 +572,12 @@ implements <a href="Options.html" title="interface in io.micronaut.projectgen.co
 <h3>testFramework</h3>
 <div class="member-signature"><span class="annotations">@Nullable
 </span><span class="modifiers">public</span>&nbsp;<span class="return-type">@Nullable <a href="TestFramework.html" title="enum class in io.micronaut.projectgen.core.options">TestFramework</a></span>&nbsp;<span class="element-name">testFramework</span>()</div>
-<div class="block">Returns the value of the <code>testFramework</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-testFramework"><code>testFramework</code></a> record component.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="Options.html#testFramework()">testFramework</a></code>&nbsp;in interface&nbsp;<code><a href="Options.html" title="interface in io.micronaut.projectgen.core.options">Options</a></code></dd>
 <dt>Returns:</dt>
-<dd>the value of the <code>testFramework</code> record component</dd>
+<dd>the value of the <a href="#param-testFramework"><code>testFramework</code></a> record component</dd>
 </dl>
 </section>
 </li>

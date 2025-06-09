@@ -72,8 +72,14 @@ loadScripts(document, 'script');</script>
 <h1 title="Interface ZipGenerator" class="title">Interface ZipGenerator</h1>
 </div>
 <section class="class-description" id="class-description">
+<dl class="notes">
+<dt>Functional Interface:</dt>
+<dd>This is a functional interface and can therefore be used as the assignment target for a lambda expression or method reference.</dd>
+</dl>
 <hr>
-<div class="type-signature"><span class="modifiers">public interface </span><span class="element-name type-name-label">ZipGenerator</span></div>
+<div class="type-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/FunctionalInterface.html" title="class or interface in java.lang" class="external-link">@FunctionalInterface</a>
+</span><span class="modifiers">public interface </span><span class="element-name type-name-label">ZipGenerator</span></div>
+<div class="block">ZIP generator.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -111,6 +117,12 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="annotations">@NonNull
 </span><span class="return-type">@NonNull io.micronaut.core.io.Writable</span>&nbsp;<span class="element-name">zip</span><wbr><span class="parameters">(@NonNull
  @NonNull <a href="../../options/Options.html" title="interface in io.micronaut.projectgen.core.options">Options</a>&nbsp;options)</span></div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>options</code> - Project Options</dd>
+<dt>Returns:</dt>
+<dd>ZIP wrapped in a <code>Writable</code>.</dd>
+</dl>
 </section>
 </li>
 </ul>

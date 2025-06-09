@@ -75,6 +75,7 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="annotations">@DefaultImplementation(io.micronaut.projectgen.core.io.DefaultPreviewGenerator.class)
 </span><span class="modifiers">public interface </span><span class="element-name type-name-label">PreviewGenerator</span></div>
+<div class="block">API to generate a project preview.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -89,8 +90,8 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#generate(io.micronaut.projectgen.core.options.Options)" class="member-name-link">generate</a><wbr>(<a href="../options/Options.html" title="interface in io.micronaut.projectgen.core.options">Options</a>&nbsp;options)</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>@NonNull <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#generate(io.micronaut.projectgen.core.options.Options)" class="member-name-link">generate</a><wbr>(@NonNull <a href="../options/Options.html" title="interface in io.micronaut.projectgen.core.options">Options</a>&nbsp;options)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
 </div>
 </div>
@@ -109,11 +110,17 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="generate(io.micronaut.projectgen.core.options.Options)">
 <h3>generate</h3>
-<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</span>&nbsp;<span class="element-name">generate</span><wbr><span class="parameters">(<a href="../options/Options.html" title="interface in io.micronaut.projectgen.core.options">Options</a>&nbsp;options)</span>
-                     throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a></span></div>
+<div class="member-signature"><span class="annotations">@NonNull
+</span><span class="return-type">@NonNull <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</span>&nbsp;<span class="element-name">generate</span><wbr><span class="parameters">(@NonNull
+ @NonNull <a href="../options/Options.html" title="interface in io.micronaut.projectgen.core.options">Options</a>&nbsp;options)</span>
+                              throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a></span></div>
 <dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>options</code> - Project Options</dd>
+<dt>Returns:</dt>
+<dd>Project Preview</dd>
 <dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a></code></dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a></code> - Exception generating preview</dd>
 </dl>
 </section>
 </li>

@@ -77,6 +77,13 @@ loadScripts(document, 'script');</script>
 </div>
 </div>
 <section class="class-description" id="class-description">
+<dl class="notes">
+<dt>Record Components:</dt>
+<dd><code><span id="param-combineAttribute">combineAttribute</span></code> - combine attribute</dd>
+<dd><code><span id="param-annotationProcessors">annotationProcessors</span></code> - annotation processors</dd>
+<dd><code><span id="param-testCombineAttribute">testCombineAttribute</span></code> - test combine attribute</dd>
+<dd><code><span id="param-testAnnotationProcessors">testAnnotationProcessors</span></code> - test annotation processors</dd>
+</dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public record </span><span class="element-name type-name-label">MavenCompilerPluginAnnotationProcessors</span>(<a href="MavenCombineAttribute.html" title="enum class in io.micronaut.projectgen.core.buildtools.maven">MavenCombineAttribute</a>&nbsp;combineAttribute, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../dependencies/DependencyCoordinate.html" title="class in io.micronaut.projectgen.core.buildtools.dependencies">DependencyCoordinate</a>&gt;&nbsp;annotationProcessors, <a href="MavenCombineAttribute.html" title="enum class in io.micronaut.projectgen.core.buildtools.maven">MavenCombineAttribute</a>&nbsp;testCombineAttribute, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../dependencies/DependencyCoordinate.html" title="class in io.micronaut.projectgen.core.buildtools.dependencies">DependencyCoordinate</a>&gt;&nbsp;testAnnotationProcessors)
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Record.html" title="class or interface in java.lang" class="external-link">Record</a></span></div>
@@ -115,12 +122,12 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../dependencies/DependencyCoordinate.html" title="class in io.micronaut.projectgen.core.buildtools.dependencies">DependencyCoordinate</a>&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#annotationProcessors()" class="member-name-link">annotationProcessors</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>annotationProcessors</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-annotationProcessors"><code>annotationProcessors</code></a> record component.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="MavenCombineAttribute.html" title="enum class in io.micronaut.projectgen.core.buildtools.maven">MavenCombineAttribute</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#combineAttribute()" class="member-name-link">combineAttribute</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>combineAttribute</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-combineAttribute"><code>combineAttribute</code></a> record component.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#equals(java.lang.Object)" class="member-name-link">equals</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;o)</code></div>
@@ -142,12 +149,12 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../dependencies/DependencyCoordinate.html" title="class in io.micronaut.projectgen.core.buildtools.dependencies">DependencyCoordinate</a>&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#testAnnotationProcessors()" class="member-name-link">testAnnotationProcessors</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>testAnnotationProcessors</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-testAnnotationProcessors"><code>testAnnotationProcessors</code></a> record component.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="MavenCombineAttribute.html" title="enum class in io.micronaut.projectgen.core.buildtools.maven">MavenCombineAttribute</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#testCombineAttribute()" class="member-name-link">testCombineAttribute</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>testCombineAttribute</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-testCombineAttribute"><code>testCombineAttribute</code></a> record component.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toString()" class="member-name-link">toString</a>()</code></div>
@@ -181,10 +188,10 @@ loadScripts(document, 'script');</script>
 <div class="block">Creates an instance of a <code>MavenCompilerPluginAnnotationProcessors</code> record class.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>combineAttribute</code> - the value for the <code>combineAttribute</code> record component</dd>
-<dd><code>annotationProcessors</code> - the value for the <code>annotationProcessors</code> record component</dd>
-<dd><code>testCombineAttribute</code> - the value for the <code>testCombineAttribute</code> record component</dd>
-<dd><code>testAnnotationProcessors</code> - the value for the <code>testAnnotationProcessors</code> record component</dd>
+<dd><code>combineAttribute</code> - the value for the <a href="#param-combineAttribute"><code>combineAttribute</code></a> record component</dd>
+<dd><code>annotationProcessors</code> - the value for the <a href="#param-annotationProcessors"><code>annotationProcessors</code></a> record component</dd>
+<dd><code>testCombineAttribute</code> - the value for the <a href="#param-testCombineAttribute"><code>testCombineAttribute</code></a> record component</dd>
+<dd><code>testAnnotationProcessors</code> - the value for the <a href="#param-testAnnotationProcessors"><code>testAnnotationProcessors</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -254,10 +261,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="combineAttribute()">
 <h3>combineAttribute</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="MavenCombineAttribute.html" title="enum class in io.micronaut.projectgen.core.buildtools.maven">MavenCombineAttribute</a></span>&nbsp;<span class="element-name">combineAttribute</span>()</div>
-<div class="block">Returns the value of the <code>combineAttribute</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-combineAttribute"><code>combineAttribute</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the value of the <code>combineAttribute</code> record component</dd>
+<dd>the value of the <a href="#param-combineAttribute"><code>combineAttribute</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -265,10 +272,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="annotationProcessors()">
 <h3>annotationProcessors</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../dependencies/DependencyCoordinate.html" title="class in io.micronaut.projectgen.core.buildtools.dependencies">DependencyCoordinate</a>&gt;</span>&nbsp;<span class="element-name">annotationProcessors</span>()</div>
-<div class="block">Returns the value of the <code>annotationProcessors</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-annotationProcessors"><code>annotationProcessors</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the value of the <code>annotationProcessors</code> record component</dd>
+<dd>the value of the <a href="#param-annotationProcessors"><code>annotationProcessors</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -276,10 +283,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="testCombineAttribute()">
 <h3>testCombineAttribute</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="MavenCombineAttribute.html" title="enum class in io.micronaut.projectgen.core.buildtools.maven">MavenCombineAttribute</a></span>&nbsp;<span class="element-name">testCombineAttribute</span>()</div>
-<div class="block">Returns the value of the <code>testCombineAttribute</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-testCombineAttribute"><code>testCombineAttribute</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the value of the <code>testCombineAttribute</code> record component</dd>
+<dd>the value of the <a href="#param-testCombineAttribute"><code>testCombineAttribute</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -287,10 +294,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="testAnnotationProcessors()">
 <h3>testAnnotationProcessors</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../dependencies/DependencyCoordinate.html" title="class in io.micronaut.projectgen.core.buildtools.dependencies">DependencyCoordinate</a>&gt;</span>&nbsp;<span class="element-name">testAnnotationProcessors</span>()</div>
-<div class="block">Returns the value of the <code>testAnnotationProcessors</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-testAnnotationProcessors"><code>testAnnotationProcessors</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the value of the <code>testAnnotationProcessors</code> record component</dd>
+<dd>the value of the <a href="#param-testAnnotationProcessors"><code>testAnnotationProcessors</code></a> record component</dd>
 </dl>
 </section>
 </li>

@@ -83,6 +83,7 @@ loadScripts(document, 'script');</script>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">MavenBuildTestVerifier</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
 implements <a href="BuildTestVerifier.html" title="interface in io.micronaut.projectgen.test">BuildTestVerifier</a></span></div>
+<div class="block"><a href="BuildTestVerifier.html" title="interface in io.micronaut.projectgen.test"><code>BuildTestVerifier</code></a> for Maven builds.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -245,6 +246,10 @@ implements <a href="BuildTestVerifier.html" title="interface in io.micronaut.pro
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="BuildTestVerifier.html#getProperty(java.lang.String)">getProperty</a></code>&nbsp;in interface&nbsp;<code><a href="BuildTestVerifier.html" title="interface in io.micronaut.projectgen.test">BuildTestVerifier</a></code></dd>
+<dt>Parameters:</dt>
+<dd><code>propertyName</code> - property name</dd>
+<dt>Returns:</dt>
+<dd>the value associated with the property</dd>
 </dl>
 </section>
 </li>
@@ -351,6 +356,14 @@ implements <a href="BuildTestVerifier.html" title="interface in io.micronaut.pro
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">hasDependency</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;groupId,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;artifactId,
  <a href="../core/buildtools/maven/MavenScope.html" title="enum class in io.micronaut.projectgen.core.buildtools.maven">MavenScope</a>&nbsp;scope)</span></div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>groupId</code> - Group ID</dd>
+<dd><code>artifactId</code> - Artifact ID</dd>
+<dd><code>scope</code> - Scope</dd>
+<dt>Returns:</dt>
+<dd>Whether the build has a dependency with the supplied groupId, artifactId and scope</dd>
+</dl>
 </section>
 </li>
 <li>

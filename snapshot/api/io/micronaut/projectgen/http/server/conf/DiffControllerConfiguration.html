@@ -84,6 +84,7 @@ loadScripts(document, 'script');</script>
 </span><span class="modifiers">public class </span><span class="element-name type-name-label">DiffControllerConfiguration</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
 implements <a href="ControllerConfiguration.html" title="interface in io.micronaut.projectgen.http.server.conf">ControllerConfiguration</a></span></div>
+<div class="block"><a href="ControllerConfiguration.html" title="interface in io.micronaut.projectgen.http.server.conf"><code>ControllerConfiguration</code></a> for Diff Controller.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -97,8 +98,11 @@ implements <a href="ControllerConfiguration.html" title="interface in io.microna
 <div class="table-header col-second">Field</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color"><code>static final <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color"><code><a href="#PREFIX" class="member-name-link">PREFIX</a></code></div>
+<div class="col-second even-row-color"><code><a href="#DEFAULT_PATH" class="member-name-link">DEFAULT_PATH</a></code></div>
 <div class="col-last even-row-color">&nbsp;</div>
+<div class="col-first odd-row-color"><code>static final <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color"><code><a href="#PREFIX" class="member-name-link">PREFIX</a></code></div>
+<div class="col-last odd-row-color">&nbsp;</div>
 </div>
 <div class="inherited-list">
 <h3 id="fields-inherited-from-class-io.micronaut.projectgen.http.server.conf.ControllerConfiguration">Fields inherited from interface&nbsp;io.micronaut.projectgen.http.server.conf.<a href="ControllerConfiguration.html" title="interface in io.micronaut.projectgen.http.server.conf">ControllerConfiguration</a></h3>
@@ -172,6 +176,20 @@ implements <a href="ControllerConfiguration.html" title="interface in io.microna
 </dl>
 </section>
 </li>
+<li>
+<section class="detail" id="DEFAULT_PATH">
+<h3>DEFAULT_PATH</h3>
+<div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">DEFAULT_PATH</span></div>
+<dl class="notes">
+<dt>See Also:</dt>
+<dd>
+<ul class="see-list">
+<li><a href="../../../../../../constant-values.html#io.micronaut.projectgen.http.server.conf.DiffControllerConfiguration.DEFAULT_PATH">Constant Field Values</a></li>
+</ul>
+</dd>
+</dl>
+</section>
+</li>
 </ul>
 </section>
 </li>
@@ -208,6 +226,10 @@ implements <a href="ControllerConfiguration.html" title="interface in io.microna
 <section class="detail" id="setEnabled(boolean)">
 <h3>setEnabled</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setEnabled</span><wbr><span class="parameters">(boolean&nbsp;enabled)</span></div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>enabled</code> - Whether the controller is enabled. Default value: true.</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -226,6 +248,10 @@ implements <a href="ControllerConfiguration.html" title="interface in io.microna
 <section class="detail" id="setPath(java.lang.String)">
 <h3>setPath</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setPath</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;path)</span></div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>path</code> - Controller path. Default value: /api/v1/diff</dd>
+</dl>
 </section>
 </li>
 </ul>

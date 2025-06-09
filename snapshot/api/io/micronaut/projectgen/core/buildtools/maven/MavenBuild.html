@@ -77,6 +77,23 @@ loadScripts(document, 'script');</script>
 </div>
 </div>
 <section class="class-description" id="class-description">
+<dl class="notes">
+<dt>Record Components:</dt>
+<dd><code><span id="param-name">name</span></code> - Name</dd>
+<dd><code><span id="param-description">description</span></code> - description</dd>
+<dd><code><span id="param-coordinate">coordinate</span></code> - coordinate</dd>
+<dd><code><span id="param-packaging">packaging</span></code> - packaging</dd>
+<dd><code><span id="param-parentPom">parentPom</span></code> - Parent Pom</dd>
+<dd><code><span id="param-annotationProcessorCombineAttribute">annotationProcessorCombineAttribute</span></code> - Annotation Processor combine attribute</dd>
+<dd><code><span id="param-testAnnotationProcessorCombineAttribute">testAnnotationProcessorCombineAttribute</span></code> - Test Annotation Processor combine attribute</dd>
+<dd><code><span id="param-testAnnotationProcessors">testAnnotationProcessors</span></code> - Test annotation processors</dd>
+<dd><code><span id="param-annotationProcessors">annotationProcessors</span></code> - annotation processors</dd>
+<dd><code><span id="param-dependencies">dependencies</span></code> - Dependencies</dd>
+<dd><code><span id="param-plugins">plugins</span></code> - Plugins</dd>
+<dd><code><span id="param-properties">properties</span></code> - properties</dd>
+<dd><code><span id="param-profiles">profiles</span></code> - profiles</dd>
+<dd><code><span id="param-repositories">repositories</span></code> - repositories</dd>
+</dl>
 <hr>
 <div class="type-signature"><span class="annotations">@Builder
 </span><span class="modifiers">public record </span><span class="element-name type-name-label">MavenBuild</span>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;description, <a href="../dependencies/Coordinate.html" title="interface in io.micronaut.projectgen.core.buildtools.dependencies">Coordinate</a>&nbsp;coordinate, @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;packaging, <a href="ParentPom.html" title="class in io.micronaut.projectgen.core.buildtools.maven">ParentPom</a>&nbsp;parentPom, <a href="MavenCombineAttribute.html" title="enum class in io.micronaut.projectgen.core.buildtools.maven">MavenCombineAttribute</a>&nbsp;annotationProcessorCombineAttribute, <a href="MavenCombineAttribute.html" title="enum class in io.micronaut.projectgen.core.buildtools.maven">MavenCombineAttribute</a>&nbsp;testAnnotationProcessorCombineAttribute, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../dependencies/DependencyCoordinate.html" title="class in io.micronaut.projectgen.core.buildtools.dependencies">DependencyCoordinate</a>&gt;&nbsp;testAnnotationProcessors, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../dependencies/DependencyCoordinate.html" title="class in io.micronaut.projectgen.core.buildtools.dependencies">DependencyCoordinate</a>&gt;&nbsp;annotationProcessors, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="MavenDependency.html" title="class in io.micronaut.projectgen.core.buildtools.maven">MavenDependency</a>&gt;&nbsp;dependencies, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="MavenPlugin.html" title="class in io.micronaut.projectgen.core.buildtools.maven">MavenPlugin</a>&gt;&nbsp;plugins, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../Property.html" title="interface in io.micronaut.projectgen.core.buildtools">Property</a>&gt;&nbsp;properties, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link">Collection</a>&lt;<a href="Profile.html" title="class in io.micronaut.projectgen.core.buildtools.maven">Profile</a>&gt;&nbsp;profiles, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="MavenRepository.html" title="class in io.micronaut.projectgen.core.buildtools.maven">MavenRepository</a>&gt;&nbsp;repositories)
@@ -127,27 +144,27 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="MavenCombineAttribute.html" title="enum class in io.micronaut.projectgen.core.buildtools.maven">MavenCombineAttribute</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#annotationProcessorCombineAttribute()" class="member-name-link">annotationProcessorCombineAttribute</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>annotationProcessorCombineAttribute</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-annotationProcessorCombineAttribute"><code>annotationProcessorCombineAttribute</code></a> record component.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../dependencies/DependencyCoordinate.html" title="class in io.micronaut.projectgen.core.buildtools.dependencies">DependencyCoordinate</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#annotationProcessors()" class="member-name-link">annotationProcessors</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>annotationProcessors</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-annotationProcessors"><code>annotationProcessors</code></a> record component.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../dependencies/Coordinate.html" title="interface in io.micronaut.projectgen.core.buildtools.dependencies">Coordinate</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#coordinate()" class="member-name-link">coordinate</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>coordinate</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-coordinate"><code>coordinate</code></a> record component.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="MavenDependency.html" title="class in io.micronaut.projectgen.core.buildtools.maven">MavenDependency</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#dependencies()" class="member-name-link">dependencies</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>dependencies</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-dependencies"><code>dependencies</code></a> record component.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#description()" class="member-name-link">description</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>description</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-description"><code>description</code></a> record component.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#equals(java.lang.Object)" class="member-name-link">equals</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;o)</code></div>
@@ -168,32 +185,32 @@ loadScripts(document, 'script');</script>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#name()" class="member-name-link">name</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>name</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-name"><code>name</code></a> record component.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#packaging()" class="member-name-link">packaging</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>packaging</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-packaging"><code>packaging</code></a> record component.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="ParentPom.html" title="class in io.micronaut.projectgen.core.buildtools.maven">ParentPom</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#parentPom()" class="member-name-link">parentPom</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>parentPom</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-parentPom"><code>parentPom</code></a> record component.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="MavenPlugin.html" title="class in io.micronaut.projectgen.core.buildtools.maven">MavenPlugin</a>&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#plugins()" class="member-name-link">plugins</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>plugins</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-plugins"><code>plugins</code></a> record component.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link">Collection</a>&lt;<a href="Profile.html" title="class in io.micronaut.projectgen.core.buildtools.maven">Profile</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#profiles()" class="member-name-link">profiles</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>profiles</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-profiles"><code>profiles</code></a> record component.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../Property.html" title="interface in io.micronaut.projectgen.core.buildtools">Property</a>&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#properties()" class="member-name-link">properties</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>properties</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-properties"><code>properties</code></a> record component.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@NonNull <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#renderPlugins(int)" class="member-name-link">renderPlugins</a><wbr>(int&nbsp;indentationSpaces)</code></div>
@@ -207,17 +224,17 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="MavenRepository.html" title="class in io.micronaut.projectgen.core.buildtools.maven">MavenRepository</a>&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#repositories()" class="member-name-link">repositories</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>repositories</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-repositories"><code>repositories</code></a> record component.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="MavenCombineAttribute.html" title="enum class in io.micronaut.projectgen.core.buildtools.maven">MavenCombineAttribute</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#testAnnotationProcessorCombineAttribute()" class="member-name-link">testAnnotationProcessorCombineAttribute</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>testAnnotationProcessorCombineAttribute</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-testAnnotationProcessorCombineAttribute"><code>testAnnotationProcessorCombineAttribute</code></a> record component.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../dependencies/DependencyCoordinate.html" title="class in io.micronaut.projectgen.core.buildtools.dependencies">DependencyCoordinate</a>&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#testAnnotationProcessors()" class="member-name-link">testAnnotationProcessors</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>testAnnotationProcessors</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-testAnnotationProcessors"><code>testAnnotationProcessors</code></a> record component.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toString()" class="member-name-link">toString</a>()</code></div>
@@ -262,20 +279,20 @@ loadScripts(document, 'script');</script>
 <div class="block">Creates an instance of a <code>MavenBuild</code> record class.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>name</code> - the value for the <code>name</code> record component</dd>
-<dd><code>description</code> - the value for the <code>description</code> record component</dd>
-<dd><code>coordinate</code> - the value for the <code>coordinate</code> record component</dd>
-<dd><code>packaging</code> - the value for the <code>packaging</code> record component</dd>
-<dd><code>parentPom</code> - the value for the <code>parentPom</code> record component</dd>
-<dd><code>annotationProcessorCombineAttribute</code> - the value for the <code>annotationProcessorCombineAttribute</code> record component</dd>
-<dd><code>testAnnotationProcessorCombineAttribute</code> - the value for the <code>testAnnotationProcessorCombineAttribute</code> record component</dd>
-<dd><code>testAnnotationProcessors</code> - the value for the <code>testAnnotationProcessors</code> record component</dd>
-<dd><code>annotationProcessors</code> - the value for the <code>annotationProcessors</code> record component</dd>
-<dd><code>dependencies</code> - the value for the <code>dependencies</code> record component</dd>
-<dd><code>plugins</code> - the value for the <code>plugins</code> record component</dd>
-<dd><code>properties</code> - the value for the <code>properties</code> record component</dd>
-<dd><code>profiles</code> - the value for the <code>profiles</code> record component</dd>
-<dd><code>repositories</code> - the value for the <code>repositories</code> record component</dd>
+<dd><code>name</code> - the value for the <a href="#param-name"><code>name</code></a> record component</dd>
+<dd><code>description</code> - the value for the <a href="#param-description"><code>description</code></a> record component</dd>
+<dd><code>coordinate</code> - the value for the <a href="#param-coordinate"><code>coordinate</code></a> record component</dd>
+<dd><code>packaging</code> - the value for the <a href="#param-packaging"><code>packaging</code></a> record component</dd>
+<dd><code>parentPom</code> - the value for the <a href="#param-parentPom"><code>parentPom</code></a> record component</dd>
+<dd><code>annotationProcessorCombineAttribute</code> - the value for the <a href="#param-annotationProcessorCombineAttribute"><code>annotationProcessorCombineAttribute</code></a> record component</dd>
+<dd><code>testAnnotationProcessorCombineAttribute</code> - the value for the <a href="#param-testAnnotationProcessorCombineAttribute"><code>testAnnotationProcessorCombineAttribute</code></a> record component</dd>
+<dd><code>testAnnotationProcessors</code> - the value for the <a href="#param-testAnnotationProcessors"><code>testAnnotationProcessors</code></a> record component</dd>
+<dd><code>annotationProcessors</code> - the value for the <a href="#param-annotationProcessors"><code>annotationProcessors</code></a> record component</dd>
+<dd><code>dependencies</code> - the value for the <a href="#param-dependencies"><code>dependencies</code></a> record component</dd>
+<dd><code>plugins</code> - the value for the <a href="#param-plugins"><code>plugins</code></a> record component</dd>
+<dd><code>properties</code> - the value for the <a href="#param-properties"><code>properties</code></a> record component</dd>
+<dd><code>profiles</code> - the value for the <a href="#param-profiles"><code>profiles</code></a> record component</dd>
+<dd><code>repositories</code> - the value for the <a href="#param-repositories"><code>repositories</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -394,10 +411,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="name()">
 <h3>name</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">name</span>()</div>
-<div class="block">Returns the value of the <code>name</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-name"><code>name</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the value of the <code>name</code> record component</dd>
+<dd>the value of the <a href="#param-name"><code>name</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -405,10 +422,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="description()">
 <h3>description</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">description</span>()</div>
-<div class="block">Returns the value of the <code>description</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-description"><code>description</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the value of the <code>description</code> record component</dd>
+<dd>the value of the <a href="#param-description"><code>description</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -416,10 +433,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="coordinate()">
 <h3>coordinate</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../dependencies/Coordinate.html" title="interface in io.micronaut.projectgen.core.buildtools.dependencies">Coordinate</a></span>&nbsp;<span class="element-name">coordinate</span>()</div>
-<div class="block">Returns the value of the <code>coordinate</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-coordinate"><code>coordinate</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the value of the <code>coordinate</code> record component</dd>
+<dd>the value of the <a href="#param-coordinate"><code>coordinate</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -428,10 +445,10 @@ loadScripts(document, 'script');</script>
 <h3>packaging</h3>
 <div class="member-signature"><span class="annotations">@Nullable
 </span><span class="modifiers">public</span>&nbsp;<span class="return-type">@Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">packaging</span>()</div>
-<div class="block">Returns the value of the <code>packaging</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-packaging"><code>packaging</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the value of the <code>packaging</code> record component</dd>
+<dd>the value of the <a href="#param-packaging"><code>packaging</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -439,10 +456,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="parentPom()">
 <h3>parentPom</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="ParentPom.html" title="class in io.micronaut.projectgen.core.buildtools.maven">ParentPom</a></span>&nbsp;<span class="element-name">parentPom</span>()</div>
-<div class="block">Returns the value of the <code>parentPom</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-parentPom"><code>parentPom</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the value of the <code>parentPom</code> record component</dd>
+<dd>the value of the <a href="#param-parentPom"><code>parentPom</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -450,10 +467,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="annotationProcessorCombineAttribute()">
 <h3>annotationProcessorCombineAttribute</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="MavenCombineAttribute.html" title="enum class in io.micronaut.projectgen.core.buildtools.maven">MavenCombineAttribute</a></span>&nbsp;<span class="element-name">annotationProcessorCombineAttribute</span>()</div>
-<div class="block">Returns the value of the <code>annotationProcessorCombineAttribute</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-annotationProcessorCombineAttribute"><code>annotationProcessorCombineAttribute</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the value of the <code>annotationProcessorCombineAttribute</code> record component</dd>
+<dd>the value of the <a href="#param-annotationProcessorCombineAttribute"><code>annotationProcessorCombineAttribute</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -461,10 +478,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="testAnnotationProcessorCombineAttribute()">
 <h3>testAnnotationProcessorCombineAttribute</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="MavenCombineAttribute.html" title="enum class in io.micronaut.projectgen.core.buildtools.maven">MavenCombineAttribute</a></span>&nbsp;<span class="element-name">testAnnotationProcessorCombineAttribute</span>()</div>
-<div class="block">Returns the value of the <code>testAnnotationProcessorCombineAttribute</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-testAnnotationProcessorCombineAttribute"><code>testAnnotationProcessorCombineAttribute</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the value of the <code>testAnnotationProcessorCombineAttribute</code> record component</dd>
+<dd>the value of the <a href="#param-testAnnotationProcessorCombineAttribute"><code>testAnnotationProcessorCombineAttribute</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -472,10 +489,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="testAnnotationProcessors()">
 <h3>testAnnotationProcessors</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../dependencies/DependencyCoordinate.html" title="class in io.micronaut.projectgen.core.buildtools.dependencies">DependencyCoordinate</a>&gt;</span>&nbsp;<span class="element-name">testAnnotationProcessors</span>()</div>
-<div class="block">Returns the value of the <code>testAnnotationProcessors</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-testAnnotationProcessors"><code>testAnnotationProcessors</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the value of the <code>testAnnotationProcessors</code> record component</dd>
+<dd>the value of the <a href="#param-testAnnotationProcessors"><code>testAnnotationProcessors</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -483,10 +500,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="annotationProcessors()">
 <h3>annotationProcessors</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../dependencies/DependencyCoordinate.html" title="class in io.micronaut.projectgen.core.buildtools.dependencies">DependencyCoordinate</a>&gt;</span>&nbsp;<span class="element-name">annotationProcessors</span>()</div>
-<div class="block">Returns the value of the <code>annotationProcessors</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-annotationProcessors"><code>annotationProcessors</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the value of the <code>annotationProcessors</code> record component</dd>
+<dd>the value of the <a href="#param-annotationProcessors"><code>annotationProcessors</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -494,10 +511,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="dependencies()">
 <h3>dependencies</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="MavenDependency.html" title="class in io.micronaut.projectgen.core.buildtools.maven">MavenDependency</a>&gt;</span>&nbsp;<span class="element-name">dependencies</span>()</div>
-<div class="block">Returns the value of the <code>dependencies</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-dependencies"><code>dependencies</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the value of the <code>dependencies</code> record component</dd>
+<dd>the value of the <a href="#param-dependencies"><code>dependencies</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -505,10 +522,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="plugins()">
 <h3>plugins</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="MavenPlugin.html" title="class in io.micronaut.projectgen.core.buildtools.maven">MavenPlugin</a>&gt;</span>&nbsp;<span class="element-name">plugins</span>()</div>
-<div class="block">Returns the value of the <code>plugins</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-plugins"><code>plugins</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the value of the <code>plugins</code> record component</dd>
+<dd>the value of the <a href="#param-plugins"><code>plugins</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -516,10 +533,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="properties()">
 <h3>properties</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../Property.html" title="interface in io.micronaut.projectgen.core.buildtools">Property</a>&gt;</span>&nbsp;<span class="element-name">properties</span>()</div>
-<div class="block">Returns the value of the <code>properties</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-properties"><code>properties</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the value of the <code>properties</code> record component</dd>
+<dd>the value of the <a href="#param-properties"><code>properties</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -527,10 +544,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="profiles()">
 <h3>profiles</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link">Collection</a>&lt;<a href="Profile.html" title="class in io.micronaut.projectgen.core.buildtools.maven">Profile</a>&gt;</span>&nbsp;<span class="element-name">profiles</span>()</div>
-<div class="block">Returns the value of the <code>profiles</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-profiles"><code>profiles</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the value of the <code>profiles</code> record component</dd>
+<dd>the value of the <a href="#param-profiles"><code>profiles</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -538,10 +555,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="repositories()">
 <h3>repositories</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="MavenRepository.html" title="class in io.micronaut.projectgen.core.buildtools.maven">MavenRepository</a>&gt;</span>&nbsp;<span class="element-name">repositories</span>()</div>
-<div class="block">Returns the value of the <code>repositories</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-repositories"><code>repositories</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the value of the <code>repositories</code> record component</dd>
+<dd>the value of the <a href="#param-repositories"><code>repositories</code></a> record component</dd>
 </dl>
 </section>
 </li>

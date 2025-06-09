@@ -75,6 +75,7 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="annotations">@DefaultImplementation(io.micronaut.projectgen.core.io.DefaultTreeNodeGenerator.class)
 </span><span class="modifiers">public interface </span><span class="element-name type-name-label">TreeNodeGenerator</span></div>
+<div class="block">API to generate a Tree representation for a project.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -115,6 +116,12 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="annotations">@NonNull
 </span><span class="return-type">@NonNull <a href="TreeNode.html" title="class in io.micronaut.projectgen.core.io">TreeNode</a></span>&nbsp;<span class="element-name">generate</span><wbr><span class="parameters">(@NonNull
  @NonNull <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;project)</span></div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>project</code> - Project</dd>
+<dt>Returns:</dt>
+<dd>Tree Node</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -125,6 +132,10 @@ loadScripts(document, 'script');</script>
  @NonNull <a href="../options/Options.html" title="interface in io.micronaut.projectgen.core.options">Options</a>&nbsp;options)</span>
                     throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a></span></div>
 <dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>options</code> - Project Options</dd>
+<dt>Returns:</dt>
+<dd>Tree Node</dd>
 <dt>Throws:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a></code></dd>
 </dl>

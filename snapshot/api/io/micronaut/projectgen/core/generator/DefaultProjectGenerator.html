@@ -97,7 +97,7 @@ implements <a href="ProjectGenerator.html" title="interface in io.micronaut.proj
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(io.micronaut.projectgen.core.generator.ContextFactory,java.util.List)" class="member-name-link">DefaultProjectGenerator</a><wbr>(<a href="ContextFactory.html" title="class in io.micronaut.projectgen.core.generator">ContextFactory</a>&nbsp;contextFactory,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../feature/AvailableFeatures.html" title="interface in io.micronaut.projectgen.core.feature">AvailableFeatures</a>&gt;&nbsp;availableFeaturesList)</code></div>
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../feature/AvailableFeatures.html" title="interface in io.micronaut.projectgen.core.feature">AvailableFeatures</a>&gt;&nbsp;availableFeatures)</code></div>
 <div class="col-last even-row-color">&nbsp;</div>
 </div>
 </section>
@@ -113,20 +113,15 @@ implements <a href="ProjectGenerator.html" title="interface in io.micronaut.proj
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="GeneratorContext.html" title="class in io.micronaut.projectgen.core.generator">GeneratorContext</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#createGeneratorContext(io.micronaut.projectgen.core.generator.Project,io.micronaut.projectgen.core.options.Options,io.micronaut.projectgen.core.io.ConsoleOutput)" class="member-name-link">createGeneratorContext</a><wbr>(<a href="Project.html" title="class in io.micronaut.projectgen.core.generator">Project</a>&nbsp;project,
- <a href="../options/Options.html" title="interface in io.micronaut.projectgen.core.options">Options</a>&nbsp;options,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#generate(io.micronaut.projectgen.core.options.Options,io.micronaut.projectgen.core.io.OutputHandler,io.micronaut.projectgen.core.io.ConsoleOutput)" class="member-name-link">generate</a><wbr>(<a href="../options/Options.html" title="interface in io.micronaut.projectgen.core.options">Options</a>&nbsp;options,
+ <a href="../io/OutputHandler.html" title="interface in io.micronaut.projectgen.core.io">OutputHandler</a>&nbsp;outputHandler,
  <a href="../io/ConsoleOutput.html" title="interface in io.micronaut.projectgen.core.io">ConsoleOutput</a>&nbsp;consoleOutput)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#generate(io.micronaut.projectgen.core.options.Options,io.micronaut.projectgen.core.io.OutputHandler,io.micronaut.projectgen.core.io.ConsoleOutput)" class="member-name-link">generate</a><wbr>(<a href="../options/Options.html" title="interface in io.micronaut.projectgen.core.options">Options</a>&nbsp;options,
- <a href="../io/OutputHandler.html" title="interface in io.micronaut.projectgen.core.io">OutputHandler</a>&nbsp;outputHandler,
- <a href="../io/ConsoleOutput.html" title="interface in io.micronaut.projectgen.core.io">ConsoleOutput</a>&nbsp;consoleOutput)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#writeTo(io.micronaut.projectgen.core.options.Options,java.io.File)" class="member-name-link">writeTo</a><wbr>(@NonNull <a href="../options/Options.html" title="interface in io.micronaut.projectgen.core.options">Options</a>&nbsp;options,
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#writeTo(io.micronaut.projectgen.core.options.Options,java.io.File)" class="member-name-link">writeTo</a><wbr>(@NonNull <a href="../options/Options.html" title="interface in io.micronaut.projectgen.core.options">Options</a>&nbsp;options,
  @NonNull <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/File.html" title="class or interface in java.io" class="external-link">File</a>&nbsp;outputFolder)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 </div>
 </div>
 </div>
@@ -151,7 +146,7 @@ implements <a href="ProjectGenerator.html" title="interface in io.micronaut.proj
 <section class="detail" id="&lt;init&gt;(io.micronaut.projectgen.core.generator.ContextFactory,java.util.List)">
 <h3>DefaultProjectGenerator</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">DefaultProjectGenerator</span><wbr><span class="parameters">(<a href="ContextFactory.html" title="class in io.micronaut.projectgen.core.generator">ContextFactory</a>&nbsp;contextFactory,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../feature/AvailableFeatures.html" title="interface in io.micronaut.projectgen.core.feature">AvailableFeatures</a>&gt;&nbsp;availableFeaturesList)</span></div>
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../feature/AvailableFeatures.html" title="interface in io.micronaut.projectgen.core.feature">AvailableFeatures</a>&gt;&nbsp;availableFeatures)</span></div>
 </section>
 </li>
 </ul>
@@ -191,14 +186,6 @@ implements <a href="ProjectGenerator.html" title="interface in io.micronaut.proj
 <dd><code>options</code> - Options used to generate the application</dd>
 <dd><code>outputFolder</code> - Path where zip will be written to</dd>
 </dl>
-</section>
-</li>
-<li>
-<section class="detail" id="createGeneratorContext(io.micronaut.projectgen.core.generator.Project,io.micronaut.projectgen.core.options.Options,io.micronaut.projectgen.core.io.ConsoleOutput)">
-<h3>createGeneratorContext</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="GeneratorContext.html" title="class in io.micronaut.projectgen.core.generator">GeneratorContext</a></span>&nbsp;<span class="element-name">createGeneratorContext</span><wbr><span class="parameters">(<a href="Project.html" title="class in io.micronaut.projectgen.core.generator">Project</a>&nbsp;project,
- <a href="../options/Options.html" title="interface in io.micronaut.projectgen.core.options">Options</a>&nbsp;options,
- <a href="../io/ConsoleOutput.html" title="interface in io.micronaut.projectgen.core.io">ConsoleOutput</a>&nbsp;consoleOutput)</span></div>
 </section>
 </li>
 </ul>
