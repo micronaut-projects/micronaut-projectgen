@@ -5,15 +5,19 @@ plugins {
 repositories {
     mavenCentral()
 }
+ext {
+    micronautPlatform = "${libs.versions.micronaut.platform.get()}" as String
+}
 dependencies {
-    annotationProcessor(platform("io.micronaut.platform:micronaut-platform:4.8.2"))
-    implementation(platform("io.micronaut.platform:micronaut-platform:4.8.2"))
+    annotationProcessor(platform("io.micronaut.platform:micronaut-platform:${micronautPlatform}"))
+    implementation(platform("io.micronaut.platform:micronaut-platform:${micronautPlatform}"))
     annotationProcessor("io.micronaut:micronaut-inject-java")
-    testAnnotationProcessor(platform("io.micronaut.platform:micronaut-platform:4.8.2"))
-
+    testAnnotationProcessor(platform("io.micronaut.platform:micronaut-platform:${micronautPlatform}"))
     testAnnotationProcessor("io.micronaut:micronaut-inject-java")
 }
-
+tasks.withType(Test) {
+    useJUnitPlatform()
+}
 java {
     sourceCompatibility = JavaVersion.toVersion("17")
     targetCompatibility = JavaVersion.toVersion("17")
