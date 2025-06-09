@@ -28,7 +28,7 @@ import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.Project;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
-import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
+import io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.projectgen.micronaut.template.function.oraclefunction.raw.oracleRawFunctionGroovy;
 import io.micronaut.projectgen.micronaut.template.function.oraclefunction.raw.oracleRawFunctionGroovyJunit;
@@ -43,8 +43,6 @@ import io.micronaut.starter.feature.logging.SimpleLogging;
 import io.micronaut.projectgen.core.options.Language;
 import io.micronaut.projectgen.core.rocker.RockerTemplate;
 import jakarta.inject.Singleton;
-
-import static io.micronaut.projectgen.micronaut.template.function.oraclefunction.OracleFunction.COM_FNPROJECT_RUNTIME;
 
 @Requires(property = "micronaut.starter.feature.oracle.function.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Requires(property = "micronaut.starter.feature.oracle.function.http.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)

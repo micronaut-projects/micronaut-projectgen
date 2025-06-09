@@ -24,7 +24,6 @@ import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.rocker.RockerWritable;
 import io.micronaut.projectgen.micronaut.template.view.gradlePluginRocker;
 import io.micronaut.projectgen.micronaut.template.view.mvnPluginRocker;
-import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import io.micronaut.projectgen.core.buildtools.gradle.GradlePlugin;
 import io.micronaut.projectgen.core.buildtools.maven.MavenPlugin;
 import io.micronaut.starter.feature.server.MicronautServerDependent;

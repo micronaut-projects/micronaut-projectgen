@@ -29,7 +29,7 @@ import io.micronaut.projectgen.core.generator.Project;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.micronaut.features.logging.Logback;
-import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
+import io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.starter.feature.function.AbstractFunctionFeature;
 import io.micronaut.starter.feature.logging.SimpleLogging;

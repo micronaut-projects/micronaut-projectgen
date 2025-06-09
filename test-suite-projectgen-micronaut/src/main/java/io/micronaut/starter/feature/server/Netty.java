@@ -21,7 +21,7 @@ import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
+import io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils;
 
 import jakarta.inject.Singleton;
 

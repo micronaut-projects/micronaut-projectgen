@@ -16,7 +16,7 @@
 package io.micronaut.starter.feature.database;
 
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
-import io.micronaut.starter.build.dependencies.Priority;
+import io.micronaut.starter.buildtools.dependencies.Priority;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
 
 /**

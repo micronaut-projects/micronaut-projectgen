@@ -15,22 +15,20 @@
  */
 package io.micronaut.starter.feature.database;
 
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
-import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
-import io.micronaut.starter.build.dependencies.Priority;
+import io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils;
+import io.micronaut.starter.buildtools.dependencies.Priority;
 import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.OneOfFeature;
 import io.micronaut.starter.feature.migration.MigrationFeature;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
 
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
-import static io.micronaut.starter.build.dependencies.MicronautDependencyUtils.ARTIFACT_ID_MICRONAUT_DATA_PROCESSOR_ARTIFACT;
-import static io.micronaut.starter.build.dependencies.MicronautDependencyUtils.GROUP_ID_MICRONAUT_DATA;
+import static io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils.ARTIFACT_ID_MICRONAUT_DATA_PROCESSOR_ARTIFACT;
+import static io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils.GROUP_ID_MICRONAUT_DATA;
 
 public interface DataFeature extends OneOfFeature {
 

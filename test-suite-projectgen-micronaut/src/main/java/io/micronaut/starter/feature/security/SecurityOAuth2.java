@@ -16,15 +16,13 @@
 package io.micronaut.starter.feature.security;
 
 import io.micronaut.context.annotation.Requires;
-import io.micronaut.context.env.Environment;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.feature.config.Configuration;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.generator.ModuleContext;
-import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
+import io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils;
 import io.micronaut.projectgen.core.feature.FeatureContext;
-import io.micronaut.projectgen.core.feature.config.ApplicationConfiguration;
 import io.micronaut.projectgen.micronaut.features.httpclient.HttpClientFeature;
 import io.micronaut.projectgen.micronaut.features.httpclient.HttpClient;
 import jakarta.inject.Inject;

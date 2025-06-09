@@ -27,7 +27,7 @@ import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.projectgen.micronaut.template.view.mvnPluginReact;
 import io.micronaut.projectgen.micronaut.template.view.reactControllerJava;
 import io.micronaut.projectgen.micronaut.template.view.reactControllerKotlin;
-import io.micronaut.starter.build.dependencies.*;
+import io.micronaut.starter.buildtools.dependencies.*;
 import io.micronaut.projectgen.core.buildtools.gradle.GradleFile;
 import io.micronaut.projectgen.core.buildtools.gradle.GradlePlugin;
 import io.micronaut.projectgen.core.buildtools.maven.MavenPlugin;

@@ -15,11 +15,8 @@
  */
 package io.micronaut.starter.feature.opensearch;
 
-import io.micronaut.projectgen.core.generator.ModuleContext;
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.MavenCoordinate;
-import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import io.micronaut.starter.feature.Category;
 import io.micronaut.starter.feature.database.TestContainers;
 import io.micronaut.starter.feature.testresources.EaseTestingFeature;
@@ -30,7 +27,7 @@ import io.micronaut.testresources.buildtools.KnownModules;
 import java.util.Collections;
 import java.util.List;
 
-import static io.micronaut.starter.build.dependencies.MicronautDependencyUtils.GROUP_ID_MICRONAUT_TESTRESOURCES;
+import static io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils.GROUP_ID_MICRONAUT_TESTRESOURCES;
 
 public abstract class OpenSearchFeature extends EaseTestingFeature implements OpenSearchContributingTestContainerDependency, TestResourcesAdditionalModulesProvider {
 

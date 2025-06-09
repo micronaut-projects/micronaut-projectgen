@@ -18,9 +18,7 @@ package io.micronaut.projectgen.micronaut.features.httpclient;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
-import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import jakarta.inject.Singleton;
 
 import java.util.List;

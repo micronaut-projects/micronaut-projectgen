@@ -21,7 +21,7 @@ import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.generator.ModuleContext;
-import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
+import io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils;
 import jakarta.inject.Singleton;
 
 @Requires(property = "micronaut.starter.feature.security.csrf.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)

@@ -20,9 +20,7 @@ import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.MavenCoordinate;
-import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
-import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import io.micronaut.starter.feature.testresources.TestResourcesAdditionalModulesProvider;
 import io.micronaut.testresources.buildtools.KnownModules;
 import jakarta.inject.Singleton;
@@ -30,7 +28,7 @@ import jakarta.inject.Singleton;
 import java.util.Collections;
 import java.util.List;
 
-import static io.micronaut.starter.build.dependencies.MicronautDependencyUtils.GROUP_ID_MICRONAUT_TESTRESOURCES;
+import static io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils.GROUP_ID_MICRONAUT_TESTRESOURCES;
 
 @Requires(property = "micronaut.starter.feature.jms.sqs.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton

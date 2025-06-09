@@ -15,10 +15,6 @@
  */
 package io.micronaut.starter.feature.micrometer;
 
-import io.micronaut.core.annotation.NonNull;
-import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
-import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.utils.NameUtils;

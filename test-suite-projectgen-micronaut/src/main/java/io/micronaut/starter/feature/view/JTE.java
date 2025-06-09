@@ -27,16 +27,13 @@ import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.projectgen.micronaut.template.view.exampleJTE;
 import io.micronaut.projectgen.micronaut.template.view.gradlePluginJTE;
 import io.micronaut.projectgen.micronaut.template.view.mvnPluginJTE;
-import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
 import io.micronaut.projectgen.core.buildtools.gradle.GradlePlugin;
-import io.micronaut.projectgen.core.buildtools.gradle.GradleDsl;
 
 import java.util.List;
-import java.util.Optional;
+
 import io.micronaut.projectgen.core.buildtools.maven.MavenPlugin;
 import io.micronaut.projectgen.core.buildtools.BuildPlugin;
 import io.micronaut.starter.feature.build.Kapt;
-import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.starter.feature.server.MicronautServerDependent;
 import io.micronaut.projectgen.core.options.Language;
 import io.micronaut.projectgen.core.rocker.RockerTemplate;

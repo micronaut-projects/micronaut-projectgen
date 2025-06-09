@@ -24,14 +24,14 @@ import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
-import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
+import io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils;
 import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.starter.feature.server.MicronautServerDependent;
 import io.micronaut.projectgen.core.options.Language;
 import jakarta.inject.Singleton;
 
-import static io.micronaut.starter.build.dependencies.MicronautDependencyUtils.GROUP_ID_IO_MICRONAUT_OPENAPI;
+import static io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils.GROUP_ID_IO_MICRONAUT_OPENAPI;
 
 @Requires(property = "micronaut.starter.feature.openapi.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton

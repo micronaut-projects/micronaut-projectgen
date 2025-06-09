@@ -26,7 +26,7 @@ import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.projectgen.micronaut.gradle.ShadePlugin;
-import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
+import io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils;
 import io.micronaut.projectgen.micronaut.template.function.gcp.gcpFunctionGroovyJunit;
 import io.micronaut.projectgen.micronaut.template.function.gcp.gcpFunctionJavaJunit;
 import io.micronaut.projectgen.micronaut.template.function.gcp.gcpFunctionKoTest;

@@ -26,7 +26,7 @@ import io.micronaut.projectgen.core.generator.Project;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.micronaut.gradle.ShadePlugin;
-import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
+import io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils;
 import io.micronaut.projectgen.micronaut.template.function.gcp.cloudevents.gcpCloudEventsFunctionGroovy;
 import io.micronaut.projectgen.micronaut.template.function.gcp.cloudevents.gcpCloudEventsFunctionGroovyJunit;
 import io.micronaut.projectgen.micronaut.template.function.gcp.cloudevents.gcpCloudEventsFunctionJava;

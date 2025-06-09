@@ -19,18 +19,12 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
-import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
-import io.micronaut.projectgen.core.feature.Feature;
 
-import io.micronaut.starter.feature.database.r2dbc.R2dbc;
 import io.micronaut.starter.feature.database.r2dbc.R2dbcFeature;
 import io.micronaut.starter.feature.database.r2dbc.R2dbcPool;
 import jakarta.inject.Singleton;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Requires(property = "micronaut.starter.feature.micrometer.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)

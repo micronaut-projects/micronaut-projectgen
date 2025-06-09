@@ -17,7 +17,6 @@ package io.micronaut.starter.feature.database;
 
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.projectgen.core.generator.ModuleContext;
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.buildtools.dependencies.MavenCoordinate;
@@ -38,7 +37,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import static io.micronaut.starter.build.dependencies.MicronautDependencyUtils.GROUP_ID_MICRONAUT_TESTRESOURCES;
+import static io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils.GROUP_ID_MICRONAUT_TESTRESOURCES;
 
 public abstract class DatabaseDriverFeature extends EaseTestingFeature implements OneOfFeature, DatabaseDriverFeatureDependencies, TestResourcesAdditionalModulesProvider {
 

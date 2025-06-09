@@ -22,7 +22,7 @@ import io.micronaut.projectgen.core.buildtools.gradle.GradlePlugin;
 import io.micronaut.projectgen.core.buildtools.maven.MavenPlugin;
 import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.utils.OptionUtils;
-import io.micronaut.starter.build.maven.JvmArgumentsFeature;
+import io.micronaut.starter.buildtools.maven.JvmArgumentsFeature;
 import jakarta.inject.Singleton;
 import java.util.Collections;
 import java.util.List;

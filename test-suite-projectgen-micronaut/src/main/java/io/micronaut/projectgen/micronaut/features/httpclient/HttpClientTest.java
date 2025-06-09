@@ -24,7 +24,7 @@ import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.micronaut.features.validation.MicronautHttpValidation;
-import io.micronaut.starter.build.dependencies.MicronautDependencyUtils;
+import io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils;
 import io.micronaut.projectgen.core.buildtools.Scope;
 import io.micronaut.projectgen.core.feature.FeaturePhase;
 import io.micronaut.starter.feature.awslambdacustomruntime.AwsLambdaCustomRuntime;
