@@ -1,7 +1,7 @@
 [versions]
 micronaut = "4.8.13"
 micronaut-platform = "4.8.2"
-rewrite-recipe-bom = "3.4.0"
+rewrite-recipe-bom = "3.9.0"
 micronaut-docs = "2.0.0"
 micronaut-test = "4.7.0"
 groovy = "4.0.24"
