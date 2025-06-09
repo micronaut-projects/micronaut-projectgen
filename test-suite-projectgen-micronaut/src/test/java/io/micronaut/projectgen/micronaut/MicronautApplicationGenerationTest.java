@@ -5,6 +5,7 @@ import io.micronaut.projectgen.core.buildtools.Scope;
 import io.micronaut.projectgen.core.buildtools.gradle.GradleDsl;
 import io.micronaut.projectgen.core.generator.ProjectGenerator;
 import io.micronaut.projectgen.core.io.MapOutputHandler;
+import io.micronaut.projectgen.core.io.PreviewGenerator;
 import io.micronaut.projectgen.core.options.GenericOptionsBuilder;
 import io.micronaut.projectgen.core.options.JdkVersion;
 import io.micronaut.projectgen.core.options.Language;
@@ -33,11 +34,9 @@ class MicronautApplicationGenerationTest {
     );
 
     @Test
-    void generateMicronautMavenApplication(ProjectGenerator projectGenerator) throws Exception {
+    void generateMicronautMavenApplication(PreviewGenerator previewGenerator) throws Exception {
         Options options = createOptionsBuilder().buildTools(List.of(BuildTool.MAVEN)).gradleDsl(GradleDsl.GROOVY).build();
-        MapOutputHandler outputHandler = new MapOutputHandler();
-        projectGenerator.generate(options, outputHandler);
-        Map<String, String> project = outputHandler.getProject();
+        Map<String, String> project = previewGenerator.generate(options);
         Set<String> expected = new HashSet<>(Set.of(
             "pom.xml",
             "mvnw",
@@ -63,11 +62,9 @@ class MicronautApplicationGenerationTest {
     }
 
     @Test
-    void generateMicronautGradleApplication(ProjectGenerator projectGenerator) throws Exception {
+    void generateMicronautGradleApplication(PreviewGenerator previewGenerator) throws Exception {
         Options options = createOptionsBuilder().buildTools(List.of(BuildTool.GRADLE)).gradleDsl(GradleDsl.GROOVY).build();
-        MapOutputHandler outputHandler = new MapOutputHandler();
-        projectGenerator.generate(options, outputHandler);
-        Map<String, String> project = outputHandler.getProject();
+        Map<String, String> project = previewGenerator.generate(options);
         Set<String> expected = new HashSet<>(Set.of(
             "gradle.properties",
             "settings.gradle",

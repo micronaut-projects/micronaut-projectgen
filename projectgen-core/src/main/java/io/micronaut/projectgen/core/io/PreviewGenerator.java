@@ -16,6 +16,7 @@
 package io.micronaut.projectgen.core.io;
 
 import io.micronaut.context.annotation.DefaultImplementation;
+import io.micronaut.core.annotation.NonNull;
 import io.micronaut.projectgen.core.options.Options;
 import java.util.Map;
 
@@ -31,5 +32,6 @@ public interface PreviewGenerator {
      * @return Project Preview
      * @throws Exception Exception generating preview
      */
-    Map<String, String> generate(Options options) throws Exception;
+    @NonNull
+    Map<String, String> generate(@NonNull Options options) throws Exception;
 }

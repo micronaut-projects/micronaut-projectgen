@@ -4,6 +4,7 @@ import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.buildtools.gradle.GradleDsl;
 import io.micronaut.projectgen.core.generator.ProjectGenerator;
 import io.micronaut.projectgen.core.io.MapOutputHandler;
+import io.micronaut.projectgen.core.io.PreviewGenerator;
 import io.micronaut.projectgen.core.options.GenericOptionsBuilder;
 import io.micronaut.projectgen.core.options.JdkVersion;
 import io.micronaut.projectgen.core.options.Language;
@@ -21,11 +22,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class MicronautLibraryGenerationTest {
 
     @Test
-    void generateMicronautLibrary(ProjectGenerator projectGenerator) throws Exception {
+    void generateMicronautLibrary(PreviewGenerator previewGenerator) throws Exception {
         Options options = createOptions();
-        MapOutputHandler outputHandler = new MapOutputHandler();
-        projectGenerator.generate(options, outputHandler);
-        Map<String, String> project = outputHandler.getProject();
+        Map<String, String> project = previewGenerator.generate(options);
         Set<String> expected = new HashSet<>(Set.of(
             ".gitignore",
             "config/spotless.license.java",

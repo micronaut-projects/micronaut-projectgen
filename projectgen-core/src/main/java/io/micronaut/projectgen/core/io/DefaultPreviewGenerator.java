@@ -15,6 +15,7 @@
  */
 package io.micronaut.projectgen.core.io;
 
+import io.micronaut.core.annotation.NonNull;
 import io.micronaut.projectgen.core.generator.ProjectGenerator;
 import io.micronaut.projectgen.core.options.Options;
 import jakarta.inject.Singleton;
@@ -30,7 +31,8 @@ class DefaultPreviewGenerator implements PreviewGenerator {
     }
 
     @Override
-    public Map<String, String> generate(Options options) throws Exception {
+    @NonNull
+    public Map<String, String> generate(@NonNull Options options) throws Exception {
         MapOutputHandler outputHandler = new MapOutputHandler();
         projectGenerator.generate(options, outputHandler);
         return outputHandler.getProject();

@@ -4,6 +4,7 @@ import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.buildtools.Scope;
 import io.micronaut.projectgen.core.generator.ProjectGenerator;
 import io.micronaut.projectgen.core.io.MapOutputHandler;
+import io.micronaut.projectgen.core.io.PreviewGenerator;
 import io.micronaut.projectgen.core.options.GenericOptions;
 import io.micronaut.projectgen.core.options.GenericOptionsBuilder;
 import io.micronaut.projectgen.core.options.JdkVersion;
@@ -24,11 +25,9 @@ import static org.junit.jupiter.api.Assertions.*;
 class SpringBootProjectGeneratorTest {
 
     @Test
-    void testGenerateSpringBootMavenProject(ProjectGenerator projectGenerator) throws Exception {
-        MapOutputHandler outputHandler = new MapOutputHandler();
+    void testGenerateSpringBootMavenProject(PreviewGenerator generator) throws Exception {
         Options options = createOptions(List.of(BuildTool.MAVEN));
-        projectGenerator.generate(options, outputHandler);
-        Map<String, String> project = outputHandler.getProject();
+        Map<String, String> project = generator.generate(options);
         Set<String> expected = Set.of(
             ".gitignore",
             "pom.xml",
@@ -42,12 +41,9 @@ class SpringBootProjectGeneratorTest {
     }
 
     @Test
-    void testGenerateSpringBootGradleProject(ProjectGenerator projectGenerator) throws Exception {
-        MapOutputHandler outputHandler = new MapOutputHandler();
+    void testGenerateSpringBootGradleProject(PreviewGenerator generator) throws Exception {
         Options options = createOptions(List.of(BuildTool.GRADLE));
-        projectGenerator.generate(options, outputHandler);
-        Map<String, String> project = outputHandler.getProject();
-
+        Map<String, String> project = generator.generate(options);
         Set<String> expected = Set.of(
             ".gitignore",
             "settings.gradle",

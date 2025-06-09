@@ -74,6 +74,11 @@ public class Gradle implements BuildFeature, DefaultFeature {
     }
 
     @Override
+    public boolean shouldApply(Options options, Set<Feature> selectedFeatures) {
+        return OptionUtils.hasGradleBuildTool(options);
+    }
+
+    @Override
     public void apply(GeneratorContext generatorContext) {
         ModuleContext rootModule = generatorContext.getRootModule();
         addGradleInitFiles(rootModule);
@@ -150,11 +155,6 @@ public class Gradle implements BuildFeature, DefaultFeature {
         module.addTemplate("gradleSettings",
             new RockerTemplate(settingsFile,
                 settingsGradle.template(generatorContext.getProject(), build, hasMultiProjectFeature, generatorContext.getModuleNames())));
-    }
-
-    @Override
-    public boolean shouldApply(Options options, Set<Feature> selectedFeatures) {
-        return OptionUtils.hasGradleBuildTool(options);
     }
 }
 

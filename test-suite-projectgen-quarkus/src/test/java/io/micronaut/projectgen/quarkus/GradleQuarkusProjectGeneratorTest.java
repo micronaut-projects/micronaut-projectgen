@@ -5,6 +5,7 @@ import io.micronaut.projectgen.core.buildtools.Scope;
 import io.micronaut.projectgen.core.buildtools.gradle.GradleDsl;
 import io.micronaut.projectgen.core.generator.ProjectGenerator;
 import io.micronaut.projectgen.core.io.MapOutputHandler;
+import io.micronaut.projectgen.core.io.PreviewGenerator;
 import io.micronaut.projectgen.core.options.GenericOptionsBuilder;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.core.options.TestFramework;
@@ -22,8 +23,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class GradleQuarkusProjectGeneratorTest {
 
     @Test
-    void testGenerateQuarkusGradleProject(ProjectGenerator projectGenerator) throws Exception {
-        MapOutputHandler outputHandler = new MapOutputHandler();
+    void testGenerateQuarkusGradleProject(PreviewGenerator generator) throws Exception {
         Options options = GenericOptionsBuilder.builder()
             .group("org.acme")
             .artifact("code-with-quarkus")
@@ -32,8 +32,7 @@ class GradleQuarkusProjectGeneratorTest {
             .testFramework(TestFramework.JUNIT)
             .features(List.of("rest-assured", "quarkus-junit5-mockito"))
             .build();
-        projectGenerator.generate(options, outputHandler);
-        Map<String, String> project = outputHandler.getProject();
+        Map<String, String> project = generator.generate(options);
 
         Set<String> expected = Set.of(
             ".gitignore",
