@@ -1,7 +1,11 @@
 package io.micronaut.projectgen.demo;
 
 import io.micronaut.configuration.picocli.PicocliRunner;
+import io.micronaut.projectgen.core.buildtools.BuildTool;
+import io.micronaut.projectgen.core.buildtools.gradle.GradleDsl;
 import io.micronaut.projectgen.core.generator.ProjectGenerator;
+import io.micronaut.projectgen.core.options.GenericOptionsBuilder;
+import io.micronaut.projectgen.core.options.JdkVersion;
 import io.micronaut.projectgen.core.options.Options;
 import jakarta.inject.Inject;
 import picocli.CommandLine;
@@ -38,7 +42,17 @@ public class ProjectGenCommand implements Runnable {
         if (!outputDir.exists() || !outputDir.isDirectory()) {
             System.err.println("Provided path is not an existing directory: " + outputDir);
         } else {
-            Options options = OptionsFactory.create(features);
+            Options options = GenericOptionsBuilder.builder()
+                .name("demo")
+                .packageName("com.example")
+                .group("io.micronaut.projectgen")
+                .artifact("demo-project")
+                .version("1.0.0")
+                .features(features)
+                .buildTools(List.of(BuildTool.GRADLE))
+                .gradleDsl(GradleDsl.KOTLIN)
+                .java(JdkVersion.JDK_21)
+                .build();
             projectGenerator.writeTo(options, outputDir);
         }
     }

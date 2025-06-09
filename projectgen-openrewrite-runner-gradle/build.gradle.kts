@@ -1,5 +1,5 @@
 plugins {
-    id("io.micronaut.build.internal.projectgen-test-module")
+    id("io.micronaut.build.internal.projectgen-module")
 }
 repositories {
     maven {
