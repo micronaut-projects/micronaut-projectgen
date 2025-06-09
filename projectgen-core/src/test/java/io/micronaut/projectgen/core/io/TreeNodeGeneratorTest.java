@@ -16,7 +16,11 @@ import static org.junit.jupiter.api.Assertions.*;
 class TreeNodeGeneratorTest {
     @Test
     void preview(TreeNodeGenerator treeNodeGenerator) throws Exception {
-        Options options = GenericOptionsBuilder.builder().buildTools(List.of(BuildTool.GRADLE)).name("demo").build();
+        Options options = GenericOptionsBuilder.builder()
+            .packageName("com.example")
+            .buildTools(List.of(BuildTool.GRADLE))
+            .name("demo")
+            .build();
         TreeNode node = treeNodeGenerator.generate(options);
         assertNotNull(node);
         List<TreeNode> children = new ArrayList<>();

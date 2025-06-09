@@ -29,7 +29,8 @@ class FeatureDifferTest {
 
     @Test
     void featureDiff(FeatureDiffer featureDiffer) throws Exception {
-        Options options = GenericOptionsBuilder.builder().name("demo")
+        Options options = GenericOptionsBuilder.builder()
+            .packageName("com.example")
             .name("demo")
             .buildTools(List.of(BuildTool.GRADLE))
             .gradleDsl(GradleDsl.KOTLIN)

@@ -39,7 +39,8 @@ class MultiModuleProjectGeneratorTest {
             .configurationFormat(ConfigurationFormat.PROPERTIES)
             .buildTools(List.of(BuildTool.MAVEN, BuildTool.GRADLE))
             .gradleDsl(GradleDsl.GROOVY)
-            .name("org.springframework.gs-multi-module")
+            .packageName("org.springframework")
+            .name("gs-multi-module")
             .build();
         Map<String, String> project = generator.generate(options);
         assertNotNull(project.get("application/build.gradle"));

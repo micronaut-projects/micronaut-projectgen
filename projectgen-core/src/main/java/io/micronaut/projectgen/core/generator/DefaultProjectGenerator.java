@@ -17,7 +17,6 @@ package io.micronaut.projectgen.core.generator;
 
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.projectgen.core.feature.AvailableFeatures;
-import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.projectgen.core.io.ConsoleOutput;
 import io.micronaut.projectgen.core.io.FileSystemOutputHandler;
 import io.micronaut.projectgen.core.io.OutputHandler;
@@ -41,20 +40,19 @@ import java.util.List;
 public class DefaultProjectGenerator implements ProjectGenerator {
     private static final Logger LOG = LoggerFactory.getLogger(DefaultProjectGenerator.class);
     private final ContextFactory contextFactory;
-    private final List<AvailableFeatures> availableFeaturesList;
+    private final List<AvailableFeatures> availableFeatures;
 
-    public DefaultProjectGenerator(ContextFactory contextFactory,
-                                   List<AvailableFeatures> availableFeaturesList) {
+    public DefaultProjectGenerator(ContextFactory contextFactory, List<AvailableFeatures> availableFeatures) {
         this.contextFactory = contextFactory;
-        this.availableFeaturesList = availableFeaturesList;
+        this.availableFeatures = availableFeatures;
     }
 
     @Override
     public void generate(Options options,
                          OutputHandler outputHandler,
                          ConsoleOutput consoleOutput) throws Exception {
-        Project project = NameUtils.parse(options.name());
-        GeneratorContext generatorContext = createGeneratorContext(project, options, consoleOutput);
+        Project project = NameUtils.parse(options);
+        GeneratorContext generatorContext = contextFactory.createGeneratorContext(availableFeatures, options, consoleOutput);
         generatorContext.applyFeatures();
         renderTemplates(outputHandler, project, generatorContext);
     }
@@ -71,25 +69,6 @@ public class DefaultProjectGenerator implements ProjectGenerator {
         } catch (Exception e) {
             LOG.error("Exception while generating the zip file: {}", e.getMessage());
         }
-    }
-
-    /**
-     *
-     * @param project Project
-     * @param options Options
-     * @param consoleOutput ConsoleOutput
-     * @return A Generator Context
-     */
-    public GeneratorContext createGeneratorContext(Project project,
-                                                   Options options,
-                                                   ConsoleOutput consoleOutput) {
-        List<String> selectedFeatures = options.features();
-        AvailableFeatures availableFeatures = availableFeaturesList.stream()
-            .filter(feat -> feat.supports(options))
-            .findFirst()
-            .orElseThrow();
-        FeatureContext featureContext = contextFactory.createFeatureContext(availableFeatures, selectedFeatures, options);
-        return contextFactory.createGeneratorContext(project, featureContext, consoleOutput);
     }
 
     private void renderTemplates(OutputHandler outputHandler, Project project, GeneratorContext generatorContext) throws Exception {

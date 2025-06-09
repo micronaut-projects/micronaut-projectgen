@@ -37,13 +37,13 @@ public class KtorTest {
         assertTrue(verifier.hasDependency("io.ktor", "ktor-server-content-negotiation-jvm", Scope.COMPILE), buildGradle);
         assertTrue(verifier.hasDependency("io.ktor", "ktor-server-netty-jvm", Scope.COMPILE), buildGradle);
         assertTrue(buildGradle.contains("2.3.13"));
-        assertTrue(buildGradle.contains("demo.Application"), buildGradle);
+        assertTrue(buildGradle.contains("com.example.Application"), buildGradle);
 
-        assertTrue(project.containsKey("src/main/kotlin/demo/Application.kt"));
-        assertTrue(project.containsKey("src/main/kotlin/demo/HomeRoute.kt"));
-        assertTrue(project.containsKey("src/main/kotlin/demo/JacksonFeature.kt"));
-        assertTrue(project.containsKey("src/main/kotlin/demo/NameTransformer.kt"));
-        assertTrue(project.containsKey("src/main/kotlin/demo/UppercaseTransformer.kt"));
+        assertTrue(project.containsKey("src/main/kotlin/com/example/Application.kt"));
+        assertTrue(project.containsKey("src/main/kotlin/com/example/HomeRoute.kt"));
+        assertTrue(project.containsKey("src/main/kotlin/com/example/JacksonFeature.kt"));
+        assertTrue(project.containsKey("src/main/kotlin/com/example/NameTransformer.kt"));
+        assertTrue(project.containsKey("src/main/kotlin/com/example/UppercaseTransformer.kt"));
 
         String pom = project.get("pom.xml");
         assertNotNull(pom);

@@ -29,8 +29,8 @@ class MicronautApplicationGenerationTest {
         "README.md",
         "src/main/resources/logback.xml",
         "src/main/resources/application.properties",
-        "src/main/java/demo/Application.java",
-        "src/test/java/demo/DemoTest.java"
+        "src/main/java/com/example/Application.java",
+        "src/test/java/com/example/DemoTest.java"
     );
 
     @Test

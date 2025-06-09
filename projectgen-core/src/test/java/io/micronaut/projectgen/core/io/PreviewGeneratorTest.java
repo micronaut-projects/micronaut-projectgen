@@ -16,7 +16,11 @@ class PreviewGeneratorTest {
 
     @Test
     void preview(PreviewGenerator previewGenerator) throws Exception {
-        Options options = GenericOptionsBuilder.builder().buildTools(List.of(BuildTool.GRADLE)).name("demo").build();
+        Options options = GenericOptionsBuilder.builder()
+            .packageName("com.example")
+            .buildTools(List.of(BuildTool.GRADLE))
+            .name("demo")
+            .build();
         Map<String, String> preview = previewGenerator.generate(options);
         assertNotNull(preview);
         assertFalse(preview.keySet().isEmpty());

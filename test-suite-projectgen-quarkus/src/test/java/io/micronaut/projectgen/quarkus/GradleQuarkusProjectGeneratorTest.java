@@ -26,6 +26,7 @@ class GradleQuarkusProjectGeneratorTest {
     void testGenerateQuarkusGradleProject(PreviewGenerator generator) throws Exception {
         Options options = GenericOptionsBuilder.builder()
             .group("org.acme")
+            .packageName("org.acme")
             .artifact("code-with-quarkus")
             .buildTools(List.of(BuildTool.GRADLE))
             .gradleDsl(GradleDsl.KOTLIN)

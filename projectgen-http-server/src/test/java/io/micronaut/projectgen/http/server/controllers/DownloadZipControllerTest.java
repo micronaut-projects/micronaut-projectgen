@@ -62,6 +62,7 @@ class DownloadZipControllerTest {
 
     private static Map<String, Object> form() {
         Map<String, Object> form = new HashMap<>();
+        form.put("packageName", "com.example");
         form.put("name", "demo");
         form.put("build", "GRADLE");
         form.put("features", List.of("geb-core"));
