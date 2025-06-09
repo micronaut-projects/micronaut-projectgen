@@ -1,12 +1,16 @@
 package io.micronaut.projectgen.demo;
 
+import io.micronaut.context.annotation.Requires;
+import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.template.StringTemplate;
 import jakarta.inject.Singleton;
 
+@Requires(property = "hello-world-test-with-openrewrite", value = StringUtils.FALSE, defaultValue = StringUtils.FALSE)
 @Singleton
 public class HelloWorldTest implements Feature {
     private final JunitJupiter jupiter;

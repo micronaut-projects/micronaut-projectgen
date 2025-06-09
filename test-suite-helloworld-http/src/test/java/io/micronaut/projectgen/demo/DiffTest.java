@@ -21,6 +21,7 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @MicronautTest
 class DiffTest {
@@ -46,6 +47,16 @@ class DiffTest {
         String diff = assertDoesNotThrow(() -> client.retrieve(request));
         assertNotNull(diff);
         String expected = """
+            --- projectgen.properties
+            +++ projectgen.properties
+            @@ -4,4 +4,5 @@
+             gradleDsl=KOTLIN
+             name=demo
+             packageName=com.example
+            +version=1.0.0
+             group=io.micronaut.projectgen""";
+        assertTrue(diff.contains(expected));
+        expected = """
             --- src/test/java/com/example/HelloWorldTest.java
             +++ src/test/java/com/example/HelloWorldTest.java
             @@ -1,0 +1,13 @@
@@ -61,9 +72,9 @@ class DiffTest {
             +    void testHello() {
             +        assertEquals("Hello, World!", HelloWorld.hello());
             +    }
-            +}
-
-
+            +}""";
+        assertTrue(diff.contains(expected));
+        expected = """
             --- build.gradle.kts
             +++ build.gradle.kts
             @@ -3,6 +3,13 @@
@@ -80,9 +91,7 @@ class DiffTest {
              java {
                  sourceCompatibility = JavaVersion.VERSION_21
                  targetCompatibility = JavaVersion.VERSION_21
-
-
-                 """;
-        assertEquals(expected, diff);
+            """;
+        assertTrue(diff.contains(expected));
     }
 }

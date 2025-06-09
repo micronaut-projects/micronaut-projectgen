@@ -58,5 +58,19 @@ class ProjectGenTest {
         assertTrue(project.containsKey("src/test/java/com/example/HelloWorldTest.java"));
         verifier = new GradleBuildTestVerifier(buildGradleKts, BuildTool.GRADLE, options.language(), options.testFramework());
         assertTrue(verifier.hasDependency("org.junit.jupiter", "junit-jupiter", Scope.TEST), buildGradleKts);
+
+        assertTrue(project.containsKey("projectgen.properties"));
+        String props = project.get("projectgen.properties");
+        assertEquals("""
+            artifact=demo-project
+            java=JDK_21
+            buildTools[0]=maven
+            buildTools[1]=gradle
+            gradleDsl=KOTLIN
+            name=demo
+            packageName=com.example
+            version=1.0.0
+            group=io.micronaut.projectgen
+            """, props);
     }
 }

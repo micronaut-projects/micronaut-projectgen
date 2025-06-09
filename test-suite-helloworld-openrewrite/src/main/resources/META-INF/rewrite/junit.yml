@@ -1,0 +1,10 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.projectgen.demo.junit-jupiter
+displayName: Adds JUnit Jupiter dependency in the test classpath
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: org.junit.jupiter
+      artifactId: junit-jupiter
+      configuration: testImplementation
+      version: 5.10.2
+      scope: test

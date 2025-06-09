@@ -21,6 +21,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 
 /**
  * Test Framework.
@@ -119,6 +120,15 @@ public enum TestFramework {
             default:
                 throw new RuntimeException("No default language have been defined for " + this.getName());
         }
+    }
+
+    public static Optional<TestFramework> of(String testFramework) {
+        for (TestFramework l : values()) {
+            if (l.getName().equalsIgnoreCase(testFramework)) {
+                return Optional.of(l);
+            }
+        }
+        return Optional.empty();
     }
 
     public String getTitle() {

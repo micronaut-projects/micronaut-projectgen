@@ -27,6 +27,7 @@ include 'test-suite-multi-module'
 include 'test-suite-helloworld-cli'
 include 'test-suite-helloworld'
 include 'test-suite-helloworld-http'
+include 'test-suite-helloworld-openrewrite'
 enableFeaturePreview 'TYPESAFE_PROJECT_ACCESSORS'
 
 micronautBuild {

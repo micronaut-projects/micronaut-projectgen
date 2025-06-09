@@ -20,7 +20,7 @@ import io.micronaut.sourcegen.annotations.Builder;
 import java.util.List;
 
 /**
- * Configuration for the Maven Compiler Plugin
+ * Configuration for the Maven Compiler Plugin.
  * @param version version
  * @param configurationCombine Configuration combine attribute
  * @param incrementalCompilation incremental compilation
