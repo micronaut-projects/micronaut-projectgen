@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.starter.feature.build;
+package io.micronaut.starter.feature.buildtools;
 
 import com.fizzed.rocker.RockerModel;
 import io.micronaut.context.annotation.Requires;
@@ -22,7 +22,6 @@ import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.rocker.RockerWritable;
 import io.micronaut.projectgen.core.utils.OptionUtils;
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.gradle.GradleFile;
 import io.micronaut.projectgen.core.buildtools.gradle.GradlePlugin;

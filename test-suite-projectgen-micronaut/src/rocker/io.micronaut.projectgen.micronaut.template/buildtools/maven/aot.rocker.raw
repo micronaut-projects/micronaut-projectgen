@@ -1,5 +1,5 @@
 @import java.util.List
-@import io.micronaut.starter.feature.build.MicronautAotOptimization
+@import io.micronaut.starter.feature.buildtools.MicronautAotOptimization
 @args (
 String packaging,
 List<MicronautAotOptimization> optimizations

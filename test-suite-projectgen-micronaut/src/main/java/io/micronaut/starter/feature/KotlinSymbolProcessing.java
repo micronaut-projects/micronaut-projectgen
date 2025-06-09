@@ -23,11 +23,10 @@ import io.micronaut.projectgen.core.feature.DefaultFeature;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.utils.OptionUtils;
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.gradle.GradlePlugin;
 import io.micronaut.projectgen.core.feature.KotlinSymbolProcessingFeature;
-import io.micronaut.starter.feature.build.KotlinSupportFeature;
+import io.micronaut.starter.feature.buildtools.KotlinSupportFeature;
 import io.micronaut.projectgen.core.options.Options;
 import jakarta.inject.Singleton;
 

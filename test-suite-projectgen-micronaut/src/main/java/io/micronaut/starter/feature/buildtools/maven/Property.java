@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.starter.feature.build.maven;
+package io.micronaut.starter.feature.buildtools.maven;
 
 import io.micronaut.core.annotation.NonNull;
 

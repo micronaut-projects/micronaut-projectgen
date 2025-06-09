@@ -33,7 +33,7 @@ import java.util.List;
 
 import io.micronaut.projectgen.core.buildtools.maven.MavenPlugin;
 import io.micronaut.projectgen.core.buildtools.BuildPlugin;
-import io.micronaut.starter.feature.build.Kapt;
+import io.micronaut.starter.feature.buildtools.Kapt;
 import io.micronaut.starter.feature.server.MicronautServerDependent;
 import io.micronaut.projectgen.core.options.Language;
 import io.micronaut.projectgen.core.rocker.RockerTemplate;

@@ -18,19 +18,11 @@ package io.micronaut.starter.feature.testresources;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
-import io.micronaut.projectgen.core.utils.OptionUtils;
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.BuildProperties;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.Feature;
-import io.micronaut.starter.feature.build.gradle.MicronautTestResourcesGradlePlugin;
-import io.micronaut.starter.feature.database.DatabaseDriverFeature;
-import io.micronaut.starter.feature.database.DatabaseDriverFeatureDependencies;
 import io.micronaut.starter.feature.database.HibernateReactiveFeature;
 import io.micronaut.starter.feature.database.r2dbc.R2dbc;
-import io.micronaut.starter.feature.migration.MigrationFeature;
 import jakarta.inject.Singleton;
 
 @Requires(property = "micronaut.starter.feature.test.resources.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)

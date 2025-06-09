@@ -22,7 +22,7 @@ import io.micronaut.projectgen.core.feature.Feature;
  * for Kotlin language projects. They require using the kapt compiler plugin (Kapt) instead. Note that Maven
  * projects always use Kapt since Maven isn't compatible with KSP.
  *
- * @see io.micronaut.starter.feature.build.Kapt
+ * @see io.micronaut.starter.feature.buildtools.Kapt
  * @see KotlinSymbolProcessing
  * @see RequireKaptFeatureValidator
  */

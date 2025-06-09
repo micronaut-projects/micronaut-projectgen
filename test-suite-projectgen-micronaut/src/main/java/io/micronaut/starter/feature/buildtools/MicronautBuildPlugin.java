@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.starter.feature.build;
+package io.micronaut.starter.feature.buildtools;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
@@ -38,7 +38,7 @@ import io.micronaut.projectgen.core.feature.DefaultFeature;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.starter.feature.MicronautRuntimeFeature;
 import io.micronaut.projectgen.core.buildtools.Dockerfile;
-import io.micronaut.starter.feature.build.gradle.MicronautApplicationGradlePlugin;
+import io.micronaut.starter.feature.buildtools.gradle.MicronautApplicationGradlePlugin;
 import io.micronaut.starter.feature.function.LambdaRuntimeMainClass;
 import io.micronaut.starter.feature.function.awslambda.AwsLambda;
 import io.micronaut.starter.feature.graalvm.GraalVMFeatureValidator;
