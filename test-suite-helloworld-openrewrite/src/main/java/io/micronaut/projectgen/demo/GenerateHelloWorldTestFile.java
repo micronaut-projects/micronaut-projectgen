@@ -7,12 +7,11 @@ import org.openrewrite.*;
 import org.openrewrite.text.PlainText;
 
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class HelloWorldTestRecipe extends ProjectGenPropertiesScanningRecipe {
+public class GenerateHelloWorldTestFile extends ProjectGenPropertiesScanningRecipe {
     @Override
     public String getDisplayName() {
         return "projectgen-properties-scanning";
@@ -26,18 +25,20 @@ public class HelloWorldTestRecipe extends ProjectGenPropertiesScanningRecipe {
     private AtomicBoolean done = new AtomicBoolean(false);
 
     @Override
-    public Collection<SourceFile> generate(GenericOptionsBuilder optionsBuilder, ExecutionContext ctx) {
+    public Collection<SourceFile> generate(GenericOptionsBuilder optionsBuilder,
+                                           ExecutionContext ctx) {
         Options options = optionsBuilder.build();
-        Path path = Paths.get(PATH);
+        Path path = projectDir != null ? projectDir.resolve(PATH) : Path.of(PATH);
+        System.out.println("Path: " + path);
         if (!done.get()) {
             done.compareAndSet(false, true);
-            return Collections.emptyList();
+            PlainText plainText = PlainText.builder()
+                .text(fileContents(options))
+                .sourcePath(path)
+                .build();
+            return Collections.singletonList(plainText);
         }
-        PlainText plainText = PlainText.builder()
-            .text(fileContents(options))
-            .sourcePath(path)
-            .build();
-        return Collections.singletonList(plainText);
+        return Collections.emptyList();
     }
 
     public static String fileContents(Options options) {

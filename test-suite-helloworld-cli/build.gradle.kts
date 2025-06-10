@@ -21,7 +21,7 @@ dependencies {
     runtimeOnly("ch.qos.logback:logback-classic")
 }
 application {
-    mainClass = "io.micronaut.projectgen.demo.ProjectGenCommand"
+    mainClass = "io.micronaut.projectgen.demo.MainCommand"
 }
 java {
     sourceCompatibility = JavaVersion.toVersion("17")

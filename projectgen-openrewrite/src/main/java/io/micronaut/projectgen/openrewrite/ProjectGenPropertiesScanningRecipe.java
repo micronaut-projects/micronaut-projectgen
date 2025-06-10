@@ -15,6 +15,7 @@
  */
 package io.micronaut.projectgen.openrewrite;
 
+import io.micronaut.core.annotation.Internal;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.buildtools.gradle.GradleDsl;
 import io.micronaut.projectgen.core.buildtools.maven.Packaging;
@@ -37,14 +38,16 @@ import java.util.List;
 
 import static io.micronaut.projectgen.openrewrite.PropertiesUtils.*;
 
+/**
+ * abstract class for a scanning recipe which reads a `projectgen.properties` file and populates {@link GenericOptionsBuilder}.
+ */
+@Internal
 public abstract class ProjectGenPropertiesScanningRecipe extends ScanningRecipe<GenericOptionsBuilder> {
+    protected Path projectDir;
+
     @Override
     public GenericOptionsBuilder getInitialValue(ExecutionContext ctx) {
         return GenericOptionsBuilder.builder();
-    }
-
-    protected Path sourcePath() {
-        return Path.of("projectgen.properties");
     }
 
     @Override
@@ -52,20 +55,16 @@ public abstract class ProjectGenPropertiesScanningRecipe extends ScanningRecipe<
         return new PropertiesIsoVisitor<ExecutionContext>() {
             @Override
             public Properties.File visitFile(Properties.File file, ExecutionContext ctx) {
+                Path path = Path.of("projectgen.properties");
                 SourceFile sourceFile = getCursor().firstEnclosing(SourceFile.class);
                 if (sourceFile != null) {
                     Path sourcePath = sourceFile.getSourcePath();
-                    if (sourcePath != null && sourcePath().equals(sourcePath)) {
+                    if (path.equals(sourcePath)) {
+                        projectDir = sourcePath.getParent();
                         return super.visitFile(file, ctx);
                     }
                 }
                 return file;
-            }
-
-            private List<BuildTool> buildTools(Properties.Entry entry, String keyName) {
-                List<BuildTool> buildTools = new ArrayList<>(acc.build().buildTools());
-                parseValue(entry, keyName).flatMap(BuildTool::of).ifPresent(buildTools::add);
-                return buildTools;
             }
 
             @Override
@@ -89,8 +88,25 @@ public abstract class ProjectGenPropertiesScanningRecipe extends ScanningRecipe<
                 parseValue(entry, "version").ifPresent(acc::version);
                 parseValue(entry, "packaging").map(Packaging::valueOf).ifPresent(acc::packaging);
                 parseValue(entry, "testFramework").flatMap(TestFramework::of).ifPresent(acc::testFramework);
-                acc.features(parseValues(entry, "features"));
+                for (int i = 0; i < 100; i++) {
+                    String keyName = "features[" + i + "]";
+                    if (entry.getKey().equals(keyName)) {
+                        acc.features(features(entry, keyName));
+                    }
+                }
                 return entry;
+            }
+
+            private List<BuildTool> buildTools(Properties.Entry entry, String keyName) {
+                List<BuildTool> buildTools = new ArrayList<>(acc.build().buildTools());
+                parseValue(entry, keyName).flatMap(BuildTool::of).ifPresent(buildTools::add);
+                return buildTools;
+            }
+
+            private List<String> features(Properties.Entry entry, String keyName) {
+                List<String> features = new ArrayList<>(acc.build().features());
+                parseValue(entry, keyName).ifPresent(features::add);
+                return features;
             }
         };
     }

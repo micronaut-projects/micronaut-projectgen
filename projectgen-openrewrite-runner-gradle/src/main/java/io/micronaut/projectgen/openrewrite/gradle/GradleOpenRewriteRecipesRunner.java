@@ -59,7 +59,11 @@ public class GradleOpenRewriteRecipesRunner implements OpenRewriteRecipesRunner 
         Map<String, String> systemProperties = new HashMap<>();
         Map<String, Object> configurationSystemProperties = configuration.getSystemProperties();
         for (String k : configurationSystemProperties.keySet()) {
-            systemProperties.put(k, configurationSystemProperties.get(k).toString());
+            Object value = configurationSystemProperties.get(k);
+            if (value != null) {
+                systemProperties.put(k, value.toString());
+            }
+
         }
         return systemProperties;
     }

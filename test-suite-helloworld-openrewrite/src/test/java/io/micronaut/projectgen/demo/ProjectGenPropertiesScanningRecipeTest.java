@@ -10,7 +10,7 @@ import java.nio.file.Path;
 class ProjectGenPropertiesScanningRecipeTest implements RewriteTest {
     @Override
     public void defaults(RecipeSpec spec) {
-        spec.recipe(new HelloWorldTestRecipe());
+        spec.recipe(new GenerateHelloWorldTestFile());
     }
 
     @Test

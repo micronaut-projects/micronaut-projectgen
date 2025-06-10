@@ -15,8 +15,10 @@
  */
 package io.micronaut.projectgen.openrewrite;
 
+import io.micronaut.core.util.CollectionUtils;
 import io.micronaut.projectgen.core.options.OperatingSystem;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -56,10 +58,16 @@ public record OpenRewriteConfiguration(List<String> activeRecipes,
      * @return System Properties
      */
     public Map<String, Object> getSystemProperties() {
-        return Map.of(SYS_PROPERTY_REWRITE_ACTIVE_RECIPES, String.join(",", activeRecipes),
-                SYS_PROPERTY_REWRITE_EXPORT_DATATABLES, exportDatatables,
-                SYS_PROPERTY_REWRITE_RECIPE_CHANGE_LOG_LEVEL, recipeChangeLogLevel,
-                SYS_PROPERTY_REWRITE_CONFIG_LOCATION, configLocation);
+        System.out.print("active recipes: " + activeRecipes);
+        Map<String, Object> systemProperties = new HashMap<>();
+        if (CollectionUtils.isNotEmpty(activeRecipes)) {
+            systemProperties.put(SYS_PROPERTY_REWRITE_ACTIVE_RECIPES, String.join(",", activeRecipes));
+        }
+        systemProperties.put(SYS_PROPERTY_REWRITE_EXPORT_DATATABLES, exportDatatables);
+        systemProperties.put(SYS_PROPERTY_REWRITE_RECIPE_CHANGE_LOG_LEVEL, recipeChangeLogLevel);
+        systemProperties.put(SYS_PROPERTY_REWRITE_CONFIG_LOCATION, configLocation);
+        System.out.print("system properties: " + systemProperties);
+        return systemProperties;
     }
 
     /**
