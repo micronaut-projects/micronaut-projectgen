@@ -22,4 +22,6 @@ io.micronaut.projectgen.http.server.conf
 io.micronaut.projectgen.http.server.controllers
 io.micronaut.projectgen.http.server.utils
 io.micronaut.projectgen.openrewrite
+io.micronaut.projectgen.openrewrite.gradle
+io.micronaut.projectgen.openrewrite.maven
 io.micronaut.projectgen.test
