@@ -41,6 +41,7 @@ public class AddFeatureCommand implements Runnable {
 
     @Override
     public void run() {
+        //TODO Given a list of features, get the recipes
         List<String> recipes = HelloWorldTest.RECIPES;
         OpenRewriteConfiguration configuration = OpenRewriteConfiguration.builder()
             .activeRecipes(recipes)
