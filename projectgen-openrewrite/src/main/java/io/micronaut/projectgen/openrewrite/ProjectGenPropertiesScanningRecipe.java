@@ -33,6 +33,7 @@ import org.openrewrite.properties.PropertiesIsoVisitor;
 import org.openrewrite.properties.tree.Properties;
 
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,16 +56,16 @@ public abstract class ProjectGenPropertiesScanningRecipe extends ScanningRecipe<
         return new PropertiesIsoVisitor<ExecutionContext>() {
             @Override
             public Properties.File visitFile(Properties.File file, ExecutionContext ctx) {
-                Path path = Path.of("projectgen.properties");
                 SourceFile sourceFile = getCursor().firstEnclosing(SourceFile.class);
                 if (sourceFile != null) {
                     Path sourcePath = sourceFile.getSourcePath();
-                    if (path.equals(sourcePath)) {
-                        projectDir = sourcePath.getParent();
-                        return super.visitFile(file, ctx);
+                    if ("projectgen.properties".equals(sourcePath.getFileName().toString())) {
+                        projectDir = sourcePath.getParent() == null
+                            ? Paths.get("")
+                            : sourcePath.getParent();
                     }
                 }
-                return file;
+                return super.visitFile(file, ctx);
             }
 
             @Override

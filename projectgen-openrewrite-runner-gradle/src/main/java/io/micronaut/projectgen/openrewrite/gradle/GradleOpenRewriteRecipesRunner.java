@@ -48,7 +48,8 @@ public class GradleOpenRewriteRecipesRunner implements OpenRewriteRecipesRunner 
                 .connect()) {
             connection.newBuild()
                     .forTasks(TASK_REWRITE_RUN)
-                    .withSystemProperties(systemProperties(configuration))
+                .withArguments("-Duser.dir=" + folder.getAbsolutePath())
+                .withSystemProperties(systemProperties(configuration))
                     .setStandardOutput(new ConsumerOutputStream(out))
                     .setStandardError(new ConsumerOutputStream(err))
                     .run();

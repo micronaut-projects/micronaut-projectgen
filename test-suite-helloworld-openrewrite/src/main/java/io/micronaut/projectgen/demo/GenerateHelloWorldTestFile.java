@@ -7,6 +7,7 @@ import org.openrewrite.*;
 import org.openrewrite.text.PlainText;
 
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -28,13 +29,15 @@ public class GenerateHelloWorldTestFile extends ProjectGenPropertiesScanningReci
     public Collection<SourceFile> generate(GenericOptionsBuilder optionsBuilder,
                                            ExecutionContext ctx) {
         Options options = optionsBuilder.build();
-        Path path = projectDir != null ? projectDir.resolve(PATH) : Path.of(PATH);
-        System.out.println("Path: " + path);
+        Path base = projectDir == null ? Paths.get("") : projectDir;
+        Path target = base.resolve(PATH);
+        System.out.println(">>> Generating into: " + target);
+
         if (!done.get()) {
             done.compareAndSet(false, true);
             PlainText plainText = PlainText.builder()
                 .text(fileContents(options))
-                .sourcePath(path)
+                .sourcePath(target)
                 .build();
             return Collections.singletonList(plainText);
         }
