@@ -31,8 +31,7 @@ public class GenerateHelloWorldTestFile extends ProjectGenPropertiesScanningReci
         Options options = optionsBuilder.build();
         Path base = projectDir == null ? Paths.get("") : projectDir;
         Path target = base.resolve(PATH);
-        System.out.println(">>> Generating into: " + target);
-
+        
         if (!done.get()) {
             done.compareAndSet(false, true);
             PlainText plainText = PlainText.builder()
