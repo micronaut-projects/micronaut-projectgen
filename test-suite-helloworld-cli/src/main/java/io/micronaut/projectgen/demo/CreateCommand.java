@@ -45,7 +45,7 @@ public class CreateCommand implements Runnable {
                 .artifact("demo-project")
                 .version("1.0.0")
                 .features(features)
-                .buildTools(List.of(BuildTool.GRADLE))
+                .buildTools(List.of(BuildTool.GRADLE, BuildTool.MAVEN))
                 .gradleDsl(GradleDsl.KOTLIN)
                 .java(JdkVersion.JDK_21)
                 .build();

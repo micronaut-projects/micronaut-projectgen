@@ -99,9 +99,19 @@ demo
                     └── HelloWorldTest.java
 ```
 
+You need to be able to run gradle tests:
 
+```
+cd demo
+./gradlew test
+```
 
+You need to be able to run Maven tests:
 
+```
+cd demo
+./mvnw test
+```
 
 
 

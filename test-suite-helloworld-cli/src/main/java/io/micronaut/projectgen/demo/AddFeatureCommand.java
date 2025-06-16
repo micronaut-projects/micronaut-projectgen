@@ -50,6 +50,7 @@ public class AddFeatureCommand implements Runnable {
             .operatingSystem(getOperatingSystem())
             .build();
         gradleRecipeRunner.run(recipes, projectDir, configuration, this::out, this::err);
+        mavenRecipeRunner.run(recipes, projectDir, configuration, this::out, this::err);
     }
 
     public void out(String message) {
