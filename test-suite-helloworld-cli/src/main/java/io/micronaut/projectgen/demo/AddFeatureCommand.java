@@ -35,7 +35,7 @@ public class AddFeatureCommand implements Runnable {
     @Inject
     private OpenRewriteRecipesRunner gradleRecipeRunner;
 
-    @Named("gradle")
+    @Named("maven")
     @Inject
     private OpenRewriteRecipesRunner mavenRecipeRunner;
 
