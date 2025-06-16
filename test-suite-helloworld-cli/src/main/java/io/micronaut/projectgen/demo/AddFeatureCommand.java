@@ -49,7 +49,7 @@ public class AddFeatureCommand implements Runnable {
             .recipeChangeLogLevel("INFO")
             .operatingSystem(getOperatingSystem())
             .build();
-        gradleRecipeRunner.run(recipes, projectDir, configuration, this::out, this::err);
+        //gradleRecipeRunner.run(recipes, projectDir, configuration, this::out, this::err);
         mavenRecipeRunner.run(recipes, projectDir, configuration, this::out, this::err);
     }
 
