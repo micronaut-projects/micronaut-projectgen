@@ -19,7 +19,7 @@ sonatype-scan = "3.0.0"
 micronaut-picocli = "5.7.0"
 java-diff-utils = "4.15"
 micronaut-logging = "1.7.0"
-micronaut-validation = "4.9.0"
+micronaut-validation = "4.10.0"
 
 [libraries]
 java-diff-utils = { module = 'io.github.java-diff-utils:java-diff-utils', version.ref = 'java-diff-utils' }
