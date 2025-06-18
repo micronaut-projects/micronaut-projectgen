@@ -18,7 +18,7 @@ gradle-tooling-api = "8.12"
 sonatype-scan = "3.0.0"
 micronaut-picocli = "5.7.0"
 java-diff-utils = "4.15"
-micronaut-logging = "1.6.1"
+micronaut-logging = "1.7.0"
 micronaut-validation = "4.9.0"
 
 [libraries]
