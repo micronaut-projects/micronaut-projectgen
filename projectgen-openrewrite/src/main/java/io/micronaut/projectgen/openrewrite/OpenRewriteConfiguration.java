@@ -65,7 +65,6 @@ public record OpenRewriteConfiguration(List<String> activeRecipes,
         systemProperties.put(SYS_PROPERTY_REWRITE_EXPORT_DATATABLES, exportDatatables);
         systemProperties.put(SYS_PROPERTY_REWRITE_RECIPE_CHANGE_LOG_LEVEL, recipeChangeLogLevel);
         systemProperties.put(SYS_PROPERTY_REWRITE_CONFIG_LOCATION, configLocation);
-        System.out.print("system properties: " + systemProperties);
         return systemProperties;
     }
 
