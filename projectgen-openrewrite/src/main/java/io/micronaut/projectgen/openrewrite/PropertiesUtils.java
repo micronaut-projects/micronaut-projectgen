@@ -16,29 +16,21 @@
 package io.micronaut.projectgen.openrewrite;
 
 import org.openrewrite.properties.tree.Properties;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
+/**
+ * Utility class to work with {@link Properties.Entry} instances.
+ */
 public final class PropertiesUtils {
     private PropertiesUtils() {
     }
 
-    public static List<String> parseValues(Properties.Entry entry, String keyName) {
-        List<String> result = new ArrayList<>();
-        if (keyName.equals(entry.getKey())) {
-            if (entry.getDelimiter() != null) {
-                String[] arr = entry.getValue().getText().split("" + entry.getDelimiter().getCharacter());
-                for (String str : arr) {
-                    result.add(str);
-                }
-            } else {
-                result.add(entry.getValue().getText());
-            }
-        }
-        return result;
-    }
-
+    /**
+     *
+     * @param entry Entry
+     * @param keyName property key name
+     * @return the value associated with the property
+     */
     public static Optional<String> parseValue(Properties.Entry entry, String keyName) {
         if (keyName.equals(entry.getKey())) {
             return Optional.of(entry.getValue().getText());

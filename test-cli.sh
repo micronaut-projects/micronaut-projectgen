@@ -5,7 +5,7 @@ mkdir -p demo
 if [ $EXIT_STATUS -ne 0 ]; then
   exit $EXIT_STATUS
 fi
-java -jar test-suite-helloworld-cli/build/libs/test-suite-helloworld-cli-0.1-all.jar --output demo || EXIT_STATUS=$?
+java -jar test-suite-helloworld-cli/build/libs/test-suite-helloworld-cli-0.1-all.jar create --output demo || EXIT_STATUS=$?
 if [ $EXIT_STATUS -ne 0 ]; then
   exit $EXIT_STATUS
 fi

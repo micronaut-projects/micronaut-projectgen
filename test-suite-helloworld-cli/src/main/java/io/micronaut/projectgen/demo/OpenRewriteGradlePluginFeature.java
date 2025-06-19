@@ -1,5 +1,7 @@
 package io.micronaut.projectgen.demo;
 
+import io.micronaut.projectgen.core.buildtools.MavenCentral;
+import io.micronaut.projectgen.core.buildtools.MavenLocal;
 import io.micronaut.projectgen.core.buildtools.Scope;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.buildtools.gradle.GradlePlugin;
@@ -22,6 +24,8 @@ public class OpenRewriteGradlePluginFeature implements DefaultFeature {
     @Override
     public void apply(GeneratorContext generatorContext) {
         ModuleContext module = generatorContext.getRootModule();
+        module.repositories().add(new MavenLocal());
+        module.repositories().add(new MavenCentral());
         module.addBuildPlugin(GradlePlugin.builder()
                 .id("org.openrewrite.rewrite")
                 .version("7.7.0")

@@ -8,6 +8,7 @@ dependencies {
     testImplementation(libs.rewrite.test)
 }
 group = "io.micronaut.projectgen"
+version = rootProject.version
 publishing {
     publications {
         create<MavenPublication>("maven") {

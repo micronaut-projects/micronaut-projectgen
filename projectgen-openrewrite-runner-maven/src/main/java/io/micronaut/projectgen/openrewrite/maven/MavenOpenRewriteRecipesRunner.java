@@ -54,6 +54,11 @@ public class MavenOpenRewriteRecipesRunner implements OpenRewriteRecipesRunner {
         List<String> args = new ArrayList<>();
         args.add(goal);
         args.addAll(configuration.getSystemPropertiesList());
+
+        File mavenWrapper = configuration.operatingSystem() == OperatingSystem.WINDOWS
+            ? new File(folder, "mvnw.bat")
+            : new File(folder, "mvnw");
+
         InvocationRequest request = new DefaultInvocationRequest();
         request.setBaseDirectory(folder);
         request.setPomFile(new File(folder, "pom.xml"));
@@ -62,9 +67,7 @@ public class MavenOpenRewriteRecipesRunner implements OpenRewriteRecipesRunner {
         request.setOutputHandler(out::accept);
         request.setErrorHandler(err::accept);
         request.setBatchMode(true);
-        request.setMavenExecutable(configuration.operatingSystem() == OperatingSystem.WINDOWS
-                ? new File(folder, "mvnw.bat")
-                : new File(folder, "mvnw"));
+        request.setMavenExecutable(mavenWrapper.getAbsoluteFile());
         return request;
     }
 }

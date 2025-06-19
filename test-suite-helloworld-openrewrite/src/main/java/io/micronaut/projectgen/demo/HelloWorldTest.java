@@ -9,10 +9,15 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
-import static io.micronaut.projectgen.demo.HelloWorldTestRecipe.PATH;
+import static io.micronaut.projectgen.demo.GenerateHelloWorldTestFile.PATH;
 
 @Singleton
 public class HelloWorldTest implements OpenRewriteFeature {
+    public static final List<String> RECIPES = List.of(
+        "io.micronaut.projectgen.demo.junit-jupiter",
+        "io.micronaut.projectgen.demo.GenerateHelloWorldTestFile"
+    );
+
     @Override
     public String getName() {
         return "hello-world-test";
@@ -29,7 +34,7 @@ public class HelloWorldTest implements OpenRewriteFeature {
 
     @Override
     public List<String> getRecipes(GeneratorContext generatorContext) {
-        return List.of("io.micronaut.projectgen.demo.junit-jupiter");
+        return RECIPES;
     }
 
     @Override
@@ -41,6 +46,6 @@ public class HelloWorldTest implements OpenRewriteFeature {
 
     private void addHelloWorldTestJavaClass(ModuleContext module, Options options) {
         module.addTemplate("HelloWorldTest.java",
-            new StringTemplate(PATH, HelloWorldTestRecipe.fileContents(options)));
+            new StringTemplate(PATH, GenerateHelloWorldTestFile.fileContents(options)));
     }
 }

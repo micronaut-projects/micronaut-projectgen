@@ -69,7 +69,8 @@ public class DefaultRecipeFetcher implements RecipeFetcher {
             var recipe = env.activateRecipes(recipeName);
             return findAllFilesContents(recipe);
         } catch (RecipeException e) {
-            throw new ConfigurationException("Error activating recipe: " + recipeName, e);
+            //throw new ConfigurationException("Error activating recipe: " + recipeName, e);
+            return Collections.emptyList();
         }
     }
 
@@ -80,7 +81,8 @@ public class DefaultRecipeFetcher implements RecipeFetcher {
             var recipe = env.activateRecipes(recipeName);
             return findDependencies(recipe, buildTool);
         } catch (RecipeException e) {
-            throw new ConfigurationException("Error activating recipe: " + recipeName, e);
+            //throw new ConfigurationException("Error activating recipe: " + recipeName, e);
+            return Collections.emptyList();
         }
     }
 
@@ -91,7 +93,8 @@ public class DefaultRecipeFetcher implements RecipeFetcher {
             var recipe = env.activateRecipes(recipeName);
             return findProperties(recipe);
         } catch (RecipeException e) {
-            throw new ConfigurationException("Error activating recipe: " + recipeName, e);
+            //throw new ConfigurationException("Error activating recipe: " + recipeName, e);
+            return Optional.empty();
         }
     }
 
@@ -102,7 +105,8 @@ public class DefaultRecipeFetcher implements RecipeFetcher {
             var recipe = env.activateRecipes(recipeName);
             return findBootstrapProperties(recipe);
         } catch (RecipeException e) {
-            throw new ConfigurationException("Error activating recipe: " + recipeName, e);
+            //throw new ConfigurationException("Error activating recipe: " + recipeName, e);
+            return Optional.empty();
         }
     }
 
