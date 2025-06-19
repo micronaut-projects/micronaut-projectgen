@@ -16,7 +16,7 @@ dependencies {
     annotationProcessor(mnSourcegen.micronaut.sourcegen.generator.java)
     implementation(mnSourcegen.micronaut.sourcegen.annotations)
 
-    api(libs.rocker.runtime)
+    api(mnViews.rocker.runtime)
     implementation(libs.apache.commons.compress)
     compileOnly(libs.java.diff.utils)
     testAnnotationProcessor(mn.micronaut.inject.java)
