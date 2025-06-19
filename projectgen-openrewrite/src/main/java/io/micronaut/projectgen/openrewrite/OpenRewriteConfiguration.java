@@ -58,7 +58,6 @@ public record OpenRewriteConfiguration(List<String> activeRecipes,
      * @return System Properties
      */
     public Map<String, Object> getSystemProperties() {
-        System.out.print("active recipes: " + activeRecipes);
         Map<String, Object> systemProperties = new HashMap<>();
         if (CollectionUtils.isNotEmpty(activeRecipes)) {
             systemProperties.put(SYS_PROPERTY_REWRITE_ACTIVE_RECIPES, String.join(",", activeRecipes));
