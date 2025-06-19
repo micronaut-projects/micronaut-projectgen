@@ -51,7 +51,7 @@ loadScripts(document, 'script');</script>
 </ul>
 <ul class="sub-nav-list">
 <li>Detail:&nbsp;</li>
-<li>Field&nbsp;|&nbsp;</li>
+<li><a href="#field-detail">Field</a>&nbsp;|&nbsp;</li>
 <li><a href="#constructor-detail">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method-detail">Method</a></li>
 </ul>
@@ -84,8 +84,10 @@ loadScripts(document, 'script');</script>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Cloneable.html" title="class or interface in java.lang" class="external-link">Cloneable</a></code></dd>
 </dl>
 <hr>
-<div class="type-signature"><span class="modifiers">public abstract class </span><span class="element-name type-name-label">ProjectGenPropertiesScanningRecipe</span>
+<div class="type-signature"><span class="annotations">@Internal
+</span><span class="modifiers">public abstract class </span><span class="element-name type-name-label">ProjectGenPropertiesScanningRecipe</span>
 <span class="extends-implements">extends org.openrewrite.ScanningRecipe&lt;<a href="../core/options/GenericOptionsBuilder.html" title="class in io.micronaut.projectgen.core.options">GenericOptionsBuilder</a>&gt;</span></div>
+<div class="block">abstract class for a scanning recipe which reads a `projectgen.properties` file and populates <a href="../core/options/GenericOptionsBuilder.html" title="class in io.micronaut.projectgen.core.options"><code>GenericOptionsBuilder</code></a>.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -102,6 +104,15 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="field-summary" id="field-summary">
 <h2>Field Summary</h2>
+<div class="caption"><span>Fields</span></div>
+<div class="summary-table three-column-summary">
+<div class="table-header col-first">Modifier and Type</div>
+<div class="table-header col-second">Field</div>
+<div class="table-header col-last">Description</div>
+<div class="col-first even-row-color"><code>protected <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/nio/file/Path.html" title="class or interface in java.nio.file" class="external-link">Path</a></code></div>
+<div class="col-second even-row-color"><code><a href="#projectDir" class="member-name-link">projectDir</a></code></div>
+<div class="col-last even-row-color">&nbsp;</div>
+</div>
 <div class="inherited-list">
 <h3 id="fields-inherited-from-class-org.openrewrite.Recipe">Fields inherited from class&nbsp;org.openrewrite.Recipe</h3>
 <code>contributors, examples, PANIC</code></div>
@@ -137,9 +148,6 @@ loadScripts(document, 'script');</script>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>org.openrewrite.TreeVisitor&lt;?,<wbr>org.openrewrite.ExecutionContext&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getScanner(io.micronaut.projectgen.core.options.GenericOptionsBuilder)" class="member-name-link">getScanner</a><wbr>(<a href="../core/options/GenericOptionsBuilder.html" title="class in io.micronaut.projectgen.core.options">GenericOptionsBuilder</a>&nbsp;acc)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/nio/file/Path.html" title="class or interface in java.nio.file" class="external-link">Path</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#sourcePath()" class="member-name-link">sourcePath</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 </div>
 </div>
 </div>
@@ -158,6 +166,20 @@ loadScripts(document, 'script');</script>
 </section>
 <section class="details">
 <ul class="details-list">
+<!-- ============ FIELD DETAIL =========== -->
+<li>
+<section class="field-details" id="field-detail">
+<h2>Field Details</h2>
+<ul class="member-list">
+<li>
+<section class="detail" id="projectDir">
+<h3>projectDir</h3>
+<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/nio/file/Path.html" title="class or interface in java.nio.file" class="external-link">Path</a></span>&nbsp;<span class="element-name">projectDir</span></div>
+</section>
+</li>
+</ul>
+</section>
+</li>
 <!-- ========= CONSTRUCTOR DETAIL ======== -->
 <li>
 <section class="constructor-details" id="constructor-detail">
@@ -185,12 +207,6 @@ loadScripts(document, 'script');</script>
 <dt>Specified by:</dt>
 <dd><code>getInitialValue</code>&nbsp;in class&nbsp;<code>org.openrewrite.ScanningRecipe&lt;<a href="../core/options/GenericOptionsBuilder.html" title="class in io.micronaut.projectgen.core.options">GenericOptionsBuilder</a>&gt;</code></dd>
 </dl>
-</section>
-</li>
-<li>
-<section class="detail" id="sourcePath()">
-<h3>sourcePath</h3>
-<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/nio/file/Path.html" title="class or interface in java.nio.file" class="external-link">Path</a></span>&nbsp;<span class="element-name">sourcePath</span>()</div>
 </section>
 </li>
 <li>

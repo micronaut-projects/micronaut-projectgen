@@ -3751,8 +3751,6 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="io/micronaut/projectgen/openrewrite/PropertiesUtils.html#parseValue(org.openrewrite.properties.tree.Properties.Entry,java.lang.String)" class="member-name-link">parseValue(Properties.Entry, String)</a> - Static method in class io.micronaut.projectgen.openrewrite.<a href="io/micronaut/projectgen/openrewrite/PropertiesUtils.html" title="class in io.micronaut.projectgen.openrewrite">PropertiesUtils</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="io/micronaut/projectgen/openrewrite/PropertiesUtils.html#parseValues(org.openrewrite.properties.tree.Properties.Entry,java.lang.String)" class="member-name-link">parseValues(Properties.Entry, String)</a> - Static method in class io.micronaut.projectgen.openrewrite.<a href="io/micronaut/projectgen/openrewrite/PropertiesUtils.html" title="class in io.micronaut.projectgen.openrewrite">PropertiesUtils</a></dt>
-<dd>&nbsp;</dd>
 <dt><a href="io/micronaut/projectgen/core/template/DefaultTemplate.html#path" class="member-name-link">path</a> - Variable in class io.micronaut.projectgen.core.template.<a href="io/micronaut/projectgen/core/template/DefaultTemplate.html" title="class in io.micronaut.projectgen.core.template">DefaultTemplate</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/micronaut/projectgen/core/io/TreeNode.html#path()" class="member-name-link">path()</a> - Method in record class io.micronaut.projectgen.core.io.<a href="io/micronaut/projectgen/core/io/TreeNode.html" title="class in io.micronaut.projectgen.core.io">TreeNode</a></dt>
@@ -3894,12 +3892,16 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="io/micronaut/projectgen/core/generator/Project.html#%3Cinit%3E(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)" class="member-name-link">Project(String, String, String, String, String, String)</a> - Constructor for class io.micronaut.projectgen.core.generator.<a href="io/micronaut/projectgen/core/generator/Project.html" title="class in io.micronaut.projectgen.core.generator">Project</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="io/micronaut/projectgen/openrewrite/ProjectGenPropertiesScanningRecipe.html#projectDir" class="member-name-link">projectDir</a> - Variable in class io.micronaut.projectgen.openrewrite.<a href="io/micronaut/projectgen/openrewrite/ProjectGenPropertiesScanningRecipe.html" title="class in io.micronaut.projectgen.openrewrite">ProjectGenPropertiesScanningRecipe</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="io/micronaut/projectgen/core/generator/ProjectGenerator.html" class="type-name-link" title="interface in io.micronaut.projectgen.core.generator">ProjectGenerator</a> - Interface in <a href="io/micronaut/projectgen/core/generator/package-summary.html">io.micronaut.projectgen.core.generator</a></dt>
 <dd>
 <div class="block">Project Generator API.</div>
 </dd>
 <dt><a href="io/micronaut/projectgen/openrewrite/ProjectGenPropertiesScanningRecipe.html" class="type-name-link" title="class in io.micronaut.projectgen.openrewrite">ProjectGenPropertiesScanningRecipe</a> - Class in <a href="io/micronaut/projectgen/openrewrite/package-summary.html">io.micronaut.projectgen.openrewrite</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">abstract class for a scanning recipe which reads a `projectgen.properties` file and populates <a href="io/micronaut/projectgen/core/options/GenericOptionsBuilder.html" title="class in io.micronaut.projectgen.core.options"><code>GenericOptionsBuilder</code></a>.</div>
+</dd>
 <dt><a href="io/micronaut/projectgen/openrewrite/ProjectGenPropertiesScanningRecipe.html#%3Cinit%3E()" class="member-name-link">ProjectGenPropertiesScanningRecipe()</a> - Constructor for class io.micronaut.projectgen.openrewrite.<a href="io/micronaut/projectgen/openrewrite/ProjectGenPropertiesScanningRecipe.html" title="class in io.micronaut.projectgen.openrewrite">ProjectGenPropertiesScanningRecipe</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/micronaut/projectgen/core/generator/ProjectIdentifier.html" class="type-name-link" title="class in io.micronaut.projectgen.core.generator">ProjectIdentifier</a> - Class in <a href="io/micronaut/projectgen/core/generator/package-summary.html">io.micronaut.projectgen.core.generator</a></dt>
@@ -3949,7 +3951,9 @@ loadScripts(document, 'script');</script>
 <dt><a href="io/micronaut/projectgen/core/template/PropertiesTemplate.LinkedProperties.html" class="type-name-link" title="class in io.micronaut.projectgen.core.template">PropertiesTemplate.LinkedProperties</a> - Class in <a href="io/micronaut/projectgen/core/template/package-summary.html">io.micronaut.projectgen.core.template</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/micronaut/projectgen/openrewrite/PropertiesUtils.html" class="type-name-link" title="class in io.micronaut.projectgen.openrewrite">PropertiesUtils</a> - Class in <a href="io/micronaut/projectgen/openrewrite/package-summary.html">io.micronaut.projectgen.openrewrite</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Utility class to work with <code>Properties.Entry</code> instances.</div>
+</dd>
 <dt><a href="io/micronaut/projectgen/core/buildtools/Property.html" class="type-name-link" title="interface in io.micronaut.projectgen.core.buildtools">Property</a> - Interface in <a href="io/micronaut/projectgen/core/buildtools/package-summary.html">io.micronaut.projectgen.core.buildtools</a></dt>
 <dd>
 <div class="block">Build tool property.</div>
@@ -4283,8 +4287,6 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Source.</div>
 </dd>
-<dt><a href="io/micronaut/projectgen/openrewrite/ProjectGenPropertiesScanningRecipe.html#sourcePath()" class="member-name-link">sourcePath()</a> - Method in class io.micronaut.projectgen.openrewrite.<a href="io/micronaut/projectgen/openrewrite/ProjectGenPropertiesScanningRecipe.html" title="class in io.micronaut.projectgen.openrewrite">ProjectGenPropertiesScanningRecipe</a></dt>
-<dd>&nbsp;</dd>
 <dt><a href="io/micronaut/projectgen/core/rocker/TestRockerModelProvider.html#spock()" class="member-name-link">spock()</a> - Method in interface io.micronaut.projectgen.core.rocker.<a href="io/micronaut/projectgen/core/rocker/TestRockerModelProvider.html" title="interface in io.micronaut.projectgen.core.rocker">TestRockerModelProvider</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/micronaut/projectgen/core/options/TestFramework.html#SPOCK" class="member-name-link">SPOCK</a> - Enum constant in enum class io.micronaut.projectgen.core.options.<a href="io/micronaut/projectgen/core/options/TestFramework.html" title="enum class in io.micronaut.projectgen.core.options">TestFramework</a></dt>
