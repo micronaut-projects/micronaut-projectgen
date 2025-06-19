@@ -10,10 +10,10 @@ if [ $EXIT_STATUS -ne 0 ]; then
   exit $EXIT_STATUS
 fi
 cd demo
-#./mvnw test || EXIT_STATUS=$?
-#if [ $EXIT_STATUS -ne 0 ]; then
-#  exit $EXIT_STATUS
-#fi
+./mvnw test || EXIT_STATUS=$?
+if [ $EXIT_STATUS -ne 0 ]; then
+  exit $EXIT_STATUS
+fi
 ./gradlew test || EXIT_STATUS=$?
 if [ $EXIT_STATUS -ne 0 ]; then
   exit $EXIT_STATUS
