@@ -1,0 +1,25 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.security-jwt
+displayName: Add Security Jwt dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.security-jwt.dependencies
+  - io.micronaut.starter.feature.security-jwt.micronaut.documentation
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.security-jwt.dependencies
+displayName: Add Security Jwt dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.security
+      artifactId: micronaut-security-jwt
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.security-jwt.micronaut.documentation
+displayName: Append a link to Micronaut Security Jwt documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-security/latest/guide/index.html
+      appendNewline: true

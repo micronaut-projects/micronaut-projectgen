@@ -20,14 +20,16 @@ import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils;
 import jakarta.inject.Singleton;
 
+import java.util.List;
 import java.util.Optional;
 
 @Requires(property = "micronaut.starter.feature.security.jwt.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class SecurityJWT extends SecurityFeature implements SecurityAuthenticationModeProvider {
+public class SecurityJWT extends SecurityFeature implements SecurityAuthenticationModeProvider, OpenRewriteFeature {
 
     public static final String NAME = "security-jwt";
 
@@ -54,6 +56,7 @@ public class SecurityJWT extends SecurityFeature implements SecurityAuthenticati
 
     @Override
     public void apply(GeneratorContext generatorContext) {
+        OpenRewriteFeature.super.apply(generatorContext);
         ModuleContext module = generatorContext.getRootModule();
         module.configuration().put(PROPERTY_MICRONAUT_SECURITY_AUTHENTICATION, getSecurityAuthenticationMode().toString());
         Optional<SecurityAuthenticationMode> securityAuthenticationModeOptional = SecurityAuthenticationModeUtils.resolveSecurityAuthenticationMode(generatorContext);
@@ -62,14 +65,11 @@ public class SecurityJWT extends SecurityFeature implements SecurityAuthenticati
         ) {
             module.configuration().put("micronaut.security.token.jwt.signatures.secret.generator.secret", "${JWT_GENERATOR_SIGNATURE_SECRET:pleaseChangeThisSecretForANewOne}");
         }
-        module.addDependency(MicronautDependencyUtils.securityDependency()
-                .artifactId("micronaut-security-jwt")
-                .compile());
     }
 
     @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-security/latest/guide/index.html";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.security-jwt");
     }
 
     @Override
