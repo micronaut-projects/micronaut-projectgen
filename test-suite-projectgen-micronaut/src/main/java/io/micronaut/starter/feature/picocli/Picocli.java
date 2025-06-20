@@ -18,6 +18,7 @@ package io.micronaut.starter.feature.picocli;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
@@ -27,11 +28,13 @@ import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.options.Options;
 
 import jakarta.inject.Singleton;
+
+import java.util.List;
 import java.util.Set;
 
 @Requires(property = "micronaut.starter.feature.picocli.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class Picocli implements DefaultFeature {
+public class Picocli implements DefaultFeature, OpenRewriteFeature {
 
     @Override
     public String getName() {
@@ -60,15 +63,8 @@ public class Picocli implements DefaultFeature {
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
-        module.addDependency(Dependency.builder()
-                .groupId("info.picocli")
-                .artifactId("picocli-codegen")
-                .versionProperty("picocli.version")
-                .annotationProcessor());
-        module.addDependency(Dependency.builder().groupId("info.picocli").artifactId("picocli").compile());
-        module.addDependency(MicronautDependencyUtils.picocliDependency().artifactId("micronaut-picocli").compile());
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.picocli");
     }
 
     @Override
