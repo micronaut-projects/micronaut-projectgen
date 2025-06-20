@@ -22,6 +22,7 @@ import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.feature.ContributingInterceptUrlMapFeature;
 import io.micronaut.starter.feature.InterceptUrlMap;
 import jakarta.inject.Singleton;
@@ -31,7 +32,7 @@ import java.util.Map;
 
 @Requires(property = "micronaut.starter.feature.security.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class Security extends SecurityFeature {
+public class Security extends SecurityFeature implements OpenRewriteFeature {
 
     public static final String NAME = "security";
 
@@ -56,11 +57,7 @@ public class Security extends SecurityFeature {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
-        module.addDependency(Dependency.builder()
-                .groupId("io.micronaut.security")
-                .artifactId("micronaut-security")
-                .compile());
+        OpenRewriteFeature.super.apply(generatorContext);
         addInterceptUrlMapConfiguration(generatorContext);
     }
 
@@ -79,7 +76,8 @@ public class Security extends SecurityFeature {
     }
 
     @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-security/latest/guide/index.html";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.security");
     }
+
 }
