@@ -22,14 +22,17 @@ import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.feature.other.HttpSession;
 import jakarta.inject.Singleton;
+
+import java.util.List;
 
 import static io.micronaut.starter.feature.security.SecurityAuthenticationModeProvider.PROPERTY_MICRONAUT_SECURITY_AUTHENTICATION;
 
 @Requires(property = "micronaut.starter.feature.security.session.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class SecuritySession extends SecurityFeature implements SecurityAuthenticationModeProvider {
+public class SecuritySession extends SecurityFeature implements SecurityAuthenticationModeProvider, OpenRewriteFeature {
 
     public static final int ORDER = SecurityOAuth2.ORDER + 10;
 
@@ -59,18 +62,8 @@ public class SecuritySession extends SecurityFeature implements SecurityAuthenti
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
-        module.configuration().put(PROPERTY_MICRONAUT_SECURITY_AUTHENTICATION, getSecurityAuthenticationMode().toString());
-        module.addDependency(Dependency.builder()
-                .groupId("io.micronaut.security")
-                .artifactId("micronaut-security-session")
-                .compile());
-    }
-
-    @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-security/latest/guide/index.html#session";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.security-session");
     }
 
     @Override
