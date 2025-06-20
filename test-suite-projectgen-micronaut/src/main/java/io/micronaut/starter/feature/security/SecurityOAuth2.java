@@ -21,6 +21,7 @@ import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.feature.config.Configuration;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.projectgen.micronaut.features.httpclient.HttpClientFeature;
@@ -28,9 +29,11 @@ import io.micronaut.projectgen.micronaut.features.httpclient.HttpClient;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.security.oauth2.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class SecurityOAuth2 extends SecurityFeature implements SecurityAuthenticationModeProvider {
+public class SecurityOAuth2 extends SecurityFeature implements SecurityAuthenticationModeProvider, OpenRewriteFeature {
 
     public static final String NAME = "security-oauth2";
     public static final int ORDER = SecurityJWT.ORDER + 10;
@@ -73,6 +76,7 @@ public class SecurityOAuth2 extends SecurityFeature implements SecurityAuthentic
 
     @Override
     public void apply(GeneratorContext generatorContext) {
+        OpenRewriteFeature.super.apply(generatorContext);
         ModuleContext module = generatorContext.getRootModule();
         module.configuration().put(PROPERTY_MICRONAUT_SECURITY_AUTHENTICATION,
                 SecurityAuthenticationModeUtils.resolveSecurityAuthenticationMode(generatorContext)
@@ -86,9 +90,6 @@ public class SecurityOAuth2 extends SecurityFeature implements SecurityAuthentic
         if (generatorContext.isFeaturePresent(SecurityJWT.class)) {
             devConfig.put("micronaut.security.oauth2.clients.default.openid.issuer", oAuth2Config.getIssuer());
         }
-        module.addDependency(MicronautDependencyUtils.securityDependency()
-                .artifactId("micronaut-security-oauth2")
-                .compile());
     }
 
     @NonNull
@@ -103,8 +104,8 @@ public class SecurityOAuth2 extends SecurityFeature implements SecurityAuthentic
     }
 
     @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-security/latest/guide/index.html#oauth";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.security-oauth2");
     }
 
     @Override
