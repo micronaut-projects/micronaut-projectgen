@@ -52,6 +52,7 @@ import static io.micronaut.projectgen.openrewrite.RecipeUtils.resolveRecipe;
 public class DefaultRecipeFetcher implements RecipeFetcher {
     private static final String PRECONDITION_FIND_BOOTSTRAP_PROPERTIES = "io.micronaut.starter.openrewrite.recipes.FindBootstrapProperties";
     private static final String PRECONDITION_FIND_APPLICATION_PROPERTIES = "io.micronaut.starter.openrewrite.recipes.FindApplicationProperties";
+    private static final String PRECONDITION_FIND_DEV_PROPERTIES = "io.micronaut.starter.openrewrite.recipes.FindDevProperties";
     private final Environment env;
 
     /**
@@ -107,6 +108,22 @@ public class DefaultRecipeFetcher implements RecipeFetcher {
         } catch (RecipeException e) {
             //throw new ConfigurationException("Error activating recipe: " + recipeName, e);
             return Optional.empty();
+        }
+    }
+
+    @NonNull
+    private Optional<Properties> findDevProperties(@NonNull Recipe recipe) {
+        return findProperties(recipe, r -> r.getName().equals(PRECONDITION_FIND_DEV_PROPERTIES));
+    }
+
+    @Override
+    @NonNull
+    public Optional<Properties> findDevPropertiesByRecipeName(@NonNull String recipeName) {
+        try {
+            var recipe = env.activateRecipes(recipeName);
+            return findDevProperties(recipe);
+        } catch (RecipeException e) {
+            throw new ConfigurationException("Error activating recipe: " + recipeName, e);
         }
     }
 

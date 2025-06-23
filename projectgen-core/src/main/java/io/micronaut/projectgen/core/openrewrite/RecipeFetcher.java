@@ -42,4 +42,7 @@ public interface RecipeFetcher {
 
     @NonNull
     Optional<Properties> findBootstrapPropertiesByRecipeName(@NonNull String recipeName);
+
+    @NonNull
+    Optional<Properties> findDevPropertiesByRecipeName(@NonNull String recipeName);
 }

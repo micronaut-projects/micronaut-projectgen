@@ -274,6 +274,15 @@ public record ModuleContext(CoordinateResolver coordinateResolver,
         });
     }
 
+    public void addDevConfigurationByRecipeName(@NonNull String recipeName) {
+        Configuration config = devConfiguration();
+        recipeFetcher.findDevPropertiesByRecipeName(recipeName).ifPresent(properties -> {
+            for (Map.Entry<Object, Object> entry : properties.entrySet()) {
+                config.addNested(entry.getKey().toString(), entry.getValue());
+            }
+        });
+    }
+
     /**
      * Adds a template.
      * @param name The name of the template
