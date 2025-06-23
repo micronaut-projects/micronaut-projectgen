@@ -29,6 +29,7 @@ public final class ConfigurationUtils {
 
     public static final String SRC_MAIN_RESOURCES_APPLICATION_PROPERTIES = "src/main/resources/application.properties";
     public static final String SRC_MAIN_RESOURCES_BOOTSTRAP_PROPERTIES = "src/main/resources/bootstrap.properties";
+    public static final String SRC_MAIN_RESOURCES_APPLICATION_DEV_PROPERTIES = "src/main/resources/application-dev.properties";
 
     private ConfigurationUtils() {
     }
@@ -41,6 +42,27 @@ public final class ConfigurationUtils {
      */
     public static Properties loadApplicationProperties(Map<String, String> project) throws Exception {
         return loadPropertiesByPath(project, SRC_MAIN_RESOURCES_APPLICATION_PROPERTIES);
+    }
+
+    /**
+     *
+     * @param project project preview
+     * @param module module
+     * @return dev properties
+     * @throws Exception Exception loading dev properties
+     */
+    public static Properties loadDevPropertiesByModule(Map<String, String> project, String module) throws Exception {
+        return loadPropertiesByPath(project, module + "/" + SRC_MAIN_RESOURCES_APPLICATION_DEV_PROPERTIES);
+    }
+
+    /**
+     *
+     * @param project project preview
+     * @return dev properties
+     * @throws Exception Exception loading dev properties
+     */
+    public static Properties loadDevProperties(Map<String, String> project) throws Exception {
+        return loadPropertiesByPath(project, SRC_MAIN_RESOURCES_APPLICATION_DEV_PROPERTIES);
     }
 
     /**

@@ -38,6 +38,7 @@ public interface OpenRewriteFeature extends Feature {
         for (String recipeName : getRecipes(generatorContext)) {
             rootModule.addConfigurationByRecipeName(recipeName);
             rootModule.addBootstrapConfigurationByRecipeName(recipeName);
+            rootModule.addDevConfigurationByRecipeName(recipeName);
             rootModule.addDependenciesByRecipeName(generatorContext.getOptions(), recipeName);
             rootModule.addTemplatesByRecipeName(recipeName);
         }
@@ -66,4 +67,5 @@ public interface OpenRewriteFeature extends Feature {
             .findFirst()
             .orElse(null);
     }
+
 }

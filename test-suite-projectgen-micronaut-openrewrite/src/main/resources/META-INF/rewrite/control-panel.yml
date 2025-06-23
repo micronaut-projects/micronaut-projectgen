@@ -1,0 +1,50 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.control-panel
+displayName: Add Control Panel dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.control-panel.dependencies
+  - io.micronaut.starter.feature.control-panel.micronaut.documentation
+  - io.micronaut.starter.feature.control-panel.configuration
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.control-panel.dependencies
+displayName: Add Control Panel dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.controlpanel
+      artifactId: micronaut-control-panel-management
+      configuration: developmentOnly
+      scope: provided
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.controlpanel
+      artifactId: micronaut-control-panel-ui
+      configuration: developmentOnly
+      scope: provided
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.control-panel.micronaut.documentation
+displayName: Append a link to Micronaut Control Panel documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-control-panel/latest/guide/index.html
+      appendNewline: true
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.control-panel.configuration
+displayName: Add Control Panel configuration
+preconditions:
+  - io.micronaut.starter.openrewrite.recipes.FindDevProperties
+recipeList:
+  - org.openrewrite.properties.AddProperty:
+      property: endpoints.all.enabled
+      value: true
+  - org.openrewrite.properties.AddProperty:
+      property: endpoints.all.sensitive
+      value: false
+  - org.openrewrite.properties.AddProperty:
+      property: endpoints.health.details-visible
+      value: ANONYMOUS
+  - org.openrewrite.properties.AddProperty:
+      property: endpoints.loggers.write-sensitive
+      value: false
