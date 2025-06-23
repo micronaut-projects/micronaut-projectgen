@@ -123,7 +123,8 @@ public class DefaultRecipeFetcher implements RecipeFetcher {
             var recipe = env.activateRecipes(recipeName);
             return findDevProperties(recipe);
         } catch (RecipeException e) {
-            throw new ConfigurationException("Error activating recipe: " + recipeName, e);
+//            throw new ConfigurationException("Error activating recipe: " + recipeName, e);
+            return Optional.empty();
         }
     }
 
