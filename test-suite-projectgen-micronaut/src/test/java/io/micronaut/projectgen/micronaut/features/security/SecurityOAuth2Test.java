@@ -5,16 +5,28 @@ import io.micronaut.projectgen.core.io.PreviewGenerator;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.OptionsFixture;
 import io.micronaut.projectgen.test.BuildTestVerifier;
+import io.micronaut.projectgen.test.ConfigurationUtils;
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @MicronautTest(startApplication = false)
 class SecurityOAuth2Test {
+    @Test
+    void securityOauth2FeaturesConfiguration(PreviewGenerator previewGenerator) throws Exception {
+        Options options = OptionsFixture.defaultGradle().features(List.of("security-oauth2")).build();
+        Map<String, String> project = previewGenerator.generate(options);
+        Properties applicationProperties = ConfigurationUtils.loadApplicationProperties(project);
+        String buildGradle = project.get("build.gradle.kts");
+        assertNotNull(buildGradle);
+        assertEquals("cookie", applicationProperties.getProperty("micronaut.security.authentication"));
+    }
+
     @Test
     void securityOauth2FeaturesAddsTheDependency(PreviewGenerator previewGenerator) throws Exception {
         Options options = OptionsFixture.defaultGradle().features(List.of("security-oauth2")).build();

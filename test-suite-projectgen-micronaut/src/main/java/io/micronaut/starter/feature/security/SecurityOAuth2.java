@@ -78,12 +78,7 @@ public class SecurityOAuth2 extends SecurityFeature implements SecurityAuthentic
     public void apply(GeneratorContext generatorContext) {
         OpenRewriteFeature.super.apply(generatorContext);
         ModuleContext module = generatorContext.getRootModule();
-        module.configuration().put(PROPERTY_MICRONAUT_SECURITY_AUTHENTICATION,
-                SecurityAuthenticationModeUtils.resolveSecurityAuthenticationMode(generatorContext)
-                        .orElseGet(this::getSecurityAuthenticationMode).toString());
-
         SecurityOAuth2Configuration oAuth2Config = securityOAuth2Configuration(generatorContext);
-
         Configuration devConfig = module.devConfiguration();
         devConfig.put("micronaut.security.oauth2.clients.default.client-id", oAuth2Config.getClientId());
         devConfig.put("micronaut.security.oauth2.clients.default.client-secret", oAuth2Config.getClientSecret());
