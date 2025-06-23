@@ -89,6 +89,8 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="io/micronaut/projectgen/core/generator/ModuleContext.html#addDependency(io.micronaut.projectgen.core.buildtools.dependencies.Dependency.Builder)" class="member-name-link">addDependency(Dependency.Builder)</a> - Method in record class io.micronaut.projectgen.core.generator.<a href="io/micronaut/projectgen/core/generator/ModuleContext.html" title="class in io.micronaut.projectgen.core.generator">ModuleContext</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="io/micronaut/projectgen/core/generator/ModuleContext.html#addDevConfigurationByRecipeName(java.lang.String)" class="member-name-link">addDevConfigurationByRecipeName(String)</a> - Method in record class io.micronaut.projectgen.core.generator.<a href="io/micronaut/projectgen/core/generator/ModuleContext.html" title="class in io.micronaut.projectgen.core.generator">ModuleContext</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="io/micronaut/projectgen/core/feature/FeatureContext.html#addFeature(io.micronaut.projectgen.core.feature.Feature)" class="member-name-link">addFeature(Feature)</a> - Method in class io.micronaut.projectgen.core.feature.<a href="io/micronaut/projectgen/core/feature/FeatureContext.html" title="class in io.micronaut.projectgen.core.feature">FeatureContext</a></dt>
 <dd>
 <div class="block">Adds a feature to be applied.</div>
@@ -1297,6 +1299,10 @@ loadScripts(document, 'script');</script>
 <dt><a href="io/micronaut/projectgen/core/openrewrite/RecipeFetcher.html#findBootstrapPropertiesByRecipeName(java.lang.String)" class="member-name-link">findBootstrapPropertiesByRecipeName(String)</a> - Method in interface io.micronaut.projectgen.core.openrewrite.<a href="io/micronaut/projectgen/core/openrewrite/RecipeFetcher.html" title="interface in io.micronaut.projectgen.core.openrewrite">RecipeFetcher</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/micronaut/projectgen/openrewrite/DefaultRecipeFetcher.html#findBootstrapPropertiesByRecipeName(java.lang.String)" class="member-name-link">findBootstrapPropertiesByRecipeName(String)</a> - Method in class io.micronaut.projectgen.openrewrite.<a href="io/micronaut/projectgen/openrewrite/DefaultRecipeFetcher.html" title="class in io.micronaut.projectgen.openrewrite">DefaultRecipeFetcher</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/micronaut/projectgen/core/openrewrite/RecipeFetcher.html#findDevPropertiesByRecipeName(java.lang.String)" class="member-name-link">findDevPropertiesByRecipeName(String)</a> - Method in interface io.micronaut.projectgen.core.openrewrite.<a href="io/micronaut/projectgen/core/openrewrite/RecipeFetcher.html" title="interface in io.micronaut.projectgen.core.openrewrite">RecipeFetcher</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/micronaut/projectgen/openrewrite/DefaultRecipeFetcher.html#findDevPropertiesByRecipeName(java.lang.String)" class="member-name-link">findDevPropertiesByRecipeName(String)</a> - Method in class io.micronaut.projectgen.openrewrite.<a href="io/micronaut/projectgen/openrewrite/DefaultRecipeFetcher.html" title="class in io.micronaut.projectgen.openrewrite">DefaultRecipeFetcher</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/micronaut/projectgen/core/feature/AvailableFeatures.html#findFeature(java.lang.String)" class="member-name-link">findFeature(String)</a> - Method in interface io.micronaut.projectgen.core.feature.<a href="io/micronaut/projectgen/core/feature/AvailableFeatures.html" title="interface in io.micronaut.projectgen.core.feature">AvailableFeatures</a></dt>
 <dd>&nbsp;</dd>
@@ -3169,6 +3175,10 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="io/micronaut/projectgen/test/ConfigurationUtils.html#loadBootstrapPropertiesByModule(java.util.Map,java.lang.String)" class="member-name-link">loadBootstrapPropertiesByModule(Map&lt;String, String&gt;, String)</a> - Static method in class io.micronaut.projectgen.test.<a href="io/micronaut/projectgen/test/ConfigurationUtils.html" title="class in io.micronaut.projectgen.test">ConfigurationUtils</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="io/micronaut/projectgen/test/ConfigurationUtils.html#loadDevProperties(java.util.Map)" class="member-name-link">loadDevProperties(Map&lt;String, String&gt;)</a> - Static method in class io.micronaut.projectgen.test.<a href="io/micronaut/projectgen/test/ConfigurationUtils.html" title="class in io.micronaut.projectgen.test">ConfigurationUtils</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/micronaut/projectgen/test/ConfigurationUtils.html#loadDevPropertiesByModule(java.util.Map,java.lang.String)" class="member-name-link">loadDevPropertiesByModule(Map&lt;String, String&gt;, String)</a> - Static method in class io.micronaut.projectgen.test.<a href="io/micronaut/projectgen/test/ConfigurationUtils.html" title="class in io.micronaut.projectgen.test">ConfigurationUtils</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="io/micronaut/projectgen/test/ConfigurationUtils.html#loadPropertiesByPath(java.util.Map,java.lang.String)" class="member-name-link">loadPropertiesByPath(Map&lt;String, String&gt;, String)</a> - Static method in class io.micronaut.projectgen.test.<a href="io/micronaut/projectgen/test/ConfigurationUtils.html" title="class in io.micronaut.projectgen.test">ConfigurationUtils</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/micronaut/projectgen/build/dependencies/StarterCoordinates.html#LOG4J_API" class="member-name-link">LOG4J_API</a> - Static variable in class io.micronaut.projectgen.build.dependencies.<a href="io/micronaut/projectgen/build/dependencies/StarterCoordinates.html" title="class in io.micronaut.projectgen.build.dependencies">StarterCoordinates</a></dt>
@@ -4314,6 +4324,8 @@ loadScripts(document, 'script');</script>
 <dt><a href="io/micronaut/projectgen/build/dependencies/StarterCoordinates.html#SPRING_BOOT_GRADLE_PLUGIN" class="member-name-link">SPRING_BOOT_GRADLE_PLUGIN</a> - Static variable in class io.micronaut.projectgen.build.dependencies.<a href="io/micronaut/projectgen/build/dependencies/StarterCoordinates.html" title="class in io.micronaut.projectgen.build.dependencies">StarterCoordinates</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/micronaut/projectgen/build/dependencies/StarterCoordinates.html#SPRING_BOOT_STARTER_PARENT" class="member-name-link">SPRING_BOOT_STARTER_PARENT</a> - Static variable in class io.micronaut.projectgen.build.dependencies.<a href="io/micronaut/projectgen/build/dependencies/StarterCoordinates.html" title="class in io.micronaut.projectgen.build.dependencies">StarterCoordinates</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/micronaut/projectgen/test/ConfigurationUtils.html#SRC_MAIN_RESOURCES_APPLICATION_DEV_PROPERTIES" class="member-name-link">SRC_MAIN_RESOURCES_APPLICATION_DEV_PROPERTIES</a> - Static variable in class io.micronaut.projectgen.test.<a href="io/micronaut/projectgen/test/ConfigurationUtils.html" title="class in io.micronaut.projectgen.test">ConfigurationUtils</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/micronaut/projectgen/test/ConfigurationUtils.html#SRC_MAIN_RESOURCES_APPLICATION_PROPERTIES" class="member-name-link">SRC_MAIN_RESOURCES_APPLICATION_PROPERTIES</a> - Static variable in class io.micronaut.projectgen.test.<a href="io/micronaut/projectgen/test/ConfigurationUtils.html" title="class in io.micronaut.projectgen.test">ConfigurationUtils</a></dt>
 <dd>&nbsp;</dd>
