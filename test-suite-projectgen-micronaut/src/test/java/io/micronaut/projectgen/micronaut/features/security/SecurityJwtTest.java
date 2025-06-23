@@ -5,16 +5,29 @@ import io.micronaut.projectgen.core.io.PreviewGenerator;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.OptionsFixture;
 import io.micronaut.projectgen.test.BuildTestVerifier;
+import io.micronaut.projectgen.test.ConfigurationUtils;
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @MicronautTest(startApplication = false)
 class SecurityJwtTest {
+    @Test
+    void securityJwtFeaturesConfiguration(PreviewGenerator previewGenerator) throws Exception {
+        Options options = OptionsFixture.defaultGradle().features(List.of("security-jwt")).build();
+        Map<String, String> project = previewGenerator.generate(options);
+        Properties applicationProperties = ConfigurationUtils.loadApplicationProperties(project);
+        String buildGradle = project.get("build.gradle.kts");
+        assertNotNull(buildGradle);
+        assertEquals("bearer", applicationProperties.getProperty("micronaut.security.authentication"));
+        assertEquals("${JWT_GENERATOR_SIGNATURE_SECRET:pleaseChangeThisSecretForANewOne}", applicationProperties.getProperty("micronaut.security.token.jwt.signatures.secret.generator.secret"));
+    }
+
     @Test
     void securityJwtFeaturesAddsTheDependency(PreviewGenerator previewGenerator) throws Exception {
         Options options = OptionsFixture.defaultGradle().features(List.of("security-jwt")).build();

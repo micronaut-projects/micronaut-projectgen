@@ -58,7 +58,6 @@ public class SecurityJWT extends SecurityFeature implements SecurityAuthenticati
     public void apply(GeneratorContext generatorContext) {
         OpenRewriteFeature.super.apply(generatorContext);
         ModuleContext module = generatorContext.getRootModule();
-        module.configuration().put(PROPERTY_MICRONAUT_SECURITY_AUTHENTICATION, getSecurityAuthenticationMode().toString());
         Optional<SecurityAuthenticationMode> securityAuthenticationModeOptional = SecurityAuthenticationModeUtils.resolveSecurityAuthenticationMode(generatorContext);
         if (securityAuthenticationModeOptional.isPresent() &&
                 (securityAuthenticationModeOptional.get() == SecurityAuthenticationMode.BEARER || securityAuthenticationModeOptional.get() == SecurityAuthenticationMode.COOKIE)
