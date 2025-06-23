@@ -16,9 +16,7 @@
 package io.micronaut.projectgen.test;
 
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.StringReader;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.Objects;
