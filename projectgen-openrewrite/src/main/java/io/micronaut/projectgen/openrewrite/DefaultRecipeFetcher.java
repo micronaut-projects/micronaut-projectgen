@@ -18,9 +18,12 @@ package io.micronaut.projectgen.openrewrite;
 import io.micronaut.context.exceptions.ConfigurationException;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.buildtools.BuildPlugin;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.buildtools.Scope;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
+import io.micronaut.projectgen.core.buildtools.gradle.GradlePlugin;
+import io.micronaut.projectgen.core.buildtools.maven.MavenPlugin;
 import io.micronaut.projectgen.core.openrewrite.FileContents;
 import io.micronaut.projectgen.core.openrewrite.RecipeFetcher;
 import jakarta.inject.Singleton;
@@ -343,5 +346,47 @@ public class DefaultRecipeFetcher implements RecipeFetcher {
             }
         }
         return Optional.empty();
+    }
+
+    @Override
+    @NonNull
+    public List<BuildPlugin> findAllBuildPluginsByRecipeNameAndBuildTool(@NonNull String recipeName, @NonNull BuildTool buildTool) {
+        try {
+            var recipe = env.activateRecipes(recipeName);
+            return findBuildPlugins(recipe, buildTool);
+        } catch (RecipeException e) {
+//            throw new ConfigurationException("Error activating recipe: " + recipeName, e);
+            return Collections.emptyList();
+        }
+    }
+
+    private List<BuildPlugin> findBuildPlugins(Recipe recipe, BuildTool buildTool) {
+        List<BuildPlugin> plugins = new ArrayList<>();
+        Recipe resolvedRecipe = resolveRecipe(recipe);
+
+        if (buildTool == BuildTool.GRADLE && resolvedRecipe instanceof org.openrewrite.gradle.plugins.AddBuildPlugin addPlugin) {
+            plugins.add(findGradleBuildPlugin(addPlugin));
+        } else if (buildTool == BuildTool.MAVEN && resolvedRecipe instanceof org.openrewrite.maven.AddPlugin addPlugin) {
+            plugins.add(findMavenBuildPlugin(addPlugin));
+        }
+
+        for (Recipe r : resolvedRecipe.getRecipeList()) {
+            Recipe resolvedRecipeChild = resolveRecipe(r);
+            plugins.addAll(findBuildPlugins(resolvedRecipeChild, buildTool));
+        }
+        return plugins;
+    }
+
+    private BuildPlugin findGradleBuildPlugin(org.openrewrite.gradle.plugins.AddBuildPlugin recipe) {
+        return GradlePlugin.builder()
+            .id(recipe.getPluginId())
+            .build();
+    }
+
+    private BuildPlugin findMavenBuildPlugin(org.openrewrite.maven.AddPlugin recipe) {
+        return MavenPlugin.builder()
+            .groupId(recipe.getGroupId())
+            .artifactId(recipe.getArtifactId())
+            .build();
     }
 }

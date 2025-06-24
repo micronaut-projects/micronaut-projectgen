@@ -240,6 +240,25 @@ public record ModuleContext(CoordinateResolver coordinateResolver,
         }
     }
 
+    public void addBuildPluginsByRecipeName(Options options, String recipeName) {
+        List<BuildPlugin> plugins = new ArrayList<>();
+
+        if (OptionUtils.hasMavenBuildTool(options)) {
+            for (BuildPlugin plugin : recipeFetcher.findAllBuildPluginsByRecipeNameAndBuildTool(recipeName, BuildTool.MAVEN)) {
+                plugins.add(plugin);
+            }
+        }
+        if (OptionUtils.hasGradleBuildTool(options)) {
+            for (BuildPlugin plugin : recipeFetcher.findAllBuildPluginsByRecipeNameAndBuildTool(recipeName, BuildTool.GRADLE)) {
+                plugins.add(plugin);
+            }
+        }
+
+        for (BuildPlugin plugin : plugins) {
+            addBuildPlugin(plugin);
+        }
+    }
+
     /**
      *
      * @param recipeName recipe Name
