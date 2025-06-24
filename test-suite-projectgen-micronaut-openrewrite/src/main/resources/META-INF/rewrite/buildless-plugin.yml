@@ -1,6 +1,6 @@
 type: specs.openrewrite.org/v1beta/recipe
-name: io.micronaut.starter.feature.buildless
-displayName: Add Buildless Plugin and link to README
+name: io.micronaut.starter.feature.buildless-plugin
+displayName: Add Buildless Plugin
 recipeList:
   - org.openrewrite.gradle.plugins.AddBuildPlugin:
       pluginId: build.less

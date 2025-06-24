@@ -28,4 +28,13 @@ class BuildlessTest {
         System.out.println(buildGradle);
         assertTrue(verifier.hasBuildPlugin("build.less"), buildGradle);
     }
+
+    @Test
+    void buildlessFeaturesAddsTheLinkInReadmeFile(PreviewGenerator previewGenerator) throws Exception {
+        Options options = OptionsFixture.defaultGradle().features(List.of("buildless")).build();
+        Map<String, String> project = previewGenerator.generate(options);
+        String readme = project.get("README.md");
+        assertNotNull(readme);
+        assertTrue(readme.contains("https://docs.less.build/"));
+    }
 }
