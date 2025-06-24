@@ -21,6 +21,7 @@ import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.projectgen.micronaut.template.aws.dynamodbConfigurationGroovy;
@@ -41,11 +42,12 @@ import io.micronaut.projectgen.micronaut.features.validator.MicronautValidationF
 import io.micronaut.projectgen.micronaut.features.validator.ValidationFeature;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.dynamodb.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class DynamoDb implements AwsFeature {
+public class DynamoDb implements AwsFeature, OpenRewriteFeature {
 
-    public static final String ARTIFACTID_DYNAMODB = "dynamodb";
     public static final String NAME = "dynamodb";
 
     private final AwsV2Sdk awsV2Sdk;
@@ -65,13 +67,7 @@ public class DynamoDb implements AwsFeature {
     @Override
     public void apply(GeneratorContext generatorContext) {
         ModuleContext module = generatorContext.getRootModule();
-        Dependency.Builder dynamoDbDependency = Dependency.builder()
-                .groupId(GROUP_ID_AWS_SDK_V2)
-                .artifactId(ARTIFACTID_DYNAMODB)
-                .compile();
-
-        AwsSdkDependenciesUtils.dependencies(generatorContext, dynamoDbDependency)
-                .forEach(module::addDependency);
+        OpenRewriteFeature.super.apply(generatorContext);
 
         String repositoryFile = generatorContext.getSourcePath("/{packagePath}/DynamoRepository");
         module.addTemplate(generatorContext.getOptions().language(), "dynamoRepository", repositoryFile,
@@ -127,12 +123,8 @@ public class DynamoDb implements AwsFeature {
     }
 
     @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-aws/latest/guide/#dynamodb";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.dynamodb");
     }
 
-    @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://aws.amazon.com/dynamodb/";
-    }
 }
