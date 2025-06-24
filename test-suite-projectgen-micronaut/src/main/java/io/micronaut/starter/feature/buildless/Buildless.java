@@ -18,6 +18,7 @@ package io.micronaut.starter.feature.buildless;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.rocker.RockerWritable;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.projectgen.micronaut.ApplicationType;
@@ -30,9 +31,11 @@ import io.micronaut.projectgen.core.buildtools.gradle.GradleSpecificFeature;
 import io.micronaut.projectgen.micronaut.template.buildtools.gradle.buildlessGradlePlugin;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.buildless.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class Buildless implements CommunityFeature, GradleSpecificFeature {
+public class Buildless implements CommunityFeature, OpenRewriteFeature {
     public static final String NAME = "buildless";
     public static final String BUILDLESS_PLUGIN_ARTIFACT = "buildless-plugin-gradle";
     private static final String FEATURE_NAME_BUILDLESS = "buildless";
@@ -88,12 +91,18 @@ public class Buildless implements CommunityFeature, GradleSpecificFeature {
         return plugin.build();
     }
 
+//    @Override
+//    public void apply(GeneratorContext generatorContext) {
+//        ModuleContext module = generatorContext.getRootModule();
+//        if (OptionUtils.hasGradleBuildTool(generatorContext.getOptions())) {
+//            module.buildProperties().put("org.gradle.caching", "true");
+//            module.addBuildPlugin(buildPlugin(generatorContext));
+//        }
+//    }
+
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
-        if (OptionUtils.hasGradleBuildTool(generatorContext.getOptions())) {
-            module.buildProperties().put("org.gradle.caching", "true");
-            module.addBuildPlugin(buildPlugin(generatorContext));
-        }
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.buildless");
     }
+
 }
