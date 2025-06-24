@@ -40,6 +40,7 @@ public interface OpenRewriteFeature extends Feature {
             rootModule.addBootstrapConfigurationByRecipeName(recipeName);
             rootModule.addDevConfigurationByRecipeName(recipeName);
             rootModule.addDependenciesByRecipeName(generatorContext.getOptions(), recipeName);
+            rootModule.addBuildPluginsByRecipeName(generatorContext.getOptions(), recipeName);
             rootModule.addTemplatesByRecipeName(recipeName);
         }
     }
