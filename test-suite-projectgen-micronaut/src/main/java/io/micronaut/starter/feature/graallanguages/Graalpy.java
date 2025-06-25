@@ -18,6 +18,7 @@ package io.micronaut.starter.feature.graallanguages;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.rocker.RockerWritable;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
@@ -32,21 +33,14 @@ import io.micronaut.projectgen.micronaut.template.graallanguages.graalPyMavenPlu
 import io.micronaut.projectgen.core.options.JdkVersion;
 import jakarta.inject.Singleton;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 @Requires(property = "micronaut.starter.feature.graalpy.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class Graalpy implements MinJdkFeature, MavenSpecificFeature {
+public class Graalpy implements MinJdkFeature, MavenSpecificFeature, OpenRewriteFeature {
     public static final String NAME = "graalpy";
-
-    private static final String GROUP_ID_GRAALVM_PYTHON = "org.graalvm.python";
-    private static final String ARTIFACT_ID_GRAALPY_MAVEN_PLUGIN = "graalpy-maven-plugin";
-    private static final String ARTIFACT_ID_MICRONAUT_GRAALPY = "micronaut-graalpy";
-    private static final Dependency MICRONAUT_GRAALPY_DEPENDENCY = MicronautDependencyUtils.graalLanguagesDependency()
-            .artifactId(ARTIFACT_ID_MICRONAUT_GRAALPY)
-            .compile()
-            .build();
 
     private final CoordinateResolver coordinateResolver;
 
@@ -75,42 +69,17 @@ public class Graalpy implements MinJdkFeature, MavenSpecificFeature {
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
-        addDependencies(module);
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        List<String> recipes = new ArrayList<>();
         if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())) {
-            addGraalPyMavenPlugin(module);
+            recipes.add("io.micronaut.starter.feature.graalpy-maven-plugin");
         }
-    }
-
-    private void addGraalPyMavenPlugin(ModuleContext module) {
-        module.addBuildPlugin(graalpyMavenPlugin());
-    }
-
-    protected MavenPlugin graalpyMavenPlugin() {
-        return MavenPlugin.builder()
-                .groupId(GROUP_ID_GRAALVM_PYTHON)
-                .artifactId(ARTIFACT_ID_GRAALPY_MAVEN_PLUGIN)
-                .extension(new RockerWritable(graalPyMavenPlugin.template(pythonPackages())))
-                .build();
+        recipes.add("io.micronaut.starter.feature.graalpy");
+        return recipes;
     }
 
     protected List<String> pythonPackages() {
         return Collections.emptyList();
-    }
-
-    protected void addDependencies(ModuleContext module) {
-        module.addDependency(MICRONAUT_GRAALPY_DEPENDENCY);
-    }
-
-    @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://graalvm.org/python";
-    }
-
-    @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-graal-languages/latest/guide/";
     }
 
     @Override

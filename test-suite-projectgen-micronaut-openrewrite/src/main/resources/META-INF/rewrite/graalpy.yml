@@ -1,0 +1,35 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.graalpy
+displayName: Add Graalpy dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.graalpy.dependencies
+  - io.micronaut.starter.feature.graalpy.micronaut.documentation
+  - io.micronaut.starter.feature.graalpy.documentation.thirdparty
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.graalpy.dependencies
+displayName: Add Graalpy dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.graal-languages
+      artifactId: micronaut-graalpy
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.graalpy.micronaut.documentation
+displayName: Append a link to Micronaut Graalpy documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-graal-languages/latest/guide/
+      appendNewline: true
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.graalpy.documentation.thirdparty
+displayName: Append a link to Graalpy website
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://graalvm.org/python
+      appendNewline: true

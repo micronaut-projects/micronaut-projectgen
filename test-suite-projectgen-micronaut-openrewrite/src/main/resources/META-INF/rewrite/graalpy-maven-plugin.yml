@@ -1,0 +1,8 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.graalpy-maven-plugin
+displayName: Add Graalpy Maven Plugin
+recipeList:
+  - org.openrewrite.maven.AddPlugin:
+      groupId: org.graalvm.python
+      artifactId: graalpy-maven-plugin
+      executions: <executions><execution><goals><goal>process-graalpy-resources</goal></goals></execution></executions>
