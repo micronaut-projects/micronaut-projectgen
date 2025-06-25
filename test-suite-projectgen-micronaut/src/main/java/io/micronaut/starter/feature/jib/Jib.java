@@ -18,6 +18,7 @@ package io.micronaut.starter.feature.jib;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
@@ -27,9 +28,12 @@ import io.micronaut.projectgen.core.feature.Feature;
 
 import jakarta.inject.Singleton;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.jib.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class Jib implements Feature {
+public class Jib implements OpenRewriteFeature {
 
     @Override
     public String getName() {
@@ -52,14 +56,12 @@ public class Jib implements Feature {
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        List<String> recipes = new ArrayList<>();
         if (OptionUtils.hasGradleBuildTool(generatorContext.getOptions())) {
-            module.addHelpLink("Jib Gradle Plugin", "https://plugins.gradle.org/plugin/com.google.cloud.tools.jib");
-            module.addBuildPlugin(GradlePlugin.builder()
-                    .id("com.google.cloud.tools.jib")
-                    .lookupArtifactId("jib-gradle-plugin")
-                    .build());
+            recipes.add("io.micronaut.starter.feature.jib");
         }
+        return recipes;
     }
+
 }
