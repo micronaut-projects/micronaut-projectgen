@@ -14,23 +14,23 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.*;
 
 @MicronautTest(startApplication = false)
-class AnnotationApiTest {
+class HibernateValidatorTest {
     @Test
-    void annotationApiFeaturesAddsTheDependency(PreviewGenerator previewGenerator) throws Exception {
-        Options options = OptionsFixture.defaultGradle().features(List.of("annotation-api")).build();
+    void hibernateValidatorFeaturesAddsTheDependency(PreviewGenerator previewGenerator) throws Exception {
+        Options options = OptionsFixture.defaultGradle().features(List.of("hibernate-validator")).build();
         Map<String, String> project = previewGenerator.generate(options);
         String buildGradle = project.get("build.gradle.kts");
         assertNotNull(buildGradle);
         BuildTestVerifier verifier = BuildTestVerifier.of(buildGradle, options);
-        assertTrue(verifier.hasDependency("jakarta.annotation", "jakarta.annotation-api", Scope.COMPILE), buildGradle);
+        assertTrue(verifier.hasDependency("io.micronaut.beanvalidation", "micronaut-hibernate-validator", Scope.COMPILE), buildGradle);
     }
 
     @Test
-    void annotationApiFeaturesAddsTheLinkInReadmeFile(PreviewGenerator previewGenerator) throws Exception {
-        Options options = OptionsFixture.defaultGradle().features(List.of("annotation-api")).build();
+    void hibernateValidatorFeaturesAddsTheLinkInReadmeFile(PreviewGenerator previewGenerator) throws Exception {
+        Options options = OptionsFixture.defaultGradle().features(List.of("hibernate-validator")).build();
         Map<String, String> project = previewGenerator.generate(options);
         String readme = project.get("README.md");
         assertNotNull(readme);
-        assertTrue(readme.contains("https://jakarta.ee/specifications/annotations/"));
+        assertTrue(readme.contains("https://micronaut-projects.github.io/micronaut-hibernate-validator/latest/guide/index.html"));
     }
 }
