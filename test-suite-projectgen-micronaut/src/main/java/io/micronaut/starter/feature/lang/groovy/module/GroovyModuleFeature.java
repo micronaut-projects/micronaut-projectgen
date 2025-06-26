@@ -34,22 +34,6 @@ import io.micronaut.projectgen.core.options.Language;
 public interface GroovyModuleFeature extends Feature {
 
     @Override
-    default void apply(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
-        Dependency.Builder builder = Dependency.builder()
-                .groupId("org.apache.groovy")
-                .artifactId(getName());
-        if (generatorContext.getLanguage() == Language.GROOVY) {
-            // if language is Groovy, add to compile classpath
-            builder.compile();
-        } else {
-            // if test is Spock, add to test classpath; validation fails otherwise
-            builder.test();
-        }
-        module.addDependency(builder);
-    }
-
-    @Override
     @NonNull
     default String getCategory() {
         return Category.GROOVY_MODULE;
