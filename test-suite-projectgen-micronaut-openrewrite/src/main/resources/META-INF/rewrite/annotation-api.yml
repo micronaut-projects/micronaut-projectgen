@@ -1,0 +1,25 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.annotation-api
+displayName: Add Annotation Api dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.annotation-api.dependencies
+  - io.micronaut.starter.feature.annotation-api.documentation.thirdparty
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.annotation-api.dependencies
+displayName: Add Annotation Api dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: jakarta.annotation
+      artifactId: jakarta.annotation-api
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.annotation-api.documentation.thirdparty
+displayName: Append a link to Annotation Api documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://jakarta.ee/specifications/annotations/
+      appendNewline: true
