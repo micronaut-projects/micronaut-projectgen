@@ -1,0 +1,16 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.groovy-sql
+displayName: Add Groovy Sql dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.groovy-sql.dependencies
+  - io.micronaut.starter.feature.groovy-sql-docs
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.groovy-sql.dependencies
+displayName: Add Groovy Sql dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: org.apache.groovy
+      artifactId: groovy-sql
+      configuration: implementation
+      scope: compile
