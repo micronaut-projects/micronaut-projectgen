@@ -19,6 +19,7 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.projectgen.micronaut.ApplicationType;
@@ -31,20 +32,14 @@ import io.micronaut.starter.feature.server.MicronautServerDependent;
 import io.micronaut.projectgen.core.options.Language;
 import jakarta.inject.Singleton;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils.GROUP_ID_IO_MICRONAUT_OPENAPI;
 
 @Requires(property = "micronaut.starter.feature.openapi.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class OpenApi implements Feature, MicronautServerDependent {
-
-    public static final String ARTIFACT_ID_MICRONAUT_OPENAPI = "micronaut-openapi";
-    public static final String ARTIFACT_ID_MICRONAUT_OPENAPI_ANNOTATIONS = "micronaut-openapi-annotations";
-    private static final String OPENAPI_VERSION_MAVEN_PROPERTY = "micronaut.openapi.version";
-
-    private static final Dependency DEPENDENCY_OPENAPI_ANNOTATIONS = MicronautDependencyUtils.openapi()
-            .artifactId(ARTIFACT_ID_MICRONAUT_OPENAPI_ANNOTATIONS)
-            .compileOnly()
-            .build();
+public class OpenApi implements OpenRewriteFeature, MicronautServerDependent {
 
     @Override
     @NonNull
@@ -70,34 +65,18 @@ public class OpenApi implements Feature, MicronautServerDependent {
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
-        module.addDependency(micronautOpenApiProcessor(generatorContext));
-        module.addDependency(DEPENDENCY_OPENAPI_ANNOTATIONS);
-        if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions()) && generatorContext.getLanguage() == Language.GROOVY) {
-            module.addDependency(MicronautDependencyUtils.openapi()
-                    .artifactId(ARTIFACT_ID_MICRONAUT_OPENAPI)
-                    .compile());
-        }
-    }
-
-    public static Dependency.Builder micronautOpenApiProcessor(GeneratorContext generatorContext) {
-        return MicronautDependencyUtils.annotationProcessor(generatorContext.getBuildTool(),
-                GROUP_ID_IO_MICRONAUT_OPENAPI, ARTIFACT_ID_MICRONAUT_OPENAPI, OPENAPI_VERSION_MAVEN_PROPERTY);
-    }
-
-    @Override
     public String getCategory() {
         return Category.API;
     }
 
     @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://www.openapis.org";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        List<String> recipes = new ArrayList<>();
+        recipes.add("io.micronaut.starter.feature.openapi");
+        if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions()) && generatorContext.getLanguage() == Language.GROOVY) {
+            recipes.add("io.micronaut.starter.feature.openapi-maven");
+        }
+            return recipes;
     }
 
-    @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-openapi/latest/guide/index.html";
-    }
 }

@@ -1,0 +1,8 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.openapi-maven
+displayName: Add Openapi dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.openapi
+      artifactId: micronaut-openapi
+      scope: provided

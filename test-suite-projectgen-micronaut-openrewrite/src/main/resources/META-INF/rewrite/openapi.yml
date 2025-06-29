@@ -1,0 +1,36 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.openapi
+displayName: Add Openapi dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.openapi.dependencies
+  - io.micronaut.starter.feature.openapi-processor
+  - io.micronaut.starter.feature.openapi.micronaut.documentation
+  - io.micronaut.starter.feature.openapi.documentation.thirdparty
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.openapi.dependencies
+displayName: Add Openapi dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.openapi
+      artifactId: micronaut-openapi-annotations
+      configuration: compileOnly
+      scope: provided
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.openapi.micronaut.documentation
+displayName: Append a link to Micronaut Openapi documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-openapi/latest/guide/index.html
+      appendNewline: true
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.openapi.documentation.thirdparty
+displayName: Append a link to Openapi website
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://www.openapis.org
+      appendNewline: true
