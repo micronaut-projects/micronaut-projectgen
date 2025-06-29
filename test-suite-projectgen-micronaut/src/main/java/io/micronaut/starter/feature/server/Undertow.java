@@ -23,12 +23,16 @@ import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
 
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import jakarta.inject.Singleton;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.undertow.server.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class Undertow extends AbstractServletFeature {
+public class Undertow extends AbstractServletFeature implements OpenRewriteFeature {
 
     @Override
     public String getName() {
@@ -46,19 +50,13 @@ public class Undertow extends AbstractServletFeature {
     }
 
     @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-servlet/latest/guide/index.html#undertow";
-    }
-
-    @Override
-    public void doApply(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        List<String> recipes = new ArrayList<>();
+        recipes.add("io.micronaut.starter.feature.undertow-server-docs");
         if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())) {
-            module.addDependency(Dependency.builder()
-                    .groupId("io.micronaut.servlet")
-                    .artifactId("micronaut-http-server-undertow")
-                    .compile());
+            recipes.add("io.micronaut.starter.feature.undertow-server");
         }
+            return recipes;
     }
 
     @Override
