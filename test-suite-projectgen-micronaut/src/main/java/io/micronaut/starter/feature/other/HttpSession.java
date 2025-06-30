@@ -35,6 +35,8 @@ import java.util.Map;
 @Requires(property = "micronaut.starter.feature.http.session.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class HttpSession implements OpenRewriteFeature {
+    private static final String RECIPE_HTTP_SESSION = "io.micronaut.starter.feature.http-session";
+    private static final String RECIPE_HTTP_SESSION_REDIS = "io.micronaut.starter.feature.http-session-redis";
 
     @NonNull
     @Override
@@ -59,12 +61,8 @@ public class HttpSession implements OpenRewriteFeature {
 
     @Override
     public List<String> getRecipes(GeneratorContext generatorContext) {
-        List<String> recipes = new ArrayList<>();
-        recipes.add("io.micronaut.starter.feature.http-session");
-        if (generatorContext.isFeaturePresent(RedisLettuce.class)) {
-        recipes.add("io.micronaut.starter.feature.http-session-redis");
-        }
-        return recipes;
+        return generatorContext.isFeaturePresent(RedisLettuce.class)
+            ? List.of(RECIPE_HTTP_SESSION, RECIPE_HTTP_SESSION_REDIS)
+            : List.of(RECIPE_HTTP_SESSION);
     }
-
 }
