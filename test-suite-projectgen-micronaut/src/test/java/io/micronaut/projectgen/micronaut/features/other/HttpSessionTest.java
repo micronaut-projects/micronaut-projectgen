@@ -38,6 +38,11 @@ class HttpSessionTest {
         assertNotNull(buildGradle);
         BuildTestVerifier verifier = BuildTestVerifier.of(buildGradle, options);
         assertTrue(verifier.hasDependency("io.micronaut.session", "micronaut-session", Scope.COMPILE), buildGradle);
+
+        Properties applicationProperties = ConfigurationUtils.loadApplicationProperties(project);
+        assertEquals(StringUtils.TRUE, applicationProperties.getProperty("micronaut.session.http.cookie"));
+        assertEquals(StringUtils.TRUE, applicationProperties.getProperty("micronaut.session.http.header"));
+        assertFalse(applicationProperties.containsKey("micronaut.session.http.redis.enabled"));
     }
 
     @Test
