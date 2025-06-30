@@ -35,28 +35,6 @@ import java.util.List;
 @Requires(property = "micronaut.starter.feature.kotest.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class KoTest implements TestFeature, OpenRewriteFeature {
-    protected static final String ARTIFACT_ID_MICRONAUT_KOTEST5 = "micronaut-test-kotest5";
-
-    protected static final Dependency DEPENDENCY_MICRONAUT_TEST_KOTEST = MicronautDependencyUtils
-            .testDependency()
-            .artifactId(ARTIFACT_ID_MICRONAUT_KOTEST5)
-            .test()
-            .build();
-    protected static final String ARTIFACT_ID_KOTEST_RUNNER_JUNIT_5_JVM = "kotest-runner-junit5-jvm";
-    protected static final String ARTIFACT_ID_KOTEST_ASSERTIONS_CORE_JVM = "kotest-assertions-core-jvm";
-
-    private static final String GROUP_ID_KOTEST = "io.kotest";
-
-    private static final Dependency DEPENDENCY_KOTEST_RUNNER_JUNIT_5_JVM = Dependency.builder()
-            .artifactId(ARTIFACT_ID_KOTEST_RUNNER_JUNIT_5_JVM)
-                    .groupId(GROUP_ID_KOTEST)
-                    .test()
-                    .build();
-    private static final Dependency DEPENDENCY_KOTEST_ASSERTIONS_CORE_JVM = Dependency.builder()
-            .groupId(GROUP_ID_KOTEST)
-            .artifactId(ARTIFACT_ID_KOTEST_ASSERTIONS_CORE_JVM)
-            .test()
-            .build();
 
     @Override
     @NonNull
