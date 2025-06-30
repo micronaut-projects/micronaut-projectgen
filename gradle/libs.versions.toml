@@ -21,6 +21,7 @@ gradle-tooling-api = "8.12"
 sonatype-scan = "3.0.0"
 micronaut-picocli = "5.8.0"
 java-diff-utils = "4.15"
+rewrite-gradle-version = "8.56.1"
 
 [libraries]
 java-diff-utils = { module = 'io.github.java-diff-utils:java-diff-utils', version.ref = 'java-diff-utils' }
@@ -37,7 +38,7 @@ apache-commons-compress = { module = "org.apache.commons:commons-compress", vers
 rewrite-recipe-bom = { module = "org.openrewrite.recipe:rewrite-recipe-bom", version.ref = "rewrite-recipe-bom" }
 rewrite-core = { module = "org.openrewrite:rewrite-core" }
 rewrite-properties = { module = "org.openrewrite:rewrite-properties" }
-rewrite-gradle = { module = "org.openrewrite:rewrite-gradle" }
+rewrite-gradle = { module = "org.openrewrite:rewrite-gradle", version.ref = "rewrite-gradle-version" }
 rewrite-java-dependencies = { module = "org.openrewrite.recipe:rewrite-java-dependencies" }
 rewrite-maven = { module = "org.openrewrite:rewrite-maven" }
 rewrite-java = { module = "org.openrewrite:rewrite-java" }

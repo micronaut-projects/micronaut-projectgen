@@ -21,6 +21,7 @@ import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.feature.LoggingFeature;
 import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
+import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
@@ -29,6 +30,7 @@ import io.micronaut.projectgen.core.rocker.RockerTemplate;
 import io.micronaut.starter.util.VersionInfo;
 import jakarta.inject.Singleton;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Requires(property = "micronaut.starter.feature.log4j2.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
@@ -64,7 +66,15 @@ public class Log4j2 implements LoggingFeature, OpenRewriteFeature {
 
     @Override
     public List<String> getRecipes(GeneratorContext generatorContext) {
-        return List.of("io.micronaut.starter.feature.log4j2");
+        List<String> recipes = new ArrayList<>();
+        recipes.add("io.micronaut.starter.feature.log4j2");
+        if (OptionUtils.hasGradleBuildTool(generatorContext.getOptions())) {
+             recipes.add("io.micronaut.starter.feature.log4j-bom-gradle");
+        }
+        if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())) {
+            recipes.add("io.micronaut.starter.feature.log4j-bom-maven");
+        }
+        return recipes;
     }
 
 }

@@ -2,12 +2,6 @@ type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.log4j2
 displayName: Add Log4j2 dependency
 recipeList:
-  - org.openrewrite.maven.AddManagedDependency:
-      groupId: org.apache.logging.log4j
-      artifactId: log4j-bom
-      scope: import
-      type: pom
-      version: 2.24.2
   - org.openrewrite.java.dependencies.AddDependency:
       groupId: org.apache.logging.log4j
       artifactId: log4j-api
@@ -23,3 +17,4 @@ recipeList:
       artifactId: log4j-slf4j-impl
       configuration: runtimeOnly
       scope: runtime
+
