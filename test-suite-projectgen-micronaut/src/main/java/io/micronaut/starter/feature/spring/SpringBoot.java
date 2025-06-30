@@ -18,6 +18,7 @@ package io.micronaut.starter.feature.spring;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
@@ -25,13 +26,14 @@ import io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils;
 import io.micronaut.projectgen.core.options.Language;
 import jakarta.inject.Singleton;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.spring.boot.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class SpringBoot extends SpringFeature {
+public class SpringBoot extends SpringFeature implements OpenRewriteFeature {
 
     public static final String NAME = "spring-boot";
-    public static final String ARTIFACT_ID_MICRONAUT_SPRING_BOOT_ANNOTATION = "micronaut-spring-boot-annotation";
-    public static final String PROPERTY_MICRONAUT_SPRING_VERSION = "micronaut.spring.version";
 
     public SpringBoot(Spring spring) {
         super(spring);
@@ -53,25 +55,15 @@ public class SpringBoot extends SpringFeature {
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        Dependency.Builder springBoot = MicronautDependencyUtils.springDependency()
-                .artifactId(ARTIFACT_ID_MICRONAUT_SPRING_BOOT_ANNOTATION)
-                .versionProperty(PROPERTY_MICRONAUT_SPRING_VERSION)
-                .template();
-        ModuleContext module = generatorContext.getRootModule();
-        module.addDependency(springBoot.annotationProcessor());
-        module.addDependency(springBoot.testAnnotationProcessor());
-        module.addDependency(Dependency.builder()
-                .groupId("org.springframework.boot")
-                .artifactId("spring-boot-starter-web")
-                .compile());
-        Dependency.Builder micronautSpringBoot = Dependency.builder()
-                .groupId("io.micronaut.spring")
-                .artifactId("micronaut-spring-boot")
-                .runtime();
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        List<String> recipes = new ArrayList<>();
+        recipes.add("io.micronaut.starter.feature.spring-boot");
         if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions()) && generatorContext.getLanguage() == Language.GROOVY) {
-            micronautSpringBoot = micronautSpringBoot.compile();
+            recipes.add("io.micronaut.starter.feature.micronaut-spring-boot-maven");
+        } else {
+            recipes.add("io.micronaut.starter.feature.micronaut-spring-boot");
         }
-        module.addDependency(micronautSpringBoot);
+            return recipes;
     }
+
 }

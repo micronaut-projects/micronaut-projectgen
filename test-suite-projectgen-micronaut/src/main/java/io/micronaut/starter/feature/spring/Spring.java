@@ -20,19 +20,18 @@ import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils;
 import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.Feature;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.spring.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class Spring implements Feature {
+public class Spring implements OpenRewriteFeature {
     public static final String NAME = "spring";
-    private static final String ARTIFACT_ID_MICRONAUT_SPRING_ANNOTATION = "micronaut-spring-annotation";
-    private static final String PROPERTY_MICRONAUT_SPRING_VERSION = "micronaut.spring.version";
-    private static final String GROUP_ID_ORG_SPRINGFRAMEWORK_BOOT = "org.springframework.boot";
-    private static final String ARTIFACT_ID_SPRING_BOOT_STARTER = "spring-boot-starter";
 
     @Override
     public String getName() {
@@ -50,23 +49,13 @@ public class Spring implements Feature {
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
-        module.addDependency(
-                MicronautDependencyUtils.annotationProcessor(generatorContext.getBuildTool(), MicronautDependencyUtils.GROUP_ID_MICRONAUT_SPRING, ARTIFACT_ID_MICRONAUT_SPRING_ANNOTATION, PROPERTY_MICRONAUT_SPRING_VERSION));
-        module.addDependency(Dependency.builder()
-                .groupId(GROUP_ID_ORG_SPRINGFRAMEWORK_BOOT)
-                .artifactId(ARTIFACT_ID_SPRING_BOOT_STARTER)
-                .compile());
-    }
-
-    @Override
     public String getCategory() {
         return Category.SPRING;
     }
 
     @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-spring/latest/guide/index.html";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.spring");
     }
+
 }

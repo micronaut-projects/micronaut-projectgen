@@ -1,24 +1,23 @@
 package io.micronaut.projectgen.demo;
 
-import io.micronaut.configuration.picocli.PicocliRunner;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.buildtools.gradle.GradleDsl;
 import io.micronaut.projectgen.core.generator.ProjectGenerator;
 import io.micronaut.projectgen.core.options.GenericOptionsBuilder;
 import io.micronaut.projectgen.core.options.JdkVersion;
 import io.micronaut.projectgen.core.options.Options;
-import jakarta.inject.Inject;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
+import jakarta.inject.Inject;
+
 import java.io.File;
 import java.util.List;
 
 @Command(
-    name = "projectgen",
-    description = "Generates a project in the supplied folder",
-    mixinStandardHelpOptions = true
+    name = "create",
+    description = "Create a new project"
 )
-public class ProjectGenCommand implements Runnable {
+public class CreateCommand implements Runnable {
     @CommandLine.Option(
         names = { "--output", "-o" },
         required = true,
@@ -32,12 +31,9 @@ public class ProjectGenCommand implements Runnable {
     private List<String> features;
 
     @Inject
-    ProjectGenerator projectGenerator; // <1>
+    ProjectGenerator projectGenerator;
 
-    public static void main(String[] args) {
-        PicocliRunner.run(ProjectGenCommand.class, args);
-    }
-
+    @Override
     public void run() {
         if (!outputDir.exists() || !outputDir.isDirectory()) {
             System.err.println("Provided path is not an existing directory: " + outputDir);
@@ -49,7 +45,7 @@ public class ProjectGenCommand implements Runnable {
                 .artifact("demo-project")
                 .version("1.0.0")
                 .features(features)
-                .buildTools(List.of(BuildTool.GRADLE))
+                .buildTools(List.of(BuildTool.GRADLE, BuildTool.MAVEN))
                 .gradleDsl(GradleDsl.KOTLIN)
                 .java(JdkVersion.JDK_21)
                 .build();

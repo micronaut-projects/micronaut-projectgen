@@ -3,7 +3,7 @@ The following example shows a Micronaut CLI application which generates a projec
 
 [source, java]
 ----
-include::test-suite-helloworld-cli/src/main/java/io/micronaut/projectgen/demo/ProjectGenCommand.java[]
+include::test-suite-helloworld-cli/src/main/java/io/micronaut/projectgen/demo/CreateCommand.java[]
 ----
 
 <1> To generate a project into a folder, you can use the api:projectgen.core.generator.ProjectGenerator[] API.

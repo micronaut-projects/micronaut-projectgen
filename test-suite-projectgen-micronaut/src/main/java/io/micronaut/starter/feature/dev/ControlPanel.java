@@ -19,6 +19,7 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.feature.config.Configuration;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
@@ -29,6 +30,8 @@ import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.starter.feature.other.Management;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 /**
  * Micronaut Control Panel feature.
  *
@@ -37,7 +40,7 @@ import jakarta.inject.Singleton;
  */
 @Requires(property = "micronaut.starter.feature.control.panel.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class ControlPanel implements Feature {
+public class ControlPanel implements OpenRewriteFeature {
 
     public static final String NAME = "control-panel";
 
@@ -71,11 +74,6 @@ public class ControlPanel implements Feature {
     }
 
     @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-control-panel/latest/guide/index.html";
-    }
-
-    @Override
     public boolean isPreview() {
         return true;
     }
@@ -88,16 +86,8 @@ public class ControlPanel implements Feature {
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
-        module.addDependency(MicronautDependencyUtils.controlPanelDependency().artifactId("micronaut-control-panel-ui"));
-        Configuration devConfig = module.devConfiguration();
-
-        module.addDependency(MicronautDependencyUtils.controlPanelDependency().artifactId("micronaut-control-panel-management"));
-        devConfig.put("endpoints.all.enabled", true);
-        devConfig.put("endpoints.all.sensitive", false);
-        devConfig.put("endpoints.health.details-visible", "ANONYMOUS");
-        devConfig.put("endpoints.loggers.write-sensitive", false);
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.control-panel");
     }
 
     @Override

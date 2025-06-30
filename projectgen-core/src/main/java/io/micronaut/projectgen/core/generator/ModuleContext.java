@@ -240,6 +240,25 @@ public record ModuleContext(CoordinateResolver coordinateResolver,
         }
     }
 
+    public void addBuildPluginsByRecipeName(Options options, String recipeName) {
+        List<BuildPlugin> plugins = new ArrayList<>();
+
+        if (OptionUtils.hasMavenBuildTool(options)) {
+            for (BuildPlugin plugin : recipeFetcher.findAllBuildPluginsByRecipeNameAndBuildTool(recipeName, BuildTool.MAVEN)) {
+                plugins.add(plugin);
+            }
+        }
+        if (OptionUtils.hasGradleBuildTool(options)) {
+            for (BuildPlugin plugin : recipeFetcher.findAllBuildPluginsByRecipeNameAndBuildTool(recipeName, BuildTool.GRADLE)) {
+                plugins.add(plugin);
+            }
+        }
+
+        for (BuildPlugin plugin : plugins) {
+            addBuildPlugin(plugin);
+        }
+    }
+
     /**
      *
      * @param recipeName recipe Name
@@ -268,6 +287,15 @@ public record ModuleContext(CoordinateResolver coordinateResolver,
     public void addBootstrapConfigurationByRecipeName(@NonNull String recipeName) {
         Configuration config = getBootstrapConfiguration();
         recipeFetcher.findBootstrapPropertiesByRecipeName(recipeName).ifPresent(properties -> {
+            for (Map.Entry<Object, Object> entry : properties.entrySet()) {
+                config.addNested(entry.getKey().toString(), entry.getValue());
+            }
+        });
+    }
+
+    public void addDevConfigurationByRecipeName(@NonNull String recipeName) {
+        Configuration config = devConfiguration();
+        recipeFetcher.findDevPropertiesByRecipeName(recipeName).ifPresent(properties -> {
             for (Map.Entry<Object, Object> entry : properties.entrySet()) {
                 config.addNested(entry.getKey().toString(), entry.getValue());
             }

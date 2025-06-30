@@ -1,0 +1,25 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.security
+displayName: Add Security dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.security.dependencies
+  - io.micronaut.starter.feature.security.micronaut.documentation
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.security.dependencies
+displayName: Add Security dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.security
+      artifactId: micronaut-security
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.security.micronaut.documentation
+displayName: Append a link to Micronaut Security documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-security/latest/guide/index.html
+      appendNewline: true

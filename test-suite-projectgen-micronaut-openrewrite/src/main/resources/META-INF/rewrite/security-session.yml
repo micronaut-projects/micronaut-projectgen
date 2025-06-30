@@ -1,0 +1,36 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.security-session
+displayName: Add Security Session dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.security-session.dependencies
+  - io.micronaut.starter.feature.security-session.micronaut.documentation
+  - io.micronaut.starter.feature.security-session.configuration
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.security-session.dependencies
+displayName: Add Security Session dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.security
+      artifactId: micronaut-security-session
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.security-session.micronaut.documentation
+displayName: Append a link to Micronaut Security Session documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-security/latest/guide/index.html#session
+      appendNewline: true
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.security-session.configuration
+displayName: Add Security Session configurations
+preconditions:
+  - io.micronaut.starter.openrewrite.recipes.FindApplicationProperties
+recipeList:
+  - org.openrewrite.properties.AddProperty:
+      property: micronaut.security.authentication
+      value: session

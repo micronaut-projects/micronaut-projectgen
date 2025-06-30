@@ -48,7 +48,8 @@ public class GradleOpenRewriteRecipesRunner implements OpenRewriteRecipesRunner 
                 .connect()) {
             connection.newBuild()
                     .forTasks(TASK_REWRITE_RUN)
-                    .withSystemProperties(systemProperties(configuration))
+                .withArguments("-Duser.dir=" + folder.getAbsolutePath())
+                .withSystemProperties(systemProperties(configuration))
                     .setStandardOutput(new ConsumerOutputStream(out))
                     .setStandardError(new ConsumerOutputStream(err))
                     .run();
@@ -59,7 +60,11 @@ public class GradleOpenRewriteRecipesRunner implements OpenRewriteRecipesRunner 
         Map<String, String> systemProperties = new HashMap<>();
         Map<String, Object> configurationSystemProperties = configuration.getSystemProperties();
         for (String k : configurationSystemProperties.keySet()) {
-            systemProperties.put(k, configurationSystemProperties.get(k).toString());
+            Object value = configurationSystemProperties.get(k);
+            if (value != null) {
+                systemProperties.put(k, value.toString());
+            }
+
         }
         return systemProperties;
     }
