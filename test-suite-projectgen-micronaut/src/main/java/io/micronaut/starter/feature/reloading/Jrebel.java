@@ -33,8 +33,10 @@ import java.util.List;
 @Requires(property = "micronaut.starter.feature.jrebel.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Jrebel implements ReloadingFeature, JvmArgumentsFeature, OpenRewriteFeature {
-
     private static final String JVM_ARGUMENT_AGENT_PATH = "-agentpath:~/bin/jrebel/lib/jrebel6/lib/libjrebel64.dylib";
+    private static final String RECIPE_JREBEL_MAVEN_PLUGIN = "io.micronaut.starter.feature.jrebel-maven";
+    private static final String RECIPE_JREBEL_GRADLE_PLUGIN = "io.micronaut.starter.feature.jrebel-gradle";
+    private static final String RECIPE_JREBEL_DOCS = "io.micronaut.starter.feature.jrebel-docs";
 
     @Override
     public String getName() {
@@ -64,11 +66,12 @@ public class Jrebel implements ReloadingFeature, JvmArgumentsFeature, OpenRewrit
     @Override
     public List<String> getRecipes(GeneratorContext generatorContext) {
         List<String> recipes = new ArrayList<>();
-        recipes.add("io.micronaut.starter.feature.jrebel-docs");
+        recipes.add(RECIPE_JREBEL_DOCS);
         if (OptionUtils.hasGradleBuildTool(generatorContext.getOptions())) {
-            recipes.add("io.micronaut.starter.feature.jrebel-gradle");
-        } else {
-            recipes.add("io.micronaut.starter.feature.jrebel-maven");
+            recipes.add(RECIPE_JREBEL_GRADLE_PLUGIN);
+        }
+        if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())) {
+            recipes.add(RECIPE_JREBEL_MAVEN_PLUGIN);
         }
         return recipes;
     }
