@@ -21,17 +21,15 @@ import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.security.csrf.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class SecurityCsrf extends SecurityFeature {
-    private static final String ARTIFACT_ID_MICRONAUT_SECURITY_CSRF = "micronaut-security-csrf";
-    private static final Dependency DEPENDENCY_MICRONAUT_SECURITY_CSRF = MicronautDependencyUtils.securityDependency()
-            .artifactId(ARTIFACT_ID_MICRONAUT_SECURITY_CSRF)
-            .compile()
-            .build();
+public class SecurityCsrf extends SecurityFeature implements OpenRewriteFeature {
 
     public SecurityCsrf(SecurityAnnotations securityAnnotations) {
         super(securityAnnotations);
@@ -54,13 +52,7 @@ public class SecurityCsrf extends SecurityFeature {
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
-        module.addDependency(DEPENDENCY_MICRONAUT_SECURITY_CSRF);
-    }
-
-    @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-security/latest/guide/index.html#csrf";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.security-csrf");
     }
 }

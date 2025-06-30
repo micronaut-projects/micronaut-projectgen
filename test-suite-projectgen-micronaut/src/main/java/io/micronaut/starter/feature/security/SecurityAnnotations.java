@@ -19,16 +19,17 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.starter.feature.server.MicronautServerDependent;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.security.annotations.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class SecurityAnnotations implements Feature, MicronautServerDependent {
-    private static final String ARTIFACT_ID_MICRONAUT_SECURITY_ANNOTATIONS = "micronaut-security-annotations";
-    private static final String PROPERTY_MICRONAUT_SECURITY_VERSION = "micronaut.security.version";
+public class SecurityAnnotations implements OpenRewriteFeature, MicronautServerDependent {
 
     @Override
     public String getName() {
@@ -41,11 +42,8 @@ public class SecurityAnnotations implements Feature, MicronautServerDependent {
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
-        module.addDependency(MicronautDependencyUtils.annotationProcessor(generatorContext.getBuildTool(),
-                MicronautDependencyUtils.GROUP_ID_MICRONAUT_SECURITY,
-                ARTIFACT_ID_MICRONAUT_SECURITY_ANNOTATIONS,
-                PROPERTY_MICRONAUT_SECURITY_VERSION));
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.security-annotations");
     }
+
 }
