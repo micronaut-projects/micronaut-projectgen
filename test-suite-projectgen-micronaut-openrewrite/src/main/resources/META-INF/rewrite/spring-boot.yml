@@ -1,0 +1,23 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.spring-boot
+displayName: Add Spring Boot dependency
+recipeList:
+  - io.micronaut.starter.feature.spring-boot.dependencies
+  - io.micronaut.starter.feature.spring-boot-annotation
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.spring-boot.dependencies
+displayName: Add Spring Boot dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: org.springframework.boot
+      artifactId: spring-boot-starter-web
+      configuration: implementation
+      scope: compile
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.spring
+      artifactId: micronaut-spring-boot-annotation
+      version: ${micronaut.spring.version}
+      configuration: testAnnotationProcessor
+      scope: test
+

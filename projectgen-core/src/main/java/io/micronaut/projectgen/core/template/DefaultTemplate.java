@@ -16,7 +16,6 @@
 package io.micronaut.projectgen.core.template;
 
 import io.micronaut.core.annotation.NonNull;
-import io.micronaut.core.util.StringUtils;
 
 public abstract class DefaultTemplate implements Template {
 

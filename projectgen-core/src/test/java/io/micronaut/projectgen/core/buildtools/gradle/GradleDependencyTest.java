@@ -2,6 +2,8 @@ package io.micronaut.projectgen.core.buildtools.gradle;
 
 import io.micronaut.projectgen.core.buildtools.Scope;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
+import io.micronaut.projectgen.core.feature.AvailableFeatures;
+import io.micronaut.projectgen.core.generator.ContextFactory;
 import io.micronaut.projectgen.core.generator.DefaultProjectGenerator;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.generator.Project;
@@ -13,18 +15,23 @@ import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
 import jakarta.inject.Inject;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @MicronautTest(startApplication = false)
 class GradleDependencyTest {
     @Inject
-    DefaultProjectGenerator projectGenerator;
+    ContextFactory contextFactory;
+
+    @Inject
+    List<AvailableFeatures> availableFeaturesList;
 
     @Test
     void gradleDependencyWithComments() {
-        Options options = GenericOptionsBuilder.builder().name("demo").build();
-        Project project = NameUtils.parse(options.name());
-        GeneratorContext generatorContext = projectGenerator.createGeneratorContext(project, options, ConsoleOutput.NOOP);
+        Options options = GenericOptionsBuilder.builder().packageName("com.example").name("demo").build();
+        Project project = NameUtils.parse(options);
+        GeneratorContext generatorContext = contextFactory.createGeneratorContext(availableFeaturesList, options, ConsoleOutput.NOOP);
         GradleDependency gradleDependency = new GradleDependency(
             Dependency.builder().groupId("org.codehaus.groovy").artifactId("groovy-nio").version("3.0.5").scope(Scope.COMPILE).build(),
             options,

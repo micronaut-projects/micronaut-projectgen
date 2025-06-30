@@ -21,6 +21,7 @@ import io.micronaut.projectgen.core.feature.*;
 import io.micronaut.projectgen.core.io.ConsoleOutput;
 import io.micronaut.projectgen.core.openrewrite.RecipeFetcher;
 import io.micronaut.projectgen.core.options.Options;
+import io.micronaut.projectgen.core.utils.NameUtils;
 import jakarta.inject.Singleton;
 import java.util.Collections;
 import java.util.IdentityHashMap;
@@ -98,6 +99,26 @@ public class ContextFactory {
             featureList,
             coordinateResolver,
             recipeFetcher);
+    }
+
+    /**
+     *
+     * @param availableFeaturesList AvailableFeatures List
+     * @param options Options
+     * @param consoleOutput ConsoleOutput
+     * @return A Generator Context
+     */
+    public GeneratorContext createGeneratorContext(List<AvailableFeatures> availableFeaturesList,
+                                                   Options options,
+                                                   ConsoleOutput consoleOutput) {
+        List<String> selectedFeatures = options.features();
+        AvailableFeatures availableFeatures = availableFeaturesList.stream()
+            .filter(feat -> feat.supports(options))
+            .findFirst()
+            .orElseThrow();
+        FeatureContext featureContext = createFeatureContext(availableFeatures, selectedFeatures, options);
+        Project project = NameUtils.parse(options);
+        return createGeneratorContext(project, featureContext, consoleOutput);
     }
 
 }

@@ -55,6 +55,23 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
+/**
+ *
+ * @param coordinateResolver Coordinate resovler
+ * @param recipeFetcher Recipe Fetcher
+ * @param moduleAttributes Module Attributes
+ * @param buildProperties Build Properties
+ * @param configuration Configuration
+ * @param configurationByEnvironment Configuration by environment
+ * @param bootstrapConfiguration Bootstrap Configuration
+ * @param bootstrapConfigurationByEnvironment Bootstrap Configuration By Environment
+ * @param dependencyContext Dependency Context
+ * @param buildPlugins Build Plugins
+ * @param templates Templates
+ * @param profiles Profiles
+ * @param repositories Repositories
+ * @param helpTemplates Help Templates
+ */
 public record ModuleContext(CoordinateResolver coordinateResolver,
                             RecipeFetcher recipeFetcher,
                             ModuleAttributes moduleAttributes,
@@ -70,6 +87,7 @@ public record ModuleContext(CoordinateResolver coordinateResolver,
                             Set<Repository> repositories,
                             List<Writable> helpTemplates) {
 
+    @SuppressWarnings("ParameterNumber")
     public ModuleContext(CoordinateResolver coordinateResolver,
                          RecipeFetcher recipeFetcher,
                          ModuleAttributes moduleAttributes,
@@ -222,6 +240,25 @@ public record ModuleContext(CoordinateResolver coordinateResolver,
         }
     }
 
+    public void addBuildPluginsByRecipeName(Options options, String recipeName) {
+        List<BuildPlugin> plugins = new ArrayList<>();
+
+        if (OptionUtils.hasMavenBuildTool(options)) {
+            for (BuildPlugin plugin : recipeFetcher.findAllBuildPluginsByRecipeNameAndBuildTool(recipeName, BuildTool.MAVEN)) {
+                plugins.add(plugin);
+            }
+        }
+        if (OptionUtils.hasGradleBuildTool(options)) {
+            for (BuildPlugin plugin : recipeFetcher.findAllBuildPluginsByRecipeNameAndBuildTool(recipeName, BuildTool.GRADLE)) {
+                plugins.add(plugin);
+            }
+        }
+
+        for (BuildPlugin plugin : plugins) {
+            addBuildPlugin(plugin);
+        }
+    }
+
     /**
      *
      * @param recipeName recipe Name
@@ -256,6 +293,15 @@ public record ModuleContext(CoordinateResolver coordinateResolver,
         });
     }
 
+    public void addDevConfigurationByRecipeName(@NonNull String recipeName) {
+        Configuration config = devConfiguration();
+        recipeFetcher.findDevPropertiesByRecipeName(recipeName).ifPresent(properties -> {
+            for (Map.Entry<Object, Object> entry : properties.entrySet()) {
+                config.addNested(entry.getKey().toString(), entry.getValue());
+            }
+        });
+    }
+
     /**
      * Adds a template.
      * @param name The name of the template
@@ -271,8 +317,6 @@ public record ModuleContext(CoordinateResolver coordinateResolver,
                 ? path
                 : moduleAttributes().getName() + "/" + path, rockerModel));
     }
-
-
 
     /**
      *
@@ -409,5 +453,9 @@ public record ModuleContext(CoordinateResolver coordinateResolver,
         return getDependencies().stream()
             .filter(dependency -> dependency.getGroupId().equals(groupId))
             .count();
+    }
+
+    public Configuration devBootstrapConfiguration() {
+        return getBootstrapConfigurationByEnvironment(Environment.DEVELOPMENT);
     }
 }

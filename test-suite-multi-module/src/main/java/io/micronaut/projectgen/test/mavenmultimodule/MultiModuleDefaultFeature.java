@@ -15,24 +15,16 @@ import java.util.Set;
 
 @Singleton
 public class MultiModuleDefaultFeature implements DefaultFeature {
-    private final Maven maven;
-    private final Gradle gradle;
     private final ApplicationModule applicationModule;
     private final LibraryModule libraryModule;
     private final RootModule rootModule;
-    private final Properties properties;
 
-    public MultiModuleDefaultFeature(Maven maven, Gradle gradle,
-                                     ApplicationModule applicationModule,
+    public MultiModuleDefaultFeature(ApplicationModule applicationModule,
                                      LibraryModule libraryModule,
-                                     RootModule rootModule,
-                                     Properties properties) {
-        this.maven = maven;
-        this.gradle = gradle;
+                                     RootModule rootModule) {
         this.applicationModule = applicationModule;
         this.libraryModule = libraryModule;
         this.rootModule = rootModule;
-        this.properties = properties;
     }
 
     @Override
@@ -47,13 +39,6 @@ public class MultiModuleDefaultFeature implements DefaultFeature {
 
     @Override
     public void processSelectedFeatures(FeatureContext featureContext) {
-        featureContext.addFeatureIfNotPresent(ConfigurationFeature.class, properties);
-        if (OptionUtils.hasMavenBuildTool(featureContext.getOptions())) {
-            featureContext.addFeatureIfNotPresent(Maven.class, maven);
-        }
-        if (OptionUtils.hasGradleBuildTool(featureContext.getOptions())) {
-            featureContext.addFeatureIfNotPresent(Gradle.class, gradle);
-        }
         featureContext.addFeatureIfNotPresent(ApplicationModule.class, applicationModule);
         featureContext.addFeatureIfNotPresent(LibraryModule.class, libraryModule);
         featureContext.addFeatureIfNotPresent(RootModule.class, rootModule);

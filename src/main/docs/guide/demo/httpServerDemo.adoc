@@ -1,0 +1,14 @@
+The following controller renders an HTML with a button that downloads a ZIP file with a project:
+
+[source, java]
+----
+include::test-suite-helloworld-http/src/main/java/io/micronaut/projectgen/demo/HomeController.java[]
+----
+
+NOTE: To render server-side HTML, use https://micronaut-projects.github.io/micronaut-views/latest/guide/[Micronaut Views].
+
+
+[source, java]
+----
+include::test-suite-helloworld-http/src/test/java/io/micronaut/projectgen/demo/FeaturesTest.java[]
+----

@@ -16,7 +16,11 @@
 package io.micronaut.projectgen.http.server;
 
 import io.micronaut.context.annotation.Secondary;
+import io.micronaut.core.annotation.Internal;
+import io.micronaut.core.annotation.NonNull;
+import io.micronaut.core.annotation.Nullable;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
+import io.micronaut.projectgen.core.buildtools.gradle.GradleDsl;
 import io.micronaut.projectgen.core.options.GenericOptionsBuilder;
 import io.micronaut.projectgen.core.options.JdkVersion;
 import io.micronaut.projectgen.core.options.Language;
@@ -24,63 +28,81 @@ import io.micronaut.projectgen.core.options.Options;
 import jakarta.inject.Singleton;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+/**
+ * Default implementation of {@link OptionsBuilder}.
+ */
 @Secondary
 @Singleton
+@Internal
 public class DefaultOptionsBuilder implements OptionsBuilder {
-    private static final String FIELD_NAME = "name";
-    private static final String FIELD_LANG = "lang";
-    private static final String FIELD_BUILD = "build";
-    private static final String FIELD_JAVA = "java";
-    private static final String FIELD_FEATURES = "features";
+    protected static final String FIELD_NAME = "name";
+    protected static final String FIELD_LANG = "lang";
+    protected static final String FIELD_BUILD = "build";
+    protected static final String FIELD_JAVA = "java";
+    protected static final String FIELD_GRADLE_DSL = "gradleDsl";
+    protected static final String FIELD_FEATURES = "features";
+    protected static final String FIELD_PACKAGE_NAME = "packageName";
+    protected static final String GROUP = "group";
+    protected static final String FIELD_ARTIFACT = "artifact";
+    protected  static final String VERSION = "version";
 
     @Override
     public Options createOptions(Map<String, Object> form) {
         return createOptionsBuilder(form).build();
     }
 
-    protected GenericOptionsBuilder createOptionsBuilder(Map<String, Object> form) {
+    /**
+     *
+     * @param form form
+     * @return Builder
+     */
+    @NonNull
+    protected GenericOptionsBuilder createOptionsBuilder(@Nullable Map<String, Object> form) {
         GenericOptionsBuilder builder = GenericOptionsBuilder.builder();
-        getField(form, FIELD_NAME).ifPresent(builder::name);
+        if (form != null) {
+            getField(form, VERSION).ifPresent(builder::version);
+            getField(form, FIELD_ARTIFACT).ifPresent(builder::artifact);
+            getField(form, GROUP).ifPresent(builder::group);
+            getField(form, FIELD_PACKAGE_NAME).ifPresent(builder::packageName);
+            getField(form, FIELD_NAME).ifPresent(builder::name);
+            List<BuildTool> buildTools = new ArrayList<>();
+            for (String bt : getFieldList(form, FIELD_BUILD)) {
+                BuildTool.of(bt).ifPresent(buildTools::add);
+            }
+            builder.buildTools(buildTools);
+            getField(form, FIELD_GRADLE_DSL)
+                .map(GradleDsl::valueOf)
+                .ifPresent(builder::gradleDsl);
+            getField(form, FIELD_LANG)
+                .flatMap(Language::of)
+                .ifPresent(builder::language);
+            builder.features(getFieldList(form, FIELD_FEATURES));
+            getField(form, FIELD_JAVA)
+                .map(JdkVersion::valueOf)
+                .ifPresent(builder::java);
+        }
+        return builder;
+    }
 
-        getField(form, FIELD_BUILD)
-            .flatMap(BuildTool::of)
-            .map(Collections::singletonList)
-            .ifPresent(builder::buildTools);
-
-        getField(form, FIELD_LANG)
-            .flatMap(Language::of)
-            .ifPresent(builder::language);
-
-        Object featuresObj = form.get(FIELD_FEATURES);
-
-        List<String> features = new ArrayList<>();
-        if (featuresObj instanceof List<?>) {
-            for (Object featureObj : (List<?>) featuresObj) {
+    private List<String> getFieldList(Map<String, Object> form, String fieldName) {
+        Object resultObj = form.get(fieldName);
+        List<String> result = new ArrayList<>();
+        if (resultObj instanceof List<?>) {
+            for (Object featureObj : (List<?>) resultObj) {
                 if (featureObj instanceof String feature) {
-                    features.add(feature);
+                    result.add(feature);
                 }
             }
-        } else if (featuresObj instanceof String feature) {
-            features.add(feature);
+        } else if (resultObj instanceof String feature) {
+            result.addAll(Arrays.asList(feature.split(",")));
         }
-        builder.features(features);
-
-        getField(form, FIELD_JAVA)
-            .map(JdkVersion::valueOf)
-            .ifPresent(builder::java);
-
-        Object nameObject = form.get(FIELD_NAME);
-        if (nameObject != null) {
-            builder = builder.name(nameObject.toString());
-        }
-        builder.buildTools(List.of(BuildTool.GRADLE_KOTLIN));
-        builder.language(Language.JAVA);
-        return builder;
+        return result;
     }
 
     private Optional<String> getField(Map<String, Object> form, String fieldName) {

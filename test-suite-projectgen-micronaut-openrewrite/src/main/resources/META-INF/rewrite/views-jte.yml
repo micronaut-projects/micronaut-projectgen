@@ -1,0 +1,35 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.views-jte
+displayName: Add Jte Views dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.views-jte.dependencies
+  - io.micronaut.starter.feature.views-jte.micronaut.documentation
+  - io.micronaut.starter.feature.views-jte.documentation.thirdparty
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.views-jte.dependencies
+displayName: Add Jte Views dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.views
+      artifactId: micronaut-views-jte
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.views-jte.micronaut.documentation
+displayName: Append a link to Micronaut Jte Views documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-views/latest/guide/#jte
+      appendNewline: true
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.views-jte.documentation.thirdparty
+displayName: Append a link to Jte Views documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://jte.gg/
+      appendNewline: true

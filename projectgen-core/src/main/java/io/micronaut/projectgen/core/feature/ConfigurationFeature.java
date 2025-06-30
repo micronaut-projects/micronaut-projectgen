@@ -19,14 +19,17 @@ import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.feature.config.Configuration;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.options.ConfigurationFormat;
+import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.core.template.Template;
 
+import java.util.Set;
 import java.util.function.Function;
 
 /**
  * Configuration feature.
  */
-public interface ConfigurationFeature extends OneOfFeature {
+public interface ConfigurationFeature extends OneOfFeature, DefaultFeature {
 
     @Override
     default Class<?> getFeatureClass() {
@@ -56,4 +59,15 @@ public interface ConfigurationFeature extends OneOfFeature {
             }
         }
     }
+
+    @Override
+    default boolean shouldApply(Options options, Set<Feature> selectedFeatures) {
+        ConfigurationFormat format = options.configurationFormat();
+        if (format == null) {
+            return false;
+        }
+        return format == configurationFormat();
+    }
+
+    ConfigurationFormat configurationFormat();
 }

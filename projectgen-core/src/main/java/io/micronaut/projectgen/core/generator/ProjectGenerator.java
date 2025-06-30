@@ -17,18 +17,23 @@ package io.micronaut.projectgen.core.generator;
 
 import io.micronaut.context.annotation.DefaultImplementation;
 import io.micronaut.core.annotation.NonNull;
-import io.micronaut.core.annotation.Nullable;
-import io.micronaut.projectgen.core.feature.AvailableFeatures;
 import io.micronaut.projectgen.core.io.ConsoleOutput;
 import io.micronaut.projectgen.core.io.OutputHandler;
 import io.micronaut.projectgen.core.options.Options;
-import jakarta.inject.Provider;
+
+import java.io.File;
 
 /**
  * Project Generator API.
  */
 @DefaultImplementation(DefaultProjectGenerator.class)
 public interface ProjectGenerator {
+    /**
+     * @param options Options used to generate the application
+     * @param outputFolder Path where zip will be written to
+     */
+    void writeTo(@NonNull Options options,
+                 @NonNull File outputFolder);
 
     default void generate(@NonNull Options options, @NonNull OutputHandler outputHandler) throws Exception {
         generate(options, outputHandler, ConsoleOutput.NOOP);

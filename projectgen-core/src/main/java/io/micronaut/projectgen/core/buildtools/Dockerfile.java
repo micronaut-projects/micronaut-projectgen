@@ -17,7 +17,6 @@ package io.micronaut.projectgen.core.buildtools;
 
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.annotation.Nullable;
-
 import java.util.ArrayList;
 import java.util.List;
 

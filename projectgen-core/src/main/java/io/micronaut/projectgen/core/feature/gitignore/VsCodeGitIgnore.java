@@ -17,7 +17,6 @@ package io.micronaut.projectgen.core.feature.gitignore;
 
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import jakarta.inject.Singleton;
-
 import java.util.List;
 
 /**

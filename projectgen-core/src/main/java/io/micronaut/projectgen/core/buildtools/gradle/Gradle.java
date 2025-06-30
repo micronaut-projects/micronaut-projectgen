@@ -15,32 +15,35 @@
  */
 package io.micronaut.projectgen.core.buildtools.gradle;
 
-import com.fizzed.rocker.RockerModel;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
+import io.micronaut.projectgen.core.buildtools.BuildToolUtils;
 import io.micronaut.projectgen.core.buildtools.Property;
 import io.micronaut.projectgen.core.feature.BuildFeature;
+import io.micronaut.projectgen.core.feature.DefaultFeature;
+import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.core.rocker.RockerTemplate;
 import io.micronaut.projectgen.core.template.BinaryTemplate;
-import io.micronaut.projectgen.core.template.Template;
 import io.micronaut.projectgen.core.template.URLTemplate;
+import io.micronaut.projectgen.core.utils.OptionUtils;
 import jakarta.inject.Singleton;
-import io.micronaut.projectgen.core.template.genericBuildGradle;
 import io.micronaut.projectgen.core.template.gradleProperties;
 import io.micronaut.projectgen.core.template.settingsGradle;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Gradle Feature.
  */
 @Requires(property = "micronaut.projectgen.core.features.gradle.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class Gradle implements BuildFeature {
+public class Gradle implements BuildFeature, DefaultFeature {
     private static final String SLASH = "/";
     private static final String GRADLE = "gradle";
     private static final String WRAPPER = "wrapper";
@@ -62,14 +65,17 @@ public class Gradle implements BuildFeature {
     private static final String NAME_GRADLE_WRAPPER_BAT = "gradleWrapperBat";
     private static final String NAME = "gradle";
     private static final String NAME_BUILD_GRADLE = "build.gradle";
-    private static final String SETTINGS_GRADLE = "settings.gradle";
-    private static final String SETTINGS_GRADLE_KTS = "settings.gradle.kts";
     private static final String GRADLE_PROPERTIES = "gradle.properties";
 
     @Override
     @NonNull
     public String getName() {
         return NAME;
+    }
+
+    @Override
+    public boolean shouldApply(Options options, Set<Feature> selectedFeatures) {
+        return OptionUtils.hasGradleBuildTool(options);
     }
 
     @Override
@@ -88,6 +94,7 @@ public class Gradle implements BuildFeature {
     /**
      *
      * @param generatorContext Generator Context
+     * @param rootModule Root Module
      */
     protected void generateBuildFiles(GeneratorContext generatorContext, ModuleContext rootModule) {
         for (String module : generatorContext.getModuleNames()) {
@@ -96,11 +103,18 @@ public class Gradle implements BuildFeature {
         }
         generateBuildFiles(generatorContext, rootModule, "");
 
-        BuildTool buildTool = generatorContext.getOptions().buildTools().stream().filter(BuildTool::isGradle).findFirst().orElseThrow();
+        BuildTool buildTool = generatorContext.getOptions().buildTools().stream()
+            .filter(bt -> bt == BuildTool.GRADLE).findFirst().orElseThrow();
         GradleBuild build = GradleBuildCreator.create(generatorContext, rootModule, generatorContext.getOptions());
         addSettingsFile(buildTool, generatorContext, build, rootModule);
     }
 
+    /**
+     *
+     * @param generatorContext Generator Context
+     * @param moduleContext Module context
+     * @param module Module name
+     */
     protected void generateBuildFiles(GeneratorContext generatorContext, ModuleContext moduleContext, String module) {
         moduleContext.addTemplate(module + NAME_BUILD_GRADLE,
             GradleBuildCreator.buildFileTemplate(generatorContext, moduleContext, module));
@@ -118,7 +132,6 @@ public class Gradle implements BuildFeature {
         module.addTemplate(NAME_GRADLE_WRAPPER_BAT, new URLTemplate(GRADLEW_BAT_PATH, classLoader.getResource(GRADLEW_BAT), false));
     }
 
-
     /**
      *
      * @param module Module
@@ -134,10 +147,11 @@ public class Gradle implements BuildFeature {
      * @param buildTool Gradle Build Tool
      * @param generatorContext  Generator Context
      * @param build Gradle Build
+     * @param module Module
      */
     protected void addSettingsFile(BuildTool buildTool, GeneratorContext generatorContext, GradleBuild build, ModuleContext module) {
         boolean hasMultiProjectFeature = generatorContext.getFeatures().hasMultiProjectFeature();
-        String settingsFile = buildTool == BuildTool.GRADLE ? SETTINGS_GRADLE : SETTINGS_GRADLE_KTS;
+        String settingsFile = BuildToolUtils.settingsFileName(buildTool, generatorContext.getOptions().gradleDsl());
         module.addTemplate("gradleSettings",
             new RockerTemplate(settingsFile,
                 settingsGradle.template(generatorContext.getProject(), build, hasMultiProjectFeature, generatorContext.getModuleNames())));

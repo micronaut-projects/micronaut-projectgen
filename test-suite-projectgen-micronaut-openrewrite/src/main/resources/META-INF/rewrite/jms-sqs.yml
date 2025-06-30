@@ -1,0 +1,27 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.jms-sqs
+displayName: Add Jms Sqs dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.jms-sqs.dependencies
+  - io.micronaut.starter.feature.micronaut-jms-docs
+  - io.micronaut.starter.feature.jms-sqs.configuration
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.jms-sqs.dependencies
+displayName: Add Jms Sqs dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.jms
+      artifactId: micronaut-jms-sqs
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.jms-sqs.configuration
+displayName: Add Jms Sqs configuration
+preconditions:
+  - io.micronaut.starter.openrewrite.recipes.FindApplicationProperties
+recipeList:
+  - org.openrewrite.properties.AddProperty:
+      property: micronaut.jms.sqs.enabled
+      value: true

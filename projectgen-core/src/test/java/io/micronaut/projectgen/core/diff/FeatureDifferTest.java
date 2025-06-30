@@ -29,9 +29,10 @@ class FeatureDifferTest {
 
     @Test
     void featureDiff(FeatureDiffer featureDiffer) throws Exception {
-        Options options = GenericOptionsBuilder.builder().name("demo")
+        Options options = GenericOptionsBuilder.builder()
+            .packageName("com.example")
             .name("demo")
-            .buildTools(List.of(BuildTool.GRADLE_KOTLIN))
+            .buildTools(List.of(BuildTool.GRADLE))
             .gradleDsl(GradleDsl.KOTLIN)
             .features(List.of("geb-core"))
             .build();
@@ -53,22 +54,9 @@ class FeatureDifferTest {
     @Singleton
     static class GradleBuildDefaultFeature implements DefaultFeature {
 
-        private final Gradle gradle;
-
-        GradleBuildDefaultFeature(Gradle gradle) {
-            this.gradle = gradle;
-        }
-
         @Override
         public String getName() {
             return "geb-default-feature";
-        }
-
-        @Override
-        public void processSelectedFeatures(FeatureContext featureContext) {
-            if (OptionUtils.hasGradleBuildTool(featureContext.getOptions())) {
-                featureContext.addFeatureIfNotPresent(Gradle.class, gradle);
-            }
         }
 
         @Override

@@ -1,0 +1,24 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.picocli-annotation
+displayName: Add Picocli Annotation dependency
+recipeList:
+  - io.micronaut.starter.feature.picocli-annotation.maven
+  - io.micronaut.starter.feature.picocli-annotation.gradle
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.picocli-annotation.maven
+displayName: Add Picocli Annotations Processor to the Maven compiler plugin
+recipeList:
+  - org.openrewrite.maven.AddAnnotationProcessor:
+      groupId: info.picocli
+      artifactId: picocli-codegen
+      version: ${picocli.version}
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.picocli-annotation.gradle
+displayName: Add Picocli Annotations Processor dependency to a Gradle Build
+recipeList:
+  - org.openrewrite.gradle.AddDependency:
+      groupId: info.picocli
+      artifactId:  picocli-codegen
+      configuration: annotationProcessor

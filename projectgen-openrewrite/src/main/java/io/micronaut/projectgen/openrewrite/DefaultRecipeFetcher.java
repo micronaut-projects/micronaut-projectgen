@@ -18,9 +18,12 @@ package io.micronaut.projectgen.openrewrite;
 import io.micronaut.context.exceptions.ConfigurationException;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.buildtools.BuildPlugin;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.buildtools.Scope;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
+import io.micronaut.projectgen.core.buildtools.gradle.GradlePlugin;
+import io.micronaut.projectgen.core.buildtools.maven.MavenPlugin;
 import io.micronaut.projectgen.core.openrewrite.FileContents;
 import io.micronaut.projectgen.core.openrewrite.RecipeFetcher;
 import jakarta.inject.Singleton;
@@ -52,6 +55,7 @@ import static io.micronaut.projectgen.openrewrite.RecipeUtils.resolveRecipe;
 public class DefaultRecipeFetcher implements RecipeFetcher {
     private static final String PRECONDITION_FIND_BOOTSTRAP_PROPERTIES = "io.micronaut.starter.openrewrite.recipes.FindBootstrapProperties";
     private static final String PRECONDITION_FIND_APPLICATION_PROPERTIES = "io.micronaut.starter.openrewrite.recipes.FindApplicationProperties";
+    private static final String PRECONDITION_FIND_DEV_PROPERTIES = "io.micronaut.starter.openrewrite.recipes.FindDevProperties";
     private final Environment env;
 
     /**
@@ -69,7 +73,8 @@ public class DefaultRecipeFetcher implements RecipeFetcher {
             var recipe = env.activateRecipes(recipeName);
             return findAllFilesContents(recipe);
         } catch (RecipeException e) {
-            throw new ConfigurationException("Error activating recipe: " + recipeName, e);
+            //throw new ConfigurationException("Error activating recipe: " + recipeName, e);
+            return Collections.emptyList();
         }
     }
 
@@ -80,7 +85,8 @@ public class DefaultRecipeFetcher implements RecipeFetcher {
             var recipe = env.activateRecipes(recipeName);
             return findDependencies(recipe, buildTool);
         } catch (RecipeException e) {
-            throw new ConfigurationException("Error activating recipe: " + recipeName, e);
+            //throw new ConfigurationException("Error activating recipe: " + recipeName, e);
+            return Collections.emptyList();
         }
     }
 
@@ -91,7 +97,8 @@ public class DefaultRecipeFetcher implements RecipeFetcher {
             var recipe = env.activateRecipes(recipeName);
             return findProperties(recipe);
         } catch (RecipeException e) {
-            throw new ConfigurationException("Error activating recipe: " + recipeName, e);
+            //throw new ConfigurationException("Error activating recipe: " + recipeName, e);
+            return Optional.empty();
         }
     }
 
@@ -102,7 +109,25 @@ public class DefaultRecipeFetcher implements RecipeFetcher {
             var recipe = env.activateRecipes(recipeName);
             return findBootstrapProperties(recipe);
         } catch (RecipeException e) {
-            throw new ConfigurationException("Error activating recipe: " + recipeName, e);
+            //throw new ConfigurationException("Error activating recipe: " + recipeName, e);
+            return Optional.empty();
+        }
+    }
+
+    @NonNull
+    private Optional<Properties> findDevProperties(@NonNull Recipe recipe) {
+        return findProperties(recipe, r -> r.getName().equals(PRECONDITION_FIND_DEV_PROPERTIES));
+    }
+
+    @Override
+    @NonNull
+    public Optional<Properties> findDevPropertiesByRecipeName(@NonNull String recipeName) {
+        try {
+            var recipe = env.activateRecipes(recipeName);
+            return findDevProperties(recipe);
+        } catch (RecipeException e) {
+//            throw new ConfigurationException("Error activating recipe: " + recipeName, e);
+            return Optional.empty();
         }
     }
 
@@ -154,7 +179,7 @@ public class DefaultRecipeFetcher implements RecipeFetcher {
         Recipe resolvedRecipe = resolveRecipe(recipe);
         if (resolvedRecipe instanceof org.openrewrite.java.dependencies.AddDependency d) {
             dependencies.add(findDependency(d));
-        } else if (buildTool.isGradle() && resolvedRecipe instanceof org.openrewrite.gradle.AddDependency d) {
+        } else if (buildTool == BuildTool.GRADLE && resolvedRecipe instanceof org.openrewrite.gradle.AddDependency d) {
             dependencies.add(findGradleDependency(d));
         } else if (buildTool == BuildTool.MAVEN && resolvedRecipe instanceof org.openrewrite.maven.AddDependency d) {
             dependencies.add(findMavenDependency(d));
@@ -211,6 +236,8 @@ public class DefaultRecipeFetcher implements RecipeFetcher {
     private static Optional<Scope> ofGradleConfiguration(String configuration) {
         if (configuration.equals("implementation")) {
             return Optional.of(Scope.COMPILE);
+        } else if (configuration.equals("developmentOnly")) {
+            return Optional.of(Scope.DEVELOPMENT_ONLY);
         } else if (configuration.equals("compileOnly")) {
             return Optional.of(Scope.COMPILE_ONLY);
         } else if (configuration.equals("annotationProcessor")) {
@@ -231,6 +258,8 @@ public class DefaultRecipeFetcher implements RecipeFetcher {
     private static Optional<Scope> ofMavenScope(String scope) {
         if (scope.equals("compile")) {
             return Optional.of(Scope.COMPILE);
+        } else if (scope.equals("provided")) {
+                return Optional.of(Scope.COMPILE_ONLY);
         } else if (scope.equals("runtime")) {
             return Optional.of(Scope.RUNTIME);
         } else if (scope.equals("test")) {
@@ -317,5 +346,47 @@ public class DefaultRecipeFetcher implements RecipeFetcher {
             }
         }
         return Optional.empty();
+    }
+
+    @Override
+    @NonNull
+    public List<BuildPlugin> findAllBuildPluginsByRecipeNameAndBuildTool(@NonNull String recipeName, @NonNull BuildTool buildTool) {
+        try {
+            var recipe = env.activateRecipes(recipeName);
+            return findBuildPlugins(recipe, buildTool);
+        } catch (RecipeException e) {
+//            throw new ConfigurationException("Error activating recipe: " + recipeName, e);
+            return Collections.emptyList();
+        }
+    }
+
+    private List<BuildPlugin> findBuildPlugins(Recipe recipe, BuildTool buildTool) {
+        List<BuildPlugin> plugins = new ArrayList<>();
+        Recipe resolvedRecipe = resolveRecipe(recipe);
+
+        if (buildTool == BuildTool.GRADLE && resolvedRecipe instanceof org.openrewrite.gradle.plugins.AddBuildPlugin addPlugin) {
+            plugins.add(findGradleBuildPlugin(addPlugin));
+        } else if (buildTool == BuildTool.MAVEN && resolvedRecipe instanceof org.openrewrite.maven.AddPlugin addPlugin) {
+            plugins.add(findMavenBuildPlugin(addPlugin));
+        }
+
+        for (Recipe r : resolvedRecipe.getRecipeList()) {
+            Recipe resolvedRecipeChild = resolveRecipe(r);
+            plugins.addAll(findBuildPlugins(resolvedRecipeChild, buildTool));
+        }
+        return plugins;
+    }
+
+    private BuildPlugin findGradleBuildPlugin(org.openrewrite.gradle.plugins.AddBuildPlugin recipe) {
+        return GradlePlugin.builder()
+            .id(recipe.getPluginId())
+            .build();
+    }
+
+    private BuildPlugin findMavenBuildPlugin(org.openrewrite.maven.AddPlugin recipe) {
+        return MavenPlugin.builder()
+            .groupId(recipe.getGroupId())
+            .artifactId(recipe.getArtifactId())
+            .build();
     }
 }

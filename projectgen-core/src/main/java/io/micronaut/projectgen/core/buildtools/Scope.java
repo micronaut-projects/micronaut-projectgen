@@ -116,4 +116,9 @@ public class Scope implements Ordered {
     public int hashCode() {
         return Objects.hash(source, phases);
     }
+
+    @Override
+    public String toString() {
+        return this.getSource().toString() + " " + phases.stream().map(Phase::toString).toList();
+    }
 }

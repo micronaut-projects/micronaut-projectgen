@@ -22,7 +22,6 @@ import io.micronaut.core.order.Ordered;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 /**
  * Dependency Coordinate.
@@ -145,6 +144,10 @@ public class DependencyCoordinate implements Coordinate, Ordered {
         return pom;
     }
 
+    /**
+     *
+     * @return Comment
+     */
     @Nullable
     public String getComment() {
         return comment;

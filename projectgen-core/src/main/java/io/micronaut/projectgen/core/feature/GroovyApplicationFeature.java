@@ -15,6 +15,9 @@
  */
 package io.micronaut.projectgen.core.feature;
 
+/**
+ * {@link ApplicationFeature} for Groovy.
+ */
 public interface GroovyApplicationFeature extends ApplicationFeature {
     @Override
     default int getOrder() {

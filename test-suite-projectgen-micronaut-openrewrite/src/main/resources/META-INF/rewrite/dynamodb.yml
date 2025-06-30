@@ -1,0 +1,35 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.dynamodb
+displayName: Add Dynamodb dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.dynamodb.dependencies
+  - io.micronaut.starter.feature.dynamodb.micronaut.documentation
+  - io.micronaut.starter.feature.dynamodb.documentation.thirdparty
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.dynamodb.dependencies
+displayName: Add Dynamodb dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: software.amazon.awssdk
+      artifactId: dynamodb
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.dynamodb.micronaut.documentation
+displayName: Append a link to Micronaut Dynamodb documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-aws/latest/guide/#dynamodb
+      appendNewline: true
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.dynamodb.documentation.thirdparty
+displayName: Append a link to Dynamodb website
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://aws.amazon.com/dynamodb/
+      appendNewline: true

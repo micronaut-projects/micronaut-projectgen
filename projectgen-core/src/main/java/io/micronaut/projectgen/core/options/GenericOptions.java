@@ -28,6 +28,21 @@ import java.util.*;
 
 /**
  * Options Implementation.
+ * @param name Project name
+ * @param version Project Version
+ * @param operatingSystem Operating System
+ * @param template template
+ * @param language language
+ * @param buildTools build tools
+ * @param configurationFormat configuration format
+ * @param gradleDsl Gradle DSL
+ * @param group group
+ * @param artifact artifact
+ * @param java Java version
+ * @param packageName package name
+ * @param packaging packaging
+ * @param features Features
+ * @param testFramework Test framework
  */
 @Builder
 public record GenericOptions(@NonNull String name,
@@ -36,6 +51,7 @@ public record GenericOptions(@NonNull String name,
                              @Nullable String template,
                              @Nullable Language language,
                              @Nullable List<BuildTool> buildTools,
+                             @Nullable ConfigurationFormat configurationFormat,
                              @Nullable GradleDsl gradleDsl,
                              @Nullable String group,
                              @Nullable String artifact,
@@ -48,6 +64,7 @@ public record GenericOptions(@NonNull String name,
     public Options withoutFeatures() {
         return GenericOptionsBuilder.builder()
             .name(this.name())
+            .configurationFormat(this.configurationFormat())
             .operatingSystem(this.operatingSystem())
             .template(this.template())
             .buildTools(this.buildTools())

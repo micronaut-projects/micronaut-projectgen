@@ -1,0 +1,26 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.spring
+displayName: Add Spring dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.spring.dependencies
+  - io.micronaut.starter.feature.spring-annotation
+  - io.micronaut.starter.feature.spring.micronaut.documentation
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.spring.dependencies
+displayName: Add Spring dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: org.springframework.boot
+      artifactId: spring-boot-starter
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.spring.micronaut.documentation
+displayName: Append a link to Micronaut Spring documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-spring/latest/guide/index.html
+      appendNewline: true

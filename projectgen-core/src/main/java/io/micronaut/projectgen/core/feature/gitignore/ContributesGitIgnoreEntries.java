@@ -17,7 +17,6 @@ package io.micronaut.projectgen.core.feature.gitignore;
 
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 
-
 /**
  * API for singletons contributing entries to the .gitignore file.
  */

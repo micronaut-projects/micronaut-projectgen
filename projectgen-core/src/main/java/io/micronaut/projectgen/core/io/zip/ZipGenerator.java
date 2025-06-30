@@ -19,7 +19,16 @@ import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.io.Writable;
 import io.micronaut.projectgen.core.options.Options;
 
+/**
+ * ZIP generator.
+ */
+@FunctionalInterface
 public interface ZipGenerator {
+    /**
+     *
+     * @param options Project Options
+     * @return ZIP wrapped in a {@link Writable}.
+     */
     @NonNull
     Writable zip(@NonNull Options options);
 }

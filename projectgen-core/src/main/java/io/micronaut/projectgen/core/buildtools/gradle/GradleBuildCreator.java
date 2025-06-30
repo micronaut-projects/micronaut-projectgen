@@ -20,13 +20,14 @@ import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.order.OrderUtil;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
+import io.micronaut.projectgen.core.buildtools.BuildToolUtils;
 import io.micronaut.projectgen.core.buildtools.Repository;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.core.rocker.RockerTemplate;
-import io.micronaut.projectgen.core.template.Template;
 import io.micronaut.projectgen.core.template.genericBuildGradle;
+import io.micronaut.projectgen.core.utils.OptionUtils;
 
 import java.util.Collection;
 import java.util.List;
@@ -35,22 +36,24 @@ import java.util.List;
  * Gradle Build Creator.
  */
 public final class GradleBuildCreator {
+    private static final GradleDsl DEFAULT_GRADLE_DSL = GradleDsl.KOTLIN;
+    private static final boolean DEFAULT_USER_VERSION_CATALOGUE = false;
+
     private GradleBuildCreator() {
     }
 
-    public static final boolean DEFAULT_USER_VERSION_CATALOGUE = false;
-
     public static RockerTemplate buildFileTemplate(GeneratorContext generatorContext, ModuleContext moduleContext, String module) {
         GradleBuild build = create(generatorContext, moduleContext, generatorContext.getOptions());
-        BuildTool buildTool = generatorContext.getOptions().buildTools().stream().filter(BuildTool::isGradle).findFirst().orElseThrow();
+        BuildTool buildTool = generatorContext.getOptions().buildTools().stream().filter(bt ->  bt == BuildTool.GRADLE).findFirst().orElseThrow();
         RockerModel rockerModel = genericBuildGradle.template(generatorContext.getProject(),
             build,
             generatorContext.getFeatures().mainClass().orElse(null),
             generatorContext.getOptions().version(),
             StringUtils.isNotEmpty(generatorContext.getOptions().group()) ? generatorContext.getOptions().group() : generatorContext.getProject().getPackageName());
+        String buildFileName = BuildToolUtils.buildFileName(buildTool, generatorContext.getOptions().gradleDsl());
         return new RockerTemplate(StringUtils.isEmpty(module)
-            ? buildTool.getBuildFileName()
-            : module + "/" + buildTool.getBuildFileName(), rockerModel);
+            ? buildFileName
+            : module + "/" + buildFileName, rockerModel);
     }
 
     @NonNull
@@ -64,10 +67,13 @@ public final class GradleBuildCreator {
     public static GradleBuild create(@NonNull GeneratorContext generatorContext,
                               @NonNull ModuleContext module,
                               Options options, boolean useVersionCatalogue) {
-        BuildTool buildTool = options.buildTools().stream().filter(BuildTool::isGradle).findFirst().orElseThrow();
-        GradleDsl gradleDsl = buildTool
-                .getGradleDsl()
-                .orElseThrow(() -> new IllegalArgumentException("GradleBuildCreator can only create Gradle builds"));
+        if (!OptionUtils.hasGradleBuildTool(generatorContext.getOptions())) {
+            throw new IllegalArgumentException("GradleBuildCreator can only create Gradle builds");
+        }
+        GradleDsl gradleDsl = options.gradleDsl();
+        if (gradleDsl == null) {
+            gradleDsl = DEFAULT_GRADLE_DSL;
+        }
         List<GradlePlugin> gradlePlugins = module.buildPlugins()
                 .stream()
                 .filter(GradlePlugin.class::isInstance)
@@ -90,9 +96,9 @@ public final class GradleBuildCreator {
     @NonNull
     private static List<GradleRepository> getRepositories(@NonNull Options options,
                                                      Collection<Repository> repositories) {
-        BuildTool buildTool = options.buildTools().stream().filter(BuildTool::isGradle).findFirst().orElseThrow();
-        return GradleRepository.listOf(buildTool.getGradleDsl()
-                .orElse(GradleDsl.GROOVY), repositories);
+        BuildTool buildTool = options.buildTools().stream()
+            .filter(bt -> bt == BuildTool.GRADLE).findFirst().orElseThrow();
+        return GradleRepository.listOf(options.gradleDsl() == null ? DEFAULT_GRADLE_DSL : options.gradleDsl(), repositories);
     }
 
 }

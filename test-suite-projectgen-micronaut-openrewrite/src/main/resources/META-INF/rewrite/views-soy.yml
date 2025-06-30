@@ -1,0 +1,35 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.views-soy
+displayName: Add Soy Views dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.views-soy.dependencies
+  - io.micronaut.starter.feature.views-soy.micronaut.documentation
+  - io.micronaut.starter.feature.views-soy.documentation.thirdparty
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.views-soy.dependencies
+displayName: Add Soy Views dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.views
+      artifactId: micronaut-views-soy
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.views-soy.micronaut.documentation
+displayName: Append a link to Micronaut Soy Views documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-views/latest/guide/index.html#soy
+      appendNewline: true
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.views-soy.documentation.thirdparty
+displayName: Append a link to Soy Views website
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://github.com/google/closure-templates
+      appendNewline: true

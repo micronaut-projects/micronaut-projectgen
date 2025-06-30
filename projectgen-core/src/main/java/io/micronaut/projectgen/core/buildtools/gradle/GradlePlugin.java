@@ -23,7 +23,7 @@ import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.buildtools.dependencies.Coordinate;
 import io.micronaut.projectgen.core.buildtools.dependencies.CoordinateResolver;
 import io.micronaut.projectgen.core.buildtools.dependencies.LookupFailedException;
-import io.micronaut.projectgen.core.buildtools.maven.ParentPomBuilder;
+import io.micronaut.projectgen.core.template.StringWritable;
 import io.micronaut.projectgen.core.template.Writable;
 
 import java.util.ArrayList;
@@ -45,7 +45,7 @@ public class GradlePlugin implements BuildPlugin {
     private final String id;
 
     /**
-     * https://docs.gradle.org/current/kotlin-dsl/gradle/org.gradle.plugin.use/-plugin-dependencies-spec/alias.html
+     * @see <a href="https://docs.gradle.org/current/kotlin-dsl/gradle/org.gradle.plugin.use/-plugin-dependencies-spec/alias.html">alias</a>.
      */
     @Nullable
     private final String alias; // Notation coming from a version catalgoue
@@ -91,6 +91,23 @@ public class GradlePlugin implements BuildPlugin {
         );
     }
 
+    /**
+     *
+     * @param gradleFile Gradle File
+     * @param id Id
+     * @param version version
+     * @param alias alias
+     * @param apply apply
+     * @param artifactId ArtifactID
+     * @param extension extension
+     * @param settingsExtension settings extensions
+     * @param pluginsManagementRepositories plugin management repositories
+     * @param requiresLookup requires lookup
+     * @param order order
+     * @param buildImports build imports
+     * @param settingsImports settings imports
+     */
+    @SuppressWarnings("ParameterNumber")
     public GradlePlugin(@NonNull GradleFile gradleFile,
                         @Nullable String id,
                         @Nullable String version,
@@ -119,10 +136,20 @@ public class GradlePlugin implements BuildPlugin {
         this.settingsImports = settingsImports;
     }
 
+    /**
+     *
+     * @return apply
+     */
     public Boolean getApply() {
         return apply;
     }
 
+    /**
+     *
+     * @param id Plugin ID
+     * @param lookupArtifactId Plugin Artifact ID
+     * @return Gradle Plugin
+     */
     public static GradlePlugin of(String id, String lookupArtifactId) {
         return GradlePlugin.builder()
             .id(id)
@@ -167,6 +194,10 @@ public class GradlePlugin implements BuildPlugin {
         return id;
     }
 
+    /**
+     *
+     * @return Alias
+     */
     @Nullable
     public String getAlias() {
         return alias;
@@ -226,7 +257,19 @@ public class GradlePlugin implements BuildPlugin {
     public BuildPlugin resolved(CoordinateResolver coordinateResolver) {
         Coordinate coordinate = coordinateResolver.resolve(artifactId)
             .orElseThrow(() -> new LookupFailedException(artifactId));
-        return new GradlePlugin(gradleFile, id, coordinate.getVersion(), alias, apply,null, extension, settingsExtension, pluginsManagementRepositories, false, order, buildImports, settingsImports);
+        return new GradlePlugin(gradleFile,
+            id,
+            coordinate.getVersion(),
+            alias,
+            apply,
+            null,
+            extension,
+            settingsExtension,
+            pluginsManagementRepositories,
+            false,
+            order,
+            buildImports,
+            settingsImports);
     }
 
     @Override
@@ -330,6 +373,12 @@ public class GradlePlugin implements BuildPlugin {
         }
 
         @NonNull
+        public GradlePlugin.Builder extension(@Nullable String extension) {
+            this.extension = new StringWritable(extension);
+            return this;
+        }
+
+        @NonNull
         public GradlePlugin.Builder settingsExtension(@Nullable Writable settingsExtension) {
             this.settingsExtension = settingsExtension;
             return this;
@@ -359,6 +408,4 @@ public class GradlePlugin implements BuildPlugin {
             return new GradlePlugin(gradleFile, id, version, alias, apply, artifactId, extension, settingsExtension, pluginsManagementRepositories, requiresLookup, order, buildImports, settingsImports);
         }
     }
-
 }
-

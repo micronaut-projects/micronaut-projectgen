@@ -15,9 +15,7 @@
  */
 package io.micronaut.projectgen.core.buildtools.gradle;
 
-
 import io.micronaut.projectgen.core.buildtools.MavenCentral;
-
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;

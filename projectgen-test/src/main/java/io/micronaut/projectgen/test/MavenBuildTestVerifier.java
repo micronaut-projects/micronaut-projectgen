@@ -23,6 +23,7 @@ import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.buildtools.maven.MavenScope;
 import io.micronaut.projectgen.core.buildtools.maven.ParentPom;
 import io.micronaut.projectgen.core.buildtools.maven.Profile;
+import io.micronaut.projectgen.core.options.Language;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -33,12 +34,14 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.StringReader;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+/**
+ * {@link BuildTestVerifier} for Maven builds.
+ */
 public class MavenBuildTestVerifier implements BuildTestVerifier {
     private ParentPom parentPom;
     private final List<Profile> profiles = new ArrayList<>();
@@ -46,8 +49,12 @@ public class MavenBuildTestVerifier implements BuildTestVerifier {
     private final Map<String, String> properties = new HashMap<>();
     private final List<Dependency> dependencies = new ArrayList<>();
     private final List<Dependency> annotationProcessors = new ArrayList<>();
-    public MavenBuildTestVerifier(@NonNull String content) {
+
+    private final Language language;
+
+    public MavenBuildTestVerifier(@NonNull String content, Language language) {
         readXMLFile(content);
+        this.language = language;
     }
 
     private void readXMLFile(String xmlContent) {
@@ -125,6 +132,7 @@ public class MavenBuildTestVerifier implements BuildTestVerifier {
         }
         return properties;
     }
+
     private List<Dependency> parseAnnotationProcessors(Element projectElement) {
         List<Dependency> result = new ArrayList<>();
 
@@ -256,6 +264,19 @@ public class MavenBuildTestVerifier implements BuildTestVerifier {
             d.getGroupId().equals(groupId) && d.getArtifactId().equals(artifactId) && d.getScope().equals(scope));
     }
 
+    /**
+     *
+     * @param groupId Group ID
+     * @param artifactId Artifact ID
+     * @param scope Scope
+     * @return Whether the build has a dependency with the supplied groupId, artifactId and scope
+     */
+    public boolean hasDependency(String groupId, String artifactId, MavenScope scope) {
+        return dependencies.stream().anyMatch(d ->
+            d.getGroupId().equals(groupId) && d.getArtifactId().equals(artifactId) &&
+                MavenScope.of(d.getScope(), language).isPresent() && MavenScope.of(d.getScope(), language).get().equals(scope));
+    }
+
     @Override
     public boolean hasDependency(String groupId, String artifactId, String scope) {
         throw new UnsupportedOperationException("Not supported yet.");
@@ -273,7 +294,8 @@ public class MavenBuildTestVerifier implements BuildTestVerifier {
 
     @Override
     public boolean hasDependency(String groupId, String artifactId) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return dependencies.stream().anyMatch(d ->
+            d.getGroupId().equals(groupId)  && d.getArtifactId().equals(artifactId));
     }
 
     @Override

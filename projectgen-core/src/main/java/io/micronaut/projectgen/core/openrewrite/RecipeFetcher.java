@@ -16,6 +16,7 @@
 package io.micronaut.projectgen.core.openrewrite;
 
 import io.micronaut.core.annotation.NonNull;
+import io.micronaut.projectgen.core.buildtools.BuildPlugin;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 
@@ -42,4 +43,10 @@ public interface RecipeFetcher {
 
     @NonNull
     Optional<Properties> findBootstrapPropertiesByRecipeName(@NonNull String recipeName);
+
+    @NonNull
+    Optional<Properties> findDevPropertiesByRecipeName(@NonNull String recipeName);
+
+    @NonNull
+    List<BuildPlugin> findAllBuildPluginsByRecipeNameAndBuildTool(@NonNull String recipeName, @NonNull BuildTool buildTool);
 }

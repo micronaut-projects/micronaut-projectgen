@@ -1,0 +1,10 @@
+Generate projects in a command line application is a common use case of project generation.
+The following example shows a Micronaut CLI application which generates a project:
+
+[source, java]
+----
+include::test-suite-helloworld-cli/src/main/java/io/micronaut/projectgen/demo/CreateCommand.java[]
+----
+
+<1> To generate a project into a folder, you can use the api:projectgen.core.generator.ProjectGenerator[] API.
+

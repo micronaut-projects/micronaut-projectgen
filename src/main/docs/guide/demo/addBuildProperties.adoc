@@ -1,0 +1,6 @@
+The following feature adds build properties:
+
+[source, java]
+----
+include::test-suite-helloworld/src/main/java/io/micronaut/projectgen/demo/MavenCompilerProperties.java[]
+----

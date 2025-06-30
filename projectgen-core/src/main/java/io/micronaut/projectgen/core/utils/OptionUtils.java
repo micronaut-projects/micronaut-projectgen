@@ -27,11 +27,25 @@ public final class OptionUtils {
     private OptionUtils() {
     }
 
+    /**
+     *
+     * @param options Project Options
+     * @return Whether options contains {@link BuildTool#GRADLE}.
+     */
     public static boolean hasGradleBuildTool(Options options) {
-        return options.buildTools().stream().anyMatch(BuildTool::isGradle);
+        return hasBuildTool(options, BuildTool.GRADLE);
     }
 
+    /**
+     *
+     * @param options Project Options
+     * @return Whether options contains {@link BuildTool#MAVEN}.
+     */
     public static boolean hasMavenBuildTool(Options options) {
-        return options.buildTools().stream().anyMatch(bt -> bt == BuildTool.MAVEN);
+        return hasBuildTool(options, BuildTool.MAVEN);
+    }
+
+    private static boolean hasBuildTool(Options options, BuildTool buildTool) {
+        return options.buildTools().stream().anyMatch(bt -> bt == buildTool);
     }
 }

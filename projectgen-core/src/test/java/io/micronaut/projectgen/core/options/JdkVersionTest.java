@@ -13,6 +13,7 @@ class JdkVersionTest {
     @Test
     void testValueOfStringWithASupportedJDKVersion() {
         assertEquals(JdkVersion.JDK_17, JdkVersion.valueOf("JDK_17"));
+        assertEquals(JdkVersion.JDK_17, JdkVersion.valueOf("17"));
     }
 
     @Test

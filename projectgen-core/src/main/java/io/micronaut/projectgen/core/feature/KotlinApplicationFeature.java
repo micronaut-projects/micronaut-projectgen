@@ -15,6 +15,9 @@
  */
 package io.micronaut.projectgen.core.feature;
 
+/**
+ * {@link ApplicationFeature} for Kotlin.
+ */
 public interface KotlinApplicationFeature extends ApplicationFeature {
     @Override
     default int getOrder() {

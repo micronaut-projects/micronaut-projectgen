@@ -72,6 +72,7 @@ public enum MavenScope implements Ordered {
             case SYSTEM, IMPORT -> {
                 return Optional.empty();
             }
+            default -> Optional.empty();
         }
         return Optional.empty();
     }

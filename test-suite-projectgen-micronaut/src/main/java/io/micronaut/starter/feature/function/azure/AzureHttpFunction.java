@@ -1,0 +1,126 @@
+/*
+ * Copyright 2017-2022 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package io.micronaut.starter.feature.function.azure;
+
+import com.fizzed.rocker.RockerModel;
+import io.micronaut.context.annotation.Requires;
+import io.micronaut.core.annotation.NonNull;
+import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.options.Options;
+import io.micronaut.projectgen.core.utils.OptionUtils;
+import io.micronaut.projectgen.micronaut.ApplicationType;
+import io.micronaut.projectgen.core.generator.Project;
+import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.buildtools.dependencies.CoordinateResolver;
+import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
+import io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils;
+import io.micronaut.projectgen.core.feature.Feature;
+import io.micronaut.projectgen.micronaut.template.function.azure.azureFunctionGroovyJunit;
+import io.micronaut.projectgen.micronaut.template.function.azure.azureFunctionJavaJunit;
+import io.micronaut.projectgen.micronaut.template.function.azure.azureFunctionKoTest;
+import io.micronaut.projectgen.micronaut.template.function.azure.azureFunctionKotlinJunit;
+import io.micronaut.projectgen.micronaut.template.function.azure.azureFunctionSpock;
+import io.micronaut.projectgen.micronaut.template.function.azure.azureFunctionTriggerGroovy;
+import io.micronaut.projectgen.micronaut.template.function.azure.azureFunctionTriggerJava;
+import io.micronaut.projectgen.micronaut.template.function.azure.azureFunctionTriggerKotlin;
+import jakarta.inject.Singleton;
+
+@Requires(property = "micronaut.starter.feature.azure.function.http.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
+@Singleton
+public class AzureHttpFunction extends AbstractAzureFunction implements Feature {
+
+    public static final String NAME = "azure-function-http";
+
+    private static final Dependency MICRONAUT_AZURE_FUNCTION_HTTP = MicronautDependencyUtils
+            .azureDependency()
+            .artifactId("micronaut-azure-function-http")
+            .compile()
+            .build();
+
+    private static final Dependency MICRONAUT_AZURE_FUNCTION_HTTP_TEST = MicronautDependencyUtils
+            .azureDependency()
+            .artifactId("micronaut-azure-function-http-test")
+            .test()
+            .build();
+
+    public AzureHttpFunction(CoordinateResolver coordinateResolver) {
+        super(coordinateResolver);
+    }
+
+    @NonNull
+    @Override
+    public String getName() {
+        return NAME;
+    }
+
+    @Override
+    public boolean isVisible() {
+        return false;
+    }
+
+    @Override
+    protected RockerModel javaJUnitTemplate(Project project) {
+        return azureFunctionJavaJunit.template(project);
+    }
+
+    @Override
+    protected RockerModel kotlinJUnitTemplate(Project project) {
+        return azureFunctionKotlinJunit.template(project);
+    }
+
+    @Override
+    protected RockerModel groovyJUnitTemplate(Project project) {
+        return azureFunctionGroovyJunit.template(project);
+    }
+
+    @Override
+    protected RockerModel koTestTemplate(Project project) {
+        return azureFunctionKoTest.template(project);
+    }
+
+    @Override
+    public RockerModel spockTemplate(Project project) {
+        return azureFunctionSpock.template(project);
+    }
+
+    @Override
+    protected void addFunctionTemplate(ModuleContext module, GeneratorContext generatorContext, Options options, Project project) {
+        ApplicationType applicationType = ApplicationType.of(generatorContext.getOptions().template());
+        if (applicationType == ApplicationType.DEFAULT) {
+            String triggerFile = generatorContext.getSourcePath("/{packagePath}/Function");
+            module.addTemplate(generatorContext.getOptions().language(), "trigger", triggerFile,
+                    azureFunctionTriggerJava.template(project),
+                    azureFunctionTriggerKotlin.template(project),
+                    azureFunctionTriggerGroovy.template(project));
+        }
+
+    }
+
+    @Override
+    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
+        return "https://micronaut-projects.github.io/micronaut-azure/latest/guide/index.html#azureHttpFunctions";
+    }
+
+    @Override
+    protected void addDependencies(ModuleContext module, Options options) {
+        super.addDependencies(module, options);
+        if (OptionUtils.hasMavenBuildTool(options)) {
+            module.addDependency(MICRONAUT_AZURE_FUNCTION_HTTP);
+            module.addDependency(MICRONAUT_AZURE_FUNCTION_HTTP_TEST);
+        }
+    }
+}

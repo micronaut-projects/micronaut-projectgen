@@ -15,6 +15,9 @@
  */
 package io.micronaut.projectgen.core.feature.config;
 
+/**
+ * Configuration Phase.
+ */
 public enum ConfigurationPhase {
     APPLICATION,
     BOOTSTRAP;

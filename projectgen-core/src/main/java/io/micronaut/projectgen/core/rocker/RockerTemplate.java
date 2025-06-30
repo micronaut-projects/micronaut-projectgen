@@ -30,7 +30,7 @@ public class RockerTemplate extends DefaultTemplate {
     private final boolean executable;
 
     public RockerTemplate(RockerModel delegate) {
-        this( "", delegate);
+        this("", delegate);
     }
 
     public RockerTemplate(String path, RockerModel delegate) {

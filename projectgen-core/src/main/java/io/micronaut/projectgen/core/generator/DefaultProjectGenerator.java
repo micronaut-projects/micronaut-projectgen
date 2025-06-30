@@ -15,62 +15,60 @@
  */
 package io.micronaut.projectgen.core.generator;
 
-import io.micronaut.context.BeanContext;
+import io.micronaut.core.annotation.NonNull;
 import io.micronaut.projectgen.core.feature.AvailableFeatures;
-import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.projectgen.core.io.ConsoleOutput;
+import io.micronaut.projectgen.core.io.FileSystemOutputHandler;
 import io.micronaut.projectgen.core.io.OutputHandler;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.core.template.RenderResult;
 import io.micronaut.projectgen.core.template.Template;
 import io.micronaut.projectgen.core.template.TemplateRenderer;
 import io.micronaut.projectgen.core.utils.NameUtils;
-import jakarta.inject.Provider;
 import jakarta.inject.Singleton;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
-import java.util.function.Function;
 
 /**
  * Default implementation of {@link ProjectGenerator}.
  */
 @Singleton
 public class DefaultProjectGenerator implements ProjectGenerator {
+    private static final Logger LOG = LoggerFactory.getLogger(DefaultProjectGenerator.class);
     private final ContextFactory contextFactory;
-    private final BeanContext beanContext;
-    private final List<AvailableFeatures> availableFeaturesList;
+    private final List<AvailableFeatures> availableFeatures;
 
-    public DefaultProjectGenerator(ContextFactory contextFactory,
-                                   BeanContext beanContext,
-                                   List<AvailableFeatures> availableFeaturesList) {
+    public DefaultProjectGenerator(ContextFactory contextFactory, List<AvailableFeatures> availableFeatures) {
         this.contextFactory = contextFactory;
-        this.beanContext = beanContext;
-        this.availableFeaturesList = availableFeaturesList;
+        this.availableFeatures = availableFeatures;
     }
 
     @Override
     public void generate(Options options,
                          OutputHandler outputHandler,
                          ConsoleOutput consoleOutput) throws Exception {
-        Project project = NameUtils.parse(options.name());
-        GeneratorContext generatorContext = createGeneratorContext(project, options, consoleOutput);
+        Project project = NameUtils.parse(options);
+        GeneratorContext generatorContext = contextFactory.createGeneratorContext(availableFeatures, options, consoleOutput);
         generatorContext.applyFeatures();
         renderTemplates(outputHandler, project, generatorContext);
     }
 
-    public GeneratorContext createGeneratorContext(Project project,
-                                                   Options options,
-                                                   ConsoleOutput consoleOutput) {
-        List<String> selectedFeatures = options.features();
-        AvailableFeatures availableFeatures = availableFeaturesList.stream()
-            .filter(feat -> feat.supports(options))
-            .findFirst()
-            .orElseThrow();
-        FeatureContext featureContext = contextFactory.createFeatureContext(availableFeatures, selectedFeatures, options);
-        return contextFactory.createGeneratorContext(project, featureContext, consoleOutput);
+    @Override
+    public void writeTo(@NonNull Options options,
+                        @NonNull File outputFolder) {
+        try {
+            OutputHandler outputHandler = new FileSystemOutputHandler(outputFolder, ConsoleOutput.NOOP);
+            generate(options, outputHandler);
+        } catch (IOException e) {
+            LOG.error("IOException while generating the zip file: {}", e.getMessage());
+
+        } catch (Exception e) {
+            LOG.error("Exception while generating the zip file: {}", e.getMessage());
+        }
     }
 
     private void renderTemplates(OutputHandler outputHandler, Project project, GeneratorContext generatorContext) throws Exception {
@@ -83,7 +81,7 @@ public class DefaultProjectGenerator implements ProjectGenerator {
         }
     }
 
-    void renderTemplates(TemplateRenderer templateRenderer, ModuleContext moduleContext) throws Exception {
+    private void renderTemplates(TemplateRenderer templateRenderer, ModuleContext moduleContext) throws Exception {
         for (Template template : moduleContext.templates().values()) {
             RenderResult renderResult = templateRenderer.render(template);
             if (renderResult.getError() != null) {

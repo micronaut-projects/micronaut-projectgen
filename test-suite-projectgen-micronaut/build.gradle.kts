@@ -1,0 +1,29 @@
+plugins {
+    id("io.micronaut.build.internal.projectgen-test-module")
+    id("nu.studer.rocker") version "3.0.4"
+}
+dependencies {
+    api(project(":micronaut-projectgen-core"))
+    api(project(":test-suite-projectgen-micronaut-openrewrite"))
+    annotationProcessor(mnSourcegen.micronaut.sourcegen.generator.java)
+    implementation(mnSourcegen.micronaut.sourcegen.annotations)
+    implementation(libs.snakeyaml)
+    implementation(libs.typesafeconfig)
+    implementation("io.micronaut.testresources:micronaut-test-resources-build-tools:2.7.3")
+    implementation(mn.micronaut.http.client)
+    testAnnotationProcessor(mn.micronaut.inject.java)
+    testImplementation(mnTest.micronaut.test.junit5)
+    testRuntimeOnly(mnTest.junit.jupiter.engine)
+    testImplementation(mnTest.junit.jupiter.params)
+    testImplementation(project(":micronaut-projectgen-test"))
+    testRuntimeOnly(mnLogging.logback.classic)
+}
+rocker {
+    configurations {
+        create("main") {
+            optimize.set(true)
+            templateDir.set(file("src/rocker"))
+            outputDir.set(file("src/generated/rocker"))
+        }
+    }
+}

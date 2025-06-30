@@ -1,0 +1,9 @@
+The following feature adds a dependency:
+
+[source, java]
+----
+include::test-suite-helloworld/src/main/java/io/micronaut/projectgen/demo/JunitJupiter.java[]
+----
+
+<1> A feature can add repository.
+<2> You can use fluid api:projectgen.core.buildtools.dependencies.Dependency[] API to add dependencies to your project.

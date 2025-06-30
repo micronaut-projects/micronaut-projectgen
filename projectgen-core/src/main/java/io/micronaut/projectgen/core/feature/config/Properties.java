@@ -18,17 +18,18 @@ package io.micronaut.projectgen.core.feature.config;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.feature.ConfigurationFeature;
-
 import io.micronaut.projectgen.core.feature.FeaturePhase;
+import io.micronaut.projectgen.core.options.ConfigurationFormat;
 import io.micronaut.projectgen.core.template.PropertiesTemplate;
 import io.micronaut.projectgen.core.template.Template;
 import jakarta.inject.Singleton;
+
 import java.util.function.Function;
 
 /**
  * {@link ConfigurationFeature} for Properties.
  */
-@Requires(property = "micronaut.starter.feature.properties.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
+@Requires(property = "projectgen.features.properties.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Properties implements ConfigurationFeature {
 
@@ -56,6 +57,11 @@ public class Properties implements ConfigurationFeature {
     }
 
     @Override
+    public boolean isVisible() {
+        return false;
+    }
+
+    @Override
     public Function<Configuration, Template> createTemplate(String module) {
         return config -> {
             String path = StringUtils.isEmpty(module)
@@ -63,5 +69,10 @@ public class Properties implements ConfigurationFeature {
                 : module + "/" + config.getFullPath(EXTENSION);
             return new PropertiesTemplate(path, config);
         };
+    }
+
+    @Override
+    public ConfigurationFormat configurationFormat() {
+        return ConfigurationFormat.PROPERTIES;
     }
 }

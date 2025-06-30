@@ -1,8 +1,27 @@
 introduction:
   title: Introduction
 releaseHistory: Release History
-micronautProjectGeneration: Micronaut Project Generation
-openrewriteIntegration: OpenRewrite Integration
-springBootProjectGeneration: Spring Boot Project Generation
+modules:
+  title: Modules
+  coreModule: Core Module
+  testModule: Test Module
+  httpServer:
+    title: HTTP Server Module
+    downloadZip: Download ZIP
+    featuresHttpServer: Features
+    diff: Diff
+features: Features
+demo:
+  title: Demo
+  defineOptions: Options
+  addDependency: Add Dependency
+  addBuildProperties: Add Build Properties
+  addGradlePlugins: Add Gradle Plugins
+  addMavenPlugin: Add Maven Plugins
+  addCode: Add Code
+  root: Default Feature
+  cli: Project Generation in a Command Line Application
+  httpServerDemo: Project Generation in a HTTP Server
+  test: Test Project Generation
 repository: Repository
 

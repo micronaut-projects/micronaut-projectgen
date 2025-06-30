@@ -16,7 +16,6 @@
 package io.micronaut.projectgen.core.feature;
 
 import io.micronaut.context.annotation.Primary;
-
 import io.micronaut.projectgen.core.options.Options;
 import jakarta.inject.Singleton;
 import java.util.List;

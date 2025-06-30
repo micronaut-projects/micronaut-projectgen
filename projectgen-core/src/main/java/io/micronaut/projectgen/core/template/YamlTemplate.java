@@ -15,7 +15,6 @@
  */
 package io.micronaut.projectgen.core.template;
 
-import io.micronaut.projectgen.core.feature.config.Configuration;
 import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.Yaml;
 
@@ -25,7 +24,6 @@ import java.io.OutputStreamWriter;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.regex.Pattern;
 

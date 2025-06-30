@@ -16,49 +16,26 @@
 package io.micronaut.projectgen.core.buildtools;
 
 import io.micronaut.core.annotation.NonNull;
-import io.micronaut.projectgen.core.generator.Project;
-import  io.micronaut.projectgen.core.buildtools.gradle.GradleDsl;
-
-import java.util.List;
+import io.micronaut.core.util.StringUtils;
 import java.util.Locale;
-import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * Build tool.
  */
 public enum BuildTool {
-    GRADLE("build/libs", "build.gradle", "-*-all.jar", "Gradle (Groovy)"),
-    GRADLE_KOTLIN("build/libs", "build.gradle.kts", "-*-all.jar", "Gradle (Kotlin)"),
-    MAVEN("target", "pom.xml", "-*.jar", "Maven");
+    GRADLE("build/libs"),
+    MAVEN("target");
 
-    public static final BuildTool DEFAULT_OPTION = BuildTool.GRADLE_KOTLIN;
-
+    public static final BuildTool DEFAULT_OPTION = BuildTool.GRADLE;
     private final String jarDirectory;
-    private final String fileName;
-    private final String shadeJarPattern;
-    private final String title;
 
-    BuildTool(String jarDirectory, String fileName, String shadeJarPattern, String title) {
+    BuildTool(String jarDirectory) {
         this.jarDirectory = jarDirectory;
-        this.fileName = fileName;
-        this.shadeJarPattern = shadeJarPattern;
-        this.title = title;
     }
 
     public String getJarDirectory() {
         return jarDirectory;
-    }
-
-    public String getShadeJarDirectoryPattern(Project project) {
-        Objects.requireNonNull(project, "Project should not be null");
-        return getJarDirectory() + '/' + project.getName() + shadeJarPattern;
-    }
-
-    public String getBuildFileName() {
-        return fileName;
     }
 
     @Override
@@ -69,21 +46,6 @@ public enum BuildTool {
     @NonNull
     public String getName() {
         return name().toLowerCase(Locale.ENGLISH);
-    }
-
-    public boolean isGradle() {
-        return this == GRADLE || this == GRADLE_KOTLIN;
-    }
-
-    public Optional<GradleDsl> getGradleDsl() {
-        if (isGradle()) {
-            if (this == BuildTool.GRADLE_KOTLIN) {
-                return Optional.of(GradleDsl.KOTLIN);
-            } else if (this == BuildTool.GRADLE) {
-                return Optional.of(GradleDsl.GROOVY);
-            }
-        }
-        return Optional.empty();
     }
 
     @NonNull
@@ -97,16 +59,6 @@ public enum BuildTool {
     }
 
     public String getTitle() {
-        return title;
-    }
-
-    /**
-     *
-     * @return Every BuildTool which evaluates to true for {@link BuildTool#isGradle()}
-     */
-    public static List<BuildTool> valuesGradle() {
-        return Stream.of(BuildTool.values())
-                .filter(BuildTool::isGradle)
-                .collect(Collectors.toList());
+        return StringUtils.capitalize(name().toLowerCase(Locale.ENGLISH));
     }
 }

@@ -1,0 +1,59 @@
+/*
+ * Copyright 2017-2025 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package io.micronaut.projectgen.core.utils;
+
+import io.micronaut.core.annotation.Introspected;
+import io.micronaut.core.util.StringUtils;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+/**
+ *
+ * @param idAttribute HTML id attribute
+ * @param classAttribute HTML class attribute
+ * @param content content
+ */
+@Introspected
+public record CodeSample(String idAttribute,
+                  String classAttribute,
+                  String content) {
+
+    public CodeSample(String key, String value) {
+        this(toValidHtmlId(key),
+            PrismLanguageHelper.getPrismLanguageClass(key),
+            StringUtils.isEmpty(value) ? "" : value);
+    }
+
+    public static List<CodeSample> of(Map<String, String> project) {
+        List<CodeSample> result = new ArrayList<>();
+        for (Map.Entry<String, String> entry : project.entrySet()) {
+            result.add(new CodeSample(entry.getKey(), entry.getValue()));
+        }
+        return result;
+    }
+
+    public static String toValidHtmlId(String input) {
+        // 1. Replace invalid characters (anything not a-z, A-Z, 0-9, -, _, :, .) with underscores
+        String result = input.replaceAll("[^a-zA-Z0-9\\-_:\\.]", "_");
+        // 2. Ensure it starts with a letter (prepend 'id_' if not)
+        if (!result.matches("^[a-zA-Z].*")) {
+            result = "id_" + result;
+        }
+        return result;
+    }
+}

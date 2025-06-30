@@ -19,6 +19,9 @@ import io.micronaut.core.annotation.Internal;
 
 import java.util.regex.Pattern;
 
+/**
+ * Utility class to work with strings.
+ */
 @Internal
 public final class StringUtils {
     private StringUtils() {

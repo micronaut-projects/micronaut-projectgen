@@ -20,12 +20,14 @@ import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.buildtools.Scope;
 import io.micronaut.projectgen.core.buildtools.gradle.GradleConfiguration;
 import io.micronaut.projectgen.core.options.Language;
-import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.core.options.TestFramework;
 import java.util.Optional;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
+/**
+ * {@link BuildTestVerifier} for Gradle builds.
+ */
 public class GradleBuildTestVerifier implements BuildTestVerifier {
 
     private final BuildTool buildTool;

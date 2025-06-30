@@ -24,18 +24,27 @@ import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.projectgen.core.feature.FeaturePhase;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.options.ConfigurationFormat;
 import io.micronaut.projectgen.core.template.Template;
 import io.micronaut.projectgen.core.template.TomlTemplate;
 import jakarta.inject.Singleton;
 
 import java.util.function.Function;
 
-@Requires(property = "micronaut.starter.feature.toml.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
+/**
+ * {@link ConfigurationFeature} for TOML.
+ */
+@Requires(property = "projectgen.features.toml.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Toml implements ConfigurationFeature {
 
     public static final String NAME = "toml";
     private static final String EXTENSION = "toml";
+
+    @Override
+    public boolean isVisible() {
+        return false;
+    }
 
     @Override
     public void processSelectedFeatures(FeatureContext featureContext) {
@@ -86,5 +95,10 @@ public class Toml implements ConfigurationFeature {
                 : module + "/" + cfg.getFullPath(EXTENSION);
             return new TomlTemplate(path, cfg);
         };
+    }
+
+    @Override
+    public ConfigurationFormat configurationFormat() {
+        return ConfigurationFormat.TOML;
     }
 }

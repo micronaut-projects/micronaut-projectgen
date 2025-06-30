@@ -10,16 +10,21 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class BuildToolTest {
 
     @Test
-    void valueGradleReturnsGroovyAndKotlinDsl() {
-        assertTrue(BuildTool.valuesGradle().stream().allMatch(BuildTool::isGradle));
-        assertEquals(List.of(BuildTool.GRADLE, BuildTool.GRADLE_KOTLIN), BuildTool.valuesGradle());
-    }
-
-    @Test
     void buildToolOf() {
         assertTrue(BuildTool.of("foo").isEmpty());
         assertEquals(BuildTool.GRADLE, BuildTool.of("gradle").get());
-        assertEquals(BuildTool.GRADLE_KOTLIN, BuildTool.of("gradle_kotlin").get());
         assertEquals(BuildTool.MAVEN, BuildTool.of("maven").get());
+    }
+
+    @Test
+    void buildToolTitle() {
+        assertEquals("Gradle", BuildTool.GRADLE.getTitle());
+        assertEquals("Maven", BuildTool.MAVEN.getTitle());
+    }
+
+    @Test
+    void getJarDirectory() {
+        assertEquals("build/libs", BuildTool.GRADLE.getJarDirectory());
+        assertEquals("target", BuildTool.MAVEN.getJarDirectory());
     }
 }

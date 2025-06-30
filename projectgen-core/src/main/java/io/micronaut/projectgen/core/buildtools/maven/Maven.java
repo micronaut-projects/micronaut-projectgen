@@ -20,24 +20,28 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.feature.BuildFeature;
+import io.micronaut.projectgen.core.feature.DefaultFeature;
+import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.core.rocker.RockerTemplate;
 import io.micronaut.projectgen.core.template.BinaryTemplate;
 import io.micronaut.projectgen.core.template.URLTemplate;
+import io.micronaut.projectgen.core.utils.OptionUtils;
 import jakarta.inject.Singleton;
 import io.micronaut.projectgen.core.template.genericPom;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Set;
 
 /**
  * Maven Feature.
  */
 @Requires(property = "micronaut.starter.feature.maven.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class Maven implements BuildFeature {
+public class Maven implements BuildFeature, DefaultFeature {
     public static final String MICRONAUT_MAVEN_DOCS_URL = "https://micronaut-projects.github.io/micronaut-maven-plugin/latest/";
     protected static final String WRAPPER_JAR = ".mvn/wrapper/maven-wrapper.jar";
     protected static final String WRAPPER_PROPS = ".mvn/wrapper/maven-wrapper.properties";
@@ -89,6 +93,13 @@ public class Maven implements BuildFeature {
         generatePom("", module, generatorContext.getOptions(), generatorContext.getModuleNames());
     }
 
+    /**
+     *
+     * @param name module name
+     * @param module Module
+     * @param options Project options
+     * @param modules module names
+     */
     void generatePom(String name, ModuleContext module, Options options, Collection<String> modules) {
         MavenBuild mavenBuild = createBuild(module, options);
         RockerModel rockerModel = genericPom.template(mavenBuild, modules);
@@ -116,5 +127,10 @@ public class Maven implements BuildFeature {
      */
     protected MavenBuild createBuild(ModuleContext moduleContext, Options options) {
         return mavenBuildCreator.create(moduleContext, options);
+    }
+
+    @Override
+    public boolean shouldApply(Options options, Set<Feature> selectedFeatures) {
+        return OptionUtils.hasMavenBuildTool(options);
     }
 }

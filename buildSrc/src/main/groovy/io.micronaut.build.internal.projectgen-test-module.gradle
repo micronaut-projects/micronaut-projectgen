@@ -1,0 +1,27 @@
+plugins {
+    id 'io.micronaut.build.internal.projectgen-base'
+    id 'java-library'
+}
+repositories {
+    mavenCentral()
+}
+ext {
+    micronautPlatform = "${libs.versions.micronaut.platform.get()}" as String
+}
+dependencies {
+    annotationProcessor(platform("io.micronaut.platform:micronaut-platform:${micronautPlatform}"))
+    implementation(platform("io.micronaut.platform:micronaut-platform:${micronautPlatform}"))
+    annotationProcessor("io.micronaut:micronaut-inject-java")
+    testAnnotationProcessor(platform("io.micronaut.platform:micronaut-platform:${micronautPlatform}"))
+    testAnnotationProcessor("io.micronaut:micronaut-inject-java")
+    testImplementation(project(":micronaut-projectgen-test"))
+    testImplementation(mnTest.micronaut.test.junit5)
+    testRuntimeOnly(mnTest.junit.jupiter.engine)
+}
+tasks.withType(Test) {
+    useJUnitPlatform()
+}
+java {
+    sourceCompatibility = JavaVersion.toVersion("17")
+    targetCompatibility = JavaVersion.toVersion("17")
+}

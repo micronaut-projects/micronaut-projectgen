@@ -3,8 +3,11 @@ package io.micronaut.projectgen.test.mavenmultimodule;
 import io.micronaut.core.io.ResourceLoader;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.buildtools.Scope;
+import io.micronaut.projectgen.core.buildtools.gradle.GradleDsl;
 import io.micronaut.projectgen.core.generator.ProjectGenerator;
 import io.micronaut.projectgen.core.io.MapOutputHandler;
+import io.micronaut.projectgen.core.io.PreviewGenerator;
+import io.micronaut.projectgen.core.options.ConfigurationFormat;
 import io.micronaut.projectgen.core.options.GenericOptionsBuilder;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.test.BuildTestVerifier;
@@ -30,15 +33,16 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class MultiModuleProjectGeneratorTest {
 
     @Test
-    void testMultiModule(ProjectGenerator projectGenerator,
-                              ResourceLoader resourceLoader) throws Exception {
-        MapOutputHandler outputHandler = new MapOutputHandler();
+    void testMultiModule(PreviewGenerator generator,
+                         ResourceLoader resourceLoader) throws Exception {
         Options options = GenericOptionsBuilder.builder().name("demo")
+            .configurationFormat(ConfigurationFormat.PROPERTIES)
             .buildTools(List.of(BuildTool.MAVEN, BuildTool.GRADLE))
-            .name("org.springframework.gs-multi-module")
+            .gradleDsl(GradleDsl.GROOVY)
+            .packageName("org.springframework")
+            .name("gs-multi-module")
             .build();
-        projectGenerator.generate(options, outputHandler);
-        Map<String, String> project = outputHandler.getProject();
+        Map<String, String> project = generator.generate(options);
         assertNotNull(project.get("application/build.gradle"));
         assertNotNull(project.get("library/build.gradle"));
         assertNotNull(project.get("build.gradle"));

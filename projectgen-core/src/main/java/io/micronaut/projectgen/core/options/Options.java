@@ -20,6 +20,7 @@ import io.micronaut.core.annotation.Nullable;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.buildtools.gradle.GradleDsl;
 import io.micronaut.projectgen.core.buildtools.maven.Packaging;
+import io.micronaut.projectgen.core.validation.JavaPackageName;
 
 import java.util.*;
 
@@ -43,6 +44,9 @@ public interface Options {
     List<BuildTool> buildTools();
 
     @Nullable
+    ConfigurationFormat configurationFormat();
+
+    @Nullable
     GradleDsl gradleDsl();
 
     @Nullable
@@ -55,6 +59,7 @@ public interface Options {
     JdkVersion java();
 
     @Nullable
+    @JavaPackageName
     String packageName();
 
     @Nullable

@@ -15,6 +15,9 @@
  */
 package io.micronaut.projectgen.core.buildtools.maven;
 
+/**
+ * Type of artifact the project produces.
+ */
 public enum Packaging {
     JAR("jar"),
     WAR("war"),

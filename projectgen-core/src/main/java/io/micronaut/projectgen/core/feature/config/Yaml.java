@@ -25,13 +25,17 @@ import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.projectgen.core.feature.FeaturePhase;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.options.ConfigurationFormat;
 import io.micronaut.projectgen.core.template.Template;
 import io.micronaut.projectgen.core.template.YamlTemplate;
 import jakarta.inject.Singleton;
 
 import java.util.function.Function;
 
-@Requires(property = "micronaut.starter.feature.yaml.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
+/**
+ * {@link ConfigurationFeature} for YAML.
+ */
+@Requires(property = "projectgen.features.yaml.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Yaml implements ConfigurationFeature {
     public static final String NAME = "yaml";
@@ -58,6 +62,11 @@ public class Yaml implements ConfigurationFeature {
     @Override
     public String getDescription() {
         return "Adds support for using YAML for configuration";
+    }
+
+    @Override
+    public boolean isVisible() {
+        return false;
     }
 
     @Override
@@ -91,5 +100,10 @@ public class Yaml implements ConfigurationFeature {
                 : module + "/" + config.getFullPath(EXTENSION);
             return new YamlTemplate(path, config);
         };
+    }
+
+    @Override
+    public ConfigurationFormat configurationFormat() {
+        return ConfigurationFormat.YAML;
     }
 }

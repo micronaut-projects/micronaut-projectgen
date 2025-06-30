@@ -18,6 +18,7 @@ package io.micronaut.projectgen.core.utils;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.Project;
 import io.micronaut.projectgen.core.generator.ProjectIdentifier;
+import io.micronaut.projectgen.core.options.Options;
 
 import java.util.*;
 import java.util.regex.Pattern;
@@ -74,6 +75,10 @@ public final class NameUtils {
 
     public static Project parse(String name) throws IllegalArgumentException {
         ProjectIdentifier projectIdentifier = parseProjectIdentifier(name);
+        return parse(projectIdentifier);
+    }
+
+    public static Project parse(ProjectIdentifier projectIdentifier) throws IllegalArgumentException {
         String packageName = projectIdentifier.getPackageName();
         String appName = projectIdentifier.getName();
         String packagePath = packageName.replace('.', '/');
@@ -82,6 +87,11 @@ public final class NameUtils {
         String propertyName = getPropertyName(appName);
 
         return new Project(packageName, packagePath, className, naturalName, propertyName, appName);
+    }
+
+    public static Project parse(Options options) throws IllegalArgumentException {
+        ProjectIdentifier projectIdentifier = new ProjectIdentifier(options.packageName(), options.name());
+        return parse(projectIdentifier);
     }
 
     private static String createPackageName(String appName) {

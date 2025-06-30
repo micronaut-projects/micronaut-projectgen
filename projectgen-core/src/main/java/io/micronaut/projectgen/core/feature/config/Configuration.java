@@ -26,7 +26,6 @@ import java.util.Objects;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Collections;
-import java.util.UUID;
 
 import static io.micronaut.projectgen.core.utils.StringUtils.*;
 
@@ -35,15 +34,13 @@ import static io.micronaut.projectgen.core.utils.StringUtils.*;
  *
  */
 public class Configuration extends LinkedHashMap<String, Object> {
-
+    public static final String COMMENT_PREFIX = "___COMMENT_KEY___";
+    public static final String BLANK_LINE_PREFIX = "___BLANK_LINE__KEY___";
+    public static final List<String> PREFIXES = Arrays.asList(COMMENT_PREFIX, BLANK_LINE_PREFIX);
     private static final String EMPTY_STRING = "";
     private final String path;
     private final String fileName;
     private final String templateKey;
-    public static final String COMMENT_PREFIX = "___COMMENT_KEY___";
-    public static final String BLANK_LINE_PREFIX = "___BLANK_LINE__KEY___";
-    public static final List<String> PREFIXES = Arrays.asList(COMMENT_PREFIX, BLANK_LINE_PREFIX);
-
 
     /**
      * A configuration rooted at path, with the given map of configurations.
@@ -274,7 +271,7 @@ public class Configuration extends LinkedHashMap<String, Object> {
     }
 
     /**
-     * Add a blank line
+     * Add a blank line.
      */
     public void blankLine() {
         put(BLANK_LINE_PREFIX + randomString(), EMPTY_STRING);
