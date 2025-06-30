@@ -1,0 +1,24 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.spring-boot-annotation
+displayName: Add Spring Boot Annotation Processor
+recipeList:
+  - io.micronaut.starter.feature.spring-boot-annotation.maven
+  - io.micronaut.starter.feature.spring-boot-annotation.gradle
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.spring-boot-annotation.maven
+displayName: Add Spring Boot Annotations Processor to the Maven compiler plugin
+recipeList:
+  - org.openrewrite.maven.AddAnnotationProcessor:
+      groupId: io.micronaut.spring
+      artifactId: micronaut-spring-boot-annotation
+      version: ${micronaut.spring.version}
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.spring-boot-annotation.gradle
+displayName: Add Spring Boot Annotations Processor dependency to a Gradle Build
+recipeList:
+  - org.openrewrite.gradle.AddDependency:
+      groupId: io.micronaut.spring
+      artifactId: micronaut-spring-boot-annotation
+      configuration: annotationProcessor

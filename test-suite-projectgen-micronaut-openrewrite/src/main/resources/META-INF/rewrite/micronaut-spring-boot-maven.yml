@@ -1,0 +1,8 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.micronaut-spring-boot-maven
+displayName: Add Spring Boot dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.spring
+      artifactId: micronaut-spring-boot
+      scope: compile

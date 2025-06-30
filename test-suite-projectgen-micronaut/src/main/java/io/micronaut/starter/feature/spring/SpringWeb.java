@@ -18,6 +18,7 @@ package io.micronaut.starter.feature.spring;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
@@ -26,9 +27,11 @@ import io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils;
 import io.micronaut.starter.feature.server.MicronautServerDependent;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.spring.web.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class SpringWeb extends SpringFeature implements MicronautServerDependent {
+public class SpringWeb extends SpringFeature implements MicronautServerDependent, OpenRewriteFeature {
 
     public static final String NAME = "spring-web";
 
@@ -58,25 +61,8 @@ public class SpringWeb extends SpringFeature implements MicronautServerDependent
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
-        Dependency.Builder springWebAnnotation = MicronautDependencyUtils.springDependency()
-                .artifactId("micronaut-spring-web-annotation")
-                .versionProperty("micronaut.spring.version")
-                .template();
-
-        module.addDependency(springWebAnnotation.annotationProcessor());
-        module.addDependency(springWebAnnotation.testAnnotationProcessor());
-        module.addDependency(Dependency.builder()
-                .groupId("org.springframework.boot")
-                .artifactId("spring-boot-starter-web")
-                .compile());
-        module.addDependency(MicronautDependencyUtils.coreDependency()
-                .artifactId("micronaut-http-server")
-                .compile());
-        module.addDependency(Dependency.builder()
-                .groupId("io.micronaut.spring")
-                .artifactId("micronaut-spring-web")
-                .runtime());
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.spring-web");
     }
+
 }
