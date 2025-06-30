@@ -20,15 +20,18 @@ import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.starter.feature.database.DataJdbc;
 
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.spring.data.jdbc.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class SpringDataJdbc extends SpringFeature {
+public class SpringDataJdbc extends SpringFeature implements OpenRewriteFeature {
 
     private final DataJdbc dataJdbc;
 
@@ -61,14 +64,8 @@ public class SpringDataJdbc extends SpringFeature {
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
-        module.addDependency(MicronautDependencyUtils.dataDependency()
-                .artifactId("micronaut-data-spring")
-                .compile());
-        module.addDependency(Dependency.builder()
-                .groupId("org.springframework")
-                .artifactId("spring-jdbc")
-                .compile());
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.spring-data-jdbc");
     }
+
 }
