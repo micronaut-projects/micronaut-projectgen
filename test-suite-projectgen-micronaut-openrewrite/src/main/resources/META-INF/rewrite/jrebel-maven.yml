@@ -1,0 +1,7 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.jrebel-maven
+displayName: Add Jrebel Maven Plugin
+recipeList:
+  - org.openrewrite.maven.AddPlugin:
+      groupId: org.zeroturnaround
+      artifactId: jrebel-maven-plugin
