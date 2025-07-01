@@ -45,7 +45,6 @@ public abstract class ChatBots implements ChatBotsFeature {
     @Override
     public void apply(GeneratorContext generatorContext) {
         ModuleContext module = generatorContext.getRootModule();
-        addDependencies(module);
         addConfigurations(module);
         renderTemplates(generatorContext, module);
     }
@@ -54,13 +53,6 @@ public abstract class ChatBots implements ChatBotsFeature {
     public void processSelectedFeatures(FeatureContext featureContext) {
         featureContext.addFeatureIfNotPresent(ValidationFeature.class, validationFeature);
     }
-
-    @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-chatbots/latest/guide/";
-    }
-
-    protected abstract void addDependencies(@NonNull ModuleContext module);
 
     protected abstract void addConfigurations(@NonNull ModuleContext module);
 

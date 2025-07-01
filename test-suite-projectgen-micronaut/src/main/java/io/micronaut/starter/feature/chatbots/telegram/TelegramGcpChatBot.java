@@ -97,7 +97,6 @@ public class TelegramGcpChatBot extends ChatBotsTelegram implements GcpCloudFeat
         return GcpCloudFunctionBuildCommandUtils.getBuildCommand(buildTool);
     }
 
-    @Override
     protected void addDependencies(ModuleContext module) {
         module.addDependency(CHATBOTS_TELEGRAM_GCP_FUNCTION);
     }

@@ -98,7 +98,6 @@ public class TelegramAwsChatBot extends ChatBotsTelegram implements AwsFeature, 
         addMicronautRuntimeBuildProperty(generatorContext);
     }
 
-    @Override
     protected void addDependencies(ModuleContext module) {
         module.addDependency(CHATBOTS_TELEGRAM_LAMBDA);
     }

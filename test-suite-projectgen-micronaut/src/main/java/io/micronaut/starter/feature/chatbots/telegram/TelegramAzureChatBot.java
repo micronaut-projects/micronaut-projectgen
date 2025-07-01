@@ -99,7 +99,6 @@ public class TelegramAzureChatBot extends ChatBotsTelegram implements AzureCloud
         return AzureBuildCommandUtils.getBuildCommand(buildTool);
     }
 
-    @Override
     protected void addDependencies(ModuleContext module) {
         module.addDependency(CHATBOTS_TELEGRAM_AZURE_FUNCTION);
     }

@@ -99,7 +99,6 @@ public class BasecampAzureChatBot extends ChatBotsBasecamp implements AzureCloud
         return AzureBuildCommandUtils.getBuildCommand(buildTool);
     }
 
-    @Override
     protected void addDependencies(ModuleContext module) {
         module.addDependency(CHATBOTS_BASECAMP_AZURE_FUNCTION);
     }

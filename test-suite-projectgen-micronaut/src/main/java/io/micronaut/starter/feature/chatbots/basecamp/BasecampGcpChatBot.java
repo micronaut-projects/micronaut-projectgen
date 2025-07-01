@@ -98,7 +98,6 @@ public class BasecampGcpChatBot extends ChatBotsBasecamp implements GcpCloudFeat
         return GcpCloudFunctionBuildCommandUtils.getBuildCommand(buildTool);
     }
 
-    @Override
     protected void addDependencies(ModuleContext module) {
         module.addDependency(CHATBOTS_BASECAMP_GCP_FUNCTION);
     }

@@ -99,7 +99,6 @@ public class BasecampHttpChatBot extends ChatBotsBasecamp {
         return "Generates an application that implements a Basecamp chatbot controller";
     }
 
-    @Override
     protected void addDependencies(ModuleContext module) {
         module.addDependency(CHATBOTS_BASECAMP_HTTP);
     }

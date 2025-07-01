@@ -109,11 +109,6 @@ abstract class ChatBotsBasecamp extends ChatBots {
     }
 
     @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://github.com/basecamp/bc3-api/blob/master/sections/chatbots.md";
-    }
-
-    @Override
     public ChatBotType getChatBotType() {
         return ChatBotType.BASECAMP;
     }

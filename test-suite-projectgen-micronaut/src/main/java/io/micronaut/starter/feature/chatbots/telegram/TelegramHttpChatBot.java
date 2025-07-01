@@ -99,7 +99,6 @@ public class TelegramHttpChatBot extends ChatBotsTelegram {
         return "Generates an application that implements a Telegram chatbot controller";
     }
 
-    @Override
     protected void addDependencies(ModuleContext module) {
         module.addDependency(CHATBOTS_TELEGRAM_HTTP);
     }
