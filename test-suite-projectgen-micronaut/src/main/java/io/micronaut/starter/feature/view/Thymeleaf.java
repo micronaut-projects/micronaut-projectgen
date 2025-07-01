@@ -20,6 +20,7 @@ import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.starter.feature.server.MicronautServerDependent;
@@ -27,14 +28,12 @@ import io.micronaut.projectgen.core.template.URLTemplate;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.views.thymeleaf.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class Thymeleaf implements ViewFeature, MicronautServerDependent {
+public class Thymeleaf implements ViewFeature, MicronautServerDependent, OpenRewriteFeature {
 
-    private static final String ARTIFACT_ID_MICRONAUT_VIEWS_THYMELEAF = "micronaut-views-thymeleaf";
-    private static final Dependency.Builder DEPENDENCY_MICRONAUT_VIEWS_THYMELEAF = MicronautDependencyUtils.viewsDependency()
-            .artifactId(ARTIFACT_ID_MICRONAUT_VIEWS_THYMELEAF)
-            .compile();
     private static final String LAYOUT_HTML = "layout.html";
     private static final String RESOURCES_THYMELEAF_PATH = "views/thymeleaf/";
 
@@ -75,24 +74,15 @@ public class Thymeleaf implements ViewFeature, MicronautServerDependent {
     }
 
     @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://www.thymeleaf.org/";
-    }
-
-    @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-views/latest/guide/index.html#thymeleaf";
-    }
-
-    @Override
     public void apply(GeneratorContext generatorContext) {
-        addDependencies(generatorContext);
+        ModuleContext module = generatorContext.getRootModule();
+        addLayout(module);
+        OpenRewriteFeature.super.apply(generatorContext);
     }
 
-    protected void addDependencies(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
-        module.addDependency(DEPENDENCY_MICRONAUT_VIEWS_THYMELEAF);
-        addLayout(module);
+    @Override
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.views-thymeleaf");
     }
 
     private void addLayout(ModuleContext module) {
