@@ -19,6 +19,7 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
@@ -35,6 +36,8 @@ import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.rocker.RockerTemplate;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 /**
  * Adds support for Telegram chatbots as Google Cloud Functions.
  *
@@ -43,15 +46,10 @@ import jakarta.inject.Singleton;
  */
 @Requires(property = "micronaut.starter.feature.chatbots.basecamp.gcp.function.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class BasecampGcpChatBot extends ChatBotsBasecamp implements GcpCloudFeature, GcpMicronautRuntimeFeature {
+public class BasecampGcpChatBot extends ChatBotsBasecamp implements GcpCloudFeature, GcpMicronautRuntimeFeature, OpenRewriteFeature {
 
     public static final String NAME = "chatbots-basecamp-gcp-function";
 
-    public static final Dependency CHATBOTS_BASECAMP_GCP_FUNCTION = MicronautDependencyUtils
-            .chatBotsDependency()
-            .artifactId("micronaut-chatbots-basecamp-gcp-function")
-            .compile()
-            .build();
     private final GoogleCloudRawFunction rawFunction;
 
     public BasecampGcpChatBot(MicronautValidationFeature validationFeature, GoogleCloudRawFunction rawFunction) {
@@ -90,6 +88,7 @@ public class BasecampGcpChatBot extends ChatBotsBasecamp implements GcpCloudFeat
     @Override
     public void apply(GeneratorContext generatorContext) {
         super.apply(generatorContext);
+        OpenRewriteFeature.super.apply(generatorContext);
         addMicronautRuntimeBuildProperty(generatorContext);
     }
 
@@ -98,8 +97,9 @@ public class BasecampGcpChatBot extends ChatBotsBasecamp implements GcpCloudFeat
         return GcpCloudFunctionBuildCommandUtils.getBuildCommand(buildTool);
     }
 
-    protected void addDependencies(ModuleContext module) {
-        module.addDependency(CHATBOTS_BASECAMP_GCP_FUNCTION);
+    @Override
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.chatbots-basecamp-gcp-function");
     }
 
     @Override
