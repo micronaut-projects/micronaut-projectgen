@@ -45,7 +45,6 @@ public abstract class ChatBots implements ChatBotsFeature {
     @Override
     public void apply(GeneratorContext generatorContext) {
         ModuleContext module = generatorContext.getRootModule();
-        addConfigurations(module);
         renderTemplates(generatorContext, module);
     }
 
@@ -53,8 +52,6 @@ public abstract class ChatBots implements ChatBotsFeature {
     public void processSelectedFeatures(FeatureContext featureContext) {
         featureContext.addFeatureIfNotPresent(ValidationFeature.class, validationFeature);
     }
-
-    protected abstract void addConfigurations(@NonNull ModuleContext module);
 
     @NonNull
     protected abstract ChatBotType getChatBotType();
