@@ -39,7 +39,7 @@ class BasecampGcpChatBotTest {
 
     @Test
     void basecampGcpChatbotFeaturesAddsTheLinkInReadmeFile(PreviewGenerator previewGenerator) throws Exception {
-        Options options = OptionsFixture.defaultGradle().template("function").features(List.of("chatbots-basecamp-azure-function")).build();
+        Options options = OptionsFixture.defaultGradle().template("function").features(List.of("chatbots-basecamp-gcp-function")).build();
         Map<String, String> project = previewGenerator.generate(options);
         String readme = project.get("README.md");
         assertNotNull(readme);
