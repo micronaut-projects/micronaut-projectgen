@@ -1,0 +1,24 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.openapi-adoc
+displayName: Add Openapi Adoc Annotation Processor
+recipeList:
+  - io.micronaut.starter.feature.openapi-adoc.maven
+  - io.micronaut.starter.feature.openapi-adoc.gradle
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.openapi-adoc.maven
+displayName: Add Openapi Adoc annotations Processor to the Maven compiler plugin
+recipeList:
+  - org.openrewrite.maven.AddAnnotationProcessor:
+      groupId: io.micronaut.openapi
+      artifactId: micronaut-openapi-adoc
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.openapi-adoc.gradle
+displayName: Add Openapi Adoc annotations Processor dependency to a Gradle Build
+recipeList:
+  - org.openrewrite.gradle.AddDependency:
+      groupId: io.micronaut.openapi
+      artifactId: micronaut-openapi-adoc
+      configuration: annotationProcessor
+

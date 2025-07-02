@@ -18,6 +18,7 @@ package io.micronaut.starter.feature.other;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
@@ -29,17 +30,13 @@ import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.starter.feature.server.MicronautServerDependent;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.openapi.adoc.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class OpenApiAdoc implements Feature, MicronautServerDependent {
+public class OpenApiAdoc implements OpenRewriteFeature, MicronautServerDependent {
 
     public static final String NAME = "openapi-adoc";
-
-    private static final Dependency DEPENDENCY_OPENAPI_ASCIIDOC = MicronautDependencyUtils
-            .openapi()
-            .artifactId("micronaut-openapi-adoc")
-            .annotationProcessor()
-            .build();
 
     private final OpenApi openApiFeature;
 
@@ -63,12 +60,6 @@ public class OpenApiAdoc implements Feature, MicronautServerDependent {
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
-        module.addDependency(DEPENDENCY_OPENAPI_ASCIIDOC);
-    }
-
-    @Override
     public void processSelectedFeatures(FeatureContext featureContext) {
         featureContext.addFeatureIfNotPresent(OpenApi.class, openApiFeature);
     }
@@ -83,4 +74,10 @@ public class OpenApiAdoc implements Feature, MicronautServerDependent {
     public String getCategory() {
         return Category.API;
     }
+
+    @Override
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.openapi-adoc");
+    }
+
 }
