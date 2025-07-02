@@ -1,20 +1,34 @@
 package io.micronaut.projectgen.micronaut.features.chatbots.basecamp;
 
+import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.buildtools.Scope;
 import io.micronaut.projectgen.core.io.PreviewGenerator;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.OptionsFixture;
 import io.micronaut.projectgen.test.BuildTestVerifier;
+import io.micronaut.projectgen.test.ConfigurationUtils;
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @MicronautTest(startApplication = false)
 class BasecampAwsChatBotTest {
+
+    @Test
+    void basecampAwsChatbotFeaturesConfiguration(PreviewGenerator previewGenerator) throws Exception {
+        Options options = OptionsFixture.defaultGradle().template("function").features(List.of("chatbots-basecamp-lambda")).build();
+        Map<String, String> project = previewGenerator.generate(options);
+        Properties applicationProperties = ConfigurationUtils.loadApplicationProperties(project);
+        String buildGradle = project.get("build.gradle.kts");
+        assertNotNull(buildGradle);
+        assertEquals("botcommands", applicationProperties.getProperty("micronaut.chatbots.folder"));
+    }
+
     @Test
     void basecampAwsChatbotFeaturesAddsTheDependency(PreviewGenerator previewGenerator) throws Exception {
         Options options = OptionsFixture.defaultGradle().template("function").features(List.of("chatbots-basecamp-lambda")).build();
