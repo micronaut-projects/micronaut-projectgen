@@ -16,15 +16,15 @@
 package io.micronaut.starter.feature.server;
 
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.feature.MicronautRuntimeFeature;
 
-public abstract class AbstractMicronautServerFeature implements ServerFeature, MicronautRuntimeFeature {
+public abstract class AbstractMicronautServerFeature implements ServerFeature, MicronautRuntimeFeature, OpenRewriteFeature {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
         addMicronautRuntimeBuildProperty(generatorContext);
-        doApply(generatorContext);
+        OpenRewriteFeature.super.apply(generatorContext);
     }
 
-    public abstract void doApply(GeneratorContext generatorContext);
 }

@@ -19,15 +19,19 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils;
 
 import jakarta.inject.Singleton;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.netty.server.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class Netty extends AbstractMicronautServerFeature {
+public class Netty extends AbstractMicronautServerFeature implements OpenRewriteFeature {
 
     @Override
     public String getName() {
@@ -45,13 +49,12 @@ public class Netty extends AbstractMicronautServerFeature {
     }
 
     @Override
-    public void doApply(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        List<String> recipes = new ArrayList<>();
         if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())) {
-            module.addDependency(MicronautDependencyUtils.coreDependency()
-                    .artifactId("micronaut-http-server-netty")
-                    .compile());
+            recipes.add("io.micronaut.starter.feature.netty-server");
         }
+        return recipes;
     }
 
     @Override

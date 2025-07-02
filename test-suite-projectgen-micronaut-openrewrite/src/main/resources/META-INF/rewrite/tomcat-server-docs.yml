@@ -1,0 +1,8 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.tomcat-server-docs
+displayName: Append a link to Micronaut Tomcat Server documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-servlet/latest/guide/index.html#tomcat
+      appendNewline: true

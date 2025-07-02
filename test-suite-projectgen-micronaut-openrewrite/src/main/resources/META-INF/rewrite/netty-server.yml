@@ -1,0 +1,8 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.netty-server
+displayName: Add Netty Server dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut
+      artifactId: micronaut-http-server-netty
+      scope: compile
