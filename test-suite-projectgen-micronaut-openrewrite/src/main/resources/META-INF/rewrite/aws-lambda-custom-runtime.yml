@@ -1,0 +1,35 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.aws-lambda-custom-runtime
+displayName: Add Aws Lambda Custom Runtime dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.aws-lambda-custom-runtime.dependencies
+  - io.micronaut.starter.feature.aws-lambda-custom-runtime.micronaut.documentation
+  - io.micronaut.starter.feature.aws-lambda-custom-runtime.documentation.thirdparty
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.aws-lambda-custom-runtime.dependencies
+displayName: Add Aws Lambda Custom Runtime dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.aws
+      artifactId: micronaut-function-aws-custom-runtime
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.aws-lambda-custom-runtime.micronaut.documentation
+displayName: Append a link to Micronaut Aws Lambda Custom Runtime documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-aws/latest/guide/index.html#lambdaCustomRuntimes
+      appendNewline: true
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.aws-lambda-custom-runtime.documentation.thirdparty
+displayName: Append a link to Aws Lambda Custom Runtime website
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://docs.aws.amazon.com/lambda/latest/dg/runtimes-custom.html
+      appendNewline: true
