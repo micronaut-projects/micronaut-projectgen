@@ -7,6 +7,7 @@ import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.OptionsFixture;
 import io.micronaut.projectgen.test.BuildTestVerifier;
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -27,16 +28,16 @@ class OpenApiTest {
         assertTrue(verifier.hasDependency("io.micronaut.openapi", "micronaut-openapi", Scope.ANNOTATION_PROCESSOR), buildGradle);
     }
 
-    //Could not get version for ID groovy
-//    @Test
-//    void openapiMavenFeaturesAddsTheDependency(PreviewGenerator previewGenerator) throws Exception {
-//        Options options = OptionsFixture.defaultMaven().language(Language.GROOVY).features(List.of("openapi")).build();
-//        Map<String, String> project = previewGenerator.generate(options);
-//        String pom = project.get("pom.xml");
-//        assertNotNull(pom);
-//        BuildTestVerifier verifier = BuildTestVerifier.of(pom, options);
-//        assertTrue(verifier.hasDependency("io.micronaut.openapi", "micronaut-openapi"), pom);
-//    }
+    @Disabled
+    @Test
+    void openapiMavenFeaturesAddsTheDependency(PreviewGenerator previewGenerator) throws Exception {
+        Options options = OptionsFixture.defaultMaven().language(Language.GROOVY).features(List.of("openapi")).build();
+        Map<String, String> project = previewGenerator.generate(options);
+        String pom = project.get("pom.xml");
+        assertNotNull(pom);
+        BuildTestVerifier verifier = BuildTestVerifier.of(pom, options);
+        assertTrue(verifier.hasDependency("io.micronaut.openapi", "micronaut-openapi"), pom);
+    }
 
     @Test
     void openapiFeaturesAddsTheLinkInReadmeFile(PreviewGenerator previewGenerator) throws Exception {
