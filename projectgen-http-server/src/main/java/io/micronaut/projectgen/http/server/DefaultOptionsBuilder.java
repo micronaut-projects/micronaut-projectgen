@@ -25,6 +25,7 @@ import io.micronaut.projectgen.core.options.GenericOptionsBuilder;
 import io.micronaut.projectgen.core.options.JdkVersion;
 import io.micronaut.projectgen.core.options.Language;
 import io.micronaut.projectgen.core.options.Options;
+import io.micronaut.projectgen.core.options.TestFramework;
 import jakarta.inject.Singleton;
 
 import java.util.ArrayList;
@@ -45,6 +46,7 @@ public class DefaultOptionsBuilder implements OptionsBuilder {
     protected static final String FIELD_LANG = "lang";
     protected static final String FIELD_BUILD = "build";
     protected static final String FIELD_JAVA = "java";
+    protected static final String FIELD_TEST_FRAMEWORK = "testFramework";
     protected static final String FIELD_GRADLE_DSL = "gradleDsl";
     protected static final String FIELD_FEATURES = "features";
     protected static final String FIELD_PACKAGE_NAME = "packageName";
@@ -86,6 +88,10 @@ public class DefaultOptionsBuilder implements OptionsBuilder {
             getField(form, FIELD_JAVA)
                 .map(JdkVersion::valueOf)
                 .ifPresent(builder::java);
+            getField(form, FIELD_TEST_FRAMEWORK)
+                .flatMap(TestFramework::of)
+                .ifPresent(builder::testFramework);
+
         }
         return builder;
     }
