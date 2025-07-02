@@ -1,0 +1,8 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.groovy-sql-docs
+displayName: Append a link to Groovy Sql documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://docs.groovy-lang.org/docs/latest/html/documentation/#processing-sql
+      appendNewline: true

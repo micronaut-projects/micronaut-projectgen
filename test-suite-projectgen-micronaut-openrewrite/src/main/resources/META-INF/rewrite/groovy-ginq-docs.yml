@@ -1,0 +1,8 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.groovy-ginq-docs
+displayName: Append a link to Groovy Ginq documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://docs.groovy-lang.org/docs/latest/html/documentation/#_querying_collections_in_sql_like_style
+      appendNewline: true
