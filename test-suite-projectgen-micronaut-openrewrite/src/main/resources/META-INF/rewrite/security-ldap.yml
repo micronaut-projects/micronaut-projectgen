@@ -1,0 +1,25 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.security-ldap
+displayName: Add Security Ldap dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.security-ldap.dependencies
+  - io.micronaut.starter.feature.security-ldap.micronaut.documentation
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.security-ldap.dependencies
+displayName: Add Security Ldap dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.security
+      artifactId: micronaut-security-ldap
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.security-ldap.micronaut.documentation
+displayName: Append a link to Micronaut Security Ldap documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-security/latest/guide/index.html#ldap
+      appendNewline: true

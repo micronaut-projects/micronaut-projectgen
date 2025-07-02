@@ -21,20 +21,22 @@ import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.gradle.GradlePlugin;
 import io.micronaut.projectgen.core.buildtools.maven.MavenPlugin;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.starter.buildtools.maven.JvmArgumentsFeature;
 import jakarta.inject.Singleton;
+
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 @Requires(property = "micronaut.starter.feature.jrebel.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class Jrebel implements ReloadingFeature, JvmArgumentsFeature {
-
+public class Jrebel implements ReloadingFeature, JvmArgumentsFeature, OpenRewriteFeature {
     private static final String JVM_ARGUMENT_AGENT_PATH = "-agentpath:~/bin/jrebel/lib/jrebel6/lib/libjrebel64.dylib";
-
-    private static final String GROUP_ID_ORG_ZEROTURNAROUND = "org.zeroturnaround";
-    private static final String ARTIFACT_ID_JREBEL_MAVEN_PLUGIN = "jrebel-maven-plugin";
+    private static final String RECIPE_JREBEL_MAVEN_PLUGIN = "io.micronaut.starter.feature.jrebel-maven";
+    private static final String RECIPE_JREBEL_GRADLE_PLUGIN = "io.micronaut.starter.feature.jrebel-gradle";
+    private static final String RECIPE_JREBEL_DOCS = "io.micronaut.starter.feature.jrebel-docs";
 
     @Override
     public String getName() {
@@ -53,26 +55,25 @@ public class Jrebel implements ReloadingFeature, JvmArgumentsFeature {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
+        OpenRewriteFeature.super.apply(generatorContext);
         ModuleContext module = generatorContext.getRootModule();
         if (OptionUtils.hasGradleBuildTool(generatorContext.getOptions())) {
             module.buildProperties().addComment("TODO: Replace with agent path from JRebel installation; see documentation");
             module.buildProperties().addComment("rebelAgent=" + JVM_ARGUMENT_AGENT_PATH);
-            module.addBuildPlugin(GradlePlugin.builder()
-                    .id("org.zeroturnaround.gradle.jrebel")
-                    .lookupArtifactId("gradle-jrebel-plugin")
-                    .build());
-            module.addHelpLink("JRebel Gradle Plugin", "https://plugins.gradle.org/plugin/org.zeroturnaround.gradle.jrebel");
-        } else {
-            module.addBuildPlugin(MavenPlugin.builder()
-                    .groupId(GROUP_ID_ORG_ZEROTURNAROUND)
-                    .artifactId(ARTIFACT_ID_JREBEL_MAVEN_PLUGIN)
-                    .build());
         }
     }
 
     @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://docs.micronaut.io/latest/guide/index.html#jrebel";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        List<String> recipes = new ArrayList<>();
+        recipes.add(RECIPE_JREBEL_DOCS);
+        if (OptionUtils.hasGradleBuildTool(generatorContext.getOptions())) {
+            recipes.add(RECIPE_JREBEL_GRADLE_PLUGIN);
+        }
+        if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())) {
+            recipes.add(RECIPE_JREBEL_MAVEN_PLUGIN);
+        }
+        return recipes;
     }
 
     @Override

@@ -1,0 +1,21 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.picocli
+displayName: Add Picocli dependencies
+recipeList:
+  - io.micronaut.starter.feature.picocli.dependencies
+  - io.micronaut.starter.feature.picocli-annotation
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.picocli.dependencies
+displayName: Add Picocli dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.picocli
+      artifactId: micronaut-picocli
+      configuration: implementation
+      scope: compile
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: info.picocli
+      artifactId: picocli
+      configuration: implementation
+      scope: compile
