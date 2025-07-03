@@ -65,19 +65,12 @@ public abstract class JdbcFeature implements OneOfFeature, DatabaseDriverConfigu
         generatorContext.getFeature(DatabaseDriverFeature.class).ifPresent(dbFeature -> {
             Map<String, Object> jdbcConfig = new LinkedHashMap<>();
             applyDefaultConfig(generatorContext, dbFeature, jdbcConfig);
-            ModuleContext module = generatorContext.getRootModule();
-            module.configuration().addNested(jdbcConfig);
         });
     }
 
     @Override
     public String getCategory() {
         return Category.DATABASE;
-    }
-
-    @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-sql/latest/guide/index.html#jdbc";
     }
 
     public String getUrlKey() {
