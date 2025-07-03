@@ -1,0 +1,35 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.views-thymeleaf
+displayName: Add Views Thymeleaf dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.views-thymeleaf.dependencies
+  - io.micronaut.starter.feature.views-thymeleaf.micronaut.documentation
+  - io.micronaut.starter.feature.views-thymeleaf.documentation.thirdparty
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.views-thymeleaf.dependencies
+displayName: Add Views Thymeleaf dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.views
+      artifactId: micronaut-views-thymeleaf
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.views-thymeleaf.micronaut.documentation
+displayName: Append a link to Micronaut Thymeleaf documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-views/latest/guide/index.html#thymeleaf
+      appendNewline: true
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.views-thymeleaf.documentation.thirdparty
+displayName: Append a link to Thymeleaf website
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://www.thymeleaf.org/
+      appendNewline: true
