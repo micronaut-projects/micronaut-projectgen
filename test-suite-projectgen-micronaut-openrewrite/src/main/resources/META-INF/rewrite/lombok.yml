@@ -1,0 +1,36 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.lombok
+displayName: Add Lombok dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.lombok.dependencies
+  - io.micronaut.starter.feature.lombok-annotation
+  - io.micronaut.starter.feature.lombok.micronaut.documentation
+  - io.micronaut.starter.feature.lombok.documentation.thirdparty
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.lombok.dependencies
+displayName: Add Lombok dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: org.projectlombok
+      artifactId: lombok
+      configuration: compileOnly
+      scope: provided
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.lombok.micronaut.documentation
+displayName: Append a link to Micronaut Lombok documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://docs.micronaut.io/latest/guide/index.html#lombok
+      appendNewline: true
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.lombok.documentation.thirdparty
+displayName: Append a link to Lombok website
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://projectlombok.org/features/all
+      appendNewline: true

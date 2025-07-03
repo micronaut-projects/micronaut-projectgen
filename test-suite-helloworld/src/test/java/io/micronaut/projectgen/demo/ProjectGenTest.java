@@ -51,6 +51,8 @@ class ProjectGenTest {
         assertTrue(project.containsKey("gradlew.bat"));
         assertTrue(project.containsKey("gradle/wrapper/gradle-wrapper.jar"));
         assertTrue(project.containsKey("gradle/wrapper/gradle-wrapper.properties"));
+        String gradleWrapperProperties = project.get("gradle/wrapper/gradle-wrapper.properties");
+        assertTrue(gradleWrapperProperties.contains("8.14.2"));
 
         options = OptionsFactory.create(List.of("hello-world-test"));
         project = previewGenerator.generate(options);

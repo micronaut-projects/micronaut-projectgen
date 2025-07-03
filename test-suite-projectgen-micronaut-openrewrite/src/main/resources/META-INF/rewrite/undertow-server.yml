@@ -1,0 +1,8 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.undertow-server
+displayName: Add Undertow Server dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.servlet
+      artifactId: micronaut-http-server-undertow
+      scope: compile

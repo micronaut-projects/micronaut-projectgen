@@ -99,6 +99,9 @@ public class Crac implements RequireEagerSingletonInitializationFeature, OpenRew
         if (generatorContext.isFeaturePresent(Hikari.class)) {
             recipes.add("io.micronaut.starter.feature.crac-hikari");
         }
-        return recipes;
+        if (OptionUtils.hasGradleBuildTool(generatorContext.getOptions())) {
+            recipes.add("io.micronaut.starter.feature.crac-plugin");
+        }
+            return recipes;
     }
 }

@@ -1,0 +1,8 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.tomcat-server
+displayName: Add Tomcat Server dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.servlet
+      artifactId: micronaut-http-server-tomcat
+      scope: compile

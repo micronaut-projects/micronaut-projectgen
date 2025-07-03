@@ -22,12 +22,16 @@ import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import jakarta.inject.Singleton;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.http.poja.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class HttpPoja extends AbstractMicronautServerFeature {
+public class HttpPoja extends AbstractMicronautServerFeature implements OpenRewriteFeature {
 
     @Override
     public String getName() {
@@ -45,23 +49,13 @@ public class HttpPoja extends AbstractMicronautServerFeature {
     }
 
     @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-servlet/latest/guide/index.html#httpPoja";
-    }
-
-    @Override
-    public void doApply(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        List<String> recipes = new ArrayList<>();
+        recipes.add("io.micronaut.starter.feature.http-poja-docs");
         if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())) {
-            module.addDependency(Dependency.builder()
-                    .groupId("io.micronaut.servlet")
-                    .artifactId("micronaut-http-poja-apache")
-                    .compile());
-            module.addDependency(Dependency.builder()
-                    .groupId("io.micronaut.servlet")
-                    .artifactId("micronaut-http-poja-test")
-                    .test());
+            recipes.add("io.micronaut.starter.feature.http-poja");
         }
+            return recipes;
     }
 
     @Override
@@ -69,4 +63,5 @@ public class HttpPoja extends AbstractMicronautServerFeature {
     public String resolveMicronautRuntime(@NonNull GeneratorContext generatorContext) {
         return "http_poja";
     }
+
 }

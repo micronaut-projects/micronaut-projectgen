@@ -21,17 +21,22 @@ import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils;
 import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.starter.feature.redis.RedisLettuce;
 import jakarta.inject.Singleton;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @Requires(property = "micronaut.starter.feature.http.session.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class HttpSession implements Feature  {
+public class HttpSession implements OpenRewriteFeature {
+    private static final String RECIPE_HTTP_SESSION = "io.micronaut.starter.feature.http-session";
+    private static final String RECIPE_HTTP_SESSION_REDIS = "io.micronaut.starter.feature.http-session-redis";
 
     @NonNull
     @Override
@@ -54,23 +59,10 @@ public class HttpSession implements Feature  {
         return Category.CLIENT;
     }
 
-    @Nullable
     @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://docs.micronaut.io/latest/guide/index.html#sessions";
-    }
-
-    @Override
-    public void apply(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
-        Map<String, Object> configuration = module.configuration();
-        configuration.put("micronaut.session.http.cookie", true);
-        configuration.put("micronaut.session.http.header", true);
-        if (generatorContext.isFeaturePresent(RedisLettuce.class)) {
-            configuration.put("micronaut.session.http.redis.enabled", true);
-        }
-        module.addDependency(MicronautDependencyUtils.sessionDependency()
-                .artifactId("micronaut-session")
-                .compile());
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return generatorContext.isFeaturePresent(RedisLettuce.class)
+            ? List.of(RECIPE_HTTP_SESSION, RECIPE_HTTP_SESSION_REDIS)
+            : List.of(RECIPE_HTTP_SESSION);
     }
 }

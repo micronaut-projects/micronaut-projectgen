@@ -21,6 +21,7 @@ import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.options.GenericOptionsBuilder;
 import io.micronaut.projectgen.core.rocker.RockerWritable;
 import io.micronaut.projectgen.core.utils.OptionUtils;
@@ -46,9 +47,12 @@ import io.micronaut.projectgen.micronaut.features.httpclient.HttpClientJdk;
 import jakarta.inject.Provider;
 import jakarta.inject.Singleton;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.aws.lambda.custom.runtime.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class AwsLambdaCustomRuntime implements FunctionFeature, ApplicationFeature, AwsCloudFeature {
+public class AwsLambdaCustomRuntime implements FunctionFeature, ApplicationFeature, AwsCloudFeature, OpenRewriteFeature {
     public static final Dependency DEPENDENCY_AWS_FUNCTION_AWS_CUSTOM_RUNTIME = MicronautDependencyUtils.awsDependency()
             .artifactId("micronaut-function-aws-custom-runtime")
             .compile()
@@ -104,6 +108,7 @@ public class AwsLambdaCustomRuntime implements FunctionFeature, ApplicationFeatu
     @Override
     public void apply(GeneratorContext generatorContext) {
         ApplicationFeature.super.apply(generatorContext);
+        OpenRewriteFeature.super.apply(generatorContext);
         ModuleContext module = generatorContext.getRootModule();
         Project project = generatorContext.getProject();
         if (shouldGenerateMainClassForRuntime(generatorContext)) {
@@ -112,16 +117,6 @@ public class AwsLambdaCustomRuntime implements FunctionFeature, ApplicationFeatu
 
         if (generatorContext.getFeatures().isFeaturePresent(GraalVM.class)) {
             module.addHelpTemplate(new RockerWritable(awsCustomRuntimeReadme.template(generatorContext.getBuildTool())));
-        }
-        addDependencies(generatorContext, module);
-    }
-
-    private void addDependencies(@NonNull GeneratorContext generatorContext, ModuleContext module) {
-        module.addDependency(DEPENDENCY_AWS_FUNCTION_AWS_CUSTOM_RUNTIME);
-        if (generatorContext.getFeatures().testFramework().isSpock() &&
-                OptionUtils.hasGradleBuildTool(generatorContext.getOptions())) {
-            // maven has this in parent pom
-            module.addDependency(AwsLambda.DEPENDENCY_MICRONAUT_FUNCTION_TEST);
         }
     }
 
@@ -160,12 +155,15 @@ public class AwsLambdaCustomRuntime implements FunctionFeature, ApplicationFeatu
     }
 
     @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-aws/latest/guide/index.html#lambdaCustomRuntimes";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        List<String> recipes = new ArrayList<>();
+        if (generatorContext.getFeatures().testFramework().isSpock() &&
+            OptionUtils.hasGradleBuildTool(generatorContext.getOptions())) {
+            // maven has this in parent pom
+            recipes.add("io.micronaut.starter.feature.micronaut-function-test");
+        }
+        recipes.add("io.micronaut.starter.feature.aws-lambda-custom-runtime");
+        return recipes;
     }
 
-    @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://docs.aws.amazon.com/lambda/latest/dg/runtimes-custom.html";
-    }
 }

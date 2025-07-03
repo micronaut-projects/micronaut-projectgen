@@ -19,11 +19,17 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
+import io.micronaut.projectgen.core.options.Language;
+import io.micronaut.projectgen.core.options.TestFramework;
 import jakarta.inject.Singleton;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Requires(property = "micronaut.starter.feature.groovy.datetime.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class DatetimeGroovyModule implements GroovyModuleFeature {
+public class DatetimeGroovyModule implements GroovyModuleFeature, OpenRewriteFeature {
 
     public static final String NAME = "groovy-datetime";
 
@@ -44,8 +50,15 @@ public class DatetimeGroovyModule implements GroovyModuleFeature {
     }
 
     @Override
-    @NonNull
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://docs.groovy-lang.org/docs/latest/html/documentation/#_working_with_datetime_types";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        List<String> recipes = new ArrayList<>();
+        if (generatorContext.getLanguage() == Language.GROOVY) {
+            recipes.add("io.micronaut.starter.feature.groovy-datetime");
+        }
+        else if (generatorContext.getTestFramework() == TestFramework.SPOCK) {
+            recipes.add("io.micronaut.starter.feature.groovy-datetime-spock");
+        }
+        return recipes;
     }
+
 }

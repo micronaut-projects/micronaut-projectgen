@@ -1,0 +1,9 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.consul-configuration
+displayName: Add Consul configuration
+preconditions:
+  - io.micronaut.starter.openrewrite.recipes.FindApplicationProperties
+recipeList:
+  - org.openrewrite.properties.AddProperty:
+      property: consul.client.defaultZone
+      value: ${CONSUL_HOST:localhost}:${CONSUL_PORT:8500}

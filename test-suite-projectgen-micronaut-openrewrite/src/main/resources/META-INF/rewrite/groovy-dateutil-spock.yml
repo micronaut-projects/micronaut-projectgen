@@ -1,0 +1,16 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.groovy-dateutil-spock
+displayName: Add Groovy Dateutil dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.groovy-dateutil-spock.dependencies
+  - io.micronaut.starter.feature.groovy-dateutil-docs
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.groovy-dateutil-spock.dependencies
+displayName: Add Groovy Dateutil dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: org.apache.groovy
+      artifactId: groovy-dateutil
+      configuration: testImplementation
+      scope: test

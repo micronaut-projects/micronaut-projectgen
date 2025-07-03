@@ -1,0 +1,39 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.http-session
+displayName: Add Http Session dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.http-session.dependencies
+  - io.micronaut.starter.feature.http-session.micronaut.documentation
+  - io.micronaut.starter.feature.http-session.configuration
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.http-session.dependencies
+displayName: Add Http Session dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.session
+      artifactId: micronaut-session
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.http-session.micronaut.documentation
+displayName: Append a link to Micronaut Http Session documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://docs.micronaut.io/latest/guide/index.html#sessions
+      appendNewline: true
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.http-session.configuration
+displayName: Add Http Session configuration
+preconditions:
+  - io.micronaut.starter.openrewrite.recipes.FindApplicationProperties
+recipeList:
+  - org.openrewrite.properties.AddProperty:
+      property: micronaut.session.http.cookie
+      value: true
+  - org.openrewrite.properties.AddProperty:
+      property: micronaut.session.http.header
+      value: true

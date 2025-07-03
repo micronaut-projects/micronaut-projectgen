@@ -1,0 +1,12 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.http-poja
+displayName: Add Http Poja dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.servlet
+      artifactId: micronaut-http-poja-apache
+      scope: compile
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.servlet
+      artifactId: micronaut-http-poja-test
+      scope: test
