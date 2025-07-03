@@ -19,6 +19,7 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.Project;
@@ -38,6 +39,8 @@ import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.rocker.RockerTemplate;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 /**
  * Adds support for Telegram chatbots as Lambdas.
  *
@@ -46,15 +49,9 @@ import jakarta.inject.Singleton;
  */
 @Requires(property = "micronaut.starter.feature.chatbots.telegram.lambda.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class TelegramAwsChatBot extends ChatBotsTelegram implements AwsFeature, AwsMicronautRuntimeFeature, HandlerClassFeature {
+public class TelegramAwsChatBot extends ChatBotsTelegram implements AwsFeature, AwsMicronautRuntimeFeature, HandlerClassFeature, OpenRewriteFeature {
 
     public static final String NAME = "chatbots-telegram-lambda";
-
-    public static final Dependency CHATBOTS_TELEGRAM_LAMBDA = MicronautDependencyUtils
-            .chatBotsDependency()
-            .artifactId("micronaut-chatbots-telegram-lambda")
-            .compile()
-            .build();
 
     public static final String HANDLER_CLASS = "io.micronaut.chatbots.telegram.lambda.Handler";
     private final AwsLambda awsLambda;
@@ -95,12 +92,13 @@ public class TelegramAwsChatBot extends ChatBotsTelegram implements AwsFeature, 
     @Override
     public void apply(GeneratorContext generatorContext) {
         super.apply(generatorContext);
+        OpenRewriteFeature.super.apply(generatorContext);
         addMicronautRuntimeBuildProperty(generatorContext);
     }
 
     @Override
-    protected void addDependencies(ModuleContext module) {
-        module.addDependency(CHATBOTS_TELEGRAM_LAMBDA);
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.chatbots-telegram-lambda");
     }
 
     @Override

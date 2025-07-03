@@ -50,14 +50,6 @@ abstract class ChatBotsBasecamp extends ChatBots {
     }
 
     @Override
-    protected void addConfigurations(ModuleContext module) {
-        module.configuration().put(
-                "micronaut.chatbots.folder",
-                "botcommands"
-        );
-    }
-
-    @Override
     protected void renderTemplates(GeneratorContext generatorContext, ModuleContext module) {
         module.addTemplate(
                 "about-html",
@@ -106,11 +98,6 @@ abstract class ChatBotsBasecamp extends ChatBots {
                 finalCommandHandlerKotlin.template(generatorContext.getProject()),
                 finalCommandHandlerGroovy.template(generatorContext.getProject())
         );
-    }
-
-    @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://github.com/basecamp/bc3-api/blob/master/sections/chatbots.md";
     }
 
     @Override

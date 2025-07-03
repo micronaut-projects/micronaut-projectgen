@@ -19,6 +19,7 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
@@ -35,6 +36,8 @@ import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.rocker.RockerTemplate;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 /**
  * Adds support for Telegram chatbots as Azure Functions.
  *
@@ -43,15 +46,9 @@ import jakarta.inject.Singleton;
  */
 @Requires(property = "micronaut.starter.feature.chatbots.basecamp.azure.function.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class BasecampAzureChatBot extends ChatBotsBasecamp implements AzureCloudFeature, AzureMicronautRuntimeFeature {
+public class BasecampAzureChatBot extends ChatBotsBasecamp implements AzureCloudFeature, AzureMicronautRuntimeFeature, OpenRewriteFeature {
 
     public static final String NAME = "chatbots-basecamp-azure-function";
-
-    public static final Dependency CHATBOTS_BASECAMP_AZURE_FUNCTION = MicronautDependencyUtils
-            .chatBotsDependency()
-            .artifactId("micronaut-chatbots-basecamp-azure-function")
-            .compile()
-            .build();
 
     private final AzureRawFunction azureRawFunction;
 
@@ -91,17 +88,18 @@ public class BasecampAzureChatBot extends ChatBotsBasecamp implements AzureCloud
     @Override
     public void apply(GeneratorContext generatorContext) {
         super.apply(generatorContext);
+        OpenRewriteFeature.super.apply(generatorContext);
         addMicronautRuntimeBuildProperty(generatorContext);
+    }
+
+    @Override
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.chatbots-basecamp-azure-function");
     }
 
     @Override
     protected String getBuildCommand(BuildTool buildTool) {
         return AzureBuildCommandUtils.getBuildCommand(buildTool);
-    }
-
-    @Override
-    protected void addDependencies(ModuleContext module) {
-        module.addDependency(CHATBOTS_BASECAMP_AZURE_FUNCTION);
     }
 
     @Override

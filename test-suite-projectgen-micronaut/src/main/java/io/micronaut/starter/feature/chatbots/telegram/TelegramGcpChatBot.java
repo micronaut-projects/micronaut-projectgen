@@ -19,6 +19,7 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
@@ -35,6 +36,8 @@ import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.rocker.RockerTemplate;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 /**
  * Adds support for Telegram chatbots as Google Cloud Functions.
  *
@@ -43,14 +46,9 @@ import jakarta.inject.Singleton;
  */
 @Requires(property = "micronaut.starter.feature.chatbots.telegram.gcp.function.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class TelegramGcpChatBot extends ChatBotsTelegram implements GcpCloudFeature, GcpMicronautRuntimeFeature {
+public class TelegramGcpChatBot extends ChatBotsTelegram implements GcpCloudFeature, GcpMicronautRuntimeFeature, OpenRewriteFeature {
     public static final String NAME = "chatbots-telegram-gcp-function";
 
-    public static final Dependency CHATBOTS_TELEGRAM_GCP_FUNCTION = MicronautDependencyUtils
-            .chatBotsDependency()
-            .artifactId("micronaut-chatbots-telegram-gcp-function")
-            .compile()
-            .build();
     private final GoogleCloudRawFunction rawFunction;
 
     public TelegramGcpChatBot(MicronautValidationFeature validationFeature, GoogleCloudRawFunction rawFunction) {
@@ -89,6 +87,7 @@ public class TelegramGcpChatBot extends ChatBotsTelegram implements GcpCloudFeat
     @Override
     public void apply(GeneratorContext generatorContext) {
         super.apply(generatorContext);
+        OpenRewriteFeature.super.apply(generatorContext);
         addMicronautRuntimeBuildProperty(generatorContext);
     }
 
@@ -98,8 +97,8 @@ public class TelegramGcpChatBot extends ChatBotsTelegram implements GcpCloudFeat
     }
 
     @Override
-    protected void addDependencies(ModuleContext module) {
-        module.addDependency(CHATBOTS_TELEGRAM_GCP_FUNCTION);
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.chatbots-telegram-gcp-function");
     }
 
     @Override

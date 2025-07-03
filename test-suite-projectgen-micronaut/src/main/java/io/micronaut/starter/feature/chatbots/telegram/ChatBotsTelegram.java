@@ -50,22 +50,6 @@ abstract class ChatBotsTelegram extends ChatBots {
     }
 
     @Override
-    protected void addConfigurations(ModuleContext module) {
-        module.configuration().put(
-                "micronaut.chatbots.telegram.bots.example.token",
-                "WEBHOOK_TOKEN"
-        );
-        module.configuration().put(
-                "micronaut.chatbots.telegram.bots.example.at-username",
-                "@MyMicronautExampleBot"
-        );
-        module.configuration().put(
-                "micronaut.chatbots.folder",
-                "botcommands"
-        );
-    }
-
-    @Override
     protected void renderTemplates(GeneratorContext generatorContext, ModuleContext module) {
         module.addTemplate(
                 "about-markdown",

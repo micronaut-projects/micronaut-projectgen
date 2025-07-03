@@ -1,0 +1,18 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.chatbots-basecamp-http
+displayName: Add Chatbots Basecamp Http dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.chatbots-basecamp-http.dependencies
+  - io.micronaut.starter.feature.chatbot-basecamp-docs
+  - io.micronaut.starter.feature.chatbot-docs
+  - io.micronaut.starter.feature.chatbots-basecamp-configuration
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.chatbots-basecamp-http.dependencies
+displayName: Add Chatbots Basecamp Http dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.chatbots
+      artifactId: micronaut-chatbots-basecamp-http
+      configuration: implementation
+      scope: compile

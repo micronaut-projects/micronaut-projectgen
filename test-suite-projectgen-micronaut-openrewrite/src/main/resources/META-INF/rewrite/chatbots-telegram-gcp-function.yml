@@ -1,0 +1,17 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.chatbots-telegram-gcp-function
+displayName: Add Chatbots Telegram Gcp Function dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.chatbots-telegram-gcp-function.dependencies
+  - io.micronaut.starter.feature.chatbots-telegram-configuration
+  - io.micronaut.starter.feature.chatbot-docs
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.chatbots-telegram-gcp-function.dependencies
+displayName: Add Chatbots Telegram Gcp Function dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.chatbots
+      artifactId: micronaut-chatbots-telegram-gcp-function
+      configuration: implementation
+      scope: compile

@@ -19,6 +19,7 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.Project;
@@ -38,6 +39,8 @@ import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.rocker.RockerTemplate;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 /**
  * Adds support for Telegram chatbots as Lambdas.
  *
@@ -46,15 +49,9 @@ import jakarta.inject.Singleton;
  */
 @Requires(property = "micronaut.starter.feature.chatbots.basecamp.lambda.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class BasecampAwsChatBot extends ChatBotsBasecamp implements AwsFeature, AwsMicronautRuntimeFeature, HandlerClassFeature {
+public class BasecampAwsChatBot extends ChatBotsBasecamp implements AwsFeature, AwsMicronautRuntimeFeature, HandlerClassFeature, OpenRewriteFeature {
 
     public static final String NAME = "chatbots-basecamp-lambda";
-
-    public static final Dependency CHATBOTS_BASECAMP_LAMBDA = MicronautDependencyUtils
-            .chatBotsDependency()
-            .artifactId("micronaut-chatbots-basecamp-lambda")
-            .compile()
-            .build();
 
     public static final String HANDLER_CLASS = "io.micronaut.chatbots.basecamp.lambda.Handler";
     private final AwsLambda awsLambda;
@@ -96,11 +93,12 @@ public class BasecampAwsChatBot extends ChatBotsBasecamp implements AwsFeature, 
     public void apply(GeneratorContext generatorContext) {
         super.apply(generatorContext);
         addMicronautRuntimeBuildProperty(generatorContext);
+        OpenRewriteFeature.super.apply(generatorContext);
     }
 
     @Override
-    protected void addDependencies(ModuleContext module) {
-        module.addDependency(CHATBOTS_BASECAMP_LAMBDA);
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.chatbots-basecamp-lambda");
     }
 
     @Override
