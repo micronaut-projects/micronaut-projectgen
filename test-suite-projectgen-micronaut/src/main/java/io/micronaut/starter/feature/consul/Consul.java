@@ -20,17 +20,24 @@ import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.feature.config.Configuration;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.feature.DistributedConfigFeature;
 
 import jakarta.inject.Singleton;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @Requires(property = "micronaut.starter.feature.consul.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class Consul implements Feature {
+public class Consul implements OpenRewriteFeature {
+
+    private static final String CONSUL_CONFIGURATION = "io.micronaut.starter.feature.consul-configuration";
+    private static final String CONSUL_CONFIGURATION_BOOTSTRAP = "io.micronaut.starter.feature.consul-configuration-bootstrap";
 
     @NonNull
     @Override
@@ -44,11 +51,14 @@ public class Consul implements Feature {
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
-        Configuration config = generatorContext.isFeaturePresent(DistributedConfigFeature.class)
-            ? module.bootstrapConfiguration()
-            : module.configuration();
-        config.put("consul.client.defaultZone", "${CONSUL_HOST:localhost}:${CONSUL_PORT:8500}");
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        List<String> recipes = new ArrayList<>();
+        if(generatorContext.isFeaturePresent(DistributedConfigFeature.class)){
+            recipes.add(CONSUL_CONFIGURATION_BOOTSTRAP);
+        } else{
+            recipes.add(CONSUL_CONFIGURATION);
+        }
+        return recipes;
     }
+
 }
