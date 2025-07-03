@@ -1,0 +1,19 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.chatbots-basecamp-azure-function
+displayName: Add Chatbots Basecamp Azure Function dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.chatbots-basecamp-azure-function.dependencies
+  - io.micronaut.starter.feature.chatbot-basecamp-docs
+  - io.micronaut.starter.feature.chatbot-docs
+  - io.micronaut.starter.feature.chatbots-basecamp-configuration
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.chatbots-basecamp-azure-function.dependencies
+displayName: Add Chatbots Basecamp Azure Function dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.chatbots
+      artifactId: micronaut-chatbots-basecamp-azure-function
+      configuration: implementation
+      scope: compile
+

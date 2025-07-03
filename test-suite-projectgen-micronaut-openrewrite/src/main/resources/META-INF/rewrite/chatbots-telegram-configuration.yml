@@ -1,0 +1,15 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.chatbots-telegram-configuration
+displayName: Add Chatbots Telegram configuration
+preconditions:
+  - io.micronaut.starter.openrewrite.recipes.FindApplicationProperties
+recipeList:
+  - org.openrewrite.properties.AddProperty:
+      property: micronaut.chatbots.folder
+      value: botcommands
+  - org.openrewrite.properties.AddProperty:
+      property: micronaut.chatbots.telegram.bots.example.token
+      value: WEBHOOK_TOKEN
+  - org.openrewrite.properties.AddProperty:
+      property: micronaut.chatbots.telegram.bots.example.at-username
+      value: "@MyMicronautExampleBot"

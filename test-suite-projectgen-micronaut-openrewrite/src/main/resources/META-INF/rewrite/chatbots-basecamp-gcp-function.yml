@@ -1,0 +1,18 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.chatbots-basecamp-gcp-function
+displayName: Add Chatbots Basecamp Gcp Function dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.chatbots-basecamp-gcp-function.dependencies
+  - io.micronaut.starter.feature.chatbot-basecamp-docs
+  - io.micronaut.starter.feature.chatbot-docs
+  - io.micronaut.starter.feature.chatbots-basecamp-configuration
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.chatbots-basecamp-gcp-function.dependencies
+displayName: Add Chatbots Basecamp Gcp Function dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.chatbots
+      artifactId: micronaut-chatbots-basecamp-gcp-function
+      configuration: implementation
+      scope: compile
