@@ -1,0 +1,7 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.crac-plugin
+displayName: Add Crac Maven plugin
+recipeList:
+  - org.openrewrite.gradle.plugins.AddBuildPlugin:
+      pluginId: io.micronaut.crac
+      version: 4.5.4

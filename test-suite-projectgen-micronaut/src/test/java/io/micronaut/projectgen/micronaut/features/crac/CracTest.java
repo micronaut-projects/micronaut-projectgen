@@ -5,6 +5,7 @@ import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.buildtools.Scope;
 import io.micronaut.projectgen.core.generator.ProjectGenerator;
 import io.micronaut.projectgen.core.io.MapOutputHandler;
+import io.micronaut.projectgen.core.io.PreviewGenerator;
 import io.micronaut.projectgen.core.options.GenericOptionsBuilder;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.ApplicationType;
@@ -22,6 +23,16 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @MicronautTest(startApplication = false)
 class CracTest {
+    @Test
+    void cracFeaturesAddPlugin(PreviewGenerator previewGenerator) throws Exception {
+        Options options = OptionsFixture.defaultGradle().features(List.of("crac")).build();
+        Map<String, String> project = previewGenerator.generate(options);
+        String buildGradle = project.get("build.gradle.kts");
+        assertNotNull(buildGradle);
+        BuildTestVerifier verifier = BuildTestVerifier.of(buildGradle, options);
+        assertTrue(verifier.hasBuildPlugin("io.micronaut.crac"), buildGradle);
+    }
+
     @Test
     void cracFeaturesAddsTheDependency(ProjectGenerator micronautProjectGenerator) throws Exception {
         Options options = OptionsFixture.defaultGradle().features(List.of("crac", "jdbc-hikari")).build();
