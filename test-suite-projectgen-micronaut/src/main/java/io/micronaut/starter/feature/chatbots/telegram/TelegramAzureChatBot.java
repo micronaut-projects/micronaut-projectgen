@@ -82,7 +82,7 @@ public class TelegramAzureChatBot extends ChatBotsTelegram implements AzureCloud
     @Override
     public void processSelectedFeatures(FeatureContext featureContext) {
         super.processSelectedFeatures(featureContext);
-//        featureContext.addFeatureIfNotPresent(AzureRawFunction.class, azureRawFunction);
+        featureContext.addFeatureIfNotPresent(AzureRawFunction.class, azureRawFunction);
     }
 
     @Override
