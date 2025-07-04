@@ -1,0 +1,24 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.r2dbc-docs
+displayName: Add link to README
+recipeList:
+  - io.micronaut.starter.feature.r2dbc-docs.micronaut.documentation
+  - io.micronaut.starter.feature.r2dbc-docs.documentation.thirdparty
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.r2dbc-docs.micronaut.documentation
+displayName: Append a link to Micronaut R2dbc documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-r2dbc/latest/guide/
+      appendNewline: true
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.r2dbc-docs.documentation.thirdparty
+displayName: Append a link to R2dbc website
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://r2dbc.io
+      appendNewline: true
