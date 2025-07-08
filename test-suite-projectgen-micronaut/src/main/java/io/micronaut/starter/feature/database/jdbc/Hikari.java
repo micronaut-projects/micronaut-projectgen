@@ -20,17 +20,19 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils;
 import io.micronaut.starter.feature.database.DatabaseDriverFeature;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.jdbc.hikari.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 @Primary
-public class Hikari extends JdbcFeature {
+public class Hikari extends JdbcFeature implements OpenRewriteFeature {
 
     public static final String NAME = "jdbc-hikari";
-    public static final String MICRONAUT_JDBC_HIKARI_ARTIFACT = "micronaut-jdbc-hikari";
 
     public Hikari(DatabaseDriverFeature dbFeature) {
         super(dbFeature);
@@ -54,9 +56,12 @@ public class Hikari extends JdbcFeature {
     @Override
     public void apply(GeneratorContext generatorContext) {
         super.apply(generatorContext);
-        ModuleContext module = generatorContext.getRootModule();
-        module.addDependency(MicronautDependencyUtils.sqlDependency()
-                .artifactId(MICRONAUT_JDBC_HIKARI_ARTIFACT)
-                .compile());
+        OpenRewriteFeature.super.apply(generatorContext);
     }
+
+    @Override
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.jdbc-hikari");
+    }
+
 }
