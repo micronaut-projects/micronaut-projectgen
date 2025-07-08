@@ -51,17 +51,10 @@ public class Tomcat extends JdbcFeature implements OpenRewriteFeature {
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        super.apply(generatorContext);
-        OpenRewriteFeature.super.apply(generatorContext);
-    }
-
-    @Override
     public List<String> getRecipes(GeneratorContext generatorContext) {
         List<String> recipes = new ArrayList<>();
         recipes.add("io.micronaut.starter.feature.jdbc-tomcat");
-        //TODO handle other drivers
-        recipes.add("io.micronaut.starter.feature.jdbc-config-h2");
+        addDatabaseConfigRecipe(generatorContext, recipes);
         return recipes;
     }
 
