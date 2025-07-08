@@ -40,12 +40,11 @@ import java.util.Map;
 
 @Requires(property = "micronaut.starter.feature.r2dbc.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class R2dbc implements R2dbcFeature, OpenRewriteFeature {
+public class R2dbc extends R2dbcConfigurationUtils implements R2dbcFeature, OpenRewriteFeature {
 
     private static final String RECIPE_R2DBC_DOCS = "io.micronaut.starter.feature.r2dbc-docs";
     private static final String RECIPE_R2DBC_DEPENDENCY = "io.micronaut.starter.feature.r2dbc-dependency";
     private static final String RECIPE_R2DBC_CONFIGURATION = "io.micronaut.starter.feature.r2dbc-configuration";
-    private static final String RECIPE_R2DBC_Configuration_TR = "io.micronaut.starter.feature.r2dbc-configuration-tr";
 
     public static final String NAME = "r2dbc";
 
@@ -99,12 +98,10 @@ public class R2dbc implements R2dbcFeature, OpenRewriteFeature {
         if (!generatorContext.isFeaturePresent(DataR2dbc.class)) {
             recipes.add(RECIPE_R2DBC_DEPENDENCY);
         }
-        if (!generatorContext.isFeaturePresent(TestResources.class)) {
-            recipes.add(RECIPE_R2DBC_Configuration_TR);
-        }
         if (generatorContext.isFeaturePresent(TestResources.class)) {
             recipes.add(RECIPE_R2DBC_CONFIGURATION);
         }
+        addDatabaseConfigRecipe(generatorContext, recipes);
             return  recipes;
     }
 

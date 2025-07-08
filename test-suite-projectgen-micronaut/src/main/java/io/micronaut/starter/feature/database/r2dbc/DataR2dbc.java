@@ -39,7 +39,7 @@ import java.util.Map;
 
 @Requires(property = "micronaut.starter.feature.data.r2dbc.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class DataR2dbc implements R2dbcFeature, DataFeature, TransactionalNotSupported, OpenRewriteFeature {
+public class DataR2dbc extends R2dbcConfigurationUtils implements R2dbcFeature, DataFeature, TransactionalNotSupported, OpenRewriteFeature {
 
     public static final String NAME = "data-r2dbc";
 
@@ -69,12 +69,6 @@ public class DataR2dbc implements R2dbcFeature, DataFeature, TransactionalNotSup
         return r2dbc.getOrder() - 1;
     }
 
-    @Override
-    public void apply(GeneratorContext generatorContext) {
-        OpenRewriteFeature.super.apply(generatorContext);
-        DatabaseDriverFeature dbFeature = generatorContext.getRequiredFeature(DatabaseDriverFeature.class);
-    }
-
     @NonNull
     @Override
     public String getName() {
@@ -99,6 +93,7 @@ public class DataR2dbc implements R2dbcFeature, DataFeature, TransactionalNotSup
         if (!generatorContext.isFeaturePresent(MigrationFeature.class)) {
             recipes.add("io.micronaut.starter.feature.data-r2dbc.conf");
         }
+        addDatabaseConfigRecipe(generatorContext, recipes);
         return recipes;
     }
 
