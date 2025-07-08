@@ -11,17 +11,17 @@ public abstract class R2dbcConfigurationUtils {
                                            List<String> recipes) {
 
         if (generatorContext.isFeaturePresent(PostgreSQL.class)) {
-            recipes.add("io.micronaut.starter.feature.jdbc-config-postgresql");
+            recipes.add("io.micronaut.starter.feature.r2dbc-config-postgresql");
         } else if (generatorContext.isFeaturePresent(MySQL.class)) {
-            recipes.add("io.micronaut.starter.feature.jdbc-config-mysql");
+            recipes.add("io.micronaut.starter.feature.r2dbc-config-mysql");
         } else if (generatorContext.isFeaturePresent(MariaDB.class)) {
-            recipes.add("io.micronaut.starter.feature.jdbc-config-mariadb");
+            recipes.add("io.micronaut.starter.feature.r2dbc-config-mariadb");
         } else if (generatorContext.isFeaturePresent(SQLServer.class)) {
-            recipes.add("io.micronaut.starter.feature.jdbc-config-sqlserver");
+            recipes.add("io.micronaut.starter.feature.r2dbc-config-sqlserver");
         } else if (generatorContext.isFeaturePresent(Oracle.class)) {
-            recipes.add("io.micronaut.starter.feature.jdbc-config-oracle");
+            recipes.add("io.micronaut.starter.feature.r2dbc-config-oracle");
         } else {
-            recipes.add("io.micronaut.starter.feature.jdbc-config-h2");
+            recipes.add("io.micronaut.starter.feature.r2dbc-config-h2");
         }
     }
 }
