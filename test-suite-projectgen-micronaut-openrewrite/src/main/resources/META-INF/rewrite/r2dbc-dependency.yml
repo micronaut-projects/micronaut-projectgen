@@ -1,0 +1,9 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.r2dbc-dependency
+displayName: Add R2dbc dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.r2dbc
+      artifactId: micronaut-r2dbc-core
+      configuration: implementation
+      scope: compile
