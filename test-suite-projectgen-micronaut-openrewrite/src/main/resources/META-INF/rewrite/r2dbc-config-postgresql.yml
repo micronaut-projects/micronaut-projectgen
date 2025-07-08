@@ -1,0 +1,12 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.r2dbc-config-postgresql
+displayName: Add R2dbc Postgresql driver configuration
+preconditions:
+  - io.micronaut.starter.openrewrite.recipes.FindApplicationProperties
+recipeList:
+  - org.openrewrite.properties.AddProperty:
+      property: r2dbc.datasources.default.dialect
+      value: POSTGRES
+  - org.openrewrite.properties.AddProperty:
+      property: r2dbc.datasources.default.db-type
+      value: postgres
