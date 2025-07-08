@@ -1,0 +1,9 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.data-r2dbc.conf
+displayName: Add Data R2dbc configuration
+preconditions:
+  - io.micronaut.starter.openrewrite.recipes.FindApplicationProperties
+recipeList:
+  - org.openrewrite.properties.AddProperty:
+      property: r2dbc.datasources.default.schema-generate
+      value: CREATE_DROP
