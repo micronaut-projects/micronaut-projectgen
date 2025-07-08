@@ -25,6 +25,7 @@ import io.micronaut.starter.feature.database.DatabaseDriverFeature;
 
 import jakarta.inject.Singleton;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Requires(property = "micronaut.starter.feature.jdbc.dbcp.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
@@ -58,7 +59,11 @@ public class Dbcp extends JdbcFeature implements OpenRewriteFeature {
 
     @Override
     public List<String> getRecipes(GeneratorContext generatorContext) {
-        return List.of("io.micronaut.starter.feature.jdbc-dbcp");
+        List<String> recipes = new ArrayList<>();
+        recipes.add("io.micronaut.starter.feature.jdbc-dbcp");
+        //TODO handle other drivers
+        recipes.add("io.micronaut.starter.feature.jdbc-config-h2");
+        return recipes;
     }
 
 }
