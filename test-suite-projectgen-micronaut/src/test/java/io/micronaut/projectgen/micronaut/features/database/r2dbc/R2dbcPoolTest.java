@@ -24,6 +24,6 @@ class R2dbcPoolTest {
         String buildGradle = project.get("build.gradle.kts");
         assertNotNull(buildGradle);
         BuildTestVerifier verifier = BuildTestVerifier.of(buildGradle, options);
-        assertTrue(verifier.hasDependency("io.r2dbc", "r2dbc-pool", Scope.RUNTIME), buildGradle);
+        assertTrue(verifier.hasDependency("io.r2dbc", "r2dbc-pool", Scope.COMPILE), buildGradle);
     }
 }

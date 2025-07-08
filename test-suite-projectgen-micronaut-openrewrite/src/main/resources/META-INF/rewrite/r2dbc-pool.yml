@@ -11,4 +11,5 @@ recipeList:
   - org.openrewrite.java.dependencies.AddDependency:
       groupId: io.r2dbc
       artifactId: r2dbc-pool
+      configuration: implementation
       scope: runtime
