@@ -41,8 +41,8 @@ class HikariTest {
         Properties applicationProperties = ConfigurationUtils.loadApplicationProperties(project);
         assertEquals("postgres", applicationProperties.getProperty(DATASOURCES_DEFAULT_DB_TYPE));
         assertEquals("org.postgresql.Driver", applicationProperties.getProperty(DATASOURCES_DEFAULT_DRIVER_CLASS_NAME));
-        assertEquals("", applicationProperties.getProperty(DATASOURCES_DEFAULT_USERNAME));
-        assertEquals("", applicationProperties.getProperty(DATASOURCES_DEFAULT_PASSWORD));
+        assertNull(applicationProperties.getProperty(DATASOURCES_DEFAULT_USERNAME));
+        assertNull(applicationProperties.getProperty(DATASOURCES_DEFAULT_PASSWORD));
     }
 
     @Test
@@ -52,8 +52,8 @@ class HikariTest {
         Properties applicationProperties = ConfigurationUtils.loadApplicationProperties(project);
         assertEquals("mysql", applicationProperties.getProperty(DATASOURCES_DEFAULT_DB_TYPE));
         assertEquals("com.mysql.cj.jdbc.Driver", applicationProperties.getProperty(DATASOURCES_DEFAULT_DRIVER_CLASS_NAME));
-        assertEquals("", applicationProperties.getProperty(DATASOURCES_DEFAULT_USERNAME));
-        assertEquals("", applicationProperties.getProperty(DATASOURCES_DEFAULT_PASSWORD));
+        assertNull(applicationProperties.getProperty(DATASOURCES_DEFAULT_USERNAME));
+        assertNull(applicationProperties.getProperty(DATASOURCES_DEFAULT_PASSWORD));
     }
 
     @Test
@@ -63,8 +63,8 @@ class HikariTest {
         Properties applicationProperties = ConfigurationUtils.loadApplicationProperties(project);
         assertEquals("oracle", applicationProperties.getProperty(DATASOURCES_DEFAULT_DB_TYPE));
         assertEquals("oracle.jdbc.OracleDriver", applicationProperties.getProperty(DATASOURCES_DEFAULT_DRIVER_CLASS_NAME));
-        assertEquals("", applicationProperties.getProperty(DATASOURCES_DEFAULT_USERNAME));
-        assertEquals("", applicationProperties.getProperty(DATASOURCES_DEFAULT_PASSWORD));
+        assertNull(applicationProperties.getProperty(DATASOURCES_DEFAULT_USERNAME));
+        assertNull(applicationProperties.getProperty(DATASOURCES_DEFAULT_PASSWORD));
     }
 
     @Test
