@@ -22,9 +22,10 @@ import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils;
-import io.micronaut.starter.feature.database.DatabaseDriverFeature;
+import io.micronaut.starter.feature.database.*;
 import jakarta.inject.Singleton;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Requires(property = "micronaut.starter.feature.jdbc.hikari.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
@@ -55,13 +56,27 @@ public class Hikari extends JdbcFeature implements OpenRewriteFeature {
 
     @Override
     public void apply(GeneratorContext generatorContext) {
-        super.apply(generatorContext);
         OpenRewriteFeature.super.apply(generatorContext);
     }
 
     @Override
     public List<String> getRecipes(GeneratorContext generatorContext) {
-        return List.of("io.micronaut.starter.feature.jdbc-hikari");
+        List<String> recipes = new ArrayList<>();
+        recipes.add("io.micronaut.starter.feature.jdbc-hikari");
+        if(generatorContext.isFeaturePresent(PostgreSQL.class)){
+            recipes.add("io.micronaut.starter.feature.jdbc-config-postgresql");
+        } else if(generatorContext.isFeaturePresent(MySQL.class)) {
+            recipes.add("io.micronaut.starter.feature.jdbc-config-mysql");
+        } else if(generatorContext.isFeaturePresent(Oracle.class)){
+            recipes.add("io.micronaut.starter.feature.jdbc-config-oracle");
+        } else if(generatorContext.isFeaturePresent(SQLServer.class)) {
+            recipes.add("io.micronaut.starter.feature.jdbc-config-sqlserver");
+        } else if(generatorContext.isFeaturePresent(MariaDB.class)){
+            recipes.add("io.micronaut.starter.feature.jdbc-config-mariadb");
+        } else {
+            recipes.add("io.micronaut.starter.feature.jdbc-config-h2");
+        }
+        return recipes;
     }
 
 }

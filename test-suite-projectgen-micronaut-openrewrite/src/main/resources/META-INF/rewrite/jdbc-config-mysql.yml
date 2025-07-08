@@ -1,0 +1,18 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.jdbc-config-mysql
+displayName: Add Jdbc Mysql configuration
+preconditions:
+  - io.micronaut.starter.openrewrite.recipes.FindApplicationProperties
+recipeList:
+  - org.openrewrite.properties.AddProperty:
+      property: datasources.default.db-type
+      value: mysql
+  - org.openrewrite.properties.AddProperty:
+      property: datasources.default.driver-class-name
+      value: com.mysql.cj.jdbc.Driver
+  - org.openrewrite.properties.AddProperty:
+      property: datasources.default.username
+      value: ""
+  - org.openrewrite.properties.AddProperty:
+      property: datasources.default.password
+      value: ""
