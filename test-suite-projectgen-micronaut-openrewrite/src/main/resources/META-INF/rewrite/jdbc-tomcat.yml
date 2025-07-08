@@ -1,0 +1,17 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.jdbc-tomcat
+displayName: Add Jdbc Tomcat dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.jdbc-tomcat.dependencies
+  - io.micronaut.starter.feature.jdbc-docs
+  - io.micronaut.starter.feature.jdbc-config
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.jdbc-tomcat.dependencies
+displayName: Add Jdbc Tomcat dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.sql
+      artifactId: micronaut-jdbc-tomcat
+      configuration: implementation
+      scope: compile
