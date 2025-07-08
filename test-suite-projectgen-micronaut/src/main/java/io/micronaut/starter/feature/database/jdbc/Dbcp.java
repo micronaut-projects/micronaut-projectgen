@@ -21,10 +21,11 @@ import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
-import io.micronaut.starter.feature.database.DatabaseDriverFeature;
+import io.micronaut.starter.feature.database.*;
 
 import jakarta.inject.Singleton;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Requires(property = "micronaut.starter.feature.jdbc.dbcp.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
@@ -51,14 +52,11 @@ public class Dbcp extends JdbcFeature implements OpenRewriteFeature {
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        super.apply(generatorContext);
-        OpenRewriteFeature.super.apply(generatorContext);
-    }
-
-    @Override
     public List<String> getRecipes(GeneratorContext generatorContext) {
-        return List.of("io.micronaut.starter.feature.jdbc-dbcp");
+        List<String> recipes = new ArrayList<>();
+        recipes.add("io.micronaut.starter.feature.jdbc-dbcp");
+       addDatabaseConfigRecipe(generatorContext, recipes);
+        return recipes;
     }
 
 }

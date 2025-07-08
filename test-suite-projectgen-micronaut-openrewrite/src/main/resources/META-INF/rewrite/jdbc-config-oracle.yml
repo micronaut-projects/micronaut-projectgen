@@ -10,9 +10,4 @@ recipeList:
   - org.openrewrite.properties.AddProperty:
       property: datasources.default.driver-class-name
       value: oracle.jdbc.OracleDriver
-  - org.openrewrite.properties.AddProperty:
-      property: datasources.default.username
-      value: ""
-  - org.openrewrite.properties.AddProperty:
-      property: datasources.default.password
-      value: ""
+

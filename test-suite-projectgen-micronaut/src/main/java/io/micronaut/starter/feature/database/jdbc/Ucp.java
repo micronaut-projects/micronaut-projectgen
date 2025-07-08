@@ -25,6 +25,7 @@ import io.micronaut.starter.feature.database.DatabaseDriverFeature;
 
 import jakarta.inject.Singleton;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Requires(property = "micronaut.starter.feature.jdbc.ucp.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
@@ -51,14 +52,11 @@ public class Ucp extends JdbcFeature implements OpenRewriteFeature {
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        super.apply(generatorContext);
-        OpenRewriteFeature.super.apply(generatorContext);
-    }
-
-    @Override
     public List<String> getRecipes(GeneratorContext generatorContext) {
-        return List.of("io.micronaut.starter.feature.jdbc-ucp");
+        List<String> recipes = new ArrayList<>();
+        recipes.add("io.micronaut.starter.feature.jdbc-ucp");
+        addDatabaseConfigRecipe(generatorContext, recipes);
+        return recipes;
     }
 
 }

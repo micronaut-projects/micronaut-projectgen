@@ -55,27 +55,10 @@ public class Hikari extends JdbcFeature implements OpenRewriteFeature {
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        OpenRewriteFeature.super.apply(generatorContext);
-    }
-
-    @Override
     public List<String> getRecipes(GeneratorContext generatorContext) {
         List<String> recipes = new ArrayList<>();
         recipes.add("io.micronaut.starter.feature.jdbc-hikari");
-        if(generatorContext.isFeaturePresent(PostgreSQL.class)){
-            recipes.add("io.micronaut.starter.feature.jdbc-config-postgresql");
-        } else if(generatorContext.isFeaturePresent(MySQL.class)) {
-            recipes.add("io.micronaut.starter.feature.jdbc-config-mysql");
-        } else if(generatorContext.isFeaturePresent(Oracle.class)){
-            recipes.add("io.micronaut.starter.feature.jdbc-config-oracle");
-        } else if(generatorContext.isFeaturePresent(SQLServer.class)) {
-            recipes.add("io.micronaut.starter.feature.jdbc-config-sqlserver");
-        } else if(generatorContext.isFeaturePresent(MariaDB.class)){
-            recipes.add("io.micronaut.starter.feature.jdbc-config-mariadb");
-        } else {
-            recipes.add("io.micronaut.starter.feature.jdbc-config-h2");
-        }
+        addDatabaseConfigRecipe(generatorContext, recipes);
         return recipes;
     }
 
