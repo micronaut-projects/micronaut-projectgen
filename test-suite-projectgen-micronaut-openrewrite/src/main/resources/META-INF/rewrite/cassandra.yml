@@ -1,0 +1,55 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.cassandra
+displayName: Add Casandra dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.cassandra.dependencies
+  - io.micronaut.starter.feature.cassandra.micronaut.documentation
+  - io.micronaut.starter.feature.cassandra.documentation.thirdparty
+  - io.micronaut.starter.feature.cassandra.configuration
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.cassandra.dependencies
+displayName: Add Cassandra dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.cassandra
+      artifactId: micronaut-cassandra
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.cassandra.micronaut.documentation
+displayName: Append a link to Micronaut Cassandra documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-cassandra/latest/guide/index.html
+      appendNewline: true
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.cassandra.documentation.thirdparty
+displayName: Append a link to Cassandra documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://docs.datastax.com/en/developer/java-driver/latest/
+      appendNewline: true
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.cassandra.configuration
+displayName: Add Cassandra configuration
+preconditions:
+  - io.micronaut.starter.openrewrite.recipes.FindApplicationProperties
+recipeList:
+  - org.openrewrite.properties.AddProperty:
+      property: cassandra.default.basic.load-balancing-policy.local-datacenter
+      value: datacenter1
+  - org.openrewrite.properties.AddProperty:
+      property: cassandra.default.basic.session-name
+      value: defaultSession
+  - org.openrewrite.properties.AddProperty:
+      property: cassandra.default.advanced.control-connection.schema-agreement.timeout
+      value: 20
+  - org.openrewrite.properties.AddProperty:
+      property: cassandra.default.advanced.ssl-engine-factory
+      value: DefaultSslEngineFactory

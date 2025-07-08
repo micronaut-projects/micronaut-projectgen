@@ -1,0 +1,47 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.cassandra-micrometer
+displayName: Add Cassandra Micrometer dependency and configuration
+recipeList:
+  - io.micronaut.starter.feature.cassandra-micrometer.dependencies
+  - io.micronaut.starter.feature.cassandra-micrometer.configuration
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.cassandra-micrometer.dependencies
+displayName: Add Cassandra Micrometer dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: com.datastax.oss
+      artifactId: java-driver-metrics-micrometer
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.cassandra-micrometer.configuration
+displayName: Add Cassandra Micrometer configuration
+preconditions:
+  - io.micronaut.starter.openrewrite.recipes.FindApplicationProperties
+recipeList:
+  - org.openrewrite.properties.AddProperty:
+      property: cassandra.default.advanced.metrics.factory.class
+      value: MicrometerMetricsFactory
+  - org.openrewrite.properties.AddProperty:
+      property: cassandra.default.advanced.metrics.session.enabled[0]
+      value: connected-nodes
+  - org.openrewrite.properties.AddProperty:
+      property: cassandra.default.advanced.metrics.session.enabled[1]
+      value: cql-requests
+  - org.openrewrite.properties.AddProperty:
+      property: cassandra.default.advanced.metrics.session.enabled[2]
+      value: bytes-sent
+  - org.openrewrite.properties.AddProperty:
+      property: cassandra.default.advanced.metrics.session.enabled[3]
+      value: bytes-received
+  - org.openrewrite.properties.AddProperty:
+      property: cassandra.default.advanced.metrics.node.enabled[0]
+      value: cql-requests
+  - org.openrewrite.properties.AddProperty:
+      property: cassandra.default.advanced.metrics.node.enabled[1]
+      value: bytes-sent
+  - org.openrewrite.properties.AddProperty:
+      property: cassandra.default.advanced.metrics.node.enabled[2]
+      value: bytes-received
