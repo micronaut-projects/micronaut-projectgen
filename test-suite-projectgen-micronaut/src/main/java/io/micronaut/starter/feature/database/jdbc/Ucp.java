@@ -20,13 +20,16 @@ import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.feature.database.DatabaseDriverFeature;
 
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.jdbc.ucp.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class Ucp extends JdbcFeature {
+public class Ucp extends JdbcFeature implements OpenRewriteFeature {
 
     public Ucp(DatabaseDriverFeature dbFeature) {
         super(dbFeature);
@@ -50,10 +53,12 @@ public class Ucp extends JdbcFeature {
     @Override
     public void apply(GeneratorContext generatorContext) {
         super.apply(generatorContext);
-        ModuleContext moduleContext = generatorContext.getRootModule();
-        moduleContext.addDependency(Dependency.builder()
-                .groupId("io.micronaut.sql")
-                .artifactId("micronaut-jdbc-ucp")
-                .compile());
+        OpenRewriteFeature.super.apply(generatorContext);
     }
+
+    @Override
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.jdbc-ucp");
+    }
+
 }
