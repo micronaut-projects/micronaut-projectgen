@@ -20,25 +20,19 @@ import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils;
 import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.data.spring.jdbc.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class DataSpringJdbcFeature implements Feature {
+public class DataSpringJdbcFeature implements OpenRewriteFeature {
     public static final String NAME = "data-spring-jdbc";
-    public static final String TXMGR_CONFIG_KEY = "datasources.default.transaction-manager";
-    public static final String TXMGR_CONFIG_VALUE = "springJdbc";
-    public static final String MICRONAUT_DATA_SPRING_JDBC_ARTIFACT = "micronaut-data-spring-jdbc";
-
-    private static final Dependency MICRONAUT_DATA_SPRING_JDBC = MicronautDependencyUtils
-            .dataDependency()
-            .artifactId(MICRONAUT_DATA_SPRING_JDBC_ARTIFACT)
-            .compile()
-            .build();
 
     private final DataJdbc dataJdbc;
 
@@ -74,14 +68,8 @@ public class DataSpringJdbcFeature implements Feature {
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
-        module.addDependency(MICRONAUT_DATA_SPRING_JDBC);
-        module.configuration().addNested(TXMGR_CONFIG_KEY, TXMGR_CONFIG_VALUE);
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.data-spring-jdbc");
     }
 
-    @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-data/latest/guide/#spring";
-    }
 }
