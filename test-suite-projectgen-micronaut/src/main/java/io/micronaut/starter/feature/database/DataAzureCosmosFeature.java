@@ -22,12 +22,14 @@ import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.projectgen.core.feature.config.NestedConfiguration;
 import jakarta.inject.Singleton;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -37,18 +39,8 @@ import java.util.Map;
  */
 @Requires(property = "micronaut.starter.feature.data.azure.cosmos.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class DataAzureCosmosFeature implements DataDocumentFeature {
+public class DataAzureCosmosFeature implements DataDocumentFeature, OpenRewriteFeature {
     private static final String NAME = "data-azure-cosmos";
-
-    private static final String MICRONAUT_DATA_AZURE_COSMOS_DATA_ARTIFACT = "micronaut-data-azure-cosmos";
-    private static final Dependency DEPENDENCY_MICRONAUT_DATA_AZURE_COSMOS_DATA = MicronautDependencyUtils.dataDependency()
-            .artifactId(MICRONAUT_DATA_AZURE_COSMOS_DATA_ARTIFACT)
-            .versionProperty(MICRONAUT_DATA_VERSION)
-            .compile()
-            .build();
-
-    private static final String CONFIGURATION_PREFIX_AZURE_COSMOS = "azure.cosmos";
-
     private final Data data;
 
     protected DataAzureCosmosFeature(Data data) {
@@ -73,50 +65,21 @@ public class DataAzureCosmosFeature implements DataDocumentFeature {
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
+    public List<String> getRecipes(GeneratorContext generatorContext) {
         // TODO: Add test resources/containers support
-        ModuleContext module = generatorContext.getRootModule();
-        module.configuration().addNested(getConfiguration(generatorContext));
-        getDependencies(generatorContext).forEach(module::addDependency);
-    }
-
-    protected NestedConfiguration getConfiguration(GeneratorContext generatorContext) {
-        Map<String, Object> databaseProperties = CollectionUtils.mapOf(
-                "database-name", "myDb",
-                "update-policy", "NONE");
-        return new NestedConfiguration(
-                CONFIGURATION_PREFIX_AZURE_COSMOS,
-                CollectionUtils.mapOf(
-                "consistency-level", "SESSION",
-                "default-gateway-mode", true,
-                "endpoint-discovery-enabled", false,
-                "database", databaseProperties));
-    }
-
-    protected List<Dependency> getDependencies(GeneratorContext generatorContext) {
-        return (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())) ?
-                Arrays.asList(
-                        DataDocumentFeature.dataDocumentProcessorDependency(generatorContext.getBuildTool()),
-                        DEPENDENCY_MICRONAUT_DATA_AZURE_COSMOS_DATA,
-                        DataFeature.dataProcessorDependency(generatorContext.getBuildTool())) :
-                Arrays.asList(
-                        DataDocumentFeature.dataDocumentProcessorDependency(generatorContext.getBuildTool()),
-                        DEPENDENCY_MICRONAUT_DATA_AZURE_COSMOS_DATA);
-    }
-
-    @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-data/latest/guide/#azureCosmos";
+        List<String> recipes = new ArrayList<>();
+        recipes.add("io.micronaut.starter.feature.data-azure-cosmos");
+        if(OptionUtils.hasMavenBuildTool(generatorContext.getOptions())){
+            recipes.add("io.micronaut.starter.feature.data-azure-cosmos-annotation-maven");
+        } else {
+            recipes.add("io.micronaut.starter.feature.data-azure-cosmos-annotation-gradle");
+        }
+        return  recipes;
     }
 
     @Override
     public void processSelectedFeatures(FeatureContext featureContext) {
         featureContext.addFeature(data);
-    }
-
-    @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://learn.microsoft.com/en-us/azure/cosmos-db/";
     }
 
 }
