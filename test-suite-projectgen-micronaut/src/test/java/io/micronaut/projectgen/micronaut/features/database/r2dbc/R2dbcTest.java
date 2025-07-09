@@ -18,18 +18,6 @@ import static org.junit.jupiter.api.Assertions.*;
 @MicronautTest(startApplication = false)
 class R2dbcTest {
     @Test
-    void r2dbcFeaturesConfiguration(PreviewGenerator previewGenerator) throws Exception {
-        Options options = OptionsFixture.defaultGradle().features(List.of("r2dbc")).build();
-        Map<String, String> project = previewGenerator.generate(options);
-        Properties applicationProperties = ConfigurationUtils.loadApplicationProperties(project);
-        String buildGradle = project.get("build.gradle.kts");
-        assertNotNull(buildGradle);
-        assertEquals("r2dbc:h2:mem:///testdb;DB_CLOSE_ON_EXIT=FALSE", applicationProperties.getProperty("r2dbc.datasources.default.url"));
-        assertEquals("sa", applicationProperties.getProperty("r2dbc.datasources.default.username"));
-        assertEquals("", applicationProperties.getProperty("r2dbc.datasources.default.password"));
-    }
-
-    @Test
     void r2dbcTestResourceFeaturesConfiguration(PreviewGenerator previewGenerator) throws Exception {
         Options options = OptionsFixture.defaultGradle().features(List.of("r2dbc", "test-resources")).build();
         Map<String, String> project = previewGenerator.generate(options);
@@ -37,6 +25,16 @@ class R2dbcTest {
         String buildGradle = project.get("build.gradle.kts");
         assertNotNull(buildGradle);
         assertEquals("H2", applicationProperties.getProperty("r2dbc.datasources.default.dialect"));
+    }
+
+    @Test
+    void r2dbcTestResourceMysqlFeaturesConfiguration(PreviewGenerator previewGenerator) throws Exception {
+        Options options = OptionsFixture.defaultGradle().features(List.of("r2dbc", "test-resources", "mysql")).build();
+        Map<String, String> project = previewGenerator.generate(options);
+        Properties applicationProperties = ConfigurationUtils.loadApplicationProperties(project);
+        String buildGradle = project.get("build.gradle.kts");
+        assertNotNull(buildGradle);
+        assertEquals("MYSQL", applicationProperties.getProperty("r2dbc.datasources.default.dialect"));
     }
 
     @Test
