@@ -97,11 +97,8 @@ public class R2dbc extends R2dbcConfigurationUtils implements R2dbcFeature, Open
         if (!generatorContext.isFeaturePresent(DataR2dbc.class)) {
             recipes.add(RECIPE_R2DBC_DEPENDENCY);
         }
-        if (generatorContext.isFeaturePresent(TestResources.class)) {
-            recipes.add(RECIPE_R2DBC_CONFIGURATION);
-        }
         addDatabaseConfigRecipe(generatorContext, recipes);
-            return  recipes;
+        return recipes;
     }
 
     public String getUrlKey() {

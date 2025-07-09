@@ -56,7 +56,7 @@ public class Tomcat extends AbstractServletFeature implements OpenRewriteFeature
         if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())) {
             recipes.add("io.micronaut.starter.feature.tomcat-server");
         }
-            return  recipes;
+        return recipes;
     }
 
     @Override
