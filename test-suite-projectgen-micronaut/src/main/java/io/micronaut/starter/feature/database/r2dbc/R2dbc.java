@@ -44,7 +44,6 @@ public class R2dbc extends R2dbcConfigurationUtils implements R2dbcFeature, Open
 
     private static final String RECIPE_R2DBC_DOCS = "io.micronaut.starter.feature.r2dbc-docs";
     private static final String RECIPE_R2DBC_DEPENDENCY = "io.micronaut.starter.feature.r2dbc-dependency";
-    private static final String RECIPE_R2DBC_CONFIGURATION = "io.micronaut.starter.feature.r2dbc-configuration";
 
     public static final String NAME = "r2dbc";
 

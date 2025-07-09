@@ -5,7 +5,6 @@ recipeList:
   - io.micronaut.starter.feature.data-r2dbc.dependencies
   - io.micronaut.starter.feature.data-r2dbc.micronaut.documentation
   - io.micronaut.starter.feature.data-r2dbc.documentation.thirdparty
-  - io.micronaut.starter.feature.data-r2dbc.configuration
   - io.micronaut.starter.feature.data-r2dbc-annotation
 ---
 type: specs.openrewrite.org/v1beta/recipe
@@ -35,13 +34,4 @@ recipeList:
       relativeFileName: README.md
       content: https://r2dbc.io
       appendNewline: true
----
-type: specs.openrewrite.org/v1beta/recipe
-name: io.micronaut.starter.feature.data-r2dbc.configuration
-displayName: Add Data R2dbc configuration
-preconditions:
-  - io.micronaut.starter.openrewrite.recipes.FindApplicationProperties
-recipeList:
-  - org.openrewrite.properties.AddProperty:
-      property: r2dbc.datasources.default.dialect
-      value: H2
+

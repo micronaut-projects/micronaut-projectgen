@@ -5,6 +5,9 @@ preconditions:
   - io.micronaut.starter.openrewrite.recipes.FindApplicationProperties
 recipeList:
   - org.openrewrite.properties.AddProperty:
+      property: r2dbc.datasources.default.dialect
+      value: H2
+  - org.openrewrite.properties.AddProperty:
       property: r2dbc.datasources.default.url
       value: r2dbc:h2:mem:///testdb;DB_CLOSE_ON_EXIT=FALSE
   - org.openrewrite.properties.AddProperty:
