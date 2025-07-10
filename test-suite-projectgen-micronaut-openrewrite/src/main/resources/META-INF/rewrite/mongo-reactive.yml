@@ -1,0 +1,35 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.mongo-reactive
+displayName: Add Mongo Reactive dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.mongo-reactive.dependencies
+  - io.micronaut.starter.feature.mongo-reactive.micronaut.documentation
+  - io.micronaut.starter.feature.mongo-reactive.documentation.thirdparty
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.mongo-reactive.dependencies
+displayName: Add Mongo Reactive dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.mongodb
+      artifactId: micronaut-mongo-reactive
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.mongo-reactive.micronaut.documentation
+displayName: Append a link to Micronaut Mongo Reactive documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-mongodb/latest/guide/index.html
+      appendNewline: true
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.mongo-reactive.documentation.thirdparty
+displayName: Append a link to Mongo Reactive website
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://docs.mongodb.com
+      appendNewline: true
