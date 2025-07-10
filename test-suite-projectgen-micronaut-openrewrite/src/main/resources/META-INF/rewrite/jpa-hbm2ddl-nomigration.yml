@@ -1,0 +1,9 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.jpa-hbm2ddl-nomigration
+displayName: Add Jpa configuration
+preconditions:
+  - io.micronaut.starter.openrewrite.recipes.FindApplicationProperties
+recipeList:
+  - org.openrewrite.properties.AddProperty:
+      property: jpa.default.properties.hibernate.hbm2ddl.auto
+      value: update

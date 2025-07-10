@@ -19,6 +19,7 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils;
 import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.FeatureContext;
@@ -27,11 +28,13 @@ import io.micronaut.starter.feature.database.jdbc.JdbcFeature;
 import io.micronaut.starter.feature.migration.MigrationFeature;
 import jakarta.inject.Singleton;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.hibernate.jpa.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class HibernateJpa implements JpaFeature {
+public class HibernateJpa implements JpaFeature, OpenRewriteFeature {
 
-    private static final String ARTIFACT_ID_MICRONAUT_HIBERNATE_JPA = "micronaut-hibernate-jpa";
     private final JdbcFeature jdbcFeature;
 
     public HibernateJpa(JdbcFeature jdbcFeature) {
@@ -61,30 +64,20 @@ public class HibernateJpa implements JpaFeature {
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
-        module.configuration().put(JPA_HIBERNATE_PROPERTIES_HBM2DDL,
-                generatorContext.getFeatures().hasFeature(MigrationFeature.class) ? Hbm2ddlAuto.NONE.toString() :
-                        Hbm2ddlAuto.UPDATE.toString());
-        addDependencies(module);
-    }
-
-    protected void addDependencies(ModuleContext module) {
-        module.addDependency(MicronautDependencyUtils.sqlDependency()
-                .artifactId(ARTIFACT_ID_MICRONAUT_HIBERNATE_JPA)
-                .compile());
-        module.addDependency(MicronautDependencyUtils.dataDependency()
-                .artifactId(MicronautDependencyUtils.ARTIFACT_ID_MICRONAUT_DATA_TX_HIBERNATE)
-                .compile());
-    }
-
-    @Override
     public String getCategory() {
         return Category.DATABASE;
     }
 
     @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-sql/latest/guide/index.html#hibernate";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        List<String> recipes = new ArrayList<>();
+        if(generatorContext.isFeaturePresent(MigrationFeature.class)) {
+            recipes.add("io.micronaut.starter.feature.jpa-hbm2ddl-migration");
+        } else {
+            recipes.add("io.micronaut.starter.feature.jpa-hbm2ddl-nomigration");
+        }
+        recipes.add("io.micronaut.starter.feature.hibernate-jpa");
+        return recipes;
     }
+
 }
