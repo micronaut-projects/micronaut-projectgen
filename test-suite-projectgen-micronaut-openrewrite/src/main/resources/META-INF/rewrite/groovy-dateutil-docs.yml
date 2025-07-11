@@ -6,3 +6,4 @@ recipeList:
       relativeFileName: README.md
       content: https://docs.groovy-lang.org/docs/latest/html/documentation/#_working_with_legacy_datecalendar_types
       appendNewline: true
+      existingFileStrategy: Continue

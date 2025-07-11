@@ -22,3 +22,4 @@ recipeList:
       relativeFileName: README.md
       content: https://plugins.gradle.org/plugin/org.zeroturnaround.gradle.jrebel
       appendNewline: true
+      existingFileStrategy: Continue

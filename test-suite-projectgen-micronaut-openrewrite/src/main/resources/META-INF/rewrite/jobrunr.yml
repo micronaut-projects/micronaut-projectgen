@@ -37,3 +37,4 @@ recipeList:
       relativeFileName: README.md
       content: https://www.jobrunr.io/en/documentation/configuration/micronaut/
       appendNewline: true
+      existingFileStrategy: Continue

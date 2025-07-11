@@ -26,6 +26,7 @@ recipeList:
       relativeFileName: README.md
       content: https://micronaut-projects.github.io/micronaut-json-schema/latest/guide/
       appendNewline: true
+      existingFileStrategy: Continue
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.json-schema.documentation.thirdparty
@@ -35,6 +36,7 @@ recipeList:
       relativeFileName: README.md
       content: https://json-schema.org/learn/getting-started-step-by-step
       appendNewline: true
+      existingFileStrategy: Continue
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.json-schema.configuration

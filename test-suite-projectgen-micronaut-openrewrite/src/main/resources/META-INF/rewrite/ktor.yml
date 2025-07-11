@@ -41,3 +41,4 @@ recipeList:
       relativeFileName: README.md
       content: https://micronaut-projects.github.io/micronaut-kotlin/latest/guide/index.html#ktor
       appendNewline: true
+      existingFileStrategy: Continue

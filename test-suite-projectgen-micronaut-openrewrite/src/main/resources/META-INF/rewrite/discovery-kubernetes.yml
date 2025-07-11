@@ -36,3 +36,4 @@ recipeList:
       relativeFileName: README.md
       content: https://micronaut-projects.github.io/micronaut-kubernetes/latest/guide/#service-discovery
       appendNewline: true
+      existingFileStrategy: Continue
