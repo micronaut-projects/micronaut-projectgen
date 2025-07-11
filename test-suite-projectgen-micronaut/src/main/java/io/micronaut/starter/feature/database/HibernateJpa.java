@@ -72,9 +72,9 @@ public class HibernateJpa implements JpaFeature, OpenRewriteFeature {
     public List<String> getRecipes(GeneratorContext generatorContext) {
         List<String> recipes = new ArrayList<>();
         if(generatorContext.isFeaturePresent(MigrationFeature.class)) {
-            recipes.add("io.micronaut.starter.feature.jpa-hbm2ddl-migration");
+            recipes.add("io.micronaut.starter.feature.jpa-hbm2ddl-none");
         } else {
-            recipes.add("io.micronaut.starter.feature.jpa-hbm2ddl-nomigration");
+            recipes.add("io.micronaut.starter.feature.jpa-hbm2ddl-update");
         }
         recipes.add("io.micronaut.starter.feature.hibernate-jpa");
         return recipes;
