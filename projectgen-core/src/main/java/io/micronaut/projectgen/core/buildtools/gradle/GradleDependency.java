@@ -179,7 +179,7 @@ public class GradleDependency extends DependencyCoordinate {
     public static List<GradleDependency> listOf(GeneratorContext generatorContext, DependencyContext dependencyContext, Options options, boolean useVersionCatalogue) {
         BuildTool buildTool = options.buildTools().stream()
             .filter(bt -> bt == BuildTool.GRADLE).findFirst().orElseThrow();
-        return dependencyContext.removeDuplicates(dependencyContext.getDependencies(), options.language(), buildTool)
+        return dependencyContext.removeDuplicates(dependencyContext.getDependenciesByBuildTool(BuildTool.GRADLE), options.language(), buildTool)
             .stream()
             .map(dep -> new GradleDependency(dep, options, generatorContext, useVersionCatalogue, dep.getProject(), dep.getComment()))
             .sorted(GradleDependency.COMPARATOR)
