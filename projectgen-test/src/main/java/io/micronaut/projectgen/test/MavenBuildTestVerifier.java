@@ -232,15 +232,13 @@ public class MavenBuildTestVerifier implements BuildTestVerifier {
     public boolean hasBuildPlugin(String groupId, String artifactId) {
         return this.buildPlugins.stream()
             .anyMatch(bp ->
-                bp.getGroupId().equals(groupId) && bp.getArtifactId().equals(artifactId));
+                    matchCoordinateGroupIdAndArtifactId(bp, groupId, artifactId));
     }
 
     @Override
     public boolean hasAnnotationProcessor(String groupId, String artifactId) {
         return annotationProcessors.stream()
-            .anyMatch(d ->
-                d.getGroupId().equals(groupId) &&
-                    d.getArtifactId().equals(artifactId));
+            .anyMatch(d -> matchCoordinateGroupIdAndArtifactId(d, groupId, artifactId));
     }
 
     @Override
@@ -261,7 +259,7 @@ public class MavenBuildTestVerifier implements BuildTestVerifier {
     @Override
     public boolean hasDependency(String groupId, String artifactId, Scope scope) {
         return dependencies.stream().anyMatch(d ->
-            d.getGroupId().equals(groupId) && d.getArtifactId().equals(artifactId) && d.getScope().equals(scope));
+            matchCoordinateGroupIdAndArtifactId(d, groupId, artifactId) && d.getScope().equals(scope));
     }
 
     /**
@@ -273,7 +271,7 @@ public class MavenBuildTestVerifier implements BuildTestVerifier {
      */
     public boolean hasDependency(String groupId, String artifactId, MavenScope scope) {
         return dependencies.stream().anyMatch(d ->
-            d.getGroupId().equals(groupId) && d.getArtifactId().equals(artifactId) &&
+            matchCoordinateGroupIdAndArtifactId(d, groupId, artifactId) &&
                 MavenScope.of(d.getScope(), language).isPresent() && MavenScope.of(d.getScope(), language).get().equals(scope));
     }
 
@@ -295,7 +293,7 @@ public class MavenBuildTestVerifier implements BuildTestVerifier {
     @Override
     public boolean hasDependency(String groupId, String artifactId) {
         return dependencies.stream().anyMatch(d ->
-            d.getGroupId().equals(groupId)  && d.getArtifactId().equals(artifactId));
+                matchCoordinateGroupIdAndArtifactId(d, groupId, artifactId));
     }
 
     @Override
