@@ -24,3 +24,4 @@ recipeList:
       relativeFileName: README.md
       content: https://aws.amazon.com/s3/
       appendNewline: true
+      existingFileStrategy: Continue

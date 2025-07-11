@@ -17,6 +17,7 @@ recipeList:
       relativeFileName: README.md
       content: https://www.liquibase.org/
       appendNewline: true
+      existingFileStrategy: Continue
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.liquibase.documentation.micronaut
@@ -26,6 +27,7 @@ recipeList:
       relativeFileName: README.md
       content: https://micronaut-projects.github.io/micronaut-liquibase/latest/guide/index.html
       appendNewline: true
+      existingFileStrategy: Continue
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.liquibase.file.create.xml.changelog

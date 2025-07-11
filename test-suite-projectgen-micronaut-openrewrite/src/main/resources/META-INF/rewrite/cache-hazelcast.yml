@@ -25,6 +25,7 @@ recipeList:
       relativeFileName: README.md
       content: https://micronaut-projects.github.io/micronaut-cache/latest/guide/index.html#hazelcast
       appendNewline: true
+      existingFileStrategy: Continue
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.cache-hazelcast.documentation.thirdparty
@@ -34,6 +35,7 @@ recipeList:
       relativeFileName: README.md
       content: https://hazelcast.org/
       appendNewline: true
+      existingFileStrategy: Continue
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.cache-hazelcast.configurations

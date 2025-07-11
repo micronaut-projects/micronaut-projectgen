@@ -25,6 +25,7 @@ recipeList:
       relativeFileName: README.md
       content: https://docs.micronaut.io/latest/guide/index.html#lombok
       appendNewline: true
+      existingFileStrategy: Continue
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.lombok.documentation.thirdparty
@@ -34,3 +35,4 @@ recipeList:
       relativeFileName: README.md
       content: https://projectlombok.org/features/all
       appendNewline: true
+      existingFileStrategy: Continue

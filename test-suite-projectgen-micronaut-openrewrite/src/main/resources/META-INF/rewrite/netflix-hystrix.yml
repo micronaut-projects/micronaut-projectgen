@@ -34,3 +34,4 @@ recipeList:
       relativeFileName: README.md
       content: https://docs.micronaut.io/latest/guide/index.html#netflixHystrix
       appendNewline: true
+      existingFileStrategy: Continue

@@ -23,3 +23,4 @@ recipeList:
       relativeFileName: README.md
       content: https://micronaut-projects.github.io/micronaut-sql/latest/guide/index.html#jooq
       appendNewline: true
+      existingFileStrategy: Continue

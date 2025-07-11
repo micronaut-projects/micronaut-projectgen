@@ -6,3 +6,4 @@ recipeList:
       relativeFileName: README.md
       content: https://docs.groovy-lang.org/docs/latest/html/documentation/#_querying_collections_in_sql_like_style
       appendNewline: true
+      existingFileStrategy: Continue

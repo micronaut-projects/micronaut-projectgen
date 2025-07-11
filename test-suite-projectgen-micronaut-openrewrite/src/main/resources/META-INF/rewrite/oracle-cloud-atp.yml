@@ -26,6 +26,7 @@ recipeList:
       relativeFileName: README.md
       content: https://micronaut-projects.github.io/micronaut-oracle-cloud/latest/guide/#_micronaut_oraclecloud_atp
       appendNewline: true
+      existingFileStrategy: Continue
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.oracle-cloud-atp.documentation.thirdparty
@@ -35,6 +36,7 @@ recipeList:
       relativeFileName: README.md
       content: https://www.oracle.com/autonomous-database/autonomous-transaction-processing/
       appendNewline: true
+      existingFileStrategy: Continue
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.oracle-cloud-atp.configuration

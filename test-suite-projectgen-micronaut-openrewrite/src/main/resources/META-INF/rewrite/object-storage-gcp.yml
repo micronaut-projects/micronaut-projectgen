@@ -24,3 +24,4 @@ recipeList:
       relativeFileName: README.md
       content: https://cloud.google.com/storage
       appendNewline: true
+      existingFileStrategy: Continue
