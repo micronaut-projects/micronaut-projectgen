@@ -1,0 +1,9 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.hibernate-reactive-jpa
+displayName: Add Hibernate Reactive Jpa dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.sql
+      artifactId: micronaut-hibernate-reactive
+      configuration: implementation
+      scope: compile

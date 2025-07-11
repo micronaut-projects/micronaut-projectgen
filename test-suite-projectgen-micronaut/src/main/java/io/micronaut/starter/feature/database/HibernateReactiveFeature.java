@@ -18,12 +18,15 @@ package io.micronaut.starter.feature.database;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.feature.Category;
 import io.micronaut.starter.feature.migration.MigrationFeature;
 import io.micronaut.starter.feature.testresources.DbType;
 import io.micronaut.starter.feature.testresources.EaseTestingFeature;
 import io.micronaut.starter.feature.testresources.TestResources;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public abstract class HibernateReactiveFeature extends EaseTestingFeature implements JpaFeature {
@@ -38,10 +41,21 @@ public abstract class HibernateReactiveFeature extends EaseTestingFeature implem
         super(testContainers, testResources);
     }
 
+    protected void addDatabaseConfigRecipe(GeneratorContext generatorContext, List<String> recipes) {
+        if (generatorContext.isFeaturePresent(PostgreSQL.class)) {
+            recipes.add("io.micronaut.starter.feature.jpa-db-type-postgres");
+        } else if (generatorContext.isFeaturePresent(MySQL.class)) {
+            recipes.add("io.micronaut.starter.feature.jpa-db-type-mysql");
+        } else if (generatorContext.isFeaturePresent(MariaDB.class)) {
+            recipes.add("io.micronaut.starter.feature.jpa-db-type-mariadb");
+        } else if (generatorContext.isFeaturePresent(SQLServer.class)) {
+            recipes.add("io.micronaut.starter.feature.jpa-db-type-sqlserver");
+        }
+    }
+
     @Override
     public void apply(GeneratorContext generatorContext) {
         ModuleContext module = generatorContext.getRootModule();
-
         DatabaseDriverFeature dbFeature = generatorContext.getRequiredFeature(DatabaseDriverFeature.class);
 
         if (dbFeature instanceof PostgreSQL) {
@@ -49,9 +63,7 @@ public abstract class HibernateReactiveFeature extends EaseTestingFeature implem
                     .lookupArtifactId("client")
                     .compile());
         }
-        module.configuration().put(JPA_HIBERNATE_PROPERTIES_HBM2DDL,
-                generatorContext.getFeatures().hasFeature(MigrationFeature.class) ? Hbm2ddlAuto.NONE.toString() :
-                        Hbm2ddlAuto.UPDATE.toString());
+
 
         module.configuration().put(JPA_DEFAULT_REACTIVE, true);
         Optional<DbType> optionalDbType = dbFeature.getDbType();
@@ -63,10 +75,6 @@ public abstract class HibernateReactiveFeature extends EaseTestingFeature implem
                     migrationFeature.map(f -> "${datasources.default.username}").orElse(dbFeature.getDefaultUser()));
             module.configuration().put(JPA_DEFAULT_PROPERTIES_HIBERNATE_CONNECTION_PASSWORD,
                     migrationFeature.map(f -> "${datasources.default.password}").orElse(dbFeature.getDefaultPassword()));
-        } else {
-            optionalDbType.ifPresent(type ->
-                module.configuration().put(JPA_HIBERNATE_PROPERTIES_CONNECTION + ".db-type", type.toString())
-            );
         }
         if (optionalDbType.isPresent()) {
             DbType dbType = optionalDbType.get();

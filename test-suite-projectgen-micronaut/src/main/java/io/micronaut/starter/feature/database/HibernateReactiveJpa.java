@@ -21,21 +21,22 @@ import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils;
 import io.micronaut.projectgen.core.feature.FeatureContext;
+import io.micronaut.starter.feature.migration.MigrationFeature;
 import io.micronaut.starter.feature.reactor.Reactor;
 import io.micronaut.starter.feature.testresources.TestResources;
 import jakarta.inject.Singleton;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.hibernate.reactive.jpa.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class HibernateReactiveJpa extends HibernateReactiveFeature {
+public class HibernateReactiveJpa extends HibernateReactiveFeature implements OpenRewriteFeature {
 
     public static final String NAME = "hibernate-reactive-jpa";
-
-    private static final Dependency.Builder DEPENDENCY_MICRONAUT_HIBERNATE_REACTIVE = MicronautDependencyUtils.sqlDependency()
-            .artifactId("micronaut-hibernate-reactive")
-            .compile();
 
     private final Reactor reactiveFeature;
 
@@ -69,7 +70,22 @@ public class HibernateReactiveJpa extends HibernateReactiveFeature {
     @Override
     public void apply(GeneratorContext generatorContext) {
         super.apply(generatorContext);
-        ModuleContext module = generatorContext.getRootModule();
-        module.addDependency(DEPENDENCY_MICRONAUT_HIBERNATE_REACTIVE);
+        OpenRewriteFeature.super.apply(generatorContext);
     }
+
+    @Override
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        List<String> recipes = new ArrayList<>();
+        if (generatorContext.isFeaturePresent(MigrationFeature.class)) {
+            recipes.add("io.micronaut.starter.feature.jpa-hbm2ddl-none");
+        } else {
+            recipes.add("io.micronaut.starter.feature.jpa-hbm2ddl-update");
+        }
+        if(generatorContext.isFeaturePresent(TestResources.class)){
+            addDatabaseConfigRecipe(generatorContext, recipes);
+        }
+        recipes.add("io.micronaut.starter.feature.hibernate-reactive-jpa");
+        return recipes;
+    }
+
 }
