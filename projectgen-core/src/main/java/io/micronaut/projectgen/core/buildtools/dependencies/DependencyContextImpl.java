@@ -16,8 +16,12 @@
 package io.micronaut.projectgen.core.buildtools.dependencies;
 
 import io.micronaut.core.annotation.NonNull;
+import io.micronaut.projectgen.core.buildtools.BuildTool;
 
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -26,6 +30,7 @@ import java.util.Set;
 public class DependencyContextImpl implements DependencyContext {
     private final CoordinateResolver coordinateResolver;
     private final Set<Dependency> dependencies = new HashSet<>();
+    private final Map<BuildTool, Set<Dependency>> dependenciesByTool = new HashMap<>();
 
     public DependencyContextImpl(CoordinateResolver coordinateResolver) {
         this.coordinateResolver = coordinateResolver;
@@ -33,19 +38,40 @@ public class DependencyContextImpl implements DependencyContext {
 
     @Override
     public void addDependency(@NonNull Dependency dependency) {
+        dependencies.add(resolveDependency(dependency));
+    }
+
+    private Dependency resolveDependency(@NonNull Dependency dependency) {
         if (dependency.requiresLookup()) {
             Coordinate coordinate = coordinateResolver.resolve(dependency.getArtifactId())
                 .orElseThrow(() -> new LookupFailedException(dependency.getArtifactId()));
-            dependencies.add(dependency.resolved(coordinate));
-        } else {
-            dependencies.add(dependency);
+            return dependency.resolved(coordinate);
         }
+        return dependency;
+    }
+
+    @Override
+    public void addDependencyOnlyForBuild(Dependency dependency, BuildTool buildTool) {
+        dependenciesByTool.computeIfAbsent(buildTool, t -> new HashSet<>())
+            .add(resolveDependency(dependency));
     }
 
     @NonNull
     @Override
     public Set<Dependency> getDependencies() {
         return dependencies;
+    }
+
+    @Override
+    @NonNull
+    public Collection<Dependency> getDependenciesByBuildTool(@NonNull BuildTool buildTool) {
+        Set<Dependency> result = new HashSet<>();
+        result.addAll(dependencies);
+        Collection<Dependency> dependencyByBuildTools = dependenciesByTool.get(buildTool);
+        if (dependencyByBuildTools != null) {
+            result.addAll(dependencyByBuildTools);
+        }
+        return result;
     }
 
     /**
