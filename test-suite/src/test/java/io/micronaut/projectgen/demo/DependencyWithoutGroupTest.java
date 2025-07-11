@@ -12,7 +12,6 @@ import io.micronaut.projectgen.core.options.GenericOptionsBuilder;
 import io.micronaut.projectgen.core.options.Language;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.core.options.TestFramework;
-import io.micronaut.projectgen.test.BuildTestVerifier;
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
 import jakarta.inject.Singleton;
 import org.junit.jupiter.api.Test;
@@ -20,12 +19,12 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@Property(name = "spec.name", value = "AddDependencyOnlyForBuildTest")
+@Property(name = "spec.name", value = "DependencyWithoutGroupTest")
 @MicronautTest(startApplication = false)
-class AddDependencyOnlyForBuildTest {
-
+class DependencyWithoutGroupTest {
     @Test
     void addDependencyOnlyForBuild(PreviewGenerator previewGenerator) throws Exception {
         Options options = GenericOptionsBuilder.builder()
@@ -41,24 +40,12 @@ class AddDependencyOnlyForBuildTest {
 
         String buildGradleKts = project.get("build.gradle.kts");
         assertNotNull(buildGradleKts);
-        BuildTestVerifier gradleVerifier = BuildTestVerifier.of(buildGradleKts, BuildTool.GRADLE, options.language(), options.testFramework());
-        assertFalse(gradleVerifier.hasDependency("io.micronaut", "micronaut-http-server-netty"), buildGradleKts);
-
-        String pomXml = project.get("pom.xml");
-        assertNotNull(pomXml);
-        BuildTestVerifier verifier = BuildTestVerifier.of(pomXml, BuildTool.MAVEN, options.language(), options.testFramework());
-        assertTrue(verifier.hasDependency("io.micronaut", "micronaut-http-server-netty"), pomXml);
+        assertTrue(buildGradleKts.contains("implementation(mn.micronaut.http.server.netty)"), buildGradleKts);
     }
 
-    @Requires(property = "spec.name", value = "AddDependencyOnlyForBuildTest")
+    @Requires(property = "spec.name", value = "DependencyWithoutGroupTest")
     @Singleton
     static class HttpServerNetty implements Feature {
-        private static final Dependency DEPENDENCY_HTTP_SERVER_NETTY = Dependency.builder()
-            .groupId("io.micronaut")
-            .artifactId("micronaut-http-server-netty")
-            .compile()
-            .build();
-
         @Override
         public String getName() {
             return "http-server-netty";
@@ -66,8 +53,7 @@ class AddDependencyOnlyForBuildTest {
 
         @Override
         public void apply(GeneratorContext generatorContext) {
-            generatorContext.getRootModule().addDependencyOnlyForBuild(DEPENDENCY_HTTP_SERVER_NETTY, BuildTool.MAVEN);
+            generatorContext.getRootModule().addDependency(Dependency.builder().artifactId("mn.micronaut.http.server.netty").compile().build());
         }
     }
-
 }
