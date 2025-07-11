@@ -182,16 +182,21 @@ loadScripts(document, 'script');</script>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#hasTestResourceDependencyWithGroupId(java.lang.String)" class="member-name-link">hasTestResourceDependencyWithGroupId</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;expectedGroupId)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1"><code>static @NonNull <a href="BuildTestVerifier.html" title="interface in io.micronaut.projectgen.test">BuildTestVerifier</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1"><code><a href="#of(java.lang.String,io.micronaut.projectgen.core.buildtools.BuildTool,io.micronaut.projectgen.core.options.Language,io.micronaut.projectgen.core.options.TestFramework)" class="member-name-link">of</a><wbr>(@NonNull <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;template,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#matchCoordinateGroupIdAndArtifactId(io.micronaut.projectgen.core.buildtools.dependencies.Coordinate,java.lang.String,java.lang.String)" class="member-name-link">matchCoordinateGroupIdAndArtifactId</a><wbr>(<a href="../core/buildtools/dependencies/Coordinate.html" title="interface in io.micronaut.projectgen.core.buildtools.dependencies">Coordinate</a>&nbsp;d,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;groupId,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;artifactId)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1"><code>static @NonNull <a href="BuildTestVerifier.html" title="interface in io.micronaut.projectgen.test">BuildTestVerifier</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1"><code><a href="#of(java.lang.String,io.micronaut.projectgen.core.buildtools.BuildTool,io.micronaut.projectgen.core.options.Language,io.micronaut.projectgen.core.options.TestFramework)" class="member-name-link">of</a><wbr>(@NonNull <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;template,
  @NonNull <a href="../core/buildtools/BuildTool.html" title="enum class in io.micronaut.projectgen.core.buildtools">BuildTool</a>&nbsp;buildTool,
  @NonNull <a href="../core/options/Language.html" title="enum class in io.micronaut.projectgen.core.options">Language</a>&nbsp;language,
  @NonNull <a href="../core/options/TestFramework.html" title="enum class in io.micronaut.projectgen.core.options">TestFramework</a>&nbsp;testFramework)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab6"><code>static @NonNull <a href="BuildTestVerifier.html" title="interface in io.micronaut.projectgen.test">BuildTestVerifier</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab6"><code><a href="#of(java.lang.String,io.micronaut.projectgen.core.options.Options)" class="member-name-link">of</a><wbr>(@NonNull <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;template,
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab6"><code>static @NonNull <a href="BuildTestVerifier.html" title="interface in io.micronaut.projectgen.test">BuildTestVerifier</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab6"><code><a href="#of(java.lang.String,io.micronaut.projectgen.core.options.Options)" class="member-name-link">of</a><wbr>(@NonNull <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;template,
  @NonNull <a href="../core/options/Options.html" title="interface in io.micronaut.projectgen.core.options">Options</a>&nbsp;options)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab6">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab6">
 <div class="block"><span class="deprecated-label">Deprecated, for removal: This API element is subject to removal in a future version.</span>
 <div class="deprecation-comment">Use <a href="#of(java.lang.String,io.micronaut.projectgen.core.buildtools.BuildTool,io.micronaut.projectgen.core.options.Language,io.micronaut.projectgen.core.options.TestFramework)"><code>of(String, BuildTool, Language, TestFramework)</code></a> instead.</div>
 </div>
@@ -521,6 +526,14 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="hasProfile(java.lang.String)">
 <h3>hasProfile</h3>
 <div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">hasProfile</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;profileId)</span></div>
+</section>
+</li>
+<li>
+<section class="detail" id="matchCoordinateGroupIdAndArtifactId(io.micronaut.projectgen.core.buildtools.dependencies.Coordinate,java.lang.String,java.lang.String)">
+<h3>matchCoordinateGroupIdAndArtifactId</h3>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">matchCoordinateGroupIdAndArtifactId</span><wbr><span class="parameters">(<a href="../core/buildtools/dependencies/Coordinate.html" title="interface in io.micronaut.projectgen.core.buildtools.dependencies">Coordinate</a>&nbsp;d,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;groupId,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;artifactId)</span></div>
 </section>
 </li>
 </ul>
