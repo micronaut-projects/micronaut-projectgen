@@ -14,6 +14,7 @@ recipeList:
       relativeFileName: README.md
       content: https://micronaut-projects.github.io/micronaut-data/latest/guide/#typeSafeJava
       appendNewline: true
+      existingFileStrategy: Continue
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.hibernate-jpamodelgen.documentation.thirdparty
@@ -23,3 +24,4 @@ recipeList:
       relativeFileName: README.md
       content: https://hibernate.org/orm/tooling/
       appendNewline: true
+      existingFileStrategy: Continue

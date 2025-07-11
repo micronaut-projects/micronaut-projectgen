@@ -47,6 +47,7 @@ recipeList:
       relativeFileName: README.md
       content: https://micronaut-projects.github.io/micronaut-azure/latest/guide/#azureCosmosClient
       appendNewline: true
+      existingFileStrategy: Continue
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.azure-cosmos-db.documentation.thirdparty
@@ -56,3 +57,4 @@ recipeList:
       relativeFileName: README.md
       content: https://learn.microsoft.com/en-us/azure/cosmos-db/
       appendNewline: true
+      existingFileStrategy: Continue

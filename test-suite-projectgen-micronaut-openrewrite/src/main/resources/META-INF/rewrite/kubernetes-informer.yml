@@ -24,6 +24,7 @@ recipeList:
       relativeFileName: README.md
       content: https://micronaut-projects.github.io/micronaut-kubernetes/latest/guide/#kubernetes-informer
       appendNewline: true
+      existingFileStrategy: Continue
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.kubernetes-informer.documentation.thirdparty
@@ -33,3 +34,4 @@ recipeList:
       relativeFileName: README.md
       content: https://github.com/kubernetes-client/java/wiki
       appendNewline: true
+      existingFileStrategy: Continue

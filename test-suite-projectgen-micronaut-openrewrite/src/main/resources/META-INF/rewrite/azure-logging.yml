@@ -24,6 +24,7 @@ recipeList:
       relativeFileName: README.md
       content: https://micronaut-projects.github.io/micronaut-azure/latest/guide/#azureLogging
       appendNewline: true
+      existingFileStrategy: Continue
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.azure-logging.documentation.thirdparty
@@ -33,3 +34,4 @@ recipeList:
       relativeFileName: README.md
       content: https://learn.microsoft.com/en-us/azure/azure-monitor/logs/data-platform-logs
       appendNewline: true
+      existingFileStrategy: Continue

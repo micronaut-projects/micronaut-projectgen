@@ -24,6 +24,7 @@ recipeList:
       relativeFileName: README.md
       content: https://docs.micronaut.io/latest/guide/index.html#serviceDiscoveryConsul
       appendNewline: true
+      existingFileStrategy: Continue
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.discovery-consul.documentation.thirdparty
@@ -33,4 +34,5 @@ recipeList:
       relativeFileName: README.md
       content: https://www.consul.io
       appendNewline: true
+      existingFileStrategy: Continue
 

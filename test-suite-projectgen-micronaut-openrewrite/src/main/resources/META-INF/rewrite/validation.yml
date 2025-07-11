@@ -16,6 +16,7 @@ recipeList:
       relativeFileName: README.md
       content: https://micronaut-projects.github.io/micronaut-validation/latest/guide/
       appendNewline: true
+      existingFileStrategy: Continue
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.dependencies.jakarta.validation.api

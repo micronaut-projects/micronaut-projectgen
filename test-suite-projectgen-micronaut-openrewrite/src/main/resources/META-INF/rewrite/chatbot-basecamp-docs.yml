@@ -6,3 +6,4 @@ recipeList:
       relativeFileName: README.md
       content: https://github.com/basecamp/bc3-api/blob/master/sections/chatbots.md
       appendNewline: true
+      existingFileStrategy: Continue

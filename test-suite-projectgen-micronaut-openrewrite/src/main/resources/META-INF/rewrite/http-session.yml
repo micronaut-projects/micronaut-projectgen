@@ -24,6 +24,7 @@ recipeList:
       relativeFileName: README.md
       content: https://docs.micronaut.io/latest/guide/index.html#sessions
       appendNewline: true
+      existingFileStrategy: Continue
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.http-session.configuration

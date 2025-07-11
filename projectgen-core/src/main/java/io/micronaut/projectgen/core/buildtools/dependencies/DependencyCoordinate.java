@@ -29,6 +29,7 @@ import java.util.Objects;
 @Introspected
 public class DependencyCoordinate implements Coordinate, Ordered {
 
+    @Nullable
     private final String groupId;
     private final String artifactId;
     @Nullable
@@ -65,7 +66,7 @@ public class DependencyCoordinate implements Coordinate, Ordered {
             dependency.getComment());
     }
 
-    public DependencyCoordinate(String groupId,
+    public DependencyCoordinate(@Nullable String groupId,
                                 String artifactId,
                                 @Nullable String version,
                                 int order,
@@ -80,7 +81,7 @@ public class DependencyCoordinate implements Coordinate, Ordered {
             null);
     }
 
-    public DependencyCoordinate(String groupId,
+    public DependencyCoordinate(@Nullable String groupId,
                                 String artifactId,
                                 @Nullable String version,
                                 int order,
@@ -121,7 +122,7 @@ public class DependencyCoordinate implements Coordinate, Ordered {
         return order;
     }
 
-    @NonNull
+    @Nullable
     @Override
     public String getGroupId() {
         return groupId;

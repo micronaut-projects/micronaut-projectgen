@@ -34,3 +34,4 @@ recipeList:
       relativeFileName: README.md
       content: https://micronaut-projects.github.io/micronaut-micrometer/latest/guide/#metricsAndReportersPrometheusPushGateway
       appendNewline: true
+      existingFileStrategy: Continue

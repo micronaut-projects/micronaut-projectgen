@@ -6,3 +6,4 @@ recipeList:
       relativeFileName: README.md
       content: https://micronaut-projects.github.io/micronaut-servlet/latest/guide/index.html#jetty
       appendNewline: true
+      existingFileStrategy: Continue

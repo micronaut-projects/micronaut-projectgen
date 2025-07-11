@@ -41,6 +41,7 @@ recipeList:
       relativeFileName: README.md
       content: https://micronaut-projects.github.io/micronaut-aws/latest/guide/index.html#parametersStore
       appendNewline: true
+      existingFileStrategy: Continue
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.aws-parameter-store.documentation.thirdparty
@@ -50,5 +51,6 @@ recipeList:
       relativeFileName: README.md
       content: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html
       appendNewline: true
+      existingFileStrategy: Continue
 
 

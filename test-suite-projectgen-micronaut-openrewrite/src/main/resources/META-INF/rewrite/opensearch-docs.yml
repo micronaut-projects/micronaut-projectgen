@@ -13,6 +13,7 @@ recipeList:
       relativeFileName: README.md
       content: https://micronaut-projects.github.io/micronaut-opensearch/latest/guide/
       appendNewline: true
+      existingFileStrategy: Continue
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.opensearch.documentation.thirdparty
@@ -22,3 +23,4 @@ recipeList:
       relativeFileName: README.md
       content: https://opensearch.org/docs/latest/clients/java/
       appendNewline: true
+      existingFileStrategy: Continue

@@ -24,4 +24,5 @@ recipeList:
       relativeFileName: README.md
       content: https://micronaut-projects.github.io/micronaut-kubernetes/latest/guide/#kubernetes-client
       appendNewline: true
+      existingFileStrategy: Continue
 

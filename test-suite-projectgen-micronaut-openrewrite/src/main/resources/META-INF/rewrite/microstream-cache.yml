@@ -37,6 +37,7 @@ recipeList:
       relativeFileName: README.md
       content: https://micronaut-projects.github.io/micronaut-microstream/latest/guide/#cache
       appendNewline: true
+      existingFileStrategy: Continue
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.microstream-cache.documentation.thirdparty
@@ -46,3 +47,4 @@ recipeList:
       relativeFileName: README.md
       content: https://docs.microstream.one/manual/cache/index.html
       appendNewline: true
+      existingFileStrategy: Continue

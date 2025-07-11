@@ -24,3 +24,4 @@ recipeList:
       relativeFileName: README.md
       content: https://azure.microsoft.com/en-gb/services/storage/blobs/
       appendNewline: true
+      existingFileStrategy: Continue

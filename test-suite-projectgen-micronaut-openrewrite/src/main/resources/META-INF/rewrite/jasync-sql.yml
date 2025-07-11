@@ -25,6 +25,7 @@ recipeList:
       relativeFileName: README.md
       content: https://micronaut-projects.github.io/micronaut-sql/latest/guide/index.html#jasync
       appendNewline: true
+      existingFileStrategy: Continue
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.jasync-sql.documentation.thirdparty
@@ -34,6 +35,7 @@ recipeList:
       relativeFileName: README.md
       content: https://github.com/jasync-sql/jasync-sql/wiki
       appendNewline: true
+      existingFileStrategy: Continue
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.jasync-sql.configuration

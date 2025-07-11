@@ -23,3 +23,4 @@ recipeList:
       relativeFileName: README.md
       content: https://micronaut-projects.github.io/micronaut-graphql/latest/guide/index.html
       appendNewline: true
+      existingFileStrategy: Continue

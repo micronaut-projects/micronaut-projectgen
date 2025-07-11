@@ -18,6 +18,7 @@ package io.micronaut.projectgen.core.buildtools.gradle;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.order.OrderUtil;
+import io.micronaut.core.util.CollectionUtils;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.buildtools.dependencies.Coordinate;
@@ -159,8 +160,25 @@ public class GradleDependency extends DependencyCoordinate {
      */
     @NonNull
     public String mavenCoordinate() {
-        return "\"" + getGroupId() + ':' + getArtifactId() +
-            (getVersion() != null ? (':' + getVersion()) : "") + "\"";
+        List<String> parts = new ArrayList<>();
+        if (getGroupId() != null) {
+            parts.add(getGroupId());
+        }
+        if (getArtifactId() != null) {
+            parts.add(getArtifactId());
+        }
+        if (getVersion() != null) {
+            parts.add(getVersion());
+        }
+        if (CollectionUtils.isEmpty(parts)) {
+            return "";
+        }
+        if (parts.size() > 1) {
+            return "\"" +  String.join(":", parts) + "\"";
+        } else if (parts.size() == 1) {
+            return parts.get(0);
+        }
+        return "";
     }
 
     /**

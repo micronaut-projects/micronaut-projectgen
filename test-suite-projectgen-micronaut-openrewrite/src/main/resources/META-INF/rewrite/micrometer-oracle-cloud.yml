@@ -42,4 +42,5 @@ recipeList:
       relativeFileName: README.md
       content: https://micronaut-projects.github.io/micronaut-oracle-cloud/latest/guide/#micrometer
       appendNewline: true
+      existingFileStrategy: Continue
 

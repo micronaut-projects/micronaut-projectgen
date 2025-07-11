@@ -25,6 +25,7 @@ recipeList:
       relativeFileName: README.md
       content: https://micronaut-projects.github.io/micronaut-flyway/latest/guide/index.html
       appendNewline: true
+      existingFileStrategy: Continue
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.flyway.documentation.thirdparty
@@ -34,6 +35,7 @@ recipeList:
       relativeFileName: README.md
       content: https://flywaydb.org/
       appendNewline: true
+      existingFileStrategy: Continue
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.flyway.configuration

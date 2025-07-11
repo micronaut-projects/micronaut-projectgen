@@ -47,3 +47,4 @@ recipeList:
       relativeFileName: README.md
       content: https://docs.aws.amazon.com/xray/latest/devguide/aws-xray.html
       appendNewline: true
+      existingFileStrategy: Continue

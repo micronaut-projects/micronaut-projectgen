@@ -37,3 +37,4 @@ recipeList:
       relativeFileName: README.md
       content: https://docs.micronaut.io/latest/guide/index.html#netflixRibbon
       appendNewline: true
+      existingFileStrategy: Continue

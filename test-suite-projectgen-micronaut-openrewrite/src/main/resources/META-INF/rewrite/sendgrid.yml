@@ -24,6 +24,7 @@ recipeList:
       relativeFileName: README.md
       content: https://docs.sendgrid.com/for-developers
       appendNewline: true
+      existingFileStrategy: Continue
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.email-sendgrid.documentation.micronaut
@@ -33,3 +34,4 @@ recipeList:
       relativeFileName: README.md
       content: https://micronaut-projects.github.io/micronaut-email/latest/guide/index.html#sendgrid
       appendNewline: true
+      existingFileStrategy: Continue
