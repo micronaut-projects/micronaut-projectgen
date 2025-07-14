@@ -21,6 +21,7 @@ import java.util.List;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.feature.InterceptUrlMap;
 import io.micronaut.starter.feature.staticResources.ContributingStaticResources;
 import io.micronaut.starter.feature.staticResources.StaticResource;
@@ -29,7 +30,7 @@ import jakarta.inject.Singleton;
 
 @Requires(property = "micronaut.starter.feature.openapi.explorer.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class OpenApiExplorer extends OpenApiView implements ContributingStaticResources {
+public class OpenApiExplorer extends OpenApiView implements ContributingStaticResources, OpenRewriteFeature {
 
     public static final String NAME = "openapi-explorer";
 
@@ -53,13 +54,8 @@ public class OpenApiExplorer extends OpenApiView implements ContributingStaticRe
     }
 
     @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://github.com/Authress-Engineering/openapi-explorer";
-    }
-
-    @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-            return "https://micronaut-projects.github.io/micronaut-openapi/latest/guide/#openapiExplorer";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.openapi-explorer-docs");
     }
 
     @Override
