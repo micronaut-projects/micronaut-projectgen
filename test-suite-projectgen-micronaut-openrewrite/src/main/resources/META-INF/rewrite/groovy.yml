@@ -1,0 +1,9 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.groovy
+displayName: Add Groovy dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.groovy
+      artifactId: micronaut-runtime-groovy
+      configuration: implementation
+      scope: compile

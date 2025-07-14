@@ -1,0 +1,14 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.groovy-maven
+displayName: Add Groovy dependency for maven
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: org.apache.groovy
+      artifactId: groovy
+      scope: compile
+      version: ${groovy.version}
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut
+      artifactId: micronaut-inject-groovy
+      scope: provided
+      version:

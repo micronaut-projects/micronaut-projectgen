@@ -19,6 +19,7 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.feature.GroovyApplicationFeature;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.options.GenericOptionsBuilder;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.projectgen.micronaut.ApplicationType;
@@ -34,28 +35,16 @@ import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.starter.util.VersionInfo;
 import jakarta.inject.Singleton;
 import io.micronaut.projectgen.micronaut.maven.GroovyMavenPlusPlugin;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 
 @Requires(property = "micronaut.starter.feature.groovy.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class Groovy implements LanguageFeature {
-    public static final String GROUP_ID_GROOVY = "org.apache.groovy";
-    protected static final Dependency DEPENDENCY_MICRONAUT_GROOVY_RUNTIME = MicronautDependencyUtils.groovyDependency()
-            .artifactId("micronaut-runtime-groovy")
-            .compile()
-            .build();
-    protected static final Dependency DEPENDENCY_MICRONAUT_INJECT_GROOVY = MicronautDependencyUtils.coreDependency()
-            .artifactId("micronaut-inject-groovy")
-            .developmentOnly()
-            .build();
-    protected static final Dependency DEPENDENCY_GROOVY = new Dependency.Builder()
-            .groupId(GROUP_ID_GROOVY)
-            .artifactId("groovy")
-            .versionProperty("groovy.version")
-            .compile()
-            .build();
+public class Groovy implements LanguageFeature, OpenRewriteFeature {
+
     protected final List<GroovyApplicationFeature> applicationFeatures;
 
     protected final GroovyMavenPlusPlugin groovyMavenPlusPlugin;
@@ -93,12 +82,21 @@ public class Groovy implements LanguageFeature {
     @Override
     public void apply(GeneratorContext generatorContext) {
         ModuleContext module = generatorContext.getRootModule();
+        OpenRewriteFeature.super.apply(generatorContext);
         if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())) {
+            //todo add openrewrite support for maven properties
             module.buildProperties().put("groovyVersion", VersionInfo.getDependencyVersion("groovy").getValue());
-            module.addDependency(DEPENDENCY_MICRONAUT_INJECT_GROOVY);
-            module.addDependency(DEPENDENCY_GROOVY);
         }
-        module.addDependency(DEPENDENCY_MICRONAUT_GROOVY_RUNTIME);
+    }
+
+    @Override
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        List<String> recipes = new ArrayList<>();
+        recipes.add("io.micronaut.starter.feature.groovy");
+        if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())) {
+            recipes.add("io.micronaut.starter.feature.groovy-maven");
+        }
+            return recipes;
     }
 
     @Override
