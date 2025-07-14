@@ -24,6 +24,7 @@ import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils;
 import jakarta.inject.Singleton;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -55,20 +56,16 @@ public class SecurityJWT extends SecurityFeature implements SecurityAuthenticati
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        OpenRewriteFeature.super.apply(generatorContext);
-        ModuleContext module = generatorContext.getRootModule();
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        List<String> recipes = new ArrayList<>();
         Optional<SecurityAuthenticationMode> securityAuthenticationModeOptional = SecurityAuthenticationModeUtils.resolveSecurityAuthenticationMode(generatorContext);
         if (securityAuthenticationModeOptional.isPresent() &&
-                (securityAuthenticationModeOptional.get() == SecurityAuthenticationMode.BEARER || securityAuthenticationModeOptional.get() == SecurityAuthenticationMode.COOKIE)
+            (securityAuthenticationModeOptional.get() == SecurityAuthenticationMode.BEARER || securityAuthenticationModeOptional.get() == SecurityAuthenticationMode.COOKIE)
         ) {
-            module.configuration().put("micronaut.security.token.jwt.signatures.secret.generator.secret", "${JWT_GENERATOR_SIGNATURE_SECRET:pleaseChangeThisSecretForANewOne}");
+            recipes.add("io.micronaut.starter.feature.security-jwt-config");
         }
-    }
-
-    @Override
-    public List<String> getRecipes(GeneratorContext generatorContext) {
-        return List.of("io.micronaut.starter.feature.security-jwt");
+        recipes.add("io.micronaut.starter.feature.security-jwt");
+        return recipes;
     }
 
     @Override
