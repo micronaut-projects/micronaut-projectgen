@@ -18,6 +18,7 @@ package io.micronaut.starter.feature.other;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.feature.ContributingInterceptUrlMapFeature;
 import io.micronaut.starter.feature.InterceptUrlMap;
 import io.micronaut.starter.feature.staticResources.StaticResource;
@@ -28,7 +29,7 @@ import java.util.List;
 
 @Requires(property = "micronaut.starter.feature.swagger.ui.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class SwaggerUI extends OpenApiView implements ContributingInterceptUrlMapFeature {
+public class SwaggerUI extends OpenApiView implements ContributingInterceptUrlMapFeature, OpenRewriteFeature {
     public static final String NAME = "swagger-ui";
 
     public SwaggerUI(OpenApi openApiFeature) {
@@ -51,13 +52,8 @@ public class SwaggerUI extends OpenApiView implements ContributingInterceptUrlMa
     }
 
     @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://swagger.io/tools/swagger-ui/";
-    }
-
-    @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-openapi/latest/guide/index.html";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.swagger-ui-docs");
     }
 
     @Override
