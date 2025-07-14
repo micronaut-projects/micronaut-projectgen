@@ -57,6 +57,7 @@ zeebe-micronaut-client = "1.19.0"
 jakarta-validation-api = "3.1.0"
 micronaut-starter-aws-cdk = "4.6.3"
 graaljs = "24.0.2"  # Once this is bumped past 24.1, you should be able to remove the disabling of Loom in the config properties in the React feature.
+groovy-version = "4.0.27"
 frontend-maven-plugin = "1.15.1"
 liquibase-slf4j = "5.0.0"
 quarkus-bom  = "3.19.2"
@@ -125,6 +126,7 @@ slf4j-simple-logger = { module = "io.goodforgod:slf4j-simple-logger", version.re
 zeebe-micronaut-client = { module = "info.novatec:micronaut-zeebe-client-feature", version.ref = "zeebe-micronaut-client" }
 buildless-gradle-plugin = { module = "build.less:buildless-plugin-gradle", version.ref = "buildless" }
 graaljs-community = { module = "org.graalvm.polyglot:js-community", version.ref = "graaljs" }
+groovy = { module = "org.apache.groovy:groovy-bom", version.ref = "groovy-version" }
 frontend-maven-plugin = { module = "com.github.eirslett:frontend-maven-plugin", version.ref = "frontend-maven-plugin" }
 liquibase-slf4j = { module = "com.mattbertolini:liquibase-slf4j", version.ref = "liquibase-slf4j" }
 spotless-plugin-gradle = { module = "com.diffplug.spotless:spotless-plugin-gradle", version.ref = "spotless-plugin-gradle" }

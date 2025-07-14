@@ -11,4 +11,3 @@ recipeList:
       groupId: io.micronaut
       artifactId: micronaut-inject-groovy
       scope: provided
-      version:

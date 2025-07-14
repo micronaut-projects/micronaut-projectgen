@@ -31,6 +31,7 @@ class GroovyTest {
         Map<String, String> project = previewGenerator.generate(options);
         String pom = project.get("pom.xml");
         assertNotNull(pom);
+        System.out.println(pom);
         BuildTestVerifier verifier = BuildTestVerifier.of(pom, options);
         assertTrue(verifier.hasDependency("org.apache.groovy", "groovy", Scope.COMPILE), pom);
         assertTrue(verifier.hasDependency("io.micronaut", "micronaut-inject-groovy"), pom);

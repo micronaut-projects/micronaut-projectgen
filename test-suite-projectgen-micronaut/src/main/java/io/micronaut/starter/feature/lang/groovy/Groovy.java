@@ -17,6 +17,7 @@ package io.micronaut.starter.feature.lang.groovy;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.buildtools.dependencies.Coordinate;
 import io.micronaut.projectgen.core.feature.GroovyApplicationFeature;
 import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
@@ -85,8 +86,13 @@ public class Groovy implements LanguageFeature, OpenRewriteFeature {
         OpenRewriteFeature.super.apply(generatorContext);
         if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())) {
             //todo add openrewrite support for maven properties
-            module.buildProperties().put("groovyVersion", VersionInfo.getDependencyVersion("groovy").getValue());
+            addGroovyVersionProperty(generatorContext, module);
         }
+    }
+
+    protected void addGroovyVersionProperty(GeneratorContext generatorContext, ModuleContext module) {
+        Coordinate coordinate = generatorContext.resolveCoordinate("groovy-bom");
+        module.buildProperties().put("groovyVersion", coordinate.getVersion());
     }
 
     @Override
