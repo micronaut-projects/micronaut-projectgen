@@ -26,6 +26,7 @@ dependencies {
     compileOnly(libs.snakeyaml)
     compileOnly(libs.typesafeconfig)
     testImplementation(libs.java.diff.utils)
+    implementation(libs.commons.lang3)
 }
 rocker {
     configurations {
