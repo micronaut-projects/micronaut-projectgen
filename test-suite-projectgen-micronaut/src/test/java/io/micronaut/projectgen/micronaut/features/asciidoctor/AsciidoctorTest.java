@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @MicronautTest(startApplication = false)
 class AsciidoctorTest {
@@ -33,6 +34,9 @@ class AsciidoctorTest {
         assertNotNull(pom);
         BuildTestVerifier verifier = BuildTestVerifier.of(pom, options);
         assertTrue(verifier.hasBuildPlugin("org.asciidoctor", "asciidoctor-maven-plugin"), pom);
-        System.out.println(pom);
+        assertTrue(pom.contains("<asciidoctor.maven.plugin.version>2.2.6</asciidoctor.maven.plugin.version>"));
+        assertTrue(pom.contains("<asciidoctorj.version>2.5.13</asciidoctorj.version>"));
+        assertTrue(pom.contains("<asciidoctorj.diagram.version>2.3.2</asciidoctorj.diagram.version>"));
+        assertTrue(pom.contains("<jruby.version>9.4.13.0</jruby.version>"));
     }
 }
