@@ -49,4 +49,8 @@ public interface RecipeFetcher {
 
     @NonNull
     List<BuildPlugin> findAllBuildPluginsByRecipeNameAndBuildTool(@NonNull String recipeName, @NonNull BuildTool buildTool);
+
+    @NonNull
+    Optional<Properties> findMavenBuildPropertiesByRecipeName(@NonNull String recipeName);
+
 }

@@ -389,4 +389,38 @@ public class DefaultRecipeFetcher implements RecipeFetcher {
             .artifactId(recipe.getArtifactId())
             .build();
     }
+
+    @Override
+    @NonNull
+    public Optional<Properties> findMavenBuildPropertiesByRecipeName(@NonNull String recipeName) {
+        try {
+            var recipe = env.activateRecipes(recipeName);
+            return findMavenBuildProperties(recipe);
+        } catch (RecipeException e) {
+            return Optional.empty();
+        }
+    }
+
+    @NonNull
+    private Optional<Properties> findMavenBuildProperties(@NonNull Recipe recipe) {
+        Recipe resolvedRecipe = resolveRecipe(recipe);
+        Properties properties = new Properties();
+
+        for (Recipe r : resolvedRecipe.getRecipeList()) {
+            Recipe resolvedRecipeChild = resolveRecipe(r);
+            if (resolvedRecipeChild instanceof org.openrewrite.maven.AddProperty addProperty) {
+                properties.put(addProperty.getKey(), addProperty.getValue());
+            }
+            Optional<Properties> nestedPropertiesOptional = findMavenBuildProperties(resolvedRecipeChild);
+            if (nestedPropertiesOptional.isPresent()) {
+                Properties nestedProperties = nestedPropertiesOptional.get();
+                nestedProperties.forEach(properties::putIfAbsent);
+            }
+        }
+
+        if (properties.isEmpty()) {
+            return Optional.empty();
+        }
+        return Optional.of(properties);
+    }
 }
