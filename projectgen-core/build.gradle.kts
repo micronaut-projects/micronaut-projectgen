@@ -26,6 +26,8 @@ dependencies {
     compileOnly(libs.snakeyaml)
     compileOnly(libs.typesafeconfig)
     testImplementation(libs.java.diff.utils)
+    //upgrade commons-lang3 to version 3.18.0 to fix a CVE
+    implementation(libs.commons.lang3)
 }
 rocker {
     configurations {
