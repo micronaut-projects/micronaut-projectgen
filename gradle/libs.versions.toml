@@ -2,7 +2,7 @@
 
 micronaut = "4.9.6"
 micronaut-platform = "4.8.3"
-rewrite-recipe-bom = "3.9.0"
+rewrite-recipe-bom = "3.11.1"
 micronaut-docs = "2.0.0"
 micronaut-test = "4.7.0"
 micronaut-serialization = "2.15.0"
