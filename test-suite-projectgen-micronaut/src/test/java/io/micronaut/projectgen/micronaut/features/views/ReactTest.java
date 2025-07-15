@@ -30,6 +30,20 @@ class ReactTest {
     }
 
     @Test
+    void reactWithMavenFeaturesAddsTheDependency(PreviewGenerator previewGenerator) throws Exception {
+        Options options = OptionsFixture.defaultMaven().features(List.of("views-react")).build();
+        Map<String, String> project = previewGenerator.generate(options);
+        String pom = project.get("pom.xml");
+        assertNotNull(pom);
+        BuildTestVerifier verifier = BuildTestVerifier.of(pom, options);
+        assertTrue(verifier.hasDependency("org.graalvm.js", "js-language", Scope.RUNTIME), pom);
+        assertTrue(verifier.hasDependency("org.graalvm.truffle", "truffle-enterprise", Scope.RUNTIME), pom);
+        assertTrue(verifier.hasDependency("org.graalvm.truffle", "truffle-runtime", Scope.RUNTIME), pom);
+        assertTrue(verifier.hasDependency("org.graalvm.polyglot", "polyglot", Scope.RUNTIME), pom);
+        assertTrue(pom.contains("24.2.1"));
+    }
+
+    @Test
     void reactFeaturesAddsTheLinkInReadmeFile(PreviewGenerator previewGenerator) throws Exception {
         Options options = OptionsFixture.defaultGradle().features(List.of("views-react")).build();
         Map<String, String> project = previewGenerator.generate(options);

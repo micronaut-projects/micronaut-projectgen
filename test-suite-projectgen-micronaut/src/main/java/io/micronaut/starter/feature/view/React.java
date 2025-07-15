@@ -110,30 +110,6 @@ public class React implements ViewFeature, MicronautServerDependent, OpenRewrite
             if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())) {
                 // We spell out the individual dependencies here because the Starter dependency management code for
                 // Maven builds can't express the direct pom dependency needed by Truffle.
-                module.addDependency(Dependency.builder()
-                        .groupId("org.graalvm.js")
-                        .artifactId("js-language")
-                        .version(StarterCoordinates.JS_COMMUNITY.getVersion())
-                        .runtime()
-                );
-                module.addDependency(Dependency.builder()
-                        .groupId("org.graalvm.truffle")
-                        .artifactId("truffle-enterprise")
-                        .version(StarterCoordinates.JS_COMMUNITY.getVersion())
-                        .runtime()
-                );
-                module.addDependency(Dependency.builder()
-                        .groupId("org.graalvm.truffle")
-                        .artifactId("truffle-runtime")
-                        .version(StarterCoordinates.JS_COMMUNITY.getVersion())
-                        .runtime()
-                );
-                module.addDependency(Dependency.builder()
-                        .groupId("org.graalvm.polyglot")
-                        .artifactId("polyglot")
-                        .version(StarterCoordinates.JS_COMMUNITY.getVersion())
-                        .runtime()
-                );
 
                 Coordinate coordinate = generatorContext.resolveCoordinate("frontend-maven-plugin");
                 module.addBuildPlugin(
@@ -175,6 +151,8 @@ public class React implements ViewFeature, MicronautServerDependent, OpenRewrite
         List<String> recipes = new ArrayList<>();
         if (OptionUtils.hasGradleBuildTool(generatorContext.getOptions())) {
             recipes.add("io.micronaut.starter.feature.views-react-gradle");
+        } else if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())) {
+            recipes.add("io.micronaut.starter.feature.views-react-maven");
         }
             recipes.add("io.micronaut.starter.feature.views-react");
         return recipes;
