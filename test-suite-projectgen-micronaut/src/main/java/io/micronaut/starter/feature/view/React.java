@@ -22,6 +22,7 @@ import io.micronaut.projectgen.core.buildtools.dependencies.Coordinate;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.rocker.RockerWritable;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.projectgen.micronaut.template.view.mvnPluginReact;
@@ -39,10 +40,12 @@ import jakarta.inject.Singleton;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 @Requires(property = "micronaut.starter.feature.views.react.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class React implements ViewFeature, MicronautServerDependent {
+public class React implements ViewFeature, MicronautServerDependent, OpenRewriteFeature {
     public static final String NODE_GRADLE_PLUGIN_VERSION = "7.0.2";
     private static final String ARTIFACT_ID = "micronaut-views-react";
     private static final String[] FRONTEND_FILES = new String[]{
@@ -70,16 +73,6 @@ public class React implements ViewFeature, MicronautServerDependent {
     }
 
     @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://react.dev/reference/react-dom/server";
-    }
-
-    @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-views/latest/guide/index.html#react";
-    }
-
-    @Override
     public boolean isPreview() {
         // June 2024: Module is brand new, it may still need to change once it's been used in anger.
         return true;
@@ -88,8 +81,8 @@ public class React implements ViewFeature, MicronautServerDependent {
     @Override
     public void apply(GeneratorContext generatorContext) {
         ModuleContext module = generatorContext.getRootModule();
+        OpenRewriteFeature.super.apply(generatorContext);
         try {
-            module.addDependency(MicronautDependencyUtils.viewsDependency().artifactId(ARTIFACT_ID).compile());
 
             if (OptionUtils.hasGradleBuildTool(generatorContext.getOptions())) {
                 module.addDependency(Dependency.builder()
@@ -118,7 +111,8 @@ public class React implements ViewFeature, MicronautServerDependent {
                                 .gradleFile(GradleFile.SETTINGS)
                                 .build()
                 );
-            } else if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())) {
+            } else
+            if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())) {
                 // We spell out the individual dependencies here because the Starter dependency management code for
                 // Maven builds can't express the direct pom dependency needed by Truffle.
                 module.addDependency(Dependency.builder()
@@ -179,5 +173,15 @@ public class React implements ViewFeature, MicronautServerDependent {
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);   // Cannot happen.
         }
+    }
+
+    @Override
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        List<String> recipes = new ArrayList<>();
+        if (OptionUtils.hasGradleBuildTool(generatorContext.getOptions())) {
+            recipes.add("io.micronaut.starter.feature.views-react-gradle");
+        }
+            recipes.add("io.micronaut.starter.feature.views-react");
+        return recipes;
     }
 }
