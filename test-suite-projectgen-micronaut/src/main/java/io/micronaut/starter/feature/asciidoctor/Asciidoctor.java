@@ -18,6 +18,7 @@ package io.micronaut.starter.feature.asciidoctor;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.rocker.RockerWritable;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.projectgen.micronaut.ApplicationType;
@@ -36,9 +37,12 @@ import io.micronaut.projectgen.core.rocker.RockerTemplate;
 
 import jakarta.inject.Singleton;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.asciidoctor.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class Asciidoctor implements Feature {
+public class Asciidoctor implements OpenRewriteFeature {
 
     private final CoordinateResolver coordinateResolver;
 
@@ -64,30 +68,9 @@ public class Asciidoctor implements Feature {
     @Override
     public void apply(GeneratorContext generatorContext) {
         ModuleContext module = generatorContext.getRootModule();
+        OpenRewriteFeature.super.apply(generatorContext);
         if (OptionUtils.hasGradleBuildTool(generatorContext.getOptions())) {
             module.addTemplate("asciidocGradle", new RockerTemplate("gradle/asciidoc.gradle", asciidocGradle.template()));
-
-            module.addBuildPlugin(GradlePlugin.builder()
-                    .id("org.asciidoctor.jvm.convert")
-                    .lookupArtifactId("asciidoctor-gradle-jvm")
-                    .build());
-
-        } else if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())) {
-            String mavenPluginArtifactId = "asciidoctor-maven-plugin";
-            BuildProperties props = module.buildProperties();
-            coordinateResolver.resolve(mavenPluginArtifactId)
-                    .ifPresent(coordinate -> props.put("asciidoctor.maven.plugin.version", coordinate.getVersion()));
-            coordinateResolver.resolve("asciidoctorj")
-                    .ifPresent(coordinate -> props.put("asciidoctorj.version", coordinate.getVersion()));
-            coordinateResolver.resolve("asciidoctorj-diagram")
-                    .ifPresent(coordinate -> props.put("asciidoctorj.diagram.version", coordinate.getVersion()));
-            coordinateResolver.resolve("jruby")
-                    .ifPresent(coordinate -> props.put("jruby.version", coordinate.getVersion()));
-
-            module.addBuildPlugin(MavenPlugin.builder()
-                    .artifactId(mavenPluginArtifactId)
-                    .extension(new RockerWritable(asciidocMavenPlugin.template()))
-                    .build());
         }
         module.addTemplate("indexAdoc", new RockerTemplate("src/docs/asciidoc/index.adoc", indexAdoc.template()));
     }
@@ -96,4 +79,17 @@ public class Asciidoctor implements Feature {
     public String getCategory() {
         return Category.DOCUMENTATION;
     }
+
+    @Override
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        List<String> recipes = new ArrayList<>();
+        if (OptionUtils.hasGradleBuildTool(generatorContext.getOptions())) {
+            recipes.add("io.micronaut.starter.feature.asciidoctor-gradle");
+        }
+        if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())) {
+            recipes.add("io.micronaut.starter.feature.asciidoctor-maven");
+        }
+            return recipes;
+    }
+
 }

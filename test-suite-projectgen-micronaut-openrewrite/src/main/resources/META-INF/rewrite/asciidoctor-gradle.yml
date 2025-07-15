@@ -1,0 +1,7 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.asciidoctor-gradle
+displayName: Add Asciidoctor Gradle Plugin
+recipeList:
+  - org.openrewrite.gradle.plugins.AddBuildPlugin:
+      pluginId: org.asciidoctor.jvm.convert
+      version: 3.3.2
