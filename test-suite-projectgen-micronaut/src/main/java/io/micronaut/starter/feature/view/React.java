@@ -85,25 +85,20 @@ public class React implements ViewFeature, MicronautServerDependent, OpenRewrite
         try {
 
             if (OptionUtils.hasGradleBuildTool(generatorContext.getOptions())) {
-                module.addDependency(Dependency.builder()
-                        .runtime()
-                        .groupId(StarterCoordinates.JS_COMMUNITY.getGroupId())
-                        .artifactId(StarterCoordinates.JS_COMMUNITY.getArtifactId())
-                        .version(StarterCoordinates.JS_COMMUNITY.getVersion())
-                        .build()
-                );
 
                 // This plugin teaches Gradle to download NodeJS and use it to run JS programs.
+                //todo recipe to add build import
                 module.addBuildPlugin(
                         GradlePlugin.builder()
-                                .id("com.github.node-gradle.node")
-                                .version(NODE_GRADLE_PLUGIN_VERSION)
+                            .id("com.github.node-gradle.node")
+                            .version(NODE_GRADLE_PLUGIN_VERSION)
                                 .buildImports("import com.github.gradle.node.npm.task.NpxTask")
                                 .build()
                 );
 
                 // This teaches Gradle to download the right GraalVM automatically (community edition).
                 // For some reason Gradle won't do it out of the box :(
+                //todo add openrewrite support for Add Gradle settings plugin
                 module.addBuildPlugin(
                         GradlePlugin.builder()
                                 .id("org.gradle.toolchains.foojay-resolver-convention")

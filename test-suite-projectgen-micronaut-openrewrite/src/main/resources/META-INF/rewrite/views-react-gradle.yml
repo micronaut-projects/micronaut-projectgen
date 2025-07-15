@@ -2,34 +2,11 @@ type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.views-react-gradle
 displayName: Add Views React dependency for gradle
 recipeList:
-  - io.micronaut.starter.feature.views-react-gradle.dependencies
-  - io.micronaut.starter.feature.views-react-gradle.build-plugin
-  - io.micronaut.starter.feature.views-react-gradle.settings-plugin
----
-type: specs.openrewrite.org/v1beta/recipe
-name: io.micronaut.starter.feature.views-react-gradle.dependencies
-displayName: Add Views React Gradle dependency
-recipeList:
   - org.openrewrite.java.dependencies.AddDependency:
       groupId: org.graalvm.polyglot
       artifactId: js-community
       configuration: runtimeOnly
       version: 24.2.1
----
-type: specs.openrewrite.org/v1beta/recipe
-name: io.micronaut.starter.feature.views-react-gradle.build-plugin
-displayName: Add View React Gradle build plugin
-recipeList:
-  - org.openrewrite.gradle.plugins.AddBuildPlugin:
-      pluginId: com.github.node-gradle.node
-      version: 7.0.2
----
-type: specs.openrewrite.org/v1beta/recipe
-name: io.micronaut.starter.feature.views-react-gradle.settings-plugin
-displayName: Add View React Gradle settings plugin
-recipeList:
-  - org.openrewrite.gradle.plugins.AddSettingsPlugin:
-      pluginId: org.gradle.toolchains.foojay-resolver-convention
-      version: 0.10.0
+
 
 

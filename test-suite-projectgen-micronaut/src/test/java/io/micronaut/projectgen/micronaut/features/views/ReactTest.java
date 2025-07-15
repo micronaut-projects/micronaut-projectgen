@@ -29,19 +29,6 @@ class ReactTest {
 
     }
 
-    //todo add support for Add Gradle settings plugin recipe
-    @Disabled
-    @Test
-    void reactFeaturesAddsTheSettingsPlugin(PreviewGenerator previewGenerator) throws Exception {
-        Options options = OptionsFixture.defaultGradle().features(List.of("views-react")).build();
-        Map<String, String> project = previewGenerator.generate(options);
-        String buildGradle = project.get("settings.gradle.kts");
-        assertNotNull(buildGradle);
-        System.out.println(buildGradle);
-        BuildTestVerifier verifier = BuildTestVerifier.of(buildGradle, options);
-        assertTrue(verifier.hasBuildPlugin("org.gradle.toolchains.foojay-resolver-convention"), buildGradle);
-    }
-
     @Test
     void reactFeaturesAddsTheLinkInReadmeFile(PreviewGenerator previewGenerator) throws Exception {
         Options options = OptionsFixture.defaultGradle().features(List.of("views-react")).build();
