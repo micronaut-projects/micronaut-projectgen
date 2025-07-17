@@ -127,6 +127,8 @@ public class MicronautCli implements Feature {
             }
         }
 
+        builder.name("demo"); // if present in yml use the value in yaml otherwise add a dummy name
+
         return builder.build();
     }
 
