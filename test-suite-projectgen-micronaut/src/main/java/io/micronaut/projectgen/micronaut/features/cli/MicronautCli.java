@@ -78,20 +78,19 @@ public class MicronautCli implements Feature {
         if (!projectFolder.exists() || !projectFolder.isDirectory()) {
             throw new IllegalArgumentException("Project folder does not exist");
         }
-
         File cliFile = new File(projectFolder, PATH);
         if (!cliFile.exists()) {
             throw new IllegalArgumentException("micronaut-cli.yml file not found in project folder");
         }
-
-        MicronautCliConfig config;
         try (FileInputStream fis = new FileInputStream(cliFile)) {
             Yaml yaml = new Yaml();
-            config = yaml.loadAs(fis, MicronautCliConfig.class);
+            return load(yaml.loadAs(fis, MicronautCliConfig.class));
         } catch (IOException e) {
             throw new RuntimeException("Failed to read micronaut-cli.yml", e);
         }
+    }
 
+    private static Options load(MicronautCliConfig config)  {
         var builder = GenericOptionsBuilder.builder();
 
         if (config.getApplicationType() != null) {
