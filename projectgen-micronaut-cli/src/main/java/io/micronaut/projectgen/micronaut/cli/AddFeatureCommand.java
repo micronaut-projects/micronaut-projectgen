@@ -12,6 +12,7 @@ import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.projectgen.micronaut.features.cli.MicronautCli;
 import io.micronaut.projectgen.openrewrite.OpenRewriteConfiguration;
 import io.micronaut.projectgen.openrewrite.OpenRewriteRecipesRunner;
+import io.micronaut.starter.application.DefaultAvailableFeatures;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import picocli.CommandLine;
@@ -60,13 +61,17 @@ public class AddFeatureCommand implements Runnable {
     @Inject
     List<AvailableFeatures> availableFeatures;
 
+    @Inject
+    List<Feature> featuresBeans;
+
+
     @Override
     public void run() {
         Options options = MicronautCli.load(projectDir);
         List<String> recipes = new ArrayList<>();
         GeneratorContext generatorContext = contextFactory.createGeneratorContext(availableFeatures , options, ConsoleOutput.NOOP);
         for (String featureName : features) {
-            Feature feature = generatorContext.getFeatures().getFeatures().stream()
+            Feature feature = featuresBeans.stream()
                 .filter(f -> f.getName().equals(featureName))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("Feature " + featureName + " not found"));
