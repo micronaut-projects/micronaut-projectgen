@@ -1,10 +1,14 @@
 package io.micronaut.projectgen.micronaut.features.cli;
 
 import io.micronaut.projectgen.core.buildtools.gradle.GradleDsl;
+import io.micronaut.projectgen.core.options.Language;
 import io.micronaut.projectgen.core.options.Options;
+import io.micronaut.projectgen.core.options.TestFramework;
 import io.micronaut.projectgen.micronaut.OptionsFixture;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -40,6 +44,18 @@ class MicronautCliTest {
 
     @Test
     void testConfig() {
-        //TODO write test for {@link MicronautCli#config}
+        Options options = OptionsFixture.defaultGradle()
+            .packageName("com.example")
+            .testFramework(TestFramework.JUNIT)
+            .language(Language.JAVA)
+            .features(List.of("oracle", "liquibase")).build();
+
+        Map<String, Object> buildOptions = MicronautCli.config(options);
+        assertEquals(options.template(), buildOptions.get("applicationType"));
+        assertEquals(options.testFramework().toString(), buildOptions.get("testFramework"));
+        assertEquals(options.packageName(), buildOptions.get("defaultPackage"));
+        assertEquals(options.language().toString(), buildOptions.get("sourceLanguage"));
+        assertEquals(options.features(), buildOptions.get("features"));
+        assertEquals(MicronautCli.LEGACY_BUILD_TOOL_GRADLE_KOTLIN, buildOptions.get("buildTool"));
     }
 }
