@@ -20,6 +20,7 @@ import io.micronaut.projectgen.core.buildtools.gradle.GradleDsl;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.options.GenericOptionsBuilder;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.core.template.YamlTemplate;
 import io.micronaut.projectgen.core.utils.OptionUtils;
@@ -72,7 +73,9 @@ public class MicronautCli implements Feature {
         // Load the yaml using snake yaml
         // instantiate an Options based on the contents of the yaml
         // take into account the legacy key names and legacy build tool name
-        return null;
+        var builder = GenericOptionsBuilder.builder();
+        //TODO fill the builder
+        return builder.build();
     }
 
     static Map<String, Object> config(Options options) {
