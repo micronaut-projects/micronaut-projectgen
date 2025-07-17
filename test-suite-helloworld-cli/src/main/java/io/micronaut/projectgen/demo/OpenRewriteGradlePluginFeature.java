@@ -28,7 +28,7 @@ public class OpenRewriteGradlePluginFeature implements DefaultFeature {
         module.repositories().add(new MavenCentral());
         module.addBuildPlugin(GradlePlugin.builder()
                 .id("org.openrewrite.rewrite")
-                .version("7.7.0")
+                .version("7.11.0")
                 .build());
         module.addDependency(Dependency.builder()
                 .groupId("io.micronaut.projectgen")
