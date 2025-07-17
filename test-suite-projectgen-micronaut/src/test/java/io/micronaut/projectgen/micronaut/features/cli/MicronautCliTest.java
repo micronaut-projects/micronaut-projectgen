@@ -8,10 +8,10 @@ class MicronautCliTest {
     void testLegacyBuildToolName() {
         //TODO write test for {@link MicronautCli#legacyBuildToolName}
     }
-    
+
     @Test
     void testOptionsLoad() {
-        //TODO write test for {@link MicronautCli#legacyBuildToolName}
+        //TODO write test for {@link MicronautCli#load}
     }
 
     @Test
