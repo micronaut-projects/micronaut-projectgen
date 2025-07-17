@@ -21,6 +21,7 @@ import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.projectgen.core.feature.config.Properties;
 import io.micronaut.projectgen.core.feature.gitignore.GitIgnore;
 import io.micronaut.projectgen.core.options.Options;
+import io.micronaut.projectgen.micronaut.features.cli.MicronautCli;
 import io.micronaut.projectgen.micronaut.features.httpclient.HttpClientFeature;
 import io.micronaut.projectgen.micronaut.features.httpclient.HttpClientTest;
 import io.micronaut.projectgen.micronaut.features.logging.Logback;
@@ -34,12 +35,13 @@ import java.util.Set;
 public class ApplicationTypeFunctionFeature extends ApplicationTypeFeature {
     private HttpClientTest httpClientTest;
 
-    public ApplicationTypeFunctionFeature(MicronautTestJunit5 micronautTestJunit5,
+    public ApplicationTypeFunctionFeature(MicronautCli micronautCli,
+                                          MicronautTestJunit5 micronautTestJunit5,
                                           MicronautTestSpock micronautTestSpock,
                                           Logback logback,
                                           GitIgnore gitIgnore,
                                           HttpClientTest httpClientTest) {
-        super(micronautTestJunit5, micronautTestSpock, logback, gitIgnore);
+        super(micronautCli, micronautTestJunit5, micronautTestSpock, logback, gitIgnore);
 
         this.httpClientTest = httpClientTest;
     }
