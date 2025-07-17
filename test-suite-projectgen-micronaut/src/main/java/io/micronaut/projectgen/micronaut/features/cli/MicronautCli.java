@@ -75,47 +75,59 @@ public class MicronautCli implements Feature {
     }
 
     public static Options load(File projectFolder) {
-        Map<String, Object> yamlValues = getStringObjectMap(projectFolder);
+        if (!projectFolder.exists() || !projectFolder.isDirectory()) {
+            throw new IllegalArgumentException("Project folder does not exist");
+        }
+
+        File cliFile = new File(projectFolder, PATH);
+        if (!cliFile.exists()) {
+            throw new IllegalArgumentException("micronaut-cli.yml file not found in project folder");
+        }
+
+        MicronautCliConfig config;
+        try (FileInputStream fis = new FileInputStream(cliFile)) {
+            Yaml yaml = new Yaml();
+            config = yaml.loadAs(fis, MicronautCliConfig.class);
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to read micronaut-cli.yml", e);
+        }
+
         var builder = GenericOptionsBuilder.builder();
-        if (yamlValues.containsKey(KEY_APPLICATION_TYPE)) {
-            builder.template((String) yamlValues.get(KEY_APPLICATION_TYPE));
+
+        if (config.getApplicationType() != null) {
+            builder.template(config.getApplicationType());
         }
 
-        if (yamlValues.containsKey(KEY_TEST_FRAMEWORK)) {
-            String testFramework = (String) yamlValues.get(KEY_TEST_FRAMEWORK);
-            builder.testFramework(TestFramework.valueOf(testFramework.toUpperCase()));
+        if (config.getTestFramework() != null) {
+            builder.testFramework(TestFramework.valueOf(config.getTestFramework().toUpperCase()));
         }
 
-        if (yamlValues.containsKey(KEY_DEFAULT_PACKAGE)) {
-            builder.packageName((String) yamlValues.get(KEY_DEFAULT_PACKAGE));
+        if (config.getDefaultPackage() != null) {
+            builder.packageName(config.getDefaultPackage());
         }
 
-        if (yamlValues.containsKey(KEY_SOURCE_LANGUAGE)) {
-            String language = (String) yamlValues.get(KEY_SOURCE_LANGUAGE);
-            builder.language(Language.valueOf(language.toUpperCase()));
+        if (config.getSourceLanguage() != null) {
+            builder.language(Language.valueOf(config.getSourceLanguage().toUpperCase()));
         }
 
-        if (yamlValues.containsKey(KEY_FEATURES)) {
-            List<String> features = (List<String>) yamlValues.get(KEY_FEATURES);
-            builder.features(features);
+        if (config.getFeatures() != null) {
+            builder.features(config.getFeatures());
         }
 
-        if (yamlValues.containsKey(KEY_BUILD_TOOL)) {
-            Object obj = yamlValues.get(KEY_BUILD_TOOL);
-            if (obj instanceof String buildToolStr) {
-                switch (buildToolStr) {
-                    case LEGACY_BUILD_TOOL_GRADLE_KOTLIN -> {
-                        builder.buildTools(List.of(BuildTool.GRADLE));
-                        builder.gradleDsl(GradleDsl.KOTLIN);
-                    }
-                    case LEGACY_BUILD_TOOL_GRADLE_GROOVY -> {
-                        builder.buildTools(List.of(BuildTool.GRADLE));
-                        builder.gradleDsl(GradleDsl.GROOVY);
-                    }
-                    case LEGACY_BUILD_TOOL_MAVEN -> builder.buildTools(List.of(BuildTool.MAVEN));
+        if (config.getBuildTool() != null) {
+            switch (config.getBuildTool()) {
+                case LEGACY_BUILD_TOOL_GRADLE_KOTLIN -> {
+                    builder.buildTools(List.of(BuildTool.GRADLE));
+                    builder.gradleDsl(GradleDsl.KOTLIN);
                 }
+                case LEGACY_BUILD_TOOL_GRADLE_GROOVY -> {
+                    builder.buildTools(List.of(BuildTool.GRADLE));
+                    builder.gradleDsl(GradleDsl.GROOVY);
+                }
+                case LEGACY_BUILD_TOOL_MAVEN -> builder.buildTools(List.of(BuildTool.MAVEN));
             }
         }
+
         return builder.build();
     }
 
