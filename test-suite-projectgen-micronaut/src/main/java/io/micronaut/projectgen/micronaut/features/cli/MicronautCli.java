@@ -16,18 +16,25 @@
 package io.micronaut.projectgen.micronaut.features.cli;
 
 import io.micronaut.core.annotation.NonNull;
+import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.buildtools.gradle.GradleDsl;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.options.GenericOptionsBuilder;
+import io.micronaut.projectgen.core.options.Language;
 import io.micronaut.projectgen.core.options.Options;
+import io.micronaut.projectgen.core.options.TestFramework;
 import io.micronaut.projectgen.core.template.YamlTemplate;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import jakarta.inject.Singleton;
+import org.yaml.snakeyaml.Yaml;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -68,14 +75,68 @@ public class MicronautCli implements Feature {
     }
 
     public static Options load(File projectFolder) {
-        // check projectFolder is a folder
-        // check there is a file within it named micronaut-cli.yml
-        // Load the yaml using snake yaml
-        // instantiate an Options based on the contents of the yaml
-        // take into account the legacy key names and legacy build tool name
+        Map<String, Object> yamlValues = getStringObjectMap(projectFolder);
         var builder = GenericOptionsBuilder.builder();
-        //TODO fill the builder
+        if (yamlValues.containsKey(KEY_APPLICATION_TYPE)) {
+            builder.template((String) yamlValues.get(KEY_APPLICATION_TYPE));
+        }
+
+        if (yamlValues.containsKey(KEY_TEST_FRAMEWORK)) {
+            String testFramework = (String) yamlValues.get(KEY_TEST_FRAMEWORK);
+            builder.testFramework(TestFramework.valueOf(testFramework.toUpperCase()));
+        }
+
+        if (yamlValues.containsKey(KEY_DEFAULT_PACKAGE)) {
+            builder.packageName((String) yamlValues.get(KEY_DEFAULT_PACKAGE));
+        }
+
+        if (yamlValues.containsKey(KEY_SOURCE_LANGUAGE)) {
+            String language = (String) yamlValues.get(KEY_SOURCE_LANGUAGE);
+            builder.language(Language.valueOf(language.toUpperCase()));
+        }
+
+        if (yamlValues.containsKey(KEY_FEATURES)) {
+            List<String> features = (List<String>) yamlValues.get(KEY_FEATURES);
+            builder.features(features);
+        }
+
+        if (yamlValues.containsKey(KEY_BUILD_TOOL)) {
+            Object obj = yamlValues.get(KEY_BUILD_TOOL);
+            if (obj instanceof String buildToolStr) {
+                switch (buildToolStr) {
+                    case LEGACY_BUILD_TOOL_GRADLE_KOTLIN -> {
+                        builder.buildTools(List.of(BuildTool.GRADLE));
+                        builder.gradleDsl(GradleDsl.KOTLIN);
+                    }
+                    case LEGACY_BUILD_TOOL_GRADLE_GROOVY -> {
+                        builder.buildTools(List.of(BuildTool.GRADLE));
+                        builder.gradleDsl(GradleDsl.GROOVY);
+                    }
+                    case LEGACY_BUILD_TOOL_MAVEN -> builder.buildTools(List.of(BuildTool.MAVEN));
+                }
+            }
+        }
         return builder.build();
+    }
+
+    private static Map<String, Object> getStringObjectMap(File projectFolder) {
+        if (!projectFolder.exists() || !projectFolder.isDirectory()) {
+            throw new IllegalArgumentException("Project folder does not exist");
+        }
+
+        File cliFile = new File(projectFolder, PATH);
+        if (!cliFile.exists()) {
+            throw new IllegalArgumentException("micronaut-cli.yml file not found in project folder");
+        }
+
+        Yaml yaml = new Yaml();
+        Map<String, Object> yamlValues;
+        try (FileInputStream fileInputStream = new FileInputStream(cliFile)) {
+            yamlValues = yaml.load(fileInputStream);
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to read micronaut-cli.yml", e);
+        }
+        return yamlValues;
     }
 
     static Map<String, Object> config(Options options) {

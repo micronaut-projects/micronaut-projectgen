@@ -1,5 +1,6 @@
 package io.micronaut.projectgen.micronaut.features.cli;
 
+import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.buildtools.gradle.GradleDsl;
 import io.micronaut.projectgen.core.options.Language;
 import io.micronaut.projectgen.core.options.Options;
@@ -7,12 +8,12 @@ import io.micronaut.projectgen.core.options.TestFramework;
 import io.micronaut.projectgen.micronaut.OptionsFixture;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class MicronautCliTest {
 
@@ -39,7 +40,22 @@ class MicronautCliTest {
 
     @Test
     void testOptionsLoad() {
-        //TODO write test for {@link MicronautCli#load}
+        File projectFolder = new File("src/test/resources");
+        assertNotNull(projectFolder, "Project folder should not be null");
+        Options options = MicronautCli.load(projectFolder);
+        assertNotNull(options);
+        assertEquals("default", options.template());
+        assertEquals("com.example", options.packageName());
+        assertEquals(TestFramework.JUNIT, options.testFramework());
+        assertEquals(Language.JAVA, options.language());
+        assertEquals(BuildTool.GRADLE, options.getBuildTool());
+        assertEquals(GradleDsl.GROOVY, options.gradleDsl());
+
+        List<String> expectedFeatures = List.of("app-name", "gradle", "http-client-test", "java",
+            "java-application", "junit", "logback", "micronaut-aot", "micronaut-build",
+            "micronaut-http-validation", "netty-server", "properties", "readme",
+            "serialization-jackson", "shade", "static-resources");
+        assertEquals(expectedFeatures, options.features());
     }
 
     @Test
