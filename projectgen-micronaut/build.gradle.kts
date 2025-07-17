@@ -1,10 +1,10 @@
 plugins {
-    id("io.micronaut.build.internal.projectgen-test-module")
+    id("io.micronaut.build.internal.projectgen-module")
     id("nu.studer.rocker") version "3.0.4"
 }
 dependencies {
     api(project(":micronaut-projectgen-core"))
-    api(project(":test-suite-projectgen-micronaut-openrewrite"))
+    api(project(":micronaut-projectgen-micronaut-openrewrite"))
     annotationProcessor(mnSourcegen.micronaut.sourcegen.generator.java)
     implementation(mnSourcegen.micronaut.sourcegen.annotations)
     implementation(libs.snakeyaml)
@@ -25,5 +25,10 @@ rocker {
             templateDir.set(file("src/rocker"))
             outputDir.set(file("src/generated/rocker"))
         }
+    }
+}
+spotless {
+    java {
+        targetExclude("src/**/*.rocker.raw")
     }
 }

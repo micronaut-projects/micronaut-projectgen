@@ -1,5 +1,5 @@
 plugins {
-    id("io.micronaut.build.internal.projectgen-test-module")
+    id("io.micronaut.build.internal.projectgen-module")
 }
 dependencies {
     api(project(":micronaut-projectgen-openrewrite"))
@@ -7,3 +7,5 @@ dependencies {
     testImplementation(mnTest.micronaut.test.junit5)
     testRuntimeOnly(mnTest.junit.jupiter.engine)
 }
+group = "io.micronaut.projectgen"
+version = rootProject.version
