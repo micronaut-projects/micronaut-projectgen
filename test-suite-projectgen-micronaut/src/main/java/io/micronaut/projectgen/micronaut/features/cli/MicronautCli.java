@@ -25,6 +25,7 @@ import io.micronaut.projectgen.core.template.YamlTemplate;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import jakarta.inject.Singleton;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -40,6 +41,7 @@ public class MicronautCli implements Feature {
     public static final String LEGACY_BUILD_TOOL_GRADLE_KOTLIN = "gradle_kotlin";
     public static final String LEGACY_BUILD_TOOL_GRADLE_GROOVY = "gradle";
     public static final String LEGACY_BUILD_TOOL_MAVEN = "maven";
+    public static final String PATH = "micronaut-cli.yml";
 
     @Override
     public String getName() {
@@ -61,7 +63,16 @@ public class MicronautCli implements Feature {
         Options options = generatorContext.getOptions();
         ModuleContext module = generatorContext.getRootModule();
         module.addTemplate("micronautCli",
-            new YamlTemplate("micronaut-cli.yml", config(options)));
+            new YamlTemplate(PATH, config(options)));
+    }
+
+    public static Options load(File projectFolder) {
+        // check projectFolder is a folder
+        // check there is a file within it named micronaut-cli.yml
+        // Load the yaml using snake yaml
+        // instantiate an Options based on the contents of the yaml
+        // take into account the legacy key names and legacy build tool name
+        return null;
     }
 
     static Map<String, Object> config(Options options) {
@@ -74,6 +85,7 @@ public class MicronautCli implements Feature {
         legacyBuildToolName(options).ifPresent(name -> config.put(KEY_BUILD_TOOL, name));
         return config;
     }
+
     @NonNull
     static Optional<String> legacyBuildToolName(@NonNull Options options) {
         if (options.gradleDsl() == GradleDsl.KOTLIN && OptionUtils.hasGradleBuildTool(options)) {
