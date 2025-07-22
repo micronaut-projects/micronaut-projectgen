@@ -1,6 +1,13 @@
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.r2dbc-config-h2
 displayName: Add R2dbc H2 driver configuration
+recipeList:
+  - io.micronaut.starter.feature.create-application-properties
+  - io.micronaut.starter.feature.r2dbc-config-h2
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.r2dbc-config-h2
+displayName: Add R2dbc H2 driver configuration.config
 preconditions:
   - io.micronaut.starter.openrewrite.recipes.FindApplicationProperties
 recipeList:

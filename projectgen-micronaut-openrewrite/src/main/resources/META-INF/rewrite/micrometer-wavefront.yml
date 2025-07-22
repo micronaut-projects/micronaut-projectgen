@@ -3,6 +3,7 @@ name: io.micronaut.starter.feature.micrometer-wavefront
 displayName: Add Micrometer Wavefront dependency and configuration
 recipeList:
   - io.micronaut.starter.feature.micrometer-wavefront.dependencies
+  - io.micronaut.starter.feature.create-application-properties
   - io.micronaut.starter.feature.micrometer-wavefront.configuration
 ---
 type: specs.openrewrite.org/v1beta/recipe

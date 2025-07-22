@@ -3,6 +3,7 @@ name: io.micronaut.starter.feature.micrometer-cloudwatch
 displayName: Add CloudWatch dependency and configuration
 recipeList:
   - io.micronaut.starter.feature.micrometer-cloudwatch.dependencies
+  - io.micronaut.starter.feature.create-application-properties
   - io.micronaut.starter.feature.micrometer-cloudwatch.configuration
 ---
 type: specs.openrewrite.org/v1beta/recipe

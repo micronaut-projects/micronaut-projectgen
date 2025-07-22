@@ -3,6 +3,7 @@ name: io.micronaut.starter.feature.tracing-zipkin
 displayName: Add Tracing Zipkin dependency and link to README
 recipeList:
   - io.micronaut.starter.feature.tracing-zipkin.dependencies
+  - io.micronaut.starter.feature.create-application-properties
   - io.micronaut.starter.feature.tracing-zipkin.configuration
   - io.micronaut.starter.feature.tracing-zipkin.micronaut.documentation
   - io.micronaut.starter.feature.tracing-zipkin.documentation.thirdparty

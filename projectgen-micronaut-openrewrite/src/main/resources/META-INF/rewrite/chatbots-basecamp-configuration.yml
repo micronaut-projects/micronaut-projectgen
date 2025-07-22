@@ -1,6 +1,13 @@
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.chatbots-basecamp-configuration
 displayName: Add Chatbots Basecamp configuration
+recipeList:
+  - io.micronaut.starter.feature.create-application-properties
+  - io.micronaut.starter.feature.chatbots-basecamp-configuration.config
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.chatbots-basecamp-configuration.config
+displayName: Add Chatbots Basecamp configuration
 preconditions:
   - io.micronaut.starter.openrewrite.recipes.FindApplicationProperties
 recipeList:
