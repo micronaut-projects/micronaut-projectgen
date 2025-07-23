@@ -4,6 +4,7 @@ displayName: Add Aws Parameter Store dependency and link to README
 recipeList:
   - io.micronaut.starter.feature.aws-parameter-store.dependencies
   - io.micronaut.starter.feature.aws-parameter-store.configurations
+  - io.micronaut.starter.feature.create-bootstrap-properties
   - io.micronaut.starter.feature.aws-parameter-store.micronaut.documentation
   - io.micronaut.starter.feature.aws-parameter-store.documentation.thirdparty
 ---
