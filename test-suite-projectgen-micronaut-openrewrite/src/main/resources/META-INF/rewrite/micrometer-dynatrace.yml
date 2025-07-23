@@ -3,6 +3,7 @@ name: io.micronaut.starter.feature.micrometer-dynatrace
 displayName: Add Micronaut Dynatrace dependency and configuration
 recipeList:
   - io.micronaut.starter.feature.micrometer-dynatrace.dependencies
+  - io.micronaut.starter.feature.create-application-properties
   - io.micronaut.starter.feature.micrometer-dynatrace.configuration
 ---
 type: specs.openrewrite.org/v1beta/recipe

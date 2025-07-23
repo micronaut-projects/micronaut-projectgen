@@ -4,6 +4,7 @@ displayName: Add Security Oauth2 dependency and link to README
 recipeList:
   - io.micronaut.starter.feature.security-oauth2.dependencies
   - io.micronaut.starter.feature.security-oauth2.micronaut.documentation
+  - io.micronaut.starter.feature.create-application-properties
   - io.micronaut.starter.feature.security-oauth2.configuration
   - io.micronaut.starter.feature.security-oauth2.dev-configuration
 ---

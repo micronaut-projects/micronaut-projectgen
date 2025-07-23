@@ -5,6 +5,7 @@ recipeList:
   - io.micronaut.starter.feature.coherence-session.dependencies
   - io.micronaut.starter.feature.coherence-session.micronaut.documentation
   - io.micronaut.starter.feature.coherence-docs
+  - io.micronaut.starter.feature.create-application-properties
   - io.micronaut.starter.feature.coherence-session.configuration
 ---
 type: specs.openrewrite.org/v1beta/recipe

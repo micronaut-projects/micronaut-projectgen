@@ -4,6 +4,7 @@ displayName: Add Jms ActiveMq Classic dependency and link to README
 recipeList:
   - io.micronaut.starter.feature.jms-activemq-classic.dependencies
   - io.micronaut.starter.feature.micronaut-jms-docs
+  - io.micronaut.starter.feature.create-application-properties
   - io.micronaut.starter.feature.jms-activemq-classic.configuration
 ---
 type: specs.openrewrite.org/v1beta/recipe

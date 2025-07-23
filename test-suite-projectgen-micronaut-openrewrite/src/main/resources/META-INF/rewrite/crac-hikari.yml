@@ -1,6 +1,13 @@
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.crac-hikari
 displayName: Add Crac Configuration
+recipeList:
+  - io.micronaut.starter.feature.create-application-properties
+  - io.micronaut.starter.feature.crac-hikari.config
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.crac-hikari.config
+displayName: Add Crac Configuration
 preconditions:
   - io.micronaut.starter.openrewrite.recipes.FindApplicationProperties
 recipeList:

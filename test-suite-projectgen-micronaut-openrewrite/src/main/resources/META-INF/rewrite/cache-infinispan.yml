@@ -3,6 +3,7 @@ name: io.micronaut.starter.feature.cache-infinispan
 displayName: Add Cache Infinispan dependency and link to README
 recipeList:
   - io.micronaut.starter.feature.cache-infinispan.dependencies
+  - io.micronaut.starter.feature.create-application-properties
   - io.micronaut.starter.feature.cache-infinispan.configurations
   - io.micronaut.starter.feature.cache-infinispan.micronaut.documentation
   - io.micronaut.starter.feature.cache-infinispan.documentation.thirdparty
