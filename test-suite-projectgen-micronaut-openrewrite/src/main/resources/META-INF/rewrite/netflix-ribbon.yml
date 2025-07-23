@@ -3,6 +3,7 @@ name: io.micronaut.starter.feature.netflix-ribbon
 displayName: Add Netflix Ribbon dependency and link to README
 recipeList:
   - io.micronaut.starter.feature.netflix-ribbon.dependencies
+  - io.micronaut.starter.feature.create-application-properties
   - io.micronaut.starter.feature.netflix-ribbon.configuration
   - io.micronaut.starter.feature.netflix-ribbon.micronaut.documentation
 ---

@@ -1,6 +1,12 @@
----
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.config.micronaut-distributed-configuration
+displayName: Add Micronaut Distributed Configuration Configuration
+recipeList:
+  - io.micronaut.starter.feature.create-bootstrap-properties
+  - io.micronaut.starter.feature.config.micronaut-distributed-configuration.config
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.config.micronaut-distributed-configuration.config
 displayName: Add Micronaut Distributed Configuration Configuration
 preconditions:
   - io.micronaut.starter.openrewrite.recipes.FindBootstrapProperties

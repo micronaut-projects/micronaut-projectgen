@@ -3,6 +3,7 @@ name: io.micronaut.starter.feature.micrometer-elastic
 displayName: Add Micrometer Elastic dependency and configuration
 recipeList:
   - io.micronaut.starter.feature.micrometer-elastic.dependencies
+  - io.micronaut.starter.feature.create-application-properties
   - io.micronaut.starter.feature.micrometer-elastic.configuration
 ---
 type: specs.openrewrite.org/v1beta/recipe

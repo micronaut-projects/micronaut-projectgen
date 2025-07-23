@@ -26,6 +26,7 @@ class MicronautLibraryGenerationTest {
         Options options = createOptions();
         Map<String, String> project = previewGenerator.generate(options);
         Set<String> expected = new HashSet<>(Set.of(
+            "micronaut-cli.yml",
             ".gitignore",
             "config/spotless.license.java",
             "gradle.properties",

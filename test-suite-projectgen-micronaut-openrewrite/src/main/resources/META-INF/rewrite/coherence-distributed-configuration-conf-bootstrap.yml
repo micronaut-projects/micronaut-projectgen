@@ -1,6 +1,13 @@
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.coherence-distributed-configuration-conf-bootstrap
 displayName: Add Coherence Distributed Configuration
+recipeList:
+  - io.micronaut.starter.feature.create-bootstrap-properties
+  - io.micronaut.starter.feature.coherence-distributed-configuration-conf-bootstrap.config
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.coherence-distributed-configuration-conf-bootstrap.config
+displayName: Add Coherence Distributed Configuration
 preconditions:
   - io.micronaut.starter.openrewrite.recipes.FindBootstrapProperties
 recipeList:

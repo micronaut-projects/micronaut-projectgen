@@ -3,6 +3,7 @@ name: io.micronaut.starter.feature.micrometer-jmx
 displayName: Add Micrometer Jmx dependency and configuration
 recipeList:
   - io.micronaut.starter.feature.micrometer-jmx.dependencies
+  - io.micronaut.starter.feature.create-application-properties
   - io.micronaut.starter.feature.micrometer-jmx.configuration
 ---
 type: specs.openrewrite.org/v1beta/recipe

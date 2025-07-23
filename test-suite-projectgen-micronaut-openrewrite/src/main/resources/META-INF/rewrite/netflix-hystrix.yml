@@ -3,6 +3,7 @@ name: io.micronaut.starter.feature.netflix-hystrix
 displayName: Add Netflix Hystrix dependency and link to README
 recipeList:
   - io.micronaut.starter.feature.netflix-hystrix.dependencies
+  - io.micronaut.starter.feature.create-application-properties
   - io.micronaut.starter.feature.netflix-hystrix.configuration
   - io.micronaut.starter.feature.netflix-hystrix.micronaut.documentation
 ---
