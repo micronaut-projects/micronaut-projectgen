@@ -2,6 +2,7 @@ type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.acme
 displayName: Add Acme dependency and link to README
 recipeList:
+  - io.micronaut.starter.feature.create-application-properties
   - io.micronaut.starter.feature.acme.configuration
   - io.micronaut.starter.feature.acme.dependencies
   - io.micronaut.starter.feature.acme.documentation.thirdparty

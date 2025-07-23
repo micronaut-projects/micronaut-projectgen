@@ -3,6 +3,7 @@ name: io.micronaut.starter.feature.micrometer-new-relic
 displayName: Add Micrometer New Relic dependency and configuration
 recipeList:
   - io.micronaut.starter.feature.micrometer-new-relic.dependencies
+  - io.micronaut.starter.feature.create-application-properties
   - io.micronaut.starter.feature.micrometer-new-relic.configuration
 ---
 type: specs.openrewrite.org/v1beta/recipe
