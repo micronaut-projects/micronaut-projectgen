@@ -48,8 +48,11 @@ class MicronautApplicationGenerationTest {
         expected.addAll(EXPECT_FILES_FOR_BOTH);
         assertEquals(expected, project.keySet());
         String pomXml = project.get("pom.xml");
-        System.out.println(pomXml);
         BuildTestVerifier verifier = BuildTestVerifier.of(pomXml, BuildTool.MAVEN, options.language(), options.testFramework());
+        assertTrue(verifier.hasParentPom("io.micronaut.platform", "micronaut-parent"), pomXml);
+        assertTrue(pomXml.contains("<groupId>com.example</groupId>"), pomXml);
+        assertTrue(pomXml.contains("<artifactId>demo</artifactId>"), pomXml);
+        assertTrue(pomXml.contains("<version>0.1</version>"), pomXml);
         assertEquals("netty", verifier.getProperty("micronaut.runtime"));
         assertEquals("jar", verifier.getProperty("packaging"));
         assertEquals("21", verifier.getProperty("jdk.version"));
@@ -104,6 +107,7 @@ class MicronautApplicationGenerationTest {
         return OptionsFixture.defaultNoBuildTool()
             .template(ApplicationType.DEFAULT.toString())
             .name("demo")
+            .version("0.1")
             .packageName("com.example")
             .java(JdkVersion.JDK_21)
             .gradleDsl(GradleDsl.KOTLIN)
