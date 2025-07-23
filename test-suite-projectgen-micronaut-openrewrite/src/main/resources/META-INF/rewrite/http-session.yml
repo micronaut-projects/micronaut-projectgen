@@ -4,6 +4,7 @@ displayName: Add Http Session dependency and link to README
 recipeList:
   - io.micronaut.starter.feature.http-session.dependencies
   - io.micronaut.starter.feature.http-session.micronaut.documentation
+  - io.micronaut.starter.feature.create-application-properties
   - io.micronaut.starter.feature.http-session.configuration
 ---
 type: specs.openrewrite.org/v1beta/recipe

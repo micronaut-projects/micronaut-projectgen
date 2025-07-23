@@ -3,6 +3,7 @@ name: io.micronaut.starter.feature.micrometer-oracle-cloud
 displayName: Add Micrometer Oracle Cloud dependency and link to README
 recipeList:
   - io.micronaut.starter.feature.micrometer-oracle-cloud.dependencies
+  - io.micronaut.starter.feature.create-application-properties
   - io.micronaut.starter.feature.micrometer-oracle-cloud.configuration
   - io.micronaut.starter.feature.micrometer-oracle-cloud.micronaut.documentation
 ---

@@ -1,0 +1,7 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.create-application-properties
+displayName: Create Application Properties file
+recipeList:
+  - org.openrewrite.properties.CreatePropertiesFile:
+      relativeFileName: src/main/resources/application.properties
+      overwriteExisting: false
