@@ -18,6 +18,7 @@ package io.micronaut.starter.feature.database;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
@@ -25,9 +26,11 @@ import io.micronaut.starter.feature.Category;
 import io.micronaut.starter.feature.testresources.TestResources;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.mongo.sync.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class MongoSync extends MongoFeature {
+public class MongoSync extends MongoFeature implements OpenRewriteFeature {
 
     public static final String NAME = "mongo-sync";
 
@@ -52,26 +55,13 @@ public class MongoSync extends MongoFeature {
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
-        module.addDependency(Dependency.builder()
-                .groupId("io.micronaut.mongodb")
-                .artifactId("micronaut-mongo-sync")
-                .compile());
-    }
-
-    @Override
     public String getCategory() {
         return Category.DATABASE;
     }
 
     @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-mongodb/latest/guide/index.html";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.mongo-sync");
     }
 
-    @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://docs.mongodb.com";
-    }
 }

@@ -4,6 +4,7 @@ displayName: Add Security Jwt dependency and link to README
 recipeList:
   - io.micronaut.starter.feature.security-jwt.dependencies
   - io.micronaut.starter.feature.security-jwt.micronaut.documentation
+  - io.micronaut.starter.feature.create-application-properties
   - io.micronaut.starter.feature.security-jwt.configuration
 ---
 type: specs.openrewrite.org/v1beta/recipe
@@ -24,6 +25,7 @@ recipeList:
       relativeFileName: README.md
       content: https://micronaut-projects.github.io/micronaut-security/latest/guide/index.html
       appendNewline: true
+      existingFileStrategy: Continue
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.security-jwt.configuration

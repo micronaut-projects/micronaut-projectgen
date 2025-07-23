@@ -24,6 +24,7 @@ recipeList:
       relativeFileName: README.md
       content: https://micronaut-projects.github.io/micronaut-email/latest/guide/index.html#ses
       appendNewline: true
+      existingFileStrategy: Continue
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.amazon-ses-email.documentation.thirdparty
@@ -33,4 +34,5 @@ recipeList:
       relativeFileName: README.md
       content: https://aws.amazon.com/ses/
       appendNewline: true
+      existingFileStrategy: Continue
 

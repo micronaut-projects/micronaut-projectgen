@@ -6,3 +6,4 @@ recipeList:
       relativeFileName: README.md
       content: https://micronaut-projects.github.io/micronaut-mqtt/latest/guide/index.html
       appendNewline: true
+      existingFileStrategy: Continue

@@ -24,6 +24,7 @@ recipeList:
       relativeFileName: README.md
       content: https://micronaut-projects.github.io/micronaut-email/latest/guide/index.html#mailjet
       appendNewline: true
+      existingFileStrategy: Continue
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.email-mailjet.documentation.thirdparty
@@ -33,4 +34,5 @@ recipeList:
       relativeFileName: README.md
       content: https://www.mailjet.com
       appendNewline: true
+      existingFileStrategy: Continue
 

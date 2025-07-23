@@ -4,6 +4,7 @@ displayName: Add Security Session dependency and link to README
 recipeList:
   - io.micronaut.starter.feature.security-session.dependencies
   - io.micronaut.starter.feature.security-session.micronaut.documentation
+  - io.micronaut.starter.feature.create-application-properties
   - io.micronaut.starter.feature.security-session.configuration
 ---
 type: specs.openrewrite.org/v1beta/recipe
@@ -24,6 +25,7 @@ recipeList:
       relativeFileName: README.md
       content: https://micronaut-projects.github.io/micronaut-security/latest/guide/index.html#session
       appendNewline: true
+      existingFileStrategy: Continue
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.security-session.configuration

@@ -19,6 +19,7 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
@@ -26,17 +27,13 @@ import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.Feature;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.hibernate.jpamodelgen.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class HibernateJpaModelgen implements Feature {
+public class HibernateJpaModelgen implements OpenRewriteFeature {
 
     public static final String NAME = "hibernate-jpamodelgen";
-
-    private static final Dependency DEPENDENCY_JPAMODELGEN = Dependency.builder()
-            .groupId("org.hibernate.orm")
-            .artifactId("hibernate-jpamodelgen")
-            .annotationProcessor()
-            .build();
 
     @Override
     @NonNull
@@ -55,23 +52,13 @@ public class HibernateJpaModelgen implements Feature {
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
-        module.addDependency(DEPENDENCY_JPAMODELGEN);
-    }
-
-    @Override
     public String getCategory() {
         return Category.DATABASE;
     }
 
     @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://hibernate.org/orm/tooling/";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.hibernate-jpamodelgen");
     }
 
-    @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-data/latest/guide/#typeSafeJava";
-    }
 }

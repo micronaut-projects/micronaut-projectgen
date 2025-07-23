@@ -6,7 +6,9 @@
     <!-- @comment -->
 }
     <dependency>
+@if (groupId != null) {
       <groupId>@groupId</groupId>
+}
       <artifactId>@artifactId</artifactId>
 @if (version != null) {
       <version>@version</version>

@@ -6,3 +6,4 @@ recipeList:
       relativeFileName: README.md
       content: https://coherence.java.net/
       appendNewline: true
+      existingFileStrategy: Continue

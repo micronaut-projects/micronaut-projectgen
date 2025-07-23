@@ -25,6 +25,7 @@ recipeList:
       relativeFileName: README.md
       content: https://micronaut-projects.github.io/micronaut-mqtt/latest/guide/index.html#hiveMq
       appendNewline: true
+      existingFileStrategy: Continue
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.mqtt-hivemq.documentation.third
@@ -34,3 +35,4 @@ recipeList:
       relativeFileName: README.md
       content: https://github.com/hivemq/hivemq-mqtt-client
       appendNewline: true
+      existingFileStrategy: Continue

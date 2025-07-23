@@ -24,6 +24,7 @@ recipeList:
       relativeFileName: README.md
       content: https://micronaut-projects.github.io/micronaut-jackson-xml/latest/guide/index.html
       appendNewline: true
+      existingFileStrategy: Continue
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.jackson-xml.documentation.thirdparty
@@ -33,3 +34,4 @@ recipeList:
       relativeFileName: README.md
       content: https://github.com/FasterXML/jackson-dataformat-xml
       appendNewline: true
+      existingFileStrategy: Continue

@@ -24,6 +24,7 @@ recipeList:
       relativeFileName: README.md
       content: https://micronaut-projects.github.io/micronaut-views/latest/guide/index.html#soy
       appendNewline: true
+      existingFileStrategy: Continue
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.views-soy.documentation.thirdparty
@@ -33,3 +34,4 @@ recipeList:
       relativeFileName: README.md
       content: https://github.com/google/closure-templates
       appendNewline: true
+      existingFileStrategy: Continue

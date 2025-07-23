@@ -3,6 +3,7 @@ name: io.micronaut.starter.feature.micrometer-atlas
 displayName: Add Atlas dependency and configurations
 recipeList:
   - io.micronaut.starter.feature.micrometer-atlas.dependencies
+  - io.micronaut.starter.feature.create-application-properties
   - io.micronaut.starter.feature.micrometer-atlas.configurations
   - io.micronaut.starter.feature.micrometer-core.configurations
 ---

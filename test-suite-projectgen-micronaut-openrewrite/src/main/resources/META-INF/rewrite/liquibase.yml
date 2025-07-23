@@ -2,6 +2,7 @@ type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.liquibase
 displayName: Adds Micronaut liquibase dependency in the compile classpath
 recipeList:
+  - io.micronaut.starter.feature.create-application-properties
   - io.micronaut.starter.feature.liquibase.configuration
   - io.micronaut.starter.feature.liquibase.dependencies
   - io.micronaut.starter.feature.liquibase.file.create.xml.changelog
@@ -17,6 +18,7 @@ recipeList:
       relativeFileName: README.md
       content: https://www.liquibase.org/
       appendNewline: true
+      existingFileStrategy: Continue
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.liquibase.documentation.micronaut
@@ -26,6 +28,7 @@ recipeList:
       relativeFileName: README.md
       content: https://micronaut-projects.github.io/micronaut-liquibase/latest/guide/index.html
       appendNewline: true
+      existingFileStrategy: Continue
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.liquibase.file.create.xml.changelog

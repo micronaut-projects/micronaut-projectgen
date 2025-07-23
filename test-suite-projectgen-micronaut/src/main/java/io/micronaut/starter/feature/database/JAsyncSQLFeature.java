@@ -18,6 +18,7 @@ package io.micronaut.starter.feature.database;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
@@ -25,11 +26,13 @@ import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.Feature;
 
 import jakarta.inject.Singleton;
+
+import java.util.List;
 import java.util.Map;
 
 @Requires(property = "micronaut.starter.feature.jasync.sql.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class JAsyncSQLFeature implements Feature {
+public class JAsyncSQLFeature implements OpenRewriteFeature {
 
     @Override
     public String getName() {
@@ -47,33 +50,13 @@ public class JAsyncSQLFeature implements Feature {
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
-        Map<String, Object> configuration = module.configuration();
-        configuration.put("jasync.client.port", 5432);
-        configuration.put("jasync.client.host", "the-host");
-        configuration.put("jasync.client.database", "the-db");
-        configuration.put("jasync.client.username", "test");
-        configuration.put("jasync.client.password", "test");
-        configuration.put("jasync.client.maxActiveConnections", 5);
-        module.addDependency(Dependency.builder()
-                .groupId("io.micronaut.sql")
-                .artifactId("micronaut-jasync-sql")
-                .compile());
-    }
-
-    @Override
     public String getCategory() {
         return Category.DATABASE;
     }
 
     @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-sql/latest/guide/index.html#jasync";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.jasync-sql");
     }
 
-    @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://github.com/jasync-sql/jasync-sql/wiki";
-    }
 }

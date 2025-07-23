@@ -3,6 +3,7 @@ name: io.micronaut.starter.feature.tracing-zipkin
 displayName: Add Tracing Zipkin dependency and link to README
 recipeList:
   - io.micronaut.starter.feature.tracing-zipkin.dependencies
+  - io.micronaut.starter.feature.create-application-properties
   - io.micronaut.starter.feature.tracing-zipkin.configuration
   - io.micronaut.starter.feature.tracing-zipkin.micronaut.documentation
   - io.micronaut.starter.feature.tracing-zipkin.documentation.thirdparty
@@ -41,6 +42,7 @@ recipeList:
       relativeFileName: README.md
       content: https://micronaut-projects.github.io/micronaut-tracing/latest/guide/#zipkin
       appendNewline: true
+      existingFileStrategy: Continue
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.tracing-zipkin.documentation.thirdparty
@@ -50,3 +52,4 @@ recipeList:
       relativeFileName: README.md
       content: https://zipkin.io/
       appendNewline: true
+      existingFileStrategy: Continue

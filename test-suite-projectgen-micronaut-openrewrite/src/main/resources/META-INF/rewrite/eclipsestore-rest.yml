@@ -24,6 +24,7 @@ recipeList:
       relativeFileName: README.md
       content: https://micronaut-projects.github.io/micronaut-eclipseStore/latest/guide/#rest
       appendNewline: true
+      existingFileStrategy: Continue
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.eclipse-store-rest.documentation.thirdparty
@@ -33,3 +34,4 @@ recipeList:
       relativeFileName: README.md
       content: https://docs.eclipsestore.io/manual/storage/rest-interface/index.html
       appendNewline: true
+      existingFileStrategy: Continue

@@ -3,6 +3,7 @@ name: io.micronaut.starter.feature.jobrunr
 displayName: Add Jobrunr dependency and link to README
 recipeList:
   - io.micronaut.starter.feature.jobrunr.dependencies
+  - io.micronaut.starter.feature.create-application-properties
   - io.micronaut.starter.feature.jobrunr.configuration
   - io.micronaut.starter.feature.jobrunr.documentation.thirdparty
 ---
@@ -37,3 +38,4 @@ recipeList:
       relativeFileName: README.md
       content: https://www.jobrunr.io/en/documentation/configuration/micronaut/
       appendNewline: true
+      existingFileStrategy: Continue

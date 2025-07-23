@@ -1,6 +1,13 @@
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.mqtt-uri-conf
 displayName: Add mqtt.client.server-uri configuration property
+recipeList:
+  - io.micronaut.starter.feature.create-application-properties
+  - io.micronaut.starter.feature.mqtt-uri-conf.config
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.mqtt-uri-conf.config
+displayName: Add mqtt.client.server-uri configuration property
 preconditions:
   - io.micronaut.starter.openrewrite.recipes.FindApplicationProperties
 recipeList:
