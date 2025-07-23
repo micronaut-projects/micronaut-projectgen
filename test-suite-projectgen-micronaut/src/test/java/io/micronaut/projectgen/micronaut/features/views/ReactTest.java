@@ -52,4 +52,18 @@ class ReactTest {
         assertTrue(readme.contains("https://micronaut-projects.github.io/micronaut-views/latest/guide/index.html#react"));
         assertTrue(readme.contains("https://react.dev/reference/react-dom/server"));
     }
+
+    @Test
+    void reactFeaturesTestResourcesFiles(PreviewGenerator previewGenerator) throws Exception {
+        Options options = OptionsFixture.defaultGradle().features(List.of("views-react")).build();
+        Map<String, String> project = previewGenerator.generate(options);
+        String buildGradle = project.get("build.gradle.kts");
+        assertNotNull(buildGradle);
+        assertTrue(project.containsKey("src/main/js/server.js"));
+        assertTrue(project.containsKey("src/main/js/client.js"));
+        assertTrue(project.containsKey("src/main/js/package.json"));
+        assertTrue(project.containsKey("src/main/js/webpack.client.js"));
+        assertTrue(project.containsKey("src/main/js/webpack.server.js"));
+        assertTrue(project.containsKey("src/main/js/components/App.js"));
+    }
 }
