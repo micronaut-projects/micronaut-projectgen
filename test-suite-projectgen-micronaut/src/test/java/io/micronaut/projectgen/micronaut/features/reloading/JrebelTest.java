@@ -27,6 +27,7 @@ class JrebelTest {
         assertNotNull(buildGradle);
         BuildTestVerifier verifier = BuildTestVerifier.of(buildGradle, options);
         assertTrue(verifier.hasBuildPlugin("org.zeroturnaround.gradle.jrebel"), buildGradle);
+        assertTrue(buildGradle.contains("1.1.10"));
     }
 
     @Test

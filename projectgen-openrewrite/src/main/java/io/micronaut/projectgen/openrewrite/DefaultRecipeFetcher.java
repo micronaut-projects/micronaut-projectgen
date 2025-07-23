@@ -378,9 +378,14 @@ public class DefaultRecipeFetcher implements RecipeFetcher {
     }
 
     private BuildPlugin findGradleBuildPlugin(org.openrewrite.gradle.plugins.AddBuildPlugin recipe) {
-        return GradlePlugin.builder()
-            .id(recipe.getPluginId())
-            .build();
+        GradlePlugin.Builder builder = GradlePlugin.builder()
+            .id(recipe.getPluginId());
+
+        if (recipe.getVersion() != null && !recipe.getVersion().isEmpty()) {
+            builder.version(recipe.getVersion());
+        }
+
+        return builder.build();
     }
 
     private BuildPlugin findMavenBuildPlugin(org.openrewrite.maven.AddPlugin recipe) {
