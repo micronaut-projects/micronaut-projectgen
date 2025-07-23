@@ -24,4 +24,5 @@ recipeList:
       relativeFileName: README.md
       content: https://github.com/dekorateio/dekorate#openshift
       appendNewline: true
+      existingFileStrategy: Continue
 

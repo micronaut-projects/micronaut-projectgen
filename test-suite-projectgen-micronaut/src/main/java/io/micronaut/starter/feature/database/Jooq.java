@@ -19,6 +19,7 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
@@ -31,9 +32,11 @@ import io.micronaut.starter.feature.database.jdbc.JdbcFeature;
 import io.micronaut.projectgen.core.options.JdkVersion;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.jooq.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class Jooq implements Feature, MinJdkFeature {
+public class Jooq implements OpenRewriteFeature, MinJdkFeature {
 
     private final JdbcFeature jdbcFeature;
 
@@ -64,22 +67,8 @@ public class Jooq implements Feature, MinJdkFeature {
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
-        module.addDependency(Dependency.builder()
-                .groupId("io.micronaut.sql")
-                .artifactId("micronaut-jooq")
-                .compile());
-    }
-
-    @Override
     public String getCategory() {
         return Category.DATABASE;
-    }
-
-    @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-sql/latest/guide/index.html#jooq";
     }
 
     @Override
@@ -87,4 +76,10 @@ public class Jooq implements Feature, MinJdkFeature {
     public JdkVersion minJdk() {
         return JdkVersion.JDK_11;
     }
+
+    @Override
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.jooq");
+    }
+
 }

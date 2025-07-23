@@ -24,6 +24,7 @@ recipeList:
       relativeFileName: README.md
       content: https://micronaut-projects.github.io/micronaut-aws/latest/guide/index.html#lambdaCustomRuntimes
       appendNewline: true
+      existingFileStrategy: Continue
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.aws-lambda-custom-runtime.documentation.thirdparty
@@ -33,3 +34,4 @@ recipeList:
       relativeFileName: README.md
       content: https://docs.aws.amazon.com/lambda/latest/dg/runtimes-custom.html
       appendNewline: true
+      existingFileStrategy: Continue

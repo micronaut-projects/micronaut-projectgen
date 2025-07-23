@@ -3,6 +3,7 @@ name: io.micronaut.starter.feature.redis-lettuce
 displayName: Add Redis Lettuce dependency and Configuration
 recipeList:
   - io.micronaut.starter.feature.redis-lettuce.dependencies
+  - io.micronaut.starter.feature.create-application-properties
   - io.micronaut.starter.feature.redis-lettuce.configuration
 ---
 type: specs.openrewrite.org/v1beta/recipe

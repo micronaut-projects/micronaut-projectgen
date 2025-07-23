@@ -158,15 +158,6 @@ public record ModuleContext(CoordinateResolver coordinateResolver,
         addHelpTemplate(new RockerWritable(markdownLink.template(label, href)));
     }
 
-    public void addDependency(@NonNull Dependency dependency) {
-        dependencyContext.addDependency(dependency);
-    }
-
-    @NonNull
-    public Collection<Dependency> getDependencies() {
-        return dependencyContext.getDependencies();
-    }
-
     /**
      *
      * @return Build plugins
@@ -399,8 +390,31 @@ public record ModuleContext(CoordinateResolver coordinateResolver,
         }
     }
 
+    public void addDependency(@NonNull Dependency dependency) {
+        dependencyContext.addDependency(dependency);
+    }
+
+    @NonNull
+    public Collection<Dependency> getDependencies() {
+        return dependencyContext.getDependencies();
+    }
+
+    @NonNull
+    public Collection<Dependency> getDependenciesByBuildTool(@NonNull BuildTool buildTool) {
+        return dependencyContext.getDependenciesByBuildTool(buildTool);
+    }
+
+    @NonNull
     public void addDependency(Dependency.Builder dependencyBuilder) {
         dependencyContext.addDependency(dependencyBuilder);
+    }
+
+    public void addDependencyOnlyForBuild(Dependency.Builder dependencyBuilder, BuildTool buildTool) {
+        dependencyContext.addDependencyOnlyForBuild(dependencyBuilder, buildTool);
+    }
+
+    public void addDependencyOnlyForBuild(Dependency dependency, BuildTool buildTool) {
+        dependencyContext.addDependencyOnlyForBuild(dependency, buildTool);
     }
 
     public Configuration getConfigurationByEnvironmentOrDefaultConfig(String env, ApplicationConfiguration defaultConfig) {

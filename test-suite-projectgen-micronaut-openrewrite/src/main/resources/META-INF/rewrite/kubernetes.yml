@@ -13,6 +13,7 @@ recipeList:
       relativeFileName: README.md
       content: https://micronaut-projects.github.io/micronaut-kubernetes/latest/guide/index.html
       appendNewline: true
+      existingFileStrategy: Continue
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.kubernetes-docs.documentation.thirdparty
@@ -22,3 +23,4 @@ recipeList:
       relativeFileName: README.md
       content: https://kubernetes.io/docs/home/
       appendNewline: true
+      existingFileStrategy: Continue

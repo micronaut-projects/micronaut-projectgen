@@ -1,0 +1,23 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.hibernate-jpamodelgen-annotation
+displayName: Add Hibernate JpaModelGen Annotation Processor
+recipeList:
+  - io.micronaut.starter.feature.hibernate-jpamodelgen-annotation.maven
+  - io.micronaut.starter.feature.hibernate-jpamodelgen-annotation.gradle
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.hibernate-jpamodelgen-annotation.maven
+displayName: Add Hibernate JpaModelGen Annotation Processor for maven
+recipeList:
+  - org.openrewrite.maven.AddAnnotationProcessor:
+      groupId: org.hibernate.orm
+      artifactId: hibernate-jpamodelgen
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.hibernate-jpamodelgen-annotation.gradle
+displayName: Add Hibernate JpaModelGen Annotation Processor for gradle
+recipeList:
+  - org.openrewrite.gradle.AddDependency:
+      groupId: org.hibernate.orm
+      artifactId: hibernate-jpamodelgen
+      configuration: annotationProcessor

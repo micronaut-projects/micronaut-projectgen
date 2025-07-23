@@ -23,4 +23,5 @@ recipeList:
       relativeFileName: README.md
       content: https://docs.micronaut.io/latest/guide/index.html#multitenancy
       appendNewline: true
+      existingFileStrategy: Continue
 

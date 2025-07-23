@@ -24,6 +24,7 @@ recipeList:
       relativeFileName: README.md
       content: https://micronaut-projects.github.io/micronaut-aws/snapshot/guide/#eventsLambdaSerde
       appendNewline: true
+      existingFileStrategy: Continue
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.aws-lambda-events-serde.documentation.thirdparty
@@ -33,3 +34,4 @@ recipeList:
       relativeFileName: README.md
       content: https://github.com/aws/aws-lambda-java-libs/tree/main/aws-lambda-java-events
       appendNewline: true
+      existingFileStrategy: Continue

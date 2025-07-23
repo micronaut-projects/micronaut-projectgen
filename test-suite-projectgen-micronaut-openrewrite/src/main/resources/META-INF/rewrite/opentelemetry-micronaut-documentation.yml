@@ -6,3 +6,4 @@ recipeList:
       relativeFileName: README.md
       content: https://micronaut-projects.github.io/micronaut-tracing/latest/guide/#opentelemetry
       appendNewline: true
+      existingFileStrategy: Continue

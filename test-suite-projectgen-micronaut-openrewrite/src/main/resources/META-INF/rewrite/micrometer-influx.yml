@@ -3,6 +3,7 @@ name: io.micronaut.starter.feature.micrometer-influx
 displayName: Add Micrometer Influx dependency and configuration
 recipeList:
   - io.micronaut.starter.feature.micrometer-influx.dependencies
+  - io.micronaut.starter.feature.create-application-properties
   - io.micronaut.starter.feature.micrometer-influx.configuration
 ---
 type: specs.openrewrite.org/v1beta/recipe

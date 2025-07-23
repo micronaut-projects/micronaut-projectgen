@@ -24,6 +24,7 @@ import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.projectgen.micronaut.features.AppName;
 import io.micronaut.projectgen.micronaut.features.MicronautAot;
+import io.micronaut.projectgen.micronaut.features.cli.MicronautCli;
 import io.micronaut.projectgen.micronaut.features.httpclient.HttpClientFeature;
 import io.micronaut.projectgen.micronaut.features.httpclient.HttpClientTest;
 import io.micronaut.projectgen.micronaut.features.logging.Logback;
@@ -75,7 +76,8 @@ public class ApplicationTypeDefaultFeature extends ApplicationTypeFeature {
     private HttpClientTest httpClientTest;
 
     @SuppressWarnings("ParameterNumber")
-    public ApplicationTypeDefaultFeature(MicronautMavenPlugin micronautMavenPlugin,
+    public ApplicationTypeDefaultFeature(MicronautCli micronautCli,
+                                         MicronautMavenPlugin micronautMavenPlugin,
                                          AppName appName,
                                          Logback logback,
                                          MicronautTestJunit5 micronautTestJunit5,
@@ -94,7 +96,7 @@ public class ApplicationTypeDefaultFeature extends ApplicationTypeFeature {
                                          List<KotlinApplication> kotlinApplications,
                                          List<GroovyApplicationFeature> groovyApplicationFeatures,
                                          HttpClientTest httpClientTest) {
-        super(micronautTestJunit5, micronautTestSpock, logback, gitIgnore);
+        super(micronautCli, micronautTestJunit5, micronautTestSpock, logback, gitIgnore);
         this.micronautMavenPlugin = micronautMavenPlugin;
         this.appName = appName;
         this.micronautMavenCompilerPlugin = micronautMavenCompilerPlugin;

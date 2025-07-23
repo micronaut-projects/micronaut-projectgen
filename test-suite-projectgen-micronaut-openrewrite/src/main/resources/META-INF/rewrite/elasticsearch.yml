@@ -3,6 +3,7 @@ name: io.micronaut.starter.feature.elasticsearch
 displayName: Add ElasticSearch dependency and link to README
 recipeList:
   - io.micronaut.starter.feature.elasticsearch.dependencies
+  - io.micronaut.starter.feature.create-application-properties
   - io.micronaut.starter.feature.elasticsearch.configuration
   - io.micronaut.starter.feature.elasticsearch.micronaut.documentation
 ---
@@ -34,3 +35,4 @@ recipeList:
       relativeFileName: README.md
       content: https://micronaut-projects.github.io/micronaut-elasticsearch/latest/guide/index.html
       appendNewline: true
+      existingFileStrategy: Continue

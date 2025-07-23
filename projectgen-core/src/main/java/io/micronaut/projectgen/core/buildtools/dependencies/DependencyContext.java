@@ -40,6 +40,9 @@ public interface DependencyContext {
     @NonNull
     Collection<Dependency> getDependencies();
 
+    @NonNull
+    Collection<Dependency> getDependenciesByBuildTool(@NonNull BuildTool buildTool);
+
     void addDependency(@NonNull Dependency dependency);
 
     default void addDependency(@NonNull Dependency.Builder dependency) {
@@ -113,5 +116,11 @@ public interface DependencyContext {
             }
         }
         return dependenciesWithoutDuplicates;
+    }
+
+    void addDependencyOnlyForBuild(@NonNull Dependency dependency, @NonNull BuildTool buildTool);
+
+    default void addDependencyOnlyForBuild(@NonNull Dependency.Builder dependency, @NonNull BuildTool buildTool) {
+        addDependencyOnlyForBuild(dependency.build(), buildTool);
     }
 }

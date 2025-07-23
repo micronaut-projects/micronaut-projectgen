@@ -30,6 +30,7 @@ recipeList:
       relativeFileName: README.md
       content: https://micronaut-projects.github.io/micronaut-microstream/latest/guide
       appendNewline: true
+      existingFileStrategy: Continue
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.microstream.documentation.thirdparty
@@ -39,3 +40,4 @@ recipeList:
       relativeFileName: README.md
       content: https://microstream.one/
       appendNewline: true
+      existingFileStrategy: Continue

@@ -1,0 +1,26 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.jooq
+displayName: Add Jooq dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.jooq.dependencies
+  - io.micronaut.starter.feature.jooq.micronaut.documentation
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.jooq.dependencies
+displayName: Add Jooq dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.sql
+      artifactId: micronaut-jooq
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.jooq.micronaut.documentation
+displayName: Append a link to Micronaut Jooq documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-sql/latest/guide/index.html#jooq
+      appendNewline: true
+      existingFileStrategy: Continue
