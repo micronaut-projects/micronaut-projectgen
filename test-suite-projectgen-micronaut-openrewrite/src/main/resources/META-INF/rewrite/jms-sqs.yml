@@ -4,6 +4,7 @@ displayName: Add Jms Sqs dependency and link to README
 recipeList:
   - io.micronaut.starter.feature.jms-sqs.dependencies
   - io.micronaut.starter.feature.micronaut-jms-docs
+  - io.micronaut.starter.feature.create-application-properties
   - io.micronaut.starter.feature.jms-sqs.configuration
 ---
 type: specs.openrewrite.org/v1beta/recipe

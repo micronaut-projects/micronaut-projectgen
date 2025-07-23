@@ -22,6 +22,7 @@ import io.micronaut.projectgen.core.feature.gitignore.GitIgnore;
 import io.micronaut.projectgen.core.options.GenericOptionsBuilder;
 import io.micronaut.projectgen.core.options.Language;
 import io.micronaut.projectgen.core.options.Options;
+import io.micronaut.projectgen.micronaut.features.cli.MicronautCli;
 import io.micronaut.projectgen.micronaut.features.logging.Logback;
 import io.micronaut.projectgen.micronaut.features.test.MicronautTestJunit5;
 import io.micronaut.projectgen.micronaut.features.test.MicronautTestSpock;
@@ -39,14 +40,15 @@ public class ApplicationTypeCliFeature extends ApplicationTypeFeature {
     @Nullable
     private final GroovyApplicationFeature groovyApplicationFeature;
 
-    public ApplicationTypeCliFeature(MicronautTestJunit5 micronautTestJunit5,
+    public ApplicationTypeCliFeature(MicronautCli micronautCli,
+                                     MicronautTestJunit5 micronautTestJunit5,
                                      MicronautTestSpock micronautTestSpock,
                                      Logback logback,
                                      GitIgnore gitIgnore,
                                      List<JavaApplicationFeature> javaApplicationFeatures,
                                      List<KotlinApplicationFeature> kotlinApplicationFeatures,
                                      List<GroovyApplicationFeature> groovyApplicationFeatures) {
-        super(micronautTestJunit5, micronautTestSpock, logback, gitIgnore);
+        super(micronautCli, micronautTestJunit5, micronautTestSpock, logback, gitIgnore);
         Options options = GenericOptionsBuilder.builder().template(ApplicationType.CLI.toString()).build();
         this.javaApplicationFeature = javaApplicationFeatures.stream().filter(f -> f.supports(options)).findFirst().orElse(null);
         this.kotlinApplicationFeature = kotlinApplicationFeatures.stream().filter(f -> f.supports(options)).findFirst().orElse(null);

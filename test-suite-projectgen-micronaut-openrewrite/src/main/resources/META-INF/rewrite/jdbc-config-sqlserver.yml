@@ -1,0 +1,23 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.jdbc-config-sqlserver
+displayName: Add Jdbc Sqlserver configuration
+recipeList:
+  - io.micronaut.starter.feature.create-application-properties
+  - io.micronaut.starter.feature.jdbc-config-sqlserver.config
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.jdbc-config-sqlserver.config
+displayName: Add Jdbc Sqlserver configuration
+preconditions:
+  - io.micronaut.starter.openrewrite.recipes.FindApplicationProperties
+recipeList:
+  - org.openrewrite.properties.AddProperty:
+      property: datasources.default.db-type
+      value: mssql
+  - org.openrewrite.properties.AddProperty:
+      property: datasources.default.driver-class-name
+      value: com.microsoft.sqlserver.jdbc.SQLServerDriver
+  - org.openrewrite.properties.AddProperty:
+      property: test-resources.containers.mssql.accept-license
+      value: false
+

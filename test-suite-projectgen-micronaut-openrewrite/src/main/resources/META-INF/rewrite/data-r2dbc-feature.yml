@@ -1,0 +1,39 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.data-r2dbc
+displayName: Add Data R2dbc dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.data-r2dbc.dependencies
+  - io.micronaut.starter.feature.data-r2dbc.micronaut.documentation
+  - io.micronaut.starter.feature.data-r2dbc.documentation.thirdparty
+  - io.micronaut.starter.feature.data-r2dbc-annotation
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.data-r2dbc.dependencies
+displayName: Add Data R2dbc dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.data
+      artifactId: micronaut-data-r2dbc
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.data-r2dbc.micronaut.documentation
+displayName: Append a link to Micronaut Data R2dbc documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-data/latest/guide/#dbc
+      appendNewline: true
+      existingFileStrategy: Continue
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.data-r2dbc.documentation.thirdparty
+displayName: Append a link to Data R2dbc website
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://r2dbc.io
+      appendNewline: true
+      existingFileStrategy: Continue
+

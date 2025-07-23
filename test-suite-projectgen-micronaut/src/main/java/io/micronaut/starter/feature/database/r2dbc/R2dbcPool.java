@@ -20,13 +20,17 @@ import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.feature.Category;
 import jakarta.inject.Singleton;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Singleton
-public class R2dbcPool implements OpenRewriteFeature, R2dbcFeature {
+public class R2dbcPool extends R2dbcConfigurationUtils implements OpenRewriteFeature, R2dbcFeature {
     @Override
     public List<String> getRecipes(GeneratorContext generatorContext) {
-        return List.of("io.micronaut.starter.feature.r2dbc-pool");
+        List<String> recipes = new ArrayList<>();
+        recipes.add("io.micronaut.starter.feature.r2dbc-pool");
+        addDatabaseConfigRecipe(generatorContext, recipes);
+        return recipes;
     }
 
     @Override

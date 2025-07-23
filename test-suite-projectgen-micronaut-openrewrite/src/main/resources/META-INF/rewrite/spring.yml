@@ -24,3 +24,4 @@ recipeList:
       relativeFileName: README.md
       content: https://micronaut-projects.github.io/micronaut-spring/latest/guide/index.html
       appendNewline: true
+      existingFileStrategy: Continue

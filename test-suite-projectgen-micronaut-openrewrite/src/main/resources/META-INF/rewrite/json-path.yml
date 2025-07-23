@@ -24,3 +24,4 @@ recipeList:
       relativeFileName: README.md
       content: https://github.com/json-path/JsonPath
       appendNewline: true
+      existingFileStrategy: Continue

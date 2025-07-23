@@ -25,6 +25,7 @@ import io.micronaut.projectgen.core.feature.LoggingFeature;
 import io.micronaut.projectgen.core.feature.config.Properties;
 import io.micronaut.projectgen.core.feature.gitignore.GitIgnore;
 import io.micronaut.projectgen.core.options.TestFramework;
+import io.micronaut.projectgen.micronaut.features.cli.MicronautCli;
 import io.micronaut.projectgen.micronaut.features.logging.Logback;
 import io.micronaut.projectgen.micronaut.features.test.MicronautTestJunit5;
 import io.micronaut.projectgen.micronaut.features.test.MicronautTestSpock;
@@ -36,8 +37,10 @@ public abstract class ApplicationTypeFeature implements DefaultFeature, Requires
     private final MicronautTestSpock micronautTestSpock;
     private final Logback logback;
     private final GitIgnore gitIgnore;
+    private final MicronautCli micronautCli;
 
-    protected ApplicationTypeFeature(MicronautTestJunit5 micronautTestJunit5,
+    protected ApplicationTypeFeature(MicronautCli micronautCli,
+                                     MicronautTestJunit5 micronautTestJunit5,
                                      MicronautTestSpock micronautTestSpock,
                                      Logback logback,
                                      GitIgnore gitIgnore) {
@@ -45,10 +48,12 @@ public abstract class ApplicationTypeFeature implements DefaultFeature, Requires
         this.micronautTestSpock = micronautTestSpock;
         this.logback = logback;
         this.gitIgnore = gitIgnore;
+        this.micronautCli = micronautCli;
     }
 
     @Override
     public void processSelectedFeatures(FeatureContext featureContext) {
+        featureContext.addFeatureIfNotPresent(MicronautCli.class, micronautCli);
         featureContext.addFeatureIfNotPresent(GitIgnore.class, gitIgnore);
         featureContext.addFeatureIfNotPresent(LoggingFeature.class, logback);
         if (featureContext.getOptions().testFramework() == null ||

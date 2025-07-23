@@ -85,7 +85,7 @@ public class Kubernetes implements OpenRewriteFeature {
     @Override
     public boolean supports(Options options) {
         ApplicationType type = ApplicationType.of(options.template());
-        return  type == ApplicationType.DEFAULT || type == ApplicationType.GRPC;
+        return type == ApplicationType.DEFAULT || type == ApplicationType.GRPC;
     }
 
     @Override

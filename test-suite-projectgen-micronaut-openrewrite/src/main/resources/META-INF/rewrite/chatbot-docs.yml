@@ -6,3 +6,4 @@ recipeList:
       relativeFileName: README.md
       content: https://micronaut-projects.github.io/micronaut-chatbots/latest/guide/
       appendNewline: true
+      existingFileStrategy: Continue

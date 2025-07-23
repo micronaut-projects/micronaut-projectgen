@@ -22,6 +22,7 @@ import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.starter.feature.database.Data;
@@ -31,12 +32,14 @@ import io.micronaut.starter.feature.database.TransactionalNotSupported;
 import io.micronaut.starter.feature.migration.MigrationFeature;
 import jakarta.inject.Singleton;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 @Requires(property = "micronaut.starter.feature.data.r2dbc.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class DataR2dbc implements R2dbcFeature, DataFeature, TransactionalNotSupported {
+public class DataR2dbc extends R2dbcConfigurationUtils implements R2dbcFeature, DataFeature, TransactionalNotSupported, OpenRewriteFeature {
 
     public static final String NAME = "data-r2dbc";
 
@@ -66,26 +69,6 @@ public class DataR2dbc implements R2dbcFeature, DataFeature, TransactionalNotSup
         return r2dbc.getOrder() - 1;
     }
 
-    @Override
-    public void apply(GeneratorContext generatorContext) {
-        ModuleContext moduleContext = generatorContext.getRootModule();
-        moduleContext.addDependency(DataFeature.dataProcessorDependency(generatorContext.getBuildTool()));
-        moduleContext.addDependency(DEPENDENCY_MICRONAUT_DATA_R2DBC);
-
-        DatabaseDriverFeature dbFeature = generatorContext.getRequiredFeature(DatabaseDriverFeature.class);
-        moduleContext.configuration().addNested(getDatasourceConfig(generatorContext, dbFeature));
-    }
-
-    @Override
-    public Map<String, Object> getDatasourceConfig(GeneratorContext generatorContext, DatabaseDriverFeature driverFeature) {
-        Map<String, Object> conf = new LinkedHashMap<>();
-        if (!generatorContext.isFeaturePresent(MigrationFeature.class)) {
-            conf.put("r2dbc.datasources.default.schema-generate", "CREATE_DROP");
-        }
-        conf.put("r2dbc.datasources.default.dialect", driverFeature.getDataDialect());
-        return conf;
-    }
-
     @NonNull
     @Override
     public String getName() {
@@ -103,15 +86,15 @@ public class DataR2dbc implements R2dbcFeature, DataFeature, TransactionalNotSup
         return "Micronaut Data support for Reactive Database Connectivity (R2DBC)";
     }
 
-    @Nullable
     @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-data/latest/guide/#dbc";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        List<String> recipes = new ArrayList<>();
+        recipes.add("io.micronaut.starter.feature.data-r2dbc");
+        if (!generatorContext.isFeaturePresent(MigrationFeature.class)) {
+            recipes.add("io.micronaut.starter.feature.data-r2dbc.conf");
+        }
+        addDatabaseConfigRecipe(generatorContext, recipes);
+        return recipes;
     }
 
-    @Nullable
-    @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://r2dbc.io";
-    }
 }

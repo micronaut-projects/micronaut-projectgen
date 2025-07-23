@@ -3,6 +3,7 @@ name: io.micronaut.starter.feature.microstream-cache
 displayName: Add Microstream Cache dependency and link to README
 recipeList:
   - io.micronaut.starter.feature.microstream-cache.dependencies
+  - io.micronaut.starter.feature.create-application-properties
   - io.micronaut.starter.feature.microstream-cache.configurations
   - io.micronaut.starter.feature.microstream-cache.micronaut.documentation
   - io.micronaut.starter.feature.microstream-cache.documentation.thirdparty
@@ -37,6 +38,7 @@ recipeList:
       relativeFileName: README.md
       content: https://micronaut-projects.github.io/micronaut-microstream/latest/guide/#cache
       appendNewline: true
+      existingFileStrategy: Continue
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.microstream-cache.documentation.thirdparty
@@ -46,3 +48,4 @@ recipeList:
       relativeFileName: README.md
       content: https://docs.microstream.one/manual/cache/index.html
       appendNewline: true
+      existingFileStrategy: Continue

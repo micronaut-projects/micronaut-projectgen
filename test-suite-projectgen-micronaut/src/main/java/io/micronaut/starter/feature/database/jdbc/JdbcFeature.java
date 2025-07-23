@@ -22,10 +22,10 @@ import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.projectgen.core.feature.FeaturePhase;
 import io.micronaut.projectgen.core.feature.OneOfFeature;
-import io.micronaut.starter.feature.database.DatabaseDriverConfigurationFeature;
-import io.micronaut.starter.feature.database.DatabaseDriverFeature;
+import io.micronaut.starter.feature.database.*;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 public abstract class JdbcFeature implements OneOfFeature, DatabaseDriverConfigurationFeature {
@@ -61,23 +61,8 @@ public abstract class JdbcFeature implements OneOfFeature, DatabaseDriverConfigu
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        generatorContext.getFeature(DatabaseDriverFeature.class).ifPresent(dbFeature -> {
-            Map<String, Object> jdbcConfig = new LinkedHashMap<>();
-            applyDefaultConfig(generatorContext, dbFeature, jdbcConfig);
-            ModuleContext module = generatorContext.getRootModule();
-            module.configuration().addNested(jdbcConfig);
-        });
-    }
-
-    @Override
     public String getCategory() {
         return Category.DATABASE;
-    }
-
-    @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-sql/latest/guide/index.html#jdbc";
     }
 
     public String getUrlKey() {
@@ -95,4 +80,23 @@ public abstract class JdbcFeature implements OneOfFeature, DatabaseDriverConfigu
     public String getPasswordKey() {
         return PASSWORD_KEY;
     }
+
+    protected void addDatabaseConfigRecipe(GeneratorContext generatorContext,
+                                           List<String> recipes) {
+
+        if (generatorContext.isFeaturePresent(PostgreSQL.class)) {
+            recipes.add("io.micronaut.starter.feature.jdbc-config-postgresql");
+        } else if (generatorContext.isFeaturePresent(MySQL.class)) {
+            recipes.add("io.micronaut.starter.feature.jdbc-config-mysql");
+        } else if (generatorContext.isFeaturePresent(MariaDB.class)) {
+            recipes.add("io.micronaut.starter.feature.jdbc-config-mariadb");
+        } else if (generatorContext.isFeaturePresent(SQLServer.class)) {
+            recipes.add("io.micronaut.starter.feature.jdbc-config-sqlserver");
+        } else if (generatorContext.isFeaturePresent(Oracle.class)) {
+            recipes.add("io.micronaut.starter.feature.jdbc-config-oracle");
+        } else {
+            recipes.add("io.micronaut.starter.feature.jdbc-config-h2");
+        }
+    }
+
 }

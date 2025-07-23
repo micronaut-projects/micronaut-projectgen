@@ -33,14 +33,19 @@ public interface Coordinate {
         if (comparison != 0) {
             return comparison;
         }
-        comparison = o1.getGroupId().compareTo(o2.getGroupId());
+        if (o1.getGroupId() != null && o2.getGroupId() != null) {
+            comparison = o1.getGroupId().compareTo(o2.getGroupId());
+        }
         if (comparison != 0) {
             return comparison;
         }
-        return o1.getArtifactId().compareTo(o2.getArtifactId());
+        if (o1.getArtifactId() != null && o2.getArtifactId() != null) {
+            return o1.getArtifactId().compareTo(o2.getArtifactId());
+        }
+        return 0;
     };
 
-    @NonNull
+    @Nullable
     String getGroupId();
 
     @NonNull

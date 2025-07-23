@@ -1,0 +1,25 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.r2dbc-config-h2
+displayName: Add R2dbc H2 driver configuration
+recipeList:
+  - io.micronaut.starter.feature.create-application-properties
+  - io.micronaut.starter.feature.r2dbc-config-h2
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.r2dbc-config-h2
+displayName: Add R2dbc H2 driver configuration.config
+preconditions:
+  - io.micronaut.starter.openrewrite.recipes.FindApplicationProperties
+recipeList:
+  - org.openrewrite.properties.AddProperty:
+      property: r2dbc.datasources.default.dialect
+      value: H2
+  - org.openrewrite.properties.AddProperty:
+      property: r2dbc.datasources.default.url
+      value: r2dbc:h2:mem:///testdb;DB_CLOSE_ON_EXIT=FALSE
+  - org.openrewrite.properties.AddProperty:
+      property: r2dbc.datasources.default.username
+      value: sa
+  - org.openrewrite.properties.AddProperty:
+      property: r2dbc.datasources.default.password
+      value: ""

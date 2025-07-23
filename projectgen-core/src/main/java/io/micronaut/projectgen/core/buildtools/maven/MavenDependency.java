@@ -91,7 +91,7 @@ public class MavenDependency extends DependencyCoordinate {
 
     @NonNull
     public static List<MavenDependency> listOf(@NonNull DependencyContext dependencyContext, Language language) {
-        return dependencyContext.removeDuplicates(dependencyContext.getDependencies(), language, BuildTool.MAVEN)
+        return dependencyContext.removeDuplicates(dependencyContext.getDependenciesByBuildTool(BuildTool.MAVEN), language, BuildTool.MAVEN)
             .stream()
             .map(dep -> new MavenDependency(dep, language))
             .filter(mavenDependency -> mavenDependency.getMavenScope() != null)

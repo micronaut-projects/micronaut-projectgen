@@ -31,3 +31,4 @@ recipeList:
       relativeFileName: README.md
       content: https://docs.oracle.com/en/database/oracle/oracle-database/21/adque/aq-introduction.html
       appendNewline: true
+      existingFileStrategy: Continue

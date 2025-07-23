@@ -3,6 +3,7 @@ name: io.micronaut.starter.feature.azure-cosmos-db
 displayName: Add Azure Cosmos Db dependency and link to README
 recipeList:
   - io.micronaut.starter.feature.azure-cosmos-db.dependencies
+  - io.micronaut.starter.feature.create-application-properties
   - io.micronaut.starter.feature.azure-cosmos-db.configuration
   - io.micronaut.starter.feature.azure-cosmos-db.micronaut.documentation
   - io.micronaut.starter.feature.azure-cosmos-db.documentation.thirdparty
@@ -47,6 +48,7 @@ recipeList:
       relativeFileName: README.md
       content: https://micronaut-projects.github.io/micronaut-azure/latest/guide/#azureCosmosClient
       appendNewline: true
+      existingFileStrategy: Continue
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.azure-cosmos-db.documentation.thirdparty
@@ -56,3 +58,4 @@ recipeList:
       relativeFileName: README.md
       content: https://learn.microsoft.com/en-us/azure/cosmos-db/
       appendNewline: true
+      existingFileStrategy: Continue

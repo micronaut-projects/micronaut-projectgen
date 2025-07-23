@@ -23,3 +23,4 @@ recipeList:
       relativeFileName: README.md
       content: https://www.mock-server.com/mock_server/mockserver_clients.html#java-mockserver-client
       appendNewline: true
+      existingFileStrategy: Continue

@@ -43,4 +43,5 @@ recipeList:
       relativeFileName: README.md
       content: https://docs.micronaut.io/latest/guide/index.html#nettyHttpClient
       appendNewline: true
+      existingFileStrategy: Continue
 

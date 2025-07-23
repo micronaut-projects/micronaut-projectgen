@@ -1,0 +1,16 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.jdbc-ucp
+displayName: Add Jdbc Ucp dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.jdbc-ucp.dependencies
+  - io.micronaut.starter.feature.jdbc-docs
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.jdbc-ucp.dependencies
+displayName: Add Jdbc Ucp dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.sql
+      artifactId: micronaut-jdbc-ucp
+      configuration: implementation
+      scope: compile

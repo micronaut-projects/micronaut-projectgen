@@ -23,3 +23,4 @@ recipeList:
       relativeFileName: README.md
       content: https://micronaut-projects.github.io/micronaut-object-storage/latest/guide/index.html#local
       appendNewline: true
+      existingFileStrategy: Continue

@@ -1,0 +1,19 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.r2dbc-config-mariadb
+displayName: Add R2dbc Mariadb driver configuration
+recipeList:
+  - io.micronaut.starter.feature.create-application-properties
+  - io.micronaut.starter.feature.r2dbc-config-mariadb.config
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.r2dbc-config-mariadb.config
+displayName: Add R2dbc Mariadb driver configuration
+preconditions:
+  - io.micronaut.starter.openrewrite.recipes.FindApplicationProperties
+recipeList:
+  - org.openrewrite.properties.AddProperty:
+      property: r2dbc.datasources.default.dialect
+      value: MYSQL
+  - org.openrewrite.properties.AddProperty:
+      property: r2dbc.datasources.default.db-type
+      value: mariadb

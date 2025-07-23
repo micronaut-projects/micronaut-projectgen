@@ -23,3 +23,4 @@ recipeList:
       relativeFileName: README.md
       content: https://docs.micronaut.io/latest/guide/#retry
       appendNewline: true
+      existingFileStrategy: Continue

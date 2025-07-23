@@ -25,6 +25,7 @@ recipeList:
       relativeFileName: README.md
       content: https://micronaut-projects.github.io/micronaut-openapi/latest/guide/index.html
       appendNewline: true
+      existingFileStrategy: Continue
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.openapi.documentation.thirdparty
@@ -34,3 +35,4 @@ recipeList:
       relativeFileName: README.md
       content: https://www.openapis.org
       appendNewline: true
+      existingFileStrategy: Continue

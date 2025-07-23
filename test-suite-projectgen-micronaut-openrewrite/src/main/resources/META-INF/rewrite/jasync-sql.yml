@@ -1,0 +1,64 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.jasync-sql
+displayName: Add Jasync Sql dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.jasync-sql.dependencies
+  - io.micronaut.starter.feature.jasync-sql.micronaut.documentation
+  - io.micronaut.starter.feature.jasync-sql.documentation.thirdparty
+  - io.micronaut.starter.feature.create-application-properties
+  - io.micronaut.starter.feature.jasync-sql.configuration
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.jasync-sql.dependencies
+displayName: Add Jasync Sql dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.sql
+      artifactId: micronaut-jasync-sql
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.jasync-sql.micronaut.documentation
+displayName: Append a link to Micronaut Jasync Sql documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-sql/latest/guide/index.html#jasync
+      appendNewline: true
+      existingFileStrategy: Continue
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.jasync-sql.documentation.thirdparty
+displayName: Append a link to Jasync Sql documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://github.com/jasync-sql/jasync-sql/wiki
+      appendNewline: true
+      existingFileStrategy: Continue
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.jasync-sql.configuration
+displayName: Add Jasync Sql configuartion
+preconditions:
+  - io.micronaut.starter.openrewrite.recipes.FindApplicationProperties
+recipeList:
+  - org.openrewrite.properties.AddProperty:
+      property: jasync.client.port
+      value: 5432
+  - org.openrewrite.properties.AddProperty:
+      property: jasync.client.host
+      value: the-host
+  - org.openrewrite.properties.AddProperty:
+      property: jasync.client.database
+      value: the-db
+  - org.openrewrite.properties.AddProperty:
+      property: jasync.client.username
+      value: test
+  - org.openrewrite.properties.AddProperty:
+      property: jasync.client.password
+      value: test
+  - org.openrewrite.properties.AddProperty:
+      property: jasync.client.maxActiveConnections
+      value: 5

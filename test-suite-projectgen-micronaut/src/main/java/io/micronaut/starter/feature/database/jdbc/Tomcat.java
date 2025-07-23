@@ -20,12 +20,16 @@ import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.feature.database.DatabaseDriverFeature;
 import jakarta.inject.Singleton;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.jdbc.tomcat.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class Tomcat extends JdbcFeature {
+public class Tomcat extends JdbcFeature implements OpenRewriteFeature {
 
     public Tomcat(DatabaseDriverFeature dbFeature) {
         super(dbFeature);
@@ -47,12 +51,11 @@ public class Tomcat extends JdbcFeature {
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        super.apply(generatorContext);
-        ModuleContext moduleContext = generatorContext.getRootModule();
-        moduleContext.addDependency(Dependency.builder()
-                .groupId("io.micronaut.sql")
-                .artifactId("micronaut-jdbc-tomcat")
-                .compile());
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        List<String> recipes = new ArrayList<>();
+        recipes.add("io.micronaut.starter.feature.jdbc-tomcat");
+        addDatabaseConfigRecipe(generatorContext, recipes);
+        return recipes;
     }
+
 }

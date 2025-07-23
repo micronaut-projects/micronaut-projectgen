@@ -1,0 +1,25 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.jdbc-config-h2
+displayName: Add Jdbc H2 configuration
+recipeList:
+  - io.micronaut.starter.feature.create-application-properties
+  - io.micronaut.starter.feature.jdbc-config-h2.config
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.jdbc-config-h2.config
+displayName: Add Jdbc H2 configuration
+preconditions:
+  - io.micronaut.starter.openrewrite.recipes.FindApplicationProperties
+recipeList:
+  - org.openrewrite.properties.AddProperty:
+      property: datasources.default.url
+      value: jdbc:h2:mem:devDb;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
+  - org.openrewrite.properties.AddProperty:
+      property: datasources.default.driver-class-name
+      value: org.h2.Driver
+  - org.openrewrite.properties.AddProperty:
+      property: datasources.default.username
+      value: sa
+  - org.openrewrite.properties.AddProperty:
+      property: datasources.default.password
+      value: ""

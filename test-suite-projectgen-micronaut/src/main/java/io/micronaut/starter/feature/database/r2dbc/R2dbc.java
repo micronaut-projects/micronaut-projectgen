@@ -22,6 +22,7 @@ import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils;
 import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.FeatureContext;
@@ -32,24 +33,22 @@ import io.micronaut.starter.feature.migration.MigrationFeature;
 import io.micronaut.starter.feature.testresources.TestResources;
 import jakarta.inject.Singleton;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 @Requires(property = "micronaut.starter.feature.r2dbc.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class R2dbc implements R2dbcFeature {
+public class R2dbc extends R2dbcConfigurationUtils implements R2dbcFeature, OpenRewriteFeature {
+
+    private static final String RECIPE_R2DBC_DOCS = "io.micronaut.starter.feature.r2dbc-docs";
+    private static final String RECIPE_R2DBC_DEPENDENCY = "io.micronaut.starter.feature.r2dbc-dependency";
 
     public static final String NAME = "r2dbc";
 
-    private static final Dependency DEPENDENCY_MICRONAUT_R2DBC_CORE = MicronautDependencyUtils.r2dbcDependency()
-            .artifactId("micronaut-r2dbc-core")
-            .compile()
-            .build();
-
     private static final String PREFIX = "r2dbc.datasources.default.";
     private static final String URL_KEY = PREFIX + "url";
-    private static final String USERNAME_KEY = PREFIX + "username";
-    private static final String PASSWORD_KEY = PREFIX + "password";
 
     private final DatabaseDriverFeature defaultDbFeature;
     private final Hikari hikari;
@@ -91,35 +90,15 @@ public class R2dbc implements R2dbcFeature {
         return Category.DATABASE;
     }
 
-    @Nullable
     @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-r2dbc/latest/guide/";
-    }
-
-    @Nullable
-    @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://r2dbc.io";
-    }
-
-    @Override
-    public void apply(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
-        DatabaseDriverFeature dbFeature = generatorContext.getRequiredFeature(DatabaseDriverFeature.class);
-        if (!generatorContext.isFeaturePresent(TestResources.class)) {
-            Map<String, Object> rdbcConfig = new LinkedHashMap<>();
-            rdbcConfig.put(getUrlKey(), dbFeature.getR2dbcUrl());
-            rdbcConfig.put(USERNAME_KEY, dbFeature.getDefaultUser());
-            rdbcConfig.put(PASSWORD_KEY, dbFeature.getDefaultPassword());
-            module.configuration().putAll(rdbcConfig);
-        } else {
-            dbFeature.getDbType().ifPresent(type -> module.configuration().addNested("r2dbc.datasources.default.db-type", type.toString()));
-            module.configuration().addNested("r2dbc.datasources.default.dialect", dbFeature.getDataDialect());
-        }
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        List<String> recipes = new ArrayList<>();
+        recipes.add(RECIPE_R2DBC_DOCS);
         if (!generatorContext.isFeaturePresent(DataR2dbc.class)) {
-            module.addDependency(DEPENDENCY_MICRONAUT_R2DBC_CORE);
+            recipes.add(RECIPE_R2DBC_DEPENDENCY);
         }
+        addDatabaseConfigRecipe(generatorContext, recipes);
+        return recipes;
     }
 
     public String getUrlKey() {

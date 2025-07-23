@@ -6,3 +6,4 @@ recipeList:
       relativeFileName: README.md
       content: https://github.com/kubernetes-client/java/wiki
       appendNewline: true
+      existingFileStrategy: Continue

@@ -1,0 +1,38 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.data-spring-jdbc
+displayName: Add Data Spring Jdbc dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.data-spring-jdbc.dependencies
+  - io.micronaut.starter.feature.data-spring-jdbc.micronaut.documentation
+  - io.micronaut.starter.feature.create-application-properties
+  - io.micronaut.starter.feature.data-spring-jdbc.configuration
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.data-spring-jdbc.dependencies
+displayName: Add Data Spring Jdbc dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.data
+      artifactId: micronaut-data-spring-jdbc
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.data-spring-jdbc.micronaut.documentation
+displayName: Append a link to Micronaut Data Spring Jdbc documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-data/latest/guide/#spring
+      appendNewline: true
+      existingFileStrategy: Continue
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.data-spring-jdbc.configuration
+displayName: Add Data Spring Jdbc configuration
+preconditions:
+  - io.micronaut.starter.openrewrite.recipes.FindApplicationProperties
+recipeList:
+  - org.openrewrite.properties.AddProperty:
+      property: datasources.default.transaction-manager
+      value: springJdbc
