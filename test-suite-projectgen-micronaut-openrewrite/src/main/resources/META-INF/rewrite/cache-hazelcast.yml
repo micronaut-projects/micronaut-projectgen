@@ -3,6 +3,7 @@ name: io.micronaut.starter.feature.cache-hazelcast
 displayName: Add Cache Hazelcast dependency and link to README
 recipeList:
   - io.micronaut.starter.feature.cache-hazelcast.dependencies
+  - io.micronaut.starter.feature.create-application-properties
   - io.micronaut.starter.feature.cache-hazelcast.configurations
   - io.micronaut.starter.feature.cache-hazelcast.micronaut.documentation
   - io.micronaut.starter.feature.cache-hazelcast.documentation.thirdparty
@@ -25,6 +26,7 @@ recipeList:
       relativeFileName: README.md
       content: https://micronaut-projects.github.io/micronaut-cache/latest/guide/index.html#hazelcast
       appendNewline: true
+      existingFileStrategy: Continue
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.cache-hazelcast.documentation.thirdparty
@@ -34,6 +36,7 @@ recipeList:
       relativeFileName: README.md
       content: https://hazelcast.org/
       appendNewline: true
+      existingFileStrategy: Continue
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.cache-hazelcast.configurations

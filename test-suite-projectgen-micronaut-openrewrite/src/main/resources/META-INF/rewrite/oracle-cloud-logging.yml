@@ -25,6 +25,7 @@ recipeList:
       relativeFileName: README.md
       content: https://micronaut-projects.github.io/micronaut-oracle-cloud/latest/guide/#logging
       appendNewline: true
+      existingFileStrategy: Continue
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.oracle-cloud-logging.documentation.thirdparty
@@ -34,4 +35,5 @@ recipeList:
       relativeFileName: README.md
       content: https://docs.oracle.com/en-us/iaas/Content/Logging/Concepts/loggingoverview.htm
       appendNewline: true
+      existingFileStrategy: Continue
 

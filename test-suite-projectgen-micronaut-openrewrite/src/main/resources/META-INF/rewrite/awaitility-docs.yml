@@ -6,3 +6,4 @@ recipeList:
       relativeFileName: README.md
       content: https://github.com/awaitility/awaitility
       appendNewline: true
+      existingFileStrategy: Continue

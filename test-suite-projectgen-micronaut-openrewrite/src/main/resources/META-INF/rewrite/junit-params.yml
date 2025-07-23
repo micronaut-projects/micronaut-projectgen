@@ -23,3 +23,4 @@ recipeList:
       relativeFileName: README.md
       content: https://junit.org/junit5/docs/current/user-guide/#writing-tests-parameterized-tests
       appendNewline: true
+      existingFileStrategy: Continue

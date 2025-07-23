@@ -3,6 +3,7 @@ name: io.micronaut.starter.feature.micrometer-statsd
 displayName: Add Micrometer Statsd dependency and configuration
 recipeList:
   - io.micronaut.starter.feature.micrometer-statsd.dependencies
+  - io.micronaut.starter.feature.create-application-properties
   - io.micronaut.starter.feature.micrometer-statsd.configuration
 ---
 type: specs.openrewrite.org/v1beta/recipe

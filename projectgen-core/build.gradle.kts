@@ -1,6 +1,6 @@
 plugins {
     id("io.micronaut.build.internal.projectgen-module")
-    id("nu.studer.rocker") version "3.0.4"
+    id("nu.studer.rocker") version "3.0.5"
 }
 dependencies {
     // Serialization
@@ -26,6 +26,8 @@ dependencies {
     compileOnly(libs.snakeyaml)
     compileOnly(libs.typesafeconfig)
     testImplementation(libs.java.diff.utils)
+    //upgrade commons-lang3 to version 3.18.0 to fix a CVE
+    implementation(libs.commons.lang3)
 }
 rocker {
     configurations {

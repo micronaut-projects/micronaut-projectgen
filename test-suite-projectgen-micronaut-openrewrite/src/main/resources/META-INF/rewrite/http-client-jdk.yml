@@ -44,6 +44,7 @@ recipeList:
       relativeFileName: README.md
       content: https://docs.micronaut.io/latest/guide/index.html#jdkHttpClient
       appendNewline: true
+      existingFileStrategy: Continue
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.http-client-jdk.documentation.thirdparty
@@ -53,3 +54,4 @@ recipeList:
       relativeFileName: README.md
       content: https://openjdk.org/groups/net/httpclient/intro.html
       appendNewline: true
+      existingFileStrategy: Continue

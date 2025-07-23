@@ -5,6 +5,7 @@ recipeList:
   - io.micronaut.starter.feature.oracle-cloud-atp.dependencies
   - io.micronaut.starter.feature.oracle-cloud-atp.micronaut.documentation
   - io.micronaut.starter.feature.oracle-cloud-atp.documentation.thirdparty
+  - io.micronaut.starter.feature.create-application-properties
   - io.micronaut.starter.feature.oracle-cloud-atp.configuration
   - io.micronaut.starter.feature.oci-config-profile
 ---
@@ -26,6 +27,7 @@ recipeList:
       relativeFileName: README.md
       content: https://micronaut-projects.github.io/micronaut-oracle-cloud/latest/guide/#_micronaut_oraclecloud_atp
       appendNewline: true
+      existingFileStrategy: Continue
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.oracle-cloud-atp.documentation.thirdparty
@@ -35,6 +37,7 @@ recipeList:
       relativeFileName: README.md
       content: https://www.oracle.com/autonomous-database/autonomous-transaction-processing/
       appendNewline: true
+      existingFileStrategy: Continue
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.oracle-cloud-atp.configuration

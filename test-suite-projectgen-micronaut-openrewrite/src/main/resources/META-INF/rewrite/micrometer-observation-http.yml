@@ -3,6 +3,7 @@ name: io.micronaut.starter.feature.micrometer-observation-http
 displayName: Add Micrometer Observation Http dependency and configuration
 recipeList:
   - io.micronaut.starter.feature.micrometer-observation-http.dependencies
+  - io.micronaut.starter.feature.create-application-properties
   - io.micronaut.starter.feature.micrometer-observation-http.configuration
 ---
 type: specs.openrewrite.org/v1beta/recipe

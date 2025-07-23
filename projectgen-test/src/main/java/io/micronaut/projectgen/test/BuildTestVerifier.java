@@ -18,6 +18,7 @@ package io.micronaut.projectgen.test;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.buildtools.Scope;
+import io.micronaut.projectgen.core.buildtools.dependencies.Coordinate;
 import io.micronaut.projectgen.core.options.Language;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.core.options.TestFramework;
@@ -216,5 +217,12 @@ public interface BuildTestVerifier {
 
     default boolean hasProfile(String profileId) {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    default boolean matchCoordinateGroupIdAndArtifactId(Coordinate d, String groupId, String artifactId) {
+        if (d.getGroupId() == null || groupId == null) {
+            return d.getArtifactId().equals(artifactId);
+        }
+        return d.getGroupId().equals(groupId) && d.getArtifactId().equals(artifactId);
     }
 }

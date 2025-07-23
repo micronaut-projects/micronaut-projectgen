@@ -27,6 +27,7 @@ import io.micronaut.projectgen.core.feature.license.Apache2LicenseFeature;
 import io.micronaut.projectgen.core.feature.license.LicenseFeature;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.core.utils.OptionUtils;
+import io.micronaut.projectgen.micronaut.features.cli.MicronautCli;
 import io.micronaut.projectgen.micronaut.features.logging.Logback;
 import io.micronaut.projectgen.micronaut.features.test.MicronautTestJunit5;
 import io.micronaut.projectgen.micronaut.features.test.MicronautTestSpock;
@@ -43,7 +44,8 @@ public class ApplicationTypeLibraryFeature extends ApplicationTypeFeature {
     private final SigningGradlePlugin signingGradlePlugin;
     private final SpotlessGradlePlugin spotlessGradlePlugin;
 
-    public ApplicationTypeLibraryFeature(Apache2LicenseFeature license,
+    public ApplicationTypeLibraryFeature(MicronautCli micronautCli,
+                                         Apache2LicenseFeature license,
                                          MicronautTestJunit5 micronautTestJunit5,
                                          MicronautTestSpock micronautTestSpock,
                                          MicronautLibraryGradlePlugin micronautLibraryGradlePlugin,
@@ -52,7 +54,7 @@ public class ApplicationTypeLibraryFeature extends ApplicationTypeFeature {
                                          SpotlessGradlePlugin spotlessGradlePlugin,
                                          Logback logback,
                                          GitIgnore gitIgnore) {
-        super(micronautTestJunit5, micronautTestSpock, logback, gitIgnore);
+        super(micronautCli, micronautTestJunit5, micronautTestSpock, logback, gitIgnore);
         this.license = license;
         this.micronautLibraryGradlePlugin = micronautLibraryGradlePlugin;
         this.mavenPublishGradlePlugin = mavenPublishGradlePlugin;

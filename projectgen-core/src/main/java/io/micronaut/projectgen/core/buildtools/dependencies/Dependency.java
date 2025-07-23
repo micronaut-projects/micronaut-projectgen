@@ -67,7 +67,7 @@ public final class Dependency implements Coordinate {
 
     @SuppressWarnings("ParameterNumber")
     private Dependency(Scope scope,
-                       String groupId,
+                       @Nullable String groupId,
                        String artifactId,
                        String version,
                        String versionProperty,
@@ -181,6 +181,7 @@ public final class Dependency implements Coordinate {
     }
 
     @Override
+    @Nullable
     public String getGroupId() {
         return groupId;
     }

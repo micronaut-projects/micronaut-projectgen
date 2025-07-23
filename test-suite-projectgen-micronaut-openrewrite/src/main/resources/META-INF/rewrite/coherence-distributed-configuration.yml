@@ -24,6 +24,7 @@ recipeList:
       relativeFileName: README.md
       content: https://micronaut-projects.github.io/micronaut-coherence/latest/guide/#distributedConfiguration
       appendNewline: true
+      existingFileStrategy: Continue
 
 
 

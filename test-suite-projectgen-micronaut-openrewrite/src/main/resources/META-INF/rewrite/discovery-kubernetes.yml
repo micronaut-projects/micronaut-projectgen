@@ -4,6 +4,7 @@ displayName: Add Discovery Kubernetes Dependency and a link to README
 recipeList:
   - io.micronaut.starter.feature.discovery-kubernetes.dependencies
   - io.micronaut.starter.feature.discovery-kubernetes.documentation.micronaut
+  - io.micronaut.starter.feature.create-bootstrap-properties
   - io.micronaut.starter.feature.discovery-kubernetes.configuration
 ---
 type: specs.openrewrite.org/v1beta/recipe
@@ -36,3 +37,4 @@ recipeList:
       relativeFileName: README.md
       content: https://micronaut-projects.github.io/micronaut-kubernetes/latest/guide/#service-discovery
       appendNewline: true
+      existingFileStrategy: Continue

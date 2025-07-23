@@ -3,6 +3,7 @@ name: io.micronaut.starter.feature.cache-infinispan
 displayName: Add Cache Infinispan dependency and link to README
 recipeList:
   - io.micronaut.starter.feature.cache-infinispan.dependencies
+  - io.micronaut.starter.feature.create-application-properties
   - io.micronaut.starter.feature.cache-infinispan.configurations
   - io.micronaut.starter.feature.cache-infinispan.micronaut.documentation
   - io.micronaut.starter.feature.cache-infinispan.documentation.thirdparty
@@ -25,6 +26,7 @@ recipeList:
       relativeFileName: README.md
       content: https://micronaut-projects.github.io/micronaut-cache/latest/guide/index.html#infinispan
       appendNewline: true
+      existingFileStrategy: Continue
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.cache-infinispan.documentation.thirdparty
@@ -34,6 +36,7 @@ recipeList:
       relativeFileName: README.md
       content: https://infinispan.org/
       appendNewline: true
+      existingFileStrategy: Continue
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.cache-infinispan.configurations

@@ -26,6 +26,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class MicronautApplicationGenerationTest {
     private static final Set<String> EXPECT_FILES_FOR_BOTH = Set.of(
         ".gitignore",
+        "micronaut-cli.yml",
         "README.md",
         "src/main/resources/logback.xml",
         "src/main/resources/application.properties",

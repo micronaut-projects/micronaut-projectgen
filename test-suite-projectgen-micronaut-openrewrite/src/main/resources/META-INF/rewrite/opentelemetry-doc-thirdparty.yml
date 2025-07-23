@@ -6,3 +6,4 @@ recipeList:
       relativeFileName: README.md
       content: https://opentelemetry.io
       appendNewline: true
+      existingFileStrategy: Continue

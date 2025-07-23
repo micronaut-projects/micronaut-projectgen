@@ -24,3 +24,4 @@ recipeList:
       relativeFileName: README.md
       content: https://netplex.github.io/json-smart/
       appendNewline: true
+      existingFileStrategy: Continue

@@ -3,6 +3,7 @@ name: io.micronaut.starter.feature.micrometer-stackdriver
 displayName: Add Micrometer Stackdriver dependency and configuration
 recipeList:
   - io.micronaut.starter.feature.micrometer-stackdriver.dependencies
+  - io.micronaut.starter.feature.create-application-properties
   - io.micronaut.starter.feature.micrometer-stackdriver.configuration
 ---
 type: specs.openrewrite.org/v1beta/recipe
