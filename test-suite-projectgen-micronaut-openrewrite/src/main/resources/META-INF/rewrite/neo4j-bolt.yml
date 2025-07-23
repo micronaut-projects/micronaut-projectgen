@@ -4,6 +4,7 @@ displayName: Add Neo4j Bolt dependency and link to README
 recipeList:
   - io.micronaut.starter.feature.neo4j-bolt.dependencies
   - io.micronaut.starter.feature.neo4j-bolt.micronaut.documentation
+  - io.micronaut.starter.feature.create-application-properties
   - io.micronaut.starter.feature.neo4j-bolt.configuration
 ---
 type: specs.openrewrite.org/v1beta/recipe
