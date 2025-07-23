@@ -3,6 +3,7 @@ name: io.micronaut.starter.feature.tracing-opentelemetry-exporter-gcp
 displayName: Add Tracing Opentelemetry Exporter GCP dependency and configuration
 recipeList:
   - io.micronaut.starter.feature.tracing-opentelemetry-exporter-gcp.dependencies
+  - io.micronaut.starter.feature.create-application-properties
   - io.micronaut.starter.feature.tracing-opentelemetry-exporter-gcp.configuration
   - io.micronaut.starter.feature.opentelemetry.documentation.thirdparty
   - io.micronaut.starter.feature.opentelemetry.micronaut.documentation

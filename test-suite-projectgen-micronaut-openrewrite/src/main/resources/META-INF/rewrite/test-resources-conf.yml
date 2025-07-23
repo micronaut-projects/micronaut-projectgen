@@ -1,6 +1,13 @@
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.test-resources-conf
 displayName: Add Test Resources Configuration
+recipeList:
+  - io.micronaut.starter.feature.create-application-properties
+  - io.micronaut.starter.feature.test-resources-conf.config
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.test-resources-conf.config
+displayName: Add Test Resources Configuration
 preconditions:
   - io.micronaut.starter.openrewrite.recipes.FindApplicationProperties
 recipeList:

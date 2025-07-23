@@ -1,9 +1,0 @@
-type: specs.openrewrite.org/v1beta/recipe
-name: io.micronaut.starter.feature.aws-codebuild-workflow-ci-docs
-displayName: Append a link to Aws Codebuild Workflow Ci documentation
-recipeList:
-  - org.openrewrite.text.AppendToTextFile:
-      relativeFileName: README.md
-      content: https://docs.aws.amazon.com/codebuild/latest/userguide
-      appendNewline: true
-      existingFileStrategy: Continue

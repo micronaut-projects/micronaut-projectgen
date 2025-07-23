@@ -2,6 +2,7 @@ type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.discovery-consul
 displayName: Add Discovery Consul Dependency and link to README
 recipeList:
+  - io.micronaut.starter.feature.create-application-properties
   - io.micronaut.starter.feature.discovery-consul.configuration
   - io.micronaut.starter.feature.discovery-consul.micronaut.documentation
   - io.micronaut.starter.feature.discovery-consul.documentation.thirdparty
