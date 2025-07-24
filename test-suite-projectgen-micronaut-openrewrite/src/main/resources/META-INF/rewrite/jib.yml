@@ -21,3 +21,4 @@ recipeList:
       relativeFileName: README.md
       content: https://plugins.gradle.org/plugin/com.google.cloud.tools.jib
       appendNewline: true
+      existingFileStrategy: Continue
