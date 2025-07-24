@@ -21,16 +21,20 @@ import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.feature.database.jdbc.JdbcFeature;
+import io.micronaut.starter.feature.migration.MigrationFeature;
 import jakarta.inject.Singleton;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Requires(property = "micronaut.starter.feature.data.jdbc.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class DataJdbc implements DataFeature {
+public class DataJdbc extends DataDriverConfiguration implements DataFeature, OpenRewriteFeature {
 
     public static final String NAME = "data-jdbc";
 
-    public static final String MICRONAUT_DATA_JDBC_ARTIFACT = "micronaut-data-jdbc";
     private final Data data;
     private final JdbcFeature jdbcFeature;
 
@@ -63,20 +67,14 @@ public class DataJdbc implements DataFeature {
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
-        module.addDependency(DataFeature.dataProcessorDependency(generatorContext.getBuildTool()));
-        module.addDependency(Dependency.builder()
-                .groupId("io.micronaut.data")
-                .artifactId(MICRONAUT_DATA_JDBC_ARTIFACT)
-                .compile());
-
-        DatabaseDriverFeature dbFeature = generatorContext.getRequiredFeature(DatabaseDriverFeature.class);
-        module.configuration().addNested(getDatasourceConfig(generatorContext, dbFeature));
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        List<String> recipes = new ArrayList<>();
+        if (!generatorContext.isFeaturePresent(MigrationFeature.class)) {
+            recipes.add("io.micronaut.starter.feature.data-conf-nomigration");
+        }
+        recipes.add("io.micronaut.starter.feature.data-jdbc");
+        addDatabaseConfigRecipe(generatorContext, recipes);
+        return recipes;
     }
 
-    @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-data/latest/guide/index.html#jdbc";
-    }
 }
