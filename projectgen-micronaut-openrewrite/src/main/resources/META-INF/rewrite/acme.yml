@@ -21,11 +21,9 @@ type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.acme.documentation.thirdparty
 displayName: Append a link to the Acme Website
 recipeList:
-  - org.openrewrite.text.AppendToTextFile:
-      relativeFileName: README.md
+  - io.micronaut.projectgen.starter.openrewrite.AppendToTextFileIfNotPresent:
+      filePattern: README.md
       content: https://micronaut-projects.github.io/micronaut-acme/latest/guide/index.html
-      appendNewline: true
-      existingFileStrategy: Continue
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.acme.configuration
