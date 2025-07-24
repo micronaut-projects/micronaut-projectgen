@@ -18,6 +18,7 @@ package io.micronaut.starter.feature.other;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.feature.InterceptUrlMap;
 import io.micronaut.starter.feature.staticResources.ContributingStaticResources;
 import io.micronaut.starter.feature.staticResources.StaticResource;
@@ -28,7 +29,7 @@ import java.util.List;
 
 @Requires(property = "micronaut.starter.feature.rapidoc.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class RapiDoc extends OpenApiView implements ContributingStaticResources {
+public class RapiDoc extends OpenApiView implements ContributingStaticResources, OpenRewriteFeature {
     public static final String NAME = "rapidoc";
 
     public RapiDoc(OpenApi openApiFeature) {
@@ -51,13 +52,8 @@ public class RapiDoc extends OpenApiView implements ContributingStaticResources 
     }
 
     @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://rapidocweb.com/api.html";
-    }
-
-    @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-openapi/latest/guide/#rapidoc";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.rapidoc-docs");
     }
 
     @Override
