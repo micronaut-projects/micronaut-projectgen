@@ -1,0 +1,26 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.kotlin
+displayName: Add Kotlin dependencies
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.kotlin
+      artifactId: micronaut-kotlin-runtime
+      configuration: implementation
+      scope: compile
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: org.jetbrains.kotlin
+      artifactId: kotlin-reflect
+      configuration: implementation
+      scope: compile
+      version: ${kotlinVersion}
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: org.jetbrains.kotlin
+      artifactId: kotlin-stdlib-jdk8
+      configuration: implementation
+      scope: compile
+      version: ${kotlinVersion}
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: com.fasterxml.jackson.module
+      artifactId: jackson-module-kotlin
+      configuration: runtimeOnly
+      scope: runtime
