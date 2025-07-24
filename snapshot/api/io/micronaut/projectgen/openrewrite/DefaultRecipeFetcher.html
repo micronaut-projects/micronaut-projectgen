@@ -143,11 +143,14 @@ implements <a href="../core/openrewrite/RecipeFetcher.html" title="interface in 
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#findMavenAnnotationProcessor(org.openrewrite.maven.AddAnnotationProcessor)" class="member-name-link">findMavenAnnotationProcessor</a><wbr>(@NonNull org.openrewrite.maven.AddAnnotationProcessor&nbsp;recipe)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@NonNull <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Properties.html" title="class or interface in java.util" class="external-link">Properties</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#findPropertiesByRecipeName(java.lang.String)" class="member-name-link">findPropertiesByRecipeName</a><wbr>(@NonNull <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;recipeName)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#findMavenBuildPropertiesByRecipeName(java.lang.String)" class="member-name-link">findMavenBuildPropertiesByRecipeName</a><wbr>(@NonNull <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;recipeName)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#findThirdPartyDocumentationByRecipeName(java.lang.String)" class="member-name-link">findThirdPartyDocumentationByRecipeName</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;recipeName)</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@NonNull <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Properties.html" title="class or interface in java.util" class="external-link">Properties</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#findPropertiesByRecipeName(java.lang.String)" class="member-name-link">findPropertiesByRecipeName</a><wbr>(@NonNull <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;recipeName)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#findThirdPartyDocumentationByRecipeName(java.lang.String)" class="member-name-link">findThirdPartyDocumentationByRecipeName</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;recipeName)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 </div>
 </div>
 </div>
@@ -304,6 +307,18 @@ implements <a href="../core/openrewrite/RecipeFetcher.html" title="interface in 
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="../core/openrewrite/RecipeFetcher.html#findAllBuildPluginsByRecipeNameAndBuildTool(java.lang.String,io.micronaut.projectgen.core.buildtools.BuildTool)">findAllBuildPluginsByRecipeNameAndBuildTool</a></code>&nbsp;in interface&nbsp;<code><a href="../core/openrewrite/RecipeFetcher.html" title="interface in io.micronaut.projectgen.core.openrewrite">RecipeFetcher</a></code></dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="findMavenBuildPropertiesByRecipeName(java.lang.String)">
+<h3>findMavenBuildPropertiesByRecipeName</h3>
+<div class="member-signature"><span class="annotations">@NonNull
+</span><span class="modifiers">public</span>&nbsp;<span class="return-type">@NonNull <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Properties.html" title="class or interface in java.util" class="external-link">Properties</a>&gt;</span>&nbsp;<span class="element-name">findMavenBuildPropertiesByRecipeName</span><wbr><span class="parameters">(@NonNull
+ @NonNull <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;recipeName)</span></div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="../core/openrewrite/RecipeFetcher.html#findMavenBuildPropertiesByRecipeName(java.lang.String)">findMavenBuildPropertiesByRecipeName</a></code>&nbsp;in interface&nbsp;<code><a href="../core/openrewrite/RecipeFetcher.html" title="interface in io.micronaut.projectgen.core.openrewrite">RecipeFetcher</a></code></dd>
 </dl>
 </section>
 </li>
