@@ -1,5 +1,6 @@
 package io.micronaut.projectgen.micronaut.features.asciidoctor;
 
+import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.buildtools.Scope;
 import io.micronaut.projectgen.core.io.PreviewGenerator;
 import io.micronaut.projectgen.core.options.Options;
@@ -32,11 +33,11 @@ class AsciidoctorTest {
         Map<String, String> project = previewGenerator.generate(options);
         String pom = project.get("pom.xml");
         assertNotNull(pom);
-        BuildTestVerifier verifier = BuildTestVerifier.of(pom, options);
+        BuildTestVerifier verifier = BuildTestVerifier.of(pom, BuildTool.MAVEN, options.language(), options.testFramework());
         assertTrue(verifier.hasBuildPlugin("org.asciidoctor", "asciidoctor-maven-plugin"), pom);
-        assertTrue(pom.contains("<asciidoctor.maven.plugin.version>2.2.6</asciidoctor.maven.plugin.version>"));
-        assertTrue(pom.contains("<asciidoctorj.version>2.5.13</asciidoctorj.version>"));
-        assertTrue(pom.contains("<asciidoctorj.diagram.version>2.3.2</asciidoctorj.diagram.version>"));
-        assertTrue(pom.contains("<jruby.version>9.4.13.0</jruby.version>"));
+        assertEquals("2.2.6", verifier.getProperty("asciidoctor.maven.plugin.version"));
+        assertEquals("2.5.13", verifier.getProperty("asciidoctorj.version"));
+        assertEquals("2.3.2", verifier.getProperty("asciidoctorj.diagram.version"));
+        assertEquals("9.4.13.0", verifier.getProperty("jruby.version"));
     }
 }
