@@ -293,6 +293,15 @@ public record ModuleContext(CoordinateResolver coordinateResolver,
         });
     }
 
+    public void addMavenBuildPropertiesByRecipeName(@NonNull String recipeName) {
+        recipeFetcher.findMavenBuildPropertiesByRecipeName(recipeName).ifPresent(properties -> {
+            BuildProperties buildProps = buildProperties();
+            for (Map.Entry<Object, Object> entry : properties.entrySet()) {
+                buildProps.put(entry.getKey().toString(), entry.getValue().toString());
+            }
+        });
+    }
+
     /**
      * Adds a template.
      * @param name The name of the template

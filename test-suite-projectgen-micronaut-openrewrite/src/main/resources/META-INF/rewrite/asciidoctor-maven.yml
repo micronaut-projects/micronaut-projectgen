@@ -1,0 +1,17 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.asciidoctor-maven.properties
+displayName: Add Asciidoctor project properties
+recipeList:
+  - org.openrewrite.maven.AddProperty:
+      key: asciidoctor.maven.plugin.version
+      value: 2.2.6
+  - org.openrewrite.maven.AddProperty:
+      key: asciidoctorj.version
+      value: 2.5.13
+  - org.openrewrite.maven.AddProperty:
+      key: asciidoctorj.diagram.version
+      value: 2.3.2
+  - org.openrewrite.maven.AddProperty:
+      key: jruby.version
+      value: 9.4.13.0
+
