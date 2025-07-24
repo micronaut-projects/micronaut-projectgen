@@ -25,7 +25,7 @@ class SecurityJwtTest {
         String buildGradle = project.get("build.gradle.kts");
         assertNotNull(buildGradle);
         assertEquals("bearer", applicationProperties.getProperty("micronaut.security.authentication"));
-        assertEquals("pleaseChangeThisSecretForANewOne", applicationProperties.getProperty("micronaut.security.token.jwt.signatures.secret.generator.secret"));
+        assertEquals("${JWT_GENERATOR_SIGNATURE_SECRET:pleaseChangeThisSecretForANewOne}", applicationProperties.getProperty("micronaut.security.token.jwt.signatures.secret.generator.secret"));
     }
 
     @Test
