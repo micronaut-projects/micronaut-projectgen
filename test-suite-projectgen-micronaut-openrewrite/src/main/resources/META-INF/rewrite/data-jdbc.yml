@@ -24,3 +24,4 @@ recipeList:
       relativeFileName: README.md
       content: https://micronaut-projects.github.io/micronaut-data/latest/guide/index.html#jdbc
       appendNewline: true
+      existingFileStrategy: Continue
