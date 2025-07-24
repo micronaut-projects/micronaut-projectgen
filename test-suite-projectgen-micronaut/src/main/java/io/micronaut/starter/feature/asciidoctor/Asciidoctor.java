@@ -71,6 +71,12 @@ public class Asciidoctor implements OpenRewriteFeature {
         OpenRewriteFeature.super.apply(generatorContext);
         if (OptionUtils.hasGradleBuildTool(generatorContext.getOptions())) {
             module.addTemplate("asciidocGradle", new RockerTemplate("gradle/asciidoc.gradle", asciidocGradle.template()));
+        } else if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())) {
+            String mavenPluginArtifactId = "asciidoctor-maven-plugin";
+            module.addBuildPlugin(MavenPlugin.builder()
+                .artifactId(mavenPluginArtifactId)
+                .extension(new RockerWritable(asciidocMavenPlugin.template()))
+                .build());
         }
         module.addTemplate("indexAdoc", new RockerTemplate("src/docs/asciidoc/index.adoc", indexAdoc.template()));
     }
@@ -87,7 +93,7 @@ public class Asciidoctor implements OpenRewriteFeature {
             recipes.add("io.micronaut.starter.feature.asciidoctor-gradle");
         }
         if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())) {
-            recipes.add("io.micronaut.starter.feature.asciidoctor-maven");
+            recipes.add("io.micronaut.starter.feature.asciidoctor-maven.properties");
         }
             return recipes;
     }
