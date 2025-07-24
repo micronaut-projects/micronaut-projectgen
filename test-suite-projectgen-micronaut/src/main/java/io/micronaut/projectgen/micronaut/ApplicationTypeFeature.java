@@ -18,12 +18,15 @@ package io.micronaut.projectgen.micronaut;
 import io.micronaut.projectgen.core.buildtools.MavenCentral;
 import io.micronaut.projectgen.core.buildtools.Repository;
 import io.micronaut.projectgen.core.buildtools.RequiresRepository;
+import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.feature.ConfigurationFeature;
 import io.micronaut.projectgen.core.feature.DefaultFeature;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.projectgen.core.feature.LoggingFeature;
 import io.micronaut.projectgen.core.feature.config.Properties;
 import io.micronaut.projectgen.core.feature.gitignore.GitIgnore;
+import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.core.options.TestFramework;
 import io.micronaut.projectgen.micronaut.features.cli.MicronautCli;
 import io.micronaut.projectgen.micronaut.features.logging.Logback;
@@ -62,6 +65,16 @@ public abstract class ApplicationTypeFeature implements DefaultFeature, Requires
         } else if (featureContext.getOptions().testFramework() == TestFramework.SPOCK) {
             featureContext.addFeatureIfNotPresent(MicronautTestSpock.class, micronautTestSpock);
         }
+    }
+
+    @Override
+    public void apply(GeneratorContext generatorContext) {
+        Options options = generatorContext.getOptions();
+        generatorContext.getRootModule().moduleAttributes().setCoordinate(Dependency.builder()
+            .groupId(options.group())
+            .artifactId(options.artifact())
+            .version(options.version())
+            .build());
     }
 
     @Override
