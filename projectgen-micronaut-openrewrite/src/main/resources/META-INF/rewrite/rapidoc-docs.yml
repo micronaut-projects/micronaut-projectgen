@@ -1,0 +1,28 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.rapidoc-docs
+displayName: Add Rapidoc documentation
+recipeList:
+  - io.micronaut.starter.feature.rapidoc-docs.micronaut.documentation
+  - io.micronaut.starter.feature.rapidoc-docs.documentation.thirdparty
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.rapidoc-docs.micronaut.documentation
+displayName: Append a link to Micronaut Rapidoc documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-openapi/latest/guide/#rapidoc
+      appendNewline: true
+      existingFileStrategy: Continue
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.rapidoc-docs.documentation.thirdparty
+displayName: Append a link to Rapidoc website
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://rapidocweb.com/api.html
+      appendNewline: true
+      existingFileStrategy: Continue
+
+

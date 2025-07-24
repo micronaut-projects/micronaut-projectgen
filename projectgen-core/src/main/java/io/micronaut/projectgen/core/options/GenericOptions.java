@@ -79,6 +79,22 @@ public record GenericOptions(@NonNull String name,
     }
 
     @Override
+    public String artifact() {
+        if (StringUtils.isEmpty(this.artifact)) {
+            return name();
+        }
+        return this.artifact;
+    }
+
+    @Override
+    public String group() {
+        if (StringUtils.isEmpty(this.group)) {
+            return packageName();
+        }
+        return this.group;
+    }
+
+    @Override
     public List<String> features() {
         return CollectionUtils.isEmpty(this.features) ? Collections.emptyList() : this.features;
     }

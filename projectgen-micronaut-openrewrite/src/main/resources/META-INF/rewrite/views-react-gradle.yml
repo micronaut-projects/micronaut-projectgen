@@ -1,0 +1,12 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.views-react-gradle
+displayName: Add Views React dependency for gradle
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: org.graalvm.polyglot
+      artifactId: js-community
+      configuration: runtimeOnly
+      version: 24.2.1
+
+
+

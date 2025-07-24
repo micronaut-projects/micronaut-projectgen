@@ -29,6 +29,7 @@ import io.micronaut.projectgen.micronaut.features.httpclient.HttpClient;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Requires(property = "micronaut.starter.feature.security.oauth2.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
@@ -75,32 +76,13 @@ public class SecurityOAuth2 extends SecurityFeature implements SecurityAuthentic
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        OpenRewriteFeature.super.apply(generatorContext);
-        ModuleContext module = generatorContext.getRootModule();
-        SecurityOAuth2Configuration oAuth2Config = securityOAuth2Configuration(generatorContext);
-        Configuration devConfig = module.devConfiguration();
-        devConfig.put("micronaut.security.oauth2.clients.default.client-id", oAuth2Config.getClientId());
-        devConfig.put("micronaut.security.oauth2.clients.default.client-secret", oAuth2Config.getClientSecret());
-        if (generatorContext.isFeaturePresent(SecurityJWT.class)) {
-            devConfig.put("micronaut.security.oauth2.clients.default.openid.issuer", oAuth2Config.getIssuer());
-        }
-    }
-
-    @NonNull
-    private SecurityOAuth2Configuration securityOAuth2Configuration(@NonNull GeneratorContext generatorContext) {
-        return generatorContext.getFeatures()
-                .getFeatures()
-                .stream()
-                .filter(SecurityOAuth2Configuration.class::isInstance)
-                .map(SecurityOAuth2Configuration.class::cast)
-                .findFirst()
-                .orElseGet(() -> new SecurityOAuth2Configuration() { });
-    }
-
-    @Override
     public List<String> getRecipes(GeneratorContext generatorContext) {
-        return List.of("io.micronaut.starter.feature.security-oauth2");
+        List<String> recipes = new ArrayList<>();
+        if (generatorContext.isFeaturePresent(SecurityJWT.class)) {
+            recipes.add("io.micronaut.starter.feature.security-oauth2-jwt-config");
+        }
+        recipes.add("io.micronaut.starter.feature.security-oauth2");
+        return recipes;
     }
 
     @Override

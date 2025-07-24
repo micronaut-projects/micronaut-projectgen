@@ -20,6 +20,7 @@ import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.feature.ci.workflows.CIWorkflowFeature;
 import io.micronaut.projectgen.core.rocker.RockerTemplate;
 import io.micronaut.projectgen.core.template.Template;
@@ -27,9 +28,11 @@ import io.micronaut.projectgen.micronaut.template.ci.aws.buildSpec;
 
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.aws.codebuild.workflow.ci.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class AWSCiWorkflowFeature extends CIWorkflowFeature {
+public class AWSCiWorkflowFeature extends CIWorkflowFeature implements OpenRewriteFeature {
     public static final String NAME = "aws-codebuild-workflow-ci";
     private static final String WORKFLOW_FILENAME = "buildspec.yml";
 
@@ -59,6 +62,7 @@ public class AWSCiWorkflowFeature extends CIWorkflowFeature {
     @Override
     public void apply(GeneratorContext generatorContext) {
         super.apply(generatorContext);
+        OpenRewriteFeature.super.apply(generatorContext);
         ModuleContext module = generatorContext.getRootModule();
         module.addTemplate("cloudBuild", workflowRockerTemplate(generatorContext));
     }
@@ -73,7 +77,8 @@ public class AWSCiWorkflowFeature extends CIWorkflowFeature {
     }
 
     @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
-        return "https://docs.aws.amazon.com/codebuild/latest/userguide";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.aws-codebuild-workflow-ci-docs");
     }
+
 }

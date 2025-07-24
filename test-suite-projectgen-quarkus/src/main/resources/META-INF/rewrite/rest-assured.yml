@@ -16,3 +16,4 @@ recipeList:
       relativeFileName: README.md
       content: https://rest-assured.io
       appendNewline: true
+      existingFileStrategy: Continue

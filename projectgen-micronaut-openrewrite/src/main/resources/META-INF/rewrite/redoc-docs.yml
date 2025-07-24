@@ -1,0 +1,26 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.redoc-docs
+displayName: Add Redoc documentation
+recipeList:
+  - io.micronaut.starter.feature.redoc-docs.micronaut.documentation
+  - io.micronaut.starter.feature.redoc-docs.documentation.thirdparty
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.redoc-docs.micronaut.documentation
+displayName: Append a link to Micronaut Redoc documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-openapi/latest/guide/#redoc
+      appendNewline: true
+      existingFileStrategy: Continue
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.redoc-docs.documentation.thirdparty
+displayName: Append a link to Redoc documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://github.com/Redocly/redoc#generate-beautiful-api-documentation-from-openapi
+      appendNewline: true
+      existingFileStrategy: Continue

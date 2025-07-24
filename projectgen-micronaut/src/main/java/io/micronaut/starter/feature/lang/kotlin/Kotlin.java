@@ -20,6 +20,7 @@ import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.feature.KotlinApplicationFeature;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.options.GenericOptionsBuilder;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
@@ -40,11 +41,7 @@ import java.util.function.Predicate;
 
 @Requires(property = "micronaut.starter.feature.kotlin.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class Kotlin implements LanguageFeature {
-    protected static final Dependency DEPENDENCY_MICRONAUT_KOTLIN_RUNTIME = MicronautDependencyUtils.kotlinDependency()
-            .artifactId("micronaut-kotlin-runtime")
-            .compile()
-            .build();
+public class Kotlin implements LanguageFeature, OpenRewriteFeature {
 
     protected final List<KotlinApplicationFeature> applicationFeatures;
 
@@ -78,7 +75,7 @@ public class Kotlin implements LanguageFeature {
     public void apply(GeneratorContext generatorContext) {
         ModuleContext module = generatorContext.getRootModule();
         addKotlinVersionProperty(generatorContext, module);
-        addDependencies(module);
+        OpenRewriteFeature.super.apply(generatorContext);
     }
 
     protected void addKotlinVersionProperty(GeneratorContext generatorContext, ModuleContext module) {
@@ -86,20 +83,9 @@ public class Kotlin implements LanguageFeature {
         module.buildProperties().put("kotlinVersion", coordinate.getVersion());
     }
 
-    protected void addDependencies(ModuleContext module) {
-        Dependency.Builder kotlin = Dependency.builder()
-                .groupId("org.jetbrains.kotlin")
-                .compile()
-                .version("${kotlinVersion}")
-                .template();
-
-        module.addDependency(kotlin.artifactId("kotlin-stdlib-jdk8"));
-        module.addDependency(kotlin.artifactId("kotlin-reflect"));
-        module.addDependency(DEPENDENCY_MICRONAUT_KOTLIN_RUNTIME);
-        module.addDependency(Dependency.builder()
-                .groupId("com.fasterxml.jackson.module")
-                .artifactId("jackson-module-kotlin")
-                .runtime());
+    @Override
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.kotlin");
     }
 
     @Override

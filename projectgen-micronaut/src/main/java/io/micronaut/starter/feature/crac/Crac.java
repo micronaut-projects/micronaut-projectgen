@@ -81,21 +81,12 @@ public class Crac implements RequireEagerSingletonInitializationFeature, OpenRew
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        OpenRewriteFeature.super.apply(generatorContext);
-        ModuleContext module = generatorContext.getRootModule();
-        if (OptionUtils.hasGradleBuildTool(generatorContext.getOptions())) {
-            module.addBuildPlugin(GradlePlugin.builder()
-                .id("io.micronaut.crac")
-                .lookupArtifactId("micronaut-crac-plugin")
-                .build());
-        }
-    }
-
-    @Override
     public List<String> getRecipes(GeneratorContext generatorContext) {
         List<String> recipes = new ArrayList<>();
-        recipes.add("io.micronaut.starter.feature.crac");
+        if (OptionUtils.hasGradleBuildTool(generatorContext.getOptions())) {
+            recipes.add("io.micronaut.starter.feature.crac-plugin");
+        }
+            recipes.add("io.micronaut.starter.feature.crac");
         if (generatorContext.isFeaturePresent(Hikari.class)) {
             recipes.add("io.micronaut.starter.feature.crac-hikari");
         }

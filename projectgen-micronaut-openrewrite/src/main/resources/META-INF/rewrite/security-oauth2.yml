@@ -5,7 +5,9 @@ recipeList:
   - io.micronaut.starter.feature.security-oauth2.dependencies
   - io.micronaut.starter.feature.security-oauth2.micronaut.documentation
   - io.micronaut.starter.feature.create-application-properties
+  - io.micronaut.starter.feature.create-application-dev-properties
   - io.micronaut.starter.feature.security-oauth2.configuration
+  - io.micronaut.starter.feature.security-oauth2.dev-configuration
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.feature.security-oauth2.dependencies
@@ -36,3 +38,16 @@ recipeList:
   - org.openrewrite.properties.AddProperty:
       property: micronaut.security.authentication
       value: cookie
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.security-oauth2.dev-configuration
+displayName: Add Security Oauth2 dev configuration
+preconditions:
+  - io.micronaut.starter.openrewrite.recipes.FindDevProperties
+recipeList:
+  - org.openrewrite.properties.AddProperty:
+      property: micronaut.security.oauth2.clients.default.client-id
+      value: ${OAUTH_CLIENT_ID\:XXX}
+  - org.openrewrite.properties.AddProperty:
+      property: micronaut.security.oauth2.clients.default.client-secret
+      value: ${OAUTH_ISSUER}

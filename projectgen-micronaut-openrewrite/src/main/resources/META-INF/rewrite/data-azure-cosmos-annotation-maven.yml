@@ -1,0 +1,12 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.data-azure-cosmos-annotation-maven
+displayName: Add Data Azure Cosmos Annotation Processor for maven
+recipeList:
+  - org.openrewrite.maven.AddAnnotationProcessor:
+      groupId: io.micronaut.data
+      artifactId: micronaut-data-processor
+      version: ${micronaut.data.version}
+  - org.openrewrite.maven.AddAnnotationProcessor:
+      groupId: io.micronaut.data
+      artifactId: micronaut-data-document-processor
+      version: ${micronaut.data.version}
