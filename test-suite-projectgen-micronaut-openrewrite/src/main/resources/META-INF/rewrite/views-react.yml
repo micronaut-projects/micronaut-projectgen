@@ -1,0 +1,37 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.views-react
+displayName: Add Views React dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.views-react.dependencies
+  - io.micronaut.starter.feature.views-react.micronaut.documentation
+  - io.micronaut.starter.feature.views-react.documentation.thirdparty
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.views-react.dependencies
+displayName: Add Views React dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.views
+      artifactId: micronaut-views-react
+      configuration: implementation
+      scope: compile
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.views-react.micronaut.documentation
+displayName: Append a link to Micronaut Views React documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-views/latest/guide/index.html#react
+      appendNewline: true
+      existingFileStrategy: Continue
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.views-react.documentation.thirdparty
+displayName: Append a link to Views React website
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://react.dev/reference/react-dom/server
+      appendNewline: true
+      existingFileStrategy: Continue

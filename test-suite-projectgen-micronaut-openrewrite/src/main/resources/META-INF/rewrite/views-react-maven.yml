@@ -1,0 +1,25 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.views-react-maven
+displayName: Add Views React dependency for maven
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: org.graalvm.js
+      artifactId: js-language
+      scope: runtime
+      version: 24.2.1
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: org.graalvm.truffle
+      artifactId: truffle-enterprise
+      scope: runtime
+      version: 24.2.1
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: org.graalvm.truffle
+      artifactId: truffle-runtime
+      scope: runtime
+      version: 24.2.1
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: org.graalvm.polyglot
+      artifactId: polyglot
+      scope: runtime
+      version: 24.2.1
+
