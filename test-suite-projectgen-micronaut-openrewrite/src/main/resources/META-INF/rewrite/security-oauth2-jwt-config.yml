@@ -1,0 +1,9 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.security-oauth2-jwt-config
+displayName: Add Security Oauth configuration
+preconditions:
+  - io.micronaut.starter.openrewrite.recipes.FindDevProperties
+recipeList:
+  - org.openrewrite.properties.AddProperty:
+      property: micronaut.security.oauth2.clients.default.openid.issuer
+      value: ${OAUTH_ISSUER}
