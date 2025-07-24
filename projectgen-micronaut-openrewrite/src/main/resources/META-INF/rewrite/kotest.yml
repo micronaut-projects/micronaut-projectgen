@@ -1,0 +1,18 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.kotest
+displayName: Add Kotest dependency and link to README
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.micronaut.test
+      artifactId: micronaut-test-kotest5
+      scope: test
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.kotest
+      artifactId: kotest-runner-junit5-jvm
+      scope: test
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: io.kotest
+      artifactId: kotest-assertions-core-jvm
+      scope: test
+
+

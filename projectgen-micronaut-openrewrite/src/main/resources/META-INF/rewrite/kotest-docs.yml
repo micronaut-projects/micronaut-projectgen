@@ -1,0 +1,26 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.kotest-docs
+displayName: Add a link to README
+recipeList:
+  - io.micronaut.starter.feature.kotest-docs.micronaut.documentation
+  - io.micronaut.starter.feature.kotest-docs.documentation.thirdparty
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.kotest-docs.micronaut.documentation
+displayName: Append a link to Micronaut Kotest documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://micronaut-projects.github.io/micronaut-test/latest/guide/#kotest5
+      appendNewline: true
+      existingFileStrategy: Continue
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.kotest-docs.documentation.thirdparty
+displayName: Append a link to Kotest website
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://kotest.io/
+      appendNewline: true
+      existingFileStrategy: Continue

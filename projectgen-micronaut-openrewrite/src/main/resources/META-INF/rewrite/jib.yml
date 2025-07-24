@@ -1,0 +1,24 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.jib
+displayName: Add Jib dependency and link to README
+recipeList:
+  - io.micronaut.starter.feature.jib.plugin
+  - io.micronaut.starter.feature.jib.documentation.thirdparty
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.jib.plugin
+displayName: Add Jib Plugin
+recipeList:
+  - org.openrewrite.gradle.plugins.AddBuildPlugin:
+      pluginId: com.google.cloud.tools.jib
+      version: 2.8.0
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.jib.documentation.thirdparty
+displayName: Append a link to Jib documentation
+recipeList:
+  - org.openrewrite.text.AppendToTextFile:
+      relativeFileName: README.md
+      content: https://plugins.gradle.org/plugin/com.google.cloud.tools.jib
+      appendNewline: true
+      existingFileStrategy: Continue
