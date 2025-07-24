@@ -21,19 +21,17 @@ import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils;
 import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.Feature;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 @Requires(property = "micronaut.starter.feature.neo4j.bolt.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class Neo4jBolt implements Feature {
-    private static final Dependency DEPENDENCY_NEO4J_HARNESS = Dependency.builder()
-            .groupId("org.neo4j.test")
-            .artifactId("neo4j-harness")
-            .testRuntime()
-            .build();
+public class Neo4jBolt implements OpenRewriteFeature {
 
     @Override
     @NonNull
@@ -53,22 +51,13 @@ public class Neo4jBolt implements Feature {
     }
 
     @Override
-    public void apply(GeneratorContext generatorContext) {
-        ModuleContext module = generatorContext.getRootModule();
-        module.configuration().put("neo4j.uri", "bolt://${NEO4J_HOST:localhost}");
-        module.addDependency(MicronautDependencyUtils.neo4j()
-                .artifactId("micronaut-neo4j-bolt")
-                .compile());
-        module.addDependency(DEPENDENCY_NEO4J_HARNESS);
-    }
-
-    @Override
     public String getCategory() {
         return Category.DATABASE;
     }
 
     @Override
-    public String getFrameworkDocumentation(GeneratorContext generatorContext) {
-        return "https://micronaut-projects.github.io/micronaut-neo4j/latest/guide/index.html";
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.neo4j-bolt");
     }
+
 }
