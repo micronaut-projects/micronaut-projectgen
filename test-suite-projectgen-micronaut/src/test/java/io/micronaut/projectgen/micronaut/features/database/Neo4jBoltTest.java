@@ -24,7 +24,7 @@ class Neo4jBoltTest {
         Properties applicationProperties = ConfigurationUtils.loadApplicationProperties(project);
         String buildGradle = project.get("build.gradle.kts");
         assertNotNull(buildGradle);
-        assertEquals("bolt://localhost", applicationProperties.getProperty("neo4j.uri"));
+        assertEquals("bolt://${NEO4J_HOST:localhost}", applicationProperties.getProperty("neo4j.uri"));
     }
 
     @Test
