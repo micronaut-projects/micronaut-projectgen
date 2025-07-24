@@ -7,5 +7,3 @@ dependencies {
     testImplementation(mnTest.micronaut.test.junit5)
     testRuntimeOnly(mnTest.junit.jupiter.engine)
 }
-group = "io.micronaut.projectgen"
-version = rootProject.version
