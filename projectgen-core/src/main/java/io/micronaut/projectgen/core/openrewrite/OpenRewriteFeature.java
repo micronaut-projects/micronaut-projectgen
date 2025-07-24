@@ -42,6 +42,7 @@ public interface OpenRewriteFeature extends Feature {
             rootModule.addDependenciesByRecipeName(generatorContext.getOptions(), recipeName);
             rootModule.addBuildPluginsByRecipeName(generatorContext.getOptions(), recipeName);
             rootModule.addTemplatesByRecipeName(recipeName);
+            rootModule.addMavenBuildPropertiesByRecipeName(recipeName);
         }
     }
 
