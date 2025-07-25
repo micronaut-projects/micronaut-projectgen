@@ -58,7 +58,7 @@ class DataJdbcTest {
 
     @ParameterizedTest
     @MethodSource("driversArguments")
-    void testDataJdbcDriversConfiguration(String driver , String dialect, PreviewGenerator previewGenerator) throws Exception {
+    void testDataJdbcDriversConfiguration(String driver, String dialect, PreviewGenerator previewGenerator) throws Exception {
         Options options = OptionsFixture.defaultGradle().features(List.of(driver, "data-jdbc")).build();
         Map<String, String> project = previewGenerator.generate(options);
         Properties applicationProperties = ConfigurationUtils.loadApplicationProperties(project);

@@ -15,7 +15,6 @@
  */
 package io.micronaut.starter.feature.server;
 
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.feature.FeatureValidator;
 import io.micronaut.projectgen.core.options.Options;
@@ -36,15 +35,15 @@ public class MicronautServerDependentValidator implements FeatureValidator {
 
         features.stream().filter(ThirdPartyServerFeature.class::isInstance).findFirst().ifPresent(feature -> {
             List<String> dependents = features.stream()
-            .filter(MicronautServerDependent.class::isInstance)
-            .map(Feature::getName)
-            .sorted()
-            .collect(Collectors.toList());
+                .filter(MicronautServerDependent.class::isInstance)
+                .map(Feature::getName)
+                .sorted()
+                .collect(Collectors.toList());
 
             if (!dependents.isEmpty()) {
-                throw new IllegalArgumentException(feature.getName() +
-                    " cannot be used with these features that depend on a Micronaut Server: " +
-                    dependents);
+                throw new IllegalArgumentException(feature.getName()
+                    + " cannot be used with these features that depend on a Micronaut Server: "
+                    + dependents);
             }
         });
     }

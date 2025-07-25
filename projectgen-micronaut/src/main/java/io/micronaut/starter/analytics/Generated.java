@@ -41,11 +41,11 @@ public class Generated {
 
     @Creator
     public Generated(
-            @NonNull ApplicationType type,
-            @NonNull Language language,
-            @NonNull BuildTool buildTool,
-            @NonNull TestFramework testFramework,
-            @NonNull JdkVersion jdkVersion) {
+        @NonNull ApplicationType type,
+        @NonNull Language language,
+        @NonNull BuildTool buildTool,
+        @NonNull TestFramework testFramework,
+        @NonNull JdkVersion jdkVersion) {
         this.type = Objects.requireNonNull(type, "Type cannot be null");
         this.language = Objects.requireNonNull(language, "Language cannot be null");
         this.buildTool = Objects.requireNonNull(buildTool, "Build tool cannot be null");

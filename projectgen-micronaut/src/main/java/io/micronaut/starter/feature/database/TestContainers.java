@@ -60,9 +60,9 @@ public class TestContainers implements Feature {
     public void apply(GeneratorContext generatorContext) {
         ModuleContext module = generatorContext.getRootModule();
         generatorContext.getFeatures().getFeatures()
-                .stream()
-                .filter(ContributingTestContainerDependency.class::isInstance)
-                .forEach(f -> ((ContributingTestContainerDependency) f).testContainersDependencies().forEach(module::addDependency));
+            .stream()
+            .filter(ContributingTestContainerDependency.class::isInstance)
+            .forEach(f -> ((ContributingTestContainerDependency) f).testContainersDependencies().forEach(module::addDependency));
         module.addDependency(ContributingTestContainerDependency.testContainerDependency(ARTIFACT_ID_TESTCONTAINERS));
 
         generatorContext.getFeature(DatabaseDriverFeature.class).ifPresent(driverFeature -> {
@@ -99,12 +99,11 @@ public class TestContainers implements Feature {
                     testConfig.put(hibernateReactiveFeature.getUrlKey(), url);
                 });
                 artifactIdForDriverFeature(driverFeature)
-                        .ifPresent(dependencyArtifactId -> module.addDependency(ContributingTestContainerDependency.testContainerDependency(dependencyArtifactId)));
+                    .ifPresent(dependencyArtifactId -> module.addDependency(ContributingTestContainerDependency.testContainerDependency(dependencyArtifactId)));
             });
         });
-        testContainerArtifactIdByTestFramework(generatorContext.getTestFramework()).ifPresent(testArtifactId -> {
-            module.addDependency(ContributingTestContainerDependency.testContainerDependency(testArtifactId));
-        });
+        testContainerArtifactIdByTestFramework(generatorContext.getTestFramework()).ifPresent(testArtifactId ->
+            module.addDependency(ContributingTestContainerDependency.testContainerDependency(testArtifactId)));
     }
 
     @NonNull

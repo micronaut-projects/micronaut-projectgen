@@ -52,39 +52,39 @@ abstract class ChatBotsBasecamp extends ChatBots {
     @Override
     protected void renderTemplates(GeneratorContext generatorContext, ModuleContext module) {
         module.addTemplate(
-                "about-html",
-                new RockerTemplate("src/main/resources/botcommands/about.html", about.template())
+            "about-html",
+            new RockerTemplate("src/main/resources/botcommands/about.html", about.template())
         );
         module.addTemplate(
             generatorContext.getOptions().language(),
-                "basecamp-about-command-handler",
-                generatorContext.getSourcePath("/{packagePath}/BasecampAboutCommandHandler"),
-                aboutCommandHandlerJava.template(generatorContext.getProject()),
-                aboutCommandHandlerKotlin.template(generatorContext.getProject()),
-                aboutCommandHandlerGroovy.template(generatorContext.getProject())
+            "basecamp-about-command-handler",
+            generatorContext.getSourcePath("/{packagePath}/BasecampAboutCommandHandler"),
+            aboutCommandHandlerJava.template(generatorContext.getProject()),
+            aboutCommandHandlerKotlin.template(generatorContext.getProject()),
+            aboutCommandHandlerGroovy.template(generatorContext.getProject())
         );
         if (!generatorContext.getTestFramework().isKotlinTestFramework()) {
             module.addTemplate(
-                    "mock-basecamp-about-command-json",
-                    new RockerTemplate(
-                            "src/test/resources/mockBasecampAboutCommand.json",
-                            mockAboutCommandJson.template()
-                    )
+                "mock-basecamp-about-command-json",
+                new RockerTemplate(
+                    "src/test/resources/mockBasecampAboutCommand.json",
+                    mockAboutCommandJson.template()
+                )
             );
         }
         if (generatorContext.getTestFramework() == TestFramework.JUNIT) {
             module.addTemplate(
                 generatorContext.getOptions().language(),
-                    "about-command-handler-junit-test",
-                    generatorContext.getTestSourcePath("/{packagePath}/BasecampAboutCommandHandler"),
-                    aboutCommandHandlerJavaJunit.template(generatorContext.getProject()),
-                    aboutCommandHandlerKotlinJunit.template(generatorContext.getProject()),
-                    aboutCommandHandlerGroovyJunit.template(generatorContext.getProject())
+                "about-command-handler-junit-test",
+                generatorContext.getTestSourcePath("/{packagePath}/BasecampAboutCommandHandler"),
+                aboutCommandHandlerJavaJunit.template(generatorContext.getProject()),
+                aboutCommandHandlerKotlinJunit.template(generatorContext.getProject()),
+                aboutCommandHandlerGroovyJunit.template(generatorContext.getProject())
             );
         } else if (generatorContext.getTestFramework() == TestFramework.SPOCK) {
             module.addTemplate(
-                    "about-command-handler-spock-groovy-test",
-                    new RockerTemplate(generatorContext.getTestSourcePath("/{packagePath}/BasecampAboutCommandHandler"), aboutCommandHandlerGroovySpock.template(generatorContext.getProject()))
+                "about-command-handler-spock-groovy-test",
+                new RockerTemplate(generatorContext.getTestSourcePath("/{packagePath}/BasecampAboutCommandHandler"), aboutCommandHandlerGroovySpock.template(generatorContext.getProject()))
             );
         }
 
@@ -92,11 +92,11 @@ abstract class ChatBotsBasecamp extends ChatBots {
 
         module.addTemplate(
             generatorContext.getOptions().language(),
-                "final-command-handler",
-                generatorContext.getSourcePath("/{packagePath}/BasecampFinalCommandHandler"),
-                finalCommandHandlerJava.template(generatorContext.getProject()),
-                finalCommandHandlerKotlin.template(generatorContext.getProject()),
-                finalCommandHandlerGroovy.template(generatorContext.getProject())
+            "final-command-handler",
+            generatorContext.getSourcePath("/{packagePath}/BasecampFinalCommandHandler"),
+            finalCommandHandlerJava.template(generatorContext.getProject()),
+            finalCommandHandlerKotlin.template(generatorContext.getProject()),
+            finalCommandHandlerGroovy.template(generatorContext.getProject())
         );
     }
 

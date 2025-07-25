@@ -54,4 +54,3 @@ public class RedisLettuce implements OpenRewriteFeature {
         return Category.DATABASE;
     }
 }
-

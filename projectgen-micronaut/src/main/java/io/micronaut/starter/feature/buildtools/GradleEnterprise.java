@@ -76,11 +76,11 @@ public class GradleEnterprise implements Feature, GradleEnterpriseConfiguration 
 
     protected GradlePlugin gradlePlugin(GradleEnterpriseConfiguration configuration) {
         return GradlePlugin.builder()
-                .gradleFile(GradleFile.SETTINGS)
-                .id(GRADLE_ENTERPRISE_PLUGIN_ID)
-                .lookupArtifactId(GRADLE_ENTERPRISE_ARTIFACT_ID)
-                .settingsExtension(new RockerWritable(gradleEnterprise.template(configuration)))
-                .build();
+            .gradleFile(GradleFile.SETTINGS)
+            .id(GRADLE_ENTERPRISE_PLUGIN_ID)
+            .lookupArtifactId(GRADLE_ENTERPRISE_ARTIFACT_ID)
+            .settingsExtension(new RockerWritable(gradleEnterprise.template(configuration)))
+            .build();
     }
 
     protected void applyMaven(GeneratorContext generatorContext, GradleEnterpriseConfiguration server) {
@@ -97,8 +97,8 @@ public class GradleEnterprise implements Feature, GradleEnterpriseConfiguration 
 
     private static RockerModel extensionsRockerModel(GeneratorContext generatorContext) {
         return extensions.template(
-                generatorContext.resolveCoordinate(ARTIFACT_ID_GRADLE_ENTERPRISE_MAVEN_EXTENSION).getVersion(),
-                generatorContext.resolveCoordinate(ARTIFACT_ID_COMMON_CUSTOM_USER_DATA_MAVEN_EXTENSION).getVersion());
+            generatorContext.resolveCoordinate(ARTIFACT_ID_GRADLE_ENTERPRISE_MAVEN_EXTENSION).getVersion(),
+            generatorContext.resolveCoordinate(ARTIFACT_ID_COMMON_CUSTOM_USER_DATA_MAVEN_EXTENSION).getVersion());
     }
 
     @Override

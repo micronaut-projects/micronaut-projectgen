@@ -32,9 +32,9 @@ import jakarta.inject.Singleton;
 public class OpenTelemetryHttp implements TracingFeature, MicronautServerDependent {
 
     private static final Dependency MICRONAUT_OPEN_TELEMETRY_HTTP = MicronautDependencyUtils.tracingDependency()
-            .artifactId("micronaut-tracing-opentelemetry-http")
-            .compile()
-            .build();
+        .artifactId("micronaut-tracing-opentelemetry-http")
+        .compile()
+        .build();
 
     @Override
     public boolean isVisible() {

@@ -29,7 +29,7 @@ public class AwsLambdaScheduledEvent extends AwsLambdaEventFunctionFeature imple
     public AwsLambdaScheduledEvent(AwsLambda awsLambda) {
         super(awsLambda);
     }
-    
+
     @Override
     @NonNull
     public String getName() {

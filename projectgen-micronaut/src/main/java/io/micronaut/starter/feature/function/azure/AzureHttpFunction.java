@@ -46,16 +46,16 @@ public class AzureHttpFunction extends AbstractAzureFunction implements Feature 
     public static final String NAME = "azure-function-http";
 
     private static final Dependency MICRONAUT_AZURE_FUNCTION_HTTP = MicronautDependencyUtils
-            .azureDependency()
-            .artifactId("micronaut-azure-function-http")
-            .compile()
-            .build();
+        .azureDependency()
+        .artifactId("micronaut-azure-function-http")
+        .compile()
+        .build();
 
     private static final Dependency MICRONAUT_AZURE_FUNCTION_HTTP_TEST = MicronautDependencyUtils
-            .azureDependency()
-            .artifactId("micronaut-azure-function-http-test")
-            .test()
-            .build();
+        .azureDependency()
+        .artifactId("micronaut-azure-function-http-test")
+        .test()
+        .build();
 
     public AzureHttpFunction(CoordinateResolver coordinateResolver) {
         super(coordinateResolver);
@@ -103,9 +103,9 @@ public class AzureHttpFunction extends AbstractAzureFunction implements Feature 
         if (applicationType == ApplicationType.DEFAULT) {
             String triggerFile = generatorContext.getSourcePath("/{packagePath}/Function");
             module.addTemplate(generatorContext.getOptions().language(), "trigger", triggerFile,
-                    azureFunctionTriggerJava.template(project),
-                    azureFunctionTriggerKotlin.template(project),
-                    azureFunctionTriggerGroovy.template(project));
+                azureFunctionTriggerJava.template(project),
+                azureFunctionTriggerKotlin.template(project),
+                azureFunctionTriggerGroovy.template(project));
         }
 
     }

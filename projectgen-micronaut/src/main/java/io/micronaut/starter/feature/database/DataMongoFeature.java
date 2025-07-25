@@ -52,17 +52,17 @@ public abstract class DataMongoFeature extends EaseTestingFeature implements Dat
         }
 
         if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())) {
-            module.addDependency(DataFeature.dataProcessorDependency(generatorContext.getBuildTool()));
+            module.addDependency(DataFeature.dataProcessorDependency(generatorContext.getOptions().getBuildTool()));
         }
-        module.addDependency(DataDocumentFeature.dataDocumentProcessorDependency(generatorContext.getBuildTool()));
+        module.addDependency(DataDocumentFeature.dataDocumentProcessorDependency(generatorContext.getOptions().getBuildTool()));
         module.addDependency(MicronautDependencyUtils.dataDependency()
-                .compile()
-                .artifactId(MICRONAUT_DATA_MONGODB_ARTIFACT)
-                .versionProperty(MICRONAUT_DATA_VERSION));
+            .compile()
+            .artifactId(MICRONAUT_DATA_MONGODB_ARTIFACT)
+            .versionProperty(MICRONAUT_DATA_VERSION));
 
         Dependency.Builder driverDependency = Dependency.builder()
-                .groupId(MONGODB_GROUP)
-                .artifactId(mongoArtifact());
+            .groupId(MONGODB_GROUP)
+            .artifactId(mongoArtifact());
         // Needs to be an implementation dependency for the Groovy compiler
         driverDependency = generatorContext.getLanguage() == Language.GROOVY ? driverDependency.compile() : driverDependency.runtime();
         module.addDependency(driverDependency);

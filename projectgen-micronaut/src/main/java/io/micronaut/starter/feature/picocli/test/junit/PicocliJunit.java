@@ -78,7 +78,7 @@ public class PicocliJunit implements PicocliTestFeature {
     }
 
     public RockerTemplate getTemplate(Language language, Project project) {
-        String testSource =  getTestFramework().getSourcePath(PATH, language);
+        String testSource = getTestFramework().getSourcePath(PATH, language);
         return new RockerTemplate(testSource, getModel(language, project));
     }
 

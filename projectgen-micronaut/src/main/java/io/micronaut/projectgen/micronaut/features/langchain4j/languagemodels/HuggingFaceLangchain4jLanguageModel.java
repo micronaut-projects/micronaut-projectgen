@@ -26,9 +26,9 @@ import java.util.List;
 
 @Requires(property = "micronaut.starter.feature.langchain4j.hugging.face.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class HuggingFaceLangchain4jLanguageModel implements Langchain4jLanguageModel, OpenRewriteFeature {
+public class
+HuggingFaceLangchain4jLanguageModel implements Langchain4jLanguageModel, OpenRewriteFeature {
     private static final String NAME = "langchain4j-hugging-face";
-
 
     @Override
     public String getTitle() {

@@ -16,7 +16,6 @@
 package io.micronaut.starter.feature.sourcegen;
 
 import io.micronaut.core.util.StringUtils;
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.feature.FeatureValidator;
 import io.micronaut.projectgen.core.options.Language;
@@ -28,7 +27,7 @@ import java.util.Set;
 import java.util.stream.Stream;
 
 @Singleton
-public class SourcegenFeatureValidator implements FeatureValidator  {
+public class SourcegenFeatureValidator implements FeatureValidator {
 
     @Override
     public void validatePreProcessing(Options options, Set<Feature> features) {
@@ -37,7 +36,7 @@ public class SourcegenFeatureValidator implements FeatureValidator  {
 
     @Override
     public void validatePostProcessing(Options options, Set<Feature> features) {
-        if (features.stream().anyMatch(f -> f instanceof SourcegenJava)) {
+        if (features.stream().anyMatch(SourcegenJava.class::isInstance)) {
             if (!supports(options.language())) {
                 throw new IllegalArgumentException("sourcegen-generator is not supported in " + StringUtils.capitalize(options.language().getName()) + " applications");
             }
@@ -46,8 +45,8 @@ public class SourcegenFeatureValidator implements FeatureValidator  {
 
     public static List<Language> supportedLanguages() {
         return Stream.of(Language.values())
-                .filter(SourcegenFeatureValidator::supports)
-                .toList();
+            .filter(SourcegenFeatureValidator::supports)
+            .toList();
     }
 
     public static boolean supports(Language language) {

@@ -25,8 +25,6 @@ import io.micronaut.projectgen.core.options.GenericOptionsBuilder;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Coordinate;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
-import io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils;
 import io.micronaut.starter.feature.ApplicationFeature;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.feature.FeatureContext;
@@ -64,10 +62,10 @@ public class Kotlin implements LanguageFeature, OpenRewriteFeature {
         if (!featureContext.isPresent(ApplicationFeature.class)) {
             ApplicationType type = ApplicationType.of(featureContext.getOptions().template());
             applicationFeatures.stream()
-                    .filter(filter)
-                    .filter(f -> !f.isVisible() && f.supports(GenericOptionsBuilder.builder().template(type.toString()).build()))
-                    .findFirst()
-                    .ifPresent(featureContext::addFeature);
+                .filter(filter)
+                .filter(f -> !f.isVisible() && f.supports(GenericOptionsBuilder.builder().template(type.toString()).build()))
+                .findFirst()
+                .ifPresent(featureContext::addFeature);
         }
     }
 

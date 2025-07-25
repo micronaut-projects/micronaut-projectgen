@@ -33,8 +33,8 @@ public class DataHibernateReactive extends HibernateReactiveFeature implements D
     public static final String NAME = "data-hibernate-reactive";
 
     private static final Dependency.Builder DEPENDENCY_MICRONAUT_DATA_HIBERNATE_REACTIVE = MicronautDependencyUtils.dataDependency()
-            .artifactId("micronaut-data-hibernate-reactive")
-                .compile();
+        .artifactId("micronaut-data-hibernate-reactive")
+        .compile();
 
     private final Data data;
 
@@ -69,7 +69,7 @@ public class DataHibernateReactive extends HibernateReactiveFeature implements D
     public void apply(GeneratorContext generatorContext) {
         super.apply(generatorContext);
         ModuleContext module = generatorContext.getRootModule();
-        module.addDependency(DataFeature.dataProcessorDependency(generatorContext.getBuildTool()));
+        module.addDependency(DataFeature.dataProcessorDependency(generatorContext.getOptions().getBuildTool()));
         module.addDependency(DEPENDENCY_MICRONAUT_DATA_HIBERNATE_REACTIVE);
     }
 }

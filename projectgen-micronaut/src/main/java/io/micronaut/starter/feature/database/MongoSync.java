@@ -17,11 +17,8 @@ package io.micronaut.starter.feature.database;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
-import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.starter.feature.Category;
 import io.micronaut.starter.feature.testresources.TestResources;
 import jakarta.inject.Singleton;
@@ -35,7 +32,7 @@ public class MongoSync extends MongoFeature implements OpenRewriteFeature {
     public static final String NAME = "mongo-sync";
 
     public MongoSync(TestContainers testContainers,
-                     TestResources testResources) {
+        TestResources testResources) {
         super(testContainers, testResources);
     }
 

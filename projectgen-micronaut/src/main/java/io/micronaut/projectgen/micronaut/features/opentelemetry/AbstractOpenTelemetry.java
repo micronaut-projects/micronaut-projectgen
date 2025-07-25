@@ -26,10 +26,10 @@ public class AbstractOpenTelemetry implements OpenTelemetryFeature {
     private final OpenTelemetryExporterFeature otelExporter;
 
     public AbstractOpenTelemetry(OpenTelemetry otel,
-                                 OpenTelemetryHttp otelHttp,
-                                 OpenTelemetryAnnotations otelAnnotations,
-                                 OpenTelemetryGrpc openTelemetryGrpc,
-                                 OpenTelemetryExporterFeature otelExporter) {
+        OpenTelemetryHttp otelHttp,
+        OpenTelemetryAnnotations otelAnnotations,
+        OpenTelemetryGrpc openTelemetryGrpc,
+        OpenTelemetryExporterFeature otelExporter) {
         this.otel = otel;
         this.otelHttp = otelHttp;
         this.otelAnnotations = otelAnnotations;

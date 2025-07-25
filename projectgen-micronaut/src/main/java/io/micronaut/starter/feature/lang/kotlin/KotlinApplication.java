@@ -77,7 +77,7 @@ public class KotlinApplication implements KotlinApplicationFeature {
     protected boolean shouldGenerateApplicationFile(GeneratorContext generatorContext) {
         ApplicationType applicationType = ApplicationType.of(generatorContext.getOptions().template());
         return applicationType == ApplicationType.DEFAULT
-                || !generatorContext.getFeatures().hasFeature(FunctionFeature.class);
+            || !generatorContext.getFeatures().hasFeature(FunctionFeature.class);
     }
 
     protected void addApplication(GeneratorContext generatorContext, ModuleContext module) {
@@ -88,10 +88,10 @@ public class KotlinApplication implements KotlinApplicationFeature {
         String defaultEnvironment = getDefaultEnvironment(module);
         boolean eagerInitSingleton = generatorContext.getFeatures().isFeaturePresent(RequireEagerSingletonInitializationFeature.class);
         return application.template(
-                generatorContext.getProject(),
-                generatorContext.getFeatures(),
-                new KotlinApplicationRenderingContext(defaultEnvironment, eagerInitSingleton),
-                generatorContext.hasFeature(Slf4jJulBridge.class)
+            generatorContext.getProject(),
+            generatorContext.getFeatures(),
+            new KotlinApplicationRenderingContext(defaultEnvironment, eagerInitSingleton),
+            generatorContext.hasFeature(Slf4jJulBridge.class)
         );
     }
 
@@ -102,7 +102,7 @@ public class KotlinApplication implements KotlinApplicationFeature {
     protected void addApplicationTest(GeneratorContext generatorContext, ModuleContext module) {
         String testSourcePath = generatorContext.getTestSourcePath("/{packagePath}/{className}");
         module.addTemplate("applicationTest",
-                new RockerTemplate(testSourcePath, applicationTest(generatorContext))
+            new RockerTemplate(testSourcePath, applicationTest(generatorContext))
         );
     }
 
@@ -111,10 +111,10 @@ public class KotlinApplication implements KotlinApplicationFeature {
         Project project = generatorContext.getProject();
         boolean transactional = !generatorContext.getFeatures().hasFeature(TransactionalNotSupported.class);
         TestRockerModelProvider provider = new DefaultTestRockerModelProvider(spock.template(project, transactional),
-                kotlinJunit.template(project, transactional),
-                kotlinJunit.template(project, transactional),
-                kotlinJunit.template(project, transactional),
-                koTest.template(project, transactional));
+            kotlinJunit.template(project, transactional),
+            kotlinJunit.template(project, transactional),
+            kotlinJunit.template(project, transactional),
+            koTest.template(project, transactional));
         return provider.findModel(generatorContext.getLanguage(), testFramework);
     }
 

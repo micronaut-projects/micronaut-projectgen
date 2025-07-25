@@ -62,6 +62,4 @@ public class Jaeger implements TracingFeature, MicronautServerDependent, OpenRew
         return recipes;
     }
 
-
-
 }

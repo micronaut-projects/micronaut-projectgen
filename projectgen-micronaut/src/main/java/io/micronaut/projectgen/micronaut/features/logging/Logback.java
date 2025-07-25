@@ -80,8 +80,8 @@ public class Logback implements LoggingFeature, OpenRewriteFeature {
      * @return whether to use Jansi
      */
     protected boolean useJansi(@NonNull GeneratorContext generatorContext) {
-        if (generatorContext.getOptions().operatingSystem() != null &&
-            generatorContext.getOptions().operatingSystem() == OperatingSystem.WINDOWS) {
+        if (generatorContext.getOptions().operatingSystem() != null
+            && generatorContext.getOptions().operatingSystem() == OperatingSystem.WINDOWS) {
             return false;
         }
         // TODO

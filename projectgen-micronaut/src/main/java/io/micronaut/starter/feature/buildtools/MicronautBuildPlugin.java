@@ -91,7 +91,7 @@ public class MicronautBuildPlugin implements BuildPluginFeature, DefaultFeature 
     }
 
     @NonNull
-    protected GradlePlugin gradlePlugin(@NonNull GeneratorContext generatorContext) {
+     protected final GradlePlugin gradlePlugin(@NonNull GeneratorContext generatorContext) {
         GradlePlugin.Builder builder = null;
         if (shouldApplyMicronautApplicationGradlePlugin(generatorContext)) {
             builder = micronautGradleApplicationPluginBuilder(generatorContext).builder();
@@ -101,13 +101,13 @@ public class MicronautBuildPlugin implements BuildPluginFeature, DefaultFeature 
 
         if (shouldAddRepositoriesForSnapshots(builder)) {
             builder.pluginsManagementRepository(new GradlePluginPortal())
-                    .pluginsManagementRepository(GradleRepository.of(
-                        generatorContext.getOptions().gradleDsl() == null ? GradleDsl.GROOVY : generatorContext.getOptions().gradleDsl(), new S01SonatypeSnapshots()));
+                .pluginsManagementRepository(GradleRepository.of(
+                    generatorContext.getOptions().gradleDsl() == null ? GradleDsl.GROOVY : generatorContext.getOptions().gradleDsl(), new S01SonatypeSnapshots()));
         }
         return builder.build();
     }
 
-    public boolean shouldAddRepositoriesForSnapshots(GradlePlugin.Builder builder) {
+    public final boolean shouldAddRepositoriesForSnapshots(GradlePlugin.Builder builder) {
         Optional<String> artifactIdOptional = builder.getArtifiactId();
         if (!artifactIdOptional.isPresent()) {
             return false;
@@ -129,40 +129,40 @@ public class MicronautBuildPlugin implements BuildPluginFeature, DefaultFeature 
         }
     }
 
-    Optional<String> resolveRuntime(GeneratorContext generatorContext) {
+    final Optional<String> resolveRuntime(GeneratorContext generatorContext) {
         ModuleContext module = generatorContext.getRootModule();
         return module.buildProperties()
-                .getProperties()
-                .stream()
-                .filter(property -> MicronautRuntimeFeature.PROPERTY_MICRONAUT_RUNTIME.equals(property.getKey()))
-                .map(Property::getValue)
-                .findFirst();
+            .getProperties()
+            .stream()
+            .filter(property -> MicronautRuntimeFeature.PROPERTY_MICRONAUT_RUNTIME.equals(property.getKey()))
+            .map(Property::getValue)
+            .findFirst();
     }
 
     @Nullable
     private Set<String> ignoredAutomaticDependencies(GeneratorContext generatorContext) {
         ModuleContext module = generatorContext.getRootModule();
         if (module.hasDependency(MicronautDependencyUtils.GROUP_ID_MICRONAUT_DATA, MicronautDependencyUtils.ARTIFACT_ID_MICRONAUT_DATA_TX_HIBERNATE)
-                && module.countDependencies(MicronautDependencyUtils.GROUP_ID_MICRONAUT_DATA) == 1) {
+            && module.countDependencies(MicronautDependencyUtils.GROUP_ID_MICRONAUT_DATA) == 1) {
             return Set.of(MicronautDependencyUtils.GROUP_ID_MICRONAUT_DATA + ":" + ARTIFACT_ID_MICRONAUT_DATA_PROCESSOR_ARTIFACT);
         }
         return null;
     }
 
-    protected MicronautApplicationGradlePlugin.Builder micronautGradleApplicationPluginBuilder(GeneratorContext generatorContext, String id) {
+    protected final MicronautApplicationGradlePlugin.Builder micronautGradleApplicationPluginBuilder(GeneratorContext generatorContext, String id) {
         MicronautApplicationGradlePlugin.Builder builder = MicronautApplicationGradlePlugin.builder()
-                .buildTool(generatorContext.getBuildTool())
-                .incremental(true)
-                .javaVersion(FeaturesUtils.getTargetJdk(generatorContext.getFeatures()))
-                .packageName(generatorContext.getProject().getPackageName())
-                .ignoredAutomaticDependencies(ignoredAutomaticDependencies(generatorContext));
+            .buildTool(generatorContext.getOptions().getBuildTool())
+            .incremental(true)
+            .javaVersion(FeaturesUtils.getTargetJdk(generatorContext.getFeatures()))
+            .packageName(generatorContext.getProject().getPackageName())
+            .ignoredAutomaticDependencies(ignoredAutomaticDependencies(generatorContext));
         generatorContext.getFeatures()
-                .getFeatures()
-                .stream()
-                .filter(LambdaRuntimeMainClass.class::isInstance)
-                .map(f -> ((LambdaRuntimeMainClass) f).getLambdaRuntimeMainClass())
-                .findFirst()
-                .ifPresent(builder::lambdaRuntimeMainClass);
+            .getFeatures()
+            .stream()
+            .filter(LambdaRuntimeMainClass.class::isInstance)
+            .map(f -> ((LambdaRuntimeMainClass) f).getLambdaRuntimeMainClass())
+            .findFirst()
+            .ifPresent(builder::lambdaRuntimeMainClass);
         GradleDsl gradleDsl = generatorContext.getOptions().gradleDsl();
         if (gradleDsl != null) {
             builder = builder.dsl(gradleDsl);
@@ -203,25 +203,24 @@ public class MicronautBuildPlugin implements BuildPluginFeature, DefaultFeature 
         return builder.id(id);
     }
 
-    protected MicronautApplicationGradlePlugin.Builder micronautGradleApplicationPluginBuilder(GeneratorContext generatorContext) {
+    protected final MicronautApplicationGradlePlugin.Builder micronautGradleApplicationPluginBuilder(GeneratorContext generatorContext) {
         ApplicationType applicationType = ApplicationType.of(generatorContext.getOptions().template());
         MicronautApplicationGradlePlugin.Builder builder = micronautGradleApplicationPluginBuilder(generatorContext, MicronautApplicationGradlePlugin.Builder.APPLICATION);
-        if (generatorContext.getFeatures().contains(AwsLambda.FEATURE_NAME_AWS_LAMBDA) && ((
-                (applicationType == ApplicationType.FUNCTION && generatorContext.getFeatures().contains(FEATURE_NAME_GRAALVM)) ||
-                        (applicationType == ApplicationType.DEFAULT)))) {
+        if (generatorContext.getFeatures().contains(AwsLambda.FEATURE_NAME_AWS_LAMBDA) && ((applicationType == ApplicationType.FUNCTION && generatorContext.getFeatures().contains(FEATURE_NAME_GRAALVM))
+            || (applicationType == ApplicationType.DEFAULT))) {
             builder.dockerNative(Dockerfile.builder()
-                    .javaVersion(generatorContext.getJdkVersion().asString())
-                    .arg("-XX:MaximumHeapSizePercent=80")
-                    .arg("-Dio.netty.allocator.numDirectArenas=0")
-                    .arg("-Dio.netty.noPreferDirect=true")
-                    .build());
+                .javaVersion(generatorContext.getJdkVersion().asString())
+                .arg("-XX:MaximumHeapSizePercent=80")
+                .arg("-Dio.netty.allocator.numDirectArenas=0")
+                .arg("-Dio.netty.noPreferDirect=true")
+                .build());
         } else if (generatorContext.getJdkVersion() != JdkVersion.JDK_17) {
             builder.dockerNative(Dockerfile.builder().javaVersion(generatorContext.getJdkVersion().asString()).build());
         }
         return builder;
     }
 
-    private Optional<String> resolveTestRuntime(GeneratorContext generatorContext) {
+     private Optional<String> resolveTestRuntime(GeneratorContext generatorContext) {
         if (generatorContext.getFeatures().testFramework() == null) {
             return Optional.empty();
         }
@@ -236,15 +235,15 @@ public class MicronautBuildPlugin implements BuildPluginFeature, DefaultFeature 
         return Optional.empty();
     }
 
-    protected GradlePlugin.Builder micronautLibraryGradlePluginBuilder(GeneratorContext generatorContext) {
+    protected final GradlePlugin.Builder micronautLibraryGradlePluginBuilder(GeneratorContext generatorContext) {
         return micronautGradleApplicationPluginBuilder(generatorContext, MicronautApplicationGradlePlugin.Builder.LIBRARY).builder();
     }
 
     private static boolean shouldApplyMicronautApplicationGradlePlugin(GeneratorContext generatorContext) {
         ApplicationType applicationType = ApplicationType.of(generatorContext.getOptions().template());
-        return generatorContext.getFeatures().mainClass().isPresent() ||
-                generatorContext.getFeatures().contains("oracle-function") ||
-                applicationType == ApplicationType.DEFAULT && generatorContext.getFeatures().contains("aws-lambda");
+        return generatorContext.getFeatures().mainClass().isPresent()
+            || generatorContext.getFeatures().contains("oracle-function")
+            || applicationType == ApplicationType.DEFAULT && generatorContext.getFeatures().contains("aws-lambda");
     }
 
     @Override

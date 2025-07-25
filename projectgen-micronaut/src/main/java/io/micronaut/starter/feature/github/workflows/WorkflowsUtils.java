@@ -31,7 +31,7 @@ import io.micronaut.starter.util.VersionInfo;
  * @author Pavol Gressa
  * @since 2.3
  */
-public class WorkflowsUtils {
+public final class WorkflowsUtils {
 
     /**
      * Resolves GraalVM jdk version based on the source version.
@@ -41,7 +41,7 @@ public class WorkflowsUtils {
      */
     public static String graalVersion(JdkVersion javaVersion) {
         return "%s.java%s".formatted(VersionInfo.getDependencyVersion("graal").getValue(),
-                javaVersion.majorVersion());
+            javaVersion.majorVersion());
     }
 
     public static RockerTemplate createExampleController(Project project, Language language) {

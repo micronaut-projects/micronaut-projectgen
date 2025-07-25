@@ -32,10 +32,10 @@ public class OpenTelemetryXray extends AbstractOpenTelemetry implements OpenRewr
     public static final String NAME = "tracing-opentelemetry-xray";
 
     public OpenTelemetryXray(OpenTelemetry otel,
-                             OpenTelemetryHttp otelHttp,
-                             OpenTelemetryAnnotations otelAnnotations,
-                             OpenTelemetryGrpc openTelemetryGrpc,
-                             OpenTelemetryExporterOtlp otelExporter) {
+        OpenTelemetryHttp otelHttp,
+        OpenTelemetryAnnotations otelAnnotations,
+        OpenTelemetryGrpc openTelemetryGrpc,
+        OpenTelemetryExporterOtlp otelExporter) {
         super(otel, otelHttp, otelAnnotations, openTelemetryGrpc, otelExporter);
     }
 

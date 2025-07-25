@@ -1,19 +1,17 @@
 package io.micronaut.projectgen.micronaut.features.buildtools.maven;
 
-import io.micronaut.projectgen.core.buildtools.Scope;
 import io.micronaut.projectgen.core.io.PreviewGenerator;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.OptionsFixture;
 import io.micronaut.projectgen.test.BuildTestVerifier;
-import io.micronaut.projectgen.test.ConfigurationUtils;
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @MicronautTest(startApplication = false)
 class EnforcerPluginTest {

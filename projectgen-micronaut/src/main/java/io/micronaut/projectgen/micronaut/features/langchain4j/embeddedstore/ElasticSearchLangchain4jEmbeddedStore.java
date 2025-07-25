@@ -32,7 +32,7 @@ public class ElasticSearchLangchain4jEmbeddedStore implements Langchain4jEmbedde
 
     @Override
     public String getTitle() {
-        return "Elastic Search Langchain4j"+ Langchain4jEmbeddedStore.super.getTitle();
+        return "Elastic Search Langchain4j" + Langchain4jEmbeddedStore.super.getTitle();
     }
 
     @Override

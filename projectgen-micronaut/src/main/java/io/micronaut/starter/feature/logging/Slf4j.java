@@ -25,6 +25,6 @@ public final class Slf4j {
 
     public static Dependency.Builder slf4jDependency() {
         return Dependency.builder()
-                .groupId(Slf4j.GROUP_ID_SLF4J);
+            .groupId(Slf4j.GROUP_ID_SLF4J);
     }
 }

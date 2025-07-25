@@ -62,7 +62,7 @@ public abstract class AbstractAzureFunction extends AbstractFunctionFeature impl
     public static final String NAME = "azure-function";
     private final CoordinateResolver coordinateResolver;
 
-    public AbstractAzureFunction(CoordinateResolver coordinateResolver) {
+    protected AbstractAzureFunction(CoordinateResolver coordinateResolver) {
         this.coordinateResolver = coordinateResolver;
     }
 
@@ -99,22 +99,22 @@ public abstract class AbstractAzureFunction extends AbstractFunctionFeature impl
         if (OptionUtils.hasGradleBuildTool(generatorContext.getOptions())) {
             module.addHelpLink("Azure Functions Plugin for Gradle", "https://plugins.gradle.org/plugin/com.microsoft.azure.azurefunctions");
             module.addBuildPlugin(GradlePlugin.builder()
-                    .id("com.microsoft.azure.azurefunctions")
-                    .lookupArtifactId("azure-functions-gradle-plugin")
-                    .extension(new RockerWritable(azurefunctions.template(generatorContext.getProject(),
-                        generatorContext.getOptions().gradleDsl() == null ? GradleDsl.GROOVY : generatorContext.getOptions().gradleDsl(),
-                        javaVersionValue(generatorContext).orElse("null"))))
-                    .build());
+                .id("com.microsoft.azure.azurefunctions")
+                .lookupArtifactId("azure-functions-gradle-plugin")
+                .extension(new RockerWritable(azurefunctions.template(generatorContext.getProject(),
+                    generatorContext.getOptions().gradleDsl() == null ? GradleDsl.GROOVY : generatorContext.getOptions().gradleDsl(),
+                    javaVersionValue(generatorContext).orElse("null"))))
+                .build());
         }
         if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())) {
             String mavenPluginArtifactId = "azure-functions-maven-plugin";
             module.addBuildPlugin(MavenPlugin.builder()
-                    .artifactId(mavenPluginArtifactId)
-                    .extension(new RockerWritable(azureFunctionMavenPlugin.template()))
-                    .build());
+                .artifactId(mavenPluginArtifactId)
+                .extension(new RockerWritable(azureFunctionMavenPlugin.template()))
+                .build());
             BuildProperties props = module.buildProperties();
             coordinateResolver.resolve(mavenPluginArtifactId)
-                    .ifPresent(coordinate -> props.put("azure.functions.maven.plugin.version", coordinate.getVersion()));
+                .ifPresent(coordinate -> props.put("azure.functions.maven.plugin.version", coordinate.getVersion()));
             props.put("functionAppName", project.getName());
             props.put("functionResourceGroup", "java-functions-group");
             props.put("functionAppRegion", "westus");
@@ -143,43 +143,88 @@ public abstract class AbstractAzureFunction extends AbstractFunctionFeature impl
         }
     }
 
+    /**
+     * Adds the Azure Function trigger template for the selected language, if the application type is FUNCTION
+     * and no other code-contributing feature is selected. Subclasses may override to customize template logic.
+     *
+     * @param module The module context
+     * @param generatorContext The generator context containing project and feature info
+     * @param options The selected options including build tool and language
+     * @param project The project metadata
+     */
     protected void addFunctionTemplate(ModuleContext module, GeneratorContext generatorContext, Options options, Project project) {
         ApplicationType applicationType = ApplicationType.of(generatorContext.getOptions().template());
         if (applicationType == ApplicationType.FUNCTION
-                && generatorContext.isFeatureMissing(CodeContributingFeature.class)) {
+            && generatorContext.isFeatureMissing(CodeContributingFeature.class)) {
             String triggerFile = generatorContext.getSourcePath("/{packagePath}/Function");
             module.addTemplate(options.language(), "trigger", triggerFile,
-                    azureRawFunctionTriggerJava.template(project),
-                    azureRawFunctionTriggerKotlin.template(project),
-                    azureRawFunctionTriggerGroovy.template(project));
+                azureRawFunctionTriggerJava.template(project),
+                azureRawFunctionTriggerKotlin.template(project),
+                azureRawFunctionTriggerGroovy.template(project));
         }
     }
 
+    /**
+     * Returns the Java JUnit template for the Azure Function.
+     *
+     * @param project The project metadata
+     * @return The RockerModel for Java JUnit
+     */
     @Override
     protected RockerModel javaJUnitTemplate(Project project) {
         return azureRawFunctionJavaJunit.template(project);
     }
 
+    /**
+     * Returns the Kotlin JUnit template for the Azure Function.
+     *
+     * @param project The project metadata
+     * @return The RockerModel for Kotlin JUnit
+     */
     @Override
     protected RockerModel kotlinJUnitTemplate(Project project) {
         return azureRawFunctionKotlinJunit.template(project);
     }
 
+    /**
+     * Returns the Groovy JUnit template for the Azure Function.
+     *
+     * @param project The project metadata
+     * @return The RockerModel for Groovy JUnit
+     */
     @Override
     protected RockerModel groovyJUnitTemplate(Project project) {
         return azureRawFunctionGroovyJunit.template(project);
     }
 
+    /**
+     * Returns the Kotest template for the Azure Function.
+     *
+     * @param project The project metadata
+     * @return The RockerModel for Kotest
+     */
     @Override
     protected RockerModel koTestTemplate(Project project) {
         return azureRawFunctionKoTest.template(project);
     }
 
+    /**
+     * Returns the Spock template for the Azure Function.
+     *
+     * @param project The project metadata
+     * @return The RockerModel for Spock
+     */
     @Override
     public RockerModel spockTemplate(Project project) {
         return azureRawFunctionSpock.template(project);
     }
 
+    /**
+     * Returns the command used to run the Azure Function based on the selected build tool.
+     *
+     * @param buildTool The selected build tool
+     * @return The run command string
+     */
     @Override
     protected String getRunCommand(BuildTool buildTool) {
         if (buildTool == BuildTool.MAVEN) {
@@ -189,19 +234,38 @@ public abstract class AbstractAzureFunction extends AbstractFunctionFeature impl
         }
     }
 
+    /**
+     * Returns the command used to build the Azure Function based on the selected build tool.
+     *
+     * @param buildTool The selected build tool
+     * @return The build command string
+     */
     @Override
     protected String getBuildCommand(BuildTool buildTool) {
         return AzureBuildCommandUtils.getBuildCommand(buildTool);
     }
 
+    /**
+     * Adds the necessary dependencies for Azure Functions. Subclasses may override to customize dependency handling.
+     *
+     * @param module The module context to which dependencies will be added
+     * @param options The selected options including build tool
+     */
     protected void addDependencies(ModuleContext module, Options options) {
         addAzureFunctionsJavaLibraryDependency(module, options);
     }
 
+    /**
+     * Adds the Azure Functions Java library dependency based on the selected build tool.
+     * Subclasses may override to customize dependency scope or versioning.
+     *
+     * @param module The module context
+     * @param options The selected options including build tool
+     */
     protected void addAzureFunctionsJavaLibraryDependency(ModuleContext module, Options options) {
         Dependency.Builder builder = Dependency.builder()
-                .groupId(GROUP_ID_COM_MICROSOFT_AZURE_FUNCTIONS)
-                .artifactId(ARTIFACT_ID_AZURE_FUNCTIONS_JAVA_LIBRARY);
+            .groupId(GROUP_ID_COM_MICROSOFT_AZURE_FUNCTIONS)
+            .artifactId(ARTIFACT_ID_AZURE_FUNCTIONS_JAVA_LIBRARY);
         if (OptionUtils.hasMavenBuildTool(options)) {
             module.addDependency(builder.developmentOnly());
         } else if (OptionUtils.hasGradleBuildTool(options)) {

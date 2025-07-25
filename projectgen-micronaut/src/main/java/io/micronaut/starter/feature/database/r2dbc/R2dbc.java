@@ -17,35 +17,29 @@ package io.micronaut.starter.feature.database.r2dbc;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
-import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.util.StringUtils;
-import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
-import io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils;
 import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.starter.feature.database.DatabaseDriverFeature;
 import io.micronaut.starter.feature.database.jdbc.Hikari;
 import io.micronaut.starter.feature.database.jdbc.JdbcFeature;
 import io.micronaut.starter.feature.migration.MigrationFeature;
-import io.micronaut.starter.feature.testresources.TestResources;
 import jakarta.inject.Singleton;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
+
 
 @Requires(property = "micronaut.starter.feature.r2dbc.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class R2dbc extends R2dbcConfigurationUtils implements R2dbcFeature, OpenRewriteFeature {
 
+    public static final String NAME = "r2dbc";
+
     private static final String RECIPE_R2DBC_DOCS = "io.micronaut.starter.feature.r2dbc-docs";
     private static final String RECIPE_R2DBC_DEPENDENCY = "io.micronaut.starter.feature.r2dbc-dependency";
-
-    public static final String NAME = "r2dbc";
 
     private static final String PREFIX = "r2dbc.datasources.default.";
     private static final String URL_KEY = PREFIX + "url";
@@ -101,6 +95,9 @@ public class R2dbc extends R2dbcConfigurationUtils implements R2dbcFeature, Open
         return recipes;
     }
 
+    /**
+     * @return The URL key
+     */
     public String getUrlKey() {
         return URL_KEY;
     }

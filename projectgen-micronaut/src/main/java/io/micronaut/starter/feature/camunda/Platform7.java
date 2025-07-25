@@ -39,12 +39,12 @@ public class Platform7 implements CamundaCommunityFeature {
     public static final String NAME = "camunda-platform7";
 
     private static final Dependency.Builder DEPENDENCY_PLATFORM7 = Dependency.builder()
-            .lookupArtifactId("micronaut-camunda-bpm-feature")
-            .compile();
+        .lookupArtifactId("micronaut-camunda-bpm-feature")
+        .compile();
 
     private static final Dependency.Builder DEPENDENCY_BPM_ASSERT = Dependency.builder()
-            .lookupArtifactId("camunda-bpm-assert")
-            .test();
+        .lookupArtifactId("camunda-bpm-assert")
+        .test();
 
     private final DatabaseDriverFeature defaultDbFeature;
     private final Jetty jetty;

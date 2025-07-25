@@ -6,13 +6,13 @@ import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.OptionsFixture;
 import io.micronaut.projectgen.test.BuildTestVerifier;
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @MicronautTest(startApplication = false)
 class ReactTest {

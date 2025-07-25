@@ -43,13 +43,13 @@ public abstract class DatabaseDriverFeature extends EaseTestingFeature implement
 
     private final JdbcFeature jdbcFeature;
 
-    public DatabaseDriverFeature() {
+    protected DatabaseDriverFeature() {
         this(null, null, null);
     }
 
-    public DatabaseDriverFeature(JdbcFeature jdbcFeature,
-                                 TestContainers testContainers,
-                                 TestResources testResources) {
+    protected DatabaseDriverFeature(JdbcFeature jdbcFeature,
+        TestContainers testContainers,
+        TestResources testResources) {
         super(testContainers, testResources);
         this.jdbcFeature = jdbcFeature;
     }
@@ -69,9 +69,9 @@ public abstract class DatabaseDriverFeature extends EaseTestingFeature implement
 
     private boolean shouldAddJdbcFeature(FeatureContext featureContext) {
         return !featureContext.isPresent(JdbcFeature.class)
-                && !featureContext.isPresent(R2dbcFeature.class)
-                && !hasHibernateReactiveWithoutMigration(featureContext)
-                && jdbcFeature != null;
+            && !featureContext.isPresent(R2dbcFeature.class)
+            && !hasHibernateReactiveWithoutMigration(featureContext)
+            && jdbcFeature != null;
     }
 
     private boolean hasHibernateReactiveWithoutMigration(FeatureContext featureContext) {
@@ -97,6 +97,12 @@ public abstract class DatabaseDriverFeature extends EaseTestingFeature implement
 
     public abstract String getDataDialect();
 
+    /**
+     * Returns the database type if applicable.
+     * <p>
+     * Subclasses may override this to provide a specific DbType.
+     * Ensure consistency with other database-related features.
+     */
     @NonNull
     public Optional<DbType> getDbType() {
         return Optional.empty();
@@ -106,7 +112,7 @@ public abstract class DatabaseDriverFeature extends EaseTestingFeature implement
     @NonNull
     public List<String> getTestResourcesAdditionalModules(@NonNull GeneratorContext generatorContext) {
         if (
-                (!generatorContext.isFeaturePresent(Data.class) || generatorContext.isFeaturePresent(HibernateReactiveFeature.class))
+            !generatorContext.isFeaturePresent(Data.class) || generatorContext.isFeaturePresent(HibernateReactiveFeature.class)
         ) {
             return getDbType().map(dbType -> {
                 if (generatorContext.isFeaturePresent(R2dbc.class)) {
@@ -126,34 +132,34 @@ public abstract class DatabaseDriverFeature extends EaseTestingFeature implement
     public List<MavenCoordinate> getTestResourcesDependencies(@NonNull GeneratorContext generatorContext) {
         List<MavenCoordinate> dependencies = new ArrayList<>();
         if (
-                (!generatorContext.isFeaturePresent(Data.class) || generatorContext.isFeaturePresent(HibernateReactiveFeature.class) || generatorContext.isFeaturePresent(R2dbc.class))
+            !generatorContext.isFeaturePresent(Data.class) || generatorContext.isFeaturePresent(HibernateReactiveFeature.class) || generatorContext.isFeaturePresent(R2dbc.class)
         ) {
             getDbType()
-                    .map(dbType -> {
-                        if (generatorContext.isFeaturePresent(R2dbc.class)) {
-                            return dbType.getR2dbcTestResourcesModuleName();
-                        } else if (generatorContext.isFeaturePresent(HibernateReactiveFeature.class)) {
-                            return dbType.getHibernateReactiveTestResourcesModuleName();
-                        } else {
-                            return dbType.getJdbcTestResourcesModuleName();
-                        }
-                    })
-                    .map(resourceName -> new MavenCoordinate(GROUP_ID_MICRONAUT_TESTRESOURCES, "micronaut-test-resources-" + resourceName, null))
-                    .ifPresent(dependencies::add);
+                .map(dbType -> {
+                    if (generatorContext.isFeaturePresent(R2dbc.class)) {
+                        return dbType.getR2dbcTestResourcesModuleName();
+                    } else if (generatorContext.isFeaturePresent(HibernateReactiveFeature.class)) {
+                        return dbType.getHibernateReactiveTestResourcesModuleName();
+                    } else {
+                        return dbType.getJdbcTestResourcesModuleName();
+                    }
+                })
+                .map(resourceName -> new MavenCoordinate(GROUP_ID_MICRONAUT_TESTRESOURCES, "micronaut-test-resources-" + resourceName, null))
+                .ifPresent(dependencies::add);
         }
         if ((generatorContext.isFeaturePresent(HibernateReactiveFeature.class) || generatorContext.isFeaturePresent(R2dbc.class))
-                && generatorContext.isFeaturePresent(DatabaseDriverFeature.class)
-                && !generatorContext.isFeaturePresent(MigrationFeature.class)
+            && generatorContext.isFeaturePresent(DatabaseDriverFeature.class)
+            && !generatorContext.isFeaturePresent(MigrationFeature.class)
         ) {
             generatorContext.getFeature(DatabaseDriverFeature.class)
-                    .flatMap(DatabaseDriverFeatureDependencies::getJavaClientDependency)
-                    .map(Dependency.Builder::build)
-                    .ifPresent(driver -> dependencies.add(new MavenCoordinate(driver.getGroupId(), driver.getArtifactId(), null)));
+                .flatMap(DatabaseDriverFeatureDependencies::getJavaClientDependency)
+                .map(Dependency.Builder::build)
+                .ifPresent(driver -> dependencies.add(new MavenCoordinate(driver.getGroupId(), driver.getArtifactId(), null)));
         }
         return dependencies;
     }
 
-    public Map<String, Object> getAdditionalConfig(GeneratorContext generatorContext) {
+    public final Map<String, Object> getAdditionalConfig(GeneratorContext generatorContext) {
         return Collections.emptyMap();
     }
 
@@ -164,7 +170,7 @@ public abstract class DatabaseDriverFeature extends EaseTestingFeature implement
     }
 
     @NonNull
-    protected List<Dependency.Builder> parseDependencies(GeneratorContext generatorContext) {
+    protected final List<Dependency.Builder> parseDependencies(GeneratorContext generatorContext) {
         List<Dependency.Builder> dependencies = new ArrayList<>();
         if (generatorContext.isFeaturePresent(R2dbc.class)) {
             getR2DbcDependency().ifPresent(dependencies::add);
@@ -181,7 +187,7 @@ public abstract class DatabaseDriverFeature extends EaseTestingFeature implement
     }
 
     @NonNull
-    protected List<Dependency.Builder> dependenciesForHibernateReactive(@NonNull GeneratorContext generatorContext) {
+    protected final List<Dependency.Builder> dependenciesForHibernateReactive(@NonNull GeneratorContext generatorContext) {
         List<Dependency.Builder> dependencies = new ArrayList<>();
         getHibernateReactiveJavaClientDependency().ifPresent(dependencies::add);
         if (generatorContext.isFeaturePresent(MigrationFeature.class)) {
@@ -190,4 +196,3 @@ public abstract class DatabaseDriverFeature extends EaseTestingFeature implement
         return dependencies;
     }
 }
-

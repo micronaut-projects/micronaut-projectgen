@@ -77,7 +77,7 @@ public class Kapt implements KotlinSupportFeature, DefaultFeature {
 
     @Override
     public boolean shouldApply(Options options, Set<Feature> selectedFeatures) {
-        return OptionUtils.hasMavenBuildTool(options) &&
-                KotlinSupportFeature.shouldApply(options.language(), options.testFramework()) && selectedFeatures.stream().noneMatch(KotlinSupportFeature.class::isInstance);
+        return OptionUtils.hasMavenBuildTool(options)
+            && KotlinSupportFeature.shouldApply(options.language(), options.testFramework()) && selectedFeatures.stream().noneMatch(KotlinSupportFeature.class::isInstance);
     }
 }

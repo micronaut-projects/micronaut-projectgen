@@ -41,7 +41,7 @@ public class AzureKeyVaultFeature implements DistributedConfigFeature, OpenRewri
     private final DiscoveryClient discoveryClient;
 
     public AzureKeyVaultFeature(DiscoveryClient discoveryClient,
-                                MicronautDistributedConfigurationFeature micronautDistributedConfigurationFeature) {
+        MicronautDistributedConfigurationFeature micronautDistributedConfigurationFeature) {
         this.micronautDistributedConfigurationFeature = micronautDistributedConfigurationFeature;
         this.discoveryClient = discoveryClient;
     }

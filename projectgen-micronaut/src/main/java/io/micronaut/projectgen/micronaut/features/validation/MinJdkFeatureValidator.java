@@ -16,7 +16,6 @@
 package io.micronaut.projectgen.micronaut.features.validation;
 
 import io.micronaut.projectgen.core.feature.FeatureValidator;
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.starter.feature.MinJdkFeature;
 import io.micronaut.projectgen.core.options.JdkVersion;

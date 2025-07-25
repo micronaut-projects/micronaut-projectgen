@@ -26,9 +26,9 @@ public interface OpenSearchContributingTestContainerDependency extends Contribut
     @Override
     default List<Dependency> testContainersDependencies() {
         return Collections.singletonList(Dependency.builder()
-                .groupId("org.opensearch")
-                .artifactId("opensearch-testcontainers")
-                .test()
-                .build());
+            .groupId("org.opensearch")
+            .artifactId("opensearch-testcontainers")
+            .test()
+            .build());
     }
 }

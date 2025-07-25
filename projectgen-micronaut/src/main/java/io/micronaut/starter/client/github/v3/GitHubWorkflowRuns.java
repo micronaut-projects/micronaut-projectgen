@@ -35,7 +35,7 @@ public class GitHubWorkflowRuns {
 
     @JsonCreator
     public GitHubWorkflowRuns(@JsonProperty("total_count") int totalCount,
-                              @JsonProperty("workflow_runs") List<GitHubWorkflowRun> runs) {
+        @JsonProperty("workflow_runs") List<GitHubWorkflowRun> runs) {
         this.totalCount = totalCount;
         this.runs = runs;
     }

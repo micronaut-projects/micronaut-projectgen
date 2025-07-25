@@ -31,10 +31,10 @@ public class GraalVM implements Feature {
 
     @Deprecated(forRemoval = true, since = "4.1.4")
     static final Dependency GRAAL_SVM = Dependency.builder()
-            .groupId("org.graalvm.nativeimage")
-            .artifactId("svm")
-            .compileOnly()
-            .build();
+        .groupId("org.graalvm.nativeimage")
+        .artifactId("svm")
+        .compileOnly()
+        .build();
 
     @Override
     public String getName() {
@@ -59,6 +59,6 @@ public class GraalVM implements Feature {
     @Deprecated(forRemoval = true, since = "4.1.4")
     public static Dependency.Builder micronautGraalVM() {
         return MicronautDependencyUtils.coreDependency()
-                .artifactId(ARTIFACT_ID_MICRONAUT_GRAALVM);
+            .artifactId(ARTIFACT_ID_MICRONAUT_GRAALVM);
     }
 }

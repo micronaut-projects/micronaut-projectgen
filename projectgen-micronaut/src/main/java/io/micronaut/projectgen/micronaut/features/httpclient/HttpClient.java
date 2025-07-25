@@ -28,7 +28,6 @@ import java.util.List;
 public class HttpClient implements HttpClientFeature, OpenRewriteFeature {
     public static final String NAME = "http-client";
 
-
     @Override
     public String getName() {
         return NAME;

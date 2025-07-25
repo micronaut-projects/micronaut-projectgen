@@ -22,8 +22,8 @@ import java.util.List;
 
 public abstract class R2dbcConfigurationUtils {
 
-    protected void addDatabaseConfigRecipe(GeneratorContext generatorContext,
-                                           List<String> recipes) {
+    protected final void addDatabaseConfigRecipe(GeneratorContext generatorContext,
+        List<String> recipes) {
 
         if (generatorContext.isFeaturePresent(PostgreSQL.class)) {
             recipes.add("io.micronaut.starter.feature.r2dbc-config-postgresql");

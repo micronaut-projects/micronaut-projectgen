@@ -18,10 +18,8 @@ package io.micronaut.starter.feature.database.jdbc;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
-import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
-import io.micronaut.starter.feature.database.*;
+import io.micronaut.starter.feature.database.DatabaseDriverFeature;
 
 import jakarta.inject.Singleton;
 
@@ -55,7 +53,7 @@ public class Dbcp extends JdbcFeature implements OpenRewriteFeature {
     public List<String> getRecipes(GeneratorContext generatorContext) {
         List<String> recipes = new ArrayList<>();
         recipes.add("io.micronaut.starter.feature.jdbc-dbcp");
-       addDatabaseConfigRecipe(generatorContext, recipes);
+        addDatabaseConfigRecipe(generatorContext, recipes);
         return recipes;
     }
 

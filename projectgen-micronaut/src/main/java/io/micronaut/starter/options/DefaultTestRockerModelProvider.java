@@ -26,10 +26,10 @@ public class DefaultTestRockerModelProvider implements TestRockerModelProvider {
     private final RockerModel kotest;
 
     public DefaultTestRockerModelProvider(RockerModel spock,
-                                          RockerModel javaJunit,
-                                          RockerModel groovyJunit,
-                                          RockerModel kotlinJunit,
-                                          RockerModel kotest) {
+        RockerModel javaJunit,
+        RockerModel groovyJunit,
+        RockerModel kotlinJunit,
+        RockerModel kotest) {
         this.spock = spock;
         this.javaJunit = javaJunit;
         this.groovyJunit = groovyJunit;

@@ -36,7 +36,7 @@ public class MavenRepository extends RockerWritable {
     @NonNull
     public static List<MavenRepository> listOf(List<Repository> repositories) {
         return repositories.stream()
-                .map(it -> new MavenRepository(it.getId(), it.getUrl(), it.isSnapshot()))
-                .collect(Collectors.toList());
+            .map(it -> new MavenRepository(it.getId(), it.getUrl(), it.isSnapshot()))
+            .collect(Collectors.toList());
     }
 }

@@ -16,7 +16,6 @@
 package io.micronaut.starter.feature.ci.workflows;
 
 import io.micronaut.core.annotation.NonNull;
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.Feature;

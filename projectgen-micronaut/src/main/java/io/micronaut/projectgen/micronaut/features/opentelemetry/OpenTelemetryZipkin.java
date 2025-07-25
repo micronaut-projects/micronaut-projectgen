@@ -28,10 +28,10 @@ import java.util.List;
 @Singleton
 public class OpenTelemetryZipkin extends AbstractOpenTelemetry implements OpenRewriteFeature {
     public OpenTelemetryZipkin(OpenTelemetry otel,
-                               OpenTelemetryHttp otelHttp,
-                               OpenTelemetryAnnotations otelAnnotations,
-                               OpenTelemetryGrpc openTelemetryGrpc,
-                               OpenTelemetryExporterZipkin openTelemetryExporterZipkin) {
+        OpenTelemetryHttp otelHttp,
+        OpenTelemetryAnnotations otelAnnotations,
+        OpenTelemetryGrpc openTelemetryGrpc,
+        OpenTelemetryExporterZipkin openTelemetryExporterZipkin) {
         super(otel, otelHttp, otelAnnotations, openTelemetryGrpc, openTelemetryExporterZipkin);
     }
 

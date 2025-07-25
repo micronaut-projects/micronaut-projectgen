@@ -34,9 +34,9 @@ public class GitHubUser {
 
     @JsonCreator
     public GitHubUser(
-            @JsonProperty("login") String login,
-            @JsonProperty("email")  String email,
-            @JsonProperty("name") String name) {
+        @JsonProperty("login") String login,
+        @JsonProperty("email")  String email,
+        @JsonProperty("name") String name) {
         this.login = login;
         this.email = email;
         this.name = name;

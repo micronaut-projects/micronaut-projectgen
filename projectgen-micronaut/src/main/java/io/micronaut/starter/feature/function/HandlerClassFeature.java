@@ -40,13 +40,13 @@ public interface HandlerClassFeature extends Feature, AwsFeature {
      * @return a Rocker Model
      */
     static RockerModel readmeRockerModel(@NonNull HandlerClassFeature feature,
-                                          @NonNull GeneratorContext generatorContext,
-                                          @Nullable DocumentationLink documentationLink) {
+        @NonNull GeneratorContext generatorContext,
+        @Nullable DocumentationLink documentationLink) {
         ApplicationType applicationType = ApplicationType.of(generatorContext.getOptions().template());
         return handlerReadme.template(feature,
-                applicationType,
-                generatorContext.getProject(),
-                documentationLink);
+            applicationType,
+            generatorContext.getProject(),
+            documentationLink);
     }
 
     @NonNull
@@ -67,12 +67,12 @@ public interface HandlerClassFeature extends Feature, AwsFeature {
     @NonNull
     static String resolveHandler(@NonNull GeneratorContext generatorContext) {
         return generatorContext.getFeatures()
-                .getFeatures()
-                .stream()
-                .filter(f -> (f instanceof HandlerClassFeature))
-                .sorted(OrderUtil.REVERSE_COMPARATOR)
-                .map(f -> ((HandlerClassFeature) f).handlerClass(generatorContext))
-                .findFirst()
-                .orElseGet(() -> DefaultAwsLambdaHandlerProvider.MICRONAUT_LAMBDA_HANDLER);
+            .getFeatures()
+            .stream()
+            .filter(f -> (f instanceof HandlerClassFeature))
+            .sorted(OrderUtil.REVERSE_COMPARATOR)
+            .map(f -> ((HandlerClassFeature) f).handlerClass(generatorContext))
+            .findFirst()
+            .orElseGet(() -> DefaultAwsLambdaHandlerProvider.MICRONAUT_LAMBDA_HANDLER);
     }
 }

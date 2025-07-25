@@ -51,9 +51,9 @@ public class GroovyMavenPlusPlugin implements MavenSpecificFeature {
         ModuleContext module = generatorContext.getRootModule();
         if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())) {
             module.addBuildPlugin(MavenPlugin.builder()
-                    .groupId(GROUP_ID_GMAVEN)
-                    .artifactId(ARTIFACT_ID_GMAVEN)
-                    .build());
+                .groupId(GROUP_ID_GMAVEN)
+                .artifactId(ARTIFACT_ID_GMAVEN)
+                .build());
         }
     }
 

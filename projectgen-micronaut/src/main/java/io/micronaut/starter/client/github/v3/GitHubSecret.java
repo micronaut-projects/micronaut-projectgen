@@ -30,7 +30,7 @@ public class GitHubSecret {
 
     @JsonCreator
     public GitHubSecret(@JsonProperty("encrypted_value") String encryptedValue,
-                        @JsonProperty("key_id") String keyId) {
+        @JsonProperty("key_id") String keyId) {
         this.encryptedValue = encryptedValue;
         this.keyId = keyId;
     }

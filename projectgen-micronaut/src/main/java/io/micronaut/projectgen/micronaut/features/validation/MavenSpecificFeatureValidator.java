@@ -17,10 +17,8 @@ package io.micronaut.projectgen.micronaut.features.validation;
 
 import io.micronaut.projectgen.core.feature.FeatureValidator;
 import io.micronaut.projectgen.core.utils.OptionUtils;
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.buildtools.maven.MavenSpecificFeature;
-import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.options.Options;
 import jakarta.inject.Singleton;
 import org.slf4j.Logger;

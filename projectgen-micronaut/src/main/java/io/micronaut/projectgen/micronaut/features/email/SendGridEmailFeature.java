@@ -19,7 +19,6 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import jakarta.inject.Singleton;
 
 import java.util.List;
@@ -37,7 +36,9 @@ public class SendGridEmailFeature extends EmailFeature {
     }
 
     @Override
-    public String getName() {return "email-sendgrid";}
+    public String getName() {
+        return "email-sendgrid";
+    }
 
     @Override
     @NonNull
@@ -50,7 +51,7 @@ public class SendGridEmailFeature extends EmailFeature {
         return "Sendgrid Email";
     }
 
-   @Override
+    @Override
     public List<String> getRecipes(GeneratorContext generatorContext) {
         return List.of("io.micronaut.starter.feature.email-sendgrid");
     }

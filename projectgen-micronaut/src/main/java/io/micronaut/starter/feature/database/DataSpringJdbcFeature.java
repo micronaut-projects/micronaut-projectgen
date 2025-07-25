@@ -17,13 +17,9 @@ package io.micronaut.starter.feature.database;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
-import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
-import io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils;
 import io.micronaut.starter.feature.Category;
-import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import jakarta.inject.Singleton;
 

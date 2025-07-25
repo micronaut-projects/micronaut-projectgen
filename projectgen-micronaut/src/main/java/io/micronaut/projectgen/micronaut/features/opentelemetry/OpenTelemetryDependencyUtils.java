@@ -39,6 +39,6 @@ public final class OpenTelemetryDependencyUtils {
     @NonNull
     private static Dependency.Builder dependency(@NonNull String groupId) {
         return Dependency.builder()
-                .groupId(groupId);
+            .groupId(groupId);
     }
 }

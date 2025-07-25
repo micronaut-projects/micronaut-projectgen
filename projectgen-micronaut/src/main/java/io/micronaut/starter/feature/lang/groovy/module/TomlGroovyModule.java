@@ -54,8 +54,7 @@ public class TomlGroovyModule implements GroovyModuleFeature, OpenRewriteFeature
         List<String> recipes = new ArrayList<>();
         if (generatorContext.getLanguage() == Language.GROOVY) {
             recipes.add("io.micronaut.starter.feature.groovy-toml");
-        }
-        else if (generatorContext.getTestFramework() == TestFramework.SPOCK) {
+        } else if (generatorContext.getTestFramework() == TestFramework.SPOCK) {
             recipes.add("io.micronaut.starter.feature.groovy-toml-spock");
         }
         return recipes;

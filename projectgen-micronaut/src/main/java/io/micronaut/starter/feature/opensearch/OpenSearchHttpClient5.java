@@ -32,8 +32,8 @@ public class OpenSearchHttpClient5 extends OpenSearchFeature implements OpenRewr
     public static final String NAME = "opensearch-httpclient5";
 
     public OpenSearchHttpClient5(
-            TestContainers testContainers,
-            TestResources testResources
+        TestContainers testContainers,
+        TestResources testResources
     ) {
         super(testContainers, testResources);
     }

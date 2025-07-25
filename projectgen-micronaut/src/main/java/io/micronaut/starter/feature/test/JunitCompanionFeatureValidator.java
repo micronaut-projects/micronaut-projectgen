@@ -15,7 +15,6 @@
  */
 package io.micronaut.starter.feature.test;
 
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.feature.FeatureValidator;
 import io.micronaut.projectgen.core.options.Options;
@@ -35,20 +34,20 @@ public class JunitCompanionFeatureValidator implements FeatureValidator {
 
     @Override
     public void validatePreProcessing(Options options,
-                                      Set<Feature> features) {
+        Set<Feature> features) {
 
     }
 
     @Override
     public void validatePostProcessing(Options options,
-                                       Set<Feature> features) {
+        Set<Feature> features) {
         if (options.testFramework() != TestFramework.JUNIT) {
             features.stream()
-                    .filter(JunitCompanionFeature.class::isInstance)
-                    .findFirst()
-                    .ifPresent(f -> {
-                        throw new IllegalArgumentException(f.getName() + " requires JUnit.");
-                    });
+                .filter(JunitCompanionFeature.class::isInstance)
+                .findFirst()
+                .ifPresent(f -> {
+                    throw new IllegalArgumentException(f.getName() + " requires JUnit.");
+                });
         }
     }
 }

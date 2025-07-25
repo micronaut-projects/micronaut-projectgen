@@ -19,11 +19,9 @@ import io.micronaut.projectgen.core.buildtools.MavenCentral;
 import io.micronaut.projectgen.core.buildtools.Repository;
 import io.micronaut.projectgen.core.buildtools.RequiresRepository;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
-import io.micronaut.projectgen.core.feature.ConfigurationFeature;
 import io.micronaut.projectgen.core.feature.DefaultFeature;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.projectgen.core.feature.LoggingFeature;
-import io.micronaut.projectgen.core.feature.config.Properties;
 import io.micronaut.projectgen.core.feature.gitignore.GitIgnore;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.options.Options;
@@ -43,10 +41,10 @@ public abstract class ApplicationTypeFeature implements DefaultFeature, Requires
     private final MicronautCli micronautCli;
 
     protected ApplicationTypeFeature(MicronautCli micronautCli,
-                                     MicronautTestJunit5 micronautTestJunit5,
-                                     MicronautTestSpock micronautTestSpock,
-                                     Logback logback,
-                                     GitIgnore gitIgnore) {
+        MicronautTestJunit5 micronautTestJunit5,
+        MicronautTestSpock micronautTestSpock,
+        Logback logback,
+        GitIgnore gitIgnore) {
         this.micronautTestJunit5 = micronautTestJunit5;
         this.micronautTestSpock = micronautTestSpock;
         this.logback = logback;
@@ -59,8 +57,8 @@ public abstract class ApplicationTypeFeature implements DefaultFeature, Requires
         featureContext.addFeatureIfNotPresent(MicronautCli.class, micronautCli);
         featureContext.addFeatureIfNotPresent(GitIgnore.class, gitIgnore);
         featureContext.addFeatureIfNotPresent(LoggingFeature.class, logback);
-        if (featureContext.getOptions().testFramework() == null ||
-            featureContext.getOptions().testFramework() == TestFramework.JUNIT) {
+        if (featureContext.getOptions().testFramework() == null
+            || featureContext.getOptions().testFramework() == TestFramework.JUNIT) {
             featureContext.addFeatureIfNotPresent(MicronautTestJunit5.class, micronautTestJunit5);
         } else if (featureContext.getOptions().testFramework() == TestFramework.SPOCK) {
             featureContext.addFeatureIfNotPresent(MicronautTestSpock.class, micronautTestSpock);

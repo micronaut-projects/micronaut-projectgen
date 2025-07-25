@@ -49,9 +49,9 @@ public class Cdk implements MultiProjectFeature, InfrastructureAsCodeFeature {
     private final Dependency dependencyCdk;
 
     public Cdk(CoordinateResolver coordinateResolver,
-               X86 x86
-               //RepositoryResolver repositoryResolver
-               ) {
+        X86 x86
+    //RepositoryResolver repositoryResolver
+    ) {
         this.coordinateResolver = coordinateResolver;
 //        dependencyCdk = MicronautDependencyUtils.starterDependency()
 //                        .artifactId(ARTIFACT_ID_MICRONAUT_STARTER_AWS_CDK)
@@ -87,8 +87,8 @@ public class Cdk implements MultiProjectFeature, InfrastructureAsCodeFeature {
     @Override
     public boolean supports(Options options) {
         ApplicationType applicationType = ApplicationType.of(options.template());
-        return applicationType == ApplicationType.DEFAULT ||
-            applicationType == ApplicationType.FUNCTION;
+        return applicationType == ApplicationType.DEFAULT
+            || applicationType == ApplicationType.FUNCTION;
     }
 
     @Override

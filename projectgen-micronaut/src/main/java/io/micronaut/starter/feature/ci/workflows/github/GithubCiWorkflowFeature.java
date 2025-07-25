@@ -65,7 +65,7 @@ public class GithubCiWorkflowFeature extends CIWorkflowFeature {
         return new RockerTemplate(workflowFilePath, javaAction.template(
             generatorContext.getJdkVersion(),
             JdkDistribution.DEFAULT_DISTRIBUTION,
-            generatorContext.getBuildTool(),
+            generatorContext.getOptions().getBuildTool(),
             DEFAULT_BRANCH)
         );
     }

@@ -26,19 +26,19 @@ import io.micronaut.starter.feature.json.JacksonDatabindFeature;
 
 public abstract class AbstractGoogleCloudFunction extends AbstractFunctionFeature implements GcpCloudFeature, GcpMicronautRuntimeFeature {
     public static final Dependency.Builder GCP_FUNCTIONS_FRAMEWORK_API = Dependency.builder()
-            .groupId("com.google.cloud.functions")
-            .artifactId("functions-framework-api");
+        .groupId("com.google.cloud.functions")
+        .artifactId("functions-framework-api");
     private static final Dependency DEPENDENCY_MICRONAUT_SERVLET_CORE = MicronautDependencyUtils.servletDependency()
-                    .artifactId("micronaut-servlet-core")
-                    .test()
-                    .build();
+        .artifactId("micronaut-servlet-core")
+        .test()
+        .build();
 
     private final ShadePlugin shadePlugin;
     private final JacksonDatabindFeature jacksonDatabindFeature;
 
-    public AbstractGoogleCloudFunction(
-            ShadePlugin shadePlugin,
-            JacksonDatabindFeature jacksonDatabindFeature) {
+    protected AbstractGoogleCloudFunction(
+        ShadePlugin shadePlugin,
+        JacksonDatabindFeature jacksonDatabindFeature) {
         this.shadePlugin = shadePlugin;
         this.jacksonDatabindFeature = jacksonDatabindFeature;
     }

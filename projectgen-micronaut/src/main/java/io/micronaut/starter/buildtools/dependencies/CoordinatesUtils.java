@@ -86,11 +86,11 @@ public final class CoordinatesUtils {
 
                     if (StringUtils.isNotEmpty(groupId) && StringUtils.isNotEmpty(artifactId)) {
                         DependencyCoordinate dependencyCoordinate = Dependency.builder()
-                                .groupId(groupId)
-                                .artifactId(artifactId)
-                                .version(version)
-                                .pom(pom)
-                                .buildCoordinate();
+                            .groupId(groupId)
+                            .artifactId(artifactId)
+                            .version(version)
+                            .pom(pom)
+                            .buildCoordinate();
                         coordinates.put(dependencyCoordinate.getArtifactId(), dependencyCoordinate);
                     }
                 }
@@ -104,7 +104,7 @@ public final class CoordinatesUtils {
     }
 
     private static Document documentFor(@NonNull InputStream inputStream)
-            throws ParserConfigurationException, IOException, SAXException {
+        throws ParserConfigurationException, IOException, SAXException {
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
         return dBuilder.parse(inputStream);
@@ -115,7 +115,7 @@ public final class CoordinatesUtils {
         NodeList children = node.getChildNodes();
         for (int i = 0; i < children.getLength(); i++) {
             Node child = children.item(i);
-            if (child.getNodeName().equals(NODE_NAME_TEXT)) {
+            if (NODE_NAME_TEXT.equals(child.getNodeName())) {
                 return Optional.of(child.getNodeValue());
             }
         }

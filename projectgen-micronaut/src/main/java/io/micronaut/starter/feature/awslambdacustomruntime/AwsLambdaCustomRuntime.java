@@ -54,9 +54,9 @@ import java.util.List;
 @Singleton
 public class AwsLambdaCustomRuntime implements FunctionFeature, ApplicationFeature, AwsCloudFeature, OpenRewriteFeature {
     public static final Dependency DEPENDENCY_AWS_FUNCTION_AWS_CUSTOM_RUNTIME = MicronautDependencyUtils.awsDependency()
-            .artifactId("micronaut-function-aws-custom-runtime")
-            .compile()
-            .build();
+        .artifactId("micronaut-function-aws-custom-runtime")
+        .compile()
+        .build();
     public static final String MAIN_CLASS_NAME = "io.micronaut.function.aws.runtime.MicronautLambdaRuntime";
 
     public static final String FEATURE_NAME_AWS_LAMBDA_CUSTOM_RUNTIME = "aws-lambda-custom-runtime";
@@ -65,11 +65,16 @@ public class AwsLambdaCustomRuntime implements FunctionFeature, ApplicationFeatu
     private final HttpClientJdk httpClientJdk;
 
     public AwsLambdaCustomRuntime(Provider<AwsLambda> awsLambda,
-                                  HttpClientJdk httpClientJdk) {
+        HttpClientJdk httpClientJdk) {
         this.awsLambda = awsLambda;
         this.httpClientJdk = httpClientJdk;
     }
 
+    /**
+     * Processes selected features and ensures required AWS Lambda and HTTP client features are present.
+     *
+     * @param featureContext The feature context to modify.
+     */
     @Override
     public void processSelectedFeatures(FeatureContext featureContext) {
         AwsLambda awsLambda = this.awsLambda.get();
@@ -104,6 +109,12 @@ public class AwsLambdaCustomRuntime implements FunctionFeature, ApplicationFeatu
         return "Adds support for deploying a Micronaut Function to a Custom AWS Lambda Runtime";
     }
 
+    /**
+     * Applies the AWS Lambda Custom Runtime feature to the generator context by adding required dependencies,
+     * templates, and configuration settings.
+     *
+     * @param generatorContext The context of the generator to apply this feature to.
+     */
     @SuppressWarnings("EmptyBlock")
     @Override
     public void apply(GeneratorContext generatorContext) {
@@ -114,18 +125,30 @@ public class AwsLambdaCustomRuntime implements FunctionFeature, ApplicationFeatu
         if (shouldGenerateMainClassForRuntime(generatorContext)) {
             addFunctionLambdaRuntime(generatorContext, module, project);
         }
-
         if (generatorContext.getFeatures().isFeaturePresent(GraalVM.class)) {
-            module.addHelpTemplate(new RockerWritable(awsCustomRuntimeReadme.template(generatorContext.getBuildTool())));
+            module.addHelpTemplate(new RockerWritable(awsCustomRuntimeReadme.template(generatorContext.getOptions().getBuildTool())));
         }
     }
 
+    /**
+     * Determines if the FunctionLambdaRuntime main class should be generated.
+     *
+     * @param generatorContext The generator context.
+     * @return {@code true} if the main class should be generated, {@code false} otherwise.
+     */
     public boolean shouldGenerateMainClassForRuntime(GeneratorContext generatorContext) {
         ApplicationType applicationType = ApplicationType.of(generatorContext.getOptions().template());
-        return applicationType == ApplicationType.FUNCTION &&
-                generatorContext.getFeatures().isFeaturePresent(AwsLambda.class);
+        return applicationType == ApplicationType.FUNCTION
+            && generatorContext.getFeatures().isFeaturePresent(AwsLambda.class);
     }
-
+    /**
+     * Returns the fully qualified main class name to use for AWS Lambda custom runtime,
+     * based on the application type and features.
+     *
+     * @param generatorContext The generator context.
+     * @return The main class name to use.
+     * @throws ConfigurationException if AWS Lambda feature is missing.
+     */
     @Override
     @Nullable
     public String mainClassName(GeneratorContext generatorContext) {
@@ -141,12 +164,19 @@ public class AwsLambdaCustomRuntime implements FunctionFeature, ApplicationFeatu
         throw new ConfigurationException("aws-lambda-custom-runtime should be used together with aws-lambda or aws-gateway-lambda-proxy");
     }
 
+    /**
+     * Adds the main class template for AWS Lambda custom runtime function.
+     *
+     * @param generatorContext The generator context.
+     * @param module The module to which the template should be added.
+     * @param project The current project metadata.
+     */
     private void addFunctionLambdaRuntime(GeneratorContext generatorContext, ModuleContext module, Project project) {
         String functionLambdaRuntime = generatorContext.getSourcePath("/{packagePath}/FunctionLambdaRuntime");
         module.addTemplate(generatorContext.getOptions().language(), "functionLambdaRuntime", functionLambdaRuntime,
-                functionLambdaRuntimeJava.template(generatorContext.getFeatures(), project),
-                functionLambdaRuntimeKotlin.template(generatorContext.getFeatures(), project),
-                functionLambdaRuntimeGroovy.template(generatorContext.getFeatures(), project));
+            functionLambdaRuntimeJava.template(generatorContext.getFeatures(), project),
+            functionLambdaRuntimeKotlin.template(generatorContext.getFeatures(), project),
+            functionLambdaRuntimeGroovy.template(generatorContext.getFeatures(), project));
     }
 
     @Override
@@ -157,8 +187,8 @@ public class AwsLambdaCustomRuntime implements FunctionFeature, ApplicationFeatu
     @Override
     public List<String> getRecipes(GeneratorContext generatorContext) {
         List<String> recipes = new ArrayList<>();
-        if (generatorContext.getFeatures().testFramework().isSpock() &&
-            OptionUtils.hasGradleBuildTool(generatorContext.getOptions())) {
+        if (generatorContext.getFeatures().testFramework().isSpock()
+            && OptionUtils.hasGradleBuildTool(generatorContext.getOptions())) {
             // maven has this in parent pom
             recipes.add("io.micronaut.starter.feature.micronaut-function-test");
         }

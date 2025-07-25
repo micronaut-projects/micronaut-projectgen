@@ -28,7 +28,7 @@ import java.util.zip.ZipInputStream;
  * @author graemerocher
  * @since 1.0.0
  */
-public class ZipUtil {
+public final class ZipUtil {
 
     /**
      * Are the given bytes a zip file.

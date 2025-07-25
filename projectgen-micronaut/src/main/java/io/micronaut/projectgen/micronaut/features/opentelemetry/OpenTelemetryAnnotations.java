@@ -57,8 +57,8 @@ public class OpenTelemetryAnnotations implements OpenTelemetryFeature {
     public void apply(GeneratorContext generatorContext) {
         ModuleContext module = generatorContext.getRootModule();
         module.addDependency(MicronautDependencyUtils.annotationProcessor(generatorContext.getBuildTool(),
-                MicronautDependencyUtils.GROUP_ID_MICRONAUT_TRACING,
-                MICRONAUT_TRACING_OPENTELEMETRY_ANNOTATION_ARTIFACTID,
-                MICRONAUT_TRACING_VERSION));
+            MicronautDependencyUtils.GROUP_ID_MICRONAUT_TRACING,
+            MICRONAUT_TRACING_OPENTELEMETRY_ANNOTATION_ARTIFACTID,
+            MICRONAUT_TRACING_VERSION));
     }
 }

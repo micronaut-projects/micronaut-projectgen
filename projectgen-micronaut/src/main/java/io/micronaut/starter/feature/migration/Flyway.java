@@ -34,6 +34,7 @@ import java.util.List;
 public class Flyway implements MigrationFeature, OpenRewriteFeature {
 
     public static final String NAME = "flyway";
+
     //https://documentation.red-gate.com/fd/oracle-184127602.html
 
     @Override
@@ -70,4 +71,3 @@ public class Flyway implements MigrationFeature, OpenRewriteFeature {
         return recipes;
     }
 }
-

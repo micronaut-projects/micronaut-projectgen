@@ -24,10 +24,10 @@ import jakarta.inject.Singleton;
 @Singleton
 public class OpenTelemetryGoogleCloudTrace extends AbstractOpenTelemetry {
     public OpenTelemetryGoogleCloudTrace(OpenTelemetry otel,
-                                         OpenTelemetryHttp otelHttp,
-                                         OpenTelemetryAnnotations otelAnnotations,
-                                         OpenTelemetryGrpc openTelemetryGrpc,
-                                         OpenTelemetryExporterGoogleCloudTrace otelExporter) {
+        OpenTelemetryHttp otelHttp,
+        OpenTelemetryAnnotations otelAnnotations,
+        OpenTelemetryGrpc openTelemetryGrpc,
+        OpenTelemetryExporterGoogleCloudTrace otelExporter) {
         super(otel, otelHttp, otelAnnotations, openTelemetryGrpc, otelExporter);
     }
 

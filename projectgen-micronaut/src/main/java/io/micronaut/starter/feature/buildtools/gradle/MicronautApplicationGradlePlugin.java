@@ -30,7 +30,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class MicronautApplicationGradlePlugin {
+public final class MicronautApplicationGradlePlugin {
 
     @NonNull
     public static Builder builder() {
@@ -157,9 +157,9 @@ public class MicronautApplicationGradlePlugin {
 
         public GradlePlugin.Builder builder() {
             return GradlePlugin.builder()
-                    .id(id)
-                    .lookupArtifactId(ARTIFACT_ID)
-                    .extension(new RockerWritable(micronautGradle.template(dsl, buildTool, javaVersion, dockerfile, dockerfileNative, dockerBuildImages, dockerBuildNativeImages, runtime, testRuntime, aotVersion, incremental, packageName, additionalTestResourceModules, sharedTestResources, aotKeys, lambdaRuntimeMainClass, ignoredAutomaticDependencies)));
+                .id(id)
+                .lookupArtifactId(ARTIFACT_ID)
+                .extension(new RockerWritable(micronautGradle.template(dsl, buildTool, javaVersion, dockerfile, dockerfileNative, dockerBuildImages, dockerBuildNativeImages, runtime, testRuntime, aotVersion, incremental, packageName, additionalTestResourceModules, sharedTestResources, aotKeys, lambdaRuntimeMainClass, ignoredAutomaticDependencies)));
         }
 
         public Builder dsl(GradleDsl gradleDsl) {
@@ -171,6 +171,9 @@ public class MicronautApplicationGradlePlugin {
             this.sharedTestResources = true;
             return this;
         }
+    }
+
+    private MicronautApplicationGradlePlugin() {
     }
 
 }

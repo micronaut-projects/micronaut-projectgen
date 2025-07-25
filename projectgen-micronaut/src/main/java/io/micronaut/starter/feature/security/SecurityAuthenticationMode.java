@@ -27,7 +27,7 @@ public enum SecurityAuthenticationMode implements Ordered {
     private final int order;
 
     SecurityAuthenticationMode(String value,
-                               int order) {
+        int order) {
         this.value = value;
         this.order = order;
     }

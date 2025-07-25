@@ -19,8 +19,6 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
-import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.Feature;
@@ -76,7 +74,7 @@ public class KotlinExtensionFunctions implements OpenRewriteFeature, KotlinSpeci
         return "Convenience functions to make using Micronaut with Kotlin more user-friendly";
     }
 
-    public String getCategory() {
+    public final String getCategory() {
         return Category.LANGUAGES;
     }
 }

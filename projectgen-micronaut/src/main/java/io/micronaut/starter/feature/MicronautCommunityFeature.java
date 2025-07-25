@@ -31,7 +31,7 @@ public interface MicronautCommunityFeature extends CommunityFeature {
 
     default boolean supportsCurrentMicronautVersion() {
         return VersionInfo.getMicronautMajorVersion()
-                .filter(currentMicronautVersion -> builtWithMicronautVersion().getMajor() == currentMicronautVersion)
-                .isPresent();
+            .filter(currentMicronautVersion -> builtWithMicronautVersion().getMajor() == currentMicronautVersion)
+            .isPresent();
     }
 }

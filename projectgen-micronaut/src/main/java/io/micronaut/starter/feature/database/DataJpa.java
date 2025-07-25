@@ -69,22 +69,22 @@ public class DataJpa implements JpaFeature, DataFeature {
     @Override
     public void apply(GeneratorContext generatorContext) {
         ModuleContext module = generatorContext.getRootModule();
-        module.addDependency(DataFeature.dataProcessorDependency(generatorContext.getBuildTool()));
+        module.addDependency(DataFeature.dataProcessorDependency(generatorContext.getOptions().getBuildTool()));
         module.addDependency(Dependency.builder()
-                .groupId("io.micronaut.data")
-                .artifactId("micronaut-data-hibernate-jpa")
-                .compile());
+            .groupId("io.micronaut.data")
+            .artifactId("micronaut-data-hibernate-jpa")
+            .compile());
         DatabaseDriverFeature dbFeature = generatorContext.getRequiredFeature(DatabaseDriverFeature.class);
         ApplicationConfiguration configuration = module.configuration();
         configuration.addNested(getDatasourceConfig(generatorContext, dbFeature));
         configuration.addNested(JPA_HIBERNATE_PROPERTIES_HBM2DDL,
-                generatorContext.getFeatures().hasFeature(MigrationFeature.class) ? Hbm2ddlAuto.NONE.toString() :
-                        Hbm2ddlAuto.UPDATE.toString());
+            generatorContext.getFeatures().hasFeature(MigrationFeature.class) ? Hbm2ddlAuto.NONE.toString()
+                : Hbm2ddlAuto.UPDATE.toString());
 
         Configuration testConfig = module.testConfiguration();
         testConfig.addNested(JPA_HIBERNATE_PROPERTIES_HBM2DDL,
-                generatorContext.getFeatures().hasFeature(MigrationFeature.class) ? Hbm2ddlAuto.NONE.toString() :
-                        Hbm2ddlAuto.CREATE_DROP.toString());
+            generatorContext.getFeatures().hasFeature(MigrationFeature.class) ? Hbm2ddlAuto.NONE.toString()
+                : Hbm2ddlAuto.CREATE_DROP.toString());
     }
 
     @Override

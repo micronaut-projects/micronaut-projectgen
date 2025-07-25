@@ -90,7 +90,7 @@ public class MicronautCli implements Feature {
         }
     }
 
-    private static Options load(MicronautCliConfig config)  {
+    private static Options load(MicronautCliConfig config) {
         var builder = GenericOptionsBuilder.builder();
 
         if (config.getApplicationType() != null) {

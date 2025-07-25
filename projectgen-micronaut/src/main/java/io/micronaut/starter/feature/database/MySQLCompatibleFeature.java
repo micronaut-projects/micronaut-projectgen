@@ -31,11 +31,11 @@ public abstract class MySQLCompatibleFeature extends DatabaseDriverFeature {
 
     public static final String VERTX_MYSQL_CLIENT = "vertx-mysql-client";
     private static final Dependency.Builder DEPENDENCY_VERTX_MYSQL_CLIENT = Dependency.builder()
-            .groupId(IO_VERTX_DEPENDENCY_GROUP)
-            .artifactId(VERTX_MYSQL_CLIENT)
-            .compile();
+        .groupId(IO_VERTX_DEPENDENCY_GROUP)
+        .artifactId(VERTX_MYSQL_CLIENT)
+        .compile();
 
-    public MySQLCompatibleFeature(JdbcFeature jdbcFeature, TestContainers testContainers, TestResources testResources) {
+    protected MySQLCompatibleFeature(JdbcFeature jdbcFeature, TestContainers testContainers, TestResources testResources) {
         super(jdbcFeature, testContainers, testResources);
     }
 

@@ -22,7 +22,7 @@ import io.micronaut.projectgen.core.feature.Feature;
 
 import static io.micronaut.starter.feature.Category.TRACING;
 
-public interface OpenTelemetryFeature extends Feature  {
+public interface OpenTelemetryFeature extends Feature {
     @Override
     default boolean supports(Options options) {
         ApplicationType applicationType = ApplicationType.of(options.template());

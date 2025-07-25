@@ -18,11 +18,9 @@ package io.micronaut.starter.feature.server;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
-import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils;
 
 import jakarta.inject.Singleton;
 

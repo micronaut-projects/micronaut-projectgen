@@ -21,7 +21,7 @@ import io.micronaut.starter.feature.testresources.TestResources;
 public abstract class MongoFeature extends EaseTestingFeature implements MongoContributingTestContainerDependency {
 
     protected MongoFeature(TestContainers testContainers,
-                           TestResources testResources) {
+        TestResources testResources) {
         super(testContainers, testResources);
     }
 }

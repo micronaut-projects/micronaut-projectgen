@@ -67,4 +67,3 @@ public class LambdaFunctionUrl extends CdkFeature implements AwsApiFeature, Lamb
         return "io.micronaut.function.aws.runtime.MicronautLambdaRuntime";
     }
 }
-

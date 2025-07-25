@@ -33,7 +33,6 @@ public class MicrometerObservationHttp extends MicrometerFeature implements Open
     public static final String NAME = "micrometer-observation-http";
     public static final String TITLE = "Micronaut Micrometer Observation HTTP";
 
-
     public MicrometerObservationHttp(Core core, Management management) {
         super(core, management);
     }

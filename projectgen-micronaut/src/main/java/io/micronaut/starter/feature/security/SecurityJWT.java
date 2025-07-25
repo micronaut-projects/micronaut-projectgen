@@ -19,9 +19,7 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
-import io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils;
 import jakarta.inject.Singleton;
 
 import java.util.ArrayList;
@@ -59,8 +57,8 @@ public class SecurityJWT extends SecurityFeature implements SecurityAuthenticati
     public List<String> getRecipes(GeneratorContext generatorContext) {
         List<String> recipes = new ArrayList<>();
         Optional<SecurityAuthenticationMode> securityAuthenticationModeOptional = SecurityAuthenticationModeUtils.resolveSecurityAuthenticationMode(generatorContext);
-        if (securityAuthenticationModeOptional.isPresent() &&
-            (securityAuthenticationModeOptional.get() == SecurityAuthenticationMode.BEARER || securityAuthenticationModeOptional.get() == SecurityAuthenticationMode.COOKIE)
+        if (securityAuthenticationModeOptional.isPresent()
+            && (securityAuthenticationModeOptional.get() == SecurityAuthenticationMode.BEARER || securityAuthenticationModeOptional.get() == SecurityAuthenticationMode.COOKIE)
         ) {
             recipes.add("io.micronaut.starter.feature.security-jwt-config");
         }

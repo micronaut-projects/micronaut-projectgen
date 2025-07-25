@@ -15,13 +15,11 @@
  */
 package io.micronaut.projectgen.micronaut;
 
-import io.micronaut.projectgen.core.buildtools.gradle.Gradle;
 import io.micronaut.projectgen.core.buildtools.gradle.MavenPublishGradlePlugin;
 import io.micronaut.projectgen.core.buildtools.gradle.SigningGradlePlugin;
 import io.micronaut.projectgen.core.buildtools.gradle.SpotlessGradlePlugin;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.feature.FeatureContext;
-import io.micronaut.projectgen.core.feature.config.Properties;
 import io.micronaut.projectgen.core.feature.gitignore.GitIgnore;
 import io.micronaut.projectgen.core.feature.license.Apache2LicenseFeature;
 import io.micronaut.projectgen.core.feature.license.LicenseFeature;
@@ -45,15 +43,15 @@ public class ApplicationTypeLibraryFeature extends ApplicationTypeFeature {
     private final SpotlessGradlePlugin spotlessGradlePlugin;
 
     public ApplicationTypeLibraryFeature(MicronautCli micronautCli,
-                                         Apache2LicenseFeature license,
-                                         MicronautTestJunit5 micronautTestJunit5,
-                                         MicronautTestSpock micronautTestSpock,
-                                         MicronautLibraryGradlePlugin micronautLibraryGradlePlugin,
-                                         MavenPublishGradlePlugin mavenPublishGradlePlugin,
-                                         SigningGradlePlugin signingGradlePlugin,
-                                         SpotlessGradlePlugin spotlessGradlePlugin,
-                                         Logback logback,
-                                         GitIgnore gitIgnore) {
+        Apache2LicenseFeature license,
+        MicronautTestJunit5 micronautTestJunit5,
+        MicronautTestSpock micronautTestSpock,
+        MicronautLibraryGradlePlugin micronautLibraryGradlePlugin,
+        MavenPublishGradlePlugin mavenPublishGradlePlugin,
+        SigningGradlePlugin signingGradlePlugin,
+        SpotlessGradlePlugin spotlessGradlePlugin,
+        Logback logback,
+        GitIgnore gitIgnore) {
         super(micronautCli, micronautTestJunit5, micronautTestSpock, logback, gitIgnore);
         this.license = license;
         this.micronautLibraryGradlePlugin = micronautLibraryGradlePlugin;

@@ -26,17 +26,17 @@ import java.util.List;
 /**
  * Utility class to decoracte AWS SDK dependencies with extra HTTP Client dependendies and exclusions.
  */
-public class AwsSdkDependenciesUtils {
+public final class AwsSdkDependenciesUtils {
     @NonNull
     public static List<Dependency> dependencies(@NonNull GeneratorContext generatorContext,
-                                                @NonNull Dependency.Builder awsSdkDependency) {
+        @NonNull Dependency.Builder awsSdkDependency) {
         return dependencies(generatorContext, awsSdkDependency, AwsSdkClient.URL_CONNECTION);
     }
 
     @NonNull
     public static List<Dependency> dependencies(@NonNull GeneratorContext generatorContext,
-                                                @NonNull Dependency.Builder awsSdkDependency,
-                                                @NonNull AwsSdkClient clientIfGraalVM) {
+        @NonNull Dependency.Builder awsSdkDependency,
+        @NonNull AwsSdkClient clientIfGraalVM) {
         List<Dependency> result = new ArrayList<>();
         if (generatorContext.isFeaturePresent(GraalVM.class)) {
             for (AwsSdkClient v : AwsSdkClient.values()) {

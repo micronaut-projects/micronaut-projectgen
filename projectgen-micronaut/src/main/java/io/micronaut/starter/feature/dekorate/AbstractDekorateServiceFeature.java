@@ -18,7 +18,7 @@ package io.micronaut.starter.feature.dekorate;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 
 /**
- * Abstract class for all Dekorate features that requries to for proper functionality
+ * Abstract class for all Dekorate features that requries to for proper functionality.
  * one of {@link AbstractDekoratePlatformFeature}
  *
  * @author Pavol Gressa
@@ -28,7 +28,7 @@ public abstract class AbstractDekorateServiceFeature extends AbstractDekorateFea
 
     private final DekorateKubernetes dekorateKubernetes;
 
-    public AbstractDekorateServiceFeature(DekorateKubernetes dekorateKubernetes) {
+    protected AbstractDekorateServiceFeature(DekorateKubernetes dekorateKubernetes) {
         this.dekorateKubernetes = dekorateKubernetes;
     }
 

@@ -72,6 +72,14 @@ public class Knative implements Feature {
         return Category.CLOUD;
     }
 
+    /**
+     * Processes and adds selected features to the given feature context.
+     * <p>
+     * Specifically, it adds the Management feature if not already present,
+     * and similarly adds the Jib feature if missing.
+     *
+     * @param featureContext the feature context to process and modify
+     */
     public void processSelectedFeatures(FeatureContext featureContext) {
         if (!featureContext.isPresent(Management.class)) {
             featureContext.addFeature(management);

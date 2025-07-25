@@ -55,8 +55,8 @@ public interface DataFeature extends OneOfFeature {
 
     static Dependency dataProcessorDependency(BuildTool buildTool, String artifactId, int order) {
         return MicronautDependencyUtils.annotationProcessor(buildTool, GROUP_ID_MICRONAUT_DATA, artifactId, MICRONAUT_DATA_VERSION, true)
-                .order(order)
-                .build();
+            .order(order)
+            .build();
     }
 
     @Override

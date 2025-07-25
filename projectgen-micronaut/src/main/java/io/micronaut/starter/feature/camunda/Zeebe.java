@@ -34,8 +34,8 @@ public class Zeebe implements CamundaCommunityFeature {
     public static final String NAME = "camunda-zeebe";
 
     private static final Dependency.Builder DEPENDENCY_ZEEBE = Dependency.builder()
-            .lookupArtifactId("micronaut-zeebe-client-feature")
-            .compile();
+        .lookupArtifactId("micronaut-zeebe-client-feature")
+        .compile();
 
     @NonNull
     @Override

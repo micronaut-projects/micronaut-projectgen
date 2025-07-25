@@ -85,6 +85,6 @@ public class Thymeleaf implements ViewFeature, MicronautServerDependent, OpenRew
 
     private void addLayout(ModuleContext module) {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        module.addTemplate(LAYOUT_HTML, new URLTemplate(VIEWS_PATH + LAYOUT_HTML, classLoader.getResource(RESOURCES_THYMELEAF_PATH +  LAYOUT_HTML)));
+        module.addTemplate(LAYOUT_HTML, new URLTemplate(VIEWS_PATH + LAYOUT_HTML, classLoader.getResource(RESOURCES_THYMELEAF_PATH + LAYOUT_HTML)));
     }
 }

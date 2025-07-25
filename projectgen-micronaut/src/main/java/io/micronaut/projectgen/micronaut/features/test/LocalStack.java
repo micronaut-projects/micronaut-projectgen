@@ -26,7 +26,6 @@ import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.starter.feature.database.TestContainers;
 import io.micronaut.starter.feature.messaging.jms.SQS;
-import io.micronaut.starter.feature.testcontainers.ContributingTestContainerArtifactId;
 import jakarta.inject.Singleton;
 
 import java.util.List;
@@ -83,12 +82,11 @@ public class LocalStack implements OpenRewriteFeature {
         // SQS pulls this in transitively so this is not required
         if (!generatorContext.isFeaturePresent(SQS.class)) {
             module.addDependency(Dependency.builder()
-                    .groupId("com.amazonaws")
-                    .artifactId("aws-java-sdk-core")
-                    .test());
+                .groupId("com.amazonaws")
+                .artifactId("aws-java-sdk-core")
+                .test());
         }
     }
-
 
     @Override
     public List<String> getRecipes(GeneratorContext generatorContext) {

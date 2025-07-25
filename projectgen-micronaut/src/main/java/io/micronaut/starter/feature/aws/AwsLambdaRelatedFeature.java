@@ -21,7 +21,7 @@ import io.micronaut.starter.feature.function.awslambda.AwsLambda;
 public abstract class AwsLambdaRelatedFeature implements AwsLambdaEventFeature {
     private final AwsLambda awsLambda;
 
-    public AwsLambdaRelatedFeature(AwsLambda awsLambda) {
+    protected AwsLambdaRelatedFeature(AwsLambda awsLambda) {
         this.awsLambda = awsLambda;
     }
 

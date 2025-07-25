@@ -29,7 +29,7 @@ public class AwsLambdaS3EventNotification extends AwsLambdaEventFunctionFeature 
     public AwsLambdaS3EventNotification(AwsLambda awsLambda) {
         super(awsLambda);
     }
-    
+
     @Override
     @NonNull
     public String getName() {

@@ -69,10 +69,10 @@ public class AWSCiWorkflowFeature extends CIWorkflowFeature implements OpenRewri
 
     private Template workflowRockerTemplate(GeneratorContext generatorContext) {
         return new RockerTemplate(getWorkflowFileName(generatorContext), buildSpec.template(
-                generatorContext.getProject().getName(),
-                generatorContext.getJdkVersion(),
-                generatorContext.getBuildTool()
-            )
+            generatorContext.getProject().getName(),
+            generatorContext.getJdkVersion(),
+            generatorContext.getOptions().getBuildTool()
+        )
         );
     }
 

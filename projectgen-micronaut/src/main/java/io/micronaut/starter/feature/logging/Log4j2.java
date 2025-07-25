@@ -20,7 +20,6 @@ import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.feature.LoggingFeature;
 import io.micronaut.projectgen.core.generator.ModuleContext;
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.micronaut.template.logging.log4j2;
@@ -61,23 +60,23 @@ public class Log4j2 implements LoggingFeature {
 
     private void populateDependencies(ModuleContext module) {
         module.addDependency(Dependency.builder()
-                .groupId(GROUP_ID)
-                .artifactId("log4j-bom")
-                .version(VersionInfo.getBomVersion("log4j"))
-                .pom()
-                .compile());
+            .groupId(GROUP_ID)
+            .artifactId("log4j-bom")
+            .version(VersionInfo.getBomVersion("log4j"))
+            .pom()
+            .compile());
         module.addDependency(Dependency.builder()
-                .groupId(GROUP_ID)
-                .artifactId("log4j-api")
-                .compile());
+            .groupId(GROUP_ID)
+            .artifactId("log4j-api")
+            .compile());
         module.addDependency(Dependency.builder()
-                .groupId(GROUP_ID)
-                .artifactId("log4j-core")
-                .runtime());
+            .groupId(GROUP_ID)
+            .artifactId("log4j-core")
+            .runtime());
         module.addDependency(Dependency.builder()
-                .groupId(GROUP_ID)
-                .artifactId("log4j-slf4j-impl")
-                .runtime());
+            .groupId(GROUP_ID)
+            .artifactId("log4j-slf4j-impl")
+            .runtime());
     }
 
 }

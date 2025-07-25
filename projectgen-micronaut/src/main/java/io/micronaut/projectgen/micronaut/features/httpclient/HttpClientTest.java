@@ -78,8 +78,8 @@ public class HttpClientTest implements OpenRewriteFeature {
 
     private boolean hasHttpClientFeatureDependencyInScope(@NonNull GeneratorContext generatorContext, @NonNull Scope scope) {
         ModuleContext module = generatorContext.getRootModule();
-        return module.hasDependencyInScope(MicronautDependencyUtils.GROUP_ID_MICRONAUT, ARTIFACT_ID_MICRONAUT_HTTP_CLIENT, scope) ||
-                module.hasDependencyInScope(MicronautDependencyUtils.GROUP_ID_MICRONAUT, ARTIFACT_ID_MICRONAUT_HTTP_CLIENT_JDK, scope);
+        return module.hasDependencyInScope(MicronautDependencyUtils.GROUP_ID_MICRONAUT, ARTIFACT_ID_MICRONAUT_HTTP_CLIENT, scope)
+            || module.hasDependencyInScope(MicronautDependencyUtils.GROUP_ID_MICRONAUT, ARTIFACT_ID_MICRONAUT_HTTP_CLIENT_JDK, scope);
     }
 
     @Override

@@ -21,18 +21,13 @@ import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.rocker.RockerWritable;
 import io.micronaut.projectgen.core.utils.OptionUtils;
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.BuildProperties;
 import io.micronaut.projectgen.core.buildtools.dependencies.CoordinateResolver;
-import io.micronaut.projectgen.core.buildtools.gradle.GradlePlugin;
 import io.micronaut.projectgen.core.buildtools.maven.MavenPlugin;
 import io.micronaut.starter.feature.Category;
-import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.micronaut.template.asciidoctor.asciidocGradle;
 import io.micronaut.projectgen.micronaut.template.asciidoctor.asciidocMavenPlugin;
 import io.micronaut.projectgen.micronaut.template.asciidoctor.indexAdoc;
-import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.rocker.RockerTemplate;
 
 import jakarta.inject.Singleton;
@@ -95,7 +90,7 @@ public class Asciidoctor implements OpenRewriteFeature {
         if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())) {
             recipes.add("io.micronaut.starter.feature.asciidoctor-maven.properties");
         }
-            return recipes;
+        return recipes;
     }
 
 }

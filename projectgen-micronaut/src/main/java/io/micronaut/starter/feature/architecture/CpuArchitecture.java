@@ -15,7 +15,6 @@
  */
 package io.micronaut.starter.feature.architecture;
 
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.OneOfFeature;
 

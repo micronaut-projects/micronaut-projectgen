@@ -27,8 +27,7 @@ public enum DbType {
     /**
      * @deprecated Use {@link #ORACLEFREE} instead.
      */
-    @Deprecated(forRemoval = true, since = "4.4.0")
-    ORACLEXE("oracle-xe", KnownModules.JDBC_ORACLE_XE, KnownModules.R2DBC_ORACLE_XE, KnownModules.HIBERNATE_REACTIVE_ORACLE_XE),
+    @Deprecated(forRemoval = true, since = "4.4.0") ORACLEXE("oracle-xe", KnownModules.JDBC_ORACLE_XE, KnownModules.R2DBC_ORACLE_XE, KnownModules.HIBERNATE_REACTIVE_ORACLE_XE),
     ORACLEFREE("oracle", KnownModules.JDBC_ORACLE_FREE, KnownModules.R2DBC_ORACLE_FREE, KnownModules.HIBERNATE_REACTIVE_ORACLE_FREE);
 
     private final String name;

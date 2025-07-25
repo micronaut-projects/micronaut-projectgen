@@ -32,8 +32,8 @@ import static io.micronaut.starter.buildtools.dependencies.MicronautDependencyUt
 public abstract class OpenSearchFeature extends EaseTestingFeature implements OpenSearchContributingTestContainerDependency, TestResourcesAdditionalModulesProvider {
 
     protected OpenSearchFeature(
-            TestContainers testContainers,
-            TestResources testResources
+        TestContainers testContainers,
+        TestResources testResources
     ) {
         super(testContainers, testResources);
     }

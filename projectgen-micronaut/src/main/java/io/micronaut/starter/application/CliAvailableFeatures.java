@@ -15,7 +15,6 @@
  */
 package io.micronaut.starter.application;
 
-import io.micronaut.core.order.Ordered;
 import io.micronaut.projectgen.core.feature.BaseAvailableFeatures;
 import io.micronaut.projectgen.core.feature.Feature;
 

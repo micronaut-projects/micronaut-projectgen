@@ -77,7 +77,7 @@ import java.util.Map;
 import java.util.Optional;
 
 
-import static io.micronaut.projectgen.core.utils.StringUtils.*;
+import static io.micronaut.projectgen.core.utils.StringUtils.randomString;
 import static io.micronaut.starter.feature.agorapulse.AgoraPulseFeature.addMain;
 import static io.micronaut.starter.feature.agorapulse.AgoraPulseFeature.addTest;
 import static io.micronaut.starter.feature.agorapulse.AgoraPulseFeature.addTestUtil;
@@ -148,8 +148,8 @@ public class Slack implements AgoraPulseFeature {
     private void addDependency(GeneratorContext generatorContext) {
         ModuleContext module = generatorContext.getRootModule();
         module.addDependency(Dependency.builder()
-                .lookupArtifactId(ARTIFACT_ID)
-                .compile());
+            .lookupArtifactId(ARTIFACT_ID)
+            .compile());
     }
 
     private void addConfiguration(GeneratorContext generatorContext) {
@@ -178,31 +178,31 @@ public class Slack implements AgoraPulseFeature {
 
     private void addExampleCode(GeneratorContext generatorContext) {
         senderModel(generatorContext).ifPresent(rockerModel ->
-                addMain(generatorContext, "MessageSender", rockerModel, "messageSender")
+            addMain(generatorContext, "MessageSender", rockerModel, "messageSender")
         );
 
         senderTestModel(generatorContext).ifPresent(rockerModel ->
-                addTest(generatorContext, "MessageSender", rockerModel, "messageSenderTest")
+            addTest(generatorContext, "MessageSender", rockerModel, "messageSenderTest")
         );
 
         reactionModel(generatorContext).ifPresent(rockerModel ->
-                addMain(generatorContext, "ReactionHandler", rockerModel, "reactionHandler")
+            addMain(generatorContext, "ReactionHandler", rockerModel, "reactionHandler")
         );
 
         reactionTestModel(generatorContext).ifPresent(rockerModel ->
-                addTest(generatorContext, "ReactionHandler", rockerModel, "reactionHandlerTest")
+            addTest(generatorContext, "ReactionHandler", rockerModel, "reactionHandlerTest")
         );
 
         handlerModel(generatorContext).ifPresent(rockerModel ->
-                addMain(generatorContext, "CommandHandler", rockerModel, "commandHandler")
+            addMain(generatorContext, "CommandHandler", rockerModel, "commandHandler")
         );
 
         handlerTestModel(generatorContext).ifPresent(rockerModel ->
-                addTest(generatorContext, "CommandHandler", rockerModel, "commandHandlerTest")
+            addTest(generatorContext, "CommandHandler", rockerModel, "commandHandlerTest")
         );
 
         methodsClientUtilModel(generatorContext).ifPresent(rockerModel ->
-                addTestUtil(generatorContext, "MethodsClientUtil", rockerModel, "methodsClientUtil")
+            addTestUtil(generatorContext, "MethodsClientUtil", rockerModel, "methodsClientUtil")
         );
 
         addSlackManifest(generatorContext);
@@ -210,11 +210,11 @@ public class Slack implements AgoraPulseFeature {
         if (generatorContext.isFeaturePresent(GruHttp.class)) {
 
             gruSlackUtilModel(generatorContext).ifPresent(rockerModel ->
-                    addTestUtil(generatorContext, "GruSlackUtil", rockerModel, "gruSlackUtil")
+                addTestUtil(generatorContext, "GruSlackUtil", rockerModel, "gruSlackUtil")
             );
 
             reactionTestGruModel(generatorContext).ifPresent(rockerModel ->
-                    addTest(generatorContext, "ReactionHandlerGru", rockerModel, "reactionHandlerGruTest")
+                addTest(generatorContext, "ReactionHandlerGru", rockerModel, "reactionHandlerGruTest")
             );
 
             addGruTestFixture(generatorContext, "ReactionHandlerGru");
@@ -236,95 +236,95 @@ public class Slack implements AgoraPulseFeature {
     @NonNull
     private Optional<RockerModel> senderModel(GeneratorContext generatorContext) {
         return mainModel(
-                generatorContext,
-                messageSenderJava.template(generatorContext.getProject()),
-                messageSenderGroovy.template(generatorContext.getProject()),
-                messageSenderKotlin.template(generatorContext.getProject())
+            generatorContext,
+            messageSenderJava.template(generatorContext.getProject()),
+            messageSenderGroovy.template(generatorContext.getProject()),
+            messageSenderKotlin.template(generatorContext.getProject())
         );
     }
 
     @NonNull
     private Optional<RockerModel> senderTestModel(GeneratorContext generatorContext) {
         return testModel(
-                generatorContext,
-                messageSenderTestJava.template(generatorContext.getProject()),
-                messageSenderSpecGroovy.template(generatorContext.getProject()),
-                messageSenderTestKotlin.template(generatorContext.getProject()),
-                messageSenderTestKotest.template(generatorContext.getProject())
+            generatorContext,
+            messageSenderTestJava.template(generatorContext.getProject()),
+            messageSenderSpecGroovy.template(generatorContext.getProject()),
+            messageSenderTestKotlin.template(generatorContext.getProject()),
+            messageSenderTestKotest.template(generatorContext.getProject())
         );
     }
 
     @NonNull
     private Optional<RockerModel> reactionModel(GeneratorContext generatorContext) {
         return mainModel(
-                generatorContext,
-                reactionHandlerJava.template(generatorContext.getProject()),
-                reactionHandlerGroovy.template(generatorContext.getProject()),
-                reactionHandlerKotlin.template(generatorContext.getProject())
+            generatorContext,
+            reactionHandlerJava.template(generatorContext.getProject()),
+            reactionHandlerGroovy.template(generatorContext.getProject()),
+            reactionHandlerKotlin.template(generatorContext.getProject())
         );
     }
 
     @NonNull
     private Optional<RockerModel> reactionTestModel(GeneratorContext generatorContext) {
         return testModel(
-                generatorContext,
-                reactionHandlerTestJava.template(generatorContext.getProject()),
-                reactionHandlerSpecGroovy.template(generatorContext.getProject()),
-                reactionHandlerTestKotlin.template(generatorContext.getProject()),
-                reactionHandlerTestKotest.template(generatorContext.getProject())
+            generatorContext,
+            reactionHandlerTestJava.template(generatorContext.getProject()),
+            reactionHandlerSpecGroovy.template(generatorContext.getProject()),
+            reactionHandlerTestKotlin.template(generatorContext.getProject()),
+            reactionHandlerTestKotest.template(generatorContext.getProject())
         );
     }
 
     @NonNull
     private Optional<RockerModel> methodsClientUtilModel(GeneratorContext generatorContext) {
         return testModel(
-                generatorContext,
-                methodsClientUtilJava.template(generatorContext.getProject()),
-                methodsClientUtilGroovy.template(generatorContext.getProject()),
-                methodsClientUtilKotlin.template(generatorContext.getProject()),
-                methodsClientUtilKotest.template(generatorContext.getProject())
+            generatorContext,
+            methodsClientUtilJava.template(generatorContext.getProject()),
+            methodsClientUtilGroovy.template(generatorContext.getProject()),
+            methodsClientUtilKotlin.template(generatorContext.getProject()),
+            methodsClientUtilKotest.template(generatorContext.getProject())
         );
     }
 
     @NonNull
     private Optional<RockerModel> handlerModel(GeneratorContext generatorContext) {
         return mainModel(
-                generatorContext,
-                commandHandlerJava.template(generatorContext.getProject()),
-                commandHandlerGroovy.template(generatorContext.getProject()),
-                commandHandlerKotlin.template(generatorContext.getProject())
+            generatorContext,
+            commandHandlerJava.template(generatorContext.getProject()),
+            commandHandlerGroovy.template(generatorContext.getProject()),
+            commandHandlerKotlin.template(generatorContext.getProject())
         );
     }
 
     @NonNull
     private Optional<RockerModel> handlerTestModel(GeneratorContext generatorContext) {
         return testModel(
-                generatorContext,
-                commandHandlerTestJava.template(generatorContext.getProject()),
-                commandHandlerSpecGroovy.template(generatorContext.getProject()),
-                commandHandlerTestKotlin.template(generatorContext.getProject()),
-                commandHandlerTestKotest.template(generatorContext.getProject())
+            generatorContext,
+            commandHandlerTestJava.template(generatorContext.getProject()),
+            commandHandlerSpecGroovy.template(generatorContext.getProject()),
+            commandHandlerTestKotlin.template(generatorContext.getProject()),
+            commandHandlerTestKotest.template(generatorContext.getProject())
         );
     }
 
     private Optional<RockerModel> gruSlackUtilModel(GeneratorContext generatorContext) {
         return testModel(
-                generatorContext,
-                gruSlackUtilJava.template(generatorContext.getProject()),
-                gruSlackUtilGroovy.template(generatorContext.getProject()),
-                gruSlackUtilKotlin.template(generatorContext.getProject()),
-                gruSlackUtilKotlin.template(generatorContext.getProject())
+            generatorContext,
+            gruSlackUtilJava.template(generatorContext.getProject()),
+            gruSlackUtilGroovy.template(generatorContext.getProject()),
+            gruSlackUtilKotlin.template(generatorContext.getProject()),
+            gruSlackUtilKotlin.template(generatorContext.getProject())
         );
     }
 
     @NonNull
     private Optional<RockerModel> reactionTestGruModel(GeneratorContext generatorContext) {
         return testModel(
-                generatorContext,
-                reactionHandlerGruTestJava.template(generatorContext.getProject()),
-                reactionHandlerGruSpecGroovy.template(generatorContext.getProject()),
-                reactionHandlerGruTestKotlin.template(generatorContext.getProject()),
-                reactionHandlerGruTestKotest.template(generatorContext.getProject())
+            generatorContext,
+            reactionHandlerGruTestJava.template(generatorContext.getProject()),
+            reactionHandlerGruSpecGroovy.template(generatorContext.getProject()),
+            reactionHandlerGruTestKotlin.template(generatorContext.getProject()),
+            reactionHandlerGruTestKotest.template(generatorContext.getProject())
         );
     }
 
@@ -332,7 +332,7 @@ public class Slack implements AgoraPulseFeature {
         String suffix = generatorContext.getTestFramework().getTestFrameworkSuffixWithoutTrailingDot();
         ModuleContext module = generatorContext.getRootModule();
         module.addTemplate("eventJson",
-                new RockerTemplate("src/test/resources/{packagePath}/" + className + suffix + "/event.json", eventJson.template()));
+            new RockerTemplate("src/test/resources/{packagePath}/" + className + suffix + "/event.json", eventJson.template()));
     }
 
 }

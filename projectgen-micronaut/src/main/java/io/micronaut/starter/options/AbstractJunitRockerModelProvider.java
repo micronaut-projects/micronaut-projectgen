@@ -27,7 +27,7 @@ public abstract class AbstractJunitRockerModelProvider implements JunitRockerMod
 
     private final Project project;
 
-    public AbstractJunitRockerModelProvider(Project project) {
+    protected AbstractJunitRockerModelProvider(Project project) {
         this.project = project;
     }
 

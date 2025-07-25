@@ -26,12 +26,12 @@ public final class SecurityAuthenticationModeUtils {
     @NonNull
     public static Optional<SecurityAuthenticationMode> resolveSecurityAuthenticationMode(@NonNull GeneratorContext generatorContext) {
         return generatorContext.getFeatures()
-                .getFeatures()
-                .stream()
-                .filter(SecurityAuthenticationModeProvider.class::isInstance)
-                .map(SecurityAuthenticationModeProvider.class::cast)
-                .map(SecurityAuthenticationModeProvider::getSecurityAuthenticationMode)
-                .min(OrderUtil.COMPARATOR);
+            .getFeatures()
+            .stream()
+            .filter(SecurityAuthenticationModeProvider.class::isInstance)
+            .map(SecurityAuthenticationModeProvider.class::cast)
+            .map(SecurityAuthenticationModeProvider::getSecurityAuthenticationMode)
+            .min(OrderUtil.COMPARATOR);
 
     }
 }

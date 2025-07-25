@@ -49,21 +49,21 @@ import jakarta.inject.Singleton;
 public class OracleFunction extends AbstractFunctionFeature implements OracleCloudFeature {
     public static final String GROUP_ID_COM_FNPROJECT_FN = "com.fnproject.fn";
     public static final Dependency COM_FNPROJECT_RUNTIME = Dependency.builder()
-            .groupId(GROUP_ID_COM_FNPROJECT_FN)
-            .artifactId("runtime")
-            .runtime()
-            .build();
+        .groupId(GROUP_ID_COM_FNPROJECT_FN)
+        .artifactId("runtime")
+        .runtime()
+        .build();
     private static final Dependency MICRONAUT_OCI_FUNCTION_HTTP = MicronautDependencyUtils
-            .ociDependency()
-            .artifactId("micronaut-oraclecloud-function-http")
-            .compile()
-            .build();
+        .ociDependency()
+        .artifactId("micronaut-oraclecloud-function-http")
+        .compile()
+        .build();
 
     private static final Dependency MICRONAUT_OCI_FUNCTION_HTTP_TEST = MicronautDependencyUtils
-            .ociDependency()
-            .artifactId("micronaut-oraclecloud-function-http-test")
-            .test()
-            .build();
+        .ociDependency()
+        .artifactId("micronaut-oraclecloud-function-http-test")
+        .test()
+        .build();
     private final SimpleLogging simpleLogging;
 
     public OracleFunction(SimpleLogging simpleLogging) {
@@ -185,12 +185,12 @@ public class OracleFunction extends AbstractFunctionFeature implements OracleClo
         }
     }
 
-    protected void addFuncYamlTemplate(ModuleContext module, Project project) {
+    protected final void addFuncYamlTemplate(ModuleContext module, Project project) {
         module.addTemplate(
-                "func.yml", new RockerTemplate(
-                        "func.yml",
-                        projectFnFunc.template(project
-                        ))
+            "func.yml", new RockerTemplate(
+            "func.yml",
+            projectFnFunc.template(project
+            ))
         );
     }
 }

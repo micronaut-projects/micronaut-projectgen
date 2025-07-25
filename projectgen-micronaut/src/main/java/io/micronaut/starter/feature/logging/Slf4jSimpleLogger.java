@@ -19,7 +19,6 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.feature.LoggingFeature;
 import io.micronaut.projectgen.core.generator.ModuleContext;
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.starter.feature.ThirdPartyLibraryFeature;
@@ -33,9 +32,9 @@ public class Slf4jSimpleLogger implements ThirdPartyLibraryFeature, LoggingFeatu
     private static final String SLF4J_SIMPLE_LOGGER_ARTIFACT_ID = "slf4j-simple-logger";
 
     private static final Dependency SLF4J_SIMPLE_LOGGER_DEPENDENCY = Dependency.builder()
-            .lookupArtifactId(SLF4J_SIMPLE_LOGGER_ARTIFACT_ID)
-            .runtime()
-            .build();
+        .lookupArtifactId(SLF4J_SIMPLE_LOGGER_ARTIFACT_ID)
+        .runtime()
+        .build();
 
     @Override
     public String getName() {

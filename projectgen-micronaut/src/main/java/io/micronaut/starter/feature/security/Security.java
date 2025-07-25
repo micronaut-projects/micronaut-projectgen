@@ -20,7 +20,6 @@ import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.CollectionUtils;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.feature.ContributingInterceptUrlMapFeature;
@@ -64,12 +63,12 @@ public class Security extends SecurityFeature implements OpenRewriteFeature {
     protected void addInterceptUrlMapConfiguration(@NonNull GeneratorContext generatorContext) {
         ModuleContext module = generatorContext.getRootModule();
         List<Map<String, String>> list = generatorContext.getFeatures().getFeatures()
-                .stream()
-                .filter(f -> f instanceof ContributingInterceptUrlMapFeature)
-                .map(f -> ((ContributingInterceptUrlMapFeature) f).interceptUrlMaps())
-                .flatMap(List::stream)
-                .map(InterceptUrlMap::toMap)
-                .toList();
+            .stream()
+            .filter(ContributingInterceptUrlMapFeature.class::isInstance)
+            .map(f -> ((ContributingInterceptUrlMapFeature) f).interceptUrlMaps())
+            .flatMap(List::stream)
+            .map(InterceptUrlMap::toMap)
+            .toList();
         if (CollectionUtils.isNotEmpty(list)) {
             module.configuration().put("micronaut.security.intercept-url-map", list);
         }

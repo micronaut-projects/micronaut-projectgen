@@ -39,8 +39,8 @@ public class Neo4jLangchain4jEmbeddedStore implements Langchain4jEmbeddedStore, 
         return NAME;
     }
 
-   @Override
+    @Override
     public List<String> getRecipes(GeneratorContext generatorContext) {
         return List.of("io.micronaut.starter.feature.langchain4j-store-neo4j");
-   }
+    }
 }

@@ -36,9 +36,9 @@ public class OpenSearchRestClient extends OpenSearchFeature implements OpenRewri
     private final JacksonDatabindFeature jacksonDatabindFeature;
 
     public OpenSearchRestClient(
-            TestContainers testContainers,
-            TestResources testResources,
-            JacksonDatabindFeature jacksonDatabindFeature
+        TestContainers testContainers,
+        TestResources testResources,
+        JacksonDatabindFeature jacksonDatabindFeature
     ) {
         super(testContainers, testResources);
         this.jacksonDatabindFeature = jacksonDatabindFeature;

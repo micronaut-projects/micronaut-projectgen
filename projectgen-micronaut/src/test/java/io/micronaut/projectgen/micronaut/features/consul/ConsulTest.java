@@ -11,7 +11,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @MicronautTest(startApplication = false)
 class ConsulTest {
@@ -19,7 +20,7 @@ class ConsulTest {
     void consulFeaturesConfiguration(PreviewGenerator previewGenerator) throws Exception {
         Options options = OptionsFixture.defaultGradle().features(List.of("consul", "config-consul")).build();
         Map<String, String> project = previewGenerator.generate(options);
-        Properties bootstrapProperties  = ConfigurationUtils.loadBootstrapProperties(project);
+        Properties bootstrapProperties = ConfigurationUtils.loadBootstrapProperties(project);
         String buildGradle = project.get("build.gradle.kts");
         assertNotNull(buildGradle);
         assertEquals("localhost:8500", bootstrapProperties.getProperty("consul.client.defaultZone"));
@@ -29,7 +30,7 @@ class ConsulTest {
     void consulConfFeaturesConfiguration(PreviewGenerator previewGenerator) throws Exception {
         Options options = OptionsFixture.defaultGradle().features(List.of("consul")).build();
         Map<String, String> project = previewGenerator.generate(options);
-        Properties applicationProperties  = ConfigurationUtils.loadApplicationProperties(project);
+        Properties applicationProperties = ConfigurationUtils.loadApplicationProperties(project);
         String buildGradle = project.get("build.gradle.kts");
         assertNotNull(buildGradle);
         assertEquals("localhost:8500", applicationProperties.getProperty("consul.client.defaultZone"));

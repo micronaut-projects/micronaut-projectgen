@@ -50,11 +50,11 @@ public class StaticResourceFeature implements DefaultFeature {
 
     private void addStaticResources(@NonNull GeneratorContext generatorContext) {
         List<StaticResource> list = generatorContext.getFeatures().getFeatures()
-                .stream()
-                .filter(f -> f instanceof ContributingStaticResources)
-                .map(f -> ((ContributingStaticResources) f).staticResources())
-                .flatMap(List::stream)
-                .toList();
+            .stream()
+            .filter(ContributingStaticResources.class::isInstance)
+            .map(f -> ((ContributingStaticResources) f).staticResources())
+            .flatMap(List::stream)
+            .toList();
         if (CollectionUtils.isNotEmpty(list)) {
             for (StaticResource staticResource : list) {
                 ModuleContext module = generatorContext.getRootModule();

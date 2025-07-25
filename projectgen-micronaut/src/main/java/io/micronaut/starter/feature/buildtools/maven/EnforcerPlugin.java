@@ -17,13 +17,10 @@ package io.micronaut.starter.feature.buildtools.maven;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
-import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.util.StringUtils;
-import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.maven.MavenPlugin;
 import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.DefaultFeature;
 import io.micronaut.projectgen.core.feature.Feature;

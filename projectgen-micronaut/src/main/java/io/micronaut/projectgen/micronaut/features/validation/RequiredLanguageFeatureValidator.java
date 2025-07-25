@@ -16,7 +16,6 @@
 package io.micronaut.projectgen.micronaut.features.validation;
 
 import io.micronaut.projectgen.core.feature.FeatureValidator;
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.feature.LanguageSpecificFeature;
 import io.micronaut.projectgen.core.options.Language;
@@ -35,7 +34,7 @@ public class RequiredLanguageFeatureValidator implements FeatureValidator {
     @Override
     public void validatePreProcessing(Options options, Set<Feature> features) {
         Map<Language, Set<String>> requiredLanguages = new HashMap<>();
-        for (Feature feature: features) {
+        for (Feature feature : features) {
             if (feature instanceof LanguageSpecificFeature specificFeature) {
                 Language lang = specificFeature.getRequiredLanguage();
                 requiredLanguages.compute(lang, (key, value) -> {

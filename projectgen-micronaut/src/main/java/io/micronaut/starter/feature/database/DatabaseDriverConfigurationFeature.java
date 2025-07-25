@@ -25,7 +25,7 @@ import java.util.Optional;
 import static io.micronaut.starter.feature.database.jdbc.JdbcFeature.PROPERTY_DATASOURCES_DEFAULT_DB_TYPE;
 
 /**
- * A feature that configures a datasource with a driver
+ * A feature that configures a datasource with a driver.
  */
 public interface DatabaseDriverConfigurationFeature extends Feature {
 

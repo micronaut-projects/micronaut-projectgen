@@ -44,9 +44,9 @@ public class Graalpy implements MinJdkFeature, MavenSpecificFeature {
     private static final String ARTIFACT_ID_GRAALPY_MAVEN_PLUGIN = "graalpy-maven-plugin";
     private static final String ARTIFACT_ID_MICRONAUT_GRAALPY = "micronaut-graalpy";
     private static final Dependency MICRONAUT_GRAALPY_DEPENDENCY = MicronautDependencyUtils.graalLanguagesDependency()
-            .artifactId(ARTIFACT_ID_MICRONAUT_GRAALPY)
-            .compile()
-            .build();
+        .artifactId(ARTIFACT_ID_MICRONAUT_GRAALPY)
+        .compile()
+        .build();
 
     private final CoordinateResolver coordinateResolver;
 
@@ -87,19 +87,19 @@ public class Graalpy implements MinJdkFeature, MavenSpecificFeature {
         module.addBuildPlugin(graalpyMavenPlugin());
     }
 
-    protected MavenPlugin graalpyMavenPlugin() {
+    protected final MavenPlugin graalpyMavenPlugin() {
         return MavenPlugin.builder()
-                .groupId(GROUP_ID_GRAALVM_PYTHON)
-                .artifactId(ARTIFACT_ID_GRAALPY_MAVEN_PLUGIN)
-                .extension(new RockerWritable(graalPyMavenPlugin.template(pythonPackages())))
-                .build();
+            .groupId(GROUP_ID_GRAALVM_PYTHON)
+            .artifactId(ARTIFACT_ID_GRAALPY_MAVEN_PLUGIN)
+            .extension(new RockerWritable(graalPyMavenPlugin.template(pythonPackages())))
+            .build();
     }
 
-    protected List<String> pythonPackages() {
+    protected final List<String> pythonPackages() {
         return Collections.emptyList();
     }
 
-    protected void addDependencies(ModuleContext module) {
+    protected final void addDependencies(ModuleContext module) {
         module.addDependency(MICRONAUT_GRAALPY_DEPENDENCY);
     }
 

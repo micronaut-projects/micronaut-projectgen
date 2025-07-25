@@ -58,7 +58,7 @@ public class AwsLambdaSnapstart implements Feature {
     @Override
     public boolean supports(Options options) {
         ApplicationType applicationType = ApplicationType.of(options.template());
-        return applicationType == ApplicationType.DEFAULT ||
-            applicationType == ApplicationType.FUNCTION;
+        return applicationType == ApplicationType.DEFAULT
+            || applicationType == ApplicationType.FUNCTION;
     }
 }

@@ -34,8 +34,8 @@ public class GitHubWorkflowRun {
 
     @JsonCreator
     public GitHubWorkflowRun(@JsonProperty("id") Long id,
-                             @JsonProperty("status") String status,
-                             @JsonProperty("conclusion") String conclusion) {
+        @JsonProperty("status") String status,
+        @JsonProperty("conclusion") String conclusion) {
         this.id = id;
         this.status = status;
         this.conclusion = conclusion;

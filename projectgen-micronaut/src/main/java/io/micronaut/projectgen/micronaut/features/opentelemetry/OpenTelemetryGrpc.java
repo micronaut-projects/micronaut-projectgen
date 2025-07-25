@@ -31,9 +31,9 @@ import jakarta.inject.Singleton;
 public class OpenTelemetryGrpc implements OpenTelemetryFeature {
 
     private static final Dependency MICRONAUT_OPEN_TELEMETRY_GRPC = MicronautDependencyUtils.tracingDependency()
-            .artifactId("micronaut-tracing-opentelemetry-grpc")
-            .compile()
-            .build();
+        .artifactId("micronaut-tracing-opentelemetry-grpc")
+        .compile()
+        .build();
 
     @NonNull
     @Override

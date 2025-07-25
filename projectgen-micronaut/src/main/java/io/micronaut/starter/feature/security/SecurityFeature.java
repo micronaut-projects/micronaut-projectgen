@@ -15,7 +15,6 @@
  */
 package io.micronaut.starter.feature.security;
 
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.feature.FeatureContext;
@@ -25,7 +24,7 @@ public abstract class SecurityFeature implements Feature, MicronautServerDepende
 
     private final SecurityAnnotations securityAnnotations;
 
-    public SecurityFeature(SecurityAnnotations securityAnnotations) {
+    protected SecurityFeature(SecurityAnnotations securityAnnotations) {
         this.securityAnnotations = securityAnnotations;
     }
 

@@ -57,8 +57,8 @@ public class JavaGradlePlugin implements GradleSpecificFeature, BuildPluginFeatu
         ModuleContext module = generatorContext.getRootModule();
         if (OptionUtils.hasGradleBuildTool(generatorContext.getOptions())) {
             module.addBuildPlugin(GradlePlugin.builder()
-                    .id(GRADLE_PLUGIN_JAVA_ID)
-                    .build());
+                .id(GRADLE_PLUGIN_JAVA_ID)
+                .build());
         }
     }
 }

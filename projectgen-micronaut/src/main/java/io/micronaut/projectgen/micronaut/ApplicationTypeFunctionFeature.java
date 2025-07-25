@@ -15,10 +15,8 @@
  */
 package io.micronaut.projectgen.micronaut;
 
-import io.micronaut.projectgen.core.buildtools.gradle.Gradle;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.feature.FeatureContext;
-import io.micronaut.projectgen.core.feature.config.Properties;
 import io.micronaut.projectgen.core.feature.gitignore.GitIgnore;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.features.cli.MicronautCli;
@@ -31,28 +29,54 @@ import jakarta.inject.Singleton;
 
 import java.util.Set;
 
+/**
+ * Feature definition for Micronaut applications of type FUNCTION.
+ * Adds required features and ensures correct HTTP client test setup.
+ */
 @Singleton
 public class ApplicationTypeFunctionFeature extends ApplicationTypeFeature {
-    private HttpClientTest httpClientTest;
+    private final HttpClientTest httpClientTest;
 
-    public ApplicationTypeFunctionFeature(MicronautCli micronautCli,
-                                          MicronautTestJunit5 micronautTestJunit5,
-                                          MicronautTestSpock micronautTestSpock,
-                                          Logback logback,
-                                          GitIgnore gitIgnore,
-                                          HttpClientTest httpClientTest) {
+    /**
+     * Constructs the ApplicationTypeFunctionFeature.
+     *
+     * @param micronautCli       The Micronaut CLI feature
+     * @param micronautTestJunit5 The JUnit 5 test feature
+     * @param micronautTestSpock The Spock test feature
+     * @param logback            The Logback logging feature
+     * @param gitIgnore          The .gitignore feature
+     * @param httpClientTest     The HTTP client test feature
+     */
+    public ApplicationTypeFunctionFeature(
+        MicronautCli micronautCli,
+        MicronautTestJunit5 micronautTestJunit5,
+        MicronautTestSpock micronautTestSpock,
+        Logback logback,
+        GitIgnore gitIgnore,
+        HttpClientTest httpClientTest
+    ) {
         super(micronautCli, micronautTestJunit5, micronautTestSpock, logback, gitIgnore);
-
         this.httpClientTest = httpClientTest;
     }
 
+    /**
+     * Determines if this feature should be applied for the selected options.
+     *
+     * @param options          The selected options
+     * @param selectedFeatures The set of selected features
+     * @return true if applicable
+     */
     @Override
     public boolean shouldApply(Options options, Set<Feature> selectedFeatures) {
         ApplicationType applicationType = ApplicationType.of(options.template());
         return applicationType == ApplicationType.FUNCTION;
     }
 
-
+    /**
+     * Processes and adds the required features for FUNCTION application type.
+     *
+     * @param featureContext The feature context
+     */
     @Override
     public void processSelectedFeatures(FeatureContext featureContext) {
         super.processSelectedFeatures(featureContext);
@@ -62,6 +86,11 @@ public class ApplicationTypeFunctionFeature extends ApplicationTypeFeature {
         }
     }
 
+    /**
+     * Returns the feature name.
+     *
+     * @return the feature name string
+     */
     @Override
     public String getName() {
         return "application-type-function";

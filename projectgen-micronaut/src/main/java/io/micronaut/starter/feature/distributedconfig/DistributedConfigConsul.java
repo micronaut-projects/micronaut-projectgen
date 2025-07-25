@@ -20,7 +20,6 @@ import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.feature.DistributedConfigFeature;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.micronaut.features.config.MicronautDistributedConfigurationFeature;
@@ -39,7 +38,6 @@ public class DistributedConfigConsul implements DistributedConfigFeature, OpenRe
         this.consul = consul;
         this.micronautDistributedConfigurationFeature = micronautDistributedConfigurationFeature;
     }
-
 
     @NonNull
     @Override

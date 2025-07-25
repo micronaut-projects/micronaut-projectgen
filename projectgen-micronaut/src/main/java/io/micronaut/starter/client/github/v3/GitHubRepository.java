@@ -41,11 +41,11 @@ public class GitHubRepository {
 
     @JsonCreator
     public GitHubRepository(
-            @JsonProperty("name") String name,
-            @JsonProperty("description") String description,
-            @JsonProperty("url") @Nullable String url,
-            @JsonProperty("html_url") @Nullable String htmlUrl,
-            @JsonProperty("clone_url") @Nullable String cloneUrl) {
+        @JsonProperty("name") String name,
+        @JsonProperty("description") String description,
+        @JsonProperty("url") @Nullable String url,
+        @JsonProperty("html_url") @Nullable String htmlUrl,
+        @JsonProperty("clone_url") @Nullable String cloneUrl) {
         this.name = name;
         this.description = description;
         this.url = url;

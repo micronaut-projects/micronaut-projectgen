@@ -17,7 +17,6 @@ package io.micronaut.projectgen.micronaut.features.validation;
 
 import io.micronaut.projectgen.core.feature.FeatureValidator;
 import io.micronaut.projectgen.core.utils.OptionUtils;
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.buildtools.gradle.GradleSpecificFeature;
 import io.micronaut.projectgen.core.options.Options;

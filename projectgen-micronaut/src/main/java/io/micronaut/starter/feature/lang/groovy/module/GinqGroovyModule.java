@@ -54,8 +54,7 @@ public class GinqGroovyModule implements GroovyModuleFeature, OpenRewriteFeature
         List<String> recipes = new ArrayList<>();
         if (generatorContext.getLanguage() == Language.GROOVY) {
             recipes.add("io.micronaut.starter.feature.groovy-ginq");
-        }
-        else if (generatorContext.getTestFramework() == TestFramework.SPOCK) {
+        } else if (generatorContext.getTestFramework() == TestFramework.SPOCK) {
             recipes.add("io.micronaut.starter.feature.groovy-ginq-spock");
         }
         return recipes;

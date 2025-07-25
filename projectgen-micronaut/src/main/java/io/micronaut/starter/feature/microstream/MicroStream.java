@@ -31,7 +31,6 @@ public class MicroStream implements MicroStreamFeature, OpenRewriteFeature {
 
     public static final String NAME = "microstream";
 
-
     @Override
     @NonNull
     public String getName() {

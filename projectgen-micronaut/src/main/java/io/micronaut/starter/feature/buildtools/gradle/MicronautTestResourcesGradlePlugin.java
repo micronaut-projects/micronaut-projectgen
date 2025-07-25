@@ -18,7 +18,7 @@ package io.micronaut.starter.feature.buildtools.gradle;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.projectgen.core.buildtools.gradle.GradlePlugin;
 
-public class MicronautTestResourcesGradlePlugin {
+public final class MicronautTestResourcesGradlePlugin {
 
     @NonNull
     public static Builder builder() {
@@ -32,9 +32,12 @@ public class MicronautTestResourcesGradlePlugin {
 
         public GradlePlugin build() {
             return GradlePlugin.builder()
-                    .id(MICRONAUT_GRADLE_PLUGIN_TEST_RESOURCES_ID)
-                    .lookupArtifactId(ARTIFACT_ID)
-                    .build();
+                .id(MICRONAUT_GRADLE_PLUGIN_TEST_RESOURCES_ID)
+                .lookupArtifactId(ARTIFACT_ID)
+                .build();
         }
+    }
+
+    private MicronautTestResourcesGradlePlugin() {
     }
 }

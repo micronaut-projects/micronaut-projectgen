@@ -71,15 +71,15 @@ public class MicronautGradleEnterprise extends GradleEnterprise {
     @Override
     protected GradlePlugin gradlePlugin(GradleEnterpriseConfiguration configuration) {
         GradlePlugin.Builder builder = GradlePlugin.builder()
-                .gradleFile(GradleFile.SETTINGS)
-                .id(GRADLE_PLUGIN_ID_MICRONAUT_GRADLE_ENTERPRISE)
-                .lookupArtifactId(ARTIFACT_ID_MICRONAUT_GRADLE_PLUGINS);
+            .gradleFile(GradleFile.SETTINGS)
+            .id(GRADLE_PLUGIN_ID_MICRONAUT_GRADLE_ENTERPRISE)
+            .lookupArtifactId(ARTIFACT_ID_MICRONAUT_GRADLE_PLUGINS);
         pluginsManagementRepositories().forEach(builder::pluginsManagementRepository);
         return builder.build();
     }
 
     @NonNull
-    protected List<GradleRepository> pluginsManagementRepositories() {
+    final protected List<GradleRepository> pluginsManagementRepositories() {
         return Arrays.asList(new GradlePluginPortal(), new GradleMavenCentral());
     }
 }

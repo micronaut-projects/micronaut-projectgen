@@ -54,8 +54,7 @@ public class DateUtilGroovyModule implements GroovyModuleFeature, OpenRewriteFea
         List<String> recipes = new ArrayList<>();
         if (generatorContext.getLanguage() == Language.GROOVY) {
             recipes.add("io.micronaut.starter.feature.groovy-dateutil");
-        }
-        else if (generatorContext.getTestFramework() == TestFramework.SPOCK) {
+        } else if (generatorContext.getTestFramework() == TestFramework.SPOCK) {
             recipes.add("io.micronaut.starter.feature.groovy-dateutil-spock");
         }
         return recipes;

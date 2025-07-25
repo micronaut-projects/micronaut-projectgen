@@ -29,7 +29,7 @@ import java.util.*;
 /**
  * Micronaut Gradle Plugin.
  */
-public class MicronautApplicationGradlePlugin {
+public final class MicronautApplicationGradlePlugin {
 
     @NonNull
     public static Builder builder() {

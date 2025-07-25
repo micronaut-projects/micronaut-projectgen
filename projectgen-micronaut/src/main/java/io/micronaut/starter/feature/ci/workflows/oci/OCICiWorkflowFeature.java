@@ -69,16 +69,16 @@ public class OCICiWorkflowFeature extends CIWorkflowFeature {
     private Template workflowRockerTemplate(GeneratorContext generatorContext) {
         if (!generatorContext.getFeatures().hasFeature(GraalVM.class)) {
             return new RockerTemplate(getWorkflowFileName(generatorContext), buildSpec.template(
-                    generatorContext.getProject().getName(),
-                    generatorContext.getJdkVersion(),
-                    generatorContext.getBuildTool()
+                generatorContext.getProject().getName(),
+                generatorContext.getJdkVersion(),
+                generatorContext.getOptions().getBuildTool()
             ));
         } else {
             return new RockerTemplate(getWorkflowFileName(generatorContext), buildSpecGraal.template(
-                    generatorContext.getProject().getName(),
-                    generatorContext.getJdkVersion(),
-                    generatorContext.getBuildTool(),
-                    VersionInfo.getDependencyVersion("graal").getValue()
+                generatorContext.getProject().getName(),
+                generatorContext.getJdkVersion(),
+                generatorContext.getOptions().getBuildTool(),
+                VersionInfo.getDependencyVersion("graal").getValue()
             ));
         }
     }

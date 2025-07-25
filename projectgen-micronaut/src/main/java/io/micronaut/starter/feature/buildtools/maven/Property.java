@@ -61,8 +61,7 @@ public final class Property {
     @Override
     public int hashCode() {
         int result = name.hashCode();
-        result = 31 * result + value.hashCode();
-        return result;
+        return 31 * result + value.hashCode();
     }
 
     @NonNull
@@ -89,7 +88,7 @@ public final class Property {
         @NonNull
         public Property build() {
             return new Property(Objects.requireNonNull(this.name),
-                    Objects.requireNonNull(this.value));
+                Objects.requireNonNull(this.value));
         }
     }
 }

@@ -97,7 +97,7 @@ public class ViewsFieldsetTck implements OpenRewriteFeature {
             String extension = generatorContext.getLanguage().getExtension();
             String srcDir = generatorContext.getLanguage().getTestSrcDir();
             module.addTemplate(templateName,
-                    new RockerTemplate(srcDir + "/{packagePath}/ThymeleafSuite." + extension, rockerModel));
+                new RockerTemplate(srcDir + "/{packagePath}/ThymeleafSuite." + extension, rockerModel));
         }
     }
 

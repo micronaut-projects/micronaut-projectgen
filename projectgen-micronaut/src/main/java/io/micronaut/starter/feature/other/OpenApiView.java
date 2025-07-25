@@ -21,7 +21,9 @@ import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.starter.feature.*;
+import io.micronaut.starter.feature.Category;
+import io.micronaut.starter.feature.ContributingInterceptUrlMapFeature;
+import io.micronaut.starter.feature.InterceptUrlMap;
 import io.micronaut.starter.feature.github.workflows.WorkflowsUtils;
 import io.micronaut.projectgen.micronaut.template.openApiProperties;
 import io.micronaut.starter.feature.server.MicronautServerDependent;
@@ -29,7 +31,8 @@ import io.micronaut.starter.feature.staticResources.ContributingStaticResources;
 import io.micronaut.starter.feature.staticResources.StaticResource;
 import io.micronaut.projectgen.core.rocker.RockerTemplate;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
 
 abstract class OpenApiView implements Feature, MicronautServerDependent, ContributingInterceptUrlMapFeature, ContributingStaticResources {
     private final OpenApi openApiFeature;
@@ -49,7 +52,7 @@ abstract class OpenApiView implements Feature, MicronautServerDependent, Contrib
         ModuleContext module = generatorContext.getRootModule();
         module.addTemplate("openapiProperties", new RockerTemplate("openapi.properties", openApiProperties.template(this)));
         module.addTemplate("exampleController", WorkflowsUtils.createExampleController(
-                generatorContext.getProject(), generatorContext.getLanguage()));
+            generatorContext.getProject(), generatorContext.getLanguage()));
     }
 
     @Override

@@ -17,7 +17,7 @@ package io.micronaut.projectgen.micronaut.features.cli;
 
 import java.util.List;
 
-public class MicronautCliConfig {
+public final class MicronautCliConfig {
     private String applicationType;
     private String testFramework;
     private String defaultPackage;

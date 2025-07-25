@@ -45,10 +45,10 @@ import java.util.Optional;
 
 @Requires(property = "micronaut.starter.feature.agorapulse.micronaut.console.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class Console implements AgoraPulseFeature {
+public final class Console implements AgoraPulseFeature {
 
-    protected static final String ARTIFACT_ID = "micronaut-console";
-    protected static final String SSRF_HEADER_NAME = "X-Console-Verify";
+    private static final String ARTIFACT_ID = "micronaut-console";
+    private static final String SSRF_HEADER_NAME = "X-Console-Verify";
 
     @Override
     @NonNull
@@ -91,11 +91,11 @@ public class Console implements AgoraPulseFeature {
         addConfiguration(generatorContext, secret);
     }
 
-    protected void addDependency(GeneratorContext generatorContext) {
+    private void addDependency(GeneratorContext generatorContext) {
         ModuleContext module = generatorContext.getRootModule();
         module.addDependency(Dependency.builder()
-                .lookupArtifactId(ARTIFACT_ID)
-                .developmentOnly());
+            .lookupArtifactId(ARTIFACT_ID)
+            .developmentOnly());
 
         if (generatorContext.getLanguage() == Language.JAVA) {
             addGroovyDependency(generatorContext);
@@ -104,43 +104,42 @@ public class Console implements AgoraPulseFeature {
         }
     }
 
-    protected void addGroovyDependency(GeneratorContext generatorContext) {
+    private void addGroovyDependency(GeneratorContext generatorContext) {
         ModuleContext module = generatorContext.getRootModule();
         if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())) {
             module.buildProperties().put("groovyVersion", VersionInfo.getDependencyVersion("groovy").getValue());
         }
         Dependency.Builder groovy = Dependency.builder()
-                .groupId("org.apache.groovy")
-                .artifactId("groovy")
-                .developmentOnly();
+            .groupId("org.apache.groovy")
+            .artifactId("groovy")
+            .developmentOnly();
         module.addDependency(groovy);
     }
 
-    protected void addKotlinScriptingDependency(GeneratorContext generatorContext) {
+    private void addKotlinScriptingDependency(GeneratorContext generatorContext) {
         Coordinate coordinate = generatorContext.resolveCoordinate("kotlin-bom");
         ModuleContext module = generatorContext.getRootModule();
         module.buildProperties().put("kotlinVersion", coordinate.getVersion());
         Dependency.Builder kotlin = Dependency.builder()
-                .groupId("org.jetbrains.kotlin")
-                .compile()
-                .version("${kotlinVersion}")
-                .template();
+            .groupId("org.jetbrains.kotlin")
+            .compile()
+            .version("${kotlinVersion}")
+            .template();
         module.addDependency(kotlin.artifactId("kotlin-scripting-jsr223").developmentOnly());
     }
 
-    protected void addExampleCode(GeneratorContext generatorContext, String secret) {
+    private void addExampleCode(GeneratorContext generatorContext, String secret) {
         addDslFile(generatorContext);
         addHttpFile(generatorContext, secret);
     }
 
-    protected void addDslFile(GeneratorContext generatorContext) {
+    private void addDslFile(GeneratorContext generatorContext) {
         ModuleContext module = generatorContext.getRootModule();
-        dslFile(generatorContext).ifPresent(rockerModel -> {
-            module.addTemplate("consoleGroovyDsl", new RockerTemplate("src/test/resources/console.gdsl", rockerModel));
-        });
+        dslFile(generatorContext).ifPresent(rockerModel ->
+            module.addTemplate("consoleGroovyDsl", new RockerTemplate("src/test/resources/console.gdsl", rockerModel)));
     }
 
-    protected void addHttpFile(GeneratorContext generatorContext, String secret) {
+    private void addHttpFile(GeneratorContext generatorContext, String secret) {
         ModuleContext module = generatorContext.getRootModule();
         httpFile(generatorContext, secret).ifPresent(rockerModel ->
             module.addTemplate("consoleHttpFile", new RockerTemplate("src/test/resources/console.http", rockerModel))
@@ -148,7 +147,7 @@ public class Console implements AgoraPulseFeature {
     }
 
     @NonNull
-    protected Optional<RockerModel> dslFile(GeneratorContext generatorContext) {
+    private Optional<RockerModel> dslFile(GeneratorContext generatorContext) {
         if (generatorContext.getLanguage() == Language.KOTLIN) {
             return Optional.empty();
         }
@@ -157,7 +156,7 @@ public class Console implements AgoraPulseFeature {
     }
 
     @NonNull
-    protected Optional<RockerModel> httpFile(GeneratorContext generatorContext, String secret) {
+    private Optional<RockerModel> httpFile(GeneratorContext generatorContext, String secret) {
         if (generatorContext.getLanguage() == Language.KOTLIN) {
             return Optional.of(consoleKotlinHttp.template(SSRF_HEADER_NAME, secret));
         }
@@ -165,7 +164,7 @@ public class Console implements AgoraPulseFeature {
         return Optional.of(consoleGroovyHttp.template(SSRF_HEADER_NAME, secret));
     }
 
-    protected void addConfiguration(GeneratorContext generatorContext, String secret) {
+    private void addConfiguration(GeneratorContext generatorContext, String secret) {
         Map<String, Object> settings = new LinkedHashMap<>();
         settings.put("enabled", true);
         settings.put("addresses", Arrays.asList("/127.0.0.1", "/0:0:0:0:0:0:0:1"));

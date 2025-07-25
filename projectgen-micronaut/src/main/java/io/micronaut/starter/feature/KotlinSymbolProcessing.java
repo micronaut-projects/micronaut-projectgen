@@ -86,7 +86,7 @@ public class KotlinSymbolProcessing implements KotlinSupportFeature, DefaultFeat
     @Override
     public boolean shouldApply(Options options, Set<Feature> selectedFeatures) {
         return OptionUtils.hasGradleBuildTool(options)
-                && KotlinSupportFeature.shouldApply(options.language(), options.testFramework())
-                && selectedFeatures.stream().noneMatch(KotlinSupportFeature.class::isInstance);
+            && KotlinSupportFeature.shouldApply(options.language(), options.testFramework())
+            && selectedFeatures.stream().noneMatch(KotlinSupportFeature.class::isInstance);
     }
 }

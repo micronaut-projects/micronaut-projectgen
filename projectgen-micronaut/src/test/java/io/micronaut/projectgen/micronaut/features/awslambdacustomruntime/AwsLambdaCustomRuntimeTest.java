@@ -12,7 +12,8 @@ import java.util.List;
 import java.util.Map;
 
 import static io.micronaut.projectgen.core.options.TestFramework.SPOCK;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @MicronautTest(startApplication = false)
 class AwsLambdaCustomRuntimeTest {

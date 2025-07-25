@@ -32,19 +32,19 @@ public class MariaDB extends MySQLCompatibleFeature {
 
     public static final String NAME = "mariadb";
     public static final Dependency.Builder DEPENDENCY_MARIADB_JAVA_CLIENT = Dependency.builder()
-            .groupId("org.mariadb.jdbc")
-            .artifactId("mariadb-java-client")
-            .runtime()
-            .template();
+        .groupId("org.mariadb.jdbc")
+        .artifactId("mariadb-java-client")
+        .runtime()
+        .template();
 
     private static final Dependency.Builder DEPENDENCY_R2DBC_MARIADB = Dependency.builder()
-            .groupId("org.mariadb")
-                    .artifactId("r2dbc-mariadb")
-                    .runtime();
+        .groupId("org.mariadb")
+        .artifactId("r2dbc-mariadb")
+        .runtime();
 
     public MariaDB(JdbcFeature jdbcFeature,
-                   TestContainers testContainers,
-                   TestResources testResources) {
+        TestContainers testContainers,
+        TestResources testResources) {
         super(jdbcFeature, testContainers, testResources);
     }
 

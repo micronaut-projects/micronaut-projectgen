@@ -21,7 +21,6 @@ import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.feature.Category;
-import io.micronaut.starter.feature.testcontainers.ContributingTestContainerArtifactId;
 import jakarta.inject.Singleton;
 
 import java.util.List;

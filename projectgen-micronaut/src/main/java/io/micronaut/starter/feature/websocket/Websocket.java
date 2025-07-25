@@ -50,7 +50,6 @@ public class Websocket implements OpenRewriteFeature {
         return List.of("io.micronaut.starter.feature.websocket");
     }
 
-
     @Override
     public String getCategory() {
         return Category.SERVER;

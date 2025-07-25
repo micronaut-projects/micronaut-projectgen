@@ -59,13 +59,13 @@ public class GoogleCloudEventsFunction extends AbstractGoogleCloudFunction {
     private static final String MICRONAUT_GCP_FUNCTION_CLOUDEVENTS = "micronaut-gcp-function-cloudevents";
     private static final String MICRONAUT_SERDE_API = "micronaut-serde-api";
     private static final Dependency DEPENDENCY_MICRONAUT_GCP_FUNCTION_CLOUDEVENTS = MicronautDependencyUtils.gcpDependency()
-            .artifactId(MICRONAUT_GCP_FUNCTION_CLOUDEVENTS)
-            .compile()
-            .build();
+        .artifactId(MICRONAUT_GCP_FUNCTION_CLOUDEVENTS)
+        .compile()
+        .build();
     private static final Dependency DEPENDENCY_MICRONAUT_SERDE_API = MicronautDependencyUtils.serdeDependency()
-            .artifactId(MICRONAUT_SERDE_API)
-            .compile()
-            .build();
+        .artifactId(MICRONAUT_SERDE_API)
+        .compile()
+        .build();
 
     private final GoogleCloudFunction googleCloudFunction;
 
@@ -164,7 +164,7 @@ public class GoogleCloudEventsFunction extends AbstractGoogleCloudFunction {
         return "https://micronaut-projects.github.io/micronaut-gcp/latest/guide/index.html#cloudEventsFunctions";
     }
 
-    protected void addDependencies(ModuleContext module) {
+    protected final void addDependencies(ModuleContext module) {
         module.addDependency(DEPENDENCY_MICRONAUT_GCP_FUNCTION_CLOUDEVENTS);
         module.addDependency(DEPENDENCY_MICRONAUT_SERDE_API);
     }

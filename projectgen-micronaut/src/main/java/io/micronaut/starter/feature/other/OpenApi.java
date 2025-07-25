@@ -18,24 +18,18 @@ package io.micronaut.starter.feature.other;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
-import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
-import io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils;
 import io.micronaut.starter.feature.Category;
-import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.starter.feature.server.MicronautServerDependent;
 import io.micronaut.projectgen.core.options.Language;
 import jakarta.inject.Singleton;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils.GROUP_ID_IO_MICRONAUT_OPENAPI;
 
 @Requires(property = "micronaut.starter.feature.openapi.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
@@ -76,7 +70,7 @@ public class OpenApi implements OpenRewriteFeature, MicronautServerDependent {
         if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions()) && generatorContext.getLanguage() == Language.GROOVY) {
             recipes.add("io.micronaut.starter.feature.openapi-maven");
         }
-            return recipes;
+        return recipes;
     }
 
 }

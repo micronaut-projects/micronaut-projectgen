@@ -71,20 +71,20 @@ public class GroovyApplication implements GroovyApplicationFeature {
         }
     }
 
-    protected boolean shouldGenerateApplicationFile(GeneratorContext generatorContext) {
+    protected final boolean shouldGenerateApplicationFile(GeneratorContext generatorContext) {
         ApplicationType applicationType = ApplicationType.of(generatorContext.getOptions().template());
         return applicationType == ApplicationType.DEFAULT
-                || !generatorContext.getFeatures().hasFeature(FunctionFeature.class);
+            || !generatorContext.getFeatures().hasFeature(FunctionFeature.class);
     }
 
-    protected RockerModel application(GeneratorContext generatorContext, ModuleContext module) {
+    protected final RockerModel application(GeneratorContext generatorContext, ModuleContext module) {
         String defaultEnvironment = getDefaultEnvironment(module);
         boolean eagerInitSingleton = generatorContext.getFeatures().isFeaturePresent(RequireEagerSingletonInitializationFeature.class);
         return application.template(
-                generatorContext.getProject(),
-                generatorContext.getFeatures(),
-                new GroovyApplicationRenderingContext(defaultEnvironment, eagerInitSingleton),
-                generatorContext.hasFeature(Slf4jJulBridge.class)
+            generatorContext.getProject(),
+            generatorContext.getFeatures(),
+            new GroovyApplicationRenderingContext(defaultEnvironment, eagerInitSingleton),
+            generatorContext.hasFeature(Slf4jJulBridge.class)
         );
     }
 
@@ -92,27 +92,27 @@ public class GroovyApplication implements GroovyApplicationFeature {
         return module.hasConfigurationByEnvironment(Environment.DEVELOPMENT) ? Environment.DEVELOPMENT : null;
     }
 
-    protected void addApplication(GeneratorContext generatorContext, ModuleContext module) {
+    protected final void addApplication(GeneratorContext generatorContext, ModuleContext module) {
         module.addTemplate("application", new RockerTemplate(getPath(),
-                application(generatorContext, module)));
+            application(generatorContext, module)));
     }
 
-    protected void addApplicationTest(GeneratorContext generatorContext, ModuleContext module) {
+    protected final void addApplicationTest(GeneratorContext generatorContext, ModuleContext module) {
         String testSourcePath = generatorContext.getTestSourcePath("/{packagePath}/{className}");
         module.addTemplate("applicationTest",
-                new RockerTemplate(testSourcePath, applicationTest(generatorContext))
+            new RockerTemplate(testSourcePath, applicationTest(generatorContext))
         );
     }
 
-    protected RockerModel applicationTest(GeneratorContext generatorContext) {
+    protected final RockerModel applicationTest(GeneratorContext generatorContext) {
         TestFramework testFramework = generatorContext.getTestFramework();
         Project project = generatorContext.getProject();
         boolean transactional = !generatorContext.getFeatures().hasFeature(TransactionalNotSupported.class);
         TestRockerModelProvider provider = new DefaultTestRockerModelProvider(spock.template(project, transactional),
-                groovyJunit.template(project, transactional),
-                groovyJunit.template(project, transactional),
-                groovyJunit.template(project, transactional),
-                koTest.template(project, transactional));
+            groovyJunit.template(project, transactional),
+            groovyJunit.template(project, transactional),
+            groovyJunit.template(project, transactional),
+            koTest.template(project, transactional));
         return provider.findModel(generatorContext.getLanguage(), testFramework);
     }
 

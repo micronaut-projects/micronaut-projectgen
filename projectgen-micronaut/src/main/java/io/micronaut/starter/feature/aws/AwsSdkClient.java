@@ -45,8 +45,8 @@ public enum AwsSdkClient {
 
     @NonNull
     public static List<Dependency> dependencies(@NonNull GeneratorContext generatorContext,
-                                                @NonNull Dependency.Builder awsSdkDependency,
-                                                @NonNull AwsSdkClient clientIfGraalVM) {
+        @NonNull Dependency.Builder awsSdkDependency,
+        @NonNull AwsSdkClient clientIfGraalVM) {
         List<Dependency> result = new ArrayList<>();
         if (generatorContext.isFeaturePresent(GraalVM.class)) {
             for (AwsSdkClient v : AwsSdkClient.values()) {

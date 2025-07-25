@@ -17,12 +17,10 @@ package io.micronaut.starter.feature.graalvm;
 
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.utils.OptionUtils;
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.starter.feature.aws.Cdk;
 import io.micronaut.starter.feature.github.workflows.docker.GraalVMDockerRegistryWorkflow;
 import io.micronaut.projectgen.core.feature.FeatureValidator;
-import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.options.JdkVersion;
 import io.micronaut.projectgen.core.options.Language;
 import io.micronaut.projectgen.core.options.Options;
@@ -60,8 +58,8 @@ public class GraalVMFeatureValidator implements FeatureValidator {
 
     public static List<Language> supportedLanguages() {
         return Stream.of(Language.values())
-                .filter(GraalVMFeatureValidator::supports)
-                .toList();
+            .filter(GraalVMFeatureValidator::supports)
+            .toList();
     }
 
     public static boolean supports(Language language) {

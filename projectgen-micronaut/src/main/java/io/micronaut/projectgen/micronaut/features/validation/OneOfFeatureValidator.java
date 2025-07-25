@@ -16,7 +16,6 @@
 package io.micronaut.projectgen.micronaut.features.validation;
 
 import io.micronaut.projectgen.core.feature.FeatureValidator;
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.feature.OneOfFeature;
 import io.micronaut.projectgen.core.options.Options;
@@ -31,16 +30,16 @@ public class OneOfFeatureValidator implements FeatureValidator {
 
     private void validate(Set<Feature> features) {
         Set<Class<?>> oneOfFeatures = features.stream()
-                .filter(OneOfFeature.class::isInstance)
-                .map(OneOfFeature.class::cast)
-                .map(OneOfFeature::getFeatureClass)
-                .collect(Collectors.toSet());
+            .filter(OneOfFeature.class::isInstance)
+            .map(OneOfFeature.class::cast)
+            .map(OneOfFeature::getFeatureClass)
+            .collect(Collectors.toSet());
 
-        for (Class<?> featureClass: oneOfFeatures) {
+        for (Class<?> featureClass : oneOfFeatures) {
             List<String> matches = features.stream()
-                    .filter(feature -> featureClass.isAssignableFrom(feature.getClass()))
-                    .map(Feature::getName)
-                    .collect(Collectors.toList());
+                .filter(feature -> featureClass.isAssignableFrom(feature.getClass()))
+                .map(Feature::getName)
+                .collect(Collectors.toList());
             if (matches.size() > 1) {
                 throw new IllegalArgumentException("There can only be one of the following features selected: %s".formatted(matches));
             }

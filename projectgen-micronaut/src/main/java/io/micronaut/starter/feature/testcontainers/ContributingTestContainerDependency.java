@@ -28,9 +28,9 @@ public interface ContributingTestContainerDependency {
     @NonNull
     static Dependency testContainerDependency(@NonNull String artifactId) {
         return Dependency.builder()
-                .groupId(TESTCONTAINERS_GROUP_ID)
-                .artifactId(artifactId)
-                .test()
-                .build();
+            .groupId(TESTCONTAINERS_GROUP_ID)
+            .artifactId(artifactId)
+            .test()
+            .build();
     }
 }

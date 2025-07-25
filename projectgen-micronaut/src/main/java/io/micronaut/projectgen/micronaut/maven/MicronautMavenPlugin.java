@@ -53,8 +53,8 @@ public class MicronautMavenPlugin implements MavenSpecificFeature {
             List<String> nativeImageBuildArgs = null;
             List<String> appArguments = null;
             ApplicationType applicationType = ApplicationType.of(generatorContext.getOptions().template());
-            if (applicationType == ApplicationType.FUNCTION &&
-                generatorContext.hasFeature(OracleFunction.class)) {
+            if (applicationType == ApplicationType.FUNCTION
+                && generatorContext.hasFeature(OracleFunction.class)) {
                 nativeImageBuildArgs = List.of("-H:+StaticExecutableWithDynamicLibC", "-Dfn.handler=${function.entrypoint}");
                 appArguments = List.of("${function.entrypoint}");
             }

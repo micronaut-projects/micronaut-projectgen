@@ -40,33 +40,33 @@ public class Oracle extends DatabaseDriverFeature {
 
     @Deprecated(forRemoval = true)
     public static final Dependency.Builder DEPENDENCY_OJDBC8 = Dependency.builder()
-            .groupId("com.oracle.database.jdbc")
-            .artifactId("ojdbc8")
-            .runtime()
-            .template();
+        .groupId("com.oracle.database.jdbc")
+        .artifactId("ojdbc8")
+        .runtime()
+        .template();
 
     public static final Dependency.Builder DEPENDENCY_OJDBC11 = Dependency.builder()
-            .groupId("com.oracle.database.jdbc")
-            .artifactId("ojdbc11")
-            .runtime()
-            .template();
+        .groupId("com.oracle.database.jdbc")
+        .artifactId("ojdbc11")
+        .runtime()
+        .template();
 
     private static final Dependency.Builder DEPENDENCY_ORACLE_R2DBC = Dependency.builder()
-            .groupId("com.oracle.database.r2dbc")
-            .artifactId("oracle-r2dbc")
-            .runtime();
+        .groupId("com.oracle.database.r2dbc")
+        .artifactId("oracle-r2dbc")
+        .runtime();
 
     private static final Dependency.Builder DEPENDENCY_VERTX_ORACLE_CLIENT = Dependency.builder()
-            .groupId(IO_VERTX_DEPENDENCY_GROUP)
-            .artifactId(VERTX_ORACLE_CLIENT)
-            .compile();
+        .groupId(IO_VERTX_DEPENDENCY_GROUP)
+        .artifactId(VERTX_ORACLE_CLIENT)
+        .compile();
 
     public Oracle(JdbcFeature jdbcFeature,
-                  TestContainers testContainers,
-                  TestResources testResources) {
+        TestContainers testContainers,
+        TestResources testResources) {
         super(jdbcFeature, testContainers, testResources);
     }
-    
+
     @Override
     @NonNull
     public String getName() {

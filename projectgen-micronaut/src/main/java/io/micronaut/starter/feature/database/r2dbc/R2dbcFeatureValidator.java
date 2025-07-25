@@ -15,7 +15,6 @@
  */
 package io.micronaut.starter.feature.database.r2dbc;
 
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.starter.feature.database.TestContainers;
 import io.micronaut.starter.feature.migration.MigrationFeature;
@@ -34,9 +33,9 @@ public class R2dbcFeatureValidator implements FeatureValidator {
 
     @Override
     public void validatePostProcessing(Options options, Set<Feature> features) {
-        if (hasSubclassOf(features, R2dbcFeature.class) &&
-                hasSubclassOf(features, MigrationFeature.class) &&
-                hasInstance(features, TestContainers.class)) {
+        if (hasSubclassOf(features, R2dbcFeature.class)
+            && hasSubclassOf(features, MigrationFeature.class)
+            && hasInstance(features, TestContainers.class)) {
             throw new IllegalArgumentException("Testcontainers is not supported with R2DBC and Migration. Please remove the TestContainers feature to use Test Resources instead.");
         }
     }

@@ -40,7 +40,7 @@ public class MongoDbLangchain4jEmbeddedStore implements Langchain4jEmbeddedStore
     }
 
     @Override
-    public List<String> getRecipes(GeneratorContext generatorContext){
+    public List<String> getRecipes(GeneratorContext generatorContext) {
         return List.of("io.micronaut.starter.feature.langchain4j-store-mongodb-atlas");
     }
 }

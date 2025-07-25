@@ -69,7 +69,7 @@ public class CoherenceDistributedConfiguration implements DistributedConfigFeatu
     @Override
     public List<String> getRecipes(GeneratorContext generatorContext) {
         List<String> recipes = new ArrayList<>();
-        if(generatorContext.isFeaturePresent(DistributedConfigFeature.class)){
+        if (generatorContext.isFeaturePresent(DistributedConfigFeature.class)) {
             recipes.add("io.micronaut.starter.feature.coherence-distributed-configuration-conf-bootstrap");
         } else {
             recipes.add("io.micronaut.starter.feature.coherence-distributed-configuration-conf-application");

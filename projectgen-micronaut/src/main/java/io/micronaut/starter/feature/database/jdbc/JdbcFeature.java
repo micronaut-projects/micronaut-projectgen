@@ -15,8 +15,6 @@
  */
 package io.micronaut.starter.feature.database.jdbc;
 
-import io.micronaut.projectgen.core.generator.ModuleContext;
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.FeatureContext;
@@ -24,9 +22,7 @@ import io.micronaut.projectgen.core.feature.FeaturePhase;
 import io.micronaut.projectgen.core.feature.OneOfFeature;
 import io.micronaut.starter.feature.database.*;
 
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 public abstract class JdbcFeature implements OneOfFeature, DatabaseDriverConfigurationFeature {
 
@@ -39,7 +35,7 @@ public abstract class JdbcFeature implements OneOfFeature, DatabaseDriverConfigu
 
     private final DatabaseDriverFeature defaultDbFeature;
 
-    public JdbcFeature(DatabaseDriverFeature defaultDbFeature) {
+    protected JdbcFeature(DatabaseDriverFeature defaultDbFeature) {
         this.defaultDbFeature = defaultDbFeature;
     }
 
@@ -65,24 +61,24 @@ public abstract class JdbcFeature implements OneOfFeature, DatabaseDriverConfigu
         return Category.DATABASE;
     }
 
-    public String getUrlKey() {
+    public final String getUrlKey() {
         return URL_KEY;
     }
 
-    public String getDriverKey() {
+    public final String getDriverKey() {
         return DRIVER_KEY;
     }
 
-    public String getUsernameKey() {
+    public final String getUsernameKey() {
         return USERNAME_KEY;
     }
 
-    public String getPasswordKey() {
+    public final String getPasswordKey() {
         return PASSWORD_KEY;
     }
 
-    protected void addDatabaseConfigRecipe(GeneratorContext generatorContext,
-                                           List<String> recipes) {
+    protected final void addDatabaseConfigRecipe(GeneratorContext generatorContext,
+        List<String> recipes) {
 
         if (generatorContext.isFeaturePresent(PostgreSQL.class)) {
             recipes.add("io.micronaut.starter.feature.jdbc-config-postgresql");

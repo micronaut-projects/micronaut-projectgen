@@ -17,10 +17,8 @@ package io.micronaut.starter.feature.database;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
-import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
-import io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils;
 import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.starter.feature.database.jdbc.JdbcFeature;
@@ -71,7 +69,7 @@ public class HibernateJpa implements JpaFeature, OpenRewriteFeature {
     @Override
     public List<String> getRecipes(GeneratorContext generatorContext) {
         List<String> recipes = new ArrayList<>();
-        if(generatorContext.isFeaturePresent(MigrationFeature.class)) {
+        if (generatorContext.isFeaturePresent(MigrationFeature.class)) {
             recipes.add("io.micronaut.starter.feature.jpa-hbm2ddl-none");
         } else {
             recipes.add("io.micronaut.starter.feature.jpa-hbm2ddl-update");

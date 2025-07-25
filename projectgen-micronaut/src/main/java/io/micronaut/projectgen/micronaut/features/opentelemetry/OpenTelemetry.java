@@ -29,9 +29,9 @@ import jakarta.inject.Singleton;
 public class OpenTelemetry implements OpenTelemetryFeature {
 
     private static final Dependency MICRONAUT_OPEN_TELEMETRY = MicronautDependencyUtils.tracingDependency()
-            .artifactId("micronaut-tracing-opentelemetry")
-            .compile()
-            .build();
+        .artifactId("micronaut-tracing-opentelemetry")
+        .compile()
+        .build();
 
     @Override
     public boolean isVisible() {

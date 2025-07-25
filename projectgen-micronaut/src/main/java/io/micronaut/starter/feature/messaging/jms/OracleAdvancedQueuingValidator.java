@@ -15,7 +15,6 @@
  */
 package io.micronaut.starter.feature.messaging.jms;
 
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.starter.feature.database.DatabaseDriverFeature;
 import io.micronaut.starter.feature.database.Oracle;

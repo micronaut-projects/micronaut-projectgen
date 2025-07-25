@@ -18,15 +18,11 @@ package io.micronaut.starter.feature.messaging.nats;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
-import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.starter.feature.messaging.MessagingFeature;
 
 import jakarta.inject.Singleton;
-import java.util.Collections;
 import java.util.List;
 
 @Requires(property = "micronaut.starter.feature.nats.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)

@@ -60,11 +60,11 @@ public class GitlabCiWorkflowFeature extends CIWorkflowFeature {
 
     private Template workflowRockerTemplate(GeneratorContext generatorContext) {
         return new RockerTemplate(WORKFLOW_FILE_NAME,
-                gitlabci.template(
-                        generatorContext.getProject().getName(),
-                        generatorContext.getBuildTool(),
-                        generatorContext.getJdkVersion(),
-                        generatorContext.getFeatures().hasFeature(GraalVM.class))
+            gitlabci.template(
+                generatorContext.getProject().getName(),
+                generatorContext.getOptions().getBuildTool(),
+                generatorContext.getJdkVersion(),
+                generatorContext.getFeatures().hasFeature(GraalVM.class))
         );
     }
 

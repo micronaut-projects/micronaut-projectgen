@@ -11,7 +11,7 @@ import io.micronaut.projectgen.core.options.TestFramework;
 
 import java.util.List;
 
-public class OptionsFixture {
+public final class OptionsFixture {
 
     public static Options defaultGradle(String feature) {
         return OptionsFixture.defaultGradle().features(List.of(feature)).build();
@@ -49,5 +49,8 @@ public class OptionsFixture {
             .testFramework(TestFramework.JUNIT)
             .java(JdkVersion.JDK_21)
             .template(ApplicationType.DEFAULT.toString());
+    }
+
+    private OptionsFixture() {
     }
 }

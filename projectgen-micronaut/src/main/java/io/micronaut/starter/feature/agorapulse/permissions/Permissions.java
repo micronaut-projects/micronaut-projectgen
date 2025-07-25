@@ -102,8 +102,8 @@ public class Permissions implements AgoraPulseFeature {
     private void addDependency(GeneratorContext generatorContext) {
         ModuleContext module = generatorContext.getRootModule();
         module.addDependency(Dependency.builder()
-                .lookupArtifactId(ARTIFACT_ID)
-                .compile());
+            .lookupArtifactId(ARTIFACT_ID)
+            .compile());
     }
 
     @Override
@@ -120,60 +120,60 @@ public class Permissions implements AgoraPulseFeature {
 
     private void addExampleCode(GeneratorContext generatorContext) {
         messageModel(generatorContext).ifPresent(rockerModel ->
-                addMain(generatorContext, "Message", rockerModel, "message")
+            addMain(generatorContext, "Message", rockerModel, "message")
         );
 
         advisorModel(generatorContext).ifPresent(rockerModel ->
-                addMain(generatorContext, "MessagePermissionAdvisor", rockerModel, "messagePermissionAdvisor")
+            addMain(generatorContext, "MessagePermissionAdvisor", rockerModel, "messagePermissionAdvisor")
         );
 
         serviceModel(generatorContext).ifPresent(rockerModel ->
-                addMain(generatorContext, "MessageService", rockerModel, "messageService")
+            addMain(generatorContext, "MessageService", rockerModel, "messageService")
         );
 
         serviceTestModel(generatorContext).ifPresent(rockerModel ->
-                addTest(generatorContext, "MessageService", rockerModel, "messageServiceTest")
+            addTest(generatorContext, "MessageService", rockerModel, "messageServiceTest")
         );
     }
 
     @NonNull
     private Optional<RockerModel> messageModel(GeneratorContext generatorContext) {
         return mainModel(
-                generatorContext,
-                messageJava.template(generatorContext.getProject()),
-                messageGroovy.template(generatorContext.getProject()),
-                messageKotlin.template(generatorContext.getProject())
+            generatorContext,
+            messageJava.template(generatorContext.getProject()),
+            messageGroovy.template(generatorContext.getProject()),
+            messageKotlin.template(generatorContext.getProject())
         );
     }
 
     @NonNull
     private Optional<RockerModel> advisorModel(GeneratorContext generatorContext) {
         return mainModel(
-                generatorContext,
-                messagePermissionAdvisorJava.template(generatorContext.getProject()),
-                messagePermissionAdvisorGroovy.template(generatorContext.getProject()),
-                messagePermissionAdvisorKotlin.template(generatorContext.getProject())
+            generatorContext,
+            messagePermissionAdvisorJava.template(generatorContext.getProject()),
+            messagePermissionAdvisorGroovy.template(generatorContext.getProject()),
+            messagePermissionAdvisorKotlin.template(generatorContext.getProject())
         );
     }
 
     @NonNull
     private Optional<RockerModel> serviceModel(GeneratorContext generatorContext) {
         return mainModel(
-                generatorContext,
-                messageServiceJava.template(generatorContext.getProject()),
-                messageServiceGroovy.template(generatorContext.getProject()),
-                messageServiceKotlin.template(generatorContext.getProject())
+            generatorContext,
+            messageServiceJava.template(generatorContext.getProject()),
+            messageServiceGroovy.template(generatorContext.getProject()),
+            messageServiceKotlin.template(generatorContext.getProject())
         );
     }
 
     @NonNull
     private Optional<RockerModel> serviceTestModel(GeneratorContext generatorContext) {
         return testModel(
-                generatorContext,
-                messageServiceTestJava.template(generatorContext.getProject()),
-                messageServiceSpecGroovy.template(generatorContext.getProject()),
-                messageServiceTestKotlin.template(generatorContext.getProject()),
-                messageServiceTestKotest.template(generatorContext.getProject())
+            generatorContext,
+            messageServiceTestJava.template(generatorContext.getProject()),
+            messageServiceSpecGroovy.template(generatorContext.getProject()),
+            messageServiceTestKotlin.template(generatorContext.getProject()),
+            messageServiceTestKotest.template(generatorContext.getProject())
         );
     }
 

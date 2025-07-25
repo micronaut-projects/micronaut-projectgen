@@ -15,7 +15,6 @@
  */
 package io.micronaut.starter.feature.lang.groovy.module;
 
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.feature.FeatureValidator;
 import io.micronaut.projectgen.core.options.Language;
@@ -29,19 +28,19 @@ import java.util.Set;
 public class GroovyModuleFeatureValidator implements FeatureValidator {
     @Override
     public void validatePreProcessing(Options options,
-                                      Set<Feature> features) {
+        Set<Feature> features) {
         if (!(options.language() == Language.GROOVY || options.testFramework() == TestFramework.SPOCK)) {
             features.stream()
-                    .filter(GroovyModuleFeature.class::isInstance)
-                    .findFirst()
-                    .ifPresent(f -> {
-                        throw new IllegalArgumentException(f.getName() + " requires Groovy language or Spock test framework.");
-                    });
+                .filter(GroovyModuleFeature.class::isInstance)
+                .findFirst()
+                .ifPresent(f -> {
+                    throw new IllegalArgumentException(f.getName() + " requires Groovy language or Spock test framework.");
+                });
         }
     }
 
     @Override
     public void validatePostProcessing(Options options,
-                                       Set<Feature> features) {
+        Set<Feature> features) {
     }
 }

@@ -68,30 +68,29 @@ public class Mockk implements MockingFeature, DefaultFeature, OpenRewriteFeature
 
     @Override
     public boolean shouldApply(Options options, Set<Feature> selectedFeatures) {
-        return isValid(selectedFeatures, options::buildTools, t -> t.stream().anyMatch(bt -> bt ==  BuildTool.MAVEN), BuildFeature.class, BuildFeature::isMaven)
-                && isValid(selectedFeatures, options::language, t -> t == Language.KOTLIN, LanguageFeature.class, LanguageFeature::isKotlin)
-                && isValid(selectedFeatures, options::testFramework, t -> t.isKotlinTestFramework(), TestFeature.class, TestFeature::isKotlinTestFramework);
+        return isValid(selectedFeatures, options::buildTools, t -> t.stream().anyMatch(bt -> bt == BuildTool.MAVEN), BuildFeature.class, BuildFeature::isMaven)
+            && isValid(selectedFeatures, options::language, t -> t == Language.KOTLIN, LanguageFeature.class, LanguageFeature::isKotlin)
+            && isValid(selectedFeatures, options::testFramework, t -> t.isKotlinTestFramework(), TestFeature.class, TestFeature::isKotlinTestFramework);
     }
 
     private <T, U extends Feature> boolean isValid(Set<Feature> selectedFeatures,
-                                                   Supplier<T> supplier,
-                                                   Predicate<T> nonNull,
-                                                   Class<U> nullFeature,
-                                                   Predicate<U> nullFeatureTest) {
+        Supplier<T> supplier,
+        Predicate<T> nonNull,
+        Class<U> nullFeature,
+        Predicate<U> nullFeatureTest) {
         T suppliedValue = supplier.get();
         return suppliedValue != null
-                ? nonNull.test(suppliedValue)
-                : selectedFeatures.stream()
-                    .filter(nullFeature::isInstance)
-                    .map(nullFeature::cast)
-                    .anyMatch(nullFeatureTest);
+            ? nonNull.test(suppliedValue)
+            : selectedFeatures.stream()
+            .filter(nullFeature::isInstance)
+            .map(nullFeature::cast)
+            .anyMatch(nullFeatureTest);
     }
 
     @Override
     public int getOrder() {
         return FeaturePhase.LOW.getOrder();
     }
-
 
     @Override
     public void apply(GeneratorContext generatorContext) {
@@ -107,5 +106,3 @@ public class Mockk implements MockingFeature, DefaultFeature, OpenRewriteFeature
         }
     }
 }
-
-

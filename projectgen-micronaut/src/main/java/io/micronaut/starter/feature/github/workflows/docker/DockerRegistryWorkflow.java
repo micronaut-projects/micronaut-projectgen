@@ -67,14 +67,14 @@ public class DockerRegistryWorkflow extends AbstractDockerRegistryWorkflow {
         String workflowFilePath = ".github/workflows/" + getWorkflowFileName(generatorContext);
 
         module.addTemplate("javaWorkflow",
-                new RockerTemplate(workflowFilePath,
-                        dockerRegistryWorkflow.template(generatorContext.getProject(), generatorContext.getJdkVersion(),
-                                generatorContext.getBuildTool(), false)
-                )
+            new RockerTemplate(workflowFilePath,
+                dockerRegistryWorkflow.template(generatorContext.getProject(), generatorContext.getJdkVersion(),
+                    generatorContext.getBuildTool(), false)
+            )
         );
         module.addHelpTemplate(new RockerWritable(
-                dockerRegistryWorkflowReadme.template(this, generatorContext.getProject(),
-                        workflowFilePath)));
+            dockerRegistryWorkflowReadme.template(this, generatorContext.getProject(),
+                workflowFilePath)));
     }
 
     @Override

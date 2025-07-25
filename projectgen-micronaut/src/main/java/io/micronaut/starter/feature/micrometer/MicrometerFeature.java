@@ -27,7 +27,7 @@ public abstract class MicrometerFeature implements Feature, MicronautServerDepen
     private final Core core;
     private final Management management;
 
-    public MicrometerFeature(Core core, Management management) {
+    protected MicrometerFeature(Core core, Management management) {
         this.core = core;
         this.management = management;
     }

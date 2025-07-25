@@ -24,10 +24,10 @@ import jakarta.inject.Singleton;
 @Singleton
 public class OpenTelemetryJaeger extends AbstractOpenTelemetry {
     public OpenTelemetryJaeger(OpenTelemetry otel,
-                               OpenTelemetryHttp otelHttp,
-                               OpenTelemetryAnnotations otelAnnotations,
-                               OpenTelemetryGrpc openTelemetryGrpc,
-                               OpenTelemetryExporterJaeger otelExporterJaeger) {
+        OpenTelemetryHttp otelHttp,
+        OpenTelemetryAnnotations otelAnnotations,
+        OpenTelemetryGrpc openTelemetryGrpc,
+        OpenTelemetryExporterJaeger otelExporterJaeger) {
         super(otel, otelHttp, otelAnnotations, openTelemetryGrpc, otelExporterJaeger);
     }
 

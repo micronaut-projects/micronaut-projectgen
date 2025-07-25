@@ -34,8 +34,8 @@ public class HibernateReactiveJpa extends HibernateReactiveFeature {
     public static final String NAME = "hibernate-reactive-jpa";
 
     private static final Dependency.Builder DEPENDENCY_MICRONAUT_HIBERNATE_REACTIVE = MicronautDependencyUtils.sqlDependency()
-            .artifactId("micronaut-hibernate-reactive")
-            .compile();
+        .artifactId("micronaut-hibernate-reactive")
+        .compile();
 
     private final Reactor reactiveFeature;
 

@@ -38,24 +38,24 @@ public class SQLServer extends DatabaseDriverFeature {
 
     public static final String VERTX_MSSQL_CLIENT = "vertx-mssql-client";
     public static final Dependency.Builder DEPENDENCY_MSSQL_JDBC = Dependency.builder()
-            .groupId("com.microsoft.sqlserver")
-            .artifactId("mssql-jdbc")
-            .runtime()
-            .template();
+        .groupId("com.microsoft.sqlserver")
+        .artifactId("mssql-jdbc")
+        .runtime()
+        .template();
 
     private static final Dependency.Builder DEPENDENCY_VERTX_MSSQL_CLIENT = Dependency.builder()
-            .groupId(IO_VERTX_DEPENDENCY_GROUP)
-            .artifactId(VERTX_MSSQL_CLIENT)
-            .compile();
+        .groupId(IO_VERTX_DEPENDENCY_GROUP)
+        .artifactId(VERTX_MSSQL_CLIENT)
+        .compile();
 
     private static final Dependency.Builder DEPENDENCY_MSSQL_R2DBC = Dependency.builder()
-            .groupId("io.r2dbc")
-            .artifactId("r2dbc-mssql")
-            .runtime();
+        .groupId("io.r2dbc")
+        .artifactId("r2dbc-mssql")
+        .runtime();
 
     public SQLServer(JdbcFeature jdbcFeature,
-                     TestContainers testContainers,
-                     TestResources testResources) {
+        TestContainers testContainers,
+        TestResources testResources) {
         super(jdbcFeature, testContainers, testResources);
     }
 
@@ -144,7 +144,7 @@ public class SQLServer extends DatabaseDriverFeature {
         }
     }
 
-    protected boolean acceptLicense() {
+    protected final boolean acceptLicense() {
         return false;
     }
 }

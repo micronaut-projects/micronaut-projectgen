@@ -60,7 +60,7 @@ public class PicocliKotlinApplication implements RequireKaptFeature, KotlinAppli
 
     public RockerTemplate getTemplate(Project project) {
         return new RockerTemplate(getPath(),
-                picocliApplication.template(project));
+            picocliApplication.template(project));
     }
 
     protected String getPath() {

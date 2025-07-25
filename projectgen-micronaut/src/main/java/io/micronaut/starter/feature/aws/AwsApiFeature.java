@@ -24,9 +24,9 @@ import io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils;
 
 public interface AwsApiFeature extends AwsLambdaEventFeature, LambdaTrigger {
     Dependency MICRONAUT_AWS_APIGATEWAY = MicronautDependencyUtils.awsDependency()
-            .artifactId("micronaut-aws-apigateway")
-            .compile()
-            .build();
+        .artifactId("micronaut-aws-apigateway")
+        .compile()
+        .build();
 
     @Override
     default String getFrameworkDocumentation(GeneratorContext generatorContext) {

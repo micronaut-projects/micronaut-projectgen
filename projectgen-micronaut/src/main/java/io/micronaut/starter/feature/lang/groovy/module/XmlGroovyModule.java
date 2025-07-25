@@ -54,8 +54,7 @@ public class XmlGroovyModule implements GroovyModuleFeature, OpenRewriteFeature 
         List<String> recipes = new ArrayList<>();
         if (generatorContext.getLanguage() == Language.GROOVY) {
             recipes.add("io.micronaut.starter.feature.groovy-xml");
-        }
-        else if (generatorContext.getTestFramework() == TestFramework.SPOCK) {
+        } else if (generatorContext.getTestFramework() == TestFramework.SPOCK) {
             recipes.add("io.micronaut.starter.feature.groovy-xml-spock");
         }
         return recipes;

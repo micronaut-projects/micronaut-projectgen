@@ -28,7 +28,7 @@ public abstract class AbstractDekoratePlatformFeature extends AbstractDekorateFe
 
     private final Management management;
 
-    public AbstractDekoratePlatformFeature(Management management) {
+    protected AbstractDekoratePlatformFeature(Management management) {
         this.management = management;
     }
 

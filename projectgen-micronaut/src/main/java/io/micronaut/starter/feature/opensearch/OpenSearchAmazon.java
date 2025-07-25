@@ -32,8 +32,8 @@ public class OpenSearchAmazon extends OpenSearchFeature implements OpenRewriteFe
     public static final String NAME = "opensearch-amazon";
 
     public OpenSearchAmazon(
-            TestContainers testContainers,
-            TestResources testResources
+        TestContainers testContainers,
+        TestResources testResources
     ) {
         super(testContainers, testResources);
     }
