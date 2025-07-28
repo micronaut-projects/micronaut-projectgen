@@ -177,6 +177,12 @@ public class OracleFunction extends AbstractFunctionFeature implements OracleClo
         return "oracle_function";
     }
 
+    /**
+     * Adds necessary dependencies for the function project when Maven is the selected build tool.
+     *
+     * @param options The project generation options.
+     * @param module The module context to which dependencies will be added.
+     */
     protected void addDependencies(Options options, ModuleContext module) {
         if (OptionUtils.hasMavenBuildTool(options)) {
             module.addDependency(COM_FNPROJECT_RUNTIME);
@@ -185,12 +191,18 @@ public class OracleFunction extends AbstractFunctionFeature implements OracleClo
         }
     }
 
-    protected final void addFuncYamlTemplate(ModuleContext module, Project project) {
+    /**
+     * Adds the {@code func.yml} template to the module for Project configuration.
+     *
+     * @param module The module context to which the template will be added.
+     * @param project The current project configuration.
+     */
+    protected void addFuncYamlTemplate(ModuleContext module, Project project) {
         module.addTemplate(
             "func.yml", new RockerTemplate(
-            "func.yml",
-            projectFnFunc.template(project
-            ))
+                "func.yml",
+                projectFnFunc.template(project
+                ))
         );
     }
 }

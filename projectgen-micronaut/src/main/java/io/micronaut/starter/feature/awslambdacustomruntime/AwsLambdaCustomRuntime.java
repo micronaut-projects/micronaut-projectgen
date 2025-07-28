@@ -141,6 +141,7 @@ public class AwsLambdaCustomRuntime implements FunctionFeature, ApplicationFeatu
         return applicationType == ApplicationType.FUNCTION
             && generatorContext.getFeatures().isFeaturePresent(AwsLambda.class);
     }
+
     /**
      * Returns the fully qualified main class name to use for AWS Lambda custom runtime,
      * based on the application type and features.

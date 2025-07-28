@@ -73,18 +73,35 @@ public final class Property {
         private String name;
         private String value;
 
+        /**
+         * Sets the name of the property.
+         *
+         * @param name The property name.
+         * @return This builder instance.
+         */
         @NonNull
         public Builder name(@NonNull String name) {
             this.name = name;
             return this;
         }
 
+        /**
+         * Sets the value of the property.
+         *
+         * @param value The property value.
+         * @return This builder instance.
+         */
         @NonNull
         public Builder value(@NonNull String value) {
             this.value = value;
             return this;
         }
 
+        /**
+         * Builds the {@link Property} instance using the configured name and value.
+         *
+         * @return A new {@link Property} instance.
+         */
         @NonNull
         public Property build() {
             return new Property(Objects.requireNonNull(this.name),

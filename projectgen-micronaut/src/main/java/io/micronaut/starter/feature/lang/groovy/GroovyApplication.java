@@ -116,7 +116,7 @@ public class GroovyApplication implements GroovyApplicationFeature {
         return provider.findModel(generatorContext.getLanguage(), testFramework);
     }
 
-    protected String getPath() {
+    protected final String getPath() {
         return "src/main/groovy/{packagePath}/Application.groovy";
     }
 }

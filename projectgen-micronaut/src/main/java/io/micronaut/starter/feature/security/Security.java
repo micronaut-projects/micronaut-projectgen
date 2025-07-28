@@ -60,6 +60,12 @@ public class Security extends SecurityFeature implements OpenRewriteFeature {
         addInterceptUrlMapConfiguration(generatorContext);
     }
 
+    /**
+     * Adds the security intercept URL map configuration to the root module
+     * based on all contributing features.
+     *
+     * @param generatorContext The context of the code generator.
+     */
     protected void addInterceptUrlMapConfiguration(@NonNull GeneratorContext generatorContext) {
         ModuleContext module = generatorContext.getRootModule();
         List<Map<String, String>> list = generatorContext.getFeatures().getFeatures()

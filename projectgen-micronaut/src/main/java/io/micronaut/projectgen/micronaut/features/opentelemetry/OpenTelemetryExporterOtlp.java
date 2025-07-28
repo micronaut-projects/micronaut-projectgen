@@ -30,7 +30,7 @@ public class OpenTelemetryExporterOtlp extends OpenTelemetryExporterFeature impl
     public static final String EXPORTER_OTLP = "OTLP";
 
     @NonNull
-    public String exporterName() {
+    public final String exporterName() {
         return EXPORTER_OTLP;
     }
 

@@ -48,7 +48,7 @@ public class AOP implements OpenRewriteFeature {
         return Category.API;
     }
 
-    public List<String> getRecipes(GeneratorContext generatorContext) {
+    public final List<String> getRecipes(GeneratorContext generatorContext) {
         return List.of("io.micronaut.starter.feature.aop");
     }
 }

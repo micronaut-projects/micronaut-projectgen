@@ -51,7 +51,7 @@ public class AwsLambdaSnapstart implements Feature {
         return "https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html";
     }
 
-    public boolean supports(@NonNull CpuArchitecture cpuArchitecture) {
+    public final boolean supports(@NonNull CpuArchitecture cpuArchitecture) {
         return !(cpuArchitecture instanceof Arm);
     }
 

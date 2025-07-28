@@ -39,6 +39,14 @@ public abstract class GitHubWorkflowFeature implements Feature {
         return Category.CICD;
     }
 
+    /**
+     * Returns a list of secrets required by the GitHub workflow.
+     * <p>
+     * Subclasses may override this method to provide specific secrets
+     * needed for their workflow configuration.
+     *
+     * @return a list of {@link Secret} instances, or an empty list if none are required
+     */
     public List<Secret> getSecrets() {
         return Collections.emptyList();
     }

@@ -40,11 +40,11 @@ public class GitHubWorkflowRuns {
         this.runs = runs;
     }
 
-    public int getTotalCount() {
+    public final int getTotalCount() {
         return totalCount;
     }
 
-    public List<GitHubWorkflowRun> getRuns() {
+    public final List<GitHubWorkflowRun> getRuns() {
         return runs;
     }
 }

@@ -79,7 +79,7 @@ public class MicronautGradleEnterprise extends GradleEnterprise {
     }
 
     @NonNull
-    final protected List<GradleRepository> pluginsManagementRepositories() {
+    protected final List<GradleRepository> pluginsManagementRepositories() {
         return Arrays.asList(new GradlePluginPortal(), new GradleMavenCentral());
     }
 }

@@ -29,5 +29,4 @@ public interface HttpClientFeature  extends OneOfFeature {
         return Category.CLIENT;
     }
 
-
 }

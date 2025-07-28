@@ -102,6 +102,7 @@ public abstract class DatabaseDriverFeature extends EaseTestingFeature implement
      * <p>
      * Subclasses may override this to provide a specific DbType.
      * Ensure consistency with other database-related features.
+     * @return An {@link Optional} containing the {@link DbType}, or empty if not applicable.
      */
     @NonNull
     public Optional<DbType> getDbType() {

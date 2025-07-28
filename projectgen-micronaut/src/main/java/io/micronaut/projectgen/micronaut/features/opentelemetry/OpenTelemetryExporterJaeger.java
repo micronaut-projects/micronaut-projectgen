@@ -37,7 +37,7 @@ public class OpenTelemetryExporterJaeger extends OpenTelemetryExporterFeature im
     }
 
     @NonNull
-    public String exporterName() {
+    public final String exporterName() {
         return EXPORTER_JAEGER.toLowerCase(Locale.ROOT);
     }
 

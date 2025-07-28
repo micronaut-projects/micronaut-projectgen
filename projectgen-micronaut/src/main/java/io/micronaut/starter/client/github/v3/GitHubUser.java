@@ -42,15 +42,15 @@ public class GitHubUser {
         this.name = name;
     }
 
-    public String getLogin() {
+    public final String getLogin() {
         return login;
     }
 
-    public String getEmail() {
+    public final String getEmail() {
         return email;
     }
 
-    public String getName() {
+    public final String getName() {
         return name;
     }
 

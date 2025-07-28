@@ -59,6 +59,7 @@ public class Awaitility implements OpenRewriteFeature {
             case JAVA -> recipes.add("io.micronaut.starter.feature.awaitility.dependencies.java");
             case KOTLIN -> recipes.add("io.micronaut.starter.feature.awaitility.dependencies.kotlin");
             case GROOVY -> recipes.add("io.micronaut.starter.feature.awaitility.dependencies.groovy");
+            default -> throw new IllegalStateException("Unsupported language: " + generatorContext.getOptions().language());
         }
         recipes.add("io.micronaut.starter.feature.awaitility.documentation.thirdparty");
         return recipes;

@@ -40,6 +40,7 @@ import java.util.List;
 @Singleton
 public class HttpClientTest implements OpenRewriteFeature {
     public static final String ARTIFACT_ID_MICRONAUT_HTTP_CLIENT = "micronaut-http-client";
+    private static final String ARTIFACT_ID_MICRONAUT_HTTP_CLIENT_JDK = "micronaut-http-client-jdk";
 
     @Override
     public String getName() {
@@ -73,8 +74,6 @@ public class HttpClientTest implements OpenRewriteFeature {
         }
         return recipes;
     }
-
-    private static final String ARTIFACT_ID_MICRONAUT_HTTP_CLIENT_JDK = "micronaut-http-client-jdk";
 
     private boolean hasHttpClientFeatureDependencyInScope(@NonNull GeneratorContext generatorContext, @NonNull Scope scope) {
         ModuleContext module = generatorContext.getRootModule();

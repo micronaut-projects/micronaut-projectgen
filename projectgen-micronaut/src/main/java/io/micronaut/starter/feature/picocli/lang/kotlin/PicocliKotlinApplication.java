@@ -58,12 +58,18 @@ public class PicocliKotlinApplication implements RequireKaptFeature, KotlinAppli
         module.addTemplate("application", getTemplate(generatorContext.getProject()));
     }
 
+    /**
+     * Returns the {@link RockerTemplate} for generating the Picocli application source file.
+     *
+     * @param project The project metadata.
+     * @return The Rocker template used to render the application source.
+     */
     public RockerTemplate getTemplate(Project project) {
         return new RockerTemplate(getPath(),
             picocliApplication.template(project));
     }
 
-    protected String getPath() {
+    protected final String getPath() {
         return "src/main/kotlin/{packagePath}/{className}Command.kt";
     }
 }

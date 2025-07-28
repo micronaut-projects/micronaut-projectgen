@@ -58,6 +58,13 @@ public class Kotlin implements LanguageFeature, OpenRewriteFeature {
         processSelectedFeatures(featureContext, kotlinApplicationFeature -> true);
     }
 
+    /**
+     * Processes selected features by adding {@link ApplicationFeature} based on the application type
+     * if none is explicitly present.
+     *
+     * @param featureContext The context containing selected features.
+     * @param filter Predicate to filter applicable features.
+     */
     protected void processSelectedFeatures(FeatureContext featureContext, Predicate<Feature> filter) {
         if (!featureContext.isPresent(ApplicationFeature.class)) {
             ApplicationType type = ApplicationType.of(featureContext.getOptions().template());
@@ -76,6 +83,12 @@ public class Kotlin implements LanguageFeature, OpenRewriteFeature {
         OpenRewriteFeature.super.apply(generatorContext);
     }
 
+    /**
+     * Adds the Kotlin version property to the build based on the resolved Kotlin BOM coordinate.
+     *
+     * @param generatorContext The context for project generation.
+     * @param module The module to which the property should be added.
+     */
     protected void addKotlinVersionProperty(GeneratorContext generatorContext, ModuleContext module) {
         Coordinate coordinate = generatorContext.resolveCoordinate("kotlin-bom");
         module.buildProperties().put("kotlinVersion", coordinate.getVersion());

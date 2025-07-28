@@ -30,7 +30,7 @@ public class OpenTelemetryExporterLogging extends OpenTelemetryExporterFeature i
     private static final String EXPORTER_LOGGING = "Logging";
 
     @NonNull
-    public String exporterName() {
+    public final String exporterName() {
         return EXPORTER_LOGGING;
     }
 

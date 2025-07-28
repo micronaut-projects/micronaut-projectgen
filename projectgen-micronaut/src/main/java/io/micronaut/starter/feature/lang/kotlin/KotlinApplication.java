@@ -74,16 +74,36 @@ public class KotlinApplication implements KotlinApplicationFeature {
         }
     }
 
+    /**
+     * Determines whether an application file should be generated based on the application type
+     * and the presence of the {@link FunctionFeature}.
+     *
+     * @param generatorContext The context for project generation.
+     * @return true if an application file should be generated; false otherwise.
+     */
     protected boolean shouldGenerateApplicationFile(GeneratorContext generatorContext) {
         ApplicationType applicationType = ApplicationType.of(generatorContext.getOptions().template());
         return applicationType == ApplicationType.DEFAULT
             || !generatorContext.getFeatures().hasFeature(FunctionFeature.class);
     }
 
+    /**
+     * Adds the application template to the module.
+     *
+     * @param generatorContext The context for project generation.
+     * @param module The module to which the application template is added.
+     */
     protected void addApplication(GeneratorContext generatorContext, ModuleContext module) {
         module.addTemplate("application", new RockerTemplate(getPath(), application(generatorContext, module)));
     }
 
+    /**
+     * Builds the application {@link RockerModel} used to render the application source file.
+     *
+     * @param generatorContext The context for project generation.
+     * @param module The module in which the application is added.
+     * @return The Rocker model for the application template.
+     */
     protected RockerModel application(GeneratorContext generatorContext, ModuleContext module) {
         String defaultEnvironment = getDefaultEnvironment(module);
         boolean eagerInitSingleton = generatorContext.getFeatures().isFeaturePresent(RequireEagerSingletonInitializationFeature.class);
@@ -99,6 +119,12 @@ public class KotlinApplication implements KotlinApplicationFeature {
         return moduleContext.hasConfigurationByEnvironment(Environment.DEVELOPMENT) ? Environment.DEVELOPMENT : null;
     }
 
+    /**
+     * Adds the application test template to the module.
+     *
+     * @param generatorContext The context for project generation.
+     * @param module The module to which the test template is added.
+     */
     protected void addApplicationTest(GeneratorContext generatorContext, ModuleContext module) {
         String testSourcePath = generatorContext.getTestSourcePath("/{packagePath}/{className}");
         module.addTemplate("applicationTest",
@@ -106,6 +132,12 @@ public class KotlinApplication implements KotlinApplicationFeature {
         );
     }
 
+    /**
+     * Builds the application test {@link RockerModel} based on the selected test framework and language.
+     *
+     * @param generatorContext The context for project generation.
+     * @return The Rocker model for the application test template.
+     */
     protected RockerModel applicationTest(GeneratorContext generatorContext) {
         TestFramework testFramework = generatorContext.getTestFramework();
         Project project = generatorContext.getProject();
@@ -118,7 +150,7 @@ public class KotlinApplication implements KotlinApplicationFeature {
         return provider.findModel(generatorContext.getLanguage(), testFramework);
     }
 
-    protected String getPath() {
+    protected final String getPath() {
         return "src/main/kotlin/{packagePath}/Application.kt";
     }
 }

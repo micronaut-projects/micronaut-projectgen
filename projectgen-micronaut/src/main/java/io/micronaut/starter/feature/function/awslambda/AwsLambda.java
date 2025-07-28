@@ -145,7 +145,6 @@ public class AwsLambda implements FunctionFeature, DefaultFeature, AwsCloudFeatu
         this.functionAwsLambdaHandlerProvider = functionAwsLambdaHandlerProvider;
     }
 
-
     @Override
     public void processSelectedFeatures(FeatureContext featureContext) {
         ApplicationType applicationType = ApplicationType.of(featureContext.getOptions().template());
@@ -180,6 +179,8 @@ public class AwsLambda implements FunctionFeature, DefaultFeature, AwsCloudFeatu
     /**
      * Determines if the SnapStart feature should be added based on the current feature context.
      * Subclasses may override to change the default behavior.
+     * @param featureContext The feature context to evaluate.
+     * @return {@code true} if SnapStart should be added; {@code false} otherwise.
      */
     protected boolean shouldAddSnapstartFeature(FeatureContext featureContext) {
         if (featureContext.isPresent(GraalVM.class)) {
@@ -254,6 +255,8 @@ public class AwsLambda implements FunctionFeature, DefaultFeature, AwsCloudFeatu
     /**
      * Adds generated source code files (e.g. controller or handler) to the module based on application type.
      * Subclasses may override to customize generated code.
+     * @param generatorContext The generator context.
+     * @param module The module context where code will be added.
      */
     protected void addCode(@NonNull GeneratorContext generatorContext, ModuleContext module) {
         Project project = generatorContext.getProject();
@@ -273,6 +276,8 @@ public class AwsLambda implements FunctionFeature, DefaultFeature, AwsCloudFeatu
     /**
      * Adds the help template (e.g. README) to the module if applicable.
      * Subclasses may override to customize documentation generation.
+     * @param generatorContext The generator context.
+     * @param module The module context to which the help template is added.
      */
     protected void addHelpTemplate(@NonNull GeneratorContext generatorContext, ModuleContext module) {
         readmeTemplate(generatorContext)
@@ -282,6 +287,8 @@ public class AwsLambda implements FunctionFeature, DefaultFeature, AwsCloudFeatu
     /**
      * Provides the README template for this feature, if available.
      * Subclasses may override to provide different documentation.
+     *  @param generatorContext The generator context.
+     *  @return An Optional containing the RockerModel for the README template, if present.
      */
     @NonNull
     public Optional<RockerModel> readmeTemplate(@NonNull GeneratorContext generatorContext) {
@@ -293,6 +300,8 @@ public class AwsLambda implements FunctionFeature, DefaultFeature, AwsCloudFeatu
     /**
      * Disables the security filter in test configuration if security is enabled.
      * Subclasses may override to alter test environment configuration.
+     * @param generatorContext the generator context
+     * @param module the module context
      */
     protected void disableSecurityFilterInTestConfiguration(@NonNull GeneratorContext generatorContext, ModuleContext module) {
         if (generatorContext.getFeatures().hasFeature(SecurityFeature.class)) {

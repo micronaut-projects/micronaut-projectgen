@@ -21,31 +21,22 @@ import io.micronaut.projectgen.core.buildtools.gradle.GradlePlugin;
 /**
  * Micronaut Test Resources Gradle Plugin.
  */
+@SuppressWarnings("DeclarationOrder")
 public final class MicronautTestResourcesGradlePlugin {
 
-    /**
-     * Creates a new builder instance for the Micronaut Test Resources Gradle plugin.
-     *
-     * @return a new {@link Builder} instance
-     */
     @NonNull
     public static Builder builder() {
         return new Builder();
     }
 
     /**
-     * Builder for the Micronaut Test Resources Gradle plugin.
+     * Builder.
      */
     public static final class Builder {
 
         public static final String MICRONAUT_GRADLE_PLUGIN_TEST_RESOURCES_ID = "io.micronaut.test-resources";
         public static final String ARTIFACT_ID = "micronaut-test-resources-plugin";
 
-        /**
-         * Builds the {@link GradlePlugin} for Micronaut Test Resources.
-         *
-         * @return the configured Gradle plugin
-         */
         public GradlePlugin build() {
             return GradlePlugin.builder()
                 .id(MICRONAUT_GRADLE_PLUGIN_TEST_RESOURCES_ID)
@@ -53,4 +44,5 @@ public final class MicronautTestResourcesGradlePlugin {
                 .build();
         }
     }
+
 }

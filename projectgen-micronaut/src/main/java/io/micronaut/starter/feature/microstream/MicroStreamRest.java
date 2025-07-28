@@ -30,10 +30,10 @@ import java.util.List;
 @Singleton
 public class MicroStreamRest implements MicroStreamFeature, OpenRewriteFeature {
 
-    private final MicroStream microStream;
+    public static final String NAME = "microstream-rest";
     private static final String ARTIFACT_ID_MICRONAUT_MICROSTREAM_REST = "micronaut-microstream-rest";
 
-    public static final String NAME = "microstream-rest";
+    private final MicroStream microStream;
 
     public MicroStreamRest(MicroStream microStream) {
         this.microStream = microStream;
