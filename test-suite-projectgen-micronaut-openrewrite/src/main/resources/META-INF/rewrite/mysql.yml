@@ -1,0 +1,30 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.mysql
+displayName: Add Mysql dependency and configuration
+recipeList:
+  - io.micronaut.starter.feature.mysql.dependencies
+  - io.micronaut.starter.feature.create-application-properties
+  - io.micronaut.starter.feature.mysql.configuration
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.mysql.dependencies
+displayName: Add Mysql dependency
+recipeList:
+  - org.openrewrite.java.dependencies.AddDependency:
+      groupId: com.mysql
+      artifactId: mysql-connector-j
+      configuration: runtimeOnly
+      scope: runtime
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.feature.mysql.configuration
+displayName: Add Mysql configuration
+preconditions:
+  - io.micronaut.starter.openrewrite.recipes.FindApplicationProperties
+recipeList:
+  - org.openrewrite.properties.AddProperty:
+      property: datasources.default.db-type
+      value: mysql
+  - org.openrewrite.properties.AddProperty:
+      property: datasources.default.driver-class-name
+      value: com.mysql.cj.jdbc.Driver

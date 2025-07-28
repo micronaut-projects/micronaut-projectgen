@@ -13,7 +13,7 @@ public abstract class R2dbcConfigurationUtils {
         if (generatorContext.isFeaturePresent(PostgreSQL.class)) {
             recipes.add("io.micronaut.starter.feature.r2dbc-config-postgresql");
         } else if (generatorContext.isFeaturePresent(MySQL.class)) {
-            recipes.add("io.micronaut.starter.feature.r2dbc-config-mysql");
+            recipes.add("io.micronaut.starter.feature.r2dbc-mysql");
         } else if (generatorContext.isFeaturePresent(MariaDB.class)) {
             recipes.add("io.micronaut.starter.feature.r2dbc-config-mariadb");
         } else if (generatorContext.isFeaturePresent(SQLServer.class)) {

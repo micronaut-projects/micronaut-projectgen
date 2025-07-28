@@ -19,16 +19,19 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
+import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.feature.database.jdbc.JdbcFeature;
 import io.micronaut.starter.feature.testresources.DbType;
 import io.micronaut.starter.feature.testresources.TestResources;
 import jakarta.inject.Singleton;
 
+import java.util.List;
 import java.util.Optional;
 
 @Requires(property = "micronaut.starter.feature.mysql.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public class MySQL extends MySQLCompatibleFeature {
+public class MySQL extends MySQLCompatibleFeature implements OpenRewriteFeature {
 
     public static final String NAME = "mysql";
 
@@ -118,4 +121,10 @@ public class MySQL extends MySQLCompatibleFeature {
     public Optional<Dependency.Builder> getJavaClientDependency() {
         return Optional.of(DEPENDENCY_MYSQL_CONNECTOR_JAVA);
     }
+
+    @Override
+    public List<String> getRecipes(GeneratorContext generatorContext) {
+        return List.of("io.micronaut.starter.feature.mysql");
+    }
+
 }
