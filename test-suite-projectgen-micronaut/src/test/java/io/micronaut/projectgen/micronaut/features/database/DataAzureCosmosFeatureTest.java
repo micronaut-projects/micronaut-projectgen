@@ -1,6 +1,7 @@
 package io.micronaut.projectgen.micronaut.features.database;
 
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.buildtools.Scope;
 import io.micronaut.projectgen.core.io.PreviewGenerator;
 import io.micronaut.projectgen.core.options.Options;
@@ -50,7 +51,7 @@ class DataAzureCosmosFeatureTest {
         Map<String, String> project = previewGenerator.generate(options);
         String pom = project.get("pom.xml");
         assertNotNull(pom);
-        BuildTestVerifier verifier = BuildTestVerifier.of(pom, options);
+        BuildTestVerifier verifier = BuildTestVerifier.of(pom, BuildTool.MAVEN, options.language(), options.testFramework());
         assertTrue(verifier.hasDependency("io.micronaut.data", "micronaut-data-azure-cosmos", Scope.COMPILE), pom);
         assertTrue(verifier.hasAnnotationProcessor("io.micronaut.data", "micronaut-data-document-processor"), pom);
         assertTrue(verifier.hasAnnotationProcessor("io.micronaut.data", "micronaut-data-processor"), pom);

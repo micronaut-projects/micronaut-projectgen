@@ -63,6 +63,8 @@ class MicronautApplicationGenerationTest {
         assertTrue(verifier.hasBuildPlugin("org.apache.maven.plugins", "maven-compiler-plugin"));
         assertTrue(verifier.hasBuildPlugin("io.micronaut.maven", "micronaut-maven-plugin"));
         assertTrue(verifier.hasParentPom("io.micronaut.platform", "micronaut-parent"));
+
+        assertFalse(pomXml.contains("<scope>compile</scope>"));
     }
 
     @Test
