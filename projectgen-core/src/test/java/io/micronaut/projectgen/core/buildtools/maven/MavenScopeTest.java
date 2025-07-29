@@ -30,6 +30,13 @@ class MavenScopeTest {
         assertEquals(scope, mavenScopeOptional.get());
     }
 
+    @Test
+    void providedScope() {
+        Optional<MavenScope> mavenScope = MavenScope.of(Scope.COMPILE_ONLY, Language.JAVA);
+        assertTrue(mavenScope.isPresent());
+        assertEquals(MavenScope.PROVIDED, mavenScope.get());
+    }
+
     @ParameterizedTest
     @MethodSource("mavenScopeOfString")
     void testProjectNaturalName(String scope, MavenScope mavenScope) {

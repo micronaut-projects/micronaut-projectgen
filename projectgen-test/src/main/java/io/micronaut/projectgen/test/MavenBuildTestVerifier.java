@@ -43,6 +43,7 @@ import java.util.Optional;
  * {@link BuildTestVerifier} for Maven builds.
  */
 public class MavenBuildTestVerifier implements BuildTestVerifier {
+    public static final Scope MAVEN_DEFAULT_SCOPE = Scope.COMPILE;
     private ParentPom parentPom;
     private final List<Profile> profiles = new ArrayList<>();
     private final List<Coordinate> buildPlugins  = new ArrayList<>();
@@ -258,8 +259,12 @@ public class MavenBuildTestVerifier implements BuildTestVerifier {
 
     @Override
     public boolean hasDependency(String groupId, String artifactId, Scope scope) {
+        if (scope.equals(MAVEN_DEFAULT_SCOPE) && dependencies.stream().anyMatch(d ->
+            matchCoordinateGroupIdAndArtifactId(d, groupId, artifactId) && d.getScope() == null)) {
+            return true;
+        }
         return dependencies.stream().anyMatch(d ->
-            matchCoordinateGroupIdAndArtifactId(d, groupId, artifactId) && d.getScope().equals(scope));
+            matchCoordinateGroupIdAndArtifactId(d, groupId, artifactId) && (d.getScope() != null && d.getScope().equals(scope)));
     }
 
     /**
