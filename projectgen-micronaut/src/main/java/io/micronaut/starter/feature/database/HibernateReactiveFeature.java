@@ -76,6 +76,11 @@ public abstract class HibernateReactiveFeature extends EaseTestingFeature implem
         }
     }
 
+    /**
+     * Returns the configuration property key used for the Hibernate reactive connection URL.
+     *
+     * @return the property key for the Hibernate reactive connection URL
+     */
     public String getUrlKey() {
         return JPA_DEFAULT_PROPERTIES_HIBERNATE_CONNECTION_URL;
     }

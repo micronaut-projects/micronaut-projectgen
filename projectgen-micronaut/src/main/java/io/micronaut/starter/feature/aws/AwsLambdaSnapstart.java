@@ -50,7 +50,13 @@ public class AwsLambdaSnapstart implements Feature {
     public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
         return "https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html";
     }
-    
+
+    /**
+     * Determines if the feature supports the given CPU architecture.
+     *
+     * @param cpuArchitecture The CPU architecture to check support for
+     * @return true if supported, false otherwise
+     */
     public boolean supports(@NonNull CpuArchitecture cpuArchitecture) {
         return !(cpuArchitecture instanceof Arm);
     }

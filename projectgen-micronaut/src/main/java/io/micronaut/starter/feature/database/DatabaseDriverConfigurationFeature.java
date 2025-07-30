@@ -29,12 +29,32 @@ import static io.micronaut.starter.feature.database.jdbc.JdbcFeature.PROPERTY_DA
  */
 public interface DatabaseDriverConfigurationFeature extends Feature {
 
+    /**
+     * Returns the configuration property key for the database connection URL.
+     *
+     * @return the URL configuration key
+     */
     String getUrlKey();
 
+    /**
+     * Returns the configuration property key for the database driver class name.
+     *
+     * @return the driver class name configuration key
+     */
     String getDriverKey();
 
+    /**
+     * Returns the configuration property key for the database username.
+     *
+     * @return the username configuration key
+     */
     String getUsernameKey();
 
+    /**
+     * Returns the configuration property key for the database password.
+     *
+     * @return the password configuration key
+     */
     String getPasswordKey();
 
     default void applyDefaultConfig(GeneratorContext generatorContext, DatabaseDriverFeature dbFeature, Map<String, Object> config) {

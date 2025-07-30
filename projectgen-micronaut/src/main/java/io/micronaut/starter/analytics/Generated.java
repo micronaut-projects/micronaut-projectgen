@@ -61,6 +61,11 @@ public class Generated {
         return features;
     }
 
+    /**
+     * Sets the selected features for the project.
+     *
+     * @param features the collection of selected features
+     */
     public void setSelectedFeatures(Collection<? extends SelectedFeature> features) {
         if (features != null) {
             this.features = features;

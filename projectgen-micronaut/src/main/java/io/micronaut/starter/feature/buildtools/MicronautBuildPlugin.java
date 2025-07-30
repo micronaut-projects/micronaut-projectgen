@@ -107,6 +107,12 @@ public class MicronautBuildPlugin implements BuildPluginFeature, DefaultFeature 
         return builder.build();
     }
 
+    /**
+     * Determines if snapshot repositories should be added based on the plugin's artifact version.
+     *
+     * @param builder the GradlePlugin.Builder instance to inspect
+     * @return true if the plugin version ends with "-SNAPSHOT", false otherwise or if artifact id or version is unavailable
+     */
     public boolean shouldAddRepositoriesForSnapshots(GradlePlugin.Builder builder) {
         Optional<String> artifactIdOptional = builder.getArtifiactId();
         if (!artifactIdOptional.isPresent()) {

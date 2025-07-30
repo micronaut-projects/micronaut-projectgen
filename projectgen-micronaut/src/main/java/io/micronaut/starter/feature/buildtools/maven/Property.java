@@ -31,11 +31,21 @@ public class Property {
         this.value = value;
     }
 
+    /**
+     * Returns the name of the property.
+     *
+     * @return the property name, never null
+     */
     @NonNull
     public String getName() {
         return name;
     }
 
+    /**
+     * Returns the value of the property.
+     *
+     * @return the property value, never null
+     */
     @NonNull
     public String getValue() {
         return value;

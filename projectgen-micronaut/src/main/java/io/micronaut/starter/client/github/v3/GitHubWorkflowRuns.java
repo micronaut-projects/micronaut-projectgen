@@ -40,10 +40,16 @@ public class GitHubWorkflowRuns {
         this.runs = runs;
     }
 
+    /**
+     * @return The total number of workflow runs.
+     */
     public int getTotalCount() {
         return totalCount;
     }
 
+    /**
+     * @return The list of workflow runs.
+     */
     public List<GitHubWorkflowRun> getRuns() {
         return runs;
     }

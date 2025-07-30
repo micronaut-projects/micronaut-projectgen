@@ -35,11 +35,17 @@ public class GitHubSecret {
         this.keyId = keyId;
     }
 
+    /**
+     * @return The encrypted value of the secret.
+     */
     @JsonProperty("encrypted_value")
     public String getEncryptedValue() {
         return encryptedValue;
     }
 
+    /**
+     * @return The key ID of the secret.
+     */
     @JsonProperty("key_id")
     public String getKeyId() {
         return keyId;

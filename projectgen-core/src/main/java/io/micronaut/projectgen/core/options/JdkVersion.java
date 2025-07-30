@@ -148,10 +148,21 @@ public class JdkVersion {
         return majorVersion;
     }
 
+    /**
+     * Determines whether this JDK version is greater than or equal to the specified version.
+     *
+     * @param jdk the JDK version to compare with
+     * @return {@code true} if this version is greater than or equal to the specified version; {@code false} otherwise
+     */
     public boolean greaterThanEqual(@NonNull JdkVersion jdk) {
         return majorVersion >= jdk.majorVersion;
     }
 
+    /**
+     * Returns the JDK version as a string.
+     *
+     * @return the string representation of the JDK major version
+     */
     public String asString() {
         return "" + majorVersion;
     }

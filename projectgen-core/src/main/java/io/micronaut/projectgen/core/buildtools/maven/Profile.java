@@ -63,6 +63,11 @@ public class Profile {
         return id;
     }
 
+    /**
+     * Returns the extension used in the build plugin, if any.
+     *
+     * @return the extension or {@code null} if not set
+     */
     @Nullable
     public Writable getExtension() {
         return extension;
@@ -118,6 +123,12 @@ public class Profile {
         return new Builder();
     }
 
+    /**
+     * Adds the specified activation properties to the existing set.
+     * If the current set is {@code null}, it will be initialized.
+     *
+     * @param activationProperties the activation properties to add, or {@code null}
+     */
     public void addActivationProperties(@Nullable Set<Property> activationProperties) {
         if (activationProperties != null) {
             if (this.activationProperties == null) {
@@ -128,6 +139,12 @@ public class Profile {
         }
     }
 
+    /**
+     * Adds the specified dependencies to the existing set.
+     * If the current set is {@code null}, it will be initialized.
+     *
+     * @param dependencies the dependencies to add, or {@code null}
+     */
     public void addDependencies(@Nullable Set<Dependency> dependencies) {
         if (dependencies != null) {
             if (this.dependencies == null) {

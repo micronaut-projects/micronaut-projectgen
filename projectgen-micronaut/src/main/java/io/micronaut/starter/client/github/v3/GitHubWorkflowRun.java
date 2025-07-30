@@ -41,14 +41,23 @@ public class GitHubWorkflowRun {
         this.conclusion = conclusion;
     }
 
+    /**
+     * @return ID of the workflow run.
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     * @return The current status of the workflow run.
+     */
     public String getStatus() {
         return status;
     }
 
+    /**
+     * @return The conclusion of the workflow run.
+     */
     public String getConclusion() {
         return conclusion;
     }

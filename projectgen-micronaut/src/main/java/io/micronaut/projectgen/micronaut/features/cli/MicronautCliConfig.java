@@ -25,50 +25,110 @@ public class MicronautCliConfig {
     private List<String> features;
     private String buildTool;
 
+    /**
+     * Returns the application type.
+     *
+     * @return the application type
+     */
     public String getApplicationType() {
         return applicationType;
     }
 
+    /**
+     * Sets the application type.
+     *
+     * @param applicationType the application type
+     */
     public void setApplicationType(String applicationType) {
         this.applicationType = applicationType;
     }
 
+    /**
+     * Returns the test framework.
+     *
+     * @return the test framework
+     */
     public String getTestFramework() {
         return testFramework;
     }
 
+    /**
+     * Sets the test framework.
+     *
+     * @param testFramework the test framework
+     */
     public void setTestFramework(String testFramework) {
         this.testFramework = testFramework;
     }
 
+    /**
+     * Returns the default package name.
+     *
+     * @return the default package
+     */
     public String getDefaultPackage() {
         return defaultPackage;
     }
 
+    /**
+     * Sets the default package name.
+     *
+     * @param defaultPackage the default package
+     */
     public void setDefaultPackage(String defaultPackage) {
         this.defaultPackage = defaultPackage;
     }
 
+    /**
+     * Returns the source language.
+     *
+     * @return the source language
+     */
     public String getSourceLanguage() {
         return sourceLanguage;
     }
 
+    /**
+     * Sets the source language.
+     *
+     * @param sourceLanguage the source language
+     */
     public void setSourceLanguage(String sourceLanguage) {
         this.sourceLanguage = sourceLanguage;
     }
 
+    /**
+     * Returns the list of features.
+     *
+     * @return the list of features
+     */
     public List<String> getFeatures() {
         return features;
     }
 
+    /**
+     * Sets the list of features.
+     *
+     * @param features the list of features
+     */
     public void setFeatures(List<String> features) {
         this.features = features;
     }
 
+    /**
+     * Returns the build tool.
+     *
+     * @return the build tool
+     */
     public String getBuildTool() {
         return buildTool;
     }
 
+    /**
+     * Sets the build tool.
+     *
+     * @param buildTool the build tool
+     */
     public void setBuildTool(String buildTool) {
         this.buildTool = buildTool;
     }

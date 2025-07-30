@@ -61,18 +61,22 @@ public abstract class JdbcFeature implements OneOfFeature, DatabaseDriverConfigu
         return Category.DATABASE;
     }
 
+    @Override
     public String getUrlKey() {
         return URL_KEY;
     }
 
+    @Override
     public String getDriverKey() {
         return DRIVER_KEY;
     }
 
+    @Override
     public String getUsernameKey() {
         return USERNAME_KEY;
     }
 
+    @Override
     public String getPasswordKey() {
         return PASSWORD_KEY;
     }

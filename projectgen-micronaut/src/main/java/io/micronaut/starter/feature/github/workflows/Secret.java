@@ -37,14 +37,29 @@ public class Secret {
         this.description = description;
     }
 
+    /**
+     * Returns the name of the secret.
+     *
+     * @return the secret name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Returns the description of the secret.
+     *
+     * @return the secret description
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * Returns the value of the secret.
+     *
+     * @return the secret value
+     */
     public String getValue() {
         return value;
     }

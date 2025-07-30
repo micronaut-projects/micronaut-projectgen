@@ -160,6 +160,12 @@ public abstract class DatabaseDriverFeature extends EaseTestingFeature implement
         return dependencies;
     }
 
+    /**
+     * Provides additional configuration specific to the database driver feature.
+     *
+     * @param generatorContext the context of the project generation
+     * @return a map containing additional configuration properties; empty by default
+     */
     public Map<String, Object> getAdditionalConfig(GeneratorContext generatorContext) {
         return Collections.emptyMap();
     }

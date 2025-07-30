@@ -42,14 +42,23 @@ public class GitHubUser {
         this.name = name;
     }
 
+    /**
+     * @return The GitHub login.
+     */
     public String getLogin() {
         return login;
     }
 
+    /**
+     * @return The GitHub user's email address.
+     */
     public String getEmail() {
         return email;
     }
 
+    /**
+     * @return The GitHub user's full name.
+     */
     public String getName() {
         return name;
     }

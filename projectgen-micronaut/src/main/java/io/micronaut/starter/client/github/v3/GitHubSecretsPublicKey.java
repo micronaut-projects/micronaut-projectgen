@@ -36,10 +36,16 @@ public class GitHubSecretsPublicKey {
         this.key = key;
     }
 
+    /**
+     * @return The public key used to encrypt secrets.
+     */
     public String getKey() {
         return key;
     }
 
+    /**
+     * @return The identifier of the public key.
+     */
     public String getKeyId() {
         return keyId;
     }
