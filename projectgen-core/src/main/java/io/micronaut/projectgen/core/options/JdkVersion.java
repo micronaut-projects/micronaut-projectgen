@@ -131,11 +131,19 @@ public class JdkVersion {
                         "Unsupported JDK version: " + majorVersion + ". Supported values are " + INSTANCES.keySet()));
     }
 
+    /**
+     *
+     * @return the JDK major version
+     */
     public int majorVersion() {
         return majorVersion;
     }
 
     // for serialization
+    /**
+     *
+     * @return  the JDK major version
+     */
     int getMajorVersion() {
         return majorVersion;
     }
