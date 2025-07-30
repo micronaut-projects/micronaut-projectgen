@@ -61,7 +61,7 @@ public class Generated {
         return features;
     }
 
-    public final void setSelectedFeatures(Collection<? extends SelectedFeature> features) {
+    public void setSelectedFeatures(Collection<? extends SelectedFeature> features) {
         if (features != null) {
             this.features = features;
         }

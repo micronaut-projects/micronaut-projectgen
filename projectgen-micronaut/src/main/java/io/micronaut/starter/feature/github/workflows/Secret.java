@@ -37,15 +37,15 @@ public class Secret {
         this.description = description;
     }
 
-    public final String getName() {
+    public String getName() {
         return name;
     }
 
-    public final String getDescription() {
+    public String getDescription() {
         return description;
     }
 
-    public final String getValue() {
+    public String getValue() {
         return value;
     }
 }

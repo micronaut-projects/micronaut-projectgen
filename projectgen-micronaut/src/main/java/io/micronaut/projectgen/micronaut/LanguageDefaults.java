@@ -54,7 +54,7 @@ public class LanguageDefaults implements HasDefaultTest, HasDefaultBuild {
     }
 
     @Nullable
-    public final GradleDsl getGradleDsl() {
+    public GradleDsl getGradleDsl() {
         return gradleDsl;
     }
 }

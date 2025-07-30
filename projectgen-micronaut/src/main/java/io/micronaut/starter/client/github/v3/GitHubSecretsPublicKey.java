@@ -36,11 +36,11 @@ public class GitHubSecretsPublicKey {
         this.key = key;
     }
 
-    public final String getKey() {
+    public String getKey() {
         return key;
     }
 
-    public final String getKeyId() {
+    public String getKeyId() {
         return keyId;
     }
 }

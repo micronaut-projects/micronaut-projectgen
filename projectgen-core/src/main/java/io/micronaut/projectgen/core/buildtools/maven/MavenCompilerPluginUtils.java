@@ -24,7 +24,7 @@ import java.util.Optional;
 /**
  * Utils class to generate a {@link MavenPlugin} for the Maven Compiler Plugin.
  */
-public final class MavenCompilerPluginUtils {
+public class MavenCompilerPluginUtils {
     private MavenCompilerPluginUtils() {
     }
 

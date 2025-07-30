@@ -19,7 +19,7 @@ import io.micronaut.core.annotation.NonNull;
 
 import java.util.Objects;
 
-public final class Property {
+public class Property {
     @NonNull
     private final String name;
 

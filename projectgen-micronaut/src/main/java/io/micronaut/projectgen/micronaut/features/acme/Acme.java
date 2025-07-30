@@ -45,7 +45,8 @@ public class Acme implements OpenRewriteFeature {
         return "Adds support for ACME (Automated Certificate Management Environment)";
     }
 
-    public final List<String> getRecipes(GeneratorContext generatorContext) {
+    @Override
+    public List<String> getRecipes(GeneratorContext generatorContext) {
         return List.of("io.micronaut.starter.feature.acme");
     }
 

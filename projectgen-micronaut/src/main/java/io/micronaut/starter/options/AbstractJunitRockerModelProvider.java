@@ -31,7 +31,7 @@ public abstract class AbstractJunitRockerModelProvider implements JunitRockerMod
         this.project = project;
     }
 
-    public final Project getProject() {
+    public Project getProject() {
         return this.project;
     }
 }

@@ -63,7 +63,8 @@ public class DekoratePrometheus extends AbstractDekorateServiceFeature implement
                 """;
     }
 
-    public final void processSelectedFeatures(FeatureContext featureContext) {
+    @Override
+    public void processSelectedFeatures(FeatureContext featureContext) {
         super.processSelectedFeatures(featureContext);
         if (!featureContext.isPresent(Prometheus.class)) {
             featureContext.addFeature(prometheus);

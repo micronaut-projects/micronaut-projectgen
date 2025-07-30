@@ -76,7 +76,7 @@ public abstract class HibernateReactiveFeature extends EaseTestingFeature implem
         }
     }
 
-    public final String getUrlKey() {
+    public String getUrlKey() {
         return JPA_DEFAULT_PROPERTIES_HIBERNATE_CONNECTION_URL;
     }
 

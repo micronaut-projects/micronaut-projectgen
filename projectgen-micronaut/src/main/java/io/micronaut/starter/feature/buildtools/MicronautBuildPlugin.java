@@ -107,7 +107,7 @@ public class MicronautBuildPlugin implements BuildPluginFeature, DefaultFeature 
         return builder.build();
     }
 
-    public final boolean shouldAddRepositoriesForSnapshots(GradlePlugin.Builder builder) {
+    public boolean shouldAddRepositoriesForSnapshots(GradlePlugin.Builder builder) {
         Optional<String> artifactIdOptional = builder.getArtifiactId();
         if (!artifactIdOptional.isPresent()) {
             return false;

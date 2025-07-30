@@ -46,7 +46,8 @@ public class Mockito implements MockingFeature, JunitCompanionFeature, OpenRewri
         return "Mockito test mocking framework for JUnit";
     }
 
-    public final List<String> getRecipes(GeneratorContext generatorContext) {
+    @Override
+    public List<String> getRecipes(GeneratorContext generatorContext) {
         return List.of("io.micronaut.starter.feature.mockito");
     }
 }

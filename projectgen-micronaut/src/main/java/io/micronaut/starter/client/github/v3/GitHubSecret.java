@@ -36,12 +36,12 @@ public class GitHubSecret {
     }
 
     @JsonProperty("encrypted_value")
-    public final String getEncryptedValue() {
+    public String getEncryptedValue() {
         return encryptedValue;
     }
 
     @JsonProperty("key_id")
-    public final String getKeyId() {
+    public String getKeyId() {
         return keyId;
     }
 

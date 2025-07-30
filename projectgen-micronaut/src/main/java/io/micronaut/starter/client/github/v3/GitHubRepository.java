@@ -53,23 +53,23 @@ public class GitHubRepository {
         this.cloneUrl = cloneUrl;
     }
 
-    public final String getName() {
+    public String getName() {
         return name;
     }
 
-    public final String getDescription() {
+    public String getDescription() {
         return description;
     }
 
-    public final String getCloneUrl() {
+    public String getCloneUrl() {
         return cloneUrl;
     }
 
-    public final String getUrl() {
+    public String getUrl() {
         return url;
     }
 
-    public final String getHtmlUrl() {
+    public String getHtmlUrl() {
         return htmlUrl;
     }
 

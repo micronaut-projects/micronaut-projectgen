@@ -45,7 +45,7 @@ import java.util.Optional;
 
 @Requires(property = "micronaut.starter.feature.agorapulse.micronaut.console.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
-public final class Console implements AgoraPulseFeature {
+public class Console implements AgoraPulseFeature {
 
     private static final String ARTIFACT_ID = "micronaut-console";
     private static final String SSRF_HEADER_NAME = "X-Console-Verify";

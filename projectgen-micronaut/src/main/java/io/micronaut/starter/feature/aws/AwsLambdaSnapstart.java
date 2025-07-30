@@ -50,8 +50,8 @@ public class AwsLambdaSnapstart implements Feature {
     public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
         return "https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html";
     }
-
-    public final boolean supports(@NonNull CpuArchitecture cpuArchitecture) {
+    
+    public boolean supports(@NonNull CpuArchitecture cpuArchitecture) {
         return !(cpuArchitecture instanceof Arm);
     }
 

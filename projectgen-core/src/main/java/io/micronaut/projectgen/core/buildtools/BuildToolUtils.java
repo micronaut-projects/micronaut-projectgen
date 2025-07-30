@@ -22,7 +22,7 @@ import io.micronaut.projectgen.core.buildtools.gradle.GradleDsl;
 /**
  * Utils class to work with {@link BuildTool}.
  */
-public final class BuildToolUtils {
+public class BuildToolUtils {
     private static final String DOT_GRADLE_KTS = ".gradle.kts";
     private static final String DOT_GRADLE = ".gradle";
     private static final String DEFAULT_GRADLE_FILE_EXTENSION = DOT_GRADLE;

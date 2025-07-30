@@ -74,7 +74,8 @@ public class KotlinExtensionFunctions implements OpenRewriteFeature, KotlinSpeci
         return "Convenience functions to make using Micronaut with Kotlin more user-friendly";
     }
 
-    public final String getCategory() {
+    @Override
+    public String getCategory() {
         return Category.LANGUAGES;
     }
 }

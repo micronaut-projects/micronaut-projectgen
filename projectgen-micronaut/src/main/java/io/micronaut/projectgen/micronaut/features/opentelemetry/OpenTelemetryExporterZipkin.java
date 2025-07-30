@@ -26,7 +26,8 @@ public class OpenTelemetryExporterZipkin extends OpenTelemetryExporterFeature {
     private static final String EXPORTER_ZIPKIN = "Zipkin";
 
     @NonNull
-    public final String exporterName() {
+    @Override
+    public String exporterName() {
         return EXPORTER_ZIPKIN;
     }
 }

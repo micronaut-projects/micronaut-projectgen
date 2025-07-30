@@ -35,7 +35,7 @@ import java.util.List;
 /**
  * Gradle Build Creator.
  */
-public final class GradleBuildCreator {
+public class GradleBuildCreator {
     private static final GradleDsl DEFAULT_GRADLE_DSL = GradleDsl.KOTLIN;
     private static final boolean DEFAULT_USER_VERSION_CATALOGUE = false;
 

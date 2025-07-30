@@ -41,15 +41,15 @@ public class GitHubWorkflowRun {
         this.conclusion = conclusion;
     }
 
-    public final Long getId() {
+    public Long getId() {
         return id;
     }
 
-    public final String getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public final String getConclusion() {
+    public String getConclusion() {
         return conclusion;
     }
 

@@ -22,7 +22,7 @@ import io.micronaut.projectgen.core.buildtools.gradle.GradlePlugin;
  * Micronaut Test Resources Gradle Plugin.
  */
 @SuppressWarnings("DeclarationOrder")
-public final class MicronautTestResourcesGradlePlugin {
+public class MicronautTestResourcesGradlePlugin {
 
     @NonNull
     public static Builder builder() {

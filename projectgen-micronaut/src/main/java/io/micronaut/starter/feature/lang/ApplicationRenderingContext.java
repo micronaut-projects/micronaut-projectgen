@@ -29,23 +29,23 @@ public abstract class ApplicationRenderingContext {
         this.eagerSingletons = eagerSingletons;
     }
 
-    public final boolean isRequired() {
+    public boolean isRequired() {
         return defaultEnvironment != null || eagerSingletons;
     }
 
     @Nullable
-    public final RockerOutput getContextConfigurer() {
+    public RockerOutput getContextConfigurer() {
         return isRequired() ? getRendered() : null;
     }
 
     @NonNull
     protected abstract RockerOutput getRendered();
 
-    public final boolean isEagerSingletons() {
+    public boolean isEagerSingletons() {
         return eagerSingletons;
     }
 
-    public final String getDefaultEnvironment() {
+    public String getDefaultEnvironment() {
         return defaultEnvironment;
     }
 }

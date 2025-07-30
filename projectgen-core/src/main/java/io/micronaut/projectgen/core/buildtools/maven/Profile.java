@@ -30,7 +30,7 @@ import java.util.Set;
 /**
  * Represents a Maven profile.
  */
-public final class Profile {
+public class Profile {
 
     @NonNull
     private final String id;

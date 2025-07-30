@@ -33,7 +33,7 @@ import java.util.TreeMap;
  */
 @SuppressWarnings("DeclarationOrder")
 @Serdeable
-public final class JdkVersion {
+public class JdkVersion {
     private static final Map<Integer, JdkVersion> INSTANCES = new TreeMap<>();
     public static final JdkVersion JDK_8 = new JdkVersion(8);
     public static final JdkVersion JDK_9 = new JdkVersion(9);
