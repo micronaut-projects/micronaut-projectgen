@@ -24,7 +24,7 @@ import java.util.*;
 /**
  * Dependency.
  */
-public class Dependency implements Coordinate {
+public final class Dependency implements Coordinate {
 
     public static final Comparator<Dependency> COMPARATOR = (o1, o2) -> {
         int comparison = Integer.compare(o1.getScope().getOrder(), o2.getScope().getOrder());
