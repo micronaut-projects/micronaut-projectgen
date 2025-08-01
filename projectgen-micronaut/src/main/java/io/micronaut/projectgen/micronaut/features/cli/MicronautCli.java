@@ -38,6 +38,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+/**
+ * Feature that adds a {@code micronaut-cli.yml} file to the root of the generated project.
+ * This file captures project configuration such as application type, build tool, language, test framework, and features.
+ * It can also be used to reconstruct {@link Options} when regenerating or analyzing a project.
+ * This feature is not visible in the user-facing feature list.
+ */
 @Singleton
 public class MicronautCli implements Feature {
     public static final String LEGACY_BUILD_TOOL_GRADLE_KOTLIN = "gradle_kotlin";

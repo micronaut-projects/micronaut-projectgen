@@ -23,6 +23,10 @@ import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import jakarta.inject.Singleton;
 
+/**
+ * Feature that provides Groovy Gradle plugin support for Micronaut applications.
+ * This feature adds the Groovy Gradle plugin to enable Groovy language support in Gradle builds.
+ */
 @Singleton
 public class GroovyGradlePlugin implements GradleSpecificFeature, BuildPluginFeature {
     public static final GradlePlugin GROOVY_GRADLE_PLUGIN = GradlePlugin.builder().id("groovy").build();

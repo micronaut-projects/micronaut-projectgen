@@ -24,6 +24,11 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that enables support for Micronaut Aspect-Oriented Programming (AOP).
+ * This class provides metadata and OpenRewrite recipes to configure AOP in generated projects.
+ * It is conditionally loaded based on the property {@code micronaut.starter.feature.micronaut.aop.enabled}.
+ */
 @Requires(property = "micronaut.starter.feature.micronaut.aop.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class AOP implements OpenRewriteFeature {

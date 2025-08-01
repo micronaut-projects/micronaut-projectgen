@@ -24,6 +24,10 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that provides OpenTelemetry Google Cloud Trace exporter support for Micronaut applications.
+ * This feature adds the necessary configuration and recipes for exporting traces to Google Cloud Trace.
+ */
 @Requires(property = "micronaut.starter.feature.tracing.opentelemetry.exporter.gcp.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class OpenTelemetryExporterGoogleCloudTrace extends OpenTelemetryExporterFeature implements OpenRewriteFeature {

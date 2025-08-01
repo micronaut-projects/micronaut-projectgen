@@ -24,6 +24,11 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that provides local object storage support for Micronaut applications.
+ * This feature adds a local implementation to save objects to a folder on the local filesystem,
+ * useful for testing and development purposes.
+ */
 @Requires(property = "micronaut.starter.feature.object.storage.local.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class ObjectStorageLocal implements ObjectStorageFeature, OpenRewriteFeature {

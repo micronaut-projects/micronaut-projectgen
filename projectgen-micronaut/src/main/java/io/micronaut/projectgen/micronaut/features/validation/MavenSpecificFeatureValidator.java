@@ -27,6 +27,10 @@ import org.slf4j.LoggerFactory;
 import java.util.Optional;
 import java.util.Set;
 
+/**
+ * Feature validator that ensures Maven-specific features are only used with Maven build tool.
+ * This validator checks that features marked as Maven-specific are not selected when using other build tools.
+ */
 @Singleton
 public class MavenSpecificFeatureValidator implements FeatureValidator {
     private static final Logger LOG = LoggerFactory.getLogger(MavenSpecificFeatureValidator.class);

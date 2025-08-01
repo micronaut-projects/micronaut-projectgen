@@ -24,6 +24,12 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Implements a Langchain4j embedded store using Neo4j.
+ *
+ * Provides integration for Neo4j as a backend store within Langchain4j
+ * and supplies OpenRewrite recipes for automated setup.
+ */
 @Requires(property = "micronaut.starter.feature.langchain4j.store.neo4j.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Neo4jLangchain4jEmbeddedStore implements Langchain4jEmbeddedStore, OpenRewriteFeature {

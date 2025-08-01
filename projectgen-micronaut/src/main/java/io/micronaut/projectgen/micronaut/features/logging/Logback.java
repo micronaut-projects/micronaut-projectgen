@@ -29,6 +29,10 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that provides Logback logging support for Micronaut applications.
+ * This feature adds Logback as the logging framework with configurable coloring and JUL bridge support.
+ */
 @Requires(property = "micronaut.starter.feature.logback.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Logback implements LoggingFeature, OpenRewriteFeature {
@@ -64,9 +68,10 @@ public class Logback implements LoggingFeature, OpenRewriteFeature {
     }
 
     /**
+     * Adds Logback configuration to the project.
      *
-     * @param generatorContext GeneratorContext
-     * @param useJul Use JUL
+     * @param generatorContext the generator context
+     * @param useJul whether to use JUL bridge
      */
     protected void addConfig(GeneratorContext generatorContext, boolean useJul) {
         ModuleContext module = generatorContext.getRootModule();
@@ -75,8 +80,9 @@ public class Logback implements LoggingFeature, OpenRewriteFeature {
     }
 
     /**
+     * Determines whether to use Jansi for colored output based on the operating system.
      *
-     * @param generatorContext Generator Context
+     * @param generatorContext the generator context
      * @return whether to use Jansi
      */
     protected boolean useJansi(@NonNull GeneratorContext generatorContext) {

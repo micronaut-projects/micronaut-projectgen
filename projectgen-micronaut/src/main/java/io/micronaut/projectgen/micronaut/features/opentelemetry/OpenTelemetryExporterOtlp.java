@@ -24,6 +24,10 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that provides OpenTelemetry OTLP exporter support for Micronaut applications.
+ * This feature adds the necessary configuration and recipes for exporting traces via OTLP protocol.
+ */
 @Requires(property = "micronaut.starter.feature.tracing.opentelemetry.exporter.otlp.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class OpenTelemetryExporterOtlp extends OpenTelemetryExporterFeature implements OpenRewriteFeature {

@@ -28,6 +28,11 @@ import java.util.Optional;
 
 import static io.micronaut.starter.feature.database.DataHibernateReactive.IO_VERTX_DEPENDENCY_GROUP;
 
+/**
+ * Feature that adds Oracle Database support to a Micronaut application.
+ * This feature provides the necessary dependencies and configuration for connecting
+ * to Oracle databases, including JDBC driver, R2DBC support, and test container configuration.
+ */
 @Requires(property = "micronaut.starter.feature.oracle.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Oracle extends DatabaseDriverFeature {
@@ -61,6 +66,13 @@ public class Oracle extends DatabaseDriverFeature {
         .artifactId(VERTX_ORACLE_CLIENT)
         .compile();
 
+    /**
+     * Creates a new Oracle database feature with the specified dependencies.
+     *
+     * @param jdbcFeature the JDBC feature for database connectivity
+     * @param testContainers the test containers feature for testing
+     * @param testResources the test resources feature for test data management
+     */
     public Oracle(JdbcFeature jdbcFeature,
         TestContainers testContainers,
         TestResources testResources) {

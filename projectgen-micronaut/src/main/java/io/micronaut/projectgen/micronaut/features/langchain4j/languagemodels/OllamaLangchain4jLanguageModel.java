@@ -28,6 +28,10 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that provides integration with Ollama's Langchain4j language model in Micronaut.
+ * Adds the necessary configuration and recipes for Ollama language model support, including test resources.
+ */
 @Requires(property = "micronaut.starter.feature.langchain4j.ollama.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class OllamaLangchain4jLanguageModel implements Langchain4jLanguageModel, OpenRewriteFeature {

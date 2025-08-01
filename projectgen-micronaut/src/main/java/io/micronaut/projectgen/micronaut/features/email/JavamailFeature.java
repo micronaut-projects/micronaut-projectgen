@@ -23,10 +23,19 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that provides integration with Javamail for sending transactional emails in Micronaut applications.
+ * This feature enables the use of Javamail as the email sending mechanism.
+ */
 @Requires(property = "micronaut.starter.feature.email.javamail.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class JavamailFeature extends EmailFeature {
 
+    /**
+     * Creates a new JavamailFeature with the required template email feature.
+     *
+     * @param templateEmailFeature the template email feature dependency
+     */
     JavamailFeature(TemplateEmailFeature templateEmailFeature) {
         super(templateEmailFeature);
     }

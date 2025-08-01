@@ -26,6 +26,10 @@ import jakarta.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Feature that provides Awaitility framework support for Micronaut applications.
+ * This feature adds the Awaitility framework for testing asynchronous code with language-specific dependencies.
+ */
 @Requires(property = "micronaut.starter.feature.awaitility.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Awaitility implements OpenRewriteFeature {

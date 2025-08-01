@@ -26,6 +26,10 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that provides JUnit Params support for Micronaut applications.
+ * This feature adds JUnit Params library for easy parameterization of test methods in JUnit tests.
+ */
 @Requires(property = "micronaut.starter.feature.junit.params.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class JunitParams implements JunitCompanionFeature, OpenRewriteFeature {

@@ -24,9 +24,22 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that provides OpenTelemetry Zipkin integration for Micronaut applications.
+ * This feature adds OpenTelemetry support with Zipkin as the exporter for distributed tracing.
+ */
 @Requires(property = "micronaut.starter.feature.tracing.opentelemetry.zipkin.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class OpenTelemetryZipkin extends AbstractOpenTelemetry implements OpenRewriteFeature {
+    /**
+     * Creates a new OpenTelemetryZipkin with the required OpenTelemetry components.
+     *
+     * @param otel the base OpenTelemetry feature
+     * @param otelHttp the OpenTelemetry HTTP feature
+     * @param otelAnnotations the OpenTelemetry annotations feature
+     * @param openTelemetryGrpc the OpenTelemetry gRPC feature
+     * @param openTelemetryExporterZipkin the OpenTelemetry Zipkin exporter feature
+     */
     public OpenTelemetryZipkin(OpenTelemetry otel,
         OpenTelemetryHttp otelHttp,
         OpenTelemetryAnnotations otelAnnotations,

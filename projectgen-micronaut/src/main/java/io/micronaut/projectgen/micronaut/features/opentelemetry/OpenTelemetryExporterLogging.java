@@ -24,6 +24,10 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that provides OpenTelemetry logging exporter support for Micronaut applications.
+ * This feature adds the necessary configuration and recipes for exporting traces to logs.
+ */
 @Requires(property = "micronaut.starter.feature.tracing.opentelemetry.exporter.logging.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class OpenTelemetryExporterLogging extends OpenTelemetryExporterFeature implements OpenRewriteFeature {

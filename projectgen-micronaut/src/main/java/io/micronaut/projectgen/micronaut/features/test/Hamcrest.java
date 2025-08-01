@@ -27,6 +27,10 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that provides Hamcrest matchers support for Micronaut applications.
+ * This feature adds Hamcrest matchers for JUnit to enable more expressive test assertions.
+ */
 @Requires(property = "micronaut.starter.feature.hamcrest.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Hamcrest  implements JunitCompanionFeature, OpenRewriteFeature {

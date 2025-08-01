@@ -24,6 +24,10 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that provides Micronaut Validation support for Micronaut applications.
+ * This feature adds the necessary dependencies and configuration for Micronaut Validation framework.
+ */
 @Requires(property = "micronaut.starter.feature.validation.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class MicronautValidationFeature implements ValidationFeature, OpenRewriteFeature {

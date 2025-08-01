@@ -17,6 +17,11 @@ package io.micronaut.projectgen.micronaut.features.langchain4j;
 
 import io.micronaut.starter.feature.Category;
 
+/**
+ * Represents a Langchain4j embedded store feature.
+ *
+ * Provides default title, description, and category for embedded store integrations.
+ */
 public interface Langchain4jEmbeddedStore extends Langchain4jFeature {
 
     @Override

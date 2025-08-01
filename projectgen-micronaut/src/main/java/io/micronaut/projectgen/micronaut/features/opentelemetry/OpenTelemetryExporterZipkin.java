@@ -20,6 +20,10 @@ import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import jakarta.inject.Singleton;
 
+/**
+ * Feature that provides OpenTelemetry Zipkin exporter support for Micronaut applications.
+ * This feature adds the necessary configuration for exporting traces to Zipkin.
+ */
 @Requires(property = "micronaut.starter.feature.tracing.opentelemetry.exporter.zipkin.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class OpenTelemetryExporterZipkin extends OpenTelemetryExporterFeature {

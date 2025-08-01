@@ -28,6 +28,11 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * Feature validator that ensures language-specific features are compatible with the selected programming language.
+ * This validator checks that features requiring a specific language are not selected when a different language is chosen,
+ * and that multiple language-specific features requiring different languages are not selected together.
+ */
 @Singleton
 public class RequiredLanguageFeatureValidator implements FeatureValidator {
 

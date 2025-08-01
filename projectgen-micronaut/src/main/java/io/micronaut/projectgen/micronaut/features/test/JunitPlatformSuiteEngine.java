@@ -26,6 +26,10 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that provides JUnit Platform Suite Engine support for Micronaut applications.
+ * This feature adds the JUnit Platform Suite Engine dependency for declarative test suites.
+ */
 @Requires(property = "micronaut.starter.feature.junit.platform.suite.engine.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class JunitPlatformSuiteEngine implements JunitCompanionFeature, OpenRewriteFeature {

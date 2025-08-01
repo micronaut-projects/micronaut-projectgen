@@ -23,6 +23,11 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that integrates with SendGrid for sending transactional emails.
+ * Enabled conditionally via the {@code micronaut.starter.feature.email.sendgrid.enabled} property.
+ * Extends {@link EmailFeature} to configure the SendGrid-specific module and behavior.
+ */
 @Requires(property = "micronaut.starter.feature.email.sendgrid.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class SendGridEmailFeature extends EmailFeature {

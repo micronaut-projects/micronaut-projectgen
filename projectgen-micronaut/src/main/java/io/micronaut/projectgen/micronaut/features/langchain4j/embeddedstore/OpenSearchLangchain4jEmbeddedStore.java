@@ -24,6 +24,12 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Implements a Langchain4j embedded store using OpenSearch.
+ *
+ * Provides integration for OpenSearch as a backend store within Langchain4j
+ * and includes OpenRewrite recipes.
+ */
 @Requires(property = "micronaut.starter.feature.langchain4j.store.opensearch.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class OpenSearchLangchain4jEmbeddedStore implements Langchain4jEmbeddedStore, OpenRewriteFeature {

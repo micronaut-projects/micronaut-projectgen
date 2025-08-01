@@ -18,6 +18,10 @@ package io.micronaut.projectgen.micronaut.features.objectstorage;
 import io.micronaut.starter.feature.Category;
 import io.micronaut.starter.feature.function.CloudFeature;
 
+/**
+ * Interface for cloud-based object storage features in Micronaut.
+ * Extends both ObjectStorageFeature and CloudFeature to provide cloud-specific object storage capabilities.
+ */
 public interface CloudObjectStorageFeature extends ObjectStorageFeature, CloudFeature {
 
     @Override

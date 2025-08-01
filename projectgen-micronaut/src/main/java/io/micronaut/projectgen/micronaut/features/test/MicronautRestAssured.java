@@ -25,6 +25,10 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that provides Micronaut-Test REST-assured integration for Micronaut applications.
+ * This feature adds a small utility module that helps integrate the REST-assured library for API testing.
+ */
 @Requires(property = "micronaut.starter.feature.micronaut.test.rest.assured.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class MicronautRestAssured implements OpenRewriteFeature {

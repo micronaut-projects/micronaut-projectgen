@@ -17,6 +17,11 @@ package io.micronaut.projectgen.micronaut.features.cli;
 
 import java.util.List;
 
+/**
+ * Configuration class that represents the structure of the {@code micronaut-cli.yml} file.
+ * It holds metadata about the generated Micronaut project including the application type,
+ * test framework, source language, selected features, build tool, and the default package name.
+ */
 public class MicronautCliConfig {
     private String applicationType;
     private String testFramework;

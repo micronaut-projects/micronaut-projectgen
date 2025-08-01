@@ -17,6 +17,10 @@ package io.micronaut.projectgen.micronaut.features.langchain4j;
 
 import io.micronaut.starter.feature.Category;
 
+/**
+ * Interface for Langchain4j language model features in Micronaut.
+ * Provides default description and category for language model integrations.
+ */
 public interface Langchain4jLanguageModel extends Langchain4jFeature {
     @Override
     default String getDescription() {

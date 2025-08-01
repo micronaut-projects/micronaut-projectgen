@@ -26,6 +26,10 @@ import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils;
 import jakarta.inject.Singleton;
 
+/**
+ * Feature that provides OpenTelemetry gRPC integration for Micronaut applications.
+ * This feature adds the necessary dependencies for OpenTelemetry tracing in gRPC applications.
+ */
 @Requires(property = "micronaut.starter.feature.tracing.opentelemetry.grpc.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class OpenTelemetryGrpc implements OpenTelemetryFeature {

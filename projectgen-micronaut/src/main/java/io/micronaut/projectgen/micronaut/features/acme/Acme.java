@@ -26,6 +26,10 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that adds support for ACME (Automated Certificate Management Environment).
+ * It integrates with OpenRewrite to apply acme feature.
+ */
 @Requires(property = "micronaut.starter.feature.acme.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Acme implements OpenRewriteFeature {

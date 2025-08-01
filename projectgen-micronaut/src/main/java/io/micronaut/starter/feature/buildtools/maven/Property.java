@@ -19,6 +19,10 @@ import io.micronaut.core.annotation.NonNull;
 
 import java.util.Objects;
 
+/**
+ * Represents a Maven property with a name and value.
+ * This class is used to define properties that can be used in Maven build configurations.
+ */
 public class Property {
     @NonNull
     private final String name;
@@ -26,6 +30,12 @@ public class Property {
     @NonNull
     private final String value;
 
+    /**
+     * Creates a new Property instance with the specified name and value.
+     *
+     * @param name the property name, must not be null
+     * @param value the property value, must not be null
+     */
     Property(@NonNull String name, @NonNull String value) {
         this.name = name;
         this.value = value;
@@ -74,11 +84,20 @@ public class Property {
         return 31 * result + value.hashCode();
     }
 
+    /**
+     * Creates a new builder instance for constructing Property objects.
+     *
+     * @return a new Builder instance
+     */
     @NonNull
     public static  Builder builder() {
         return new Builder();
     }
 
+    /**
+     * Builder class for creating Property instances.
+     * Provides a fluent API for setting property name and value.
+     */
     public static class Builder {
         private String name;
         private String value;
@@ -108,14 +127,14 @@ public class Property {
         }
 
         /**
-         * Builds the {@link Property} instance using the configured name and value.
+         * Builds a new Property instance with the configured name and value.
          *
-         * @return A new {@link Property} instance.
+         * @return a new Property instance
+         * @throws IllegalArgumentException if name or value is null
          */
         @NonNull
         public Property build() {
-            return new Property(Objects.requireNonNull(this.name),
-                Objects.requireNonNull(this.value));
+            return new Property(Objects.requireNonNull(name), Objects.requireNonNull(value));
         }
     }
 }

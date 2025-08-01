@@ -23,6 +23,10 @@ import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import jakarta.inject.Singleton;
 
+/**
+ * Feature that provides Java Gradle plugin support for Micronaut applications.
+ * This feature adds the Java Gradle plugin which provides Java compilation, testing, and bundling capabilities.
+ */
 @Singleton
 public class JavaGradlePlugin implements GradleSpecificFeature, BuildPluginFeature {
     private static final String GRADLE_PLUGIN_JAVA_ID = "java";

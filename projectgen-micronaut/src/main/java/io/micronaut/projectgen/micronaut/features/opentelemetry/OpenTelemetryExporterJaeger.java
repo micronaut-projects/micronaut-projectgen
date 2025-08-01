@@ -25,6 +25,10 @@ import jakarta.inject.Singleton;
 import java.util.List;
 import java.util.Locale;
 
+/**
+ * Feature that provides OpenTelemetry Jaeger exporter support for Micronaut applications.
+ * This feature adds the necessary configuration and recipes for exporting traces to Jaeger.
+ */
 @Requires(property = "micronaut.starter.feature.tracing.opentelemetry.exporter.jaeger.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class OpenTelemetryExporterJaeger extends OpenTelemetryExporterFeature implements OpenRewriteFeature {

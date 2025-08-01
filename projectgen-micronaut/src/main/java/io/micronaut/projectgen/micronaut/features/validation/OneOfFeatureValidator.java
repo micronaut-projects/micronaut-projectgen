@@ -25,9 +25,19 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ * Feature validator that ensures only one feature from a group of mutually exclusive features is selected.
+ * This validator checks that features implementing OneOfFeature interface are not selected together with other features
+ * from the same group.
+ */
 @Singleton
 public class OneOfFeatureValidator implements FeatureValidator {
 
+    /**
+     * Validates that only one feature from each OneOfFeature group is selected.
+     *
+     * @param features the set of selected features to validate
+     */
     private void validate(Set<Feature> features) {
         Set<Class<?>> oneOfFeatures = features.stream()
             .filter(OneOfFeature.class::isInstance)

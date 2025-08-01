@@ -34,6 +34,12 @@ import jakarta.inject.Singleton;
 
 import java.util.Set;
 
+/**
+ * Feature that configures a Micronaut application as a library.
+ * This feature applies when the application type is set to LIBRARY and adds
+ * necessary dependencies and plugins for library development including Gradle plugins
+ * for publishing, signing, and code formatting.
+ */
 @Singleton
 public class ApplicationTypeLibraryFeature extends ApplicationTypeFeature {
     private final LicenseFeature license;
@@ -42,6 +48,20 @@ public class ApplicationTypeLibraryFeature extends ApplicationTypeFeature {
     private final SigningGradlePlugin signingGradlePlugin;
     private final SpotlessGradlePlugin spotlessGradlePlugin;
 
+    /**
+     * Creates a new ApplicationTypeLibraryFeature with the required dependencies.
+     *
+     * @param micronautCli the Micronaut CLI feature
+     * @param license the Apache 2 license feature
+     * @param micronautTestJunit5 the JUnit 5 test feature
+     * @param micronautTestSpock the Spock test feature
+     * @param micronautLibraryGradlePlugin the Micronaut library Gradle plugin
+     * @param mavenPublishGradlePlugin the Maven publish Gradle plugin
+     * @param signingGradlePlugin the signing Gradle plugin
+     * @param spotlessGradlePlugin the Spotless Gradle plugin
+     * @param logback the Logback logging feature
+     * @param gitIgnore the Git ignore feature
+     */
     public ApplicationTypeLibraryFeature(MicronautCli micronautCli,
         Apache2LicenseFeature license,
         MicronautTestJunit5 micronautTestJunit5,

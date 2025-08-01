@@ -36,6 +36,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Test feature for Micronaut HTTP client dependencies that provides
+ * OpenRewrite recipes conditionally based on the project setup and features.
+ * This feature is not visible to users.
+ */
 @Requires(property = "micronaut.starter.feature.http.client.test.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class HttpClientTest implements OpenRewriteFeature {

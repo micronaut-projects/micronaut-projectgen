@@ -18,6 +18,10 @@ package io.micronaut.projectgen.micronaut.features.opentelemetry;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 
+/**
+ * Utility class for creating OpenTelemetry dependencies in Micronaut applications.
+ * Provides helper methods for building OpenTelemetry and OpenTelemetry instrumentation dependencies.
+ */
 public final class OpenTelemetryDependencyUtils {
     public static final String GROUP_ID_OPENTELEMETRY = "io.opentelemetry";
     public static final String GROUP_ID_OPENTELEMETRY_INSTRUMENTATION = "io.opentelemetry.instrumentation";
@@ -26,16 +30,32 @@ public final class OpenTelemetryDependencyUtils {
 
     }
 
+    /**
+     * Creates a builder for OpenTelemetry dependencies.
+     *
+     * @return a Dependency.Builder for OpenTelemetry dependencies
+     */
     @NonNull
     public static Dependency.Builder openTelemetryDependency() {
         return dependency(GROUP_ID_OPENTELEMETRY);
     }
 
+    /**
+     * Creates a builder for OpenTelemetry instrumentation dependencies.
+     *
+     * @return a Dependency.Builder for OpenTelemetry instrumentation dependencies
+     */
     @NonNull
     public static Dependency.Builder openTelemetryInstrumentationDependency() {
         return dependency(GROUP_ID_OPENTELEMETRY_INSTRUMENTATION);
     }
 
+    /**
+     * Creates a dependency builder with the specified group ID.
+     *
+     * @param groupId the group ID for the dependency
+     * @return a Dependency.Builder with the specified group ID
+     */
     @NonNull
     private static Dependency.Builder dependency(@NonNull String groupId) {
         return Dependency.builder()

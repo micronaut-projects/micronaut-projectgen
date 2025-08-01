@@ -24,6 +24,10 @@ import jakarta.inject.Singleton;
 
 import java.util.Set;
 
+/**
+ * Feature validator that ensures features requiring a minimum JDK version are compatible with the selected JDK.
+ * This validator checks that the selected JDK version meets the minimum requirements for features that implement MinJdkFeature.
+ */
 @Singleton
 public class MinJdkFeatureValidator implements FeatureValidator {
 

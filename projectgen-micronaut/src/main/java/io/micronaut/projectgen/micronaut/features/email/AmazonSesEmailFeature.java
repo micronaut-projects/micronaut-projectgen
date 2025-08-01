@@ -23,6 +23,11 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that provides integration with Amazon Simple Email Service (SES) for sending transactional emails.
+ * This feature is conditionally loaded based on the {@code micronaut.starter.feature.email.amazon.ses.enabled} property.
+ * It extends {@link EmailFeature} and configures the SES-specific module and recipes.
+ */
 @Requires(property = "micronaut.starter.feature.email.amazon.ses.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class AmazonSesEmailFeature extends EmailFeature {

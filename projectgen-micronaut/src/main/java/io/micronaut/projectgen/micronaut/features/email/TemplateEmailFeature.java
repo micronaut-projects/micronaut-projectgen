@@ -25,6 +25,12 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that enables sending emails using templates with Micronaut Views.
+ * This feature is conditionally enabled via the
+ * {@code micronaut.starter.feature.email.template.enabled} property.
+ * Implements {@link OpenRewriteFeature} to provide integration and recipe configuration.
+ */
 @Requires(property = "micronaut.starter.feature.email.template.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class TemplateEmailFeature implements OpenRewriteFeature {

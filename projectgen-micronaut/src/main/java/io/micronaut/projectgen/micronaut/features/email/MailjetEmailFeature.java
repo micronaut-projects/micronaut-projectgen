@@ -23,6 +23,11 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that integrates with Mailjet for sending transactional emails.
+ * This feature is conditionally enabled via the {@code micronaut.starter.feature.email.mailjet.enabled} property.
+ * Extends {@link EmailFeature} to configure the Mailjet-specific module and behavior.
+ */
 @Requires(property = "micronaut.starter.feature.email.mailjet.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class MailjetEmailFeature extends EmailFeature {

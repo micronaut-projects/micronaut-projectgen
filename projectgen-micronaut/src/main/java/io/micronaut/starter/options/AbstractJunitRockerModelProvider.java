@@ -31,6 +31,12 @@ public abstract class AbstractJunitRockerModelProvider implements JunitRockerMod
         this.project = project;
     }
 
+    /**
+     * Returns the {@link Project} associated with this provider.
+     *
+     * @return The current {@link Project} instance.
+     */
+
     public Project getProject() {
         return this.project;
     }

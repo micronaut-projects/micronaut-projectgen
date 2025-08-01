@@ -24,6 +24,10 @@ import jakarta.inject.Singleton;
 
 import java.util.Set;
 
+/**
+ * Feature validator that ensures Gradle-specific features are only used with Gradle build tool.
+ * This validator checks that features marked as Gradle-specific are not selected when using other build tools.
+ */
 @Singleton
 public class GradleSpecificFeatureValidator implements FeatureValidator {
     @Override

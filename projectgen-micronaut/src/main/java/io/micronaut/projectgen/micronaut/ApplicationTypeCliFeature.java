@@ -30,6 +30,13 @@ import jakarta.inject.Singleton;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Feature implementation for Micronaut CLI application type.
+ * <p>
+ * This class integrates language-specific application features (Java, Kotlin, Groovy)
+ * for CLI applications and conditionally applies them based on the selected language.
+ * </p>
+ */
 @Singleton
 public class ApplicationTypeCliFeature extends ApplicationTypeFeature {
     @Nullable

@@ -33,6 +33,11 @@ import io.micronaut.projectgen.micronaut.features.test.MicronautTestSpock;
 
 import java.util.List;
 
+/**
+ * Base implementation for features associated with specific {@link ApplicationType}s.
+ * Provides default behavior for applying essential features like logging, testing, and CLI support.
+ * Implements {@link DefaultFeature} and {@link RequiresRepository}.
+ */
 public abstract class ApplicationTypeFeature implements DefaultFeature, RequiresRepository {
     private final MicronautTestJunit5 micronautTestJunit5;
     private final MicronautTestSpock micronautTestSpock;
