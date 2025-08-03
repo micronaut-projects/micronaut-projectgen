@@ -27,6 +27,9 @@ import jakarta.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Groovy module feature that provides extensions for processing XML using Groovy.
+ */
 @Requires(property = "micronaut.starter.feature.groovy.xml.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class XmlGroovyModule implements GroovyModuleFeature, OpenRewriteFeature {

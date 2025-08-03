@@ -29,6 +29,9 @@ import jakarta.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Feature that adds support for Flyway database migrations.
+ */
 @Requires(property = "micronaut.starter.feature.flyway.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Flyway implements MigrationFeature, OpenRewriteFeature {

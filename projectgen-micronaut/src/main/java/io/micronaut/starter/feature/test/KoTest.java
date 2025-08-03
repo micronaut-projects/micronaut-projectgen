@@ -30,6 +30,9 @@ import jakarta.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Test feature that adds support for Kotest (version 5) testing framework integration.
+ */
 @Requires(property = "micronaut.starter.feature.kotest.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class KoTest implements TestFeature, OpenRewriteFeature {

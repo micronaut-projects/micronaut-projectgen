@@ -21,6 +21,10 @@ import io.micronaut.projectgen.core.generator.GeneratorContext;
 
 import java.util.Optional;
 
+/**
+ * Utility class for resolving the configured SecurityAuthenticationMode
+ * from the features present in the GeneratorContext.
+ */
 public final class SecurityAuthenticationModeUtils {
 
     @NonNull

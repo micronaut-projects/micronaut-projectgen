@@ -35,7 +35,10 @@ import java.util.Set;
  * This class provides a fluent API for configuring various aspects of the Micronaut Gradle plugin
  * including Java version, runtime settings, Docker configurations, and build tool options.
  */
-public class MicronautApplicationGradlePlugin {
+public final class MicronautApplicationGradlePlugin {
+
+    private MicronautApplicationGradlePlugin() {
+    }
 
     /**
      * Creates a new builder instance for configuring the Micronaut Gradle plugin.
@@ -299,9 +302,6 @@ public class MicronautApplicationGradlePlugin {
             this.sharedTestResources = true;
             return this;
         }
-    }
-
-    private MicronautApplicationGradlePlugin() {
     }
 
 }

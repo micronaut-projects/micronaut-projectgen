@@ -29,6 +29,10 @@ import io.micronaut.projectgen.core.buildtools.gradle.GradleSpecificFeature;
 import io.micronaut.projectgen.micronaut.template.buildtools.gradle.buildlessGradlePlugin;
 import jakarta.inject.Singleton;
 
+/**
+ * Community feature that adds Buildless support for lightning-fast
+ * build caching compatible with Gradle, Maven, Bazel, and Gradle Enterprise.
+ */
 @Requires(property = "micronaut.starter.feature.buildless.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Buildless implements CommunityFeature, GradleSpecificFeature {

@@ -33,6 +33,9 @@ import jakarta.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Feature that adds support for CRaC (Coordinated Restore at Checkpoint) in Micronaut applications.
+ */
 @Requires(property = "micronaut.starter.feature.crac.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Crac implements RequireEagerSingletonInitializationFeature, OpenRewriteFeature {

@@ -26,6 +26,10 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
 
+/**
+ * Validates the features related to source generation,
+ * ensuring compatibility with the selected programming language.
+ */
 @Singleton
 public class SourcegenFeatureValidator implements FeatureValidator {
 

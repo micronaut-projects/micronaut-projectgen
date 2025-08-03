@@ -31,7 +31,12 @@ import jakarta.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * Feature that adds support for R2DBC (Reactive Relational Database Connectivity).
+ * This feature ensures a default database driver is present, and if database migration
+ * features are included without a JDBC feature, it adds the Hikari JDBC connection pool.
+ * It also contributes relevant recipes for documentation, dependencies, and database configuration.
+ */
 @Requires(property = "micronaut.starter.feature.r2dbc.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class R2dbc extends R2dbcConfigurationUtils implements R2dbcFeature, OpenRewriteFeature {

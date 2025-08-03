@@ -37,6 +37,12 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 
+/**
+ * Represents the Kotlin language feature for the project generator.
+ * <p>
+ * This class manages Kotlin application features, processes feature selection,
+ * applies Kotlin-specific configurations such as setting the Kotlin version,
+ */
 @Requires(property = "micronaut.starter.feature.kotlin.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Kotlin implements LanguageFeature, OpenRewriteFeature {

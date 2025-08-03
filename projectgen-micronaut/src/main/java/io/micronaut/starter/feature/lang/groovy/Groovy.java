@@ -38,6 +38,10 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 
+/**
+ * Feature that enables support for the Groovy programming language in a Micronaut application.
+ * Configures necessary dependencies and plugins based on the selected build tool and application type.
+ */
 @Requires(property = "micronaut.starter.feature.groovy.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Groovy implements LanguageFeature {

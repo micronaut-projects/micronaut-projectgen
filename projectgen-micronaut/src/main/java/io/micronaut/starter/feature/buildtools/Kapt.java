@@ -29,6 +29,11 @@ import jakarta.inject.Singleton;
 
 import java.util.Set;
 
+/**
+ * Adds Kotlin Annotation Processing Tool (KAPT) support.
+ * <p>
+ * Provides integration for Kotlin compiler plugin that supports Java annotation processors.
+ */
 @Requires(property = "micronaut.starter.feature.kapt.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Kapt implements KotlinSupportFeature, DefaultFeature {

@@ -25,6 +25,11 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that adds support for the MongoDB Reactive Streams Driver.
+ * This feature includes integration with Testcontainers for MongoDB and
+ * configures the reactive MongoDB driver for reactive database access.
+ */
 @Requires(property = "micronaut.starter.feature.mongo.reactive.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class MongoReactive extends MongoFeature implements OpenRewriteFeature {

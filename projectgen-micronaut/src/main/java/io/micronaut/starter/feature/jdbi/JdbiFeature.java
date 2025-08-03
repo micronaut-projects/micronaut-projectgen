@@ -28,6 +28,9 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature for adding support for persistence using Jdbi.
+ */
 @Requires(property = "micronaut.starter.feature.sql.jdbi.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class JdbiFeature implements OpenRewriteFeature {

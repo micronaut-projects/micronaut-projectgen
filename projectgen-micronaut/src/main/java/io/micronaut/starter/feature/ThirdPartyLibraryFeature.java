@@ -17,5 +17,8 @@ package io.micronaut.starter.feature;
 
 import io.micronaut.projectgen.core.feature.Feature;
 
+/**
+ * Marker interface for features that integrate third-party libraries.
+ */
 public interface ThirdPartyLibraryFeature extends Feature {
 }

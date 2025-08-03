@@ -26,6 +26,10 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that adds support for using Spring Data JPA Annotations in Micronaut applications.
+ * Ensures the associated DataJpa feature is included if not already present.
+ */
 @Requires(property = "micronaut.starter.feature.spring.data.jpa.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class SpringDataJpa extends SpringFeature implements OpenRewriteFeature {

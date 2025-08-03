@@ -28,6 +28,11 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * MQTT feature implementation for HiveMQ support.
+ * <p>
+ * Provides integration with MQTT HiveMQ, including ease testing, shared test resources.
+ */
 @Requires(property = "micronaut.starter.feature.mqtt.hivemq.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class MqttHiveMq extends EaseTestingFeature implements MqttFeature, SharedTestResourceFeature, OpenRewriteFeature {

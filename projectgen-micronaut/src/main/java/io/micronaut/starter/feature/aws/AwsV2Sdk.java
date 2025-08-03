@@ -26,6 +26,10 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Micronaut feature that adds support and integration for AWS SDK version 2.x,
+ * enabling cloud-related functionalities using the AWS SDK.
+ */
 @Requires(property = "micronaut.starter.feature.aws.v2.sdk.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class AwsV2Sdk implements AwsFeature, OpenRewriteFeature {

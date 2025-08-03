@@ -29,6 +29,10 @@ import io.micronaut.projectgen.core.template.Template;
 import io.micronaut.starter.util.VersionInfo;
 import jakarta.inject.Singleton;
 
+/**
+ * CI workflow feature for Oracle Cloud DevOps.
+ * Adds an Oracle Cloud DevOps build workflow to build a Micronaut application.
+ */
 @Requires(property = "micronaut.starter.feature.oracle.cloud.devops.build.ci.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class OCICiWorkflowFeature extends CIWorkflowFeature {

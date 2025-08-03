@@ -26,6 +26,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Security feature for JWT (JSON Web Token) based authentication.
+ * Implements SecurityAuthenticationModeProvider to specify the authentication mode.
+ */
 @Requires(property = "micronaut.starter.feature.security.jwt.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class SecurityJWT extends SecurityFeature implements SecurityAuthenticationModeProvider, OpenRewriteFeature {

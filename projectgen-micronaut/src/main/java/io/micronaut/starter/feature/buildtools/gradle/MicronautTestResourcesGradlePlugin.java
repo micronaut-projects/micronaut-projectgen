@@ -23,7 +23,10 @@ import io.micronaut.projectgen.core.buildtools.gradle.GradlePlugin;
  * This class provides functionality to configure the Micronaut Test Resources plugin
  * for Gradle builds, which enables automatic test resource management.
  */
-public class MicronautTestResourcesGradlePlugin {
+public final class MicronautTestResourcesGradlePlugin {
+
+    private MicronautTestResourcesGradlePlugin() {
+    }
 
     /**
      * Creates a new builder instance for configuring the Micronaut Test Resources Gradle plugin.
@@ -55,8 +58,5 @@ public class MicronautTestResourcesGradlePlugin {
                 .lookupArtifactId(ARTIFACT_ID)
                 .build();
         }
-    }
-
-    private MicronautTestResourcesGradlePlugin() {
     }
 }

@@ -26,6 +26,9 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that adds support for HTTP Sessions.
+ */
 @Requires(property = "micronaut.starter.feature.http.session.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class HttpSession implements OpenRewriteFeature {

@@ -21,6 +21,9 @@ import io.micronaut.projectgen.core.buildtools.dependencies.MavenCoordinate;
 
 import java.util.List;
 
+/**
+ * Provides additional modules and dependencies required for Micronaut Test Resources.
+ */
 public interface TestResourcesAdditionalModulesProvider {
 
     @NonNull

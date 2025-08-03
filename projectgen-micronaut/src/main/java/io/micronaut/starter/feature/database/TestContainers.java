@@ -34,6 +34,10 @@ import jakarta.inject.Singleton;
 
 import java.util.Optional;
 
+/**
+ * Feature that adds support for Testcontainers, enabling
+ * running databases or other software inside Docker containers for testing.
+ */
 @Requires(property = "micronaut.starter.feature.testcontainers.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class TestContainers implements Feature {

@@ -30,6 +30,11 @@ import jakarta.inject.Singleton;
 import java.util.Collections;
 import java.util.Map;
 
+/**
+ * Feature that enables support for Micronaut Data JPA using Hibernate.
+ * <p>
+ * Applies required dependencies, configuration, and integrates with JDBC and data features.
+ */
 @Requires(property = "micronaut.starter.feature.data.jpa.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class DataJpa implements JpaFeature, DataFeature {

@@ -18,6 +18,9 @@ package io.micronaut.starter.buildtools.gradle;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 
+/**
+ * Feature interface for Kotlin Symbol Processing (KSP) integration.
+ */
 public interface KotlinSymbolProcessingFeature extends Feature {
     @Override
     default String getThirdPartyDocumentation(GeneratorContext generatorContext) {

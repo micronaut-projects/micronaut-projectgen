@@ -33,6 +33,10 @@ import io.micronaut.starter.feature.architecture.X86;
 //import io.micronaut.projectgen.micronaut.template.buildtools.maven.mavenCompilerPlugin;
 import jakarta.inject.Singleton;
 
+/**
+ * Micronaut feature that provides support for AWS Cloud Development Kit (CDK)
+ * to enable infrastructure-as-code for multi-project setups.
+ */
 @Requires(property = "micronaut.starter.feature.aws.cdk.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Cdk implements MultiProjectFeature, InfrastructureAsCodeFeature {

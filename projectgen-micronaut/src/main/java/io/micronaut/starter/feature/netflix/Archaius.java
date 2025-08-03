@@ -25,6 +25,9 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that adds support for distributed configuration using Netflix Archaius.
+ */
 @Requires(property = "micronaut.starter.feature.netflix.archaius.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Archaius implements DistributedConfigFeature, OpenRewriteFeature {

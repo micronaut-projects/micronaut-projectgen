@@ -24,6 +24,13 @@ import jakarta.inject.Singleton;
 
 import java.util.Set;
 
+/**
+ * Validates feature combinations related to R2DBC in the project generation context.
+ * <p>
+ * Specifically, this validator checks that when R2DBC features, migration features,
+ * and TestContainers are all selected together.
+ * TestContainers are not supported with the combination of R2DBC and Migration.
+ */
 @Singleton
 public class R2dbcFeatureValidator implements FeatureValidator {
 

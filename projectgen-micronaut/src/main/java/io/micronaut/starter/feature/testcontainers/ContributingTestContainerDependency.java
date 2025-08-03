@@ -20,6 +20,9 @@ import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 
 import java.util.List;
 
+/**
+ * Interface for features that contribute Testcontainers dependencies.
+ */
 public interface ContributingTestContainerDependency {
     String TESTCONTAINERS_GROUP_ID = "org.testcontainers";
 

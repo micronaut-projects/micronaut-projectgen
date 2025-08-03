@@ -26,6 +26,10 @@ import jakarta.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents the Undertow server feature for Micronaut applications.
+ * Adds support for running the application on an Undertow server.
+ */
 @Requires(property = "micronaut.starter.feature.undertow.server.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Undertow extends AbstractServletFeature implements OpenRewriteFeature {

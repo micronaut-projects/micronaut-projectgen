@@ -18,6 +18,10 @@ package io.micronaut.starter.feature.aws;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.starter.feature.function.awslambda.AwsLambda;
 
+/**
+ * Base class for AWS Lambda related features.
+ * Ensures the core AwsLambda feature is included in the feature context.
+ */
 public abstract class AwsLambdaRelatedFeature implements AwsLambdaEventFeature {
     private final AwsLambda awsLambda;
 

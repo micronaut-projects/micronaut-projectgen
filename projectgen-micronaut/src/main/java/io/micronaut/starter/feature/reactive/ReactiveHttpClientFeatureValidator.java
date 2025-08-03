@@ -23,6 +23,13 @@ import jakarta.inject.Singleton;
 
 import java.util.Set;
 
+/**
+ * Validator to ensure that reactive HTTP client features are not used
+ * together with incompatible HTTP client features.
+ *
+ * <p>Specifically, it disallows using the `http-client-jdk` feature
+ * alongside any reactive HTTP client feature.</p>
+ */
 @Singleton
 public class ReactiveHttpClientFeatureValidator implements FeatureValidator {
     @Override

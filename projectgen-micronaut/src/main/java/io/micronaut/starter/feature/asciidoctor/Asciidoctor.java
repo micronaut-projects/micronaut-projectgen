@@ -35,6 +35,12 @@ import jakarta.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Adds support for generating Asciidoctor documentation.
+ *
+ * Applies relevant configuration for Gradle or Maven builds
+ * and includes Asciidoctor-related templates and plugins.
+ */
 @Requires(property = "micronaut.starter.feature.asciidoctor.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Asciidoctor implements OpenRewriteFeature {

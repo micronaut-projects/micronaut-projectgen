@@ -42,6 +42,13 @@ import io.micronaut.projectgen.core.rocker.RockerTemplate;
 import jakarta.inject.Singleton;
 import java.util.Optional;
 
+/**
+ * Feature implementation for a raw Azure Function in Micronaut.
+ * <p>
+ * Provides configuration and setup for using Azure Functions without the HTTP abstraction,
+ * including dependency management, test generation, and integration with the Azure HTTP function feature.
+ * </p>
+ */
 @Requires(property = "micronaut.starter.feature.azure.function.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class AzureRawFunction extends AbstractAzureFunction {

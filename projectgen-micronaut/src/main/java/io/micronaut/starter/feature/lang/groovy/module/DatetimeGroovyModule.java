@@ -27,6 +27,9 @@ import jakarta.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Feature that adds Groovy extensions for working with the JSR 310 Date/Time API.
+ */
 @Requires(property = "micronaut.starter.feature.groovy.datetime.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class DatetimeGroovyModule implements GroovyModuleFeature, OpenRewriteFeature {

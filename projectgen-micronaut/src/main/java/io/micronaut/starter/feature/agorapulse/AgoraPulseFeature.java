@@ -28,6 +28,12 @@ import io.micronaut.projectgen.core.rocker.RockerTemplate;
 
 import java.util.Optional;
 
+/**
+ * Defines a Micronaut community feature contributed by Agorapulse.
+ * Provides default implementations for Micronaut version, documentation link,
+ * community contributor name, and utility methods for managing templates
+ * based on language and test framework.
+ */
 public interface AgoraPulseFeature extends MicronautCommunityFeature {
 
     @Override

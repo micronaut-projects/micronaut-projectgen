@@ -45,6 +45,12 @@ import jakarta.inject.Singleton;
 
 import java.util.Optional;
 
+/**
+ * Feature that adds support for deploying raw functions to Google Cloud Functions in a Micronaut project.
+ * <p>
+ * Provides integration with Google Cloud's Functions Framework and sets up the necessary templates,
+ * dependencies, and configuration for function-based applications.
+ */
 @Requires(property = "micronaut.starter.feature.google.cloud.function.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class GoogleCloudRawFunction extends AbstractGoogleCloudFunction {

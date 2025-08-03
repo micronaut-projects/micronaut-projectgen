@@ -17,6 +17,9 @@ package io.micronaut.starter.feature.security;
 
 import io.micronaut.core.annotation.NonNull;
 
+/**
+ * Provides the security authentication mode configuration.
+ */
 @FunctionalInterface
 public interface SecurityAuthenticationModeProvider {
     String PROPERTY_MICRONAUT_SECURITY_AUTHENTICATION = "micronaut.security.authentication";

@@ -40,6 +40,10 @@ import io.micronaut.projectgen.core.rocker.TestRockerModelProvider;
 import io.micronaut.projectgen.core.rocker.RockerTemplate;
 import jakarta.inject.Singleton;
 
+/**
+ * Feature that generates a Groovy-based application entry point for supported Micronaut application types.
+ * Provides Groovy-specific application and test templates, and configures the main class accordingly.
+ */
 @Requires(property = "micronaut.starter.feature.groovy.application.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class GroovyApplication implements GroovyApplicationFeature {

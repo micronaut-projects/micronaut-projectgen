@@ -30,6 +30,12 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that adds support for jOOQ, a fluent API for typesafe SQL query construction and execution.
+ * <p>
+ * Requires at least JDK 11.
+ * </p>
+ */
 @Requires(property = "micronaut.starter.feature.jooq.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Jooq implements OpenRewriteFeature, MinJdkFeature {

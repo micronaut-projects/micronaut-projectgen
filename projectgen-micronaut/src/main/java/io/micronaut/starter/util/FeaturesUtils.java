@@ -18,6 +18,9 @@ package io.micronaut.starter.util;
 import io.micronaut.projectgen.core.feature.Features;
 import io.micronaut.projectgen.core.options.JdkVersion;
 
+/**
+ * Utility class for resolving the appropriate target JDK version from features.
+ */
 public final class FeaturesUtils {
     private FeaturesUtils() {
     }

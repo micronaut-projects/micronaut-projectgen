@@ -24,6 +24,9 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that adds Jackson Databind integration to a Micronaut application.
+ */
 @Requires(property = "micronaut.starter.feature.jackson.databind.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class JacksonDatabindFeature implements OpenRewriteFeature {

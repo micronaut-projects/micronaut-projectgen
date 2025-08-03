@@ -27,6 +27,9 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Micronaut community feature providing integration with JobRunr for background job processing.
+ */
 @Requires(property = "micronaut.starter.feature.jobrunr.jobrunr.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class JobRunrFeature implements MicronautCommunityFeature, OpenRewriteFeature {

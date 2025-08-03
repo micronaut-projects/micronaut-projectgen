@@ -29,6 +29,10 @@ import jakarta.inject.Singleton;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Provides support for generating HTML fieldset views.
+ * Adds Thymeleaf form fragment templates if Thymeleaf feature is present.
+ */
 @Requires(property = "micronaut.starter.feature.views.fieldset.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class ViewsFieldset implements OpenRewriteFeature {

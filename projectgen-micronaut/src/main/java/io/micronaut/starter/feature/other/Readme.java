@@ -39,6 +39,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Generates README.md files including main docs, module help, and feature documentation links.
+ *
+ * <p>Always applied and runs with highest priority.</p>
+ */
 @Requires(property = "micronaut.starter.feature.readme.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Readme implements DefaultFeature {

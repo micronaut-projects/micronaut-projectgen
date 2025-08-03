@@ -25,6 +25,9 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that adds support for Netflix Hystrix for resilience and fault tolerance.
+ */
 @Requires(property = "micronaut.starter.feature.netflix.hystrix.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Hystrix implements OpenRewriteFeature {

@@ -37,6 +37,13 @@ import static io.micronaut.projectgen.core.buildtools.Scope.OPENREWRITE;
 import static io.micronaut.starter.feature.Category.DEV_TOOLS;
 import static io.micronaut.projectgen.core.options.Language.JAVA;
 
+/**
+ * Adds OpenRewrite support to the project, including the OpenRewrite plugin
+ * and the Micronaut 3 to 4 migration recipe.
+ *
+ * Supports both Gradle and Maven build tools, adding appropriate build plugins
+ * and dependencies.
+ */
 @Requires(property = "micronaut.starter.feature.openrewrite.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class OpenRewrite implements LanguageSpecificFeature {

@@ -26,6 +26,10 @@ import jakarta.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents the Tomcat server feature for Micronaut applications.
+ * Adds support for running the application on a Tomcat server.
+ */
 @Requires(property = "micronaut.starter.feature.tomcat.server.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Tomcat extends AbstractServletFeature implements OpenRewriteFeature {

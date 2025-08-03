@@ -34,6 +34,12 @@ import jakarta.inject.Singleton;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Kafka messaging feature.
+ * <p>
+ * Adds support for Kafka messaging, including test container integration
+ * and shared test resources.
+ */
 @Requires(property = "micronaut.starter.feature.kafka.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Kafka extends EaseTestingFeature

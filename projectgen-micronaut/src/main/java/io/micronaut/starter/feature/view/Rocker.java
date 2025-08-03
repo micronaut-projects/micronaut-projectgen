@@ -31,6 +31,10 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Adds support for server-side view rendering using Rocker templates.
+ * Configures the necessary Gradle and Maven plugins.
+ */
 @Requires(property = "micronaut.starter.feature.views.rocker.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Rocker implements ViewFeature, MicronautServerDependent, OpenRewriteFeature {

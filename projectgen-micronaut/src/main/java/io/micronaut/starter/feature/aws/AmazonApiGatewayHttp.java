@@ -24,6 +24,13 @@ import io.micronaut.starter.feature.function.awslambda.ApiGatewayV2AwsLambdaHand
 import io.micronaut.starter.feature.function.awslambda.AwsLambda;
 import jakarta.inject.Singleton;
 
+/**
+ * Feature that enables integration with Amazon API Gateway HTTP API (v2).
+ * <p>
+ * This feature works with AWS CDK to define a low-latency HTTP API using API Gateway v2
+ * and sets the runtime class to {@code APIGatewayV2HTTPEventMicronautLambdaRuntime}.
+ * It also ensures the appropriate handler provider feature is included.
+ */
 @Requires(property = "micronaut.starter.feature.amazon.api.gateway.http.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class AmazonApiGatewayHttp extends AwsLambdaRelatedFeature implements AwsApiFeature, LambdaRuntimeMainClass {

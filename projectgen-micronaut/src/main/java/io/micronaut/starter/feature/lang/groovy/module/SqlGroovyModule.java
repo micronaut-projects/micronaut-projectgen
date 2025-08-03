@@ -27,6 +27,9 @@ import jakarta.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Groovy module feature that provides extensions offering a higher-level abstraction over Java's JDBC technology.
+ */
 @Requires(property = "micronaut.starter.feature.groovy.sql.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class SqlGroovyModule implements GroovyModuleFeature, OpenRewriteFeature {

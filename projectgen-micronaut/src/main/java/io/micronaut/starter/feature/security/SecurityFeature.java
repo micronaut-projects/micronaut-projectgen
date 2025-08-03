@@ -20,6 +20,10 @@ import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.starter.feature.server.MicronautServerDependent;
 
+/**
+ * Base class for security-related features providing common functionality
+ * and ensuring the inclusion of security annotations.
+ */
 public abstract class SecurityFeature implements Feature, MicronautServerDependent {
 
     private final SecurityAnnotations securityAnnotations;

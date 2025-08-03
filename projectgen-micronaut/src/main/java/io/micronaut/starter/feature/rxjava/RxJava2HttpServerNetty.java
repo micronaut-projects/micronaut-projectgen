@@ -25,6 +25,9 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature providing an RxJava 2 based HTTP server implementation using Netty.
+ */
 @Requires(property = "micronaut.starter.feature.rxjava2.http.server.netty.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class RxJava2HttpServerNetty implements OpenRewriteFeature {

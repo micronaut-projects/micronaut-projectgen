@@ -21,6 +21,13 @@ import io.micronaut.starter.feature.testcontainers.ContributingTestContainerDepe
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * A specialized {@link ContributingTestContainerDependency} that contributes the MongoDB
+ * Testcontainers dependency for integration testing.
+ * <p>
+ * By default, this interface provides the MongoDB Testcontainers dependency artifact.
+ * </p>
+ */
 public interface MongoContributingTestContainerDependency extends ContributingTestContainerDependency {
     @Override
     default List<Dependency> testContainersDependencies() {

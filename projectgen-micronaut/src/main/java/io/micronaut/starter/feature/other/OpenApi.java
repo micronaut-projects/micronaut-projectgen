@@ -31,6 +31,9 @@ import jakarta.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Feature that adds support for OpenAPI (Swagger) in Micronaut applications.
+ */
 @Requires(property = "micronaut.starter.feature.openapi.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class OpenApi implements OpenRewriteFeature, MicronautServerDependent {

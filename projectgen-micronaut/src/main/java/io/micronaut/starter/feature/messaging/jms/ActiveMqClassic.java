@@ -24,6 +24,9 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * JMS feature implementation for ActiveMQ Classic messaging.
+ */
 @Requires(property = "micronaut.starter.feature.jms.activemq.classic.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class ActiveMqClassic extends AbstractJmsFeature implements OpenRewriteFeature {

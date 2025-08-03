@@ -82,6 +82,16 @@ import static io.micronaut.projectgen.micronaut.ApplicationType.DEFAULT;
 import static io.micronaut.projectgen.micronaut.ApplicationType.FUNCTION;
 import static io.micronaut.starter.feature.crac.Crac.DEPENDENCY_MICRONAUT_CRAC;
 
+/**
+ * Provides support for AWS Lambda functions in Micronaut applications.
+ * <p>
+ * This feature configures necessary dependencies, handler classes, and integration
+ * with AWS Lambda runtime and tools such as GraalVM native image support,
+ * custom runtimes, SnapStart optimization, and HTTP client setup.
+ * <p>
+ * It selectively adds features based on the application type, build tools,
+ * and presence of other features like GraalVM and HTTP client.
+ */
 @Requires(property = "micronaut.starter.feature.aws.lambda.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class AwsLambda implements FunctionFeature, DefaultFeature, AwsCloudFeature, AwsMicronautRuntimeFeature {

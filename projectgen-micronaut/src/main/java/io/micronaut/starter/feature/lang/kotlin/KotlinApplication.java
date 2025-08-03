@@ -42,6 +42,12 @@ import io.micronaut.projectgen.core.rocker.RockerTemplate;
 
 import jakarta.inject.Singleton;
 
+/**
+ * Kotlin application feature implementation.
+ * <p>
+ * Provides support for generating a Kotlin application, including the main application file
+ * and corresponding test files, depending on the selected application type and features.
+ */
 @Requires(property = "micronaut.starter.feature.kotlin.application.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class KotlinApplication implements KotlinApplicationFeature {

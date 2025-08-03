@@ -39,6 +39,9 @@ import io.micronaut.projectgen.core.options.Language;
 import io.micronaut.projectgen.core.rocker.RockerTemplate;
 import jakarta.inject.Singleton;
 
+/**
+ * Adds support for Server-Side View Rendering using JTE.
+ */
 @Requires(property = "micronaut.starter.feature.views.jte.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class JTE implements ViewFeature, MicronautServerDependent, OpenRewriteFeature {

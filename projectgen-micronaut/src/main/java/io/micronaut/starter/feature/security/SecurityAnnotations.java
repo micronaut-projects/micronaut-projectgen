@@ -24,6 +24,11 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Provides support for security annotations in Micronaut applications.
+ *
+ * <p>This feature is server-dependent and typically not visible to end users.</p>
+ */
 @Requires(property = "micronaut.starter.feature.security.annotations.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class SecurityAnnotations implements OpenRewriteFeature, MicronautServerDependent {

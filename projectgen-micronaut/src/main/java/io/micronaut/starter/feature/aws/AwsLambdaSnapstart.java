@@ -26,6 +26,12 @@ import io.micronaut.starter.feature.architecture.Arm;
 import io.micronaut.starter.feature.architecture.CpuArchitecture;
 import jakarta.inject.Singleton;
 
+/**
+ * Feature for enabling AWS Lambda SnapStart functionality.
+ * <p>
+ * SnapStart improves cold start performance by initializing
+ * the Lambda function ahead of time on supported CPU architectures.
+ */
 @Requires(property = "micronaut.starter.feature.snapstart.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class AwsLambdaSnapstart implements Feature {

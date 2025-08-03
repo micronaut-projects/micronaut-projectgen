@@ -24,6 +24,13 @@ import jakarta.inject.Singleton;
 
 import java.util.Set;
 
+/**
+ * Validator for features implementing {@link GroovyModuleFeature}.
+ * <p>
+ * Ensures that such features are only used when the project language is Groovy
+ * or the test framework is Spock.
+ * </p>
+ */
 @Singleton
 public class GroovyModuleFeatureValidator implements FeatureValidator {
     @Override

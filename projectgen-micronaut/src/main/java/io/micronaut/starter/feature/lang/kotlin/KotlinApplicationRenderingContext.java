@@ -20,6 +20,12 @@ import io.micronaut.core.annotation.NonNull;
 import io.micronaut.projectgen.micronaut.template.lang.kotlin.contextConfigurer;
 import io.micronaut.starter.feature.lang.ApplicationRenderingContext;
 
+/**
+ * Rendering context for Kotlin applications.
+ * <p>
+ * Extends {@link ApplicationRenderingContext} to provide Kotlin-specific rendering
+ * behavior for the application template.
+ */
 public class KotlinApplicationRenderingContext extends ApplicationRenderingContext {
 
     public KotlinApplicationRenderingContext(String defaultEnvironment, boolean eagerSingletons) {

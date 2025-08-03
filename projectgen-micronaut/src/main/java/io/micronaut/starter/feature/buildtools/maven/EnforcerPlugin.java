@@ -30,6 +30,10 @@ import jakarta.inject.Singleton;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Adds the Maven Enforcer plugin to control environmental constraints such as
+ * Maven version, JDK version, OS family, and supports built-in and custom rules.
+ */
 @Requires(property = "micronaut.starter.feature.maven.enforcer.plugin.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class EnforcerPlugin implements DefaultFeature, OpenRewriteFeature {

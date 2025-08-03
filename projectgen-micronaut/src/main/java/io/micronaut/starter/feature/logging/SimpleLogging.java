@@ -27,6 +27,12 @@ import io.micronaut.projectgen.core.rocker.RockerTemplate;
 
 import jakarta.inject.Singleton;
 
+/**
+ * Logging feature that adds SLF4J Simple Logging support.
+ * <p>
+ * This feature provides a basic SLF4J logger implementation by adding the
+ * necessary runtime dependency and a simplelogger.properties configuration file.
+ */
 @Requires(property = "micronaut.starter.feature.slf4j.simple.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class SimpleLogging implements LoggingFeature {

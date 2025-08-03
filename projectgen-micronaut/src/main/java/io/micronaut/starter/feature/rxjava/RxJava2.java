@@ -29,6 +29,12 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that adds reactive support using RxJava 2.
+ *
+ * <p>Automatically adds RxJava 2 based HTTP server and client features
+ * if Netty server or HTTP client are selected.</p>
+ */
 @Requires(property = "micronaut.starter.feature.rxjava2.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class RxJava2 implements OpenRewriteFeature {

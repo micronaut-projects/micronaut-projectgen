@@ -24,6 +24,10 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that adds Cross Site Request Forgery (CSRF) mitigation support
+ * to Micronaut Security.
+ */
 @Requires(property = "micronaut.starter.feature.security.csrf.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class SecurityCsrf extends SecurityFeature implements OpenRewriteFeature {

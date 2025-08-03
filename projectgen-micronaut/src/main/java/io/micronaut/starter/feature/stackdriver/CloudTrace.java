@@ -26,6 +26,9 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature implementation that adds support for distributed tracing using Google Cloud Trace.
+ */
 @Requires(property = "micronaut.starter.feature.gcp.cloud.trace.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class CloudTrace implements OpenRewriteFeature {

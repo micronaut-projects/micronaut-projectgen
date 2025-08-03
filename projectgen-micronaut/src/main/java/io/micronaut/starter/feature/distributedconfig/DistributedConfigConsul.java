@@ -28,6 +28,12 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * A {@link DistributedConfigFeature} implementation that enables distributed configuration using Consul.
+ * <p>
+ * This feature adds the necessary configuration for integrating
+ * Micronaut applications with Consul as a distributed configuration source.
+ */
 @Requires(property = "micronaut.starter.feature.config.consul.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class DistributedConfigConsul implements DistributedConfigFeature, OpenRewriteFeature {

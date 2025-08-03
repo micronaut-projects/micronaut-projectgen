@@ -27,6 +27,9 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that adds multitenancy support including tenant resolution and propagation.
+ */
 @Requires(property = "micronaut.starter.feature.multi.tenancy.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Multitenancy implements OpenRewriteFeature, MicronautServerDependent {

@@ -25,6 +25,9 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature providing integration with the Oracle Cloud SDK.
+ */
 @Requires(property = "micronaut.starter.feature.oracle.cloud.sdk.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class OracleCloudSdk implements OpenRewriteFeature {

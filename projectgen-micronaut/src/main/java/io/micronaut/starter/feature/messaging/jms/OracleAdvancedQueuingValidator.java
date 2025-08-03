@@ -25,6 +25,11 @@ import jakarta.inject.Singleton;
 import java.util.Optional;
 import java.util.Set;
 
+/**
+ * Validator for the Oracle Advanced Queuing feature.
+ * <p>
+ * Ensures that only the Oracle database feature is used with Oracle Advanced Queuing.
+ */
 @Singleton
 public class OracleAdvancedQueuingValidator implements FeatureValidator {
 

@@ -24,6 +24,9 @@ import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.Feature;
 import jakarta.inject.Singleton;
 
+/**
+ * Adds support for the Vertx Reactive PostgreSQL Client.
+ */
 @Requires(property = "micronaut.starter.feature.vertx.pg.client.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class VertxPg implements Feature {

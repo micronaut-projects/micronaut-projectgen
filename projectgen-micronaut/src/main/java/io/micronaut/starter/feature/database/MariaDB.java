@@ -26,6 +26,15 @@ import jakarta.inject.Singleton;
 
 import java.util.Optional;
 
+/**
+ * Feature that adds support for MariaDB database.
+ * <p>
+ * Provides the MariaDB JDBC and R2DBC drivers, along with default configuration values.
+ * </p>
+ * <p>
+ * Extends {@link MySQLCompatibleFeature}, sharing compatibility with MySQL.
+ * </p>
+ */
 @Requires(property = "micronaut.starter.feature.mariadb.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class MariaDB extends MySQLCompatibleFeature {

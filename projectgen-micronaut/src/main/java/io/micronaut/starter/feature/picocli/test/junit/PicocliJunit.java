@@ -33,6 +33,11 @@ import io.micronaut.projectgen.core.rocker.RockerTemplate;
 
 import jakarta.inject.Singleton;
 
+/**
+ * Adds a Picocli JUnit test for CLI applications.
+ *
+ * <p>Generates language-specific test templates using JUnit for Picocli commands.</p>
+ */
 @Requires(property = "micronaut.starter.feature.picocli.junit.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class PicocliJunit implements PicocliTestFeature {

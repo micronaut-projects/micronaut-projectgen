@@ -38,6 +38,12 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Kafka Streams messaging feature.
+ * <p>
+ * Adds support for Kafka Streams and ensures Kafka feature is included if not already selected.
+ * Provides example listener and factory templates in multiple languages.
+ */
 @Requires(property = "micronaut.starter.feature.kafka.streams.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class KafkaStreams extends EaseTestingFeature implements MessagingFeature, SharedTestResourceFeature, OpenRewriteFeature {

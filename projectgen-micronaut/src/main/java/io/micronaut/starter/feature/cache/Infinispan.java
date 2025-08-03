@@ -23,6 +23,10 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Infinispan caching feature for Micronaut applications.
+ * Provides integration and configuration recipes for using Infinispan as a cache provider.
+ */
 @Requires(property = "micronaut.starter.feature.cache.infinispan.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Infinispan implements CacheFeature, OpenRewriteFeature {

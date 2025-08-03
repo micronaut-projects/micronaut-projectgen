@@ -28,6 +28,10 @@ import java.util.List;
 
 import static io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils.GROUP_ID_MICRONAUT_SERDE;
 
+/**
+ * Represents a serialization feature that extends JSON support in Micronaut.
+ * Provides default dependencies and configuration for Micronaut serialization modules.
+ */
 public interface SerializationFeature extends JsonFeature {
     String MICRONAUT_SERIALIZATION = "micronaut.serialization";
     String ARTIFACT_ID_MICRONAUT_JACKSON_CORE = "micronaut-jackson-core";

@@ -26,6 +26,12 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Provides support for Project Lombok in Java projects.
+ *
+ * This feature integrates Lombok annotations to reduce boilerplate code.
+ * It requires Java as the language.
+ */
 @Requires(property = "micronaut.starter.feature.lombok.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class ProjectLombok implements LanguageSpecificFeature, OpenRewriteFeature {

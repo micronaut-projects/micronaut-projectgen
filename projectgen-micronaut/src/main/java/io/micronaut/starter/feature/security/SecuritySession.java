@@ -26,6 +26,10 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Security feature that adds support for Session based Authentication
+ * within the Micronaut security framework.
+ */
 @Requires(property = "micronaut.starter.feature.security.session.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class SecuritySession extends SecurityFeature implements SecurityAuthenticationModeProvider, OpenRewriteFeature {

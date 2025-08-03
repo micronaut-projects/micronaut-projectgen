@@ -23,6 +23,10 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Hazelcast caching feature for Micronaut applications.
+ * Adds Hazelcast support and provides the necessary configuration recipes.
+ */
 @Requires(property = "micronaut.starter.feature.cache.hazelcast.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Hazelcast implements CacheFeature, OpenRewriteFeature {

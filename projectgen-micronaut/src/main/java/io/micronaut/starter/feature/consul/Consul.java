@@ -27,6 +27,10 @@ import jakarta.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * OpenRewrite feature for Consul integration.
+ * Provides recipes for Consul configuration depending on the presence of DistributedConfigFeature.
+ */
 @Requires(property = "micronaut.starter.feature.consul.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Consul implements OpenRewriteFeature {

@@ -28,6 +28,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ * Validates that AWS Lambda features are used with supported Java versions (JDK 17 or 21).
+ */
 @Singleton
 public class AwsLambdaFeatureValidator implements FeatureValidator {
 

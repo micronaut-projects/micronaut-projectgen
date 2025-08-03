@@ -25,6 +25,9 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that adds support for Micronaut Kubernetes Informers.
+ */
 @Requires(property = "micronaut.starter.feature.kubernetes.informer.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class KubernetesInformer implements OpenRewriteFeature {

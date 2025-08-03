@@ -28,6 +28,9 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that adds and enables OpenAPI documentation conversion to AsciiDoc format.
+ */
 @Requires(property = "micronaut.starter.feature.openapi.adoc.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class OpenApiAdoc implements OpenRewriteFeature, MicronautServerDependent {

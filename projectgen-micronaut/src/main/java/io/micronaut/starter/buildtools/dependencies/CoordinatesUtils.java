@@ -38,6 +38,10 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Stream;
 
+/**
+ * Utility class for reading and parsing Maven dependency coordinates from XML documents.
+ * Provides functionality to extract groupId, artifactId, version, and type (pom) from dependency XML nodes.
+ */
 public final class CoordinatesUtils {
     private static final Logger LOG = LoggerFactory.getLogger(CoordinatesUtils.class);
 

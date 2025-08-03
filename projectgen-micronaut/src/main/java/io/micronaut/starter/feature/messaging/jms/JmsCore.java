@@ -24,6 +24,9 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Core JMS feature providing Micronaut support for JMS messaging.
+ */
 @Requires(property = "micronaut.starter.feature.jms.core.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class JmsCore extends AbstractJmsFeature implements OpenRewriteFeature {

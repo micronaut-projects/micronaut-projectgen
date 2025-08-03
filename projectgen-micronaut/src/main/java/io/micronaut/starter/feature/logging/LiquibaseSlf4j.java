@@ -24,6 +24,12 @@ import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.starter.feature.ThirdPartyLibraryFeature;
 import jakarta.inject.Singleton;
 
+/**
+ * Feature for integrating Liquibase SLF4J logging implementation.
+ * <p>
+ * Provides a Liquibase logger implementation that delegates directly to SLF4J,
+ * enabling consistent logging integration.
+ */
 @Requires(property = "micronaut.starter.feature.liquibase.slf4j.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class LiquibaseSlf4j implements ThirdPartyLibraryFeature, LoggingFeature {

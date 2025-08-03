@@ -29,6 +29,12 @@ import jakarta.inject.Singleton;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Core Micronaut Security feature.
+ *
+ * <p>Adds a full featured and customizable security solution to the application,
+ * including configuration of security intercept URL maps contributed by other features.</p>
+ */
 @Requires(property = "micronaut.starter.feature.security.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Security extends SecurityFeature implements OpenRewriteFeature {

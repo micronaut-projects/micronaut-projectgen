@@ -29,6 +29,11 @@ import jakarta.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * RabbitMQ messaging feature implementation.
+ * <p>
+ * Adds support for RabbitMQ messaging.
+ */
 @Requires(property = "micronaut.starter.feature.rabbitmq.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class RabbitMQ extends EaseTestingFeature implements MessagingFeature, SharedTestResourceFeature, OpenRewriteFeature {

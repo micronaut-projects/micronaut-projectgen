@@ -32,6 +32,10 @@ import jakarta.inject.Singleton;
 
 import java.util.Set;
 
+/**
+ * Feature that adds support for Kotlin Symbol Processing (KSP) in Micronaut applications.
+ * This feature is intended for Kotlin projects using Gradle and enables compile-time code processing.
+ */
 @Requires(property = "micronaut.starter.feature.ksp.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class KotlinSymbolProcessing implements KotlinSupportFeature, DefaultFeature, GradleSpecificFeature, KotlinSymbolProcessingFeature {

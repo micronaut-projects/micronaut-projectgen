@@ -26,6 +26,9 @@ import jakarta.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A feature that configures SQL DataSources using the Commons DBCP connection pool.
+ */
 @Requires(property = "micronaut.starter.feature.jdbc.dbcp.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Dbcp extends JdbcFeature implements OpenRewriteFeature {

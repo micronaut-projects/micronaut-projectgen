@@ -24,6 +24,9 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Security feature for LDAP (Lightweight Directory Access Protocol) authentication support.
+ */
 @Requires(property = "micronaut.starter.feature.security.ldap.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class SecurityLdap extends SecurityFeature implements OpenRewriteFeature {

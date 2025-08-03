@@ -27,6 +27,12 @@ import io.micronaut.projectgen.core.rocker.RockerTemplate;
 import io.micronaut.starter.util.VersionInfo;
 import jakarta.inject.Singleton;
 
+/**
+ * Logging feature that adds Log4j 2 support.
+ * <p>
+ * This feature configures the necessary dependencies and provides a default
+ * Log4j 2 configuration file for the project.
+ */
 @Requires(property = "micronaut.starter.feature.log4j2.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Log4j2 implements LoggingFeature {

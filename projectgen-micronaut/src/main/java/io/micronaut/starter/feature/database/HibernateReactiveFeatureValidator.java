@@ -26,6 +26,15 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ * Validator for Hibernate Reactive feature compatibility.
+ * <p>
+ * Ensures that:
+ * <ul>
+ *   <li>A compatible database driver feature is selected when Hibernate Reactive is enabled.</li>
+ *   <li>The Java version is at least JDK 11 when Hibernate Reactive is enabled.</li>
+ * </ul>
+ */
 @Singleton
 public class HibernateReactiveFeatureValidator implements FeatureValidator {
     private final String errorMsg;

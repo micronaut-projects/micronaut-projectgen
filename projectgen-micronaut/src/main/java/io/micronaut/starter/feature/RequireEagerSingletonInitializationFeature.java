@@ -17,5 +17,9 @@ package io.micronaut.starter.feature;
 
 import io.micronaut.projectgen.core.feature.Feature;
 
+/**
+ * Marker interface indicating that a feature requires
+ * eager initialization of singletons.
+ */
 public interface RequireEagerSingletonInitializationFeature extends Feature {
 }

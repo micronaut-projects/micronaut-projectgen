@@ -19,6 +19,9 @@ import io.micronaut.core.annotation.NonNull;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.starter.feature.MicronautRuntimeFeature;
 
+/**
+ * Marker interface for Azure-specific Micronaut runtime features.
+ */
 public interface AzureMicronautRuntimeFeature extends MicronautRuntimeFeature {
     @Override
     @NonNull

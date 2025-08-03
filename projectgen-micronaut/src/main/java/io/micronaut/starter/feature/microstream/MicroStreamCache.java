@@ -25,6 +25,9 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature implementation for using MicroStream as a cache in Micronaut applications.
+ */
 @Requires(property = "micronaut.starter.feature.microstream.cache.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class MicroStreamCache implements MicroStreamFeature, OpenRewriteFeature {

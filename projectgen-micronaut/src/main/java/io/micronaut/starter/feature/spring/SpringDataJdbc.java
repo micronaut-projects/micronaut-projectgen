@@ -26,6 +26,10 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that adds support for using Spring Data JDBC Annotations in Micronaut applications.
+ * It ensures the associated DataJdbc feature is included if not already present.
+ */
 @Requires(property = "micronaut.starter.feature.spring.data.jdbc.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class SpringDataJdbc extends SpringFeature implements OpenRewriteFeature {

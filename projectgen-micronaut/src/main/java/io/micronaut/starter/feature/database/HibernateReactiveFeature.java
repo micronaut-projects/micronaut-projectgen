@@ -26,6 +26,10 @@ import io.micronaut.starter.feature.testresources.TestResources;
 
 import java.util.Optional;
 
+/**
+ * Base feature class for Micronaut Data Hibernate Reactive support,
+ * providing configuration and dependency management for reactive JPA.
+ */
 public abstract class HibernateReactiveFeature extends EaseTestingFeature implements JpaFeature {
 
     public static final String JPA_DEFAULT_REACTIVE = "jpa.default.reactive";

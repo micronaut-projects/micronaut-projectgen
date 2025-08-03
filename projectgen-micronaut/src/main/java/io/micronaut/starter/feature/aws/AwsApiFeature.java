@@ -22,6 +22,13 @@ import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils;
 
+/**
+ * Interface representing an AWS API Gateway feature.
+ * <p>
+ * Provides integration with Amazon API Gateway for routing HTTP requests to AWS Lambda functions.
+ * Adds the required Micronaut AWS API Gateway dependency and links to both Micronaut and AWS documentation.
+ * Supports CLI and default application types.
+ */
 public interface AwsApiFeature extends AwsLambdaEventFeature, LambdaTrigger {
     Dependency MICRONAUT_AWS_APIGATEWAY = MicronautDependencyUtils.awsDependency()
         .artifactId("micronaut-aws-apigateway")

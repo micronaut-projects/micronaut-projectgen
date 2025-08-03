@@ -29,6 +29,11 @@ import io.micronaut.projectgen.core.rocker.RockerTemplate;
 
 import jakarta.inject.Singleton;
 
+/**
+ * Adds a Picocli test using KoTest for Kotlin-based CLI applications.
+ *
+ * <p>Generates a test class using the KoTest framework for Picocli commands.</p>
+ */
 @Requires(property = "micronaut.starter.feature.picocli.kotest.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class PicocliKoTest implements PicocliTestFeature {

@@ -24,6 +24,9 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * JMS feature implementation for ActiveMQ Artemis messaging.
+ */
 @Requires(property = "micronaut.starter.feature.jms.activemq.artemis.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class ActiveMqArtemis extends AbstractJmsFeature implements OpenRewriteFeature {

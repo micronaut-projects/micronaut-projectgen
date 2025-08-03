@@ -24,6 +24,9 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that adds support for Micrometer metrics with AWS CloudWatch as the reporter.
+ */
 @Requires(property = "micronaut.starter.feature.micrometer.cloudwatch.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class CloudWatch extends MicrometerFeature implements MicrometerRegistryFeature, OpenRewriteFeature {

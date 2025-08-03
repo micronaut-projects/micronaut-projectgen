@@ -27,6 +27,9 @@ import jakarta.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Groovy module feature that provides extensions for JSON serialization and parsing.
+ */
 @Requires(property = "micronaut.starter.feature.groovy.json.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class JsonGroovyModule implements GroovyModuleFeature, OpenRewriteFeature {

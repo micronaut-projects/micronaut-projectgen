@@ -19,6 +19,10 @@ import io.micronaut.projectgen.core.generator.GeneratorContext;
 
 import java.util.List;
 
+/**
+ * Abstract base class for configuring database-specific recipes
+ * used in Micronaut Data features.
+ */
 public abstract class DataDriverConfiguration {
 
     protected final void addDatabaseConfigRecipe(GeneratorContext generatorContext, List<String> recipes) {

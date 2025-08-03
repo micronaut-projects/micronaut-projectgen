@@ -27,6 +27,11 @@ import jakarta.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Adds Swagger UI as a static OpenAPI documentation view.
+ *
+ * <p>Registers static resources and anonymous access mapping for the Swagger UI.</p>
+ */
 @Requires(property = "micronaut.starter.feature.swagger.ui.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class SwaggerUI extends OpenApiView implements ContributingInterceptUrlMapFeature, OpenRewriteFeature {

@@ -26,6 +26,9 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that adds reactive support using RxJava 1.
+ */
 @Requires(property = "micronaut.starter.feature.rxjava1.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class RxJava1 implements ReactiveFeature, OpenRewriteFeature {

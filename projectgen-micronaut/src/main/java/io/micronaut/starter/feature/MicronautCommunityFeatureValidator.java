@@ -22,6 +22,9 @@ import io.micronaut.starter.util.VersionInfo;
 import jakarta.inject.Singleton;
 import java.util.Set;
 
+/**
+ * Validates Micronaut community features to ensure compatibility with the current Micronaut Framework version.
+ */
 @Singleton
 public class MicronautCommunityFeatureValidator implements FeatureValidator {
 

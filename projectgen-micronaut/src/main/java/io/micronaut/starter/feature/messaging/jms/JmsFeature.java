@@ -17,5 +17,8 @@ package io.micronaut.starter.feature.messaging.jms;
 
 import io.micronaut.starter.feature.messaging.MessagingFeature;
 
+/**
+ * Marker interface for features related to JMS messaging.
+ */
 public interface JmsFeature extends MessagingFeature {
 }

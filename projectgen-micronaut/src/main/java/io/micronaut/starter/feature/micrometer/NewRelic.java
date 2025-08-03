@@ -24,6 +24,10 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Micrometer feature that adds support for Micrometer metrics
+ * with the New Relic reporter.
+ */
 @Requires(property = "micronaut.starter.feature.micrometer.new.relic.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class NewRelic extends MicrometerFeature implements MicrometerRegistryFeature, OpenRewriteFeature {

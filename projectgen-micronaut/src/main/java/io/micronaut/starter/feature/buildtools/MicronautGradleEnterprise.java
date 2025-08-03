@@ -30,6 +30,11 @@ import jakarta.inject.Singleton;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Gradle Enterprise feature customized for Micronaut,
+ * configuring Micronaut-specific Gradle Enterprise settings
+ * and applying Maven extensions for build scans and custom user data.
+ */
 @Requires(property = "micronaut.starter.feature.micronaut.gradle.enterprise.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Requires(property = "micronaut.starter.feature.gradle.enterprise.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton

@@ -29,6 +29,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Objects;
 
+/**
+ * Holds metadata about a generated Micronaut project.
+ *
+ * Includes information such as application type, language, build tool, test framework,
+ * JDK version, Micronaut version, and selected features.
+ */
 @Introspected
 public class Generated {
     private final ApplicationType type;

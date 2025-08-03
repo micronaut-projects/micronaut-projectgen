@@ -25,6 +25,11 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that adds support for retry and fallback mechanisms in Micronaut applications.
+ *
+ * <p>Enables automatic retries on operation failures to improve resilience.</p>
+ */
 @Requires(property = "micronaut.starter.feature.retry.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Retry implements OpenRewriteFeature {

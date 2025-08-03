@@ -31,6 +31,10 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that adds support for Micrometer annotations such as @Timed and @Counted,
+ * enabling automatic metrics collection via annotations in a Micronaut server application.
+ */
 @Requires(property = "micronaut.starter.feature.micrometer.annotation.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class MicrometerAnnotations implements Feature, MicronautServerDependent, OpenRewriteFeature {

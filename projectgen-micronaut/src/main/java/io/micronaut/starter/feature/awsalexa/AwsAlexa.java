@@ -81,6 +81,10 @@ import jakarta.inject.Singleton;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Feature that adds support for building Alexa Skills using Micronaut.
+ * Integrates with AWS Alexa services.
+ */
 @Requires(property = "micronaut.starter.feature.aws.alexa.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class AwsAlexa implements OpenRewriteFeature, AwsCloudFeature, CodeContributingFeature {

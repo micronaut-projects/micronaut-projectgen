@@ -30,6 +30,11 @@ import java.util.List;
 
 import static io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils.GROUP_ID_MICRONAUT_TESTRESOURCES;
 
+/**
+ * JMS feature implementation for AWS SQS messaging.
+ * <p>
+ * Provides support for AWS SQS JMS messaging integration.
+ */
 @Requires(property = "micronaut.starter.feature.jms.sqs.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class SQS extends AbstractJmsFeature implements TestResourcesAdditionalModulesProvider, OpenRewriteFeature {

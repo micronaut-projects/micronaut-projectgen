@@ -32,6 +32,10 @@ import io.micronaut.projectgen.micronaut.template.buildtools.maven.extensions;
 import io.micronaut.projectgen.core.rocker.RockerTemplate;
 import jakarta.inject.Singleton;
 
+/**
+ * Feature to add Gradle Enterprise plugin support, enabling integration
+ * with Gradle Enterprise and scans.gradle.com.
+ */
 @Requires(property = "micronaut.starter.feature.gradle.enterprise.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class GradleEnterprise implements Feature, GradleEnterpriseConfiguration {

@@ -19,6 +19,16 @@ import io.micronaut.core.annotation.NonNull;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 
+/**
+ * Utility class providing constants and factory methods for creating
+ * {@link Dependency} instances representing Micronaut framework dependencies.
+ *
+ * <p>This class centralizes group IDs, artifact IDs, and common dependency configurations
+ * to simplify and standardize dependency declarations across Micronaut-based projects.</p>
+ *
+ * <p>Includes support for various Micronaut modules, annotation processors, and build tool-specific
+ * configurations (Gradle, Maven).</p>
+ */
 public final class MicronautDependencyUtils {
     public static final String ARTIFACT_ID_MICRONAUT_DATA_TX_HIBERNATE = "micronaut-data-tx-hibernate";
     public static final String ARTIFACT_ID_MICRONAUT_DATA_PROCESSOR_ARTIFACT = "micronaut-data-processor";

@@ -39,6 +39,14 @@ import java.util.Optional;
 
 import static io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils.GROUP_ID_MICRONAUT_TESTRESOURCES;
 
+/**
+ * Abstract base class for database driver features.
+ *
+ * <p>Handles dependency management, configuration, and integration of JDBC, R2DBC,
+ * Hibernate, migration tools, and test resources for Micronaut projects.
+ * Provides helper methods for feature selection, dependency resolution, and
+ * implementation of database-specific logic.
+ */
 public abstract class DatabaseDriverFeature extends EaseTestingFeature implements OneOfFeature, DatabaseDriverFeatureDependencies, TestResourcesAdditionalModulesProvider {
 
     private final JdbcFeature jdbcFeature;

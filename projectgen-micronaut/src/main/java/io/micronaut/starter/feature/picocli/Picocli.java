@@ -29,6 +29,11 @@ import jakarta.inject.Singleton;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Core feature for enabling Picocli support in CLI applications.
+ *
+ * <p>Applies automatically for CLI application types and adds OpenRewrite recipe support.</p>
+ */
 @Requires(property = "micronaut.starter.feature.picocli.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Picocli implements DefaultFeature, OpenRewriteFeature {

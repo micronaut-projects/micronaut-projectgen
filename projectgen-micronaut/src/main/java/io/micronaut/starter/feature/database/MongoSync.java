@@ -25,6 +25,11 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that adds support for the MongoDB Synchronous Driver.
+ * This feature includes integration with Testcontainers for MongoDB and
+ * configures the synchronous MongoDB driver for blocking database access.
+ */
 @Requires(property = "micronaut.starter.feature.mongo.sync.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class MongoSync extends MongoFeature implements OpenRewriteFeature {

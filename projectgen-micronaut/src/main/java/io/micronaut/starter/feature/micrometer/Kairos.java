@@ -24,6 +24,9 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that adds support for Micrometer metrics with KairosDB as the metrics reporter.
+ */
 @Requires(property = "micronaut.starter.feature.micrometer.kairos.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Kairos extends MicrometerFeature implements MicrometerRegistryFeature, OpenRewriteFeature {

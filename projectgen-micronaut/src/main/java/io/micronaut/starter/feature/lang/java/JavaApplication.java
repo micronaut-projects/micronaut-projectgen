@@ -42,6 +42,9 @@ import io.micronaut.projectgen.core.rocker.RockerTemplate;
 
 import jakarta.inject.Singleton;
 
+/**
+ * Represents the Java application feature that can be applied during project generation.
+ */
 @Requires(property = "micronaut.starter.feature.java.application.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class JavaApplication implements JavaApplicationFeature {

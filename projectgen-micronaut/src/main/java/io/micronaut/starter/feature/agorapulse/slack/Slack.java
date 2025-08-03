@@ -84,6 +84,12 @@ import static io.micronaut.starter.feature.agorapulse.AgoraPulseFeature.addTestU
 import static io.micronaut.starter.feature.agorapulse.AgoraPulseFeature.mainModel;
 import static io.micronaut.starter.feature.agorapulse.AgoraPulseFeature.testModel;
 
+/**
+ * Micronaut Slack community feature.
+ *
+ * Integrates the Micronaut Slack HTTP client library into Micronaut applications,
+ * providing idiomatic Slack integration as an alternative to Bolt Micronaut.
+ */
 @Requires(property = "micronaut.starter.feature.agorapulse.micronaut.slack.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Slack implements AgoraPulseFeature {

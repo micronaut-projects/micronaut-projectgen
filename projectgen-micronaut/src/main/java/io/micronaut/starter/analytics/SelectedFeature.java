@@ -19,6 +19,9 @@ import io.micronaut.core.annotation.Introspected;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.naming.Named;
 
+/**
+ * Represents a feature selected during project generation.
+ */
 @Introspected
 public class SelectedFeature implements Named {
     private final String name;

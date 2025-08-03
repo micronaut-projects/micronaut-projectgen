@@ -25,6 +25,9 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that adds support for Json-smart, a performance-focused JSON processor library.
+ */
 @Requires(property = "micronaut.starter.feature.json.smart.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class JsonSmart implements OpenRewriteFeature {

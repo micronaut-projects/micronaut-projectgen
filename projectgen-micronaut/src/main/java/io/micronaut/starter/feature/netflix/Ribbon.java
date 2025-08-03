@@ -25,6 +25,9 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that adds support for client-side load balancing using Netflix Ribbon.
+ */
 @Requires(property = "micronaut.starter.feature.netflix.ribbon.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Ribbon implements OpenRewriteFeature {

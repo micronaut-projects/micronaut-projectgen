@@ -26,6 +26,9 @@ import jakarta.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Feature to add support for the Jetty server in a Micronaut application.
+ */
 @Requires(property = "micronaut.starter.feature.jetty.server.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Jetty extends AbstractServletFeature implements OpenRewriteFeature {

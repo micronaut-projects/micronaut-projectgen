@@ -50,6 +50,10 @@ import jakarta.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Feature that adds support for deploying Micronaut Functions using a custom AWS Lambda runtime.
+ * Ensures necessary AWS Lambda and HTTP client features are included.
+ */
 @Requires(property = "micronaut.starter.feature.aws.lambda.custom.runtime.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class AwsLambdaCustomRuntime implements FunctionFeature, ApplicationFeature, AwsCloudFeature, OpenRewriteFeature {

@@ -25,6 +25,9 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature providing support for Micronaut Data Spring JDBC integration.
+ */
 @Requires(property = "micronaut.starter.feature.data.spring.jdbc.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class DataSpringJdbcFeature implements OpenRewriteFeature {

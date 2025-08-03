@@ -23,6 +23,9 @@ import io.micronaut.projectgen.micronaut.template.buildtools.maven.repository;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Represents a Maven repository configuration that can be rendered using a Rocker template.
+ */
 public class MavenRepository extends RockerWritable {
 
     public MavenRepository(RockerModel model) {

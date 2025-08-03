@@ -25,6 +25,13 @@ import jakarta.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * JDBC feature for configuring SQL DataSources using the Tomcat Connection Pool.
+ * <p>
+ * Adds support for the Tomcat JDBC connection pool, including
+ * necessary dependencies and database-specific configuration.
+ * </p>
+ */
 @Requires(property = "micronaut.starter.feature.jdbc.tomcat.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Tomcat extends JdbcFeature implements OpenRewriteFeature {

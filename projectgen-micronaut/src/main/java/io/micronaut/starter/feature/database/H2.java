@@ -24,6 +24,9 @@ import jakarta.inject.Singleton;
 
 import java.util.Optional;
 
+/**
+ * Database driver feature for the embedded H2 database.
+ */
 @Requires(property = "micronaut.starter.feature.h2.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 @Primary

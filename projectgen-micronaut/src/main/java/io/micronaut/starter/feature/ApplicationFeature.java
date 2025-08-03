@@ -22,6 +22,9 @@ import io.micronaut.projectgen.core.buildtools.BuildProperties;
 import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 
+/**
+ * Feature representing an application entry point or application-specific behaviors.
+ */
 public interface ApplicationFeature extends Feature {
 
     @Nullable

@@ -26,6 +26,10 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that enables REST API error responses in the
+ * application/problem+json format following the Problem Details specification.
+ */
 @Requires(property = "micronaut.starter.feature.problem.json.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class ProblemJson implements OpenRewriteFeature {

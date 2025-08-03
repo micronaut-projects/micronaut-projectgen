@@ -19,6 +19,9 @@ import com.fizzed.rocker.RockerOutput;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.annotation.Nullable;
 
+/**
+ * Represents the base rendering context for generating Micronaut application configuration.
+ */
 public abstract class ApplicationRenderingContext {
 
     private final String defaultEnvironment;

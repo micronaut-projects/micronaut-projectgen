@@ -19,6 +19,9 @@ import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.starter.feature.database.TestContainers;
 
+/**
+ * Abstract base class for testing features integrating TestResources and TestContainers.
+ */
 public abstract class EaseTestingFeature implements Feature {
     private final TestResources testResources;
     private final TestContainers testContainers;

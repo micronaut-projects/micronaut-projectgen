@@ -29,6 +29,11 @@ import io.micronaut.starter.feature.RequireKaptFeature;
 import io.micronaut.projectgen.core.rocker.RockerTemplate;
 import jakarta.inject.Singleton;
 
+/**
+ * Feature for generating a Kotlin-based CLI application using Picocli.
+ *
+ * <p>Creates a Picocli command as the main application class and sets up the Kotlin project structure accordingly.</p>
+ */
 @Requires(property = "micronaut.starter.feature.picocli.kotlin.application.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class PicocliKotlinApplication implements RequireKaptFeature, KotlinApplicationFeature {

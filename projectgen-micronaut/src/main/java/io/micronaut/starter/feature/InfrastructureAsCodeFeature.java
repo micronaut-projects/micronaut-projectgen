@@ -18,6 +18,11 @@ package io.micronaut.starter.feature;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.feature.FeaturePhase;
 
+/**
+ * Marker interface for features related to Infrastructure as Code (IaC).
+ * <p>
+ * Sets the feature order to the Infrastructure as Code phase.
+ */
 public interface InfrastructureAsCodeFeature extends Feature {
     @Override
     default int getOrder() {

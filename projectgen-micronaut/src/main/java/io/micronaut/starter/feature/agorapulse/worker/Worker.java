@@ -61,6 +61,10 @@ import static io.micronaut.starter.feature.agorapulse.AgoraPulseFeature.addTest;
 import static io.micronaut.starter.feature.agorapulse.AgoraPulseFeature.mainModel;
 import static io.micronaut.starter.feature.agorapulse.AgoraPulseFeature.testModel;
 
+/**
+ * Micronaut Worker community feature.
+ * Provides advanced distributed scheduling capabilities for Micronaut applications.
+ */
 @Requires(property = "micronaut.starter.feature.agorapulse.micronaut.worker.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Worker implements AgoraPulseFeature {

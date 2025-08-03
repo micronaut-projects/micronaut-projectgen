@@ -27,6 +27,11 @@ import jakarta.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Feature that enables support for Micronaut Data JDBC.
+ * <p>
+ * Registers required dependencies and configuration for using JDBC-based persistence with Micronaut Data.
+ */
 @Requires(property = "micronaut.starter.feature.data.jdbc.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class DataJdbc extends DataDriverConfiguration implements DataFeature, OpenRewriteFeature {

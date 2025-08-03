@@ -29,6 +29,9 @@ import java.util.List;
 
 import static io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils.GROUP_ID_MICRONAUT_TESTRESOURCES;
 
+/**
+ * Base feature class for OpenSearch-related features providing testing support.
+ */
 public abstract class OpenSearchFeature extends EaseTestingFeature implements OpenSearchContributingTestContainerDependency, TestResourcesAdditionalModulesProvider {
 
     protected OpenSearchFeature(

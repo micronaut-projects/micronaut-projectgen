@@ -24,6 +24,9 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature providing an RxJava 2 based HTTP client implementation.
+ */
 @Requires(property = "micronaut.starter.feature.rxjava2.http.client.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class RxJava2HttpClient implements OpenRewriteFeature {

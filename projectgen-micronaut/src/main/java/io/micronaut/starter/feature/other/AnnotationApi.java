@@ -25,6 +25,9 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that adds Jakarta Annotations API dependency.
+ */
 @Requires(property = "micronaut.starter.feature.annotation.api.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class AnnotationApi implements OpenRewriteFeature {

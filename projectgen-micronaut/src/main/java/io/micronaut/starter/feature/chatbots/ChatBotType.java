@@ -17,6 +17,9 @@ package io.micronaut.starter.feature.chatbots;
 
 import io.micronaut.core.util.StringUtils;
 
+/**
+ * Enumeration of supported chatbot types.
+ */
 public enum ChatBotType {
     BASECAMP,
     TELEGRAM;

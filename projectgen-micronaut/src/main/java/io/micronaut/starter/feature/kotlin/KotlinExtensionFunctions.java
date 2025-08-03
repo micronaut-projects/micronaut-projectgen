@@ -32,6 +32,10 @@ import jakarta.inject.Singleton;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Feature that provides Kotlin extension functions to enhance the Micronaut experience when using Kotlin.
+ * Only applicable when the selected language is Kotlin.
+ */
 @Requires(property = "micronaut.starter.feature.kotlin.extension.functions.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class KotlinExtensionFunctions implements OpenRewriteFeature, KotlinSpecificFeature {

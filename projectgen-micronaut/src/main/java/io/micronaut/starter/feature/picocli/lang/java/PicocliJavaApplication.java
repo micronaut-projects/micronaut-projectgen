@@ -29,6 +29,11 @@ import io.micronaut.projectgen.core.rocker.RockerTemplate;
 import io.micronaut.projectgen.micronaut.template.picocli.lang.java.picocliApplication;
 import jakarta.inject.Singleton;
 
+/**
+ * Feature for generating a Java-based CLI application using Picocli.
+ *
+ * <p>Creates a Picocli command as the main application class and configures the Java project accordingly.</p>
+ */
 @Requires(property = "micronaut.starter.feature.picocli.java.application.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class PicocliJavaApplication implements JavaApplicationFeature {

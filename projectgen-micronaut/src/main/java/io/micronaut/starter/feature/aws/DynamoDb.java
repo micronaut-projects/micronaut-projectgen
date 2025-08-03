@@ -42,6 +42,11 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that integrates Amazon DynamoDB support using AWS SDK 2.x
+ * and Micronaut validation. It adds necessary templates for repository,
+ * configuration, and CI-related classes during project generation.
+ */
 @Requires(property = "micronaut.starter.feature.dynamodb.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class DynamoDb implements AwsFeature, OpenRewriteFeature {

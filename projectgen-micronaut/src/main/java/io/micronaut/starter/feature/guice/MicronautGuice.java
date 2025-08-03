@@ -24,6 +24,11 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Provides integration of Guice modules into Micronaut applications.
+ * <p>
+ * Enables Guice bindings to be available for Dependency Injection in Micronaut.
+ */
 @Requires(property = "micronaut.starter.feature.guice.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class MicronautGuice implements OpenRewriteFeature {

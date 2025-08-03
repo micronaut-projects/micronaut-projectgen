@@ -20,6 +20,11 @@ import io.micronaut.starter.feature.database.*;
 
 import java.util.List;
 
+/**
+ * Utility base class for R2DBC features that provides common functionality
+ * for adding database-specific R2DBC configuration recipes based on the
+ * selected database driver feature in the generator context.
+ */
 public abstract class R2dbcConfigurationUtils {
 
     protected final void addDatabaseConfigRecipe(GeneratorContext generatorContext,

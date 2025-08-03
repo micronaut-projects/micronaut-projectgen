@@ -30,6 +30,13 @@ import java.util.Optional;
 
 import static io.micronaut.starter.feature.database.DataHibernateReactive.IO_VERTX_DEPENDENCY_GROUP;
 
+/**
+ * Feature for Microsoft SQL Server database support.
+ * <p>
+ * Provides the necessary dependencies, default configuration, and connection URLs for
+ * both JDBC and R2DBC usage with SQL Server. Also integrates with test resources and
+ * test containers when applicable.
+ */
 @Requires(property = "micronaut.starter.feature.sqlserver.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class SQLServer extends DatabaseDriverFeature {

@@ -18,6 +18,11 @@ package io.micronaut.starter.feature.function.azure;
 import io.micronaut.starter.feature.function.Cloud;
 import io.micronaut.starter.feature.function.CloudFeature;
 
+/**
+ * Marker interface for features that are specific to the Azure cloud platform.
+ * <p>
+ * Implements {@link CloudFeature} and defaults the cloud to {@link Cloud#AZURE}.
+ */
 public interface AzureCloudFeature extends CloudFeature {
     @Override
     default Cloud getCloud() {

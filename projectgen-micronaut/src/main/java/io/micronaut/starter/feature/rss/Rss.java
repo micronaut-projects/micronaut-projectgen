@@ -27,6 +27,11 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that adds support for generating RSS feeds.
+ *
+ * <p>Enables RSS feed generation capabilities in the application.</p>
+ */
 @Requires(property = "micronaut.starter.feature.rss.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Rss implements OpenRewriteFeature {

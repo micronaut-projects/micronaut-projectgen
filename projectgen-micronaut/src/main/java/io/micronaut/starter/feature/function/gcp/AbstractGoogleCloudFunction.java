@@ -24,6 +24,9 @@ import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.starter.feature.function.AbstractFunctionFeature;
 import io.micronaut.starter.feature.json.JacksonDatabindFeature;
 
+/**
+ * Base class for Google Cloud Function features providing common dependencies and configuration.
+ */
 public abstract class AbstractGoogleCloudFunction extends AbstractFunctionFeature implements GcpCloudFeature, GcpMicronautRuntimeFeature {
     public static final Dependency.Builder GCP_FUNCTIONS_FRAMEWORK_API = Dependency.builder()
         .groupId("com.google.cloud.functions")

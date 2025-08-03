@@ -25,6 +25,11 @@ import io.micronaut.starter.feature.messaging.MessagingFeature;
 import jakarta.inject.Singleton;
 import java.util.List;
 
+/**
+ * Nats.io messaging feature implementation.
+ * <p>
+ * Provides support for Nats.io messaging.
+ */
 @Requires(property = "micronaut.starter.feature.nats.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Nats implements MessagingFeature, OpenRewriteFeature {

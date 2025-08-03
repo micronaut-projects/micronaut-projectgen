@@ -28,6 +28,11 @@ import java.util.Optional;
 
 import static io.micronaut.starter.feature.database.DataHibernateReactive.IO_VERTX_DEPENDENCY_GROUP;
 
+/**
+ * Feature representing PostgreSQL database driver support.
+ * provides default configuration values for connecting to a PostgreSQL database.
+ * Supports both synchronous and reactive database access.
+ */
 @Requires(property = "micronaut.starter.feature.postgres.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class PostgreSQL extends DatabaseDriverFeature {

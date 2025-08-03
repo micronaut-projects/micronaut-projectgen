@@ -24,6 +24,12 @@ import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.starter.feature.ThirdPartyLibraryFeature;
 import jakarta.inject.Singleton;
 
+/**
+ * SLF4J Simple Logger feature for single-threaded applications.
+ * <p>
+ * Provides a lightweight logger implementation designed for use in
+ * applications running in single-threaded contexts.
+ */
 @Requires(property = "micronaut.starter.feature.slf4j.simple.logger.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Slf4jSimpleLogger implements ThirdPartyLibraryFeature, LoggingFeature {

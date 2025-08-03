@@ -15,6 +15,9 @@
  */
 package io.micronaut.starter.feature.messaging.jms;
 
+/**
+ * Base abstract implementation of the JmsFeature interface.
+ */
 public abstract class AbstractJmsFeature implements JmsFeature {
 
     @Override

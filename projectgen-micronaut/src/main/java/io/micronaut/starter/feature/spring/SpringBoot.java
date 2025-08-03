@@ -26,6 +26,9 @@ import jakarta.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Feature that adds support for using Spring Boot Annotations in Micronaut applications.
+ */
 @Requires(property = "micronaut.starter.feature.spring.boot.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class SpringBoot extends SpringFeature implements OpenRewriteFeature {

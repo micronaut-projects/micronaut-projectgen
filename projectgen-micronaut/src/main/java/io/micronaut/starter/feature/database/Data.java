@@ -22,6 +22,9 @@ import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.Feature;
 import jakarta.inject.Singleton;
 
+/**
+ * Feature for database-related support, not visible to users.
+ */
 @Requires(property = "micronaut.starter.feature.data.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Data implements Feature {

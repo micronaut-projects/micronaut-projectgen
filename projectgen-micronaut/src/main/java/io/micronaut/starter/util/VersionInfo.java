@@ -27,6 +27,9 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 
+/**
+ * Utility class for retrieving Micronaut and Java versioning information used during project generation.
+ */
 public final class VersionInfo {
     private static final Logger LOG = LoggerFactory.getLogger(VersionInfo.class);
 

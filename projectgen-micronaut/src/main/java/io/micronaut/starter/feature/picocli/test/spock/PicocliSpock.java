@@ -29,6 +29,11 @@ import io.micronaut.projectgen.core.rocker.RockerTemplate;
 
 import jakarta.inject.Singleton;
 
+/**
+ * Feature for generating Spock tests for Picocli CLI applications.
+ *
+ * <p>Provides Spock test templates and integrates them into the project structure.</p>
+ */
 @Requires(property = "micronaut.starter.feature.picocli.spock.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class PicocliSpock implements PicocliTestFeature {

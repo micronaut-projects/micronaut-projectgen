@@ -21,6 +21,12 @@ import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.starter.feature.MicronautRuntimeFeature;
 import io.micronaut.starter.feature.graalvm.GraalVM;
 
+/**
+ * Represents a Micronaut runtime feature specialized for AWS Lambda environments.
+ * <p>
+ * Determines the appropriate Micronaut runtime identifier based on the build tool
+ * and the presence of GraalVM in the selected features.
+ */
 public interface AwsMicronautRuntimeFeature extends MicronautRuntimeFeature {
 
     @Override

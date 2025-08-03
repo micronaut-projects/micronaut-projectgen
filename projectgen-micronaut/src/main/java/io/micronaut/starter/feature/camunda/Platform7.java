@@ -33,6 +33,9 @@ import io.micronaut.starter.feature.server.Netty;
 import io.micronaut.projectgen.micronaut.features.test.AssertJ;
 import jakarta.inject.Singleton;
 
+/**
+ * Camunda Platform 7 feature for embedding the Camunda Workflow Engine in Micronaut applications.
+ */
 @Requires(property = "micronaut.starter.feature.camunda.platform7.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Platform7 implements CamundaCommunityFeature {

@@ -20,6 +20,9 @@ import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.OneOfFeature;
 
+/**
+ * Represents a feature that provides server-side view rendering support.
+ */
 public interface ViewFeature extends OneOfFeature {
 
     String VIEWS_PATH = "src/main/resources/views/";

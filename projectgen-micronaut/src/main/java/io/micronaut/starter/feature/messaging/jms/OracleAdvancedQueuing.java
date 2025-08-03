@@ -26,6 +26,11 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * JMS feature for Oracle Advanced Queuing.
+ * <p>
+ * Adds support for Oracle Advanced Queuing JMS messaging.
+ */
 @Requires(property = "micronaut.starter.feature.jms.oracle.aq.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class OracleAdvancedQueuing extends AbstractJmsFeature implements OpenRewriteFeature {

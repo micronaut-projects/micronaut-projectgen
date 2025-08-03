@@ -22,6 +22,13 @@ import io.micronaut.starter.feature.aws.Cdk;
 import io.micronaut.starter.feature.function.awslambda.AwsLambda;
 import jakarta.inject.Singleton;
 
+/**
+ * Represents the ARM CPU architecture.
+ * This class implements the {@link CpuArchitecture} interface
+ * and provides metadata about the ARM architecture.
+ * It can be used alongside {@link Cdk} and the AWS Lambda feature
+ * to generate infrastructure specific to the ARM CPU architecture.
+ */
 @Requires(property = "micronaut.starter.feature.arm.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Arm implements CpuArchitecture {

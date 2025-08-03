@@ -27,6 +27,9 @@ import jakarta.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Feature for building Docker containers using Jib.
+ */
 @Requires(property = "micronaut.starter.feature.jib.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Jib implements OpenRewriteFeature {

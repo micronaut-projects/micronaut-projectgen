@@ -18,6 +18,10 @@ package io.micronaut.starter.options;
 import com.fizzed.rocker.RockerModel;
 import io.micronaut.projectgen.core.rocker.TestRockerModelProvider;
 
+/**
+ * Default implementation of {@link TestRockerModelProvider} that supplies Rocker templates
+ * for various test frameworks and languages.
+ */
 public class DefaultTestRockerModelProvider implements TestRockerModelProvider {
     private final RockerModel spock;
     private final RockerModel javaJunit;

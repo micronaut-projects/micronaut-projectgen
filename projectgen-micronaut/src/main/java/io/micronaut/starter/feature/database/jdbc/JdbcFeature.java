@@ -24,6 +24,14 @@ import io.micronaut.starter.feature.database.*;
 
 import java.util.List;
 
+/**
+ * Abstract base feature for JDBC-related functionality.
+ * <p>
+ * This class provides common configuration keys and behavior for
+ * JDBC connection setup, including default database driver selection,
+ * configuration property keys, and integration with supported database types.
+ * </p>
+ */
 public abstract class JdbcFeature implements OneOfFeature, DatabaseDriverConfigurationFeature {
 
     private static final String PREFIX = "datasources.default.";

@@ -23,6 +23,9 @@ import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.Feature;
 import jakarta.inject.Singleton;
 
+/**
+ * Feature for adding support to build GraalVM Native Images in Micronaut projects.
+ */
 @Requires(property = "micronaut.starter.feature.graalvm.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class GraalVM implements Feature {

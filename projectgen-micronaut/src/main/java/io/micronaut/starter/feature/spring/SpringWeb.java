@@ -26,6 +26,10 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature implementation that adds support for Spring MVC Controller Annotations,
+ * dependent on the core Spring feature and applicable to Micronaut server applications.
+ */
 @Requires(property = "micronaut.starter.feature.spring.web.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class SpringWeb extends SpringFeature implements MicronautServerDependent, OpenRewriteFeature {

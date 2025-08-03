@@ -43,6 +43,11 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
 
+/**
+ * Micronaut Console community feature provided by Agorapulse.
+ * Adds support for executing arbitrary code within Micronaut applications and functions.
+ * Configures necessary dependencies, example files, and default security settings.
+ */
 @Requires(property = "micronaut.starter.feature.agorapulse.micronaut.console.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Console implements AgoraPulseFeature {

@@ -20,6 +20,12 @@ import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 
 import java.util.Optional;
 
+/**
+ * Interface for database driver features that provide dependencies for different database integrations.
+ *
+ * <p>Implementors can specify R2DBC, Hibernate Reactive, or standard Java client dependencies,
+ * enabling unified dependency handling for database features.
+ */
 public interface DatabaseDriverFeatureDependencies {
     @NonNull
     default Optional<Dependency.Builder> getR2DbcDependency() {

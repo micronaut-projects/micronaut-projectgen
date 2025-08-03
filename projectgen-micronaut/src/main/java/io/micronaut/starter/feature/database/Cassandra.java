@@ -30,6 +30,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Feature that adds support for Cassandra persistence in Micronaut applications.
+ */
 @Requires(property = "micronaut.starter.feature.cassandra.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Cassandra implements OpenRewriteFeature, ContributingTestContainerDependency {

@@ -24,6 +24,9 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Micrometer feature that adds support for Stackdriver metrics reporter.
+ */
 @Requires(property = "micronaut.starter.feature.micrometer.stackdriver.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Stackdriver extends MicrometerFeature implements MicrometerRegistryFeature, OpenRewriteFeature {

@@ -21,6 +21,9 @@ import io.micronaut.starter.feature.testcontainers.ContributingTestContainerDepe
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Contributes the OpenSearch Testcontainers dependency for testing.
+ */
 public interface OpenSearchContributingTestContainerDependency extends ContributingTestContainerDependency {
 
     @Override

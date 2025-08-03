@@ -22,6 +22,9 @@ import io.micronaut.projectgen.core.options.Options;
 import jakarta.inject.Singleton;
 import java.util.Set;
 
+/**
+ * Validator for the JAsyncSQLFeature to ensure proper database driver features are selected.
+ */
 @Singleton
 public class JAsyncSQLFeatureValidator implements FeatureValidator {
     @Override

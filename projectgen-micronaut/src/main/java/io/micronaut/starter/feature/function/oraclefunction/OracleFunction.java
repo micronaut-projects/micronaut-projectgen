@@ -43,6 +43,11 @@ import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.rocker.RockerTemplate;
 import jakarta.inject.Singleton;
 
+/**
+ * Feature implementation for Oracle Cloud Functions.
+ * Supports writing functions deployable to Oracle Cloud Function service.
+ * Manages dependencies, build commands, and feature selection for Oracle functions.
+ */
 @Requires(property = "micronaut.starter.feature.oracle.function.http.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 @Primary

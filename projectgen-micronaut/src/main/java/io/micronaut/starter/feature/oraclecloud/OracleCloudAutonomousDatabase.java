@@ -31,6 +31,9 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature for integration with Oracle Cloud Autonomous Transaction Processing (ATP) database.
+ */
 @Requires(property = "micronaut.starter.feature.oracle.cloud.atp.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class OracleCloudAutonomousDatabase extends DatabaseDriverFeature implements OpenRewriteFeature {

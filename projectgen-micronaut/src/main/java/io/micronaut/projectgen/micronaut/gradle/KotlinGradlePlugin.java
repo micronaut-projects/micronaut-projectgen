@@ -22,6 +22,10 @@ import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.generator.ModuleContext;
 import jakarta.inject.Singleton;
 
+/**
+ * Adds support for the Kotlin Gradle plugin.
+ * This feature applies the Kotlin JVM plugin to the build configuration
+ */
 @Singleton
 public class KotlinGradlePlugin implements GradleSpecificFeature, BuildPluginFeature {
     @Override

@@ -30,6 +30,10 @@ import java.util.Map;
 import static io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils.ARTIFACT_ID_MICRONAUT_DATA_PROCESSOR_ARTIFACT;
 import static io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils.GROUP_ID_MICRONAUT_DATA;
 
+/**
+ * Defines a Micronaut Data feature.
+ */
+
 public interface DataFeature extends OneOfFeature {
 
     String SCHEMA_GENERATE_KEY = "datasources.default.schema-generate";

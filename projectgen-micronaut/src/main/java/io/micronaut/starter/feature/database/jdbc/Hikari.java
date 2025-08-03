@@ -26,6 +26,9 @@ import jakarta.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Feature that configures SQL DataSources using the Hikari JDBC Connection Pool.
+ */
 @Requires(property = "micronaut.starter.feature.jdbc.hikari.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 @Primary

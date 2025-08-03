@@ -51,6 +51,12 @@ import static io.micronaut.starter.feature.agorapulse.AgoraPulseFeature.addTest;
 import static io.micronaut.starter.feature.agorapulse.AgoraPulseFeature.mainModel;
 import static io.micronaut.starter.feature.agorapulse.AgoraPulseFeature.testModel;
 
+/**
+ * Micronaut Permissions community feature.
+ * Provides integration with the Micronaut Permissions library,
+ * a lightweight library for declaring object-level permissions in Micronaut applications.
+ * This feature adds required dependencies, example code, and manages related features such as Security and Mockito.
+ */
 @Requires(property = "micronaut.starter.feature.agorapulse.micronaut.permissions.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Permissions implements AgoraPulseFeature {

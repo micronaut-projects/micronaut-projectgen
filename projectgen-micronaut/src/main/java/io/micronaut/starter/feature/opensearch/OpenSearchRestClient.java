@@ -27,6 +27,9 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature for OpenSearch integration using REST Client transport.
+ */
 @Requires(property = "micronaut.starter.feature.opensearch.restclient.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class OpenSearchRestClient extends OpenSearchFeature implements OpenRewriteFeature {

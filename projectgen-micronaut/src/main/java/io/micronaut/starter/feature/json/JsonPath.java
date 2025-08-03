@@ -25,6 +25,10 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that adds support for Jayway JsonPath,
+ * a Java DSL for reading JSON documents.
+ */
 @Requires(property = "micronaut.starter.feature.json.path.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class JsonPath implements OpenRewriteFeature {

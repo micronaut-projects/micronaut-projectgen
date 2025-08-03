@@ -29,6 +29,9 @@ import jakarta.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Feature implementation that adds support for Hibernate JPA.
+ */
 @Requires(property = "micronaut.starter.feature.hibernate.jpa.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class HibernateJpa implements JpaFeature, OpenRewriteFeature {

@@ -27,6 +27,9 @@ import static io.micronaut.starter.feature.aws.AwsV2Sdk.APACHE_CLIENT_DEPENDENCY
 import static io.micronaut.starter.feature.aws.AwsV2Sdk.URL_CONNECTION_CLIENT;
 import static io.micronaut.starter.feature.aws.AwsV2Sdk.NETTY_NIO_CLIENT_DEPENDENCY;
 
+/**
+ * AWS SDK HTTP clients and their associated dependencies.
+ */
 public enum AwsSdkClient {
     APACHE(APACHE_CLIENT_DEPENDENCY),
     URL_CONNECTION(URL_CONNECTION_CLIENT),

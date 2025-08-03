@@ -42,6 +42,11 @@ import io.micronaut.projectgen.micronaut.template.agorapulse.gru.gruIndexJson;
 
 import java.util.Optional;
 
+/**
+ * Gru HTTP community feature for Micronaut applications.
+ * Provides integration with Gru, an HTTP interaction testing framework,
+ * including adding dependencies, example controller, tests, and test fixtures.
+ */
 @Requires(property = "micronaut.starter.feature.agorapulse.gru.http.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class GruHttp implements AgoraPulseFeature {

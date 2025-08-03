@@ -39,6 +39,12 @@ import io.micronaut.projectgen.micronaut.template.function.azure.azureFunctionTr
 import io.micronaut.projectgen.micronaut.template.function.azure.azureFunctionTriggerKotlin;
 import jakarta.inject.Singleton;
 
+/**
+ * Feature implementation for Azure HTTP Functions support in Micronaut applications.
+ * <p>
+ * Adds the necessary dependencies for Azure HTTP Function runtime and testing,
+ * and provides templates for generating test classes in Java, Kotlin, Groovy, and KoTest.
+ */
 @Requires(property = "micronaut.starter.feature.azure.function.http.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class AzureHttpFunction extends AbstractAzureFunction implements Feature {

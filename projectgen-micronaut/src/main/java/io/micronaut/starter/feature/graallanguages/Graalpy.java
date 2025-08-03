@@ -35,6 +35,10 @@ import jakarta.inject.Singleton;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Graalpy feature that adds support for Python using GraalPy within Micronaut projects.
+ * Implements MinJdkFeature to specify minimum JDK version and MavenSpecificFeature for Maven build integration.
+ */
 @Requires(property = "micronaut.starter.feature.graalpy.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Graalpy implements MinJdkFeature, MavenSpecificFeature {

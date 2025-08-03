@@ -29,6 +29,11 @@ import io.micronaut.projectgen.core.rocker.RockerTemplate;
 import io.micronaut.projectgen.micronaut.template.picocli.lang.groovy.picocliApplication;
 import jakarta.inject.Singleton;
 
+/**
+ * Feature for generating a Groovy-based CLI application using Picocli.
+ *
+ * <p>Generates the main application class as a Picocli command and applies the necessary Groovy setup.</p>
+ */
 @Requires(property = "micronaut.starter.feature.picocli.groovy.application.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class PicocliGroovyApplication implements GroovyApplicationFeature {

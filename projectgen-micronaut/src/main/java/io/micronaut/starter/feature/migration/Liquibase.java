@@ -26,6 +26,9 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Liquibase feature that adds support for Liquibase database migrations.
+ */
 @Requires(property = "micronaut.starter.feature.liquibase.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Liquibase implements MigrationFeature, OpenRewriteFeature {

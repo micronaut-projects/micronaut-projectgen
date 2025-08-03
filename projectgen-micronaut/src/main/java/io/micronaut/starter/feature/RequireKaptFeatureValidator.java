@@ -23,6 +23,12 @@ import jakarta.inject.Singleton;
 
 import java.util.Set;
 
+/**
+ * Validates that features requiring Kapt are not used alongside Kotlin Symbol Processing (KSP).
+ *
+ * <p>Checks after feature selection that no feature requiring Kapt is combined with Kotlin KSP,
+ * throwing an exception if such an incompatibility is detected.</p>
+ */
 @Singleton
 public class RequireKaptFeatureValidator implements FeatureValidator {
 

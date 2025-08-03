@@ -18,6 +18,9 @@ package io.micronaut.starter.feature.testresources;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.testresources.buildtools.KnownModules;
 
+/**
+ * Enumeration of supported database types with associated test resource modules.
+ */
 public enum DbType {
 
     MARIADB("mariadb", KnownModules.JDBC_MARIADB, KnownModules.R2DBC_MARIADB, KnownModules.HIBERNATE_REACTIVE_MARIADB),

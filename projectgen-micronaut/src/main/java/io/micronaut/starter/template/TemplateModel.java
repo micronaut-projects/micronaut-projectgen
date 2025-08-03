@@ -15,5 +15,9 @@
  */
 package io.micronaut.starter.template;
 
+/**
+ * Marker interface for template model classes.
+ */
+
 public interface TemplateModel {
 }

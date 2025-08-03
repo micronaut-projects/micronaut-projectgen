@@ -24,6 +24,11 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature for adding RxJava 3 HTTP client support.
+ *
+ * <p>Provides the RxJava 3 variant of the Micronaut HTTP client.</p>
+ */
 @Requires(property = "micronaut.starter.feature.rxjava3.http.client.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class RxJava3HttpClient implements OpenRewriteFeature {

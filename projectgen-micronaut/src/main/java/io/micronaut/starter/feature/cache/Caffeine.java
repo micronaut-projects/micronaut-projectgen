@@ -24,6 +24,10 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that adds support for caching with the Caffeine caching library.
+ * Integrates Caffeine cache implementation into the application.
+ */
 @Requires(property = "micronaut.starter.feature.cache.caffeine.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Caffeine implements OpenRewriteFeature {

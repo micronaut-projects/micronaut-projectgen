@@ -25,6 +25,10 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that adds support for caching using Oracle Coherence.
+ * Ensures the Coherence feature is included when this cache feature is selected.
+ */
 @Requires(property = "micronaut.starter.feature.cache.coherence.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Coherence implements CacheFeature, OpenRewriteFeature {

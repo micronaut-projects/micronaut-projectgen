@@ -24,6 +24,11 @@ import jakarta.inject.Singleton;
 
 import java.util.Set;
 
+/**
+ * Validator to enforce constraints for Google Cloud Function features.
+ * <p>
+ * Ensures compatibility of selected features and Java versions during project generation.
+ */
 @Singleton
 public class GoogleCloudFunctionFeatureValidator implements FeatureValidator {
 

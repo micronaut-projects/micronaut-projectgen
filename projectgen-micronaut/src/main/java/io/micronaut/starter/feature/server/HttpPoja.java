@@ -26,6 +26,10 @@ import jakarta.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Feature for adding support for Plain Old Java HTTP Applications
+ * using Apache libraries within a Micronaut server environment.
+ */
 @Requires(property = "micronaut.starter.feature.http.poja.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class HttpPoja extends AbstractMicronautServerFeature implements OpenRewriteFeature {

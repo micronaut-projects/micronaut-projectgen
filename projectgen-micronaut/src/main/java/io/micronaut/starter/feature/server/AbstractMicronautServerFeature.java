@@ -19,6 +19,10 @@ import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.feature.MicronautRuntimeFeature;
 
+/**
+ * Base class for Micronaut server features that integrates
+ * server-specific capabilities with Micronaut runtime features.
+ */
 public abstract class AbstractMicronautServerFeature implements ServerFeature, MicronautRuntimeFeature, OpenRewriteFeature {
 
     @Override

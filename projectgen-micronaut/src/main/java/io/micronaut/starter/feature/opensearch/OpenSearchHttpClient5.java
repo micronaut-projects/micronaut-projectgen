@@ -25,6 +25,9 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature for OpenSearch integration using Apache HttpClient 5 transport.
+ */
 @Requires(property = "micronaut.starter.feature.opensearch.httpclient5.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class OpenSearchHttpClient5 extends OpenSearchFeature implements OpenRewriteFeature {

@@ -32,6 +32,11 @@ import jakarta.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Feature that adds Micronaut Data support for Reactive Database Connectivity (R2DBC).
+ * This feature ensures that Micronaut Data and R2DBC features are included,
+ * providing reactive database access with Micronaut Data abstractions.
+ */
 @Requires(property = "micronaut.starter.feature.data.r2dbc.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class DataR2dbc extends R2dbcConfigurationUtils implements R2dbcFeature, DataFeature, TransactionalNotSupported, OpenRewriteFeature {

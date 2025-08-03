@@ -18,6 +18,9 @@ package io.micronaut.starter.feature.cache;
 import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.OneOfFeature;
 
+/**
+ * Marker interface for cache-related features.
+ */
 public interface CacheFeature extends OneOfFeature {
 
     @Override

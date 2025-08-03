@@ -25,6 +25,9 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature implementation for integrating MicroStream with Micronaut applications.
+ */
 @Requires(property = "micronaut.starter.feature.microstream.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class MicroStream implements MicroStreamFeature, OpenRewriteFeature {

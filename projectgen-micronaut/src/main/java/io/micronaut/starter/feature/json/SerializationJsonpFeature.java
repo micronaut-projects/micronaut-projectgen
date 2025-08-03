@@ -25,6 +25,9 @@ import jakarta.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Feature that adds support for Micronaut Serialization using JSON-B and JSON-P.
+ */
 @Requires(property = "micronaut.starter.feature.serialization.jsonp.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class SerializationJsonpFeature implements OpenRewriteFeature {

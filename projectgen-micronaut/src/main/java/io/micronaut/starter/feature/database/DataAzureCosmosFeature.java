@@ -59,7 +59,7 @@ public class DataAzureCosmosFeature implements DataDocumentFeature, OpenRewriteF
 
     @Override
     public List<String> getRecipes(GeneratorContext generatorContext) {
-        //TODO: Add test resources/containers support
+// NOTE: Consider adding test resources/containers support later
         List<String> recipes = new ArrayList<>();
         recipes.add("io.micronaut.starter.feature.data-azure-cosmos");
         if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())) {

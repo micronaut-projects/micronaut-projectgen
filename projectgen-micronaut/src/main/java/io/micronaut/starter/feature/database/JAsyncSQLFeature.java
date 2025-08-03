@@ -25,6 +25,9 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that adds support for JAsync asynchronous PostgreSQL and MySQL database drivers.
+ */
 @Requires(property = "micronaut.starter.feature.jasync.sql.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class JAsyncSQLFeature implements OpenRewriteFeature {

@@ -25,6 +25,9 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature providing the Micronaut Netty client integration for Oracle Cloud.
+ */
 @Requires(property = "micronaut.starter.feature.oracle.cloud.httpclient.netty.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class OracleCloudMicronautNettyClient implements OpenRewriteFeature {

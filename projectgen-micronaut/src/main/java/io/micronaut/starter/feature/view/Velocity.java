@@ -24,6 +24,9 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Adds support for server-side view rendering using Apache Velocity.
+ */
 @Requires(property = "micronaut.starter.feature.views.velocity.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Velocity implements ViewFeature, MicronautServerDependent, OpenRewriteFeature {

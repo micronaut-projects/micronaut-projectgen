@@ -24,6 +24,9 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that adds support for the Hibernate Validator.
+ */
 @Requires(property = "micronaut.starter.feature.hibernate.validator.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class HibernateValidator implements ValidationFeature, OpenRewriteFeature {

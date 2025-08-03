@@ -24,6 +24,10 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * EHCache caching feature for Micronaut applications.
+ * Adds EHCache support and provides the necessary configuration recipes.
+ */
 @Requires(property = "micronaut.starter.feature.cache.ehcache.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class EHCache implements CacheFeature, OpenRewriteFeature {

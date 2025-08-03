@@ -25,6 +25,9 @@ import jakarta.inject.Named;
 import jakarta.inject.Singleton;
 import java.util.List;
 
+/**
+ * Filters and provides features available for CLI applications.
+ */
 @Named("cli")
 @Singleton
 public class CliAvailableFeatures extends BaseAvailableFeatures {

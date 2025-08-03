@@ -41,6 +41,11 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Adds support for server-side rendering of ReactJS components using GraalJS.
+ * Configures necessary build plugins and frontend resources for Gradle and Maven.
+ */
+
 @Requires(property = "micronaut.starter.feature.views.react.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class React implements ViewFeature, MicronautServerDependent, OpenRewriteFeature {

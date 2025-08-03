@@ -30,6 +30,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
 
+/**
+ * Validator for the GraalVM feature, ensuring compatibility with selected options and features.
+ */
 @Singleton
 public class GraalVMFeatureValidator implements FeatureValidator {
 

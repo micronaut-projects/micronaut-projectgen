@@ -24,6 +24,9 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that adds support for using Spring Framework Annotations in Micronaut applications.
+ */
 @Requires(property = "micronaut.starter.feature.spring.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Spring implements OpenRewriteFeature {

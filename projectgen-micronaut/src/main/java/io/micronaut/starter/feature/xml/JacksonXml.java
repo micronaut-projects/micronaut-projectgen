@@ -25,6 +25,9 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Enables Jackson-based XML serialization and deserialization.
+ */
 @Requires(property = "micronaut.starter.feature.jackson.xml.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class JacksonXml implements OpenRewriteFeature {

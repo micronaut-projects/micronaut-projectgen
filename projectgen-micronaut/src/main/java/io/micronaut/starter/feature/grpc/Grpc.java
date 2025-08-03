@@ -39,6 +39,12 @@ import jakarta.inject.Singleton;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Adds gRPC support to the project.
+ * <p>
+ * Automatically adds the DiscoveryCore feature if not present.
+ * Applies protobuf Gradle plugin and proto templates for gRPC projects.
+ */
 @Requires(property = "micronaut.starter.feature.grpc.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Grpc implements DefaultFeature, OpenRewriteFeature {

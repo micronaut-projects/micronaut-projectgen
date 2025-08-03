@@ -30,6 +30,10 @@ import jakarta.inject.Singleton;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Feature that aggregates static resources from contributing features
+ * and adds their configuration to the Micronaut application context.
+ */
 @Requires(property = "micronaut.starter.feature.static.resources.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class StaticResourceFeature implements DefaultFeature {

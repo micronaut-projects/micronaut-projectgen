@@ -19,6 +19,10 @@ import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 
+/**
+ * Base class for Spring-related features that ensures the core Spring feature
+ * is included and categorizes features under the Spring category.
+ */
 public abstract class SpringFeature implements Feature {
 
     protected final Spring spring;

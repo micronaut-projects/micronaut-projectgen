@@ -30,6 +30,12 @@ import io.micronaut.projectgen.micronaut.template.buildtools.maven.micronautMave
 
 import java.util.List;
 
+/**
+ * Configures the Micronaut Maven Plugin.
+ *
+ * Adds the Micronaut-specific Maven plugin to support AOT, native image,
+ * function entrypoints, and other build-time optimizations.
+ */
 @Singleton
 public class MicronautMavenPlugin implements MavenSpecificFeature {
     @Override

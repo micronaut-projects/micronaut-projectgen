@@ -25,6 +25,9 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that adds JSON Schema Validation support to a Micronaut application.
+ */
 @Requires(property = "micronaut.starter.feature.json.schema.validation.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class JsonSchemaValidationFeature implements OpenRewriteFeature {

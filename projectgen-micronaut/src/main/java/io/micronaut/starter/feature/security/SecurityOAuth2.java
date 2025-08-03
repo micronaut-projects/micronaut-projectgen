@@ -29,6 +29,9 @@ import jakarta.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Security feature for OAuth 2.0 authentication support.
+ */
 @Requires(property = "micronaut.starter.feature.security.oauth2.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class SecurityOAuth2 extends SecurityFeature implements SecurityAuthenticationModeProvider, OpenRewriteFeature {

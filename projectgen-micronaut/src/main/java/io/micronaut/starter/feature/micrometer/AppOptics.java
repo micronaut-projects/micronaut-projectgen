@@ -24,6 +24,11 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Micrometer feature for AppOptics metrics reporting.
+ * <p>
+ * Adds support for Micrometer metrics with the AppOptics reporter.
+ */
 @Requires(property = "micronaut.starter.feature.micrometer.appoptics.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class AppOptics extends MicrometerFeature implements MicrometerRegistryFeature, OpenRewriteFeature {

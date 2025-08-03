@@ -44,6 +44,11 @@ import io.micronaut.projectgen.core.options.Language;
 import io.micronaut.projectgen.core.rocker.RockerTemplate;
 import jakarta.inject.Singleton;
 
+/**
+ * Oracle raw function feature for Micronaut applications targeting Oracle Cloud Functions.
+ * Extends OracleFunction with additional dependencies and templates for raw function implementations.
+ * Manages feature processing, template application, and dependency injection for function projects.
+ */
 @Requires(property = "micronaut.starter.feature.oracle.function.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Requires(property = "micronaut.starter.feature.oracle.function.http.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton

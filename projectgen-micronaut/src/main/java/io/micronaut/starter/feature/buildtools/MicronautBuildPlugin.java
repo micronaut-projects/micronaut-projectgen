@@ -58,6 +58,10 @@ import java.util.stream.Collectors;
 import static io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils.ARTIFACT_ID_MICRONAUT_DATA_PROCESSOR_ARTIFACT;
 import static io.micronaut.starter.feature.graalvm.GraalVM.FEATURE_NAME_GRAALVM;
 
+/**
+ * Feature that adds the Micronaut Gradle Build Plugin to the project,
+ * providing integration with Micronaut and optional GraalVM Gradle plugins.
+ */
 @Requires(property = "micronaut.starter.feature.micronaut.build.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class MicronautBuildPlugin implements BuildPluginFeature, DefaultFeature {

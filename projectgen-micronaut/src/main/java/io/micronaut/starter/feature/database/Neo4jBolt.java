@@ -25,6 +25,11 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature for enabling Neo4j Bolt Driver support.
+ * Adds the Neo4j Bolt driver dependency and configuration to the project,
+ * allowing applications to connect to Neo4j databases using the Bolt protocol.
+ */
 @Requires(property = "micronaut.starter.feature.neo4j.bolt.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Neo4jBolt implements OpenRewriteFeature {

@@ -33,6 +33,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 
+/**
+ * Represents the Java language feature for project generation.
+ */
 @Requires(property = "micronaut.starter.feature.java.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Java implements LanguageFeature {

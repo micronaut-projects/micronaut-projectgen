@@ -19,6 +19,9 @@ import io.micronaut.core.annotation.NonNull;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.starter.feature.MicronautRuntimeFeature;
 
+/**
+ * Micronaut runtime feature specific to Google Cloud Platform (GCP) Cloud Functions.
+ */
 public interface GcpMicronautRuntimeFeature extends MicronautRuntimeFeature {
     @Override
     @NonNull

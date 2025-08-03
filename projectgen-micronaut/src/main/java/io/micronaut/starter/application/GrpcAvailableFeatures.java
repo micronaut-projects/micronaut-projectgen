@@ -25,6 +25,9 @@ import jakarta.inject.Named;
 import jakarta.inject.Singleton;
 import java.util.List;
 
+/**
+ * Filters and provides features available for gRPC application type.
+ */
 @Named("grpc")
 @Singleton
 public class GrpcAvailableFeatures extends BaseAvailableFeatures {

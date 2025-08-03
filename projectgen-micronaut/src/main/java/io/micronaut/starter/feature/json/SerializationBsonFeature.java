@@ -23,6 +23,9 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that adds support for Micronaut Serialization with BSON.
+ */
 @Requires(property = "micronaut.starter.feature.serialization.bson.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class SerializationBsonFeature implements OpenRewriteFeature {

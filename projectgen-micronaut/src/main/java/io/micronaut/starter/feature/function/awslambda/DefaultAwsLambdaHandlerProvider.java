@@ -25,6 +25,13 @@ import io.micronaut.projectgen.core.feature.FeaturePhase;
 import io.micronaut.starter.feature.function.HandlerClassFeature;
 import jakarta.inject.Singleton;
 
+/**
+ * Provides the default AWS Lambda handler class for Micronaut applications.
+ * <p>
+ * This handler supports the AWS API Gateway payload version 1 and is only
+ * applicable for applications of type {@link ApplicationType#DEFAULT}.
+
+ */
 @Requires(property = "micronaut.starter.feature.aws.lambda.handler.default.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class DefaultAwsLambdaHandlerProvider implements HandlerClassFeature {

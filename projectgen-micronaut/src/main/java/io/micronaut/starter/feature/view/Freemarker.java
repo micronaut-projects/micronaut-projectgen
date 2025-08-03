@@ -25,6 +25,9 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Adds support for Server-Side View Rendering using Apache Freemarker.
+ */
 @Requires(property = "micronaut.starter.feature.views.freemarker.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Freemarker implements ViewFeature, MicronautServerDependent, OpenRewriteFeature {

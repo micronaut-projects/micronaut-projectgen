@@ -25,6 +25,9 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature providing support for Hibernate JPA static metamodel generation.
+ */
 @Requires(property = "micronaut.starter.feature.hibernate.jpamodelgen.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class HibernateJpaModelgen implements OpenRewriteFeature {
