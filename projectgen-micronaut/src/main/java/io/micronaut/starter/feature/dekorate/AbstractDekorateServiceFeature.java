@@ -28,7 +28,7 @@ public abstract class AbstractDekorateServiceFeature extends AbstractDekorateFea
 
     private final DekorateKubernetes dekorateKubernetes;
 
-    protected AbstractDekorateServiceFeature(DekorateKubernetes dekorateKubernetes) {
+    public AbstractDekorateServiceFeature(DekorateKubernetes dekorateKubernetes) {
         this.dekorateKubernetes = dekorateKubernetes;
     }
 

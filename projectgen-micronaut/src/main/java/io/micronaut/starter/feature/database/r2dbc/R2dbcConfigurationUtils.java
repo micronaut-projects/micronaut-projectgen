@@ -27,7 +27,13 @@ import java.util.List;
  */
 public abstract class R2dbcConfigurationUtils {
 
-    protected final void addDatabaseConfigRecipe(GeneratorContext generatorContext,
+    /**
+     * Adds a database-specific R2DBC configuration recipe to the given list of recipes based on the selected database driver feature in the generator context.
+     * The recipe is determined by checking the presence of specific database driver features in the generator context.
+     * @param generatorContext the generator context to check for database driver features
+     * @param recipes the list of recipes to add the database-specific R2DBC configuration recipe to
+     */
+    protected void addDatabaseConfigRecipe(GeneratorContext generatorContext,
         List<String> recipes) {
 
         if (generatorContext.isFeaturePresent(PostgreSQL.class)) {

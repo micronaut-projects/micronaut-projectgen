@@ -89,7 +89,18 @@ public abstract class JdbcFeature implements OneOfFeature, DatabaseDriverConfigu
         return PASSWORD_KEY;
     }
 
-    protected final void addDatabaseConfigRecipe(GeneratorContext generatorContext,
+    /**
+     * Adds a database configuration recipe to the list of recipes based on the features present in the GeneratorContext.
+     * <p>
+     * The method checks for the presence of specific database features (e.g., PostgreSQL, MySQL, MariaDB, SQLServer, Oracle)
+     * in the GeneratorContext and adds the corresponding JDBC configuration recipe to the list.
+     * If none of the specific database features are present, it defaults to adding the H2 JDBC configuration recipe.
+     * </p>
+     *
+     * @param generatorContext the context of the project generation, used to check for the presence of specific database features
+     * @param recipes the list of recipes to which the database configuration recipe will be added
+     */
+    protected void addDatabaseConfigRecipe(GeneratorContext generatorContext,
         List<String> recipes) {
 
         if (generatorContext.isFeaturePresent(PostgreSQL.class)) {

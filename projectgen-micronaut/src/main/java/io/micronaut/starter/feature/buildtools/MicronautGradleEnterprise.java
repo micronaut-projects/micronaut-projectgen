@@ -83,8 +83,14 @@ public class MicronautGradleEnterprise extends GradleEnterprise {
         return builder.build();
     }
 
+    /**
+     * Returns a list of Gradle repositories used for plugins management.
+     * The list includes the Gradle Plugin Portal and Maven Central repositories.
+     *
+     * @return A non-null list of Gradle repositories.
+     */
     @NonNull
-    protected final List<GradleRepository> pluginsManagementRepositories() {
+    protected List<GradleRepository> pluginsManagementRepositories() {
         return Arrays.asList(new GradlePluginPortal(), new GradleMavenCentral());
     }
 }

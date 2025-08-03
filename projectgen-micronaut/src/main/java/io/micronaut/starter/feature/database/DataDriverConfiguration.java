@@ -25,7 +25,15 @@ import java.util.List;
  */
 public abstract class DataDriverConfiguration {
 
-    protected final void addDatabaseConfigRecipe(GeneratorContext generatorContext, List<String> recipes) {
+    /**
+     * Adds a database configuration recipe to the given list based on the features present in the GeneratorContext.
+     * The recipe added corresponds to the database type detected from the features.
+     * If no specific database feature is present, it defaults to H2 database configuration.
+     *
+     * @param generatorContext the GeneratorContext to check for database features
+     * @param recipes the list to which the database configuration recipe will be added
+     */
+    protected void addDatabaseConfigRecipe(GeneratorContext generatorContext, List<String> recipes) {
         if (generatorContext.isFeaturePresent(PostgreSQL.class)) {
             recipes.add("io.micronaut.starter.feature.data-config-postgresql");
         } else if (generatorContext.isFeaturePresent(MySQL.class)) {

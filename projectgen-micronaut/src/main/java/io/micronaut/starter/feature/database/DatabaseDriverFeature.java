@@ -51,11 +51,11 @@ public abstract class DatabaseDriverFeature extends EaseTestingFeature implement
 
     private final JdbcFeature jdbcFeature;
 
-    protected DatabaseDriverFeature() {
+    public DatabaseDriverFeature() {
         this(null, null, null);
     }
 
-    protected DatabaseDriverFeature(JdbcFeature jdbcFeature,
+    public DatabaseDriverFeature(JdbcFeature jdbcFeature,
         TestContainers testContainers,
         TestResources testResources) {
         super(testContainers, testResources);
@@ -184,8 +184,21 @@ public abstract class DatabaseDriverFeature extends EaseTestingFeature implement
         parseDependencies(generatorContext).forEach(module::addDependency);
     }
 
+    /**
+     * Parses and returns a list of dependencies required for the database driver feature
+     * based on the provided GeneratorContext.
+     *
+     * <p>The method considers various features such as R2DBC, Hibernate Reactive, and
+     * Migration to determine the necessary dependencies. It uses the GeneratorContext
+     * to check for the presence of specific features and accordingly adds the required
+     * dependencies to the list.</p>
+     *
+     * @param generatorContext the context of the project generation
+     * @return a non-null list of Dependency.Builder objects representing the dependencies
+     *         required for the database driver feature
+     */
     @NonNull
-    protected final List<Dependency.Builder> parseDependencies(GeneratorContext generatorContext) {
+    protected List<Dependency.Builder> parseDependencies(GeneratorContext generatorContext) {
         List<Dependency.Builder> dependencies = new ArrayList<>();
         if (generatorContext.isFeaturePresent(R2dbc.class)) {
             getR2DbcDependency().ifPresent(dependencies::add);
@@ -201,8 +214,17 @@ public abstract class DatabaseDriverFeature extends EaseTestingFeature implement
         return dependencies;
     }
 
+    /**
+     * Returns a list of dependencies required for Hibernate Reactive based on the provided GeneratorContext.
+     *
+     * <p>This method considers the presence of the Migration feature to determine whether to include
+     * the Java client dependency in addition to the Hibernate Reactive Java client dependency.</p>
+     *
+     * @param generatorContext the context of the project generation, which is used to check for the presence of specific features
+     * @return a non-null list of Dependency.Builder objects representing the dependencies required for Hibernate Reactive
+     */
     @NonNull
-    protected final List<Dependency.Builder> dependenciesForHibernateReactive(@NonNull GeneratorContext generatorContext) {
+    protected List<Dependency.Builder> dependenciesForHibernateReactive(@NonNull GeneratorContext generatorContext) {
         List<Dependency.Builder> dependencies = new ArrayList<>();
         getHibernateReactiveJavaClientDependency().ifPresent(dependencies::add);
         if (generatorContext.isFeaturePresent(MigrationFeature.class)) {

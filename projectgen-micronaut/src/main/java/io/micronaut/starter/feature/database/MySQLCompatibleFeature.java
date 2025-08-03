@@ -35,7 +35,7 @@ public abstract class MySQLCompatibleFeature extends DatabaseDriverFeature {
         .artifactId(VERTX_MYSQL_CLIENT)
         .compile();
 
-    protected MySQLCompatibleFeature(JdbcFeature jdbcFeature, TestContainers testContainers, TestResources testResources) {
+    public MySQLCompatibleFeature(JdbcFeature jdbcFeature, TestContainers testContainers, TestResources testResources) {
         super(jdbcFeature, testContainers, testResources);
     }
 

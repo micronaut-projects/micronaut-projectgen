@@ -30,7 +30,7 @@ import java.util.*;
 /**
  * Micronaut Gradle Plugin.
  */
-public final class MicronautApplicationGradlePlugin {
+public class MicronautApplicationGradlePlugin {
 
     /**
      * Creates a new {@link Builder} instance for configuring the Micronaut Gradle plugin.

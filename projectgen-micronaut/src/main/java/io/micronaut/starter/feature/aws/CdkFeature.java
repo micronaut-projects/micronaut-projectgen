@@ -25,7 +25,7 @@ public abstract class CdkFeature implements AwsFeature {
 
     private final Cdk cdk;
 
-    protected CdkFeature(Cdk cdk) {
+    public CdkFeature(Cdk cdk) {
         this.cdk = cdk;
     }
 

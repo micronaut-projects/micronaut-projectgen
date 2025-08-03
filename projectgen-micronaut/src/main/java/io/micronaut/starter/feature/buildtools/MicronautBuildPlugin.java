@@ -94,8 +94,17 @@ public class MicronautBuildPlugin implements BuildPluginFeature, DefaultFeature 
         }
     }
 
+    /**
+     * Creates a GradlePlugin instance based on the provided GeneratorContext.
+     *
+     * The method determines whether to apply the Micronaut Application Gradle Plugin or the Micronaut Library Gradle Plugin
+     * based on the GeneratorContext. It also adds snapshot repositories if necessary.
+     *
+     * @param generatorContext the GeneratorContext instance to base the GradlePlugin on
+     * @return a GradlePlugin instance
+     */
     @NonNull
-     protected final GradlePlugin gradlePlugin(@NonNull GeneratorContext generatorContext) {
+     protected GradlePlugin gradlePlugin(@NonNull GeneratorContext generatorContext) {
         GradlePlugin.Builder builder = null;
         if (shouldApplyMicronautApplicationGradlePlugin(generatorContext)) {
             builder = micronautGradleApplicationPluginBuilder(generatorContext).builder();
@@ -139,7 +148,13 @@ public class MicronautBuildPlugin implements BuildPluginFeature, DefaultFeature 
         }
     }
 
-    final Optional<String> resolveRuntime(GeneratorContext generatorContext) {
+    /**
+     * Resolves the Micronaut runtime property from the root module's build properties.
+     *
+     * @param generatorContext the GeneratorContext instance to resolve the runtime from
+     * @return an Optional containing the Micronaut runtime property value if present, or an empty Optional otherwise
+     */
+     Optional<String> resolveRuntime(GeneratorContext generatorContext) {
         ModuleContext module = generatorContext.getRootModule();
         return module.buildProperties()
             .getProperties()
@@ -159,7 +174,17 @@ public class MicronautBuildPlugin implements BuildPluginFeature, DefaultFeature 
         return null;
     }
 
-    protected final MicronautApplicationGradlePlugin.Builder micronautGradleApplicationPluginBuilder(GeneratorContext generatorContext, String id) {
+    /**
+     * Creates a MicronautApplicationGradlePlugin.Builder instance based on the provided GeneratorContext and plugin ID.
+     *
+     * The method configures the builder with settings derived from the GeneratorContext, including build tool, Java version,
+     * package name, and runtime settings. It also configures additional settings based on the presence of certain features.
+     *
+     * @param generatorContext the GeneratorContext instance to base the MicronautApplicationGradlePlugin.Builder on
+     * @param id the ID of the plugin to use (e.g., "io.micronaut.application" or "io.micronaut.library")
+     * @return a MicronautApplicationGradlePlugin.Builder instance configured based on the GeneratorContext
+     */
+    protected MicronautApplicationGradlePlugin.Builder micronautGradleApplicationPluginBuilder(GeneratorContext generatorContext, String id) {
         MicronautApplicationGradlePlugin.Builder builder = MicronautApplicationGradlePlugin.builder()
             .buildTool(generatorContext.getOptions().getBuildTool())
             .incremental(true)
@@ -213,7 +238,17 @@ public class MicronautBuildPlugin implements BuildPluginFeature, DefaultFeature 
         return builder.id(id);
     }
 
-    protected final MicronautApplicationGradlePlugin.Builder micronautGradleApplicationPluginBuilder(GeneratorContext generatorContext) {
+    /**
+     * Creates a MicronautApplicationGradlePlugin.Builder instance based on the provided GeneratorContext.
+     *
+     * The method configures the builder with settings derived from the GeneratorContext, including build tool, Java version,
+     * package name, and runtime settings. It also configures Docker native settings based on the presence of certain features
+     * and the JDK version.
+     *
+     * @param generatorContext the GeneratorContext instance to base the MicronautApplicationGradlePlugin.Builder on
+     * @return a MicronautApplicationGradlePlugin.Builder instance configured based on the GeneratorContext
+     */
+    protected MicronautApplicationGradlePlugin.Builder micronautGradleApplicationPluginBuilder(GeneratorContext generatorContext) {
         ApplicationType applicationType = ApplicationType.of(generatorContext.getOptions().template());
         MicronautApplicationGradlePlugin.Builder builder = micronautGradleApplicationPluginBuilder(generatorContext, MicronautApplicationGradlePlugin.Builder.APPLICATION);
         if (generatorContext.getFeatures().contains(AwsLambda.FEATURE_NAME_AWS_LAMBDA) && ((applicationType == ApplicationType.FUNCTION && generatorContext.getFeatures().contains(FEATURE_NAME_GRAALVM))
@@ -245,7 +280,15 @@ public class MicronautBuildPlugin implements BuildPluginFeature, DefaultFeature 
         return Optional.empty();
     }
 
-    protected final GradlePlugin.Builder micronautLibraryGradlePluginBuilder(GeneratorContext generatorContext) {
+    /**
+     * Creates a GradlePlugin.Builder instance for the Micronaut Library Gradle Plugin based on the provided GeneratorContext.
+     *
+     * The method reuses the configuration from the Micronaut Application Gradle Plugin builder, but with the ID set to "LIBRARY".
+     *
+     * @param generatorContext the GeneratorContext instance to base the GradlePlugin on
+     * @return a GradlePlugin.Builder instance for the Micronaut Library Gradle Plugin
+     */
+    protected GradlePlugin.Builder micronautLibraryGradlePluginBuilder(GeneratorContext generatorContext) {
         return micronautGradleApplicationPluginBuilder(generatorContext, MicronautApplicationGradlePlugin.Builder.LIBRARY).builder();
     }
 

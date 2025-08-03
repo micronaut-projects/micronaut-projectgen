@@ -24,7 +24,7 @@ import io.micronaut.starter.feature.function.awslambda.AwsLambda;
  */
 public abstract class AwsLambdaEventFunctionFeature extends AwsLambdaRelatedFeature {
 
-    protected AwsLambdaEventFunctionFeature(AwsLambda awsLambda) {
+    public AwsLambdaEventFunctionFeature(AwsLambda awsLambda) {
         super(awsLambda);
     }
 
