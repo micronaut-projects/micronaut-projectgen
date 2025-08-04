@@ -96,7 +96,7 @@ public abstract class AbstractFunctionFeature implements FunctionFeature, Micron
      */
     protected void applyFunction(GeneratorContext generatorContext, ApplicationType type) {
         ModuleContext module = generatorContext.getRootModule();
-        BuildTool buildTool = generatorContext.getOptions().getBuildTool();
+        BuildTool buildTool = generatorContext.getBuildTool();
 
         if (generatorContext.isFeatureMissing(ChatBotsFeature.class)) {
             readmeTemplate(generatorContext, generatorContext.getProject(), buildTool)

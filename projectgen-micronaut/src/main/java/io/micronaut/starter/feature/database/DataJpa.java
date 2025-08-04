@@ -74,7 +74,7 @@ public class DataJpa implements JpaFeature, DataFeature {
     @Override
     public void apply(GeneratorContext generatorContext) {
         ModuleContext module = generatorContext.getRootModule();
-        module.addDependency(DataFeature.dataProcessorDependency(generatorContext.getOptions().getBuildTool()));
+        module.addDependency(DataFeature.dataProcessorDependency(generatorContext.getBuildTool()));
         module.addDependency(Dependency.builder()
             .groupId("io.micronaut.data")
             .artifactId("micronaut-data-hibernate-jpa")

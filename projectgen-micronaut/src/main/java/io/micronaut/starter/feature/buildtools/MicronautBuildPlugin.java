@@ -186,7 +186,7 @@ public class MicronautBuildPlugin implements BuildPluginFeature, DefaultFeature 
      */
     protected MicronautApplicationGradlePlugin.Builder micronautGradleApplicationPluginBuilder(GeneratorContext generatorContext, String id) {
         MicronautApplicationGradlePlugin.Builder builder = MicronautApplicationGradlePlugin.builder()
-            .buildTool(generatorContext.getOptions().getBuildTool())
+            .buildTool(generatorContext.getBuildTool())
             .incremental(true)
             .javaVersion(FeaturesUtils.getTargetJdk(generatorContext.getFeatures()))
             .packageName(generatorContext.getProject().getPackageName())

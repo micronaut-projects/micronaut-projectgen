@@ -59,7 +59,7 @@ public abstract class AbstractOracleFunctionsWorkflow extends AbstractDockerRegi
     private final OracleRawFunction oracleRawFunction;
     private final boolean isGraal;
 
-    protected AbstractOracleFunctionsWorkflow(OracleRawFunction oracleRawFunction, boolean isGraal) {
+    public AbstractOracleFunctionsWorkflow(OracleRawFunction oracleRawFunction, boolean isGraal) {
         this.oracleRawFunction = oracleRawFunction;
         this.isGraal = isGraal;
     }

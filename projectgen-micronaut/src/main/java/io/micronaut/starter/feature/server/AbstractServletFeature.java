@@ -29,7 +29,7 @@ public abstract class AbstractServletFeature extends AbstractMicronautServerFeat
     public void apply(GeneratorContext generatorContext) {
         ModuleContext module = generatorContext.getRootModule();
         module.addDependency(
-            MicronautDependencyUtils.annotationProcessor(generatorContext.getOptions().getBuildTool(),
+            MicronautDependencyUtils.annotationProcessor(generatorContext.getBuildTool(),
                 GROUP_ID_IO_MICRONAUT_SERVLET,
                 "micronaut-servlet-processor",
                 "micronaut.servlet.version"

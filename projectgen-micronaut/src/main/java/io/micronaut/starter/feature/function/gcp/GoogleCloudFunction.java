@@ -117,7 +117,14 @@ public class GoogleCloudFunction extends AbstractGoogleCloudFunction {
         addDependencies(module, generatorContext.getOptions());
     }
 
-    protected final void addDependencies(ModuleContext module, Options options) {
+    /**
+     * Adds dependencies required for Google Cloud Function to the module context.
+     * The dependencies added are specific to the Maven build tool.
+     *
+     * @param module  the module context to add dependencies to
+     * @param options the project creation options
+     */
+    protected void addDependencies(ModuleContext module, Options options) {
         if (OptionUtils.hasMavenBuildTool(options)) {
             module.addDependency(GCP_FUNCTIONS_FRAMEWORK_API.compileOnly());
             module.addDependency(MICRONAUT_GCP_FUNCTION_HTTP);

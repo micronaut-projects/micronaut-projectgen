@@ -46,7 +46,7 @@ public abstract class AbstractCloudRunWorkflow extends AbstractDockerRegistryWor
     private final Netty netty;
     private final boolean isGraal;
 
-    protected AbstractCloudRunWorkflow(Netty netty, boolean isGraal) {
+    public AbstractCloudRunWorkflow(Netty netty, boolean isGraal) {
         this.netty = netty;
         this.isGraal = isGraal;
     }
@@ -80,7 +80,7 @@ public abstract class AbstractCloudRunWorkflow extends AbstractDockerRegistryWor
 
         module.addTemplate("gcloudCloudRunWorkflow",
             new RockerTemplate(workflowFilePath,
-                gcloudCloudRunWorkflow.template(generatorContext.getProject(), generatorContext.getOptions().getBuildTool(),
+                gcloudCloudRunWorkflow.template(generatorContext.getProject(), generatorContext.getBuildTool(),
                     generatorContext.getJdkVersion(), isGraal)
             )
         );

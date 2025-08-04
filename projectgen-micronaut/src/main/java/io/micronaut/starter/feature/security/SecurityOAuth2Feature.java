@@ -27,13 +27,13 @@ public abstract class SecurityOAuth2Feature implements Feature {
     private final SecurityOAuth2 securityOAuth2;
     private final SecurityJWT securityJWT;
 
-    protected SecurityOAuth2Feature(SecurityOAuth2 securityOAuth2,
+    public SecurityOAuth2Feature(SecurityOAuth2 securityOAuth2,
         @Nullable SecurityJWT securityJWT) {
         this.securityOAuth2 = securityOAuth2;
         this.securityJWT = securityJWT;
     }
 
-    protected SecurityOAuth2Feature(SecurityOAuth2 securityOAuth2) {
+    public SecurityOAuth2Feature(SecurityOAuth2 securityOAuth2) {
         this(securityOAuth2, null);
     }
 

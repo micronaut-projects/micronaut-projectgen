@@ -164,7 +164,12 @@ public class GoogleCloudEventsFunction extends AbstractGoogleCloudFunction {
         return "https://micronaut-projects.github.io/micronaut-gcp/latest/guide/index.html#cloudEventsFunctions";
     }
 
-    protected final void addDependencies(ModuleContext module) {
+    /**
+     * Adds the necessary dependencies for Google CloudEvents Function to the given ModuleContext.
+     *
+     * @param module the ModuleContext to which the dependencies should be added
+     */
+    protected void addDependencies(ModuleContext module) {
         module.addDependency(DEPENDENCY_MICRONAUT_GCP_FUNCTION_CLOUDEVENTS);
         module.addDependency(DEPENDENCY_MICRONAUT_SERDE_API);
     }

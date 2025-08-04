@@ -25,7 +25,7 @@ import io.micronaut.projectgen.core.rocker.TestRockerModelProvider;
 public abstract class AbstractTestRockerModelProvider extends AbstractJunitRockerModelProvider
     implements TestRockerModelProvider {
 
-    protected AbstractTestRockerModelProvider(Project project) {
+    public AbstractTestRockerModelProvider(Project project) {
         super(project);
     }
 }

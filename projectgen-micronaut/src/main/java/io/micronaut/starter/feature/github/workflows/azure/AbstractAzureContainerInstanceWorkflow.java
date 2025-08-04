@@ -47,7 +47,7 @@ public abstract class AbstractAzureContainerInstanceWorkflow extends AbstractDoc
     private final Netty netty;
     private final boolean isGraal;
 
-    protected AbstractAzureContainerInstanceWorkflow(Netty netty, boolean isGraal) {
+    public AbstractAzureContainerInstanceWorkflow(Netty netty, boolean isGraal) {
         this.netty = netty;
         this.isGraal = isGraal;
     }

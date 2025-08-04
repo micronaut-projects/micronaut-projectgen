@@ -74,7 +74,14 @@ public class PicocliKotlinApplication implements RequireKaptFeature, KotlinAppli
             picocliApplication.template(project));
     }
 
-    protected final String getPath() {
+    /**
+     * Returns the file path for the Picocli application source file.
+     *
+     * <p>The path is a template string that will be resolved with the project's package path and class name.</p>
+     *
+     * @return The file path template for the Picocli application source file.
+     */
+    protected String getPath() {
         return "src/main/kotlin/{packagePath}/{className}Command.kt";
     }
 }

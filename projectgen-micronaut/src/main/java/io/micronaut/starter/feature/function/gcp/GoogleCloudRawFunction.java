@@ -96,7 +96,14 @@ public class GoogleCloudRawFunction extends AbstractGoogleCloudFunction {
         }
     }
 
-    final void addDependencies(ModuleContext module, Options options) {
+    /**
+     * Adds dependencies required for Google Cloud Raw Function to the module context.
+     * The dependencies added are specific to the build tool specified in the project creation options.
+     *
+     * @param module  the module context to add dependencies to
+     * @param options the project creation options
+     */
+    void addDependencies(ModuleContext module, Options options) {
         module.addDependency(MICRONAUT_GCP_FUNCTION);
         module.addDependency(GCP_FUNCTIONS_FRAMEWORK_API.compileOnly());
         if (OptionUtils.hasGradleBuildTool(options)) {

@@ -57,7 +57,7 @@ public interface SerializationFeature extends JsonFeature {
     @NonNull
     default List<Dependency.Builder> dependencies(@NonNull GeneratorContext generatorContext) {
         List<Dependency.Builder> dependencyList = new ArrayList<>();
-        dependencyList.add(serdeProcessor(generatorContext.getOptions().getBuildTool()));
+        dependencyList.add(serdeProcessor(generatorContext.getBuildTool()));
         dependencyList.add(serdeModule(generatorContext));
         return dependencyList;
     }

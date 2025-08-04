@@ -151,7 +151,15 @@ public class SQLServer extends DatabaseDriverFeature {
         }
     }
 
-    protected final boolean acceptLicense() {
+    /**
+     * Determines whether to accept the license for the SQL Server test resources container.
+     * <p>
+     * By default, this method returns {@code false}, indicating that the license is not accepted.
+     * Subclasses may override this method to change the default behavior.
+     *
+     * @return {@code true} if the license is accepted, {@code false} otherwise
+     */
+    protected boolean acceptLicense() {
         return false;
     }
 }

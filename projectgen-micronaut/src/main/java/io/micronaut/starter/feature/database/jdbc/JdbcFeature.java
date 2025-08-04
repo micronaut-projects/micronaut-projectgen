@@ -43,7 +43,7 @@ public abstract class JdbcFeature implements OneOfFeature, DatabaseDriverConfigu
 
     private final DatabaseDriverFeature defaultDbFeature;
 
-    protected JdbcFeature(DatabaseDriverFeature defaultDbFeature) {
+    public JdbcFeature(DatabaseDriverFeature defaultDbFeature) {
         this.defaultDbFeature = defaultDbFeature;
     }
 

@@ -74,7 +74,15 @@ public class PicocliGroovyApplication implements GroovyApplicationFeature {
             picocliApplication.template(project));
     }
 
-    protected final String getPath() {
+    /**
+     * Returns the file path for the Picocli application source file.
+     *
+     * <p>The path is relative to the project root and includes placeholders for
+     * the package path and class name, which will be replaced during template rendering.</p>
+     *
+     * @return The file path for the Picocli application source file.
+     */
+    protected String getPath() {
         return "src/main/groovy/{packagePath}/{className}Command.groovy";
     }
 }

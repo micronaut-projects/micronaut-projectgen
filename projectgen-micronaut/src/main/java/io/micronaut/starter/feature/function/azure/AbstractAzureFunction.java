@@ -62,7 +62,7 @@ public abstract class AbstractAzureFunction extends AbstractFunctionFeature impl
     public static final String NAME = "azure-function";
     private final CoordinateResolver coordinateResolver;
 
-    protected AbstractAzureFunction(CoordinateResolver coordinateResolver) {
+    public AbstractAzureFunction(CoordinateResolver coordinateResolver) {
         this.coordinateResolver = coordinateResolver;
     }
 

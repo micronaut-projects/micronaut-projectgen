@@ -52,9 +52,9 @@ public abstract class DataMongoFeature extends EaseTestingFeature implements Dat
         }
 
         if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())) {
-            module.addDependency(DataFeature.dataProcessorDependency(generatorContext.getOptions().getBuildTool()));
+            module.addDependency(DataFeature.dataProcessorDependency(generatorContext.getBuildTool()));
         }
-        module.addDependency(DataDocumentFeature.dataDocumentProcessorDependency(generatorContext.getOptions().getBuildTool()));
+        module.addDependency(DataDocumentFeature.dataDocumentProcessorDependency(generatorContext.getBuildTool()));
         module.addDependency(MicronautDependencyUtils.dataDependency()
             .compile()
             .artifactId(MICRONAUT_DATA_MONGODB_ARTIFACT)

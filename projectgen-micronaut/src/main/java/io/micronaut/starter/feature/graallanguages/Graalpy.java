@@ -91,7 +91,17 @@ public class Graalpy implements MinJdkFeature, MavenSpecificFeature {
         module.addBuildPlugin(graalpyMavenPlugin());
     }
 
-    protected final MavenPlugin graalpyMavenPlugin() {
+    /**
+     * Creates a Maven plugin for GraalPy.
+     *
+     * The plugin is configured with the group ID {@value #GROUP_ID_GRAALVM_PYTHON} and
+     * artifact ID {@value #ARTIFACT_ID_GRAALPY_MAVEN_PLUGIN}. The plugin's extension is
+     * generated using a Rocker template, which is populated with the list of Python packages
+     * returned by {@link #pythonPackages()}.
+     *
+     * @return a Maven plugin for GraalPy
+     */
+    protected MavenPlugin graalpyMavenPlugin() {
         return MavenPlugin.builder()
             .groupId(GROUP_ID_GRAALVM_PYTHON)
             .artifactId(ARTIFACT_ID_GRAALPY_MAVEN_PLUGIN)

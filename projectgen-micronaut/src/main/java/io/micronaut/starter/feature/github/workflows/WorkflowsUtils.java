@@ -31,7 +31,7 @@ import io.micronaut.starter.util.VersionInfo;
  * @author Pavol Gressa
  * @since 2.3
  */
-public final class WorkflowsUtils {
+public class WorkflowsUtils {
 
     /**
      * Resolves GraalVM jdk version based on the source version.

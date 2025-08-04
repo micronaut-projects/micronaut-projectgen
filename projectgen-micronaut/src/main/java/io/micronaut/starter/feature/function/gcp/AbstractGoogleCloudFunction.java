@@ -39,7 +39,7 @@ public abstract class AbstractGoogleCloudFunction extends AbstractFunctionFeatur
     private final ShadePlugin shadePlugin;
     private final JacksonDatabindFeature jacksonDatabindFeature;
 
-    protected AbstractGoogleCloudFunction(
+    public AbstractGoogleCloudFunction(
         ShadePlugin shadePlugin,
         JacksonDatabindFeature jacksonDatabindFeature) {
         this.shadePlugin = shadePlugin;

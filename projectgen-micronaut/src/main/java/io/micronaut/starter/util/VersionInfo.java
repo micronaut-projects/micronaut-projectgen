@@ -30,7 +30,7 @@ import java.util.*;
 /**
  * Utility class for retrieving Micronaut and Java versioning information used during project generation.
  */
-public final class VersionInfo {
+public class VersionInfo {
     private static final Logger LOG = LoggerFactory.getLogger(VersionInfo.class);
 
     private static final Properties VERSIONS = new Properties();

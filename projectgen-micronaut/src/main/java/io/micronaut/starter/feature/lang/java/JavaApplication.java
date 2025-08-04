@@ -82,18 +82,48 @@ public class JavaApplication implements JavaApplicationFeature {
         }
     }
 
-    protected final boolean shouldGenerateApplicationFile(GeneratorContext generatorContext) {
+    /**
+     * Determines whether an application file should be generated based on the provided GeneratorContext.
+     *
+     * The decision is made based on the application type and the presence of the FunctionFeature.
+     *
+     * @param generatorContext the context used to generate the project
+     * @return true if an application file should be generated, false otherwise
+     */
+    protected boolean shouldGenerateApplicationFile(GeneratorContext generatorContext) {
         ApplicationType type = ApplicationType.of(generatorContext.getOptions().template());
         return type == ApplicationType.DEFAULT
             || !generatorContext.getFeatures().hasFeature(FunctionFeature.class);
     }
 
-    protected final void addApplication(GeneratorContext generatorContext, ModuleContext module) {
+    /**
+     * Adds the application template to the given ModuleContext.
+     *
+     * The application template is generated based on the provided GeneratorContext and ModuleContext.
+     * The template is added with the name "application" and is located at the path specified by the getPath() method.
+     *
+     * @param generatorContext the context used to generate the project
+     * @param module the module context to which the application template is added
+     */
+    protected void addApplication(GeneratorContext generatorContext, ModuleContext module) {
         module.addTemplate("application", new RockerTemplate(getPath(),
             application(generatorContext, module)));
     }
 
-    protected final RockerModel application(GeneratorContext generatorContext, ModuleContext module) {
+    /**
+     * Generates the RockerModel for the application template based on the provided GeneratorContext and ModuleContext.
+     *
+     * The RockerModel is generated using the application template, passing in the project, features,
+     * JavaApplicationRenderingContext, and whether the Slf4jJulBridge feature is present.
+     *
+     * The JavaApplicationRenderingContext is constructed with the default environment and whether
+     * eager initialization of singletons is required.
+     *
+     * @param generatorContext the context used to generate the project
+     * @param module the module context used to determine the default environment
+     * @return the RockerModel for the application template
+     */
+    protected RockerModel application(GeneratorContext generatorContext, ModuleContext module) {
         String defaultEnvironment = getDefaultEnvironment(module);
         boolean eagerInitSingleton = generatorContext.getFeatures().isFeaturePresent(RequireEagerSingletonInitializationFeature.class);
         return application.template(
@@ -108,13 +138,35 @@ public class JavaApplication implements JavaApplicationFeature {
         return module.hasConfigurationByEnvironment(Environment.DEVELOPMENT) ? Environment.DEVELOPMENT : null;
     }
 
-    protected final void addApplicationTest(GeneratorContext generatorContext, ModuleContext module) {
+    /**
+     * Adds an application test template to the given ModuleContext.
+     *
+     * The application test template is generated based on the provided GeneratorContext.
+     * The template is added with the name "applicationTest" and is located at the path specified by the
+     * getTestSourcePath() method of the GeneratorContext.
+     *
+     * @param generatorContext the context used to generate the project
+     * @param module the module context to which the application test template is added
+     */
+    protected void addApplicationTest(GeneratorContext generatorContext, ModuleContext module) {
         String testSourcePath = generatorContext.getTestSourcePath("/{packagePath}/{className}");
         module.addTemplate("applicationTest",
             new RockerTemplate(testSourcePath, applicationTest(generatorContext)));
     }
 
-    protected final RockerModel applicationTest(GeneratorContext generatorContext) {
+    /**
+     * Generates the RockerModel for the application test template based on the provided GeneratorContext.
+     *
+     * The RockerModel is generated using a TestRockerModelProvider, which is constructed with various test templates.
+     * The test framework and project are retrieved from the GeneratorContext, and the transactional flag is determined
+     * based on the presence of the TransactionalNotSupported feature.
+     *
+     * The TestRockerModelProvider is then used to find the appropriate RockerModel based on the language and test framework.
+     *
+     * @param generatorContext the context used to generate the project
+     * @return the RockerModel for the application test template
+     */
+    protected RockerModel applicationTest(GeneratorContext generatorContext) {
         TestFramework testFramework = generatorContext.getTestFramework();
         Project project = generatorContext.getProject();
         boolean transactional = !generatorContext.getFeatures().hasFeature(TransactionalNotSupported.class);
@@ -126,7 +178,15 @@ public class JavaApplication implements JavaApplicationFeature {
         return provider.findModel(generatorContext.getLanguage(), testFramework);
     }
 
-    protected final String getPath() {
+    /**
+     * Returns the path where the application Java file will be generated.
+     *
+     * The path is in the format "src/main/java/{packagePath}/Application.java", where {packagePath} is a placeholder
+     * that will be replaced with the actual package path during template rendering.
+     *
+     * @return the path to the application Java file
+     */
+    protected String getPath() {
         return "src/main/java/{packagePath}/Application.java";
     }
 }

@@ -28,7 +28,7 @@ public abstract class SecurityFeature implements Feature, MicronautServerDepende
 
     private final SecurityAnnotations securityAnnotations;
 
-    protected SecurityFeature(SecurityAnnotations securityAnnotations) {
+    public SecurityFeature(SecurityAnnotations securityAnnotations) {
         this.securityAnnotations = securityAnnotations;
     }
 

@@ -74,7 +74,15 @@ public class PicocliJavaApplication implements JavaApplicationFeature {
             picocliApplication.template(project));
     }
 
-    protected final String getPath() {
+    /**
+     * Returns the file path for the generated Picocli application source file.
+     *
+     * <p>The path is relative to the project root and includes placeholders for
+     * the package path and class name, which are replaced during template rendering.</p>
+     *
+     * @return the file path for the generated application source file
+     */
+    protected String getPath() {
         return "src/main/java/{packagePath}/{className}Command.java";
     }
 }

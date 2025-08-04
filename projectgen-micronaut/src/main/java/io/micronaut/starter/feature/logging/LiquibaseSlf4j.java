@@ -55,7 +55,15 @@ public class LiquibaseSlf4j implements ThirdPartyLibraryFeature, LoggingFeature 
         addDependencies(generatorContext);
     }
 
-    protected final void addDependencies(GeneratorContext generatorContext) {
+    /**
+     * Adds the necessary dependencies for Liquibase SLF4J integration to the project.
+     * <p>
+     * This method retrieves the root module context from the provided GeneratorContext
+     * and adds the Liquibase SLF4J dependency with a runtime scope.
+     *
+     * @param generatorContext the GeneratorContext instance used to access the project's configuration and module context
+     */
+    protected void addDependencies(GeneratorContext generatorContext) {
         ModuleContext module = generatorContext.getRootModule();
         module.addDependency(Dependency.builder().lookupArtifactId(ARTIFACT_ID_LIQUIBASE_SLF_4_J).runtime());
     }
