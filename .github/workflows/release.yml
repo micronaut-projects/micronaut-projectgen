@@ -55,13 +55,12 @@ jobs:
           # The artifacts stored locally will be used to generate the SLSA provenance.
           ./gradlew publishAllPublicationsToBuildRepository
           cd build/repo
-          echo "Listing repo folder"
-          ls -la
-          echo "end listing repo folder"
           zip -r ../../artifacts.zip io
           cd ../..
           export SONATYPE_BEARER=$(printf "%s:%s" "$SONATYPE_USERNAME" "$SONATYPE_PASSWORD" | base64 | tr -d '\n')
-          curl -X POST https://central.sonatype.com/api/v1/publisher/upload -H "Authorization: Bearer $SONATYPE_BEARER" -F name="$GROUP_PATH $VERSION" -F publishType="RELEASE" -F bundle=@artifacts.zip
+          echo "Publishing via the Portal API"
+          # https://central.sonatype.org/publish/publish-portal-api/#uploading-a-deployment-bundle
+          curl -X POST https://central.sonatype.com/api/v1/publisher/upload -H "Authorization: Bearer $SONATYPE_BEARER" -F name="$GROUP_PATH $VERSION" -F publishingType="AUTOMATIC" -F bundle=@artifacts.zip
       - name: Generate subject
         id: hash
         run: |
