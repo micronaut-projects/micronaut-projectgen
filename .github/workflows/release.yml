@@ -56,7 +56,7 @@ jobs:
           ./gradlew publishAllPublicationsToBuildRepository
           cd build/repo
           echo "Listing repo folder"
-          ls -la repo
+          ls -la
           echo "end listing repo folder"
           zip -r ../../artifacts.zip io
           cd ../..
