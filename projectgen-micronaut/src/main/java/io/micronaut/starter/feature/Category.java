@@ -21,7 +21,7 @@ package io.micronaut.starter.feature;
  * @author Álvaro Sánchez-Mariscal
  * @since 2.0.0
  */
-public final class Category {
+public class Category {
     public static final String API = "API";
     public static final String BPM = "BPM";
     public static final String CACHE = "Cache";
