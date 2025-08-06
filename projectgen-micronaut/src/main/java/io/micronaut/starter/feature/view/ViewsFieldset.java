@@ -29,6 +29,10 @@ import jakarta.inject.Singleton;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Provides support for generating HTML fieldset views.
+ * Adds Thymeleaf form fragment templates if Thymeleaf feature is present.
+ */
 @Requires(property = "micronaut.starter.feature.views.fieldset.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class ViewsFieldset implements OpenRewriteFeature {
@@ -60,30 +64,30 @@ public class ViewsFieldset implements OpenRewriteFeature {
     private static final String TRIXEDITOR_HTML = "trixeditor.html";
 
     private static final List<String> THYMELEAF_FRAGMENTS = Arrays.asList(
-            ERRORS_HTML,
-            FIELDSET_HTML,
-            FORM_HTML,
-            INPUTCHECKBOX_HTML,
-            INPUTDATE_HTML,
-            INPUTDATETIMELOCAL_HTML,
-            INPUTEMAIL_HTML,
-            INPUTFILE_HTML,
-            INPUTHIDDEN_HTML,
-            INPUTNUMBER_HTML,
-            INPUTPASSWORD_HTML,
-            INPUTRADIO_HTML,
-            INPUTRADIOS_HTML,
-            INPUTSTRING_HTML,
-            INPUTSUBMIT_HTML,
-            INPUTTEL_HTML,
-            INPUTTEXT_HTML,
-            INPUTTIME_HTML,
-            INPUTURL_HTML,
-            LABEL_HTML,
-            OPTION_HTML,
-            SELECT_HTML,
-            TEXTAREA_HTML,
-            TRIXEDITOR_HTML
+        ERRORS_HTML,
+        FIELDSET_HTML,
+        FORM_HTML,
+        INPUTCHECKBOX_HTML,
+        INPUTDATE_HTML,
+        INPUTDATETIMELOCAL_HTML,
+        INPUTEMAIL_HTML,
+        INPUTFILE_HTML,
+        INPUTHIDDEN_HTML,
+        INPUTNUMBER_HTML,
+        INPUTPASSWORD_HTML,
+        INPUTRADIO_HTML,
+        INPUTRADIOS_HTML,
+        INPUTSTRING_HTML,
+        INPUTSUBMIT_HTML,
+        INPUTTEL_HTML,
+        INPUTTEXT_HTML,
+        INPUTTIME_HTML,
+        INPUTURL_HTML,
+        LABEL_HTML,
+        OPTION_HTML,
+        SELECT_HTML,
+        TEXTAREA_HTML,
+        TRIXEDITOR_HTML
     );
     private static final String FIELDSET_PATH = "src/main/resources/views/fieldset/";
     private static final String RESOURCES_THYMELEAF_PATH = "views/thymeleaf/fieldset/";
@@ -126,7 +130,7 @@ public class ViewsFieldset implements OpenRewriteFeature {
     private void addThymeleafTemplates(GeneratorContext generatorContext, ModuleContext module) {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         for (String fileName : THYMELEAF_FRAGMENTS) {
-            module.addTemplate(fileName, new URLTemplate(FIELDSET_PATH + fileName, classLoader.getResource(RESOURCES_THYMELEAF_PATH +  fileName)));
+            module.addTemplate(fileName, new URLTemplate(FIELDSET_PATH + fileName, classLoader.getResource(RESOURCES_THYMELEAF_PATH + fileName)));
         }
     }
 

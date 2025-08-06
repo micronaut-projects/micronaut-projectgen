@@ -17,14 +17,17 @@ package io.micronaut.starter.feature.email;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
-import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that integrates with Mailjet for sending transactional emails.
+ * This feature is conditionally enabled via the {@code micronaut.starter.feature.email.mailjet.enabled} property.
+ * Extends {@link EmailFeature} to configure the Mailjet-specific module and behavior.
+ */
 @Requires(property = "micronaut.starter.feature.email.mailjet.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class MailjetEmailFeature extends EmailFeature {

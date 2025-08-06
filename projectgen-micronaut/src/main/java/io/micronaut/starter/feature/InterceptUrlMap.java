@@ -19,6 +19,12 @@ import io.micronaut.core.annotation.NonNull;
 
 import java.util.Map;
 
+/**
+ * Represents a security URL pattern and its associated access rule.
+ *
+ * @param pattern the URL pattern to intercept
+ * @param access the access rule for the URL pattern
+ */
 public record InterceptUrlMap(@NonNull String pattern, @NonNull String access) {
     private static final String IS_ANONYMOUS = "isAnonymous()";
 

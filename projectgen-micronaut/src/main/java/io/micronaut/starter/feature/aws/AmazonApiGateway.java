@@ -22,6 +22,12 @@ import io.micronaut.starter.feature.function.LambdaRuntimeMainClass;
 import io.micronaut.starter.feature.function.awslambda.AwsLambda;
 import jakarta.inject.Singleton;
 
+/**
+ * Feature that enables integration with Amazon API Gateway REST API.
+ * <p>
+ * This feature works with AWS CDK to define a REST API using Amazon API Gateway
+ * and configures the appropriate AWS Lambda runtime main class.
+ */
 @Requires(property = "micronaut.starter.feature.amazon.api.gateway.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class AmazonApiGateway extends AwsLambdaRelatedFeature implements AwsApiFeature, LambdaRuntimeMainClass {

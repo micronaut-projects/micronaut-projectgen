@@ -17,6 +17,10 @@ package io.micronaut.starter.feature.aws;
 
 import io.micronaut.projectgen.core.feature.FeatureContext;
 
+/**
+ * Base class for AWS CDK-related features that ensures
+ * the core CDK feature is added when any CDK feature is selected.
+ */
 public abstract class CdkFeature implements AwsFeature {
 
     private final Cdk cdk;

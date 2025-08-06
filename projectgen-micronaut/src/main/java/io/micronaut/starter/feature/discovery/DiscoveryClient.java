@@ -29,6 +29,16 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that adds support for the Micronaut Discovery Client.
+ * <p>
+ * This feature adds the `micronaut-discovery-client` dependency,
+ * which provides an implementation of the DiscoveryClient API
+ * for service discovery capabilities.
+ * <p>
+ * It requires an {@link HttpClientFeature} and will add one if
+ * not already present.
+ */
 @Requires(property = "micronaut.starter.feature.discovery.client.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class DiscoveryClient implements OpenRewriteFeature {

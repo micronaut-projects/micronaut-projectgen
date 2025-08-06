@@ -17,11 +17,7 @@ package io.micronaut.projectgen.micronaut.features.objectstorage;
 
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.naming.NameUtils;
-import io.micronaut.projectgen.micronaut.ApplicationType;
-import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.feature.Feature;
-import org.openrewrite.groovy.tree.G;
 
 /**
  * Base class for Object Storage features.

@@ -17,7 +17,6 @@ package io.micronaut.starter.feature.dekorate;
 
 import io.micronaut.core.annotation.Nullable;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.Feature;
 

@@ -30,6 +30,11 @@ import jakarta.inject.Singleton;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Gradle Enterprise feature customized for Micronaut,
+ * configuring Micronaut-specific Gradle Enterprise settings
+ * and applying Maven extensions for build scans and custom user data.
+ */
 @Requires(property = "micronaut.starter.feature.micronaut.gradle.enterprise.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Requires(property = "micronaut.starter.feature.gradle.enterprise.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
@@ -71,13 +76,19 @@ public class MicronautGradleEnterprise extends GradleEnterprise {
     @Override
     protected GradlePlugin gradlePlugin(GradleEnterpriseConfiguration configuration) {
         GradlePlugin.Builder builder = GradlePlugin.builder()
-                .gradleFile(GradleFile.SETTINGS)
-                .id(GRADLE_PLUGIN_ID_MICRONAUT_GRADLE_ENTERPRISE)
-                .lookupArtifactId(ARTIFACT_ID_MICRONAUT_GRADLE_PLUGINS);
+            .gradleFile(GradleFile.SETTINGS)
+            .id(GRADLE_PLUGIN_ID_MICRONAUT_GRADLE_ENTERPRISE)
+            .lookupArtifactId(ARTIFACT_ID_MICRONAUT_GRADLE_PLUGINS);
         pluginsManagementRepositories().forEach(builder::pluginsManagementRepository);
         return builder.build();
     }
 
+    /**
+     * Returns a list of Gradle repositories used for plugins management.
+     * The list includes the Gradle Plugin Portal and Maven Central repositories.
+     *
+     * @return A non-null list of Gradle repositories.
+     */
     @NonNull
     protected List<GradleRepository> pluginsManagementRepositories() {
         return Arrays.asList(new GradlePluginPortal(), new GradleMavenCentral());

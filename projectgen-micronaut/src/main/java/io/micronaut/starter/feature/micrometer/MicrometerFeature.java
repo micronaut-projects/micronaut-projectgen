@@ -23,11 +23,15 @@ import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.starter.feature.other.Management;
 import io.micronaut.starter.feature.server.MicronautServerDependent;
 
+/**
+ * Abstract base class for Micrometer-related features in a Micronaut server application.
+ * Ensures the core Micrometer and management features are added when selected.
+ */
 public abstract class MicrometerFeature implements Feature, MicronautServerDependent {
     private final Core core;
     private final Management management;
 
-    public MicrometerFeature(Core core, Management management) {
+    protected MicrometerFeature(Core core, Management management) {
         this.core = core;
         this.management = management;
     }

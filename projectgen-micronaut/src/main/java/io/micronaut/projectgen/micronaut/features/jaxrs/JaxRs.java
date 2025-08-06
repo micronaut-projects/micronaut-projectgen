@@ -29,6 +29,12 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Provides support for JAX-RS annotations within a Micronaut application.
+ * This feature integrates JAX-RS capabilities and conditionally adds security
+ * features if a security feature is present.
+ * and It is intended for default application .
+ */
 @Requires(property = "micronaut.starter.feature.jax.rs.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class JaxRs implements OpenRewriteFeature, MicronautServerDependent {

@@ -27,6 +27,9 @@ import jakarta.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Groovy module feature that provides extensions for processing Groovy objects using YAML.
+ */
 @Requires(property = "micronaut.starter.feature.groovy.yaml.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class YamlGroovyModule implements GroovyModuleFeature, OpenRewriteFeature {
@@ -54,8 +57,7 @@ public class YamlGroovyModule implements GroovyModuleFeature, OpenRewriteFeature
         List<String> recipes = new ArrayList<>();
         if (generatorContext.getLanguage() == Language.GROOVY) {
             recipes.add("io.micronaut.starter.feature.groovy-yaml");
-        }
-        else if (generatorContext.getTestFramework() == TestFramework.SPOCK) {
+        } else if (generatorContext.getTestFramework() == TestFramework.SPOCK) {
             recipes.add("io.micronaut.starter.feature.groovy-yaml-spock");
         }
         return recipes;

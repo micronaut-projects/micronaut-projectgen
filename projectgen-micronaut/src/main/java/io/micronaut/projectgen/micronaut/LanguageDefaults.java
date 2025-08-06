@@ -53,6 +53,10 @@ public class LanguageDefaults implements HasDefaultTest, HasDefaultBuild {
         return build;
     }
 
+    /**
+     * Returns the Gradle DSL associated with this language configuration.
+     * @return the {@link GradleDsl}, or {@code null} if not set
+     */
     @Nullable
     public GradleDsl getGradleDsl() {
         return gradleDsl;

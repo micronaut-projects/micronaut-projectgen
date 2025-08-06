@@ -49,16 +49,16 @@ public class GoogleCloudFunction extends AbstractGoogleCloudFunction {
     public static final String NAME = "google-cloud-function-http";
 
     private static final Dependency MICRONAUT_GCP_FUNCTION_HTTP = MicronautDependencyUtils
-            .gcpDependency()
-            .artifactId("micronaut-gcp-function-http")
-            .compile()
-            .build();
+        .gcpDependency()
+        .artifactId("micronaut-gcp-function-http")
+        .compile()
+        .build();
 
     private static final Dependency MICRONAUT_GCP_FUNCTION_HTTP_TEST = MicronautDependencyUtils
-            .gcpDependency()
-            .artifactId("micronaut-gcp-function-http-test")
-            .test()
-            .build();
+        .gcpDependency()
+        .artifactId("micronaut-gcp-function-http-test")
+        .test()
+        .build();
 
     public GoogleCloudFunction(ShadePlugin shadePlugin, JacksonDatabindFeature jacksonDatabindFeature) {
         super(shadePlugin, jacksonDatabindFeature);
@@ -117,6 +117,13 @@ public class GoogleCloudFunction extends AbstractGoogleCloudFunction {
         addDependencies(module, generatorContext.getOptions());
     }
 
+    /**
+     * Adds dependencies required for Google Cloud Function to the module context.
+     * The dependencies added are specific to the Maven build tool.
+     *
+     * @param module  the module context to add dependencies to
+     * @param options the project creation options
+     */
     protected void addDependencies(ModuleContext module, Options options) {
         if (OptionUtils.hasMavenBuildTool(options)) {
             module.addDependency(GCP_FUNCTIONS_FRAMEWORK_API.compileOnly());

@@ -27,6 +27,12 @@ import io.micronaut.starter.feature.reactor.Reactor;
 import io.micronaut.starter.feature.testresources.TestResources;
 import jakarta.inject.Singleton;
 
+/**
+ * Feature that adds support for Hibernate Reactive with JPA integration.
+ * <p>
+ * This feature configures Micronaut projects to use Hibernate Reactive with JPA,
+ * including necessary dependencies and reactive support.
+ */
 @Requires(property = "micronaut.starter.feature.hibernate.reactive.jpa.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class HibernateReactiveJpa extends HibernateReactiveFeature {
@@ -34,8 +40,8 @@ public class HibernateReactiveJpa extends HibernateReactiveFeature {
     public static final String NAME = "hibernate-reactive-jpa";
 
     private static final Dependency.Builder DEPENDENCY_MICRONAUT_HIBERNATE_REACTIVE = MicronautDependencyUtils.sqlDependency()
-            .artifactId("micronaut-hibernate-reactive")
-            .compile();
+        .artifactId("micronaut-hibernate-reactive")
+        .compile();
 
     private final Reactor reactiveFeature;
 

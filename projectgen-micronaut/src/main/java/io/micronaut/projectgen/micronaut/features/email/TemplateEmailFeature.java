@@ -19,15 +19,18 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.starter.feature.Category;
-import io.micronaut.projectgen.core.feature.Feature;
 import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that enables sending emails using templates with Micronaut Views.
+ * This feature is conditionally enabled via the
+ * {@code micronaut.starter.feature.email.template.enabled} property.
+ * Implements {@link OpenRewriteFeature} to provide integration and recipe configuration.
+ */
 @Requires(property = "micronaut.starter.feature.email.template.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class TemplateEmailFeature implements OpenRewriteFeature {
@@ -54,7 +57,7 @@ public class TemplateEmailFeature implements OpenRewriteFeature {
         return "email-template";
     }
 
-   @Override
+    @Override
     public List<String> getRecipes(GeneratorContext generatorContext) {
         return List.of("io.micronaut.starter.feature.email-template");
     }

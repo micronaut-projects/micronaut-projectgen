@@ -17,5 +17,9 @@ package io.micronaut.projectgen.micronaut.features.langchain4j;
 
 import io.micronaut.projectgen.core.feature.Feature;
 
+/**
+ * Marker interface for Langchain4j features in Micronaut.
+ * Used to group all Langchain4j-related features under a common type.
+ */
 public interface Langchain4jFeature extends Feature {
 }

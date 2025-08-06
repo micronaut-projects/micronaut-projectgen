@@ -19,6 +19,10 @@ import io.micronaut.core.annotation.NonNull;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.generator.ModuleContext;
 
+/**
+ * Defines a feature that specifies the Micronaut runtime to be used in the project.
+ * Provides a mechanism to resolve and add the Micronaut runtime property to the build configuration.
+ */
 public interface MicronautRuntimeFeature {
 
     String PROPERTY_MICRONAUT_RUNTIME = "micronaut.runtime";

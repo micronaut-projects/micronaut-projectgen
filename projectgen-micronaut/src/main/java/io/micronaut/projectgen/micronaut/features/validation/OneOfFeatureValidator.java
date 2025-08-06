@@ -16,7 +16,6 @@
 package io.micronaut.projectgen.micronaut.features.validation;
 
 import io.micronaut.projectgen.core.feature.FeatureValidator;
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.feature.OneOfFeature;
 import io.micronaut.projectgen.core.options.Options;
@@ -26,21 +25,31 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ * Feature validator that ensures only one feature from a group of mutually exclusive features is selected.
+ * This validator checks that features implementing OneOfFeature interface are not selected together with other features
+ * from the same group.
+ */
 @Singleton
 public class OneOfFeatureValidator implements FeatureValidator {
 
+    /**
+     * Validates that only one feature from each OneOfFeature group is selected.
+     *
+     * @param features the set of selected features to validate
+     */
     private void validate(Set<Feature> features) {
         Set<Class<?>> oneOfFeatures = features.stream()
-                .filter(OneOfFeature.class::isInstance)
-                .map(OneOfFeature.class::cast)
-                .map(OneOfFeature::getFeatureClass)
-                .collect(Collectors.toSet());
+            .filter(OneOfFeature.class::isInstance)
+            .map(OneOfFeature.class::cast)
+            .map(OneOfFeature::getFeatureClass)
+            .collect(Collectors.toSet());
 
-        for (Class<?> featureClass: oneOfFeatures) {
+        for (Class<?> featureClass : oneOfFeatures) {
             List<String> matches = features.stream()
-                    .filter(feature -> featureClass.isAssignableFrom(feature.getClass()))
-                    .map(Feature::getName)
-                    .collect(Collectors.toList());
+                .filter(feature -> featureClass.isAssignableFrom(feature.getClass()))
+                .map(Feature::getName)
+                .collect(Collectors.toList());
             if (matches.size() > 1) {
                 throw new IllegalArgumentException("There can only be one of the following features selected: %s".formatted(matches));
             }

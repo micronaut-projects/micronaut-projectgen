@@ -15,10 +15,12 @@
  */
 package io.micronaut.starter.feature.migration;
 
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.OneOfFeature;
 
+/**
+ * Marker interface for features related to database migration.
+ */
 public interface MigrationFeature extends OneOfFeature {
 
     @Override

@@ -24,6 +24,10 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that provides integration with Anthropic's Langchain4j language model in Micronaut.
+ * Adds the necessary configuration and recipes for Anthropic language model support.
+ */
 @Requires(property = "micronaut.starter.feature.langchain4j.anthropic.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class AnthropicLangchain4jLanguageModel implements Langchain4jLanguageModel, OpenRewriteFeature {

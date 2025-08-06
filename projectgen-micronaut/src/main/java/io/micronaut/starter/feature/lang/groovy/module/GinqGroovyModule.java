@@ -27,6 +27,9 @@ import jakarta.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Feature providing Groovy extensions for SQL-like queries on in-memory collections.
+ */
 @Requires(property = "micronaut.starter.feature.groovy.ginq.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class GinqGroovyModule implements GroovyModuleFeature, OpenRewriteFeature {
@@ -54,8 +57,7 @@ public class GinqGroovyModule implements GroovyModuleFeature, OpenRewriteFeature
         List<String> recipes = new ArrayList<>();
         if (generatorContext.getLanguage() == Language.GROOVY) {
             recipes.add("io.micronaut.starter.feature.groovy-ginq");
-        }
-        else if (generatorContext.getTestFramework() == TestFramework.SPOCK) {
+        } else if (generatorContext.getTestFramework() == TestFramework.SPOCK) {
             recipes.add("io.micronaut.starter.feature.groovy-ginq-spock");
         }
         return recipes;

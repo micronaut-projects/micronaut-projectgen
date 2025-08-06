@@ -17,6 +17,9 @@ package io.micronaut.starter.feature.buildtools;
 
 import io.micronaut.core.annotation.Nullable;
 
+/**
+ * Configuration interface for Gradle Enterprise integration.
+ */
 public interface GradleEnterpriseConfiguration {
     @Nullable
     default String getServer() {

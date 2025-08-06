@@ -27,6 +27,11 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that adds support for core service discovery functionality in Micronaut.
+ * <p>
+ * This includes registering the {@code micronaut-discovery-core} dependency.
+ */
 @Requires(property = "micronaut.starter.feature.discovery.core.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class DiscoveryCore implements OpenRewriteFeature {

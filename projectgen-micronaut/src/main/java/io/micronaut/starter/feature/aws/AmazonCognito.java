@@ -29,6 +29,12 @@ import io.micronaut.starter.feature.security.SecurityOAuth2Configuration;
 import io.micronaut.starter.feature.security.SecurityOAuth2Feature;
 import jakarta.inject.Singleton;
 
+/**
+ * Feature that enables integration with Amazon Cognito for authentication and authorization.
+ * <p>
+ * Configures Micronaut Security with OAuth 2.0 support and provides default issuer and authentication mode settings.
+ * Can be used with the CDK to provision a Cognito User Pool and OAuth 2.0 application.
+ */
 @Requires(property = "micronaut.starter.feature.amazon.cognito.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class AmazonCognito extends SecurityOAuth2Feature implements AwsFeature, SecurityOAuth2Configuration, SecurityAuthenticationModeProvider {

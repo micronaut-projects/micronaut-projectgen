@@ -15,7 +15,6 @@
  */
 package io.micronaut.starter.feature.function.azure;
 
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.feature.FeatureValidator;
 import io.micronaut.projectgen.core.options.JdkVersion;
@@ -31,7 +30,7 @@ import java.util.Set;
 public class AzureFunctionFeatureValidator implements FeatureValidator {
 
     public static boolean supports(JdkVersion jdkVersion) {
-        return JdkVersion.JDK_8.equals(jdkVersion) || JdkVersion.JDK_11.equals(jdkVersion) || JdkVersion.JDK_17.equals(jdkVersion)  || JdkVersion.JDK_21.equals(jdkVersion);
+        return JdkVersion.JDK_8.equals(jdkVersion) || JdkVersion.JDK_11.equals(jdkVersion) || JdkVersion.JDK_17.equals(jdkVersion) || JdkVersion.JDK_21.equals(jdkVersion);
     }
 
     @Override

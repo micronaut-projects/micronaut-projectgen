@@ -29,6 +29,11 @@ import io.micronaut.projectgen.core.rocker.RockerTemplate;
 
 import jakarta.inject.Singleton;
 
+/**
+ * Feature for generating Spock tests for Picocli CLI applications.
+ *
+ * <p>Provides Spock test templates and integrates them into the project structure.</p>
+ */
 @Requires(property = "micronaut.starter.feature.picocli.spock.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class PicocliSpock implements PicocliTestFeature {
@@ -49,10 +54,22 @@ public class PicocliSpock implements PicocliTestFeature {
         return TestFramework.SPOCK;
     }
 
+    /**
+     * Returns the {@link RockerModel} for generating a Picocli Spock test.
+     *
+     * @param project The project metadata.
+     * @return The Rocker model for Spock test generation.
+     */
     public RockerModel getModel(Project project) {
         return picocliSpockTest.template(project);
     }
 
+    /**
+     * Returns the {@link RockerTemplate} for the Picocli Spock test source file.
+     *
+     * @param project The project metadata.
+     * @return The Rocker template for rendering the Spock test.
+     */
     public RockerTemplate getTemplate(Project project) {
         return new RockerTemplate(getTestFramework().getSourcePath(PATH, Language.GROOVY), getModel(project));
     }

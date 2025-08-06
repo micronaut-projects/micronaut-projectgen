@@ -65,14 +65,14 @@ public class GraalVMDockerRegistryWorkflow extends AbstractDockerRegistryWorkflo
         ModuleContext module = generatorContext.getRootModule();
         String workflowFilePath = ".github/workflows/" + getWorkflowFileName(generatorContext);
         module.addTemplate("graalCEWorkflow",
-                new RockerTemplate(workflowFilePath,
-                        dockerRegistryWorkflow.template(generatorContext.getProject(), generatorContext.getJdkVersion(),
-                                generatorContext.getBuildTool(), true)
-                )
+            new RockerTemplate(workflowFilePath,
+                dockerRegistryWorkflow.template(generatorContext.getProject(), generatorContext.getJdkVersion(),
+                    generatorContext.getBuildTool(), true)
+            )
         );
 
         module.addHelpTemplate(new RockerWritable(dockerRegistryWorkflowReadme.template(
-                this, generatorContext.getProject(), workflowFilePath)));
+            this, generatorContext.getProject(), workflowFilePath)));
     }
 
     @Override

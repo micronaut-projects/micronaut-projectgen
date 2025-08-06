@@ -27,6 +27,9 @@ import jakarta.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Feature that adds support for integrating Elasticsearch into a Micronaut application.
+ */
 @Requires(property = "micronaut.starter.feature.elasticsearch.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Elasticsearch implements OpenRewriteFeature {
@@ -55,8 +58,8 @@ public class Elasticsearch implements OpenRewriteFeature {
     public List<String> getRecipes(GeneratorContext generatorContext) {
         List<String> recipes = new ArrayList<>();
         recipes.add("io.micronaut.starter.feature.elasticsearch");
-        if(generatorContext.isFeaturePresent(GraalVM.class)) {
-        recipes.add("io.micronaut.starter.feature.elasticsearch-log");
+        if (generatorContext.isFeaturePresent(GraalVM.class)) {
+            recipes.add("io.micronaut.starter.feature.elasticsearch-log");
         }
         return recipes;
     }

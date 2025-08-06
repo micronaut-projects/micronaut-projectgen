@@ -17,6 +17,9 @@ package io.micronaut.starter.feature.function;
 
 import io.micronaut.core.annotation.NonNull;
 
+/**
+ * Functional interface representing a provider for the main class name of a Lambda runtime.
+ */
 @FunctionalInterface
 public interface LambdaRuntimeMainClass {
 

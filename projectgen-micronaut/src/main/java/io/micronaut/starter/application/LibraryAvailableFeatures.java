@@ -25,6 +25,9 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Filters and provides features available for Library application type.
+ */
 @Named("library")
 @Singleton
 public class LibraryAvailableFeatures extends BaseAvailableFeatures {

@@ -19,11 +19,7 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
-import io.micronaut.projectgen.core.feature.config.Configuration;
-import io.micronaut.projectgen.core.generator.ModuleContext;
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.starter.feature.Category;
 import io.micronaut.starter.feature.MicronautCommunityFeature;
 import io.micronaut.starter.options.MicronautVersion;
@@ -31,6 +27,9 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Micronaut community feature providing integration with JobRunr for background job processing.
+ */
 @Requires(property = "micronaut.starter.feature.jobrunr.jobrunr.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class JobRunrFeature implements MicronautCommunityFeature, OpenRewriteFeature {

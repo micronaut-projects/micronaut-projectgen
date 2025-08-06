@@ -26,6 +26,12 @@ import io.micronaut.starter.feature.architecture.Arm;
 import io.micronaut.starter.feature.architecture.CpuArchitecture;
 import jakarta.inject.Singleton;
 
+/**
+ * Feature for enabling AWS Lambda SnapStart functionality.
+ * <p>
+ * SnapStart improves cold start performance by initializing
+ * the Lambda function ahead of time on supported CPU architectures.
+ */
 @Requires(property = "micronaut.starter.feature.snapstart.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class AwsLambdaSnapstart implements Feature {
@@ -51,6 +57,12 @@ public class AwsLambdaSnapstart implements Feature {
         return "https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html";
     }
 
+    /**
+     * Determines if the feature supports the given CPU architecture.
+     *
+     * @param cpuArchitecture The CPU architecture to check support for
+     * @return true if supported, false otherwise
+     */
     public boolean supports(@NonNull CpuArchitecture cpuArchitecture) {
         return !(cpuArchitecture instanceof Arm);
     }
@@ -58,7 +70,7 @@ public class AwsLambdaSnapstart implements Feature {
     @Override
     public boolean supports(Options options) {
         ApplicationType applicationType = ApplicationType.of(options.template());
-        return applicationType == ApplicationType.DEFAULT ||
-            applicationType == ApplicationType.FUNCTION;
+        return applicationType == ApplicationType.DEFAULT
+            || applicationType == ApplicationType.FUNCTION;
     }
 }

@@ -25,6 +25,9 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that adds support for Amazon OpenSearch Service.
+ */
 @Requires(property = "micronaut.starter.feature.opensearch.amazon.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class OpenSearchAmazon extends OpenSearchFeature implements OpenRewriteFeature {
@@ -32,8 +35,8 @@ public class OpenSearchAmazon extends OpenSearchFeature implements OpenRewriteFe
     public static final String NAME = "opensearch-amazon";
 
     public OpenSearchAmazon(
-            TestContainers testContainers,
-            TestResources testResources
+        TestContainers testContainers,
+        TestResources testResources
     ) {
         super(testContainers, testResources);
     }

@@ -15,9 +15,9 @@
  */
 package io.micronaut.starter.feature.messaging.jms;
 
-import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.micronaut.ApplicationType;
-
+/**
+ * Base abstract implementation of the JmsFeature interface.
+ */
 public abstract class AbstractJmsFeature implements JmsFeature {
 
     @Override

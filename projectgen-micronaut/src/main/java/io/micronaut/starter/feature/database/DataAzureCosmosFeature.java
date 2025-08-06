@@ -17,22 +17,15 @@ package io.micronaut.starter.feature.database;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
-import io.micronaut.core.util.CollectionUtils;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
-import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.utils.OptionUtils;
-import io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils;
 import io.micronaut.projectgen.core.feature.FeatureContext;
-import io.micronaut.projectgen.core.feature.config.NestedConfiguration;
 import jakarta.inject.Singleton;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Add support for Micronaut Data Azure Cosmos.
@@ -66,10 +59,10 @@ public class DataAzureCosmosFeature implements DataDocumentFeature, OpenRewriteF
 
     @Override
     public List<String> getRecipes(GeneratorContext generatorContext) {
-        // TODO: Add test resources/containers support
+// NOTE: Consider adding test resources/containers support later
         List<String> recipes = new ArrayList<>();
         recipes.add("io.micronaut.starter.feature.data-azure-cosmos");
-        if(OptionUtils.hasMavenBuildTool(generatorContext.getOptions())){
+        if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())) {
             recipes.add("io.micronaut.starter.feature.data-azure-cosmos-annotation-maven");
         } else {
             recipes.add("io.micronaut.starter.feature.data-azure-cosmos-annotation-gradle");

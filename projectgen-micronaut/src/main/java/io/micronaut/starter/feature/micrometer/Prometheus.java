@@ -24,6 +24,10 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Micrometer feature that adds support for Micrometer metrics
+ * with the Prometheus reporter.
+ */
 @Requires(property = "micronaut.starter.feature.micrometer.prometheus.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Prometheus extends MicrometerFeature implements MicrometerRegistryFeature, OpenRewriteFeature {

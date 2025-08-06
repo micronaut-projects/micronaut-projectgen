@@ -1,6 +1,5 @@
 package io.micronaut.projectgen.micronaut.features.microstream;
 
-import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.buildtools.Scope;
 import io.micronaut.projectgen.core.generator.ProjectGenerator;
 import io.micronaut.projectgen.core.io.MapOutputHandler;
@@ -49,7 +48,7 @@ class MicroStreamCacheTest {
     }
 
     private static Map<String, String> generateProject(ProjectGenerator micronautProjectGenerator,
-                                                       Options options) throws Exception {
+        Options options) throws Exception {
         MapOutputHandler outputHandler = new MapOutputHandler();
         micronautProjectGenerator.generate(options, outputHandler);
         return outputHandler.getProject();

@@ -52,39 +52,39 @@ abstract class ChatBotsTelegram extends ChatBots {
     @Override
     protected void renderTemplates(GeneratorContext generatorContext, ModuleContext module) {
         module.addTemplate(
-                "about-markdown",
-                new RockerTemplate("src/main/resources/botcommands/about.md", about.template())
+            "about-markdown",
+            new RockerTemplate("src/main/resources/botcommands/about.md", about.template())
         );
         module.addTemplate(
             generatorContext.getOptions().language(),
-                "about-command-handler",
-                generatorContext.getSourcePath("/{packagePath}/AboutCommandHandler"),
-                aboutCommandHandlerJava.template(generatorContext.getProject()),
-                aboutCommandHandlerKotlin.template(generatorContext.getProject()),
-                aboutCommandHandlerGroovy.template(generatorContext.getProject())
+            "about-command-handler",
+            generatorContext.getSourcePath("/{packagePath}/AboutCommandHandler"),
+            aboutCommandHandlerJava.template(generatorContext.getProject()),
+            aboutCommandHandlerKotlin.template(generatorContext.getProject()),
+            aboutCommandHandlerGroovy.template(generatorContext.getProject())
         );
         if (!generatorContext.getTestFramework().isKotlinTestFramework()) {
             module.addTemplate(
-                    "mock-about-command-json",
-                    new RockerTemplate(
-                            "src/test/resources/mockAboutCommand.json",
-                            mockAboutCommandJson.template()
-                    )
+                "mock-about-command-json",
+                new RockerTemplate(
+                    "src/test/resources/mockAboutCommand.json",
+                    mockAboutCommandJson.template()
+                )
             );
         }
         if (generatorContext.getTestFramework() == TestFramework.JUNIT) {
             module.addTemplate(
                 generatorContext.getOptions().language(),
-                    "about-command-handler-junit-test",
-                    generatorContext.getTestSourcePath("/{packagePath}/AboutCommandHandler"),
-                    aboutCommandHandlerJavaJunit.template(generatorContext.getProject()),
-                    aboutCommandHandlerKotlinJunit.template(generatorContext.getProject()),
-                    aboutCommandHandlerGroovyJunit.template(generatorContext.getProject())
+                "about-command-handler-junit-test",
+                generatorContext.getTestSourcePath("/{packagePath}/AboutCommandHandler"),
+                aboutCommandHandlerJavaJunit.template(generatorContext.getProject()),
+                aboutCommandHandlerKotlinJunit.template(generatorContext.getProject()),
+                aboutCommandHandlerGroovyJunit.template(generatorContext.getProject())
             );
         } else if (generatorContext.getTestFramework() == TestFramework.SPOCK) {
             module.addTemplate(
-                    "about-command-handler-spock-groovy-test",
-                    new RockerTemplate(generatorContext.getTestSourcePath("/{packagePath}/AboutCommandHandler"), aboutCommandHandlerGroovySpock.template(generatorContext.getProject()))
+                "about-command-handler-spock-groovy-test",
+                new RockerTemplate(generatorContext.getTestSourcePath("/{packagePath}/AboutCommandHandler"), aboutCommandHandlerGroovySpock.template(generatorContext.getProject()))
             );
         }
 
@@ -92,11 +92,11 @@ abstract class ChatBotsTelegram extends ChatBots {
 
         module.addTemplate(
             generatorContext.getOptions().language(),
-                "final-command-handler",
-                generatorContext.getSourcePath("/{packagePath}/FinalCommandHandler"),
-                finalCommandHandlerJava.template(generatorContext.getProject()),
-                finalCommandHandlerKotlin.template(generatorContext.getProject()),
-                finalCommandHandlerGroovy.template(generatorContext.getProject())
+            "final-command-handler",
+            generatorContext.getSourcePath("/{packagePath}/FinalCommandHandler"),
+            finalCommandHandlerJava.template(generatorContext.getProject()),
+            finalCommandHandlerKotlin.template(generatorContext.getProject()),
+            finalCommandHandlerGroovy.template(generatorContext.getProject())
         );
     }
 

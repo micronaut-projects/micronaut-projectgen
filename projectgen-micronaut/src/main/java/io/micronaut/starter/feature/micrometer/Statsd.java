@@ -24,6 +24,9 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Micrometer feature that adds support for Statsd metrics reporter.
+ */
 @Requires(property = "micronaut.starter.feature.micrometer.statsd.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Statsd extends MicrometerFeature implements MicrometerRegistryFeature, OpenRewriteFeature {

@@ -29,6 +29,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Objects;
 
+/**
+ * Holds metadata about a generated Micronaut project.
+ *
+ * Includes information such as application type, language, build tool, test framework,
+ * JDK version, Micronaut version, and selected features.
+ */
 @Introspected
 public class Generated {
     private final ApplicationType type;
@@ -41,11 +47,11 @@ public class Generated {
 
     @Creator
     public Generated(
-            @NonNull ApplicationType type,
-            @NonNull Language language,
-            @NonNull BuildTool buildTool,
-            @NonNull TestFramework testFramework,
-            @NonNull JdkVersion jdkVersion) {
+        @NonNull ApplicationType type,
+        @NonNull Language language,
+        @NonNull BuildTool buildTool,
+        @NonNull TestFramework testFramework,
+        @NonNull JdkVersion jdkVersion) {
         this.type = Objects.requireNonNull(type, "Type cannot be null");
         this.language = Objects.requireNonNull(language, "Language cannot be null");
         this.buildTool = Objects.requireNonNull(buildTool, "Build tool cannot be null");
@@ -61,6 +67,11 @@ public class Generated {
         return features;
     }
 
+    /**
+     * Sets the selected features for the project.
+     *
+     * @param features the collection of selected features
+     */
     public void setSelectedFeatures(Collection<? extends SelectedFeature> features) {
         if (features != null) {
             this.features = features;

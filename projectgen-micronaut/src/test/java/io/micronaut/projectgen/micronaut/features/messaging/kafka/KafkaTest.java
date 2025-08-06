@@ -10,7 +10,8 @@ import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
 import org.junit.jupiter.api.Test;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @MicronautTest(startApplication = false)
 class KafkaTest {
@@ -35,7 +36,7 @@ class KafkaTest {
     }
 
     private static Map<String, String> generateProject(ProjectGenerator micronautProjectGenerator,
-                                                       Options options) throws Exception {
+        Options options) throws Exception {
         MapOutputHandler outputHandler = new MapOutputHandler();
         micronautProjectGenerator.generate(options, outputHandler);
         return outputHandler.getProject();

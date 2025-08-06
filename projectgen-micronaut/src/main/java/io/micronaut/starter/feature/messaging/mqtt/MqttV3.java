@@ -23,6 +23,11 @@ import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import jakarta.inject.Singleton;
 import java.util.List;
 
+/**
+ * MQTT v3 messaging feature implementation.
+ * <p>
+ * Provides support for MQTT version 3 messaging.
+ */
 @Requires(property = "micronaut.starter.feature.mqttv3.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class MqttV3 implements MqttFeature, OpenRewriteFeature {

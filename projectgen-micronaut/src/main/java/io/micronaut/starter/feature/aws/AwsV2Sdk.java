@@ -17,11 +17,8 @@ package io.micronaut.starter.feature.aws;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
-import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.util.StringUtils;
-import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.starter.feature.Category;
@@ -29,23 +26,27 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Micronaut feature that adds support and integration for AWS SDK version 2.x,
+ * enabling cloud-related functionalities using the AWS SDK.
+ */
 @Requires(property = "micronaut.starter.feature.aws.v2.sdk.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class AwsV2Sdk implements AwsFeature, OpenRewriteFeature {
 
     public static final String NAME = "aws-v2-sdk";
     static final Dependency.Builder URL_CONNECTION_CLIENT = Dependency.builder()
-            .groupId(GROUP_ID_AWS_SDK_V2)
-            .artifactId("url-connection-client")
-            .compile();
+        .groupId(GROUP_ID_AWS_SDK_V2)
+        .artifactId("url-connection-client")
+        .compile();
     static final Dependency.Builder APACHE_CLIENT_DEPENDENCY = Dependency.builder()
-            .groupId(GROUP_ID_AWS_SDK_V2)
-            .artifactId("apache-client")
-            .compile();
+        .groupId(GROUP_ID_AWS_SDK_V2)
+        .artifactId("apache-client")
+        .compile();
     static final Dependency.Builder NETTY_NIO_CLIENT_DEPENDENCY = Dependency.builder()
-            .groupId(GROUP_ID_AWS_SDK_V2)
-            .artifactId("netty-nio-client")
-            .compile();
+        .groupId(GROUP_ID_AWS_SDK_V2)
+        .artifactId("netty-nio-client")
+        .compile();
 
     @Override
     @NonNull

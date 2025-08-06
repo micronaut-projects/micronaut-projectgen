@@ -28,6 +28,11 @@ import java.util.Optional;
 
 import static io.micronaut.starter.feature.database.DataHibernateReactive.IO_VERTX_DEPENDENCY_GROUP;
 
+/**
+ * Feature that adds Oracle Database support to a Micronaut application.
+ * This feature provides the necessary dependencies and configuration for connecting
+ * to Oracle databases, including JDBC driver, R2DBC support, and test container configuration.
+ */
 @Requires(property = "micronaut.starter.feature.oracle.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Oracle extends DatabaseDriverFeature {
@@ -35,38 +40,45 @@ public class Oracle extends DatabaseDriverFeature {
     public static final String NAME = "oracle";
     public static final String VERTX_ORACLE_CLIENT = "vertx-oracle-client";
 
-    //TODO: enable once ojdbc upgrades to 23. See: https://github.com/micronaut-projects/micronaut-sql/pull/1268
+    //Note: enable once ojdbc upgrades to 23. See: https://github.com/micronaut-projects/micronaut-sql/pull/1268
     public static final boolean COMPATIBLE_WITH_HIBERNATE_REACTIVE = false;
 
     @Deprecated(forRemoval = true)
     public static final Dependency.Builder DEPENDENCY_OJDBC8 = Dependency.builder()
-            .groupId("com.oracle.database.jdbc")
-            .artifactId("ojdbc8")
-            .runtime()
-            .template();
+        .groupId("com.oracle.database.jdbc")
+        .artifactId("ojdbc8")
+        .runtime()
+        .template();
 
     public static final Dependency.Builder DEPENDENCY_OJDBC11 = Dependency.builder()
-            .groupId("com.oracle.database.jdbc")
-            .artifactId("ojdbc11")
-            .runtime()
-            .template();
+        .groupId("com.oracle.database.jdbc")
+        .artifactId("ojdbc11")
+        .runtime()
+        .template();
 
     private static final Dependency.Builder DEPENDENCY_ORACLE_R2DBC = Dependency.builder()
-            .groupId("com.oracle.database.r2dbc")
-            .artifactId("oracle-r2dbc")
-            .runtime();
+        .groupId("com.oracle.database.r2dbc")
+        .artifactId("oracle-r2dbc")
+        .runtime();
 
     private static final Dependency.Builder DEPENDENCY_VERTX_ORACLE_CLIENT = Dependency.builder()
-            .groupId(IO_VERTX_DEPENDENCY_GROUP)
-            .artifactId(VERTX_ORACLE_CLIENT)
-            .compile();
+        .groupId(IO_VERTX_DEPENDENCY_GROUP)
+        .artifactId(VERTX_ORACLE_CLIENT)
+        .compile();
 
+    /**
+     * Creates a new Oracle database feature with the specified dependencies.
+     *
+     * @param jdbcFeature the JDBC feature for database connectivity
+     * @param testContainers the test containers feature for testing
+     * @param testResources the test resources feature for test data management
+     */
     public Oracle(JdbcFeature jdbcFeature,
-                  TestContainers testContainers,
-                  TestResources testResources) {
+        TestContainers testContainers,
+        TestResources testResources) {
         super(jdbcFeature, testContainers, testResources);
     }
-    
+
     @Override
     @NonNull
     public String getName() {

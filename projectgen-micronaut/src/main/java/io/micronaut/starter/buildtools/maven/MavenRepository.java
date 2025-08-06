@@ -23,6 +23,9 @@ import io.micronaut.projectgen.micronaut.template.buildtools.maven.repository;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Represents a Maven repository configuration that can be rendered using a Rocker template.
+ */
 public class MavenRepository extends RockerWritable {
 
     public MavenRepository(RockerModel model) {
@@ -36,7 +39,7 @@ public class MavenRepository extends RockerWritable {
     @NonNull
     public static List<MavenRepository> listOf(List<Repository> repositories) {
         return repositories.stream()
-                .map(it -> new MavenRepository(it.getId(), it.getUrl(), it.isSnapshot()))
-                .collect(Collectors.toList());
+            .map(it -> new MavenRepository(it.getId(), it.getUrl(), it.isSnapshot()))
+            .collect(Collectors.toList());
     }
 }

@@ -25,6 +25,10 @@ import io.micronaut.starter.feature.database.HibernateReactiveFeature;
 import io.micronaut.starter.feature.database.r2dbc.R2dbc;
 import jakarta.inject.Singleton;
 
+/**
+ * Feature that adds support for managing external resources
+ * required during development or testing in Micronaut applications.
+ */
 @Requires(property = "micronaut.starter.feature.test.resources.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class TestResources implements Feature {

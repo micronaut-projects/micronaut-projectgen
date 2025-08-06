@@ -26,6 +26,11 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that adds support for generating iTunes Podcast RSS feeds.
+ *
+ * <p>Enables generation of RSS feeds specifically formatted for iTunes Podcasts.</p>
+ */
 @Requires(property = "micronaut.starter.feature.rss.itunes.podcast.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class RssItunes implements OpenRewriteFeature {

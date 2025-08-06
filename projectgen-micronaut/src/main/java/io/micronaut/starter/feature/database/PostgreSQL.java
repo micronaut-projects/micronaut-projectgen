@@ -28,6 +28,11 @@ import java.util.Optional;
 
 import static io.micronaut.starter.feature.database.DataHibernateReactive.IO_VERTX_DEPENDENCY_GROUP;
 
+/**
+ * Feature representing PostgreSQL database driver support.
+ * provides default configuration values for connecting to a PostgreSQL database.
+ * Supports both synchronous and reactive database access.
+ */
 @Requires(property = "micronaut.starter.feature.postgres.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class PostgreSQL extends DatabaseDriverFeature {
@@ -36,24 +41,24 @@ public class PostgreSQL extends DatabaseDriverFeature {
 
     public static final String VERTX_PG_CLIENT = "vertx-pg-client";
     public static final Dependency.Builder DEPENDENCY_POSTGRESQL = Dependency.builder()
-            .groupId("org.postgresql")
-            .artifactId("postgresql")
-            .runtime()
-            .template();
+        .groupId("org.postgresql")
+        .artifactId("postgresql")
+        .runtime()
+        .template();
 
     private static final Dependency.Builder DEPENDENCY_R2DBC_POSTGRESQL = Dependency.builder()
-            .groupId("org.postgresql")
-            .artifactId("r2dbc-postgresql")
-            .runtime();
+        .groupId("org.postgresql")
+        .artifactId("r2dbc-postgresql")
+        .runtime();
 
     private static final Dependency.Builder DEPENDENCY_VERTX_PG_CLIENT = Dependency.builder()
-            .groupId(IO_VERTX_DEPENDENCY_GROUP)
-            .artifactId(VERTX_PG_CLIENT)
-            .compile();
+        .groupId(IO_VERTX_DEPENDENCY_GROUP)
+        .artifactId(VERTX_PG_CLIENT)
+        .compile();
 
     public PostgreSQL(JdbcFeature jdbcFeature,
-                      TestContainers testContainers,
-                      TestResources testResources) {
+        TestContainers testContainers,
+        TestResources testResources) {
         super(jdbcFeature, testContainers, testResources);
     }
 

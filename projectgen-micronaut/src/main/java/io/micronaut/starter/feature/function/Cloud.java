@@ -15,6 +15,9 @@
  */
 package io.micronaut.starter.feature.function;
 
+/**
+ * Enumeration of supported cloud providers.
+ */
 public enum Cloud {
     AZURE,
     GCP,

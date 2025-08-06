@@ -28,6 +28,10 @@ import java.util.List;
 
 import static io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils.GROUP_ID_MICRONAUT_SERDE;
 
+/**
+ * Represents a serialization feature that extends JSON support in Micronaut.
+ * Provides default dependencies and configuration for Micronaut serialization modules.
+ */
 public interface SerializationFeature extends JsonFeature {
     String MICRONAUT_SERIALIZATION = "micronaut.serialization";
     String ARTIFACT_ID_MICRONAUT_JACKSON_CORE = "micronaut-jackson-core";
@@ -47,7 +51,7 @@ public interface SerializationFeature extends JsonFeature {
     default void apply(GeneratorContext generatorContext) {
         ModuleContext module = generatorContext.getRootModule();
         dependencies(generatorContext)
-                .forEach(module::addDependency);
+            .forEach(module::addDependency);
     }
 
     @NonNull
@@ -61,14 +65,14 @@ public interface SerializationFeature extends JsonFeature {
     @NonNull
     default Dependency.Builder serdeModule(@NonNull GeneratorContext generatorContext) {
         return MicronautDependencyUtils.serdeDependency()
-                .compile()
-                .artifactId("micronaut-serde-" + getModule());
+            .compile()
+            .artifactId("micronaut-serde-" + getModule());
     }
 
     @NonNull
     default Dependency.Builder serdeProcessor(BuildTool buildTool) {
         return MicronautDependencyUtils.annotationProcessor(buildTool,
-                GROUP_ID_MICRONAUT_SERDE, ARTIFACT_ID_MICRONAUT_SERDE_PROCESSOR, "micronaut.serialization.version");
+            GROUP_ID_MICRONAUT_SERDE, ARTIFACT_ID_MICRONAUT_SERDE_PROCESSOR, "micronaut.serialization.version");
     }
 
     String getModule();

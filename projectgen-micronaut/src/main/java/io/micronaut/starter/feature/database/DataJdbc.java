@@ -18,9 +18,7 @@ package io.micronaut.starter.feature.database;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.feature.FeatureContext;
-import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.feature.database.jdbc.JdbcFeature;
 import io.micronaut.starter.feature.migration.MigrationFeature;
@@ -29,6 +27,11 @@ import jakarta.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Feature that enables support for Micronaut Data JDBC.
+ * <p>
+ * Registers required dependencies and configuration for using JDBC-based persistence with Micronaut Data.
+ */
 @Requires(property = "micronaut.starter.feature.data.jdbc.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class DataJdbc extends DataDriverConfiguration implements DataFeature, OpenRewriteFeature {

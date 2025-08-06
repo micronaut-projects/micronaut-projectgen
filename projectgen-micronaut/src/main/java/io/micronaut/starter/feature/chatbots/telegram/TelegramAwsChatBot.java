@@ -18,14 +18,11 @@ package io.micronaut.starter.feature.chatbots.telegram;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
-import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.Project;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
-import io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.starter.feature.aws.AwsFeature;
 import io.micronaut.starter.feature.aws.AwsMicronautRuntimeFeature;
@@ -104,8 +101,8 @@ public class TelegramAwsChatBot extends ChatBotsTelegram implements AwsFeature, 
     @Override
     public RockerTemplate rootReadMeTemplate(GeneratorContext generatorContext) {
         return new RockerTemplate(generatorContext.isFeaturePresent(Cdk.class)
-                ? awsCdkReadme.template(generatorContext.getProject(), generatorContext.getFeatures(), getBuildCommand(generatorContext.getBuildTool()))
-                : awsReadme.template(generatorContext.getProject(), generatorContext.getFeatures(), getBuildCommand(generatorContext.getBuildTool()))
+            ? awsCdkReadme.template(generatorContext.getProject(), generatorContext.getFeatures(), getBuildCommand(generatorContext.getBuildTool()))
+            : awsReadme.template(generatorContext.getProject(), generatorContext.getFeatures(), getBuildCommand(generatorContext.getBuildTool()))
         );
     }
 

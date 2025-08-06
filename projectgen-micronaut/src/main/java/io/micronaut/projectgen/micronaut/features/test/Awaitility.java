@@ -26,6 +26,10 @@ import jakarta.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Feature that provides Awaitility framework support for Micronaut applications.
+ * This feature adds the Awaitility framework for testing asynchronous code with language-specific dependencies.
+ */
 @Requires(property = "micronaut.starter.feature.awaitility.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Awaitility implements OpenRewriteFeature {
@@ -59,6 +63,7 @@ public class Awaitility implements OpenRewriteFeature {
             case JAVA -> recipes.add("io.micronaut.starter.feature.awaitility.dependencies.java");
             case KOTLIN -> recipes.add("io.micronaut.starter.feature.awaitility.dependencies.kotlin");
             case GROOVY -> recipes.add("io.micronaut.starter.feature.awaitility.dependencies.groovy");
+            default -> throw new IllegalStateException("Unsupported language: " + generatorContext.getOptions().language());
         }
         recipes.add("io.micronaut.starter.feature.awaitility.documentation.thirdparty");
         return recipes;

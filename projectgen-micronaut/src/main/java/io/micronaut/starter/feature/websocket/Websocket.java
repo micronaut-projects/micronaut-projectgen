@@ -24,6 +24,9 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Adds support for creating WebSocket clients and servers.
+ */
 @Requires(property = "micronaut.starter.feature.websocket.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Websocket implements OpenRewriteFeature {
@@ -49,7 +52,6 @@ public class Websocket implements OpenRewriteFeature {
     public List<String> getRecipes(GeneratorContext generatorContext) {
         return List.of("io.micronaut.starter.feature.websocket");
     }
-
 
     @Override
     public String getCategory() {

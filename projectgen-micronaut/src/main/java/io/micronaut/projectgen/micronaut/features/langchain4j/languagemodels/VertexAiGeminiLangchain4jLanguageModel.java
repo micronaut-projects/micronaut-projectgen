@@ -24,6 +24,10 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that provides integration with Vertex AI Gemini's Langchain4j language model in Micronaut.
+ * Adds the necessary configuration and recipes for Vertex AI Gemini language model support.
+ */
 @Requires(property = "micronaut.starter.feature.langchain4j.vertexai.gemini.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class VertexAiGeminiLangchain4jLanguageModel implements Langchain4jLanguageModel, OpenRewriteFeature {

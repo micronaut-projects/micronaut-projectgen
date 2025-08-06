@@ -19,8 +19,6 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
-import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.Feature;
@@ -34,6 +32,10 @@ import jakarta.inject.Singleton;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Feature that provides Kotlin extension functions to enhance the Micronaut experience when using Kotlin.
+ * Only applicable when the selected language is Kotlin.
+ */
 @Requires(property = "micronaut.starter.feature.kotlin.extension.functions.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class KotlinExtensionFunctions implements OpenRewriteFeature, KotlinSpecificFeature {
@@ -76,6 +78,7 @@ public class KotlinExtensionFunctions implements OpenRewriteFeature, KotlinSpeci
         return "Convenience functions to make using Micronaut with Kotlin more user-friendly";
     }
 
+    @Override
     public String getCategory() {
         return Category.LANGUAGES;
     }

@@ -16,11 +16,14 @@
 package io.micronaut.starter.feature.ci.workflows;
 
 import io.micronaut.core.annotation.NonNull;
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.Feature;
 
+/**
+ * Base feature representing a continuous integration workflow.
+ * Marks the feature as preview and categorizes it under CI/CD.
+ */
 public abstract class CIWorkflowFeature  implements Feature {
 
     @Override

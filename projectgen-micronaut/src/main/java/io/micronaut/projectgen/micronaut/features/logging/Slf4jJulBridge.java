@@ -22,6 +22,10 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that provides SLF4J JUL (Java Util Logging) bridge support for Micronaut applications.
+ * This feature enables bridging between Java Util Logging and SLF4J with Logback.
+ */
 @Singleton
 public class Slf4jJulBridge implements OpenRewriteFeature {
     @Override

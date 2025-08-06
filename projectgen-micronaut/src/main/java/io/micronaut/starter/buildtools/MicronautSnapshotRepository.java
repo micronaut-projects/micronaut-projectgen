@@ -18,6 +18,9 @@ package io.micronaut.starter.buildtools;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.projectgen.core.buildtools.Repository;
 
+/**
+ * Represents the Micronaut snapshot repository hosted on Sonatype OSS.
+ */
 public class MicronautSnapshotRepository implements Repository {
 
     private static final String SONATYPE_OSS_SNAPSHOT = "https://s01.oss.sonatype.org/content/repositories/snapshots/";

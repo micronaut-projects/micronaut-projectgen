@@ -20,7 +20,6 @@ import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.starter.feature.github.workflows.GitHubWorkflowFeature;
 import io.micronaut.starter.feature.github.workflows.Secret;
-import io.micronaut.projectgen.core.buildtools.BuildTool;
 
 import java.util.Arrays;
 import java.util.List;
@@ -41,13 +40,18 @@ public abstract class AbstractDockerRegistryWorkflow extends GitHubWorkflowFeatu
     @Override
     public List<Secret> getSecrets() {
         return Arrays.asList(
-                new Secret(DOCKER_USERNAME, "Username for Docker registry authentication."),
-                new Secret(DOCKER_PASSWORD, "Docker registry password."),
-                new Secret(DOCKER_REPOSITORY_PATH, "Path to the docker image repository inside the registry, e.g. for the image `foo/bar/micronaut:0.1` it is `foo/bar`."),
-                new Secret(DOCKER_REGISTRY_URL, "Docker registry url.")
+            new Secret(DOCKER_USERNAME, "Username for Docker registry authentication."),
+            new Secret(DOCKER_PASSWORD, "Docker registry password."),
+            new Secret(DOCKER_REPOSITORY_PATH, "Path to the docker image repository inside the registry, e.g. for the image `foo/bar/micronaut:0.1` it is `foo/bar`."),
+            new Secret(DOCKER_REGISTRY_URL, "Docker registry url.")
         );
     }
 
+    /**
+     * Applies the feature by configuring build properties for Jib when using Maven.
+     *
+     * @param generatorContext The context for project generation.
+     */
     public void apply(GeneratorContext generatorContext) {
         ModuleContext module = generatorContext.getRootModule();
         if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())) {

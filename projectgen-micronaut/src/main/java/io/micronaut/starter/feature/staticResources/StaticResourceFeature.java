@@ -30,6 +30,10 @@ import jakarta.inject.Singleton;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Feature that aggregates static resources from contributing features
+ * and adds their configuration to the Micronaut application context.
+ */
 @Requires(property = "micronaut.starter.feature.static.resources.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class StaticResourceFeature implements DefaultFeature {
@@ -50,11 +54,11 @@ public class StaticResourceFeature implements DefaultFeature {
 
     private void addStaticResources(@NonNull GeneratorContext generatorContext) {
         List<StaticResource> list = generatorContext.getFeatures().getFeatures()
-                .stream()
-                .filter(f -> f instanceof ContributingStaticResources)
-                .map(f -> ((ContributingStaticResources) f).staticResources())
-                .flatMap(List::stream)
-                .toList();
+            .stream()
+            .filter(ContributingStaticResources.class::isInstance)
+            .map(f -> ((ContributingStaticResources) f).staticResources())
+            .flatMap(List::stream)
+            .toList();
         if (CollectionUtils.isNotEmpty(list)) {
             for (StaticResource staticResource : list) {
                 ModuleContext module = generatorContext.getRootModule();

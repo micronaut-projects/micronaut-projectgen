@@ -20,11 +20,9 @@ import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.feature.TestFeature;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.utils.OptionUtils;
-import io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils;
 import io.micronaut.projectgen.core.options.TestFramework;
 import io.micronaut.projectgen.core.template.URLTemplate;
 import jakarta.inject.Singleton;
@@ -32,6 +30,9 @@ import jakarta.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Test feature that adds support for Kotest (version 5) testing framework integration.
+ */
 @Requires(property = "micronaut.starter.feature.kotest.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class KoTest implements TestFeature, OpenRewriteFeature {
@@ -47,8 +48,8 @@ public class KoTest implements TestFeature, OpenRewriteFeature {
         ModuleContext module = generatorContext.getRootModule();
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         module.addTemplate("koTestConfig",
-                new URLTemplate("src/test/kotlin/io/kotest/provided/ProjectConfig.kt",
-                        classLoader.getResource("kotest/ProjectConfig.kt")));
+            new URLTemplate("src/test/kotlin/io/kotest/provided/ProjectConfig.kt",
+                classLoader.getResource("kotest/ProjectConfig.kt")));
         OpenRewriteFeature.super.apply(generatorContext);
     }
 
@@ -69,7 +70,7 @@ public class KoTest implements TestFeature, OpenRewriteFeature {
         if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())) {
             recipes.add("io.micronaut.starter.feature.kotest");
         }
-            return recipes;
+        return recipes;
     }
 
 }

@@ -27,6 +27,10 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Micrometer feature that adds support for Micronaut Micrometer Observation,
+ * simplifying code instrumentation for gathering traces and metrics.
+ */
 @Requires(property = "micronaut.starter.feature.micrometer.observation.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class MicrometerObservation extends MicrometerFeature implements OpenRewriteFeature {

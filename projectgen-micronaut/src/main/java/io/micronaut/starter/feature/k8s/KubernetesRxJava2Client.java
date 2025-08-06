@@ -18,22 +18,16 @@ package io.micronaut.starter.feature.k8s;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
-import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.options.Language;
 import io.micronaut.projectgen.core.utils.OptionUtils;
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.starter.feature.Category;
-import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.starter.feature.discovery.DiscoveryCore;
-import io.micronaut.starter.feature.reactor.Reactor;
 import io.micronaut.starter.feature.rxjava.RxJava2;
 import jakarta.inject.Singleton;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -49,7 +43,7 @@ public class KubernetesRxJava2Client implements OpenRewriteFeature {
     private final RxJava2 rxJava2;
 
     public KubernetesRxJava2Client(DiscoveryCore discoveryCore,
-                                   RxJava2 rxJava2) {
+        RxJava2 rxJava2) {
         this.discoveryCore = discoveryCore;
         this.rxJava2 = rxJava2;
     }

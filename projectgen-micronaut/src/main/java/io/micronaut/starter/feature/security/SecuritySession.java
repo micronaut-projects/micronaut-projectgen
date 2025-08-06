@@ -19,17 +19,17 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.feature.FeatureContext;
-import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.feature.other.HttpSession;
 import jakarta.inject.Singleton;
 
 import java.util.List;
 
-import static io.micronaut.starter.feature.security.SecurityAuthenticationModeProvider.PROPERTY_MICRONAUT_SECURITY_AUTHENTICATION;
-
+/**
+ * Security feature that adds support for Session based Authentication
+ * within the Micronaut security framework.
+ */
 @Requires(property = "micronaut.starter.feature.security.session.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class SecuritySession extends SecurityFeature implements SecurityAuthenticationModeProvider, OpenRewriteFeature {

@@ -35,11 +35,11 @@ public interface JvmArgumentsFeature {
     @Nullable
     static String getJvmArguments(@NonNull Collection<Feature> features) {
         List<String> jvmArgumentsList = features
-                .stream()
-                .filter(JvmArgumentsFeature.class::isInstance)
-                .map(f -> ((JvmArgumentsFeature) f).getJvmArguments())
-                .flatMap(Collection::stream)
-                .toList();
+            .stream()
+            .filter(JvmArgumentsFeature.class::isInstance)
+            .map(f -> ((JvmArgumentsFeature) f).getJvmArguments())
+            .flatMap(Collection::stream)
+            .toList();
         return CollectionUtils.isEmpty(jvmArgumentsList) ? null : String.join(",", jvmArgumentsList);
     }
 }

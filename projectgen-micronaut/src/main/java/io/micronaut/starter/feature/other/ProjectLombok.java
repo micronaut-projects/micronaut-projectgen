@@ -17,11 +17,8 @@ package io.micronaut.starter.feature.other;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
-import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
-import io.micronaut.starter.buildtools.dependencies.Priority;
 import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.LanguageSpecificFeature;
 import io.micronaut.projectgen.core.options.Language;
@@ -29,6 +26,12 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Provides support for Project Lombok in Java projects.
+ *
+ * This feature integrates Lombok annotations to reduce boilerplate code.
+ * It requires Java as the language.
+ */
 @Requires(property = "micronaut.starter.feature.lombok.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class ProjectLombok implements LanguageSpecificFeature, OpenRewriteFeature {
@@ -52,7 +55,6 @@ public class ProjectLombok implements LanguageSpecificFeature, OpenRewriteFeatur
     public String getCategory() {
         return Category.DEV_TOOLS;
     }
-
 
     @Override
     public Language getRequiredLanguage() {

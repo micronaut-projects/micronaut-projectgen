@@ -26,6 +26,9 @@ import java.util.List;
 
 import static io.micronaut.starter.feature.Category.LOGGING;
 
+/**
+ * Feature for integration with the Oracle Cloud Logging service.
+ */
 @Requires(property = "micronaut.starter.feature.oracle.cloud.logging.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class OracleCloudLogging implements OracleCloudFeature, OpenRewriteFeature {

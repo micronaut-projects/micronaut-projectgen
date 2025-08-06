@@ -21,7 +21,6 @@ import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.generator.Project;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.feature.database.TestContainers;
@@ -39,6 +38,12 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Kafka Streams messaging feature.
+ * <p>
+ * Adds support for Kafka Streams and ensures Kafka feature is included if not already selected.
+ * Provides example listener and factory templates in multiple languages.
+ */
 @Requires(property = "micronaut.starter.feature.kafka.streams.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class KafkaStreams extends EaseTestingFeature implements MessagingFeature, SharedTestResourceFeature, OpenRewriteFeature {

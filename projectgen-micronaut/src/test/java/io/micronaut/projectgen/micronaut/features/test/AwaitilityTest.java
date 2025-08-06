@@ -1,13 +1,10 @@
 package io.micronaut.projectgen.micronaut.features.test;
 
-import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.buildtools.Scope;
 import io.micronaut.projectgen.core.generator.ProjectGenerator;
 import io.micronaut.projectgen.core.io.MapOutputHandler;
-import io.micronaut.projectgen.core.options.GenericOptionsBuilder;
 import io.micronaut.projectgen.core.options.Language;
 import io.micronaut.projectgen.core.options.Options;
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.micronaut.OptionsFixture;
 import io.micronaut.projectgen.test.BuildTestVerifier;
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
@@ -43,13 +40,13 @@ class AwaitilityTest {
     private static Stream<Arguments> awaitilityDependencies() {
         return Stream.of(
             Arguments.of("org.awaitility", "awaitility", Language.JAVA),
-            Arguments.of("org.awaitility","awaitility-kotlin", Language.KOTLIN),
+            Arguments.of("org.awaitility", "awaitility-kotlin", Language.KOTLIN),
             Arguments.of("org.awaitility", "awaitility-groovy", Language.GROOVY)
         );
     }
 
     private static Map<String, String> generateProject(ProjectGenerator micronautProjectGenerator,
-                                                       Options options) throws Exception {
+        Options options) throws Exception {
         MapOutputHandler outputHandler = new MapOutputHandler();
         micronautProjectGenerator.generate(options, outputHandler);
         return outputHandler.getProject();

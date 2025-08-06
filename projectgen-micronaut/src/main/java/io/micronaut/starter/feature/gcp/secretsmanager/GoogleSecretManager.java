@@ -27,6 +27,10 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that adds support for distributed configuration using Google Secret Manager.
+ * Implements DistributedConfigFeature and OpenRewriteFeature for configuration and code transformation.
+ */
 @Requires(property = "micronaut.starter.feature.gcp.secrets.manager.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class GoogleSecretManager implements DistributedConfigFeature, OpenRewriteFeature {

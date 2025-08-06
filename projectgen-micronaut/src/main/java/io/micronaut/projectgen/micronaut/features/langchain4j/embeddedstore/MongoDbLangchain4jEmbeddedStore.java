@@ -24,6 +24,12 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Implements a Langchain4j embedded store using MongoDB Atlas.
+ *
+ * Provides integration for MongoDB Atlas as a backend store within Langchain4j
+ * and supplies OpenRewrite recipes for automated setup.
+ */
 @Requires(property = "micronaut.starter.feature.langchain4j.store.mongodb.atlas.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class MongoDbLangchain4jEmbeddedStore implements Langchain4jEmbeddedStore, OpenRewriteFeature {
@@ -40,7 +46,7 @@ public class MongoDbLangchain4jEmbeddedStore implements Langchain4jEmbeddedStore
     }
 
     @Override
-    public List<String> getRecipes(GeneratorContext generatorContext){
+    public List<String> getRecipes(GeneratorContext generatorContext) {
         return List.of("io.micronaut.starter.feature.langchain4j-store-mongodb-atlas");
     }
 }

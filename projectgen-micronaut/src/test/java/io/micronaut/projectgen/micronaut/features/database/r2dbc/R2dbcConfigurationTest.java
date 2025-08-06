@@ -14,7 +14,8 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 @MicronautTest(startApplication = false)
 class R2dbcConfigurationTest {
@@ -42,7 +43,7 @@ class R2dbcConfigurationTest {
         Options options = OptionsFixture.defaultGradle().features(List.of(r2dbcFeature, "postgres")).build();
         Map<String, String> project = previewGenerator.generate(options);
         Properties applicationProperties = ConfigurationUtils.loadApplicationProperties(project);
-        assertEquals("POSTGRES", applicationProperties.getProperty(R2DBC_DATASOURCES_DEFAULT_DIALECT ));
+        assertEquals("POSTGRES", applicationProperties.getProperty(R2DBC_DATASOURCES_DEFAULT_DIALECT));
         assertEquals("postgres", applicationProperties.getProperty(R2DBC_DATASOURCES_DEFAULT_DB_TYPE));
         assertNull(applicationProperties.getProperty(R2DBC_DATASOURCES_DEFAULT_USERNAME));
         assertNull(applicationProperties.getProperty(R2DBC_DATASOURCES_DEFAULT_PASSWORD));
@@ -50,11 +51,11 @@ class R2dbcConfigurationTest {
 
     @ParameterizedTest
     @MethodSource("r2dbcArguments")
-    void testR2dbcWithMysql(String r2dbcFeature ,PreviewGenerator previewGenerator) throws Exception {
+    void testR2dbcWithMysql(String r2dbcFeature, PreviewGenerator previewGenerator) throws Exception {
         Options options = OptionsFixture.defaultGradle().features(List.of(r2dbcFeature, "mysql")).build();
         Map<String, String> project = previewGenerator.generate(options);
         Properties applicationProperties = ConfigurationUtils.loadApplicationProperties(project);
-        assertEquals("MYSQL", applicationProperties.getProperty(R2DBC_DATASOURCES_DEFAULT_DIALECT ));
+        assertEquals("MYSQL", applicationProperties.getProperty(R2DBC_DATASOURCES_DEFAULT_DIALECT));
         assertEquals("mysql", applicationProperties.getProperty(R2DBC_DATASOURCES_DEFAULT_DB_TYPE));
         assertNull(applicationProperties.getProperty(R2DBC_DATASOURCES_DEFAULT_USERNAME));
         assertNull(applicationProperties.getProperty(R2DBC_DATASOURCES_DEFAULT_PASSWORD));
@@ -62,11 +63,11 @@ class R2dbcConfigurationTest {
 
     @ParameterizedTest
     @MethodSource("r2dbcArguments")
-    void testR2dbcWithOracle(String r2dbcFeature ,PreviewGenerator previewGenerator) throws Exception {
+    void testR2dbcWithOracle(String r2dbcFeature, PreviewGenerator previewGenerator) throws Exception {
         Options options = OptionsFixture.defaultGradle().features(List.of(r2dbcFeature, "oracle")).build();
         Map<String, String> project = previewGenerator.generate(options);
         Properties applicationProperties = ConfigurationUtils.loadApplicationProperties(project);
-        assertEquals("ORACLE", applicationProperties.getProperty(R2DBC_DATASOURCES_DEFAULT_DIALECT ));
+        assertEquals("ORACLE", applicationProperties.getProperty(R2DBC_DATASOURCES_DEFAULT_DIALECT));
         assertEquals("oracle", applicationProperties.getProperty(R2DBC_DATASOURCES_DEFAULT_DB_TYPE));
         assertNull(applicationProperties.getProperty(R2DBC_DATASOURCES_DEFAULT_USERNAME));
         assertNull(applicationProperties.getProperty(R2DBC_DATASOURCES_DEFAULT_PASSWORD));
@@ -74,11 +75,11 @@ class R2dbcConfigurationTest {
 
     @ParameterizedTest
     @MethodSource("r2dbcArguments")
-    void testR2dbcWithSqlserver(String r2dbcFeature ,PreviewGenerator previewGenerator) throws Exception {
+    void testR2dbcWithSqlserver(String r2dbcFeature, PreviewGenerator previewGenerator) throws Exception {
         Options options = OptionsFixture.defaultGradle().features(List.of(r2dbcFeature, "sqlserver")).build();
         Map<String, String> project = previewGenerator.generate(options);
         Properties applicationProperties = ConfigurationUtils.loadApplicationProperties(project);
-        assertEquals("SQL_SERVER", applicationProperties.getProperty(R2DBC_DATASOURCES_DEFAULT_DIALECT ));
+        assertEquals("SQL_SERVER", applicationProperties.getProperty(R2DBC_DATASOURCES_DEFAULT_DIALECT));
         assertEquals("mssql", applicationProperties.getProperty(R2DBC_DATASOURCES_DEFAULT_DB_TYPE));
         assertEquals("false", applicationProperties.getProperty("test-resources.containers.mssql.accept-license"));
         assertNull(applicationProperties.getProperty(R2DBC_DATASOURCES_DEFAULT_USERNAME));
@@ -87,11 +88,11 @@ class R2dbcConfigurationTest {
 
     @ParameterizedTest
     @MethodSource("r2dbcArguments")
-    void testR2dbcWithMariadb(String r2dbcFeature ,PreviewGenerator previewGenerator) throws Exception {
+    void testR2dbcWithMariadb(String r2dbcFeature, PreviewGenerator previewGenerator) throws Exception {
         Options options = OptionsFixture.defaultGradle().features(List.of(r2dbcFeature, "mariadb")).build();
         Map<String, String> project = previewGenerator.generate(options);
         Properties applicationProperties = ConfigurationUtils.loadApplicationProperties(project);
-        assertEquals("MYSQL", applicationProperties.getProperty(R2DBC_DATASOURCES_DEFAULT_DIALECT ));
+        assertEquals("MYSQL", applicationProperties.getProperty(R2DBC_DATASOURCES_DEFAULT_DIALECT));
         assertEquals("mariadb", applicationProperties.getProperty(R2DBC_DATASOURCES_DEFAULT_DB_TYPE));
         assertNull(applicationProperties.getProperty(R2DBC_DATASOURCES_DEFAULT_USERNAME));
         assertNull(applicationProperties.getProperty(R2DBC_DATASOURCES_DEFAULT_PASSWORD));

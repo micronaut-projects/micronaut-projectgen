@@ -27,3 +27,9 @@ rocker {
         }
     }
 }
+
+spotless {
+    java {
+        targetExclude("src/**/*.rocker.raw")
+    }
+}

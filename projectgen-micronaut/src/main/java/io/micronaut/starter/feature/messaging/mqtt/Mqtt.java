@@ -19,8 +19,6 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
-import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.feature.database.TestContainers;
 import io.micronaut.starter.feature.messaging.SharedTestResourceFeature;
@@ -30,6 +28,11 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * MQTT messaging feature supporting MQTT v5.
+ * <p>
+ * Integrates MQTT messaging with ease testing, shared test resources.
+ */
 @Requires(property = "micronaut.starter.feature.mqtt.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Mqtt extends EaseTestingFeature implements MqttFeature, SharedTestResourceFeature, OpenRewriteFeature {

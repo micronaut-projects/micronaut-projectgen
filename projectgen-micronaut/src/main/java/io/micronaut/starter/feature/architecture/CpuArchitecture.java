@@ -15,10 +15,15 @@
  */
 package io.micronaut.starter.feature.architecture;
 
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.OneOfFeature;
 
+/**
+ * Marker interface for CPU architecture features.
+ * Extends {@link OneOfFeature} and categorizes these features under {@link Category#CLOUD}.
+ * This interface provides default implementations to identify the feature class
+ * and its category.
+ */
 public interface CpuArchitecture extends OneOfFeature {
     @Override
     default Class<?> getFeatureClass() {

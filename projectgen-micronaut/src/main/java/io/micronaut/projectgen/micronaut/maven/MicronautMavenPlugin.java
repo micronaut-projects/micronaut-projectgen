@@ -30,6 +30,12 @@ import io.micronaut.projectgen.micronaut.template.buildtools.maven.micronautMave
 
 import java.util.List;
 
+/**
+ * Configures the Micronaut Maven Plugin.
+ *
+ * Adds the Micronaut-specific Maven plugin to support AOT, native image,
+ * function entrypoints, and other build-time optimizations.
+ */
 @Singleton
 public class MicronautMavenPlugin implements MavenSpecificFeature {
     @Override
@@ -53,8 +59,8 @@ public class MicronautMavenPlugin implements MavenSpecificFeature {
             List<String> nativeImageBuildArgs = null;
             List<String> appArguments = null;
             ApplicationType applicationType = ApplicationType.of(generatorContext.getOptions().template());
-            if (applicationType == ApplicationType.FUNCTION &&
-                generatorContext.hasFeature(OracleFunction.class)) {
+            if (applicationType == ApplicationType.FUNCTION
+                && generatorContext.hasFeature(OracleFunction.class)) {
                 nativeImageBuildArgs = List.of("-H:+StaticExecutableWithDynamicLibC", "-Dfn.handler=${function.entrypoint}");
                 appArguments = List.of("${function.entrypoint}");
             }

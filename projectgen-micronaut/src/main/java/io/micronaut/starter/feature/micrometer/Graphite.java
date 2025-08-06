@@ -24,6 +24,9 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that adds support for Micrometer metrics with Graphite as the metrics reporter.
+ */
 @Requires(property = "micronaut.starter.feature.micrometer.graphite.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Graphite extends MicrometerFeature implements MicrometerRegistryFeature, OpenRewriteFeature {

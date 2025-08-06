@@ -15,6 +15,9 @@
  */
 package io.micronaut.starter.feature.function;
 
+/**
+ * Represents a feature associated with a specific cloud provider.
+ */
 public interface CloudFeature {
     Cloud getCloud();
 }

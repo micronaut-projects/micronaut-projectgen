@@ -15,7 +15,6 @@
  */
 package io.micronaut.starter.feature.function.gcp;
 
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.starter.feature.graalvm.GraalVM;
 import io.micronaut.projectgen.core.feature.FeatureValidator;
@@ -25,11 +24,16 @@ import jakarta.inject.Singleton;
 
 import java.util.Set;
 
+/**
+ * Validator to enforce constraints for Google Cloud Function features.
+ * <p>
+ * Ensures compatibility of selected features and Java versions during project generation.
+ */
 @Singleton
 public class GoogleCloudFunctionFeatureValidator implements FeatureValidator {
 
     private static boolean supports(JdkVersion jdkVersion) {
-        return JdkVersion.JDK_11.equals(jdkVersion) || JdkVersion.JDK_17.equals(jdkVersion)  || JdkVersion.JDK_21.equals(jdkVersion);
+        return JdkVersion.JDK_11.equals(jdkVersion) || JdkVersion.JDK_17.equals(jdkVersion) || JdkVersion.JDK_21.equals(jdkVersion);
     }
 
     @Override

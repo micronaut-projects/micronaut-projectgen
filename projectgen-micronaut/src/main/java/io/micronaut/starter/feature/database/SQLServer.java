@@ -30,6 +30,13 @@ import java.util.Optional;
 
 import static io.micronaut.starter.feature.database.DataHibernateReactive.IO_VERTX_DEPENDENCY_GROUP;
 
+/**
+ * Feature for Microsoft SQL Server database support.
+ * <p>
+ * Provides the necessary dependencies, default configuration, and connection URLs for
+ * both JDBC and R2DBC usage with SQL Server. Also integrates with test resources and
+ * test containers when applicable.
+ */
 @Requires(property = "micronaut.starter.feature.sqlserver.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class SQLServer extends DatabaseDriverFeature {
@@ -38,24 +45,24 @@ public class SQLServer extends DatabaseDriverFeature {
 
     public static final String VERTX_MSSQL_CLIENT = "vertx-mssql-client";
     public static final Dependency.Builder DEPENDENCY_MSSQL_JDBC = Dependency.builder()
-            .groupId("com.microsoft.sqlserver")
-            .artifactId("mssql-jdbc")
-            .runtime()
-            .template();
+        .groupId("com.microsoft.sqlserver")
+        .artifactId("mssql-jdbc")
+        .runtime()
+        .template();
 
     private static final Dependency.Builder DEPENDENCY_VERTX_MSSQL_CLIENT = Dependency.builder()
-            .groupId(IO_VERTX_DEPENDENCY_GROUP)
-            .artifactId(VERTX_MSSQL_CLIENT)
-            .compile();
+        .groupId(IO_VERTX_DEPENDENCY_GROUP)
+        .artifactId(VERTX_MSSQL_CLIENT)
+        .compile();
 
     private static final Dependency.Builder DEPENDENCY_MSSQL_R2DBC = Dependency.builder()
-            .groupId("io.r2dbc")
-            .artifactId("r2dbc-mssql")
-            .runtime();
+        .groupId("io.r2dbc")
+        .artifactId("r2dbc-mssql")
+        .runtime();
 
     public SQLServer(JdbcFeature jdbcFeature,
-                     TestContainers testContainers,
-                     TestResources testResources) {
+        TestContainers testContainers,
+        TestResources testResources) {
         super(jdbcFeature, testContainers, testResources);
     }
 
@@ -144,6 +151,14 @@ public class SQLServer extends DatabaseDriverFeature {
         }
     }
 
+    /**
+     * Determines whether to accept the license for the SQL Server test resources container.
+     * <p>
+     * By default, this method returns {@code false}, indicating that the license is not accepted.
+     * Subclasses may override this method to change the default behavior.
+     *
+     * @return {@code true} if the license is accepted, {@code false} otherwise
+     */
     protected boolean acceptLicense() {
         return false;
     }

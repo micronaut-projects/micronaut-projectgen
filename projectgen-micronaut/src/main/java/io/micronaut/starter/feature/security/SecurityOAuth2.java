@@ -18,11 +18,8 @@ package io.micronaut.starter.feature.security;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
-import io.micronaut.projectgen.core.feature.config.Configuration;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
-import io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.projectgen.micronaut.features.httpclient.HttpClientFeature;
 import io.micronaut.projectgen.micronaut.features.httpclient.HttpClient;
@@ -32,6 +29,9 @@ import jakarta.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Security feature for OAuth 2.0 authentication support.
+ */
 @Requires(property = "micronaut.starter.feature.security.oauth2.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class SecurityOAuth2 extends SecurityFeature implements SecurityAuthenticationModeProvider, OpenRewriteFeature {

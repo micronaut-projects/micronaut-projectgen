@@ -18,6 +18,10 @@ package io.micronaut.projectgen.micronaut.features.httpclient;
 import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.OneOfFeature;
 
+/**
+ * Marker interface for features that provide HTTP client functionality.
+ * Extends {@link OneOfFeature}.
+ */
 public interface HttpClientFeature  extends OneOfFeature {
     @Override
     default Class<?> getFeatureClass() {
@@ -28,6 +32,5 @@ public interface HttpClientFeature  extends OneOfFeature {
     default String getCategory() {
         return Category.CLIENT;
     }
-
 
 }

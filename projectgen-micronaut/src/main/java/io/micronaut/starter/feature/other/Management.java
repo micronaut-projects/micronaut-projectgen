@@ -28,6 +28,9 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that adds support for management endpoints in Micronaut applications.
+ */
 @Requires(property = "micronaut.starter.feature.management.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Management implements OpenRewriteFeature, MicronautServerDependent {

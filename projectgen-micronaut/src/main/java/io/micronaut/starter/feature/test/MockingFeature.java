@@ -15,10 +15,12 @@
  */
 package io.micronaut.starter.feature.test;
 
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.Feature;
 
+/**
+ * Marker interface for features that provide mocking capabilities.
+ */
 public interface MockingFeature extends Feature {
     @Override
     default String getCategory() {

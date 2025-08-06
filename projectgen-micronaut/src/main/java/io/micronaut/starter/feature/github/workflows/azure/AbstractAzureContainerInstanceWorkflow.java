@@ -60,15 +60,15 @@ public abstract class AbstractAzureContainerInstanceWorkflow extends AbstractDoc
     @Override
     public List<Secret> getSecrets() {
         return Arrays.asList(
-                // Docker registry properties - Azure can use any docker registry
-                new Secret(DOCKER_USERNAME, "Docker registry username. In case of Azure Container Registry, provide Azure username or Service principal ID, see more on [Azure Container Registry authentication with service principals](https://docs.microsoft.com/en-us/azure/container-registry/container-registry-auth-service-principal)."),
-                new Secret(DOCKER_PASSWORD, "Docker registry password. In case of Azure Container Registry, provide Azure password or Service principal password."),
-                new Secret(DOCKER_REPOSITORY_PATH, "Docker image repository. In case of Azure Container Registry, for image `micronaut.azurecr.io/foo/bar:0.1`, the `foo` is an _image repository_."),
-                new Secret(DOCKER_REGISTRY_URL, "Docker registry url. In case of Azure Container Registry use the Container registry login path, e.g. for the image `micronaut.azurecr.io/foo/bar:0.1`, the `micronaut.azurecr.io` is a _registry url_."),
+            // Docker registry properties - Azure can use any docker registry
+            new Secret(DOCKER_USERNAME, "Docker registry username. In case of Azure Container Registry, provide Azure username or Service principal ID, see more on [Azure Container Registry authentication with service principals](https://docs.microsoft.com/en-us/azure/container-registry/container-registry-auth-service-principal)."),
+            new Secret(DOCKER_PASSWORD, "Docker registry password. In case of Azure Container Registry, provide Azure password or Service principal password."),
+            new Secret(DOCKER_REPOSITORY_PATH, "Docker image repository. In case of Azure Container Registry, for image `micronaut.azurecr.io/foo/bar:0.1`, the `foo` is an _image repository_."),
+            new Secret(DOCKER_REGISTRY_URL, "Docker registry url. In case of Azure Container Registry use the Container registry login path, e.g. for the image `micronaut.azurecr.io/foo/bar:0.1`, the `micronaut.azurecr.io` is a _registry url_."),
 
-                // Azure credentials
-                new Secret(AZURE_CREDENTIALS, "Azure Service Principal, see more on [Azure/aci-deploy#Azure Service Principal for RBAC](https://github.com/Azure/aci-deploy#azure-service-principal-for-rbac)."),
-                new Secret(AZURE_RESOURCE_GROUP, "Azure Resource Group name, see more on [Resource groups](https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/overview#resource-groups).")
+            // Azure credentials
+            new Secret(AZURE_CREDENTIALS, "Azure Service Principal, see more on [Azure/aci-deploy#Azure Service Principal for RBAC](https://github.com/Azure/aci-deploy#azure-service-principal-for-rbac)."),
+            new Secret(AZURE_RESOURCE_GROUP, "Azure Resource Group name, see more on [Resource groups](https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/overview#resource-groups).")
         );
     }
 
@@ -86,17 +86,17 @@ public abstract class AbstractAzureContainerInstanceWorkflow extends AbstractDoc
         String workflowFilePath = ".github/workflows/" + getWorkflowFileName(generatorContext);
 
         module.addTemplate("azureContainerInstanceWorkflow",
-                new RockerTemplate(workflowFilePath,
-                        azureContainerInstanceWorkflow.template(generatorContext.getProject(),
-                                generatorContext.getBuildTool(), generatorContext.getJdkVersion(), isGraal
+            new RockerTemplate(workflowFilePath,
+                azureContainerInstanceWorkflow.template(generatorContext.getProject(),
+                    generatorContext.getBuildTool(), generatorContext.getJdkVersion(), isGraal
                 ))
         );
 
         module.addTemplate("exampleController", WorkflowsUtils.createExampleController(
-                generatorContext.getProject(), generatorContext.getLanguage()));
+            generatorContext.getProject(), generatorContext.getLanguage()));
 
         module.addHelpTemplate(
-                new RockerWritable(azureContainerInstanceWorkflowReadme.template(
-                        this, generatorContext.getProject(), workflowFilePath)));
+            new RockerWritable(azureContainerInstanceWorkflowReadme.template(
+                this, generatorContext.getProject(), workflowFilePath)));
     }
 }

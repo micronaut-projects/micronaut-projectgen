@@ -19,15 +19,16 @@ import io.micronaut.context.annotation.Primary;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
-import io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils;
-import io.micronaut.starter.feature.database.*;
+import io.micronaut.starter.feature.database.DatabaseDriverFeature;
 import jakarta.inject.Singleton;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Feature that configures SQL DataSources using the Hikari JDBC Connection Pool.
+ */
 @Requires(property = "micronaut.starter.feature.jdbc.hikari.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 @Primary

@@ -3,10 +3,8 @@ package io.micronaut.projectgen.micronaut.features.sourcegen;
 import io.micronaut.projectgen.core.buildtools.Scope;
 import io.micronaut.projectgen.core.generator.ProjectGenerator;
 import io.micronaut.projectgen.core.io.MapOutputHandler;
-import io.micronaut.projectgen.core.options.GenericOptionsBuilder;
 import io.micronaut.projectgen.core.options.Language;
 import io.micronaut.projectgen.core.options.Options;
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.micronaut.OptionsFixture;
 import io.micronaut.projectgen.test.BuildTestVerifier;
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
@@ -20,7 +18,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @MicronautTest(startApplication = false)
 class SourceGenTest {
@@ -42,7 +41,7 @@ class SourceGenTest {
     private static Stream<Arguments> sourceGenDependencies() {
         return Stream.of(
             Arguments.of("io.micronaut.sourcegen", "micronaut-sourcegen-generator-java", Language.JAVA),
-            Arguments.of("io.micronaut.sourcegen","micronaut-sourcegen-generator-kotlin", Language.KOTLIN)
+            Arguments.of("io.micronaut.sourcegen", "micronaut-sourcegen-generator-kotlin", Language.KOTLIN)
         );
     }
 
@@ -67,7 +66,7 @@ class SourceGenTest {
     }
 
     private static Map<String, String> generateProject(ProjectGenerator micronautProjectGenerator,
-                                                       Options options) throws Exception {
+        Options options) throws Exception {
         MapOutputHandler outputHandler = new MapOutputHandler();
         micronautProjectGenerator.generate(options, outputHandler);
         return outputHandler.getProject();

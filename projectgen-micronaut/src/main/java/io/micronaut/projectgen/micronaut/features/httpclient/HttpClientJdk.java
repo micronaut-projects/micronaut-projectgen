@@ -23,6 +23,10 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Provides support for the Micronaut HTTP client based on the Java HTTP Client (JDK)
+ * and provides OpenRewrite recipes.
+ */
 @Requires(property = "micronaut.starter.feature.http.client.jdk.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class HttpClientJdk implements HttpClientFeature, OpenRewriteFeature {

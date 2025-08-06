@@ -21,6 +21,10 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that provides JUnit Jupiter API support for Micronaut applications.
+ * This feature adds the JUnit Jupiter API dependency to the test classpath for JUnit 5 testing.
+ */
 @Singleton
 public class JunitJupiterApi implements OpenRewriteFeature {
     @Override

@@ -26,6 +26,12 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that adds EclipseStore REST API support to a Micronaut project.
+ * <p>
+ * This feature enables REST access for EclipseStore during development and testing.
+ * Automatically includes the base EclipseStore feature as a dependency.
+ */
 @Requires(property = "micronaut.starter.feature.eclipsestore.rest.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class EclipseStoreRest implements EclipseStoreFeature, OpenRewriteFeature {

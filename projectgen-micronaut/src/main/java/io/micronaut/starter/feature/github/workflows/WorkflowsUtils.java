@@ -41,7 +41,7 @@ public class WorkflowsUtils {
      */
     public static String graalVersion(JdkVersion javaVersion) {
         return "%s.java%s".formatted(VersionInfo.getDependencyVersion("graal").getValue(),
-                javaVersion.majorVersion());
+            javaVersion.majorVersion());
     }
 
     public static RockerTemplate createExampleController(Project project, Language language) {

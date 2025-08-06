@@ -24,6 +24,9 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Micrometer feature providing support for JMX metrics reporting.
+ */
 @Requires(property = "micronaut.starter.feature.micrometer.jmx.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Jmx extends MicrometerFeature implements MicrometerRegistryFeature, OpenRewriteFeature {

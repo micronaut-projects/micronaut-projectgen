@@ -20,14 +20,27 @@ import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import jakarta.inject.Singleton;
 
+/**
+ * Feature that provides OpenTelemetry Jaeger integration for Micronaut applications.
+ * This feature adds OpenTelemetry support with Jaeger as the exporter for distributed tracing.
+ */
 @Requires(property = "micronaut.starter.feature.tracing.opentelemetry.jaeger.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class OpenTelemetryJaeger extends AbstractOpenTelemetry {
+    /**
+     * Creates a new OpenTelemetryJaeger with the required OpenTelemetry components.
+     *
+     * @param otel the base OpenTelemetry feature
+     * @param otelHttp the OpenTelemetry HTTP feature
+     * @param otelAnnotations the OpenTelemetry annotations feature
+     * @param openTelemetryGrpc the OpenTelemetry gRPC feature
+     * @param otelExporterJaeger the OpenTelemetry Jaeger exporter feature
+     */
     public OpenTelemetryJaeger(OpenTelemetry otel,
-                               OpenTelemetryHttp otelHttp,
-                               OpenTelemetryAnnotations otelAnnotations,
-                               OpenTelemetryGrpc openTelemetryGrpc,
-                               OpenTelemetryExporterJaeger otelExporterJaeger) {
+        OpenTelemetryHttp otelHttp,
+        OpenTelemetryAnnotations otelAnnotations,
+        OpenTelemetryGrpc openTelemetryGrpc,
+        OpenTelemetryExporterJaeger otelExporterJaeger) {
         super(otel, otelHttp, otelAnnotations, openTelemetryGrpc, otelExporterJaeger);
     }
 

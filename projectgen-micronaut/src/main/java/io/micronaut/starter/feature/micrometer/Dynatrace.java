@@ -24,6 +24,9 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that adds support for Micrometer metrics with Dynatrace as the metrics reporter.
+ */
 @Requires(property = "micronaut.starter.feature.micrometer.dynatrace.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Dynatrace extends MicrometerFeature implements MicrometerRegistryFeature, OpenRewriteFeature {

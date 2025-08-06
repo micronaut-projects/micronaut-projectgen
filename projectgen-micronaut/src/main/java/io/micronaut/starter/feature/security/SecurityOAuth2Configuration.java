@@ -17,6 +17,9 @@ package io.micronaut.starter.feature.security;
 
 import io.micronaut.core.annotation.NonNull;
 
+/**
+ * Configuration interface for OAuth 2.0 security settings.
+ */
 public interface SecurityOAuth2Configuration {
 
     @NonNull

@@ -20,6 +20,9 @@ import io.micronaut.projectgen.core.feature.Feature;
 
 import java.util.List;
 
+/**
+ * Feature that contributes a list of security URL intercept mappings.
+ */
 public interface ContributingInterceptUrlMapFeature extends Feature {
     @NonNull
     List<InterceptUrlMap> interceptUrlMaps();

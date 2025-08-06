@@ -25,6 +25,12 @@ import java.util.List;
 
 import static io.micronaut.starter.feature.Category.LOGGING;
 
+/**
+ * Feature that provides integration with Amazon CloudWatch Logs.
+ * <p>
+ * Adds support for configuring and using Amazon CloudWatch for application logging.
+ * Includes relevant OpenRewrite recipe to enable necessary configuration.
+ */
 @Requires(property = "micronaut.starter.feature.amazon.cloudwatch.logging.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class AmazonCloudWatchLogging implements AwsFeature, OpenRewriteFeature {

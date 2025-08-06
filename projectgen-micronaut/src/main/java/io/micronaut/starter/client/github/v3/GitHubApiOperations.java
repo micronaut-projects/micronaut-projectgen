@@ -34,20 +34,20 @@ public interface GitHubApiOperations {
 
     @Post(value = "/user/repos", single = true)
     GitHubRepository createRepository(
-            @Header(HttpHeaders.AUTHORIZATION) String oauthToken,
-            @Body GitHubRepository gitHubRepository);
+        @Header(HttpHeaders.AUTHORIZATION) String oauthToken,
+        @Body GitHubRepository gitHubRepository);
 
     @Get(value = "/repos/{owner}/{repo}", single = true)
     GitHubRepository getRepository(
-            @Header(HttpHeaders.AUTHORIZATION) String oauthToken,
-            @PathVariable String owner,
-            @PathVariable String repo);
+        @Header(HttpHeaders.AUTHORIZATION) String oauthToken,
+        @PathVariable String owner,
+        @PathVariable String repo);
 
     @Delete(value = "/repos/{owner}/{repo}")
     void deleteRepository(
-            @Header(HttpHeaders.AUTHORIZATION) String oauthToken,
-            @PathVariable String owner,
-            @PathVariable String repo);
+        @Header(HttpHeaders.AUTHORIZATION) String oauthToken,
+        @PathVariable String owner,
+        @PathVariable String repo);
 
     @Get(value = "/user", single = true)
     GitHubUser getUser(
@@ -55,29 +55,29 @@ public interface GitHubApiOperations {
 
     @Put(value = "/repos/{owner}/{repo}/actions/secrets/{secretName}")
     void createSecret(
-            @Header(HttpHeaders.AUTHORIZATION) String oauthToken,
-            @PathVariable String owner,
-            @PathVariable String repo,
-            @PathVariable String secretName,
-            @Body GitHubSecret secret);
+        @Header(HttpHeaders.AUTHORIZATION) String oauthToken,
+        @PathVariable String owner,
+        @PathVariable String repo,
+        @PathVariable String secretName,
+        @Body GitHubSecret secret);
 
     @Get(value = "/repos/{owner}/{repo}/actions/secrets/public-key")
     GitHubSecretsPublicKey getSecretPublicKey(
-            @Header(HttpHeaders.AUTHORIZATION) String oauthToken,
-            @PathVariable String owner,
-            @PathVariable String repo);
+        @Header(HttpHeaders.AUTHORIZATION) String oauthToken,
+        @PathVariable String owner,
+        @PathVariable String repo);
 
     @Get(value = "/repos/{owner}/{repo}/actions/runs")
     GitHubWorkflowRuns listWorkflows(
-            @Header(HttpHeaders.AUTHORIZATION) String oauthToken,
-            @PathVariable String owner,
-            @PathVariable String repo);
+        @Header(HttpHeaders.AUTHORIZATION) String oauthToken,
+        @PathVariable String owner,
+        @PathVariable String repo);
 
     @Get(value = "/repos/{owner}/{repo}/actions/runs/{runId}")
     GitHubWorkflowRun getWorkflowRun(
-            @Header(HttpHeaders.AUTHORIZATION) String oauthToken,
-            @PathVariable String owner,
-            @PathVariable String repo,
-            @PathVariable Long runId);
+        @Header(HttpHeaders.AUTHORIZATION) String oauthToken,
+        @PathVariable String owner,
+        @PathVariable String repo,
+        @PathVariable Long runId);
 
 }

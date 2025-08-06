@@ -24,6 +24,10 @@ import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.starter.feature.function.LambdaRuntimeMainClass;
 import jakarta.inject.Singleton;
 
+/**
+ * Feature for configuring AWS Lambda Function URLs using the CDK.
+ * Provides a dedicated HTTP(S) endpoint for a Lambda function.
+ */
 @Requires(property = "micronaut.starter.feature.aws.lambda.function.url.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class LambdaFunctionUrl extends CdkFeature implements AwsApiFeature, LambdaRuntimeMainClass {
@@ -67,4 +71,3 @@ public class LambdaFunctionUrl extends CdkFeature implements AwsApiFeature, Lamb
         return "io.micronaut.function.aws.runtime.MicronautLambdaRuntime";
     }
 }
-

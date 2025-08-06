@@ -42,14 +42,21 @@ import io.micronaut.projectgen.core.rocker.RockerTemplate;
 import jakarta.inject.Singleton;
 import java.util.Optional;
 
+/**
+ * Feature implementation for a raw Azure Function in Micronaut.
+ * <p>
+ * Provides configuration and setup for using Azure Functions without the HTTP abstraction,
+ * including dependency management, test generation, and integration with the Azure HTTP function feature.
+ * </p>
+ */
 @Requires(property = "micronaut.starter.feature.azure.function.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class AzureRawFunction extends AbstractAzureFunction {
     private static final Dependency MICRONAUT_AZURE_FUNCTION = MicronautDependencyUtils
-            .azureDependency()
-            .artifactId("micronaut-azure-function")
-            .compile()
-            .build();
+        .azureDependency()
+        .artifactId("micronaut-azure-function")
+        .compile()
+        .build();
     private final AzureHttpFunction httpFunction;
 
     public AzureRawFunction(CoordinateResolver coordinateResolver, AzureHttpFunction httpFunction) {
@@ -79,35 +86,35 @@ public class AzureRawFunction extends AbstractAzureFunction {
         super.applyFunction(generatorContext, type);
 
         if (type == ApplicationType.FUNCTION
-                && generatorContext.isFeatureMissing(CodeContributingFeature.class)
-                && !(OptionUtils.hasMavenBuildTool(generatorContext.getOptions()) && generatorContext.getLanguage() == Language.KOTLIN)) {
+            && generatorContext.isFeatureMissing(CodeContributingFeature.class)
+            && !(OptionUtils.hasMavenBuildTool(generatorContext.getOptions()) && generatorContext.getLanguage() == Language.KOTLIN)) {
             Project project = generatorContext.getProject();
 
             generateJavaTestClass(generatorContext,
-                    "HttpRequestTemplate",
-                    "HttpRequest",
-                    azureRawFunctionHttpRequestJava.template(project));
+                "HttpRequestTemplate",
+                "HttpRequest",
+                azureRawFunctionHttpRequestJava.template(project));
 
             generateJavaTestClass(generatorContext,
-                    "ResponseBuilderTemplate",
-                    "ResponseBuilder",
-                    azureRawFunctionResponseBuilderJava.template(project));
+                "ResponseBuilderTemplate",
+                "ResponseBuilder",
+                azureRawFunctionResponseBuilderJava.template(project));
 
             String testSource = generatorContext.getTestSourcePath("/{packagePath}/Function");
             TestRockerModelProvider provider = new DefaultTestRockerModelProvider(spockTemplate(project),
-                    javaJUnitTemplate(project),
-                    groovyJUnitTemplate(project),
-                    kotlinJUnitTemplate(project),
-                    koTestTemplate(project));
+                javaJUnitTemplate(project),
+                groovyJUnitTemplate(project),
+                kotlinJUnitTemplate(project),
+                koTestTemplate(project));
             ModuleContext module = generatorContext.getRootModule();
             module.addTemplate(generatorContext.getOptions(), "testFunction", testSource, provider);
         }
     }
 
     private void generateJavaTestClass(GeneratorContext generatorContext,
-                                       String templateName,
-                                       String name,
-                                       RockerModel javaModel) {
+        String templateName,
+        String name,
+        RockerModel javaModel) {
         String  testSource = Language.JAVA.getTestSrcDir() + "/{packagePath}/" + name + "." + Language.JAVA.getExtension();
         ModuleContext module = generatorContext.getRootModule();
         module.addTemplate(templateName, new RockerTemplate(testSource, javaModel));
@@ -116,12 +123,12 @@ public class AzureRawFunction extends AbstractAzureFunction {
     @Override
     protected Optional<RockerModel> readmeTemplate(GeneratorContext generatorContext, Project project, BuildTool buildTool) {
         return Optional.of(
-                azureFunctionReadme.template(
-                        project,
-                        generatorContext.getFeatures(),
-                        getRunCommand(buildTool),
-                        getBuildCommand(buildTool),
-                        buildTool)
+            azureFunctionReadme.template(
+                project,
+                generatorContext.getFeatures(),
+                getRunCommand(buildTool),
+                getBuildCommand(buildTool),
+                buildTool)
         );
     }
 

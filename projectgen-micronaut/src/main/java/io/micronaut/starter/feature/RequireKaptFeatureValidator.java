@@ -16,7 +16,6 @@
 package io.micronaut.starter.feature;
 
 import io.micronaut.projectgen.core.feature.Feature;
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.feature.FeatureValidator;
 import io.micronaut.projectgen.core.options.Language;
 import io.micronaut.projectgen.core.options.Options;
@@ -24,6 +23,12 @@ import jakarta.inject.Singleton;
 
 import java.util.Set;
 
+/**
+ * Validates that features requiring Kapt are not used alongside Kotlin Symbol Processing (KSP).
+ *
+ * <p>Checks after feature selection that no feature requiring Kapt is combined with Kotlin KSP,
+ * throwing an exception if such an incompatibility is detected.</p>
+ */
 @Singleton
 public class RequireKaptFeatureValidator implements FeatureValidator {
 
@@ -38,7 +43,7 @@ public class RequireKaptFeatureValidator implements FeatureValidator {
                 if (feature instanceof RequireKaptFeature) {
                     if (features.stream().anyMatch(KotlinSymbolProcessing.class::isInstance)) {
                         throw new IllegalArgumentException(
-                                String.format("Feature %s is incompatible with Kotlin KSP and requires Kapt instead.", feature.getName()));
+                            String.format("Feature %s is incompatible with Kotlin KSP and requires Kapt instead.", feature.getName()));
                     }
                 }
             }

@@ -19,6 +19,9 @@ import io.micronaut.projectgen.core.feature.Feature;
 
 import java.util.List;
 
+/**
+ * A feature that contributes static resources to the application.
+ */
 public interface ContributingStaticResources extends Feature {
     List<StaticResource> staticResources();
 }

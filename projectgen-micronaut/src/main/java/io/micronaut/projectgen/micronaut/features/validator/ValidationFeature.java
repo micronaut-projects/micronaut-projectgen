@@ -18,6 +18,11 @@ package io.micronaut.projectgen.micronaut.features.validator;
 import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.OneOfFeature;
 
+/**
+ * Interface for validation features in Micronaut applications.
+ * Provides common functionality for validation features with default category assignment.
+ * Validation features are mutually exclusive, allowing only one validation framework to be selected.
+ */
 public interface ValidationFeature extends OneOfFeature {
 
     @Override

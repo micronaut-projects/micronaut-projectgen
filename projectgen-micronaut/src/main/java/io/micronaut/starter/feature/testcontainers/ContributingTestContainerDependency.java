@@ -20,6 +20,9 @@ import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 
 import java.util.List;
 
+/**
+ * Interface for features that contribute Testcontainers dependencies.
+ */
 public interface ContributingTestContainerDependency {
     String TESTCONTAINERS_GROUP_ID = "org.testcontainers";
 
@@ -28,9 +31,9 @@ public interface ContributingTestContainerDependency {
     @NonNull
     static Dependency testContainerDependency(@NonNull String artifactId) {
         return Dependency.builder()
-                .groupId(TESTCONTAINERS_GROUP_ID)
-                .artifactId(artifactId)
-                .test()
-                .build();
+            .groupId(TESTCONTAINERS_GROUP_ID)
+            .artifactId(artifactId)
+            .test()
+            .build();
     }
 }

@@ -14,7 +14,8 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 @MicronautTest(startApplication = false)
 class JdbcConfigurationTest {
@@ -51,7 +52,7 @@ class JdbcConfigurationTest {
 
     @ParameterizedTest
     @MethodSource("jdbcArguments")
-    void testJdbcWithMysql(String jdbcFeature ,PreviewGenerator previewGenerator) throws Exception {
+    void testJdbcWithMysql(String jdbcFeature, PreviewGenerator previewGenerator) throws Exception {
         Options options = OptionsFixture.defaultGradle().features(List.of(jdbcFeature, "mysql")).build();
         Map<String, String> project = previewGenerator.generate(options);
         Properties applicationProperties = ConfigurationUtils.loadApplicationProperties(project);
@@ -63,7 +64,7 @@ class JdbcConfigurationTest {
 
     @ParameterizedTest
     @MethodSource("jdbcArguments")
-    void testJdbcWithOracle(String jdbcFeature ,PreviewGenerator previewGenerator) throws Exception {
+    void testJdbcWithOracle(String jdbcFeature, PreviewGenerator previewGenerator) throws Exception {
         Options options = OptionsFixture.defaultGradle().features(List.of(jdbcFeature, "oracle")).build();
         Map<String, String> project = previewGenerator.generate(options);
         Properties applicationProperties = ConfigurationUtils.loadApplicationProperties(project);
@@ -75,7 +76,7 @@ class JdbcConfigurationTest {
 
     @ParameterizedTest
     @MethodSource("jdbcArguments")
-    void testJdbcWithSqlserver(String jdbcFeature ,PreviewGenerator previewGenerator) throws Exception {
+    void testJdbcWithSqlserver(String jdbcFeature, PreviewGenerator previewGenerator) throws Exception {
         Options options = OptionsFixture.defaultGradle().features(List.of(jdbcFeature, "sqlserver")).build();
         Map<String, String> project = previewGenerator.generate(options);
         Properties applicationProperties = ConfigurationUtils.loadApplicationProperties(project);
@@ -86,7 +87,7 @@ class JdbcConfigurationTest {
 
     @ParameterizedTest
     @MethodSource("jdbcArguments")
-    void testJdbcWithMariadb(String jdbcFeature ,PreviewGenerator previewGenerator) throws Exception {
+    void testJdbcWithMariadb(String jdbcFeature, PreviewGenerator previewGenerator) throws Exception {
         Options options = OptionsFixture.defaultGradle().features(List.of(jdbcFeature, "mariadb")).build();
         Map<String, String> project = previewGenerator.generate(options);
         Properties applicationProperties = ConfigurationUtils.loadApplicationProperties(project);
@@ -98,8 +99,8 @@ class JdbcConfigurationTest {
         return Stream.of(
             Arguments.of("jdbc-hikari"),
             Arguments.of("jdbc-dbcp"),
-                Arguments.of("jdbc-tomcat"),
-                Arguments.of("jdbc-ucp")
+            Arguments.of("jdbc-tomcat"),
+            Arguments.of("jdbc-ucp")
         );
     }
 }

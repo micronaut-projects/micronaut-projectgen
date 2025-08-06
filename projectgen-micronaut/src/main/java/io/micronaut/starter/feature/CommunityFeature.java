@@ -18,6 +18,15 @@ package io.micronaut.starter.feature;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.projectgen.core.feature.Feature;
 
+/**
+ * Marker interface for community-contributed features.
+ *
+ * <p>Provides helper methods for naming and titling such features,
+ * and requires implementation of methods to declare the community contributor and feature name.
+ *
+ * @author Micronaut Community
+ * @since 1.0
+ */
 public interface CommunityFeature extends Feature {
     @NonNull
     default String getName() {

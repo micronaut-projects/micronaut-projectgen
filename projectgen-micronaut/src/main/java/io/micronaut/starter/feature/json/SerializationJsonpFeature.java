@@ -16,11 +16,8 @@
 package io.micronaut.starter.feature.json;
 
 import io.micronaut.context.annotation.Requires;
-import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
-import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import jakarta.inject.Singleton;
@@ -28,6 +25,9 @@ import jakarta.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Feature that adds support for Micronaut Serialization using JSON-B and JSON-P.
+ */
 @Requires(property = "micronaut.starter.feature.serialization.jsonp.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class SerializationJsonpFeature implements OpenRewriteFeature {
@@ -51,7 +51,7 @@ public class SerializationJsonpFeature implements OpenRewriteFeature {
     public List<String> getRecipes(GeneratorContext generatorContext) {
         List<String> recipes = new ArrayList<>();
         recipes.add("io.micronaut.starter.feature.serialization-jsonp");
-        if(OptionUtils.hasMavenBuildTool(generatorContext.getOptions())){
+        if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())) {
             recipes.add("io.micronaut.starter.feature.jakarta-json-bind");
         }
         return recipes;

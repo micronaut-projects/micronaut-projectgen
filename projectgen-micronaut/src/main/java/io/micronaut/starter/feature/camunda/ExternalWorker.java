@@ -27,6 +27,12 @@ import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.starter.feature.Category;
 import jakarta.inject.Singleton;
 
+/**
+ * Camunda External Worker feature for Micronaut.
+ *
+ * Adds support for implementing Camunda External Workers using the
+ * micronaut-camunda-external-client feature.
+ */
 @Requires(property = "micronaut.starter.feature.camunda.external.worker.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class ExternalWorker implements CamundaCommunityFeature {
@@ -34,8 +40,8 @@ public class ExternalWorker implements CamundaCommunityFeature {
     public static final String NAME = "camunda-external-worker";
 
     private static final Dependency.Builder DEPENDENCY_EXTERNAL_WORKER = Dependency.builder()
-            .lookupArtifactId("micronaut-camunda-external-client-feature")
-            .compile();
+        .lookupArtifactId("micronaut-camunda-external-client-feature")
+        .compile();
 
     @NonNull
     @Override

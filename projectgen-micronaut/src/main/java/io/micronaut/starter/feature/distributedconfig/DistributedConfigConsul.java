@@ -20,7 +20,6 @@ import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.feature.DistributedConfigFeature;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.micronaut.features.config.MicronautDistributedConfigurationFeature;
@@ -29,6 +28,12 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * A {@link DistributedConfigFeature} implementation that enables distributed configuration using Consul.
+ * <p>
+ * This feature adds the necessary configuration for integrating
+ * Micronaut applications with Consul as a distributed configuration source.
+ */
 @Requires(property = "micronaut.starter.feature.config.consul.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class DistributedConfigConsul implements DistributedConfigFeature, OpenRewriteFeature {
@@ -39,7 +44,6 @@ public class DistributedConfigConsul implements DistributedConfigFeature, OpenRe
         this.consul = consul;
         this.micronautDistributedConfigurationFeature = micronautDistributedConfigurationFeature;
     }
-
 
     @NonNull
     @Override

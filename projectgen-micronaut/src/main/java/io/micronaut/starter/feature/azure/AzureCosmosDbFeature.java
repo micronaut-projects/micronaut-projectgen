@@ -18,16 +18,12 @@ package io.micronaut.starter.feature.azure;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.OneOfFeature;
 import jakarta.inject.Singleton;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Azure Cosmos DB Feature.

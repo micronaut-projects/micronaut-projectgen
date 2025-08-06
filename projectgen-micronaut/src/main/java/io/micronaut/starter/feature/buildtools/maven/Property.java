@@ -19,23 +19,43 @@ import io.micronaut.core.annotation.NonNull;
 
 import java.util.Objects;
 
-public final class Property {
+/**
+ * Represents a Maven property with a name and value.
+ * This class is used to define properties that can be used in Maven build configurations.
+ */
+public class Property {
     @NonNull
     private final String name;
 
     @NonNull
     private final String value;
 
+    /**
+     * Creates a new Property instance with the specified name and value.
+     *
+     * @param name the property name, must not be null
+     * @param value the property value, must not be null
+     */
     Property(@NonNull String name, @NonNull String value) {
         this.name = name;
         this.value = value;
     }
 
+    /**
+     * Returns the name of the property.
+     *
+     * @return the property name, never null
+     */
     @NonNull
     public String getName() {
         return name;
     }
 
+    /**
+     * Returns the value of the property.
+     *
+     * @return the property value, never null
+     */
     @NonNull
     public String getValue() {
         return value;
@@ -61,35 +81,60 @@ public final class Property {
     @Override
     public int hashCode() {
         int result = name.hashCode();
-        result = 31 * result + value.hashCode();
-        return result;
+        return 31 * result + value.hashCode();
     }
 
+    /**
+     * Creates a new builder instance for constructing Property objects.
+     *
+     * @return a new Builder instance
+     */
     @NonNull
     public static  Builder builder() {
         return new Builder();
     }
 
+    /**
+     * Builder class for creating Property instances.
+     * Provides a fluent API for setting property name and value.
+     */
     public static class Builder {
         private String name;
         private String value;
 
+        /**
+         * Sets the name of the property.
+         *
+         * @param name The property name.
+         * @return This builder instance.
+         */
         @NonNull
         public Builder name(@NonNull String name) {
             this.name = name;
             return this;
         }
 
+        /**
+         * Sets the value of the property.
+         *
+         * @param value The property value.
+         * @return This builder instance.
+         */
         @NonNull
         public Builder value(@NonNull String value) {
             this.value = value;
             return this;
         }
 
+        /**
+         * Builds a new Property instance with the configured name and value.
+         *
+         * @return a new Property instance
+         * @throws IllegalArgumentException if name or value is null
+         */
         @NonNull
         public Property build() {
-            return new Property(Objects.requireNonNull(this.name),
-                    Objects.requireNonNull(this.value));
+            return new Property(Objects.requireNonNull(name), Objects.requireNonNull(value));
         }
     }
 }

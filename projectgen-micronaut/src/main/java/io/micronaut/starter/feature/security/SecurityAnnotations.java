@@ -17,16 +17,18 @@ package io.micronaut.starter.feature.security;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
-import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
-import io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils;
-import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.starter.feature.server.MicronautServerDependent;
 import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Provides support for security annotations in Micronaut applications.
+ *
+ * <p>This feature is server-dependent and typically not visible to end users.</p>
+ */
 @Requires(property = "micronaut.starter.feature.security.annotations.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class SecurityAnnotations implements OpenRewriteFeature, MicronautServerDependent {

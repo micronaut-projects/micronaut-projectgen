@@ -17,7 +17,6 @@ package io.micronaut.starter.feature.grpc;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
-import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.utils.OptionUtils;
@@ -38,9 +37,14 @@ import io.micronaut.projectgen.core.rocker.RockerTemplate;
 import jakarta.inject.Singleton;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
+/**
+ * Adds gRPC support to the project.
+ * <p>
+ * Automatically adds the DiscoveryCore feature if not present.
+ * Applies protobuf Gradle plugin and proto templates for gRPC projects.
+ */
 @Requires(property = "micronaut.starter.feature.grpc.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Grpc implements DefaultFeature, OpenRewriteFeature {
@@ -63,8 +67,8 @@ public class Grpc implements DefaultFeature, OpenRewriteFeature {
 
     private BuildPlugin gradlePlugin(GeneratorContext generatorContext) {
         GradlePlugin.Builder builder = GradlePlugin.builder()
-                .id("com.google.protobuf")
-                .lookupArtifactId("protobuf-gradle-plugin");
+            .id("com.google.protobuf")
+            .lookupArtifactId("protobuf-gradle-plugin");
         GradleDsl gradleDsl = generatorContext.getOptions().gradleDsl();
         if (gradleDsl == GradleDsl.KOTLIN) {
             builder.buildImports("import com.google.protobuf.gradle.*");

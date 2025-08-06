@@ -20,7 +20,6 @@ import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.rocker.RockerWritable;
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.feature.DefaultFeature;
 import io.micronaut.projectgen.core.feature.Feature;
@@ -29,7 +28,6 @@ import io.micronaut.projectgen.micronaut.template.maindocs;
 import io.micronaut.projectgen.micronaut.template.readme;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.core.template.DefaultTemplate;
-import io.micronaut.projectgen.core.template.Template;
 import io.micronaut.projectgen.core.template.Writable;
 import jakarta.inject.Singleton;
 
@@ -40,8 +38,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
+/**
+ * Generates README.md files including main docs, module help, and feature documentation links.
+ *
+ * <p>Always applied and runs with highest priority.</p>
+ */
 @Requires(property = "micronaut.starter.feature.readme.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Readme implements DefaultFeature {

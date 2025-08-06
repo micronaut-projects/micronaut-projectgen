@@ -27,6 +27,10 @@ import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.starter.feature.Category;
 import jakarta.inject.Singleton;
 
+/**
+ * Camunda Zeebe feature for implementing Zeebe Workers in Micronaut applications,
+ * enabling cloud native process automation with Camunda Platform 8.
+ */
 @Requires(property = "micronaut.starter.feature.camunda.zeebe.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Zeebe implements CamundaCommunityFeature {
@@ -34,8 +38,8 @@ public class Zeebe implements CamundaCommunityFeature {
     public static final String NAME = "camunda-zeebe";
 
     private static final Dependency.Builder DEPENDENCY_ZEEBE = Dependency.builder()
-            .lookupArtifactId("micronaut-zeebe-client-feature")
-            .compile();
+        .lookupArtifactId("micronaut-zeebe-client-feature")
+        .compile();
 
     @NonNull
     @Override

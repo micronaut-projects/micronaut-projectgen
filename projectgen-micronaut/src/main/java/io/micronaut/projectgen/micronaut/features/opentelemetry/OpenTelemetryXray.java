@@ -26,16 +26,30 @@ import jakarta.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Feature that provides OpenTelemetry X-Ray integration for Micronaut applications.
+ * This feature adds OpenTelemetry support with X-Ray as the exporter for distributed tracing,
+ * including AWS SDK 2.2 instrumentation when available.
+ */
 @Requires(property = "micronaut.starter.feature.tracing.opentelemetry.xray.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class OpenTelemetryXray extends AbstractOpenTelemetry implements OpenRewriteFeature {
     public static final String NAME = "tracing-opentelemetry-xray";
 
+    /**
+     * Creates a new OpenTelemetryXray with the required OpenTelemetry components.
+     *
+     * @param otel the base OpenTelemetry feature
+     * @param otelHttp the OpenTelemetry HTTP feature
+     * @param otelAnnotations the OpenTelemetry annotations feature
+     * @param openTelemetryGrpc the OpenTelemetry gRPC feature
+     * @param otelExporter the OpenTelemetry OTLP exporter feature
+     */
     public OpenTelemetryXray(OpenTelemetry otel,
-                             OpenTelemetryHttp otelHttp,
-                             OpenTelemetryAnnotations otelAnnotations,
-                             OpenTelemetryGrpc openTelemetryGrpc,
-                             OpenTelemetryExporterOtlp otelExporter) {
+        OpenTelemetryHttp otelHttp,
+        OpenTelemetryAnnotations otelAnnotations,
+        OpenTelemetryGrpc openTelemetryGrpc,
+        OpenTelemetryExporterOtlp otelExporter) {
         super(otel, otelHttp, otelAnnotations, openTelemetryGrpc, otelExporter);
     }
 

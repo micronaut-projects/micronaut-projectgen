@@ -18,6 +18,10 @@ package io.micronaut.starter.feature.function.gcp;
 import io.micronaut.starter.feature.function.Cloud;
 import io.micronaut.starter.feature.function.CloudFeature;
 
+/**
+ * Marker interface for features related to Google Cloud Platform (GCP).
+ * Provides a default implementation returning GCP as the cloud type.
+ */
 public interface GcpCloudFeature extends CloudFeature {
     @Override
     default Cloud getCloud() {

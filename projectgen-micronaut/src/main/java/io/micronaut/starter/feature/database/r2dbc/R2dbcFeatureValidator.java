@@ -15,7 +15,6 @@
  */
 package io.micronaut.starter.feature.database.r2dbc;
 
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.starter.feature.database.TestContainers;
 import io.micronaut.starter.feature.migration.MigrationFeature;
@@ -25,6 +24,13 @@ import jakarta.inject.Singleton;
 
 import java.util.Set;
 
+/**
+ * Validates feature combinations related to R2DBC in the project generation context.
+ * <p>
+ * Specifically, this validator checks that when R2DBC features, migration features,
+ * and TestContainers are all selected together.
+ * TestContainers are not supported with the combination of R2DBC and Migration.
+ */
 @Singleton
 public class R2dbcFeatureValidator implements FeatureValidator {
 
@@ -34,9 +40,9 @@ public class R2dbcFeatureValidator implements FeatureValidator {
 
     @Override
     public void validatePostProcessing(Options options, Set<Feature> features) {
-        if (hasSubclassOf(features, R2dbcFeature.class) &&
-                hasSubclassOf(features, MigrationFeature.class) &&
-                hasInstance(features, TestContainers.class)) {
+        if (hasSubclassOf(features, R2dbcFeature.class)
+            && hasSubclassOf(features, MigrationFeature.class)
+            && hasInstance(features, TestContainers.class)) {
             throw new IllegalArgumentException("Testcontainers is not supported with R2DBC and Migration. Please remove the TestContainers feature to use Test Resources instead.");
         }
     }

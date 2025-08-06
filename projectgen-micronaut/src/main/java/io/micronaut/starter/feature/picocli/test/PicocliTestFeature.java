@@ -20,6 +20,11 @@ import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.feature.FeaturePhase;
 import io.micronaut.projectgen.core.feature.TestFeature;
 
+/**
+ * Marker interface for Picocli CLI test features.
+ *
+ * <p>Provides support for CLI applications by supplying test configurations and templates.</p>
+ */
 public interface PicocliTestFeature extends TestFeature {
 
     String PATH = "/{packagePath}/{className}Command";

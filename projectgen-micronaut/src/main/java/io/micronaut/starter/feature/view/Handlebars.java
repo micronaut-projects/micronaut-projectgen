@@ -25,6 +25,9 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Adds support for Server-Side View Rendering using Handlebars.
+ */
 @Requires(property = "micronaut.starter.feature.views.handlebars.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Handlebars implements ViewFeature, MicronautServerDependent, OpenRewriteFeature {

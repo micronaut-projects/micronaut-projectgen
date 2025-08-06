@@ -61,6 +61,10 @@ import static io.micronaut.starter.feature.agorapulse.AgoraPulseFeature.addTest;
 import static io.micronaut.starter.feature.agorapulse.AgoraPulseFeature.mainModel;
 import static io.micronaut.starter.feature.agorapulse.AgoraPulseFeature.testModel;
 
+/**
+ * Micronaut Worker community feature.
+ * Provides advanced distributed scheduling capabilities for Micronaut applications.
+ */
 @Requires(property = "micronaut.starter.feature.agorapulse.micronaut.worker.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Worker implements AgoraPulseFeature {
@@ -119,8 +123,8 @@ public class Worker implements AgoraPulseFeature {
     private void addDependency(GeneratorContext generatorContext) {
         ModuleContext module = generatorContext.getRootModule();
         module.addDependency(Dependency.builder()
-                .lookupArtifactId(ARTIFACT_ID)
-                .compile());
+            .lookupArtifactId(ARTIFACT_ID)
+            .compile());
     }
 
     @Override
@@ -139,89 +143,89 @@ public class Worker implements AgoraPulseFeature {
 
     private void addExampleCode(GeneratorContext generatorContext) {
         serviceModel(generatorContext).ifPresent(rockerModel ->
-                addMain(generatorContext, "EmailDigestService", rockerModel, "emailDigestService")
+            addMain(generatorContext, "EmailDigestService", rockerModel, "emailDigestService")
         );
 
         fallbackServiceModel(generatorContext).ifPresent(rockerModel ->
-                addMain(generatorContext, "FallbackEmailDigestService", rockerModel, "fallbackEmailDigestService")
+            addMain(generatorContext, "FallbackEmailDigestService", rockerModel, "fallbackEmailDigestService")
         );
 
         simpleJobModel(generatorContext).ifPresent(rockerModel ->
-                addMain(generatorContext, "EmailDigestSimpleJob", rockerModel, "emailDigestSimpleJob")
+            addMain(generatorContext, "EmailDigestSimpleJob", rockerModel, "emailDigestSimpleJob")
         );
 
         simpleJobTestModel(generatorContext).ifPresent(rockerModel ->
-                addTest(generatorContext, "EmailDigestSimpleJob", rockerModel, "emailDigestSimpleJobTest")
+            addTest(generatorContext, "EmailDigestSimpleJob", rockerModel, "emailDigestSimpleJobTest")
         );
 
         distributedJobModel(generatorContext).ifPresent(rockerModel ->
-                addMain(generatorContext, "EmailDigestDistributedJob", rockerModel, "emailDigestDistributedJob")
+            addMain(generatorContext, "EmailDigestDistributedJob", rockerModel, "emailDigestDistributedJob")
         );
 
         distributedJobTestModel(generatorContext).ifPresent(rockerModel ->
-                addTest(generatorContext, "EmailDigestDistributedJob", rockerModel, "emailDigestDistributedJobTest")
+            addTest(generatorContext, "EmailDigestDistributedJob", rockerModel, "emailDigestDistributedJobTest")
         );
     }
 
     @NonNull
     private Optional<RockerModel> simpleJobModel(GeneratorContext generatorContext) {
         return mainModel(
-                generatorContext,
-                emailDigestSimpleJobJava.template(generatorContext.getProject()),
-                emailDigestSimpleJobGroovy.template(generatorContext.getProject()),
-                emailDigestSimpleJobKotlin.template(generatorContext.getProject())
+            generatorContext,
+            emailDigestSimpleJobJava.template(generatorContext.getProject()),
+            emailDigestSimpleJobGroovy.template(generatorContext.getProject()),
+            emailDigestSimpleJobKotlin.template(generatorContext.getProject())
         );
     }
 
     @NonNull
     private Optional<RockerModel> serviceModel(GeneratorContext generatorContext) {
         return mainModel(
-                generatorContext,
-                emailDigestServiceJava.template(generatorContext.getProject()),
-                emailDigestServiceGroovy.template(generatorContext.getProject()),
-                emailDigestServiceKotlin.template(generatorContext.getProject())
+            generatorContext,
+            emailDigestServiceJava.template(generatorContext.getProject()),
+            emailDigestServiceGroovy.template(generatorContext.getProject()),
+            emailDigestServiceKotlin.template(generatorContext.getProject())
         );
     }
 
     @NonNull
     private Optional<RockerModel> fallbackServiceModel(GeneratorContext generatorContext) {
         return mainModel(
-                generatorContext,
-                fallbackEmailDigestServiceJava.template(generatorContext.getProject()),
-                fallbackEmailDigestServiceGroovy.template(generatorContext.getProject()),
-                fallbackEmailDigestServiceKotlin.template(generatorContext.getProject())
+            generatorContext,
+            fallbackEmailDigestServiceJava.template(generatorContext.getProject()),
+            fallbackEmailDigestServiceGroovy.template(generatorContext.getProject()),
+            fallbackEmailDigestServiceKotlin.template(generatorContext.getProject())
         );
     }
 
     @NonNull
     private Optional<RockerModel> simpleJobTestModel(GeneratorContext generatorContext) {
         return testModel(
-                generatorContext,
-                emailDigestSimpleJobTestJava.template(generatorContext.getProject()),
-                emailDigestSimpleJobSpecGroovy.template(generatorContext.getProject()),
-                emailDigestSimpleJobTestKotlin.template(generatorContext.getProject()),
-                emailDigestSimpleJobTestKotest.template(generatorContext.getProject())
+            generatorContext,
+            emailDigestSimpleJobTestJava.template(generatorContext.getProject()),
+            emailDigestSimpleJobSpecGroovy.template(generatorContext.getProject()),
+            emailDigestSimpleJobTestKotlin.template(generatorContext.getProject()),
+            emailDigestSimpleJobTestKotest.template(generatorContext.getProject())
         );
     }
 
     @NonNull
     private Optional<RockerModel> distributedJobModel(GeneratorContext generatorContext) {
         return mainModel(
-                generatorContext,
-                emailDigestDistributedJobJava.template(generatorContext.getProject()),
-                emailDigestDistributedJobGroovy.template(generatorContext.getProject()),
-                emailDigestDistributedJobKotlin.template(generatorContext.getProject())
+            generatorContext,
+            emailDigestDistributedJobJava.template(generatorContext.getProject()),
+            emailDigestDistributedJobGroovy.template(generatorContext.getProject()),
+            emailDigestDistributedJobKotlin.template(generatorContext.getProject())
         );
     }
 
     @NonNull
     private Optional<RockerModel> distributedJobTestModel(GeneratorContext generatorContext) {
         return testModel(
-                generatorContext,
-                emailDigestDistributedJobTestJava.template(generatorContext.getProject()),
-                emailDigestDistributedJobSpecGroovy.template(generatorContext.getProject()),
-                emailDigestDistributedJobTestKotlin.template(generatorContext.getProject()),
-                emailDigestDistributedJobTestKotest.template(generatorContext.getProject())
+            generatorContext,
+            emailDigestDistributedJobTestJava.template(generatorContext.getProject()),
+            emailDigestDistributedJobSpecGroovy.template(generatorContext.getProject()),
+            emailDigestDistributedJobTestKotlin.template(generatorContext.getProject()),
+            emailDigestDistributedJobTestKotest.template(generatorContext.getProject())
         );
     }
 

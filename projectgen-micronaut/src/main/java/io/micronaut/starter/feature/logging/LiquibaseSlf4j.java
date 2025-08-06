@@ -19,12 +19,17 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.feature.LoggingFeature;
 import io.micronaut.projectgen.core.generator.ModuleContext;
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.starter.feature.ThirdPartyLibraryFeature;
 import jakarta.inject.Singleton;
 
+/**
+ * Feature for integrating Liquibase SLF4J logging implementation.
+ * <p>
+ * Provides a Liquibase logger implementation that delegates directly to SLF4J,
+ * enabling consistent logging integration.
+ */
 @Requires(property = "micronaut.starter.feature.liquibase.slf4j.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class LiquibaseSlf4j implements ThirdPartyLibraryFeature, LoggingFeature {
@@ -50,6 +55,14 @@ public class LiquibaseSlf4j implements ThirdPartyLibraryFeature, LoggingFeature 
         addDependencies(generatorContext);
     }
 
+    /**
+     * Adds the necessary dependencies for Liquibase SLF4J integration to the project.
+     * <p>
+     * This method retrieves the root module context from the provided GeneratorContext
+     * and adds the Liquibase SLF4J dependency with a runtime scope.
+     *
+     * @param generatorContext the GeneratorContext instance used to access the project's configuration and module context
+     */
     protected void addDependencies(GeneratorContext generatorContext) {
         ModuleContext module = generatorContext.getRootModule();
         module.addDependency(Dependency.builder().lookupArtifactId(ARTIFACT_ID_LIQUIBASE_SLF_4_J).runtime());

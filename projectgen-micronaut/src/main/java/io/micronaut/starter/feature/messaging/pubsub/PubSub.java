@@ -25,6 +25,11 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Google Cloud Pub/Sub messaging feature implementation.
+ * <p>
+ * Adds support for Google Cloud Pub/Sub real-time messaging service.
+ */
 @Requires(property = "micronaut.starter.feature.gcp.pubsub.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class PubSub implements MessagingFeature, OpenRewriteFeature {

@@ -15,7 +15,6 @@
  */
 package io.micronaut.starter.feature.aws;
 
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.starter.feature.function.awslambda.AwsLambda;
 import io.micronaut.starter.feature.graalvm.GraalVM;
@@ -29,6 +28,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ * Validates that AWS Lambda features are used with supported Java versions (JDK 17 or 21).
+ */
 @Singleton
 public class AwsLambdaFeatureValidator implements FeatureValidator {
 
@@ -49,15 +51,15 @@ public class AwsLambdaFeatureValidator implements FeatureValidator {
 
     public static List<JdkVersion> supportedJdks() {
         return MicronautJdkVersionConfiguration.SUPPORTED_JDKS.stream()
-                .filter(AwsLambdaFeatureValidator::supports)
-                .collect(Collectors.toList());
+            .filter(AwsLambdaFeatureValidator::supports)
+            .collect(Collectors.toList());
     }
 
     public static JdkVersion firstSupportedJdk() {
         return MicronautJdkVersionConfiguration.SUPPORTED_JDKS.stream()
-                .filter(AwsLambdaFeatureValidator::supports)
-                .findFirst()
-                .orElse(JdkVersion.JDK_17);
+            .filter(AwsLambdaFeatureValidator::supports)
+            .findFirst()
+            .orElse(JdkVersion.JDK_17);
     }
 
     public static boolean supports(JdkVersion jdkVersion) {

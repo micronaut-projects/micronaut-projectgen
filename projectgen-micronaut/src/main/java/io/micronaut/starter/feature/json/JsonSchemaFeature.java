@@ -23,6 +23,9 @@ import io.micronaut.starter.feature.Category;
 import jakarta.inject.Singleton;
 import java.util.List;
 
+/**
+ * Feature that adds JSON Schema support to a Micronaut application.
+ */
 @Requires(property = "micronaut.starter.feature.json.schema.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class JsonSchemaFeature implements OpenRewriteFeature {

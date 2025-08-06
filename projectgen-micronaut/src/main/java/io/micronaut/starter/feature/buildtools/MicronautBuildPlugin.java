@@ -58,6 +58,10 @@ import java.util.stream.Collectors;
 import static io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils.ARTIFACT_ID_MICRONAUT_DATA_PROCESSOR_ARTIFACT;
 import static io.micronaut.starter.feature.graalvm.GraalVM.FEATURE_NAME_GRAALVM;
 
+/**
+ * Feature that adds the Micronaut Gradle Build Plugin to the project,
+ * providing integration with Micronaut and optional GraalVM Gradle plugins.
+ */
 @Requires(property = "micronaut.starter.feature.micronaut.build.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class MicronautBuildPlugin implements BuildPluginFeature, DefaultFeature {
@@ -90,8 +94,17 @@ public class MicronautBuildPlugin implements BuildPluginFeature, DefaultFeature 
         }
     }
 
+    /**
+     * Creates a GradlePlugin instance based on the provided GeneratorContext.
+     *
+     * The method determines whether to apply the Micronaut Application Gradle Plugin or the Micronaut Library Gradle Plugin
+     * based on the GeneratorContext. It also adds snapshot repositories if necessary.
+     *
+     * @param generatorContext the GeneratorContext instance to base the GradlePlugin on
+     * @return a GradlePlugin instance
+     */
     @NonNull
-    protected GradlePlugin gradlePlugin(@NonNull GeneratorContext generatorContext) {
+     protected GradlePlugin gradlePlugin(@NonNull GeneratorContext generatorContext) {
         GradlePlugin.Builder builder = null;
         if (shouldApplyMicronautApplicationGradlePlugin(generatorContext)) {
             builder = micronautGradleApplicationPluginBuilder(generatorContext).builder();
@@ -101,12 +114,18 @@ public class MicronautBuildPlugin implements BuildPluginFeature, DefaultFeature 
 
         if (shouldAddRepositoriesForSnapshots(builder)) {
             builder.pluginsManagementRepository(new GradlePluginPortal())
-                    .pluginsManagementRepository(GradleRepository.of(
-                        generatorContext.getOptions().gradleDsl() == null ? GradleDsl.GROOVY : generatorContext.getOptions().gradleDsl(), new S01SonatypeSnapshots()));
+                .pluginsManagementRepository(GradleRepository.of(
+                    generatorContext.getOptions().gradleDsl() == null ? GradleDsl.GROOVY : generatorContext.getOptions().gradleDsl(), new S01SonatypeSnapshots()));
         }
         return builder.build();
     }
 
+    /**
+     * Determines if snapshot repositories should be added based on the plugin's artifact version.
+     *
+     * @param builder the GradlePlugin.Builder instance to inspect
+     * @return true if the plugin version ends with "-SNAPSHOT", false otherwise or if artifact id or version is unavailable
+     */
     public boolean shouldAddRepositoriesForSnapshots(GradlePlugin.Builder builder) {
         Optional<String> artifactIdOptional = builder.getArtifiactId();
         if (!artifactIdOptional.isPresent()) {
@@ -129,40 +148,56 @@ public class MicronautBuildPlugin implements BuildPluginFeature, DefaultFeature 
         }
     }
 
-    Optional<String> resolveRuntime(GeneratorContext generatorContext) {
+    /**
+     * Resolves the Micronaut runtime property from the root module's build properties.
+     *
+     * @param generatorContext the GeneratorContext instance to resolve the runtime from
+     * @return an Optional containing the Micronaut runtime property value if present, or an empty Optional otherwise
+     */
+     Optional<String> resolveRuntime(GeneratorContext generatorContext) {
         ModuleContext module = generatorContext.getRootModule();
         return module.buildProperties()
-                .getProperties()
-                .stream()
-                .filter(property -> MicronautRuntimeFeature.PROPERTY_MICRONAUT_RUNTIME.equals(property.getKey()))
-                .map(Property::getValue)
-                .findFirst();
+            .getProperties()
+            .stream()
+            .filter(property -> MicronautRuntimeFeature.PROPERTY_MICRONAUT_RUNTIME.equals(property.getKey()))
+            .map(Property::getValue)
+            .findFirst();
     }
 
     @Nullable
     private Set<String> ignoredAutomaticDependencies(GeneratorContext generatorContext) {
         ModuleContext module = generatorContext.getRootModule();
         if (module.hasDependency(MicronautDependencyUtils.GROUP_ID_MICRONAUT_DATA, MicronautDependencyUtils.ARTIFACT_ID_MICRONAUT_DATA_TX_HIBERNATE)
-                && module.countDependencies(MicronautDependencyUtils.GROUP_ID_MICRONAUT_DATA) == 1) {
+            && module.countDependencies(MicronautDependencyUtils.GROUP_ID_MICRONAUT_DATA) == 1) {
             return Set.of(MicronautDependencyUtils.GROUP_ID_MICRONAUT_DATA + ":" + ARTIFACT_ID_MICRONAUT_DATA_PROCESSOR_ARTIFACT);
         }
         return null;
     }
 
+    /**
+     * Creates a MicronautApplicationGradlePlugin.Builder instance based on the provided GeneratorContext and plugin ID.
+     *
+     * The method configures the builder with settings derived from the GeneratorContext, including build tool, Java version,
+     * package name, and runtime settings. It also configures additional settings based on the presence of certain features.
+     *
+     * @param generatorContext the GeneratorContext instance to base the MicronautApplicationGradlePlugin.Builder on
+     * @param id the ID of the plugin to use (e.g., "io.micronaut.application" or "io.micronaut.library")
+     * @return a MicronautApplicationGradlePlugin.Builder instance configured based on the GeneratorContext
+     */
     protected MicronautApplicationGradlePlugin.Builder micronautGradleApplicationPluginBuilder(GeneratorContext generatorContext, String id) {
         MicronautApplicationGradlePlugin.Builder builder = MicronautApplicationGradlePlugin.builder()
-                .buildTool(generatorContext.getBuildTool())
-                .incremental(true)
-                .javaVersion(FeaturesUtils.getTargetJdk(generatorContext.getFeatures()))
-                .packageName(generatorContext.getProject().getPackageName())
-                .ignoredAutomaticDependencies(ignoredAutomaticDependencies(generatorContext));
+            .buildTool(generatorContext.getBuildTool())
+            .incremental(true)
+            .javaVersion(FeaturesUtils.getTargetJdk(generatorContext.getFeatures()))
+            .packageName(generatorContext.getProject().getPackageName())
+            .ignoredAutomaticDependencies(ignoredAutomaticDependencies(generatorContext));
         generatorContext.getFeatures()
-                .getFeatures()
-                .stream()
-                .filter(LambdaRuntimeMainClass.class::isInstance)
-                .map(f -> ((LambdaRuntimeMainClass) f).getLambdaRuntimeMainClass())
-                .findFirst()
-                .ifPresent(builder::lambdaRuntimeMainClass);
+            .getFeatures()
+            .stream()
+            .filter(LambdaRuntimeMainClass.class::isInstance)
+            .map(f -> ((LambdaRuntimeMainClass) f).getLambdaRuntimeMainClass())
+            .findFirst()
+            .ifPresent(builder::lambdaRuntimeMainClass);
         GradleDsl gradleDsl = generatorContext.getOptions().gradleDsl();
         if (gradleDsl != null) {
             builder = builder.dsl(gradleDsl);
@@ -203,25 +238,34 @@ public class MicronautBuildPlugin implements BuildPluginFeature, DefaultFeature 
         return builder.id(id);
     }
 
+    /**
+     * Creates a MicronautApplicationGradlePlugin.Builder instance based on the provided GeneratorContext.
+     *
+     * The method configures the builder with settings derived from the GeneratorContext, including build tool, Java version,
+     * package name, and runtime settings. It also configures Docker native settings based on the presence of certain features
+     * and the JDK version.
+     *
+     * @param generatorContext the GeneratorContext instance to base the MicronautApplicationGradlePlugin.Builder on
+     * @return a MicronautApplicationGradlePlugin.Builder instance configured based on the GeneratorContext
+     */
     protected MicronautApplicationGradlePlugin.Builder micronautGradleApplicationPluginBuilder(GeneratorContext generatorContext) {
         ApplicationType applicationType = ApplicationType.of(generatorContext.getOptions().template());
         MicronautApplicationGradlePlugin.Builder builder = micronautGradleApplicationPluginBuilder(generatorContext, MicronautApplicationGradlePlugin.Builder.APPLICATION);
-        if (generatorContext.getFeatures().contains(AwsLambda.FEATURE_NAME_AWS_LAMBDA) && ((
-                (applicationType == ApplicationType.FUNCTION && generatorContext.getFeatures().contains(FEATURE_NAME_GRAALVM)) ||
-                        (applicationType == ApplicationType.DEFAULT)))) {
+        if (generatorContext.getFeatures().contains(AwsLambda.FEATURE_NAME_AWS_LAMBDA) && ((applicationType == ApplicationType.FUNCTION && generatorContext.getFeatures().contains(FEATURE_NAME_GRAALVM))
+            || (applicationType == ApplicationType.DEFAULT))) {
             builder.dockerNative(Dockerfile.builder()
-                    .javaVersion(generatorContext.getJdkVersion().asString())
-                    .arg("-XX:MaximumHeapSizePercent=80")
-                    .arg("-Dio.netty.allocator.numDirectArenas=0")
-                    .arg("-Dio.netty.noPreferDirect=true")
-                    .build());
+                .javaVersion(generatorContext.getJdkVersion().asString())
+                .arg("-XX:MaximumHeapSizePercent=80")
+                .arg("-Dio.netty.allocator.numDirectArenas=0")
+                .arg("-Dio.netty.noPreferDirect=true")
+                .build());
         } else if (generatorContext.getJdkVersion() != JdkVersion.JDK_17) {
             builder.dockerNative(Dockerfile.builder().javaVersion(generatorContext.getJdkVersion().asString()).build());
         }
         return builder;
     }
 
-    private Optional<String> resolveTestRuntime(GeneratorContext generatorContext) {
+     private Optional<String> resolveTestRuntime(GeneratorContext generatorContext) {
         if (generatorContext.getFeatures().testFramework() == null) {
             return Optional.empty();
         }
@@ -236,15 +280,23 @@ public class MicronautBuildPlugin implements BuildPluginFeature, DefaultFeature 
         return Optional.empty();
     }
 
+    /**
+     * Creates a GradlePlugin.Builder instance for the Micronaut Library Gradle Plugin based on the provided GeneratorContext.
+     *
+     * The method reuses the configuration from the Micronaut Application Gradle Plugin builder, but with the ID set to "LIBRARY".
+     *
+     * @param generatorContext the GeneratorContext instance to base the GradlePlugin on
+     * @return a GradlePlugin.Builder instance for the Micronaut Library Gradle Plugin
+     */
     protected GradlePlugin.Builder micronautLibraryGradlePluginBuilder(GeneratorContext generatorContext) {
         return micronautGradleApplicationPluginBuilder(generatorContext, MicronautApplicationGradlePlugin.Builder.LIBRARY).builder();
     }
 
     private static boolean shouldApplyMicronautApplicationGradlePlugin(GeneratorContext generatorContext) {
         ApplicationType applicationType = ApplicationType.of(generatorContext.getOptions().template());
-        return generatorContext.getFeatures().mainClass().isPresent() ||
-                generatorContext.getFeatures().contains("oracle-function") ||
-                applicationType == ApplicationType.DEFAULT && generatorContext.getFeatures().contains("aws-lambda");
+        return generatorContext.getFeatures().mainClass().isPresent()
+            || generatorContext.getFeatures().contains("oracle-function")
+            || applicationType == ApplicationType.DEFAULT && generatorContext.getFeatures().contains("aws-lambda");
     }
 
     @Override

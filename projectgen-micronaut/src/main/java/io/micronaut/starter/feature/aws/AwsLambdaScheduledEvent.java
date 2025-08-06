@@ -21,6 +21,10 @@ import io.micronaut.core.util.StringUtils;
 import io.micronaut.starter.feature.function.awslambda.AwsLambda;
 import jakarta.inject.Singleton;
 
+/**
+ * AWS Lambda feature for handling scheduled events.
+ * Creates a function handler subscribed to scheduled (cron) events.
+ */
 @Requires(property = "micronaut.starter.feature.aws.lambda.scheduled.event.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class AwsLambdaScheduledEvent extends AwsLambdaEventFunctionFeature implements LambdaTrigger {
@@ -29,7 +33,7 @@ public class AwsLambdaScheduledEvent extends AwsLambdaEventFunctionFeature imple
     public AwsLambdaScheduledEvent(AwsLambda awsLambda) {
         super(awsLambda);
     }
-    
+
     @Override
     @NonNull
     public String getName() {

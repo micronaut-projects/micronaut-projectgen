@@ -18,8 +18,6 @@ package io.micronaut.starter.feature.reloading;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.gradle.GradlePlugin;
-import io.micronaut.projectgen.core.buildtools.maven.MavenPlugin;
 import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.utils.OptionUtils;
@@ -30,6 +28,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Feature to enable class reloading with the JRebel JVM agent.
+ *
+ * <p>Adds JRebel support, including necessary JVM arguments and build tool configurations
+ * for Maven and Gradle (requires a separate JRebel installation).</p>
+ */
 @Requires(property = "micronaut.starter.feature.jrebel.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Jrebel implements ReloadingFeature, JvmArgumentsFeature, OpenRewriteFeature {

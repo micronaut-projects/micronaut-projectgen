@@ -18,5 +18,12 @@ package io.micronaut.starter.feature.buildtools;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.annotation.Nullable;
 
+/**
+ * Represents an optimization setting for Micronaut AOT with a key, value, and optional comment.
+ *
+ * @param key the optimization key
+ * @param value the optimization value
+ * @param comment an optional comment describing the optimization
+ */
 public record MicronautAotOptimization(@NonNull String key, Object value, @Nullable String comment) {
 }

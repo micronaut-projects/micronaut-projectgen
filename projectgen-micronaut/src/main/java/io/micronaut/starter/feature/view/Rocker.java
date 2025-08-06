@@ -31,6 +31,10 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Adds support for server-side view rendering using Rocker templates.
+ * Configures the necessary Gradle and Maven plugins.
+ */
 @Requires(property = "micronaut.starter.feature.views.rocker.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Rocker implements ViewFeature, MicronautServerDependent, OpenRewriteFeature {
@@ -55,19 +59,19 @@ public class Rocker implements ViewFeature, MicronautServerDependent, OpenRewrit
         ModuleContext module = generatorContext.getRootModule();
         OpenRewriteFeature.super.apply(generatorContext);
         module.addBuildPlugin(GradlePlugin.builder()
-                .id("nu.studer.rocker")
-                .extension(new RockerWritable(gradlePluginRocker.template(rockerSrcDir(module))))
-                .lookupArtifactId("gradle-rocker-plugin")
-                .build());
+            .id("nu.studer.rocker")
+            .extension(new RockerWritable(gradlePluginRocker.template(rockerSrcDir(module))))
+            .lookupArtifactId("gradle-rocker-plugin")
+            .build());
         String mavenPluginArtifactId = "rocker-maven-plugin";
         Coordinate coordinate = generatorContext.resolveCoordinate(mavenPluginArtifactId);
         module.addBuildPlugin(MavenPlugin.builder()
-                .artifactId(mavenPluginArtifactId)
-                .extension(new RockerWritable(mvnPluginRocker.template(coordinate.getGroupId(),
-                        coordinate.getArtifactId(),
-                        coordinate.getVersion(),
-                        rockerSrcDir(module))))
-                .build());
+            .artifactId(mavenPluginArtifactId)
+            .extension(new RockerWritable(mvnPluginRocker.template(coordinate.getGroupId(),
+                coordinate.getArtifactId(),
+                coordinate.getVersion(),
+                rockerSrcDir(module))))
+            .build());
     }
 
     private String rockerSrcDir(ModuleContext module) {

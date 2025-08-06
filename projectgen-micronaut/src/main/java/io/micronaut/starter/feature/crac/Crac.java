@@ -18,7 +18,6 @@ package io.micronaut.starter.feature.crac;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
-import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.core.utils.OptionUtils;
@@ -26,7 +25,6 @@ import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils;
-import io.micronaut.projectgen.core.buildtools.gradle.GradlePlugin;
 import io.micronaut.starter.feature.Category;
 import io.micronaut.starter.feature.RequireEagerSingletonInitializationFeature;
 import io.micronaut.starter.feature.database.jdbc.Hikari;
@@ -35,6 +33,9 @@ import jakarta.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Feature that adds support for CRaC (Coordinated Restore at Checkpoint) in Micronaut applications.
+ */
 @Requires(property = "micronaut.starter.feature.crac.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Crac implements RequireEagerSingletonInitializationFeature, OpenRewriteFeature {
@@ -69,10 +70,7 @@ public class Crac implements RequireEagerSingletonInitializationFeature, OpenRew
         if (ApplicationType.of(options.template()) == ApplicationType.DEFAULT) {
             return true;
         }
-        if (ApplicationType.of(options.template()) == ApplicationType.CLI) {
-            return true;
-        }
-        return false;
+        return ApplicationType.of(options.template()) == ApplicationType.CLI;
     }
 
     @Override
@@ -86,13 +84,13 @@ public class Crac implements RequireEagerSingletonInitializationFeature, OpenRew
         if (OptionUtils.hasGradleBuildTool(generatorContext.getOptions())) {
             recipes.add("io.micronaut.starter.feature.crac-plugin");
         }
-            recipes.add("io.micronaut.starter.feature.crac");
+        recipes.add("io.micronaut.starter.feature.crac");
         if (generatorContext.isFeaturePresent(Hikari.class)) {
             recipes.add("io.micronaut.starter.feature.crac-hikari");
         }
         if (OptionUtils.hasGradleBuildTool(generatorContext.getOptions())) {
             recipes.add("io.micronaut.starter.feature.crac-plugin");
         }
-            return recipes;
+        return recipes;
     }
 }

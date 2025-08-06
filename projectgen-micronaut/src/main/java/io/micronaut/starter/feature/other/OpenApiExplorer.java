@@ -28,6 +28,11 @@ import io.micronaut.starter.feature.staticResources.StaticResource;
 
 import jakarta.inject.Singleton;
 
+/**
+ * Feature that adds and enables the OpenAPI Explorer UI view for OpenAPI documentation.
+ *
+ * Provides static resources and configures anonymous access for the OpenAPI Explorer path.
+ */
 @Requires(property = "micronaut.starter.feature.openapi.explorer.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class OpenApiExplorer extends OpenApiView implements ContributingStaticResources, OpenRewriteFeature {

@@ -18,8 +18,6 @@ package io.micronaut.starter.feature.database.jdbc;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
-import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.feature.database.DatabaseDriverFeature;
 
@@ -28,6 +26,13 @@ import jakarta.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * JDBC feature for configuring SQL DataSources using Oracle Universal Connection Pool (UCP).
+ * <p>
+ * Adds support for Oracle UCP as the JDBC connection pooling implementation,
+ * including necessary dependencies and database-specific configuration.
+ * </p>
+ */
 @Requires(property = "micronaut.starter.feature.jdbc.ucp.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Ucp extends JdbcFeature implements OpenRewriteFeature {

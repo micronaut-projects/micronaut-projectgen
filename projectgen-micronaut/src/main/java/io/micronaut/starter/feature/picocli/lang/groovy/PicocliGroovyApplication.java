@@ -29,6 +29,11 @@ import io.micronaut.projectgen.core.rocker.RockerTemplate;
 import io.micronaut.projectgen.micronaut.template.picocli.lang.groovy.picocliApplication;
 import jakarta.inject.Singleton;
 
+/**
+ * Feature for generating a Groovy-based CLI application using Picocli.
+ *
+ * <p>Generates the main application class as a Picocli command and applies the necessary Groovy setup.</p>
+ */
 @Requires(property = "micronaut.starter.feature.picocli.groovy.application.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class PicocliGroovyApplication implements GroovyApplicationFeature {
@@ -58,11 +63,25 @@ public class PicocliGroovyApplication implements GroovyApplicationFeature {
         module.addTemplate("application", getTemplate(generatorContext.getProject()));
     }
 
+    /**
+     * Returns the {@link RockerTemplate} for generating the Picocli application source file.
+     *
+     * @param project The project metadata.
+     * @return The Rocker template used to render the application source.
+     */
     public RockerTemplate getTemplate(Project project) {
         return new RockerTemplate(getPath(),
-                picocliApplication.template(project));
+            picocliApplication.template(project));
     }
 
+    /**
+     * Returns the file path for the Picocli application source file.
+     *
+     * <p>The path is relative to the project root and includes placeholders for
+     * the package path and class name, which will be replaced during template rendering.</p>
+     *
+     * @return The file path for the Picocli application source file.
+     */
     protected String getPath() {
         return "src/main/groovy/{packagePath}/{className}Command.groovy";
     }

@@ -24,6 +24,12 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * A {@link DiscoveryFeature} implementation that enables service discovery using Netflix Eureka.
+ * <p>
+ * This feature adds the necessary configuration for integrating Eureka
+ * with Micronaut applications. It also ensures that {@link DiscoveryClient} is present.
+ */
 @Requires(property = "micronaut.starter.feature.discovery.eureka.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Eureka implements DiscoveryFeature, OpenRewriteFeature {
