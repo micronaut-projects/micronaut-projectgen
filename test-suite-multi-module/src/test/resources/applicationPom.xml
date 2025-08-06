@@ -20,20 +20,17 @@
       <groupId>com.example</groupId>
       <artifactId>library</artifactId>
       <version>${project.version}</version>
-      <scope>compile</scope>
     </dependency>
 
     <!-- To expose an actuator endpoint -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-actuator</artifactId>
-      <scope>compile</scope>
     </dependency>
 
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
-      <scope>compile</scope>
     </dependency>
 
     <dependency>
