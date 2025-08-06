@@ -137,7 +137,7 @@
         <h1>Micronaut projectgen</h1>
         <p></p>
         <p>API to generate JVM projects</p>
-        <p><strong>Version:</strong> 0.0.7-SNAPSHOT </p>
+        <p><strong>Version:</strong> 0.0.9-SNAPSHOT </p>
     </div>
     
 <h1 id="introduction"><a class="anchor" href="#introduction"></a>1 Introduction</h1>
@@ -1414,7 +1414,7 @@ class ProjectGenTest {
         assertTrue(project.containsKey("gradle/wrapper/gradle-wrapper.jar"));
         assertTrue(project.containsKey("gradle/wrapper/gradle-wrapper.properties"));
         String gradleWrapperProperties = project.get("gradle/wrapper/gradle-wrapper.properties");
-        assertTrue(gradleWrapperProperties.contains("8.14.2"));
+        assertTrue(gradleWrapperProperties.contains("8.14.3"));
 
         options = OptionsFactory.create(List.of("hello-world-test"));
         project = previewGenerator.generate(options);
