@@ -20,6 +20,10 @@ import io.micronaut.core.annotation.NonNull;
 import io.micronaut.projectgen.micronaut.template.lang.java.contextConfigurer;
 import io.micronaut.starter.feature.lang.ApplicationRenderingContext;
 
+/**
+ * Rendering context for the Java application that provides configuration rendering
+ * based on the default environment and eager singleton initialization settings.
+ */
 public class JavaApplicationRenderingContext extends ApplicationRenderingContext {
 
     public JavaApplicationRenderingContext(String defaultEnvironment, boolean eagerSingletons) {

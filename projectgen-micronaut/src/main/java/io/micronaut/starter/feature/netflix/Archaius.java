@@ -18,15 +18,16 @@ package io.micronaut.starter.feature.netflix;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.feature.DistributedConfigFeature;
 
-import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that adds support for distributed configuration using Netflix Archaius.
+ */
 @Requires(property = "micronaut.starter.feature.netflix.archaius.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Archaius implements DistributedConfigFeature, OpenRewriteFeature {

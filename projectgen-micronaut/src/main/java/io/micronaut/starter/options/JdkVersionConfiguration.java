@@ -21,6 +21,9 @@ import io.micronaut.projectgen.core.options.JdkVersion;
 
 import java.util.List;
 
+/**
+ * JDK Version Configuration.
+ */
 @DefaultImplementation(MicronautJdkVersionConfiguration.class)
 public interface JdkVersionConfiguration {
 

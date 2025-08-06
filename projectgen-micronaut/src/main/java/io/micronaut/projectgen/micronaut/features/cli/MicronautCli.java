@@ -38,18 +38,24 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+/**
+ * Feature that adds a {@code micronaut-cli.yml} file to the root of the generated project.
+ * This file captures project configuration such as application type, build tool, language, test framework, and features.
+ * It can also be used to reconstruct {@link Options} when regenerating or analyzing a project.
+ * This feature is not visible in the user-facing feature list.
+ */
 @Singleton
 public class MicronautCli implements Feature {
+    public static final String LEGACY_BUILD_TOOL_GRADLE_KOTLIN = "gradle_kotlin";
+    public static final String LEGACY_BUILD_TOOL_GRADLE_GROOVY = "gradle";
+    public static final String LEGACY_BUILD_TOOL_MAVEN = "maven";
+    public static final String PATH = "micronaut-cli.yml";
     private static final String KEY_APPLICATION_TYPE = "applicationType";
     private static final String KEY_TEST_FRAMEWORK = "testFramework";
     private static final String KEY_DEFAULT_PACKAGE = "defaultPackage";
     private static final String KEY_SOURCE_LANGUAGE = "sourceLanguage";
     private static final String KEY_FEATURES = "features";
     private static final String KEY_BUILD_TOOL = "buildTool";
-    public static final String LEGACY_BUILD_TOOL_GRADLE_KOTLIN = "gradle_kotlin";
-    public static final String LEGACY_BUILD_TOOL_GRADLE_GROOVY = "gradle";
-    public static final String LEGACY_BUILD_TOOL_MAVEN = "maven";
-    public static final String PATH = "micronaut-cli.yml";
 
     @Override
     public String getName() {
@@ -90,7 +96,7 @@ public class MicronautCli implements Feature {
         }
     }
 
-    private static Options load(MicronautCliConfig config)  {
+    private static Options load(MicronautCliConfig config) {
         var builder = GenericOptionsBuilder.builder();
 
         if (config.getApplicationType() != null) {
@@ -124,6 +130,7 @@ public class MicronautCli implements Feature {
                     builder.gradleDsl(GradleDsl.GROOVY);
                 }
                 case LEGACY_BUILD_TOOL_MAVEN -> builder.buildTools(List.of(BuildTool.MAVEN));
+                default -> throw new IllegalArgumentException("Unknown build tool: " + config.getBuildTool());
             }
         }
 

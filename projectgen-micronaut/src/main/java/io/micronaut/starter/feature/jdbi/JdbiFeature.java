@@ -19,11 +19,8 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.starter.feature.Category;
-import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.starter.feature.database.jdbc.JdbcFeature;
 
@@ -31,6 +28,9 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature for adding support for persistence using Jdbi.
+ */
 @Requires(property = "micronaut.starter.feature.sql.jdbi.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class JdbiFeature implements OpenRewriteFeature {

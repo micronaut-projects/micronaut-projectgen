@@ -16,7 +16,6 @@
 package io.micronaut.starter.feature.database;
 
 import io.micronaut.core.annotation.NonNull;
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.feature.FeatureValidator;
 import io.micronaut.projectgen.core.options.JdkVersion;
@@ -27,6 +26,15 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ * Validator for Hibernate Reactive feature compatibility.
+ * <p>
+ * Ensures that:
+ * <ul>
+ *   <li>A compatible database driver feature is selected when Hibernate Reactive is enabled.</li>
+ *   <li>The Java version is at least JDK 11 when Hibernate Reactive is enabled.</li>
+ * </ul>
+ */
 @Singleton
 public class HibernateReactiveFeatureValidator implements FeatureValidator {
     private final String errorMsg;
@@ -34,10 +42,10 @@ public class HibernateReactiveFeatureValidator implements FeatureValidator {
     public HibernateReactiveFeatureValidator(List<DatabaseDriverFeature> databaseDriverFeatures) {
         StringBuilder errorMsg = new StringBuilder("Hibernate Reactive requires ");
         List<String> hibernateReactiveDatabaseDriverFeatures = databaseDriverFeatures.stream()
-                .filter(HibernateReactiveFeatureValidator::supportsHibernateReactive)
-                .map(Feature::getName)
-                .sorted()
-                .collect(Collectors.toList());
+            .filter(HibernateReactiveFeatureValidator::supportsHibernateReactive)
+            .map(Feature::getName)
+            .sorted()
+            .collect(Collectors.toList());
         for (int i = 0; i < hibernateReactiveDatabaseDriverFeatures.size(); i++) {
             errorMsg.append(hibernateReactiveDatabaseDriverFeatures.get(i));
             if (i <= (hibernateReactiveDatabaseDriverFeatures.size() - 2)) {
@@ -60,17 +68,17 @@ public class HibernateReactiveFeatureValidator implements FeatureValidator {
     @Override
     public void validatePostProcessing(Options options, Set<Feature> features) {
         if (features.stream().anyMatch(HibernateReactiveFeature.class::isInstance)
-                && options.java().majorVersion() < JdkVersion.JDK_11.majorVersion()) {
+            && options.java().majorVersion() < JdkVersion.JDK_11.majorVersion()) {
             throw new IllegalArgumentException("Hibernate Reactive requires at least JDK 11");
         }
     }
 
     public static boolean isThereADatabaseDriverFeatureCompatibleWithHibernateReactive(@NonNull Set<Feature> features) {
         return features
-                .stream()
-                .filter(DatabaseDriverFeature.class::isInstance)
-                .map(DatabaseDriverFeature.class::cast)
-                .anyMatch(HibernateReactiveFeatureValidator::supportsHibernateReactive);
+            .stream()
+            .filter(DatabaseDriverFeature.class::isInstance)
+            .map(DatabaseDriverFeature.class::cast)
+            .anyMatch(HibernateReactiveFeatureValidator::supportsHibernateReactive);
     }
 
     public static boolean supportsHibernateReactive(@NonNull DatabaseDriverFeature f) {

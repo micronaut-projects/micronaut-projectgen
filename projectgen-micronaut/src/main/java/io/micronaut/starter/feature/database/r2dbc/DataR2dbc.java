@@ -17,26 +17,26 @@ package io.micronaut.starter.feature.database.r2dbc;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
-import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
-import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.starter.feature.database.Data;
 import io.micronaut.starter.feature.database.DataFeature;
-import io.micronaut.starter.feature.database.DatabaseDriverFeature;
 import io.micronaut.starter.feature.database.TransactionalNotSupported;
 import io.micronaut.starter.feature.migration.MigrationFeature;
 import jakarta.inject.Singleton;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
+/**
+ * Feature that adds Micronaut Data support for Reactive Database Connectivity (R2DBC).
+ * This feature ensures that Micronaut Data and R2DBC features are included,
+ * providing reactive database access with Micronaut Data abstractions.
+ */
 @Requires(property = "micronaut.starter.feature.data.r2dbc.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class DataR2dbc extends R2dbcConfigurationUtils implements R2dbcFeature, DataFeature, TransactionalNotSupported, OpenRewriteFeature {
@@ -44,9 +44,9 @@ public class DataR2dbc extends R2dbcConfigurationUtils implements R2dbcFeature, 
     public static final String NAME = "data-r2dbc";
 
     private static final Dependency DEPENDENCY_MICRONAUT_DATA_R2DBC = MicronautDependencyUtils.dataDependency()
-            .artifactId("micronaut-data-r2dbc")
-            .compile()
-            .build();
+        .artifactId("micronaut-data-r2dbc")
+        .compile()
+        .build();
 
     private final Data data;
     private final R2dbc r2dbc;

@@ -28,6 +28,10 @@ import io.micronaut.projectgen.core.rocker.RockerTemplate;
 import io.micronaut.projectgen.core.template.Template;
 import jakarta.inject.Singleton;
 
+/**
+ * CI workflow feature for GitHub Actions.
+ * Adds a GitHub Actions workflow to build a Micronaut application.
+ */
 @Requires(property = "micronaut.starter.feature.github.workflow.ci.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class GithubCiWorkflowFeature extends CIWorkflowFeature {

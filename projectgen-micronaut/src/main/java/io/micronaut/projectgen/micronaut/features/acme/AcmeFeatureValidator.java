@@ -24,6 +24,12 @@ import io.micronaut.projectgen.core.options.Options;
 import jakarta.inject.Singleton;
 import java.util.Set;
 
+/**
+ * Validates the compatibility of the ACME feature with selected features.
+ * Ensures that when ACME is selected, the Netty feature is also present,
+ * as ACME is only supported with the Netty server runtime.
+ * This validator is only active if the {@link Acme} feature is available in the context.
+ */
 @Requires(beans = Acme.class)
 @Singleton
 public class AcmeFeatureValidator implements FeatureValidator {

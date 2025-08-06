@@ -21,6 +21,9 @@ import io.micronaut.projectgen.core.feature.OneOfFeature;
 
 import static io.micronaut.starter.feature.Category.TRACING;
 
+/**
+ * Marker interface for features that provide distributed tracing support.
+ */
 public interface TracingFeature extends OneOfFeature {
 
     @Override

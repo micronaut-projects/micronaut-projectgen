@@ -23,6 +23,9 @@ import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.Feature;
 import jakarta.inject.Singleton;
 
+/**
+ * Feature for adding support to build GraalVM Native Images in Micronaut projects.
+ */
 @Requires(property = "micronaut.starter.feature.graalvm.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class GraalVM implements Feature {
@@ -31,10 +34,10 @@ public class GraalVM implements Feature {
 
     @Deprecated(forRemoval = true, since = "4.1.4")
     static final Dependency GRAAL_SVM = Dependency.builder()
-            .groupId("org.graalvm.nativeimage")
-            .artifactId("svm")
-            .compileOnly()
-            .build();
+        .groupId("org.graalvm.nativeimage")
+        .artifactId("svm")
+        .compileOnly()
+        .build();
 
     @Override
     public String getName() {
@@ -59,6 +62,6 @@ public class GraalVM implements Feature {
     @Deprecated(forRemoval = true, since = "4.1.4")
     public static Dependency.Builder micronautGraalVM() {
         return MicronautDependencyUtils.coreDependency()
-                .artifactId(ARTIFACT_ID_MICRONAUT_GRAALVM);
+            .artifactId(ARTIFACT_ID_MICRONAUT_GRAALVM);
     }
 }

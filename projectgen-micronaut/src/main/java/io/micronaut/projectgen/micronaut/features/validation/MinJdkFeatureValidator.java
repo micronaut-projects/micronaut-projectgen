@@ -16,7 +16,6 @@
 package io.micronaut.projectgen.micronaut.features.validation;
 
 import io.micronaut.projectgen.core.feature.FeatureValidator;
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.starter.feature.MinJdkFeature;
 import io.micronaut.projectgen.core.options.JdkVersion;
@@ -25,6 +24,10 @@ import jakarta.inject.Singleton;
 
 import java.util.Set;
 
+/**
+ * Feature validator that ensures features requiring a minimum JDK version are compatible with the selected JDK.
+ * This validator checks that the selected JDK version meets the minimum requirements for features that implement MinJdkFeature.
+ */
 @Singleton
 public class MinJdkFeatureValidator implements FeatureValidator {
 

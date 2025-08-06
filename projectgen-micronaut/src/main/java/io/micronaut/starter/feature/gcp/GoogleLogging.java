@@ -26,6 +26,10 @@ import java.util.List;
 
 import static io.micronaut.starter.feature.Category.LOGGING;
 
+/**
+ * Feature that provides integration with Google Cloud Logging.
+ * Implements GcpCloudFeature and OpenRewriteFeature for GCP logging support and code transformation recipes.
+ */
 @Requires(property = "micronaut.starter.feature.gcp.logging.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class GoogleLogging implements GcpCloudFeature, OpenRewriteFeature {

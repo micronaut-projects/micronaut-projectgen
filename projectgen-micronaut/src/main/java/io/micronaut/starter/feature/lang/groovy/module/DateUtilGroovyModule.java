@@ -27,6 +27,9 @@ import jakarta.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Feature that adds Groovy extensions for working with Java’s legacy Date and Calendar classes.
+ */
 @Requires(property = "micronaut.starter.feature.groovy.dateutil.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class DateUtilGroovyModule implements GroovyModuleFeature, OpenRewriteFeature {
@@ -54,8 +57,7 @@ public class DateUtilGroovyModule implements GroovyModuleFeature, OpenRewriteFea
         List<String> recipes = new ArrayList<>();
         if (generatorContext.getLanguage() == Language.GROOVY) {
             recipes.add("io.micronaut.starter.feature.groovy-dateutil");
-        }
-        else if (generatorContext.getTestFramework() == TestFramework.SPOCK) {
+        } else if (generatorContext.getTestFramework() == TestFramework.SPOCK) {
             recipes.add("io.micronaut.starter.feature.groovy-dateutil-spock");
         }
         return recipes;

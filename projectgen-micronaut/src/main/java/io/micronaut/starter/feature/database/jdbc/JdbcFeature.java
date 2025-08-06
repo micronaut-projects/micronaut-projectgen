@@ -15,8 +15,6 @@
  */
 package io.micronaut.starter.feature.database.jdbc;
 
-import io.micronaut.projectgen.core.generator.ModuleContext;
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.FeatureContext;
@@ -24,10 +22,16 @@ import io.micronaut.projectgen.core.feature.FeaturePhase;
 import io.micronaut.projectgen.core.feature.OneOfFeature;
 import io.micronaut.starter.feature.database.*;
 
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
+/**
+ * Abstract base feature for JDBC-related functionality.
+ * <p>
+ * This class provides common configuration keys and behavior for
+ * JDBC connection setup, including default database driver selection,
+ * configuration property keys, and integration with supported database types.
+ * </p>
+ */
 public abstract class JdbcFeature implements OneOfFeature, DatabaseDriverConfigurationFeature {
 
     private static final String PREFIX = "datasources.default.";
@@ -65,24 +69,39 @@ public abstract class JdbcFeature implements OneOfFeature, DatabaseDriverConfigu
         return Category.DATABASE;
     }
 
+    @Override
     public String getUrlKey() {
         return URL_KEY;
     }
 
+    @Override
     public String getDriverKey() {
         return DRIVER_KEY;
     }
 
+    @Override
     public String getUsernameKey() {
         return USERNAME_KEY;
     }
 
+    @Override
     public String getPasswordKey() {
         return PASSWORD_KEY;
     }
 
+    /**
+     * Adds a database configuration recipe to the list of recipes based on the features present in the GeneratorContext.
+     * <p>
+     * The method checks for the presence of specific database features (e.g., PostgreSQL, MySQL, MariaDB, SQLServer, Oracle)
+     * in the GeneratorContext and adds the corresponding JDBC configuration recipe to the list.
+     * If none of the specific database features are present, it defaults to adding the H2 JDBC configuration recipe.
+     * </p>
+     *
+     * @param generatorContext the context of the project generation, used to check for the presence of specific database features
+     * @param recipes the list of recipes to which the database configuration recipe will be added
+     */
     protected void addDatabaseConfigRecipe(GeneratorContext generatorContext,
-                                           List<String> recipes) {
+        List<String> recipes) {
 
         if (generatorContext.isFeaturePresent(PostgreSQL.class)) {
             recipes.add("io.micronaut.starter.feature.jdbc-config-postgresql");

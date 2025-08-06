@@ -40,6 +40,10 @@ import io.micronaut.projectgen.core.rocker.TestRockerModelProvider;
 import io.micronaut.projectgen.core.rocker.RockerTemplate;
 import jakarta.inject.Singleton;
 
+/**
+ * Feature that generates a Groovy-based application entry point for supported Micronaut application types.
+ * Provides Groovy-specific application and test templates, and configures the main class accordingly.
+ */
 @Requires(property = "micronaut.starter.feature.groovy.application.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class GroovyApplication implements GroovyApplicationFeature {
@@ -71,20 +75,35 @@ public class GroovyApplication implements GroovyApplicationFeature {
         }
     }
 
+    /**
+     * Determines whether an application file should be generated based on the provided GeneratorContext.
+     * The decision is made based on the application type and the presence of the FunctionFeature.
+     *
+     * @param generatorContext the context used to generate the project
+     * @return true if an application file should be generated, false otherwise
+     */
     protected boolean shouldGenerateApplicationFile(GeneratorContext generatorContext) {
         ApplicationType applicationType = ApplicationType.of(generatorContext.getOptions().template());
         return applicationType == ApplicationType.DEFAULT
-                || !generatorContext.getFeatures().hasFeature(FunctionFeature.class);
+            || !generatorContext.getFeatures().hasFeature(FunctionFeature.class);
     }
 
+    /**
+     * Generates a RockerModel for the application based on the provided GeneratorContext and ModuleContext.
+     * The generated RockerModel is used to render the application template.
+     *
+     * @param generatorContext the context used to generate the project
+     * @param module the module context containing information about the module being generated
+     * @return a RockerModel representing the application template
+     */
     protected RockerModel application(GeneratorContext generatorContext, ModuleContext module) {
         String defaultEnvironment = getDefaultEnvironment(module);
         boolean eagerInitSingleton = generatorContext.getFeatures().isFeaturePresent(RequireEagerSingletonInitializationFeature.class);
         return application.template(
-                generatorContext.getProject(),
-                generatorContext.getFeatures(),
-                new GroovyApplicationRenderingContext(defaultEnvironment, eagerInitSingleton),
-                generatorContext.hasFeature(Slf4jJulBridge.class)
+            generatorContext.getProject(),
+            generatorContext.getFeatures(),
+            new GroovyApplicationRenderingContext(defaultEnvironment, eagerInitSingleton),
+            generatorContext.hasFeature(Slf4jJulBridge.class)
         );
     }
 
@@ -92,30 +111,66 @@ public class GroovyApplication implements GroovyApplicationFeature {
         return module.hasConfigurationByEnvironment(Environment.DEVELOPMENT) ? Environment.DEVELOPMENT : null;
     }
 
+    /**
+     * Adds the application template to the module context.
+     *
+     * This method generates a RockerModel for the application based on the provided GeneratorContext and ModuleContext,
+     * and adds it to the module context as a template named "application".
+     *
+     * @param generatorContext the context used to generate the project
+     * @param module the module context containing information about the module being generated
+     */
     protected void addApplication(GeneratorContext generatorContext, ModuleContext module) {
         module.addTemplate("application", new RockerTemplate(getPath(),
-                application(generatorContext, module)));
+            application(generatorContext, module)));
     }
 
+    /**
+     * Adds an application test template to the module context.
+     *
+     * This method generates a test source path based on the provided GeneratorContext,
+     * creates a RockerModel for the application test using the applicationTest method,
+     * and adds it to the module context as a template named "applicationTest".
+     *
+     * @param generatorContext the context used to generate the project
+     * @param module the module context containing information about the module being generated
+     */
     protected void addApplicationTest(GeneratorContext generatorContext, ModuleContext module) {
         String testSourcePath = generatorContext.getTestSourcePath("/{packagePath}/{className}");
         module.addTemplate("applicationTest",
-                new RockerTemplate(testSourcePath, applicationTest(generatorContext))
+            new RockerTemplate(testSourcePath, applicationTest(generatorContext))
         );
     }
 
+    /**
+     * Generates a RockerModel for the application test based on the provided GeneratorContext.
+     * The generated RockerModel is used to render the application test template.
+     * The test framework and project information are retrieved from the GeneratorContext,
+     * and used to determine the appropriate test template to use.
+     *
+     * @param generatorContext the context used to generate the project
+     * @return a RockerModel representing the application test template
+     */
     protected RockerModel applicationTest(GeneratorContext generatorContext) {
         TestFramework testFramework = generatorContext.getTestFramework();
         Project project = generatorContext.getProject();
         boolean transactional = !generatorContext.getFeatures().hasFeature(TransactionalNotSupported.class);
         TestRockerModelProvider provider = new DefaultTestRockerModelProvider(spock.template(project, transactional),
-                groovyJunit.template(project, transactional),
-                groovyJunit.template(project, transactional),
-                groovyJunit.template(project, transactional),
-                koTest.template(project, transactional));
+            groovyJunit.template(project, transactional),
+            groovyJunit.template(project, transactional),
+            groovyJunit.template(project, transactional),
+            koTest.template(project, transactional));
         return provider.findModel(generatorContext.getLanguage(), testFramework);
     }
 
+    /**
+     * Returns the file path for the Groovy application class.
+     *
+     * The path is in the format "src/main/groovy/{packagePath}/Application.groovy",
+     * where "{packagePath}" is a placeholder for the actual package path.
+     *
+     * @return the file path for the Groovy application class
+     */
     protected String getPath() {
         return "src/main/groovy/{packagePath}/Application.groovy";
     }

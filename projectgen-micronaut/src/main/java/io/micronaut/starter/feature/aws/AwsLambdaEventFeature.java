@@ -18,6 +18,17 @@ package io.micronaut.starter.feature.aws;
 import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.OneOfFeature;
 
+/**
+ * Represents a feature that handles AWS Lambda event types.
+ * <p>
+ * This interface is intended for features that define specific Lambda event sources
+ * (e.g., API Gateway, S3 events, DynamoDB streams).
+ * <p>
+ * It extends {@link OneOfFeature} to ensure that only one such event feature
+ * can be selected at a time, and {@link AwsFeature} to indicate AWS relevance.
+ * <p>
+ * The feature category is set to {@link Category#SERVERLESS}.
+ */
 public interface AwsLambdaEventFeature extends OneOfFeature, AwsFeature {
 
     @Override

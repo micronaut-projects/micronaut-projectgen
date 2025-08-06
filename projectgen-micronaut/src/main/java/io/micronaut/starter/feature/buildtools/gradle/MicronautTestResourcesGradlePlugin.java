@@ -18,23 +18,45 @@ package io.micronaut.starter.feature.buildtools.gradle;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.projectgen.core.buildtools.gradle.GradlePlugin;
 
-public class MicronautTestResourcesGradlePlugin {
+/**
+ * Builder class for creating Micronaut Test Resources Gradle plugin configurations.
+ * This class provides functionality to configure the Micronaut Test Resources plugin
+ * for Gradle builds, which enables automatic test resource management.
+ */
+public final class MicronautTestResourcesGradlePlugin {
 
+    private MicronautTestResourcesGradlePlugin() {
+    }
+
+    /**
+     * Creates a new builder instance for configuring the Micronaut Test Resources Gradle plugin.
+     *
+     * @return a new Builder instance
+     */
     @NonNull
     public static Builder builder() {
         return new Builder();
     }
 
+    /**
+     * Builder class for configuring Micronaut Test Resources Gradle plugin settings.
+     * Provides methods to build the Gradle plugin configuration for test resources.
+     */
     public static final class Builder {
 
         public static final String MICRONAUT_GRADLE_PLUGIN_TEST_RESOURCES_ID = "io.micronaut.test-resources";
         public static final String ARTIFACT_ID = "micronaut-test-resources-plugin";
 
+        /**
+         * Builds the Gradle plugin configuration for Micronaut Test Resources.
+         *
+         * @return a configured GradlePlugin instance
+         */
         public GradlePlugin build() {
             return GradlePlugin.builder()
-                    .id(MICRONAUT_GRADLE_PLUGIN_TEST_RESOURCES_ID)
-                    .lookupArtifactId(ARTIFACT_ID)
-                    .build();
+                .id(MICRONAUT_GRADLE_PLUGIN_TEST_RESOURCES_ID)
+                .lookupArtifactId(ARTIFACT_ID)
+                .build();
         }
     }
 }

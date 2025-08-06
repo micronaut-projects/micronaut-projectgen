@@ -19,11 +19,15 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that integrates with SendGrid for sending transactional emails.
+ * Enabled conditionally via the {@code micronaut.starter.feature.email.sendgrid.enabled} property.
+ * Extends {@link EmailFeature} to configure the SendGrid-specific module and behavior.
+ */
 @Requires(property = "micronaut.starter.feature.email.sendgrid.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class SendGridEmailFeature extends EmailFeature {
@@ -37,7 +41,9 @@ public class SendGridEmailFeature extends EmailFeature {
     }
 
     @Override
-    public String getName() {return "email-sendgrid";}
+    public String getName() {
+        return "email-sendgrid";
+    }
 
     @Override
     @NonNull
@@ -50,7 +56,7 @@ public class SendGridEmailFeature extends EmailFeature {
         return "Sendgrid Email";
     }
 
-   @Override
+    @Override
     public List<String> getRecipes(GeneratorContext generatorContext) {
         return List.of("io.micronaut.starter.feature.email-sendgrid");
     }

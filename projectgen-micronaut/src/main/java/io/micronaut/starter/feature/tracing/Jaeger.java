@@ -29,6 +29,9 @@ import jakarta.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Adds support for distributed tracing using Jaeger.
+ */
 @Requires(property = "micronaut.starter.feature.tracing.jaeger.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Jaeger implements TracingFeature, MicronautServerDependent, OpenRewriteFeature {
@@ -61,7 +64,5 @@ public class Jaeger implements TracingFeature, MicronautServerDependent, OpenRew
         }
         return recipes;
     }
-
-
 
 }

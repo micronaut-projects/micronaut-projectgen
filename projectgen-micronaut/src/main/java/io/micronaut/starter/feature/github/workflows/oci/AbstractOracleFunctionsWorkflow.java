@@ -32,7 +32,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Deploy dockerized app to Oracle Functions
+ * Deploy dockerized app to Oracle Functions.
  *
  * @author Pavol Gressa
  * @since 2.3
@@ -73,18 +73,18 @@ public abstract class AbstractOracleFunctionsWorkflow extends AbstractDockerRegi
     public List<Secret> getSecrets() {
         return Arrays.asList(
 
-                new Secret(OCI_AUTH_TOKEN, "OCI account auth token."),
-                new Secret(OCI_OCIR_REPOSITORY, "(Optional) Docker image repository in OCIR. For image `iad.ocir.io/[tenancy name]/foo/bar:0.1`, the `foo` is an _image repository_."),
+            new Secret(OCI_AUTH_TOKEN, "OCI account auth token."),
+            new Secret(OCI_OCIR_REPOSITORY, "(Optional) Docker image repository in OCIR. For image `iad.ocir.io/[tenancy name]/foo/bar:0.1`, the `foo` is an _image repository_."),
 
-                // OCI CLI related
-                new Secret(OCI_USER_OCID, "OCI user ocid."),
-                new Secret(OCI_TENANCY_OCID, "OCID of the tenancy."),
-                new Secret(OCI_KEY_FILE, "OCI api signing private key file. See more on [Setup of API signing key](https://docs.cloud.oracle.com/en-us/iaas/Content/Functions/Tasks/functionssetupapikey.htm)."),
-                new Secret(OCI_FINGERPRINT, "OCI Api signing key file fingerprint."),
-                new Secret(OCI_PASSPHRASE, "Passphrase to the private key file. Required only when passphrase is needed by the private key file."),
+            // OCI CLI related
+            new Secret(OCI_USER_OCID, "OCI user ocid."),
+            new Secret(OCI_TENANCY_OCID, "OCID of the tenancy."),
+            new Secret(OCI_KEY_FILE, "OCI api signing private key file. See more on [Setup of API signing key](https://docs.cloud.oracle.com/en-us/iaas/Content/Functions/Tasks/functionssetupapikey.htm)."),
+            new Secret(OCI_FINGERPRINT, "OCI Api signing key file fingerprint."),
+            new Secret(OCI_PASSPHRASE, "Passphrase to the private key file. Required only when passphrase is needed by the private key file."),
 
-                // OCI Functions related
-                new Secret(OCI_FUNCTION_APPLICATION_OCID, "Oracle function application OCID. See more on [Creating Applications](https://docs.cloud.oracle.com/en-us/iaas/Content/Functions/Tasks/functionscreatingapps.htm).")
+            // OCI Functions related
+            new Secret(OCI_FUNCTION_APPLICATION_OCID, "Oracle function application OCID. See more on [Creating Applications](https://docs.cloud.oracle.com/en-us/iaas/Content/Functions/Tasks/functionscreatingapps.htm).")
         );
     }
 
@@ -106,12 +106,12 @@ public abstract class AbstractOracleFunctionsWorkflow extends AbstractDockerRegi
 
         String workflowFilePath = ".github/workflows/" + getWorkflowFileName(generatorContext);
         module.addTemplate("ociFunctionsWorkflow",
-                new RockerTemplate(workflowFilePath,
-                        ociFunctionsWorkflow.template(generatorContext.getProject(), generatorContext.getBuildTool(),
-                                generatorContext.getJdkVersion(), isGraal)
-                )
+            new RockerTemplate(workflowFilePath,
+                ociFunctionsWorkflow.template(generatorContext.getProject(), generatorContext.getBuildTool(),
+                    generatorContext.getJdkVersion(), isGraal)
+            )
         );
         module.addHelpTemplate(new RockerWritable(ociFunctionsWorkflowReadme.template(
-                this, generatorContext.getProject(), applicationType, workflowFilePath)));
+            this, generatorContext.getProject(), applicationType, workflowFilePath)));
     }
 }

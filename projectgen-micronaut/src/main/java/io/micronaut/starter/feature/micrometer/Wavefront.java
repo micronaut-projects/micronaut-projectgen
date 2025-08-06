@@ -16,7 +16,6 @@
 package io.micronaut.starter.feature.micrometer;
 
 import io.micronaut.context.annotation.Requires;
-import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
@@ -25,6 +24,9 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Micrometer feature that adds support for Wavefront metrics reporter.
+ */
 @Requires(property = "micronaut.starter.feature.micrometer.wavefront.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Wavefront extends MicrometerFeature implements MicrometerRegistryFeature, OpenRewriteFeature {

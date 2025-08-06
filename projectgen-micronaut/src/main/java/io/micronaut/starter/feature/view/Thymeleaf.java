@@ -28,6 +28,9 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Adds support for server-side view rendering using Thymeleaf.
+ */
 @Requires(property = "micronaut.starter.feature.views.thymeleaf.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Thymeleaf implements ViewFeature, MicronautServerDependent, OpenRewriteFeature {
@@ -85,6 +88,6 @@ public class Thymeleaf implements ViewFeature, MicronautServerDependent, OpenRew
 
     private void addLayout(ModuleContext module) {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        module.addTemplate(LAYOUT_HTML, new URLTemplate(VIEWS_PATH + LAYOUT_HTML, classLoader.getResource(RESOURCES_THYMELEAF_PATH +  LAYOUT_HTML)));
+        module.addTemplate(LAYOUT_HTML, new URLTemplate(VIEWS_PATH + LAYOUT_HTML, classLoader.getResource(RESOURCES_THYMELEAF_PATH + LAYOUT_HTML)));
     }
 }

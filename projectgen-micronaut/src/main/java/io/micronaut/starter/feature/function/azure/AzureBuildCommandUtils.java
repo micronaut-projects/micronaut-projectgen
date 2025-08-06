@@ -17,6 +17,11 @@ package io.micronaut.starter.feature.function.azure;
 
 import io.micronaut.projectgen.core.buildtools.BuildTool;
 
+/**
+ * Utility class for retrieving Azure Functions deployment commands based on the build tool.
+ * <p>
+ * Supports Maven and Gradle build tools.
+ */
 public final class AzureBuildCommandUtils {
 
     public static final String MAVEN_AZURE_DEPLOY_COMMAND = "mvnw package azure-functions:deploy";

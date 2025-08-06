@@ -25,6 +25,14 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that enables support for Micronaut Serialization with AWS Lambda Java Events.
+ * <p>
+ * Adds the necessary configuration and dependencies to allow Micronaut applications
+ * to serialize and deserialize AWS Lambda event payloads using Micronaut Serialization.
+ * <p>
+ * Integrates with OpenRewrite to apply related code transformations.
+ */
 @Requires(property = "micronaut.starter.feature.aws.lambda.events.serde.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class AwsLambdaEventsSerde implements AwsFeature, OpenRewriteFeature {

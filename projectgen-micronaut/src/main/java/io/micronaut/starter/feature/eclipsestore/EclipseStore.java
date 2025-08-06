@@ -25,6 +25,11 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that adds support for using EclipseStore with Micronaut.
+ * <p>
+ * This feature integrates EclipseStore (a Java-native persistence library) into a Micronaut application.
+ */
 @Requires(property = "micronaut.starter.feature.eclipsestore.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class EclipseStore implements EclipseStoreFeature, OpenRewriteFeature {

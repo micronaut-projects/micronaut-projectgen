@@ -21,4 +21,5 @@ package io.micronaut.starter.feature.server;
  *
  * @see ThirdPartyServerFeature
  */
-public interface MicronautServerDependent { }
+public interface MicronautServerDependent {
+}

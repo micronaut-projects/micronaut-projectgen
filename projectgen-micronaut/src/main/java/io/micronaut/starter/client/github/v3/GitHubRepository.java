@@ -41,11 +41,11 @@ public class GitHubRepository {
 
     @JsonCreator
     public GitHubRepository(
-            @JsonProperty("name") String name,
-            @JsonProperty("description") String description,
-            @JsonProperty("url") @Nullable String url,
-            @JsonProperty("html_url") @Nullable String htmlUrl,
-            @JsonProperty("clone_url") @Nullable String cloneUrl) {
+        @JsonProperty("name") String name,
+        @JsonProperty("description") String description,
+        @JsonProperty("url") @Nullable String url,
+        @JsonProperty("html_url") @Nullable String htmlUrl,
+        @JsonProperty("clone_url") @Nullable String cloneUrl) {
         this.name = name;
         this.description = description;
         this.url = url;
@@ -53,22 +53,37 @@ public class GitHubRepository {
         this.cloneUrl = cloneUrl;
     }
 
+    /**
+     * @return the name of the repository
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * @return the description of the repository
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * @return the clone URL of the repository
+     */
     public String getCloneUrl() {
         return cloneUrl;
     }
 
+    /**
+     * @return the URL of the repository
+     */
     public String getUrl() {
         return url;
     }
 
+    /**
+     * @return the HTML URL of the repository
+     */
     public String getHtmlUrl() {
         return htmlUrl;
     }

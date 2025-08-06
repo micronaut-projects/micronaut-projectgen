@@ -38,9 +38,10 @@ public class MicronautTestResourcesGradlePlugin {
 
         public GradlePlugin build() {
             return GradlePlugin.builder()
-                    .id(MICRONAUT_GRADLE_PLUGIN_TEST_RESOURCES_ID)
-                    .lookupArtifactId(ARTIFACT_ID)
-                    .build();
+                .id(MICRONAUT_GRADLE_PLUGIN_TEST_RESOURCES_ID)
+                .lookupArtifactId(ARTIFACT_ID)
+                .build();
         }
     }
+
 }

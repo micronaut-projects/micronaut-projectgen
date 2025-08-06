@@ -22,6 +22,12 @@ import io.micronaut.starter.feature.aws.Cdk;
 import io.micronaut.starter.feature.function.awslambda.AwsLambda;
 import jakarta.inject.Singleton;
 
+/**
+ * Represents the x86 CPU architecture feature.
+ * This feature can be used in conjunction with {@code Cdk} and {@code AwsLambda}
+ * to generate infrastructure targeting the x86 architecture for AWS Lambda.
+ * Implements the {@link CpuArchitecture} interface.
+ */
 @Requires(property = "micronaut.starter.feature.x86.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class X86 implements CpuArchitecture {

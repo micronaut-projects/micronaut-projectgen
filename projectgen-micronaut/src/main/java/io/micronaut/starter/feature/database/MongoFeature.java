@@ -18,10 +18,14 @@ package io.micronaut.starter.feature.database;
 import io.micronaut.starter.feature.testresources.EaseTestingFeature;
 import io.micronaut.starter.feature.testresources.TestResources;
 
+/**
+ * Base feature class for MongoDB-related features that integrates
+ * MongoDB Testcontainers support and testing resources.
+ */
 public abstract class MongoFeature extends EaseTestingFeature implements MongoContributingTestContainerDependency {
 
     protected MongoFeature(TestContainers testContainers,
-                           TestResources testResources) {
+        TestResources testResources) {
         super(testContainers, testResources);
     }
 }

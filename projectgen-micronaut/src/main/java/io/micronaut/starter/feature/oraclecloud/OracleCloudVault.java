@@ -27,6 +27,9 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that adds support for Distributed Configuration using Oracle Cloud Vault.
+ */
 @Requires(property = "micronaut.starter.feature.oracle.cloud.vault.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class OracleCloudVault implements DistributedConfigFeature, OpenRewriteFeature {

@@ -38,20 +38,44 @@ public class DocumentationLink {
         this.url = url;
     }
 
+    /**
+     * Gets the documentation title.
+     * Subclasses may override to customize behavior.
+     *
+     * @return the documentation title
+     */
     @NonNull
     public String getTitle() {
         return title;
     }
 
+    /**
+     * Sets the documentation title.
+     * Subclasses may override to customize behavior.
+     *
+     * @param title the documentation title to set
+     */
     public void setTitle(@NonNull String title) {
         this.title = title;
     }
 
+    /**
+     * Gets the documentation URL.
+     * Subclasses may override to customize behavior.
+     *
+     * @return the documentation URL
+     */
     @NonNull
     public String getUrl() {
         return url;
     }
 
+    /**
+     * Sets the documentation URL.
+     * Subclasses may override to customize behavior.
+     *
+     * @param url the documentation URL to set
+     */
     public void setUrl(@NonNull String url) {
         this.url = url;
     }

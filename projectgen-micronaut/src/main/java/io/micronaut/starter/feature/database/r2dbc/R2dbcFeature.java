@@ -17,5 +17,9 @@ package io.micronaut.starter.feature.database.r2dbc;
 
 import io.micronaut.projectgen.core.feature.Feature;
 
+/**
+ * Marker interface for features that provide support for
+ * Reactive Relational Database Connectivity (R2DBC).
+ */
 public interface R2dbcFeature extends Feature {
 }

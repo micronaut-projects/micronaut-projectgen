@@ -15,7 +15,6 @@
  */
 package io.micronaut.starter.feature.dekorate;
 
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.feature.FeatureValidator;
 import io.micronaut.projectgen.core.options.Language;
@@ -54,7 +53,7 @@ public class DekorateFeatureValidator implements FeatureValidator {
 
             if (features.stream().noneMatch(AbstractDekoratePlatformFeature.class::isInstance)) {
                 throw new IllegalArgumentException("At least one of %s features must be selected in order to use Dekorate properly".formatted(
-                        dekoratePlatformFeatures.stream().map(Feature::getName).collect(Collectors.toList())));
+                    dekoratePlatformFeatures.stream().map(Feature::getName).collect(Collectors.toList())));
             }
         }
     }

@@ -3,9 +3,7 @@ package io.micronaut.projectgen.micronaut.features.langchain4j;
 import io.micronaut.projectgen.core.buildtools.Scope;
 import io.micronaut.projectgen.core.generator.ProjectGenerator;
 import io.micronaut.projectgen.core.io.MapOutputHandler;
-import io.micronaut.projectgen.core.options.GenericOptionsBuilder;
 import io.micronaut.projectgen.core.options.Options;
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.micronaut.OptionsFixture;
 import io.micronaut.projectgen.test.BuildTestVerifier;
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
@@ -41,10 +39,10 @@ class Lanchain4jTest {
         if (hikari) {
             assertTrue(verifier.hasDependency("io.micronaut.sql", "micronaut-jdbc-hikari"), buildGradle);
         }
-        if (feature.equals("langchain4j-ollama")) {
+        if ("langchain4j-ollama".equals(feature)) {
             assertTrue(verifier.hasDependency("io.micronaut.langchain4j", "micronaut-langchain4j-ollama-testresources", Scope.TEST_RESOURCES_SERVICE), buildGradle);
         }
-        if (feature.equals("langchain4j-store-qdrant")) {
+        if ("langchain4j-store-qdrant".equals(feature)) {
             assertTrue(verifier.hasDependency("io.micronaut.langchain4j", "micronaut-langchain4j-qdrant-testresource", Scope.TEST_RESOURCES_SERVICE), buildGradle);
         }
     }
@@ -52,7 +50,7 @@ class Lanchain4jTest {
     private static Stream<Arguments> laghcain4JArguments() {
         return Stream.of(
             Arguments.of("langchain4j-store-elasticsearch", "io.micronaut.langchain4j", "micronaut-langchain4j-store-elasticsearch", false),
-            Arguments.of("langchain4j-store-mongodb-atlas","io.micronaut.langchain4j", "micronaut-langchain4j-store-mongodb-atlas", false),
+            Arguments.of("langchain4j-store-mongodb-atlas", "io.micronaut.langchain4j", "micronaut-langchain4j-store-mongodb-atlas", false),
             Arguments.of("langchain4j-store-neo4j", "io.micronaut.langchain4j", "micronaut-langchain4j-store-neo4j", false),
             Arguments.of("langchain4j-store-opensearch", "io.micronaut.langchain4j", "micronaut-langchain4j-store-opensearch", false),
             Arguments.of("langchain4j-store-oracle", "io.micronaut.langchain4j", "micronaut-langchain4j-store-oracle", true),

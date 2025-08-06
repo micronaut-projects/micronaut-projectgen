@@ -51,25 +51,56 @@ public abstract class AbstractFunctionFeature implements FunctionFeature, Micron
         addMicronautRuntimeBuildProperty(generatorContext);
     }
 
+    /**
+     * Returns the Java function controller template.
+     * Subclasses may override to customize the template.
+     *
+     * @param project   the project context
+     * @param useSerde  whether Serde serialization is enabled
+     * @return the Rocker template for the Java controller
+     */
     protected RockerModel javaControllerTemplate(Project project, boolean useSerde) {
         return httpFunctionJavaController.template(project, useSerde);
     }
 
+    /**
+     * Returns the Kotlin function controller template.
+     * Subclasses may override to customize the template.
+     *
+     * @param project   the project context
+     * @param useSerde  whether Serde serialization is enabled
+     * @return the Rocker template for the Kotlin controller
+     */
     protected RockerModel kotlinControllerTemplate(Project project, boolean useSerde) {
         return httpFunctionKotlinController.template(project, useSerde);
     }
 
+    /**
+     * Returns the Groovy function controller template.
+     * Subclasses may override to customize the template.
+     *
+     * @param project   the project context
+     * @param useSerde  whether Serde serialization is enabled
+     * @return the Rocker template for the Groovy controller
+     */
     protected RockerModel groovyControllerTemplate(Project project, boolean useSerde) {
         return httpFunctionGroovyController.template(project, useSerde);
     }
 
+    /**
+     * Applies the function setup based on the application type.
+     * Subclasses may override to customize how function templates and dependencies are applied.
+     *
+     * @param generatorContext the generator context
+     * @param type             the application type
+     */
     protected void applyFunction(GeneratorContext generatorContext, ApplicationType type) {
         ModuleContext module = generatorContext.getRootModule();
         BuildTool buildTool = generatorContext.getBuildTool();
 
         if (generatorContext.isFeatureMissing(ChatBotsFeature.class)) {
             readmeTemplate(generatorContext, generatorContext.getProject(), buildTool)
-                    .ifPresent(rockerModel -> module.addHelpTemplate(new RockerWritable(rockerModel)));
+                .ifPresent(rockerModel -> module.addHelpTemplate(new RockerWritable(rockerModel)));
         }
 
         if (type == ApplicationType.DEFAULT) {
@@ -84,19 +115,19 @@ public abstract class AbstractFunctionFeature implements FunctionFeature, Micron
             switch (language) {
                 case GROOVY:
                     module.addTemplate("function", new RockerTemplate(
-                            sourceFile,
-                            groovyControllerTemplate(project, serdeFeaturePresent)));
+                        sourceFile,
+                        groovyControllerTemplate(project, serdeFeaturePresent)));
                     break;
                 case KOTLIN:
                     module.addTemplate("function", new RockerTemplate(
-                            sourceFile,
-                            kotlinControllerTemplate(project, serdeFeaturePresent)));
+                        sourceFile,
+                        kotlinControllerTemplate(project, serdeFeaturePresent)));
                     break;
                 case JAVA:
                 default:
                     module.addTemplate("function", new RockerTemplate(
-                            sourceFile,
-                            javaControllerTemplate(project, serdeFeaturePresent)));
+                        sourceFile,
+                        javaControllerTemplate(project, serdeFeaturePresent)));
                     break;
             }
 
@@ -104,21 +135,45 @@ public abstract class AbstractFunctionFeature implements FunctionFeature, Micron
         }
     }
 
+    /**
+     * Returns the suffix used for function test class names.
+     * Subclasses may override to provide custom suffixes.
+     *
+     * @param type the application type
+     * @return the test class name suffix
+     */
     protected String getTestSuffix(ApplicationType type) {
         return "Function";
     }
 
+    /**
+     * Applies the test templates to the module.
+     * Subclasses may override to customize the test generation logic.
+     *
+     * @param generatorContext the generator context
+     * @param project          the project
+     * @param name             the name of the test class
+     */
     protected void applyTestTemplate(GeneratorContext generatorContext, Project project, String name) {
         ModuleContext module = generatorContext.getRootModule();
-        String testSource =  generatorContext.getTestSourcePath("/{packagePath}/" + name);
+        String testSource = generatorContext.getTestSourcePath("/{packagePath}/" + name);
         TestRockerModelProvider provider = new DefaultTestRockerModelProvider(spockTemplate(project),
-                javaJUnitTemplate(project),
-                groovyJUnitTemplate(project),
-                kotlinJUnitTemplate(project),
-                koTestTemplate(project));
+            javaJUnitTemplate(project),
+            groovyJUnitTemplate(project),
+            kotlinJUnitTemplate(project),
+            koTestTemplate(project));
         module.addTemplate(generatorContext.getOptions(), "testFunction", testSource, provider);
     }
 
+    /**
+     * Returns the README template for this function feature, if any.
+     * Subclasses may override to provide custom documentation.
+     *
+     * @param generatorContext the generator context
+     * @param project          the project
+     * @param buildTool        the build tool used
+     * @return an optional Rocker model for the README
+     */
     protected Optional<RockerModel> readmeTemplate(GeneratorContext generatorContext, Project project, BuildTool buildTool) {
         return Optional.empty();
     }

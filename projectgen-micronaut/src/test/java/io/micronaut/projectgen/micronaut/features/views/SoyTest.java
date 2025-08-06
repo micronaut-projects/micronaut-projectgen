@@ -1,8 +1,6 @@
 package io.micronaut.projectgen.micronaut.features.views;
 
 import io.micronaut.projectgen.core.buildtools.Scope;
-import io.micronaut.projectgen.core.generator.ProjectGenerator;
-import io.micronaut.projectgen.core.io.MapOutputHandler;
 import io.micronaut.projectgen.core.io.PreviewGenerator;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.OptionsFixture;
@@ -13,7 +11,8 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @MicronautTest(startApplication = false)
 class SoyTest {

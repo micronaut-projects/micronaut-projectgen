@@ -26,6 +26,12 @@ import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.starter.feature.testresources.TestResources;
 import jakarta.inject.Singleton;
 
+/**
+ * Adds support for Micronaut Data Hibernate Reactive,
+ * enabling non-blocking reactive persistence for Micronaut applications using Hibernate Reactive.
+ *
+ * Registers required dependencies and configuration for integration with the Micronaut Data module.
+ */
 @Requires(property = "micronaut.starter.feature.data.hibernate.reactive.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class DataHibernateReactive extends HibernateReactiveFeature implements DataFeature {
@@ -33,8 +39,8 @@ public class DataHibernateReactive extends HibernateReactiveFeature implements D
     public static final String NAME = "data-hibernate-reactive";
 
     private static final Dependency.Builder DEPENDENCY_MICRONAUT_DATA_HIBERNATE_REACTIVE = MicronautDependencyUtils.dataDependency()
-            .artifactId("micronaut-data-hibernate-reactive")
-                .compile();
+        .artifactId("micronaut-data-hibernate-reactive")
+        .compile();
 
     private final Data data;
 

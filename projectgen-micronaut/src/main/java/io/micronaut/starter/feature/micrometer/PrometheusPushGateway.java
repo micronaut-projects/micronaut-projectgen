@@ -24,6 +24,9 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Micrometer feature that adds support for the Prometheus Pushgateway reporter.
+ */
 @Requires(property = "micronaut.starter.feature.micrometer.prometheus.pushgateway.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class PrometheusPushGateway extends MicrometerFeature implements MicrometerRegistryFeature, OpenRewriteFeature {

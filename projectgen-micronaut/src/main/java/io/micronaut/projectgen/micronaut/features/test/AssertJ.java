@@ -26,6 +26,10 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that provides AssertJ framework support for Micronaut applications.
+ * This feature adds the AssertJ fluent assertions framework for writing more readable test assertions.
+ */
 @Requires(property = "micronaut.starter.feature.assertj.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class AssertJ implements JunitCompanionFeature, OpenRewriteFeature {

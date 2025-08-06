@@ -20,14 +20,27 @@ import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import jakarta.inject.Singleton;
 
+/**
+ * Feature that provides OpenTelemetry Google Cloud Trace integration for Micronaut applications.
+ * This feature adds OpenTelemetry support with Google Cloud Trace as the exporter for distributed tracing.
+ */
 @Requires(property = "micronaut.starter.feature.tracing.opentelemetry.gcp.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class OpenTelemetryGoogleCloudTrace extends AbstractOpenTelemetry {
+    /**
+     * Creates a new OpenTelemetryGoogleCloudTrace with the required OpenTelemetry components.
+     *
+     * @param otel the base OpenTelemetry feature
+     * @param otelHttp the OpenTelemetry HTTP feature
+     * @param otelAnnotations the OpenTelemetry annotations feature
+     * @param openTelemetryGrpc the OpenTelemetry gRPC feature
+     * @param otelExporter the OpenTelemetry Google Cloud Trace exporter feature
+     */
     public OpenTelemetryGoogleCloudTrace(OpenTelemetry otel,
-                                         OpenTelemetryHttp otelHttp,
-                                         OpenTelemetryAnnotations otelAnnotations,
-                                         OpenTelemetryGrpc openTelemetryGrpc,
-                                         OpenTelemetryExporterGoogleCloudTrace otelExporter) {
+        OpenTelemetryHttp otelHttp,
+        OpenTelemetryAnnotations otelAnnotations,
+        OpenTelemetryGrpc openTelemetryGrpc,
+        OpenTelemetryExporterGoogleCloudTrace otelExporter) {
         super(otel, otelHttp, otelAnnotations, openTelemetryGrpc, otelExporter);
     }
 

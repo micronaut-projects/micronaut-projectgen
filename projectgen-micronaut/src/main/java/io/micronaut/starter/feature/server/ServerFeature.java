@@ -20,6 +20,10 @@ import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.OneOfFeature;
 
+/**
+ * Represents a server feature for Micronaut applications.
+ * This feature is one of a set of mutually exclusive features (OneOfFeature).
+ */
 public interface ServerFeature extends OneOfFeature {
 
     @Override

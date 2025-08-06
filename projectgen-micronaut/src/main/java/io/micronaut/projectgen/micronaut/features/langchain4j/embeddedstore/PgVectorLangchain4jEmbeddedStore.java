@@ -27,6 +27,12 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Implements a Langchain4j embedded store using PgVector as the backend.
+ *
+ * Ensures Hikari JDBC connection pool feature is added if JDBC support is missing.
+ * and supplies OpenRewrite recipes for automated setup.
+ */
 @Requires(property = "micronaut.starter.feature.langchain4j.store.pgvector.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class PgVectorLangchain4jEmbeddedStore implements Langchain4jEmbeddedStore, OpenRewriteFeature {

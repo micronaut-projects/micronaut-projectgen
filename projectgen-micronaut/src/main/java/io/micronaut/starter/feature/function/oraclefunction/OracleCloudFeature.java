@@ -18,6 +18,10 @@ package io.micronaut.projectgen.micronaut.template.function.oraclefunction;
 import io.micronaut.starter.feature.function.Cloud;
 import io.micronaut.starter.feature.function.CloudFeature;
 
+/**
+ * Marker interface for features related to Oracle Cloud.
+ * Provides a default implementation to identify the Oracle cloud provider.
+ */
 public interface OracleCloudFeature extends CloudFeature {
 
     @Override

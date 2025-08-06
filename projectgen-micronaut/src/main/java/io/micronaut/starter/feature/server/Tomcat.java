@@ -19,10 +19,6 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
-import io.micronaut.projectgen.core.buildtools.BuildTool;
-
-import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import jakarta.inject.Singleton;
@@ -30,6 +26,10 @@ import jakarta.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents the Tomcat server feature for Micronaut applications.
+ * Adds support for running the application on a Tomcat server.
+ */
 @Requires(property = "micronaut.starter.feature.tomcat.server.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Tomcat extends AbstractServletFeature implements OpenRewriteFeature {

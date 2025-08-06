@@ -44,6 +44,11 @@ import io.micronaut.projectgen.core.options.Language;
 import io.micronaut.projectgen.core.rocker.RockerTemplate;
 import jakarta.inject.Singleton;
 
+/**
+ * Oracle raw function feature for Micronaut applications targeting Oracle Cloud Functions.
+ * Extends OracleFunction with additional dependencies and templates for raw function implementations.
+ * Manages feature processing, template application, and dependency injection for function projects.
+ */
 @Requires(property = "micronaut.starter.feature.oracle.function.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Requires(property = "micronaut.starter.feature.oracle.function.http.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
@@ -51,21 +56,21 @@ public class OracleRawFunction extends OracleFunction {
     public static final String FEATURE_NAME_ORACLE_RAW_FUNCTION = "oracle-function";
 
     private static final Dependency MICRONAUT_OCI_FUNCTION = MicronautDependencyUtils
-            .ociDependency()
-            .artifactId("micronaut-oraclecloud-function")
-            .compile()
-            .build();
+        .ociDependency()
+        .artifactId("micronaut-oraclecloud-function")
+        .compile()
+        .build();
     private static final Dependency COM_FNPROJECT_API = Dependency.builder()
-            .groupId(GROUP_ID_COM_FNPROJECT_FN)
-            .artifactId("api")
-            .compile()
-            .build();
+        .groupId(GROUP_ID_COM_FNPROJECT_FN)
+        .artifactId("api")
+        .compile()
+        .build();
 
     private static final Dependency COM_FNPROJECT_TESTING_JUNIT4 = Dependency.builder()
-            .groupId(GROUP_ID_COM_FNPROJECT_FN)
-            .artifactId("testing-junit4")
-            .test()
-            .build();
+        .groupId(GROUP_ID_COM_FNPROJECT_FN)
+        .artifactId("testing-junit4")
+        .test()
+        .build();
 
     private final OracleFunction httpFunction;
     private final JacksonDatabindFeature jacksonDatabindFeature;
@@ -107,19 +112,19 @@ public class OracleRawFunction extends OracleFunction {
             switch (language) {
                 case GROOVY:
                     module.addTemplate("function", new RockerTemplate(
-                            sourceFile,
-                            oracleRawFunctionGroovy.template(project)));
+                        sourceFile,
+                        oracleRawFunctionGroovy.template(project)));
                     break;
                 case KOTLIN:
                     module.addTemplate("function", new RockerTemplate(
-                            sourceFile,
-                            oracleRawFunctionKotlin.template(project)));
+                        sourceFile,
+                        oracleRawFunctionKotlin.template(project)));
                     break;
                 case JAVA:
                 default:
                     module.addTemplate("function", new RockerTemplate(
-                            sourceFile,
-                            oracleRawFunctionJava.template(project)));
+                        sourceFile,
+                        oracleRawFunctionJava.template(project)));
             }
 
             if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())) {

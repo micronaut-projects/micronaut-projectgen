@@ -22,6 +22,9 @@ import java.util.List;
 import static io.micronaut.projectgen.core.options.JdkVersion.JDK_17;
 import static io.micronaut.projectgen.core.options.JdkVersion.JDK_21;
 
+/**
+ * Micronaut JDK Version Configuration.
+ */
 @Singleton
 public class MicronautJdkVersionConfiguration implements JdkVersionConfiguration {
 

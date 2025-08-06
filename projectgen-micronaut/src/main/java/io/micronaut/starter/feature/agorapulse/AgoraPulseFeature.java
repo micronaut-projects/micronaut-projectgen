@@ -25,10 +25,15 @@ import io.micronaut.projectgen.core.options.Language;
 import io.micronaut.starter.options.MicronautVersion;
 import io.micronaut.projectgen.core.options.TestFramework;
 import io.micronaut.projectgen.core.rocker.RockerTemplate;
-import org.openrewrite.groovy.tree.G;
 
 import java.util.Optional;
 
+/**
+ * Defines a Micronaut community feature contributed by Agorapulse.
+ * Provides default implementations for Micronaut version, documentation link,
+ * community contributor name, and utility methods for managing templates
+ * based on language and test framework.
+ */
 public interface AgoraPulseFeature extends MicronautCommunityFeature {
 
     @Override
@@ -51,10 +56,10 @@ public interface AgoraPulseFeature extends MicronautCommunityFeature {
     }
 
     static Optional<RockerModel> mainModel(
-            GeneratorContext generatorContext,
-            @Nullable RockerModel javaModel,
-            @Nullable RockerModel groovyModel,
-            @Nullable RockerModel kotlinModel
+        GeneratorContext generatorContext,
+        @Nullable RockerModel javaModel,
+        @Nullable RockerModel groovyModel,
+        @Nullable RockerModel kotlinModel
     ) {
         switch (generatorContext.getLanguage()) {
             case JAVA:
@@ -70,11 +75,11 @@ public interface AgoraPulseFeature extends MicronautCommunityFeature {
 
     @NonNull
     static Optional<RockerModel> testModel(
-            GeneratorContext generatorContext,
-            @Nullable RockerModel javaModel,
-            @Nullable RockerModel groovyModel,
-            @Nullable RockerModel kotlinJUnitModel,
-            @Nullable RockerModel kotestModel
+        GeneratorContext generatorContext,
+        @Nullable RockerModel javaModel,
+        @Nullable RockerModel groovyModel,
+        @Nullable RockerModel kotlinJUnitModel,
+        @Nullable RockerModel kotestModel
     ) {
         if (generatorContext.getLanguage() == Language.JAVA && generatorContext.getTestFramework() == TestFramework.JUNIT) {
             return Optional.ofNullable(javaModel);
@@ -99,8 +104,8 @@ public interface AgoraPulseFeature extends MicronautCommunityFeature {
         String extension = generatorContext.getLanguage().getExtension();
         String srcDir = generatorContext.getLanguage().getSrcDir();
         module.addTemplate(
-                templateName,
-                new RockerTemplate(srcDir + "/{packagePath}/" + className + "." + extension, rockerModel)
+            templateName,
+            new RockerTemplate(srcDir + "/{packagePath}/" + className + "." + extension, rockerModel)
         );
     }
 
@@ -110,8 +115,8 @@ public interface AgoraPulseFeature extends MicronautCommunityFeature {
         String extension = generatorContext.getLanguage().getExtension();
         String testFrameworkSuffix = generatorContext.getTestFramework().getTestFrameworkSuffix();
         module.addTemplate(
-                templateName,
-                new RockerTemplate(testSrcDir + "/{packagePath}/" + className + testFrameworkSuffix + extension, rockerModel)
+            templateName,
+            new RockerTemplate(testSrcDir + "/{packagePath}/" + className + testFrameworkSuffix + extension, rockerModel)
         );
     }
 
@@ -120,8 +125,8 @@ public interface AgoraPulseFeature extends MicronautCommunityFeature {
         String extension = generatorContext.getLanguage().getExtension();
         ModuleContext module = generatorContext.getRootModule();
         module.addTemplate(
-                templateName,
-                new RockerTemplate(testSrcDir + "/{packagePath}/" + className +  '.' + extension, rockerModel)
+            templateName,
+            new RockerTemplate(testSrcDir + "/{packagePath}/" + className + '.' + extension, rockerModel)
         );
     }
 

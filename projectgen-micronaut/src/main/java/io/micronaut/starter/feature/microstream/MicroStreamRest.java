@@ -26,14 +26,17 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Adds support for the MicroStream REST API integration with Micronaut.
+ */
 @Requires(property = "micronaut.starter.feature.microstream.rest.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class MicroStreamRest implements MicroStreamFeature, OpenRewriteFeature {
 
     public static final String NAME = "microstream-rest";
+    private static final String ARTIFACT_ID_MICRONAUT_MICROSTREAM_REST = "micronaut-microstream-rest";
 
     private final MicroStream microStream;
-    private static final String ARTIFACT_ID_MICRONAUT_MICROSTREAM_REST = "micronaut-microstream-rest";
 
     public MicroStreamRest(MicroStream microStream) {
         this.microStream = microStream;

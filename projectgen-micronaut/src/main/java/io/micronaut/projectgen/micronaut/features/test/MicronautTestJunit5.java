@@ -37,7 +37,7 @@ public class MicronautTestJunit5 implements TestFeature, OpenRewriteFeature {
     private final JunitJupiterEngine junitJupiterEngine;
 
     public MicronautTestJunit5(JunitJupiterApi junitJupiterApi,
-                               JunitJupiterEngine junitJupiterEngine) {
+        JunitJupiterEngine junitJupiterEngine) {
         this.junitJupiterApi = junitJupiterApi;
         this.junitJupiterEngine = junitJupiterEngine;
     }

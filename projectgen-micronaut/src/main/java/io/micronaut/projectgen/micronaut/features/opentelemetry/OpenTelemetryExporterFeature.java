@@ -19,6 +19,10 @@ import io.micronaut.core.annotation.NonNull;
 
 import java.util.Locale;
 
+/**
+ * Abstract base class for OpenTelemetry exporter features in Micronaut.
+ * Provides common functionality for OpenTelemetry exporters with configurable names and descriptions.
+ */
 public abstract class OpenTelemetryExporterFeature implements OpenTelemetryFeature {
 
     @Override
@@ -44,6 +48,11 @@ public abstract class OpenTelemetryExporterFeature implements OpenTelemetryFeatu
         return "Adds the open telemetry exporter depedendency for " + exporterName();
     }
 
+    /**
+     * Returns the name of the exporter.
+     *
+     * @return the exporter name
+     */
     @NonNull
     protected abstract String exporterName();
 }

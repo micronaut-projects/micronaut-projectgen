@@ -17,17 +17,19 @@ package io.micronaut.starter.feature.database;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
-import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.starter.feature.Category;
 import io.micronaut.starter.feature.testresources.TestResources;
 import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that adds support for the MongoDB Reactive Streams Driver.
+ * This feature includes integration with Testcontainers for MongoDB and
+ * configures the reactive MongoDB driver for reactive database access.
+ */
 @Requires(property = "micronaut.starter.feature.mongo.reactive.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class MongoReactive extends MongoFeature implements OpenRewriteFeature {
@@ -35,7 +37,7 @@ public class MongoReactive extends MongoFeature implements OpenRewriteFeature {
     public static final String NAME = "mongo-reactive";
 
     public MongoReactive(TestContainers testContainers,
-                         TestResources testResources) {
+        TestResources testResources) {
         super(testContainers, testResources);
     }
 

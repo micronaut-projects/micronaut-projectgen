@@ -24,6 +24,9 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that adds support for Micrometer metrics with Humio as the metrics reporter.
+ */
 @Requires(property = "micronaut.starter.feature.micrometer.humio.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Humio extends MicrometerFeature implements MicrometerRegistryFeature, OpenRewriteFeature {

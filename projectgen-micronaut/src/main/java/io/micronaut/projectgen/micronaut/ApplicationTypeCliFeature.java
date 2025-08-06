@@ -17,7 +17,6 @@ package io.micronaut.projectgen.micronaut;
 
 import io.micronaut.core.annotation.Nullable;
 import io.micronaut.projectgen.core.feature.*;
-import io.micronaut.projectgen.core.feature.config.Properties;
 import io.micronaut.projectgen.core.feature.gitignore.GitIgnore;
 import io.micronaut.projectgen.core.options.GenericOptionsBuilder;
 import io.micronaut.projectgen.core.options.Language;
@@ -31,6 +30,13 @@ import jakarta.inject.Singleton;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Feature implementation for Micronaut CLI application type.
+ * <p>
+ * This class integrates language-specific application features (Java, Kotlin, Groovy)
+ * for CLI applications and conditionally applies them based on the selected language.
+ * </p>
+ */
 @Singleton
 public class ApplicationTypeCliFeature extends ApplicationTypeFeature {
     @Nullable
@@ -41,13 +47,13 @@ public class ApplicationTypeCliFeature extends ApplicationTypeFeature {
     private final GroovyApplicationFeature groovyApplicationFeature;
 
     public ApplicationTypeCliFeature(MicronautCli micronautCli,
-                                     MicronautTestJunit5 micronautTestJunit5,
-                                     MicronautTestSpock micronautTestSpock,
-                                     Logback logback,
-                                     GitIgnore gitIgnore,
-                                     List<JavaApplicationFeature> javaApplicationFeatures,
-                                     List<KotlinApplicationFeature> kotlinApplicationFeatures,
-                                     List<GroovyApplicationFeature> groovyApplicationFeatures) {
+        MicronautTestJunit5 micronautTestJunit5,
+        MicronautTestSpock micronautTestSpock,
+        Logback logback,
+        GitIgnore gitIgnore,
+        List<JavaApplicationFeature> javaApplicationFeatures,
+        List<KotlinApplicationFeature> kotlinApplicationFeatures,
+        List<GroovyApplicationFeature> groovyApplicationFeatures) {
         super(micronautCli, micronautTestJunit5, micronautTestSpock, logback, gitIgnore);
         Options options = GenericOptionsBuilder.builder().template(ApplicationType.CLI.toString()).build();
         this.javaApplicationFeature = javaApplicationFeatures.stream().filter(f -> f.supports(options)).findFirst().orElse(null);

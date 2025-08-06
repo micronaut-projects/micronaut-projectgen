@@ -24,6 +24,10 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that provides integration with Google AI Gemini's Langchain4j language model in Micronaut.
+ * Adds the necessary configuration and recipes for Google AI Gemini language model support.
+ */
 @Requires(property = "micronaut.starter.feature.langchain4j.googleai.gemini.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class GoogleAiGeminiLangchain4jLanguageModel implements Langchain4jLanguageModel, OpenRewriteFeature {

@@ -19,10 +19,6 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
-import io.micronaut.projectgen.core.buildtools.BuildTool;
-
-import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import jakarta.inject.Singleton;
@@ -30,6 +26,9 @@ import jakarta.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Feature to add support for the Jetty server in a Micronaut application.
+ */
 @Requires(property = "micronaut.starter.feature.jetty.server.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Jetty extends AbstractServletFeature implements OpenRewriteFeature {
@@ -56,7 +55,7 @@ public class Jetty extends AbstractServletFeature implements OpenRewriteFeature 
         if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())) {
             recipes.add("io.micronaut.starter.feature.jetty-server");
         }
-            return recipes;
+        return recipes;
     }
 
     @Override

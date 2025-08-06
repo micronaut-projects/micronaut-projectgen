@@ -17,5 +17,8 @@ package io.micronaut.starter.feature.messaging;
 
 import io.micronaut.projectgen.core.feature.Feature;
 
+/**
+ * Marker interface for features that provide shared test resources.
+ */
 public interface SharedTestResourceFeature extends Feature {
 }

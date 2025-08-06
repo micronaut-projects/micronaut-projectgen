@@ -24,6 +24,11 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Micrometer feature for Azure Monitor metrics reporting.
+ * <p>
+ * Adds support for Micrometer metrics with the Azure Monitor reporter.
+ */
 @Requires(property = "micronaut.starter.feature.micrometer.azure.monitor.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class AzureMonitor extends MicrometerFeature implements MicrometerRegistryFeature, OpenRewriteFeature {

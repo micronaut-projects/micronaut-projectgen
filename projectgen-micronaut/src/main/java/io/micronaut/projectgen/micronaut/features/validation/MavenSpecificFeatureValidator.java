@@ -17,10 +17,8 @@ package io.micronaut.projectgen.micronaut.features.validation;
 
 import io.micronaut.projectgen.core.feature.FeatureValidator;
 import io.micronaut.projectgen.core.utils.OptionUtils;
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.buildtools.maven.MavenSpecificFeature;
-import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.options.Options;
 import jakarta.inject.Singleton;
 import org.slf4j.Logger;
@@ -29,6 +27,10 @@ import org.slf4j.LoggerFactory;
 import java.util.Optional;
 import java.util.Set;
 
+/**
+ * Feature validator that ensures Maven-specific features are only used with Maven build tool.
+ * This validator checks that features marked as Maven-specific are not selected when using other build tools.
+ */
 @Singleton
 public class MavenSpecificFeatureValidator implements FeatureValidator {
     private static final Logger LOG = LoggerFactory.getLogger(MavenSpecificFeatureValidator.class);

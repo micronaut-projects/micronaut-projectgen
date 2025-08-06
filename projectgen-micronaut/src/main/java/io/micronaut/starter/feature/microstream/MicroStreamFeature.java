@@ -17,6 +17,9 @@ package io.micronaut.starter.feature.microstream;
 
 import io.micronaut.projectgen.core.feature.Feature;
 
+/**
+ * Marker interface for features related to MicroStream integration.
+ */
 public interface MicroStreamFeature extends Feature {
 
 }

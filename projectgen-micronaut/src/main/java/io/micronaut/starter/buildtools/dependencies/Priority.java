@@ -17,6 +17,10 @@ package io.micronaut.starter.buildtools.dependencies;
 
 import io.micronaut.core.order.Ordered;
 
+/**
+ * Enum representing the priority order of various processors or components.
+ * The order is calculated based on the highest precedence plus the enum's ordinal.
+ */
 public enum Priority {
 
     LOMBOK,

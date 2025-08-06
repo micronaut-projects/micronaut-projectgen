@@ -20,7 +20,6 @@ import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.rocker.RockerWritable;
 import io.micronaut.projectgen.core.utils.OptionUtils;
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.gradle.GradleFile;
 import io.micronaut.projectgen.core.buildtools.gradle.GradlePlugin;
@@ -30,6 +29,10 @@ import io.micronaut.projectgen.core.buildtools.gradle.GradleSpecificFeature;
 import io.micronaut.projectgen.micronaut.template.buildtools.gradle.buildlessGradlePlugin;
 import jakarta.inject.Singleton;
 
+/**
+ * Community feature that adds Buildless support for lightning-fast
+ * build caching compatible with Gradle, Maven, Bazel, and Gradle Enterprise.
+ */
 @Requires(property = "micronaut.starter.feature.buildless.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Buildless implements CommunityFeature, GradleSpecificFeature {
@@ -80,10 +83,10 @@ public class Buildless implements CommunityFeature, GradleSpecificFeature {
 
     private GradlePlugin buildPlugin(GeneratorContext generatorContext) {
         GradlePlugin.Builder plugin = GradlePlugin.builder()
-                .gradleFile(GradleFile.SETTINGS)
-                .id(BUILDLESS_PLUGIN_ID)
-                .lookupArtifactId(BUILDLESS_PLUGIN_ARTIFACT)
-                .settingsExtension(new RockerWritable(buildlessGradlePlugin.template()));
+            .gradleFile(GradleFile.SETTINGS)
+            .id(BUILDLESS_PLUGIN_ID)
+            .lookupArtifactId(BUILDLESS_PLUGIN_ARTIFACT)
+            .settingsExtension(new RockerWritable(buildlessGradlePlugin.template()));
 
         return plugin.build();
     }

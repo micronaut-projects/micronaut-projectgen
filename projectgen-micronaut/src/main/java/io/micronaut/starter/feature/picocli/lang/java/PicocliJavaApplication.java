@@ -29,6 +29,11 @@ import io.micronaut.projectgen.core.rocker.RockerTemplate;
 import io.micronaut.projectgen.micronaut.template.picocli.lang.java.picocliApplication;
 import jakarta.inject.Singleton;
 
+/**
+ * Feature for generating a Java-based CLI application using Picocli.
+ *
+ * <p>Creates a Picocli command as the main application class and configures the Java project accordingly.</p>
+ */
 @Requires(property = "micronaut.starter.feature.picocli.java.application.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class PicocliJavaApplication implements JavaApplicationFeature {
@@ -58,11 +63,25 @@ public class PicocliJavaApplication implements JavaApplicationFeature {
         module.addTemplate("application", getTemplate(generatorContext.getProject()));
     }
 
+    /**
+     * Returns the {@link RockerTemplate} for generating the Picocli application source file.
+     *
+     * @param project The project metadata.
+     * @return The Rocker template used to render the application source.
+     */
     public RockerTemplate getTemplate(Project project) {
         return new RockerTemplate(getPath(),
-                picocliApplication.template(project));
+            picocliApplication.template(project));
     }
 
+    /**
+     * Returns the file path for the generated Picocli application source file.
+     *
+     * <p>The path is relative to the project root and includes placeholders for
+     * the package path and class name, which are replaced during template rendering.</p>
+     *
+     * @return the file path for the generated application source file
+     */
     protected String getPath() {
         return "src/main/java/{packagePath}/{className}Command.java";
     }

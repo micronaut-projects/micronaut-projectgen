@@ -1,14 +1,12 @@
 package io.micronaut.projectgen.micronaut;
 
 import io.micronaut.projectgen.core.buildtools.BuildTool;
-import io.micronaut.projectgen.core.options.GenericOptions;
-import io.micronaut.projectgen.core.options.GenericOptionsBuilder;
 import io.micronaut.projectgen.core.options.Language;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.core.options.TestFramework;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class MicronautOptionsTest {
     @Test

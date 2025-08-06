@@ -24,6 +24,12 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * A {@link DiscoveryFeature} implementation that adds support for service discovery using Kubernetes.
+ * <p>
+ * Registers the necessary configuration and recipe to enable integration with Kubernetes' native service
+ * discovery mechanisms.
+ */
 @Requires(property = "micronaut.starter.feature.discovery.kubernetes.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class DiscoveryKubernetes implements DiscoveryFeature, OpenRewriteFeature {

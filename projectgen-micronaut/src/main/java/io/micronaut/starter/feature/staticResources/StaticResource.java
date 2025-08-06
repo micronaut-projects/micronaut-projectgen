@@ -15,5 +15,12 @@
  */
 package io.micronaut.starter.feature.staticResources;
 
+/**
+ * Represents a static resource with a name, mapping, and paths.
+ *
+ * @param name    The name of the static resource.
+ * @param mapping The URL mapping for the resource.
+ * @param paths   The file paths that the resource maps to.
+ */
 public record StaticResource(String name, String mapping, String paths) {
 }

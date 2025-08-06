@@ -25,6 +25,9 @@ import jakarta.inject.Named;
 import jakarta.inject.Singleton;
 import java.util.List;
 
+/**
+ * Filters and provides features available for function application type.
+ */
 @Named("function")
 @Singleton
 public class FunctionAvailableFeatures extends BaseAvailableFeatures {

@@ -16,7 +16,6 @@
 package io.micronaut.projectgen.micronaut.features.config;
 
 import io.micronaut.core.annotation.Internal;
-import io.micronaut.core.annotation.NonNull;
 import io.micronaut.projectgen.core.feature.DistributedConfigFeature;
 import io.micronaut.projectgen.core.feature.config.BootstrapConfiguration;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
@@ -25,7 +24,6 @@ import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import jakarta.inject.Singleton;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * Micronaut Distributed Configuration.

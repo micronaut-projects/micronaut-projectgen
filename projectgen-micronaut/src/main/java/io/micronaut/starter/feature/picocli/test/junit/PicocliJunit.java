@@ -33,6 +33,11 @@ import io.micronaut.projectgen.core.rocker.RockerTemplate;
 
 import jakarta.inject.Singleton;
 
+/**
+ * Adds a Picocli JUnit test for CLI applications.
+ *
+ * <p>Generates language-specific test templates using JUnit for Picocli commands.</p>
+ */
 @Requires(property = "micronaut.starter.feature.picocli.junit.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class PicocliJunit implements PicocliTestFeature {
@@ -53,6 +58,13 @@ public class PicocliJunit implements PicocliTestFeature {
         return TestFramework.JUNIT;
     }
 
+    /**
+     * Returns a {@link JunitRockerModelProvider} that provides JUnit test templates
+     * for different languages specific to Picocli applications.
+     *
+     * @param project The project metadata.
+     * @return The JUnit Rocker model provider.
+     */
     public JunitRockerModelProvider getJunitRockerModelProvider(Project project) {
         return new AbstractJunitRockerModelProvider(project) {
             @Override
@@ -72,13 +84,28 @@ public class PicocliJunit implements PicocliTestFeature {
         };
     }
 
+    /**
+     * Returns the {@link RockerModel} for the given language.
+     *
+     * @param language The source language (Java, Kotlin, Groovy).
+     * @param project The project metadata.
+     * @return The appropriate Rocker model for generating the test.
+     */
     public RockerModel getModel(Language language, Project project) {
         JunitRockerModelProvider junitRockerModelProvider = getJunitRockerModelProvider(project);
         return junitRockerModelProvider.findJunitModel(language);
     }
 
+    /**
+     * Returns a {@link RockerTemplate} used to render the test source file
+     * based on the language and project context.
+     *
+     * @param language The source language (Java, Kotlin, Groovy).
+     * @param project The project metadata.
+     * @return The Rocker template for the test file.
+     */
     public RockerTemplate getTemplate(Language language, Project project) {
-        String testSource =  getTestFramework().getSourcePath(PATH, language);
+        String testSource = getTestFramework().getSourcePath(PATH, language);
         return new RockerTemplate(testSource, getModel(language, project));
     }
 

@@ -24,6 +24,9 @@ import io.micronaut.projectgen.core.generator.Project;
 import io.micronaut.starter.feature.function.HandlerClassFeature;
 import jakarta.inject.Singleton;
 
+/**
+ * Provides the AWS Lambda handler class for applications using API Gateway V2 and Micronaut's payload version 2 support.
+ */
 @Requires(property = "micronaut.starter.feature.aws.lambda.handler.apigateway.v2.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class ApiGatewayV2AwsLambdaHandlerProvider implements HandlerClassFeature {

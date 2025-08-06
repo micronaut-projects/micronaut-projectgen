@@ -33,7 +33,7 @@ import java.util.TreeMap;
  */
 @SuppressWarnings("DeclarationOrder")
 @Serdeable
-public final class JdkVersion {
+public class JdkVersion {
     private static final Map<Integer, JdkVersion> INSTANCES = new TreeMap<>();
     public static final JdkVersion JDK_8 = new JdkVersion(8);
     public static final JdkVersion JDK_9 = new JdkVersion(9);
@@ -131,19 +131,38 @@ public final class JdkVersion {
                         "Unsupported JDK version: " + majorVersion + ". Supported values are " + INSTANCES.keySet()));
     }
 
+    /**
+     *
+     * @return the JDK major version
+     */
     public int majorVersion() {
         return majorVersion;
     }
 
     // for serialization
+    /**
+     *
+     * @return  the JDK major version
+     */
     int getMajorVersion() {
         return majorVersion;
     }
 
+    /**
+     * Determines whether this JDK version is greater than or equal to the specified version.
+     *
+     * @param jdk the JDK version to compare with
+     * @return {@code true} if this version is greater than or equal to the specified version; {@code false} otherwise
+     */
     public boolean greaterThanEqual(@NonNull JdkVersion jdk) {
         return majorVersion >= jdk.majorVersion;
     }
 
+    /**
+     * Returns the JDK version as a string.
+     *
+     * @return the string representation of the JDK major version
+     */
     public String asString() {
         return "" + majorVersion;
     }

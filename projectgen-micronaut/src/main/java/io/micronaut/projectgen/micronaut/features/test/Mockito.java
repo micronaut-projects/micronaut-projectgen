@@ -26,6 +26,10 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that provides Mockito framework support for Micronaut applications.
+ * This feature adds the Mockito test mocking framework for JUnit testing.
+ */
 @Requires(property = "micronaut.starter.feature.mockito.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Mockito implements MockingFeature, JunitCompanionFeature, OpenRewriteFeature {
@@ -46,6 +50,7 @@ public class Mockito implements MockingFeature, JunitCompanionFeature, OpenRewri
         return "Mockito test mocking framework for JUnit";
     }
 
+    @Override
     public List<String> getRecipes(GeneratorContext generatorContext) {
         return List.of("io.micronaut.starter.feature.mockito");
     }

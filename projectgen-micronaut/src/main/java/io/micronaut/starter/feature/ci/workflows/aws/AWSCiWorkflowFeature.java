@@ -30,6 +30,9 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * CI workflow feature for AWS CodeBuild that adds a buildspec.yml to build a Micronaut application.
+ */
 @Requires(property = "micronaut.starter.feature.aws.codebuild.workflow.ci.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class AWSCiWorkflowFeature extends CIWorkflowFeature implements OpenRewriteFeature {
@@ -69,10 +72,10 @@ public class AWSCiWorkflowFeature extends CIWorkflowFeature implements OpenRewri
 
     private Template workflowRockerTemplate(GeneratorContext generatorContext) {
         return new RockerTemplate(getWorkflowFileName(generatorContext), buildSpec.template(
-                generatorContext.getProject().getName(),
-                generatorContext.getJdkVersion(),
-                generatorContext.getBuildTool()
-            )
+            generatorContext.getProject().getName(),
+            generatorContext.getJdkVersion(),
+            generatorContext.getBuildTool()
+        )
         );
     }
 

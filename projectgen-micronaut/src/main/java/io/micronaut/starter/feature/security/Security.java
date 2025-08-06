@@ -20,7 +20,6 @@ import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.CollectionUtils;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.feature.ContributingInterceptUrlMapFeature;
@@ -30,6 +29,12 @@ import jakarta.inject.Singleton;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Core Micronaut Security feature.
+ *
+ * <p>Adds a full featured and customizable security solution to the application,
+ * including configuration of security intercept URL maps contributed by other features.</p>
+ */
 @Requires(property = "micronaut.starter.feature.security.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Security extends SecurityFeature implements OpenRewriteFeature {
@@ -61,15 +66,21 @@ public class Security extends SecurityFeature implements OpenRewriteFeature {
         addInterceptUrlMapConfiguration(generatorContext);
     }
 
+    /**
+     * Adds the security intercept URL map configuration to the root module
+     * based on all contributing features.
+     *
+     * @param generatorContext The context of the code generator.
+     */
     protected void addInterceptUrlMapConfiguration(@NonNull GeneratorContext generatorContext) {
         ModuleContext module = generatorContext.getRootModule();
         List<Map<String, String>> list = generatorContext.getFeatures().getFeatures()
-                .stream()
-                .filter(f -> f instanceof ContributingInterceptUrlMapFeature)
-                .map(f -> ((ContributingInterceptUrlMapFeature) f).interceptUrlMaps())
-                .flatMap(List::stream)
-                .map(InterceptUrlMap::toMap)
-                .toList();
+            .stream()
+            .filter(ContributingInterceptUrlMapFeature.class::isInstance)
+            .map(f -> ((ContributingInterceptUrlMapFeature) f).interceptUrlMaps())
+            .flatMap(List::stream)
+            .map(InterceptUrlMap::toMap)
+            .toList();
         if (CollectionUtils.isNotEmpty(list)) {
             module.configuration().put("micronaut.security.intercept-url-map", list);
         }

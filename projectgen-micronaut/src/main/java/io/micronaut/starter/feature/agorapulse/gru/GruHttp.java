@@ -42,6 +42,11 @@ import io.micronaut.projectgen.micronaut.template.agorapulse.gru.gruIndexJson;
 
 import java.util.Optional;
 
+/**
+ * Gru HTTP community feature for Micronaut applications.
+ * Provides integration with Gru, an HTTP interaction testing framework,
+ * including adding dependencies, example controller, tests, and test fixtures.
+ */
 @Requires(property = "micronaut.starter.feature.agorapulse.gru.http.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class GruHttp implements AgoraPulseFeature {
@@ -80,8 +85,8 @@ public class GruHttp implements AgoraPulseFeature {
     private void addDependency(GeneratorContext generatorContext) {
         ModuleContext module = generatorContext.getRootModule();
         module.addDependency(Dependency.builder()
-                .lookupArtifactId(ARTIFACT_ID)
-                .test());
+            .lookupArtifactId(ARTIFACT_ID)
+            .test());
     }
 
     private void addExampleCode(GeneratorContext generatorContext) {
@@ -97,8 +102,8 @@ public class GruHttp implements AgoraPulseFeature {
         String srcDir = generatorContext.getLanguage().getSrcDir();
         ModuleContext module = generatorContext.getRootModule();
         controllerModel(generatorContext).ifPresent(rockerModel ->
-                module.addTemplate(templateName,
-                    new RockerTemplate(srcDir + "/{packagePath}/" + className + "." + extension, rockerModel)));
+            module.addTemplate(templateName,
+                new RockerTemplate(srcDir + "/{packagePath}/" + className + "." + extension, rockerModel)));
     }
 
     @NonNull
@@ -136,15 +141,15 @@ public class GruHttp implements AgoraPulseFeature {
         String testFrameworkSuffix = generatorContext.getTestFramework().getTestFrameworkSuffix();
         ModuleContext module = generatorContext.getRootModule();
         controllerTestRockerModel(generatorContext).ifPresent(rockerModel ->
-                module.addTemplate(templateName,
-                        new RockerTemplate(testSrcDir + "/{packagePath}/" + className + testFrameworkSuffix + extension, rockerModel)));
+            module.addTemplate(templateName,
+                new RockerTemplate(testSrcDir + "/{packagePath}/" + className + testFrameworkSuffix + extension, rockerModel)));
     }
 
     private void addTestFixture(GeneratorContext generatorContext, String className) {
         String suffix = generatorContext.getTestFramework().getTestFrameworkSuffixWithoutTrailingDot();
         ModuleContext module = generatorContext.getRootModule();
         module.addTemplate("gruIndexJson",
-                new RockerTemplate("src/test/resources/{packagePath}/" + className + suffix + "/gruIndex.json", gruIndexJson.template()));
+            new RockerTemplate("src/test/resources/{packagePath}/" + className + suffix + "/gruIndex.json", gruIndexJson.template()));
     }
 
     @Override

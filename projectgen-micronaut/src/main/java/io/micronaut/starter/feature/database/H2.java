@@ -24,6 +24,9 @@ import jakarta.inject.Singleton;
 
 import java.util.Optional;
 
+/**
+ * Database driver feature for the embedded H2 database.
+ */
 @Requires(property = "micronaut.starter.feature.h2.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 @Primary
@@ -32,15 +35,15 @@ public class H2 extends DatabaseDriverFeature {
     public static final String NAME = "h2";
 
     private static final Dependency.Builder DEPENDENCY_H2 = Dependency.builder()
-            .groupId("com.h2database")
-            .artifactId("h2")
-            .runtime()
-            .template();
+        .groupId("com.h2database")
+        .artifactId("h2")
+        .runtime()
+        .template();
 
     private static final Dependency.Builder DEPENDENCY_R2DBC_H2 = Dependency.builder()
-            .groupId("io.r2dbc")
-            .artifactId("r2dbc-h2")
-            .runtime();
+        .groupId("io.r2dbc")
+        .artifactId("r2dbc-h2")
+        .runtime();
 
     @Override
     @NonNull

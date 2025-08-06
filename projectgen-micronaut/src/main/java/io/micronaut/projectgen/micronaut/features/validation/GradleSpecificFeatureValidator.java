@@ -17,7 +17,6 @@ package io.micronaut.projectgen.micronaut.features.validation;
 
 import io.micronaut.projectgen.core.feature.FeatureValidator;
 import io.micronaut.projectgen.core.utils.OptionUtils;
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.buildtools.gradle.GradleSpecificFeature;
 import io.micronaut.projectgen.core.options.Options;
@@ -25,6 +24,10 @@ import jakarta.inject.Singleton;
 
 import java.util.Set;
 
+/**
+ * Feature validator that ensures Gradle-specific features are only used with Gradle build tool.
+ * This validator checks that features marked as Gradle-specific are not selected when using other build tools.
+ */
 @Singleton
 public class GradleSpecificFeatureValidator implements FeatureValidator {
     @Override

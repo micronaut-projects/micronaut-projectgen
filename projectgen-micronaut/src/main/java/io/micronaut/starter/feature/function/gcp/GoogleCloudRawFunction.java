@@ -45,16 +45,22 @@ import jakarta.inject.Singleton;
 
 import java.util.Optional;
 
+/**
+ * Feature that adds support for deploying raw functions to Google Cloud Functions in a Micronaut project.
+ * <p>
+ * Provides integration with Google Cloud's Functions Framework and sets up the necessary templates,
+ * dependencies, and configuration for function-based applications.
+ */
 @Requires(property = "micronaut.starter.feature.google.cloud.function.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class GoogleCloudRawFunction extends AbstractGoogleCloudFunction {
     public static final String NAME = "google-cloud-function";
 
     private static final Dependency MICRONAUT_GCP_FUNCTION = MicronautDependencyUtils
-            .gcpDependency()
-            .artifactId("micronaut-gcp-function")
-            .compile()
-            .build();
+        .gcpDependency()
+        .artifactId("micronaut-gcp-function")
+        .compile()
+        .build();
 
     private final GoogleCloudFunction googleCloudFunction;
 
@@ -78,11 +84,11 @@ public class GoogleCloudRawFunction extends AbstractGoogleCloudFunction {
             Project project = generatorContext.getProject();
             String sourceFile = generatorContext.getSourcePath("/{packagePath}/Function");
             module.addTemplate(generatorContext.getOptions().language(),
-                    "function",
-                    sourceFile,
-                    gcpRawBackgroundFunctionJava.template(project),
-                    gcpRawBackgroundFunctionKotlin.template(project),
-                    gcpRawBackgroundFunctionGroovy.template(project)
+                "function",
+                sourceFile,
+                gcpRawBackgroundFunctionJava.template(project),
+                gcpRawBackgroundFunctionKotlin.template(project),
+                gcpRawBackgroundFunctionGroovy.template(project)
             );
 
             applyTestTemplate(generatorContext, project, "Function");
@@ -90,6 +96,13 @@ public class GoogleCloudRawFunction extends AbstractGoogleCloudFunction {
         }
     }
 
+    /**
+     * Adds dependencies required for Google Cloud Raw Function to the module context.
+     * The dependencies added are specific to the build tool specified in the project creation options.
+     *
+     * @param module  the module context to add dependencies to
+     * @param options the project creation options
+     */
     void addDependencies(ModuleContext module, Options options) {
         module.addDependency(MICRONAUT_GCP_FUNCTION);
         module.addDependency(GCP_FUNCTIONS_FRAMEWORK_API.compileOnly());
@@ -110,9 +123,9 @@ public class GoogleCloudRawFunction extends AbstractGoogleCloudFunction {
 
     @Override
     protected Optional<RockerModel> readmeTemplate(
-            GeneratorContext generatorContext,
-            Project project,
-            BuildTool buildTool) {
+        GeneratorContext generatorContext,
+        Project project,
+        BuildTool buildTool) {
         ApplicationType applicationType = ApplicationType.of(generatorContext.getOptions().template());
         return Optional.of(
             gcpFunctionReadme.template(
@@ -120,7 +133,7 @@ public class GoogleCloudRawFunction extends AbstractGoogleCloudFunction {
                 generatorContext.getFeatures(),
                 getRunCommand(buildTool),
                 getBuildCommand(buildTool),
-                    applicationType == ApplicationType.FUNCTION
+                applicationType == ApplicationType.FUNCTION
             )
         );
     }
@@ -131,7 +144,7 @@ public class GoogleCloudRawFunction extends AbstractGoogleCloudFunction {
         ApplicationType applicationType = ApplicationType.of(featureContext.getOptions().template());
         if (applicationType == ApplicationType.DEFAULT) {
             featureContext.addFeature(
-                    googleCloudFunction
+                googleCloudFunction
             );
         }
     }

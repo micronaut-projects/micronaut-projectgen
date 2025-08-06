@@ -24,6 +24,10 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that provides integration with Azure's Langchain4j language model in Micronaut.
+ * Adds the necessary configuration and recipes for Azure language model support.
+ */
 @Requires(property = "micronaut.starter.feature.langchain4j.azure.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class AzureLangchain4jLanguageModel implements Langchain4jLanguageModel, OpenRewriteFeature {

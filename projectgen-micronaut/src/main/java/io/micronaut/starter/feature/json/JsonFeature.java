@@ -17,6 +17,9 @@ package io.micronaut.starter.feature.json;
 
 import io.micronaut.projectgen.core.feature.Feature;
 
+/**
+ * Marker interface for features related to JSON support.
+ */
 public interface JsonFeature extends Feature {
 
 }

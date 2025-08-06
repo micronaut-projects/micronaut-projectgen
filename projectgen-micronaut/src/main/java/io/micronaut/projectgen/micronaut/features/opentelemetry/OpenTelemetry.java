@@ -24,14 +24,18 @@ import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils;
 import jakarta.inject.Singleton;
 
+/**
+ * Feature that provides OpenTelemetry integration for Micronaut applications.
+ * This feature adds the necessary dependencies for OpenTelemetry tracing support.
+ */
 @Requires(property = "micronaut.starter.feature.tracing.opentelemetry.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class OpenTelemetry implements OpenTelemetryFeature {
 
     private static final Dependency MICRONAUT_OPEN_TELEMETRY = MicronautDependencyUtils.tracingDependency()
-            .artifactId("micronaut-tracing-opentelemetry")
-            .compile()
-            .build();
+        .artifactId("micronaut-tracing-opentelemetry")
+        .compile()
+        .build();
 
     @Override
     public boolean isVisible() {

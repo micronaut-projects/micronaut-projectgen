@@ -30,6 +30,10 @@ import java.util.Map;
 import static io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils.ARTIFACT_ID_MICRONAUT_DATA_PROCESSOR_ARTIFACT;
 import static io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils.GROUP_ID_MICRONAUT_DATA;
 
+/**
+ * Defines a Micronaut Data feature.
+ */
+
 public interface DataFeature extends OneOfFeature {
 
     String SCHEMA_GENERATE_KEY = "datasources.default.schema-generate";
@@ -55,8 +59,8 @@ public interface DataFeature extends OneOfFeature {
 
     static Dependency dataProcessorDependency(BuildTool buildTool, String artifactId, int order) {
         return MicronautDependencyUtils.annotationProcessor(buildTool, GROUP_ID_MICRONAUT_DATA, artifactId, MICRONAUT_DATA_VERSION, true)
-                .order(order)
-                .build();
+            .order(order)
+            .build();
     }
 
     @Override

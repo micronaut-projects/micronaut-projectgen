@@ -17,6 +17,9 @@ package io.micronaut.starter.feature.eclipsestore;
 
 import io.micronaut.projectgen.core.feature.Feature;
 
+/**
+ * Marker interface for features that provide EclipseStore integration.
+ */
 public interface EclipseStoreFeature extends Feature {
 
 }

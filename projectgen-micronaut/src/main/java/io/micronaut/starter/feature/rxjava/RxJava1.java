@@ -19,8 +19,6 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
-import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.feature.reactive.ReactiveFeature;
 
@@ -28,6 +26,9 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that adds reactive support using RxJava 1.
+ */
 @Requires(property = "micronaut.starter.feature.rxjava1.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class RxJava1 implements ReactiveFeature, OpenRewriteFeature {

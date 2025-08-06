@@ -28,6 +28,12 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Implements a Langchain4j embedded store using Qdrant as the backend.
+ *
+ * Adds test resources dependency if the TestResources feature is present.
+ * and supplies OpenRewrite recipes for automated setup.
+ */
 @Requires(property = "micronaut.starter.feature.langchain4j.store.qdrant.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class QdrantLangchain4jEmbeddedStore implements Langchain4jEmbeddedStore, OpenRewriteFeature {

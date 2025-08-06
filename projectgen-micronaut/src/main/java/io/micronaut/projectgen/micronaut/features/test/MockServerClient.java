@@ -21,11 +21,14 @@ import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.feature.Category;
-import io.micronaut.starter.feature.testcontainers.ContributingTestContainerArtifactId;
 import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that provides MockServer Java client support for Micronaut applications.
+ * This feature adds the Java client for MockServer, enabling connection to MockServer instances for testing.
+ */
 @Requires(property = "micronaut.starter.feature.mockserver.client.java.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class MockServerClient implements OpenRewriteFeature {

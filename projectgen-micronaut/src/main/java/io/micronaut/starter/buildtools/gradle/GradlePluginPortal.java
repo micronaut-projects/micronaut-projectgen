@@ -22,6 +22,9 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 
+/**
+ * Represents the Gradle Plugin Portal repository configuration.
+ */
 public class GradlePluginPortal extends GradleRepository {
     public GradlePluginPortal() {
         super(GradleDsl.KOTLIN, "https://plugins.gradle.org");

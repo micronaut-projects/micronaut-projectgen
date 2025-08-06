@@ -17,11 +17,8 @@ package io.micronaut.starter.feature.spring;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
-import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.starter.feature.database.DataJpa;
 
@@ -29,6 +26,10 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that adds support for using Spring Data JPA Annotations in Micronaut applications.
+ * Ensures the associated DataJpa feature is included if not already present.
+ */
 @Requires(property = "micronaut.starter.feature.spring.data.jpa.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class SpringDataJpa extends SpringFeature implements OpenRewriteFeature {

@@ -21,14 +21,17 @@ import io.micronaut.starter.feature.testcontainers.ContributingTestContainerDepe
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Contributes the OpenSearch Testcontainers dependency for testing.
+ */
 public interface OpenSearchContributingTestContainerDependency extends ContributingTestContainerDependency {
 
     @Override
     default List<Dependency> testContainersDependencies() {
         return Collections.singletonList(Dependency.builder()
-                .groupId("org.opensearch")
-                .artifactId("opensearch-testcontainers")
-                .test()
-                .build());
+            .groupId("org.opensearch")
+            .artifactId("opensearch-testcontainers")
+            .test()
+            .build());
     }
 }

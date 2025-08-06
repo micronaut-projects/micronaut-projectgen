@@ -19,15 +19,18 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.feature.FeatureContext;
-import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.feature.database.Oracle;
 import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * JMS feature for Oracle Advanced Queuing.
+ * <p>
+ * Adds support for Oracle Advanced Queuing JMS messaging.
+ */
 @Requires(property = "micronaut.starter.feature.jms.oracle.aq.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class OracleAdvancedQueuing extends AbstractJmsFeature implements OpenRewriteFeature {

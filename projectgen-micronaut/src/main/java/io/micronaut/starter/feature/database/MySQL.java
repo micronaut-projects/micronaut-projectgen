@@ -26,6 +26,12 @@ import jakarta.inject.Singleton;
 
 import java.util.Optional;
 
+/**
+ * Feature that adds support for MySQL databases.
+ * This feature provides the MySQL JDBC driver and R2DBC driver dependencies,
+ * default configuration values such as JDBC URL, default user, and password,
+ * and integrates with Testcontainers and other infrastructure as needed.
+ */
 @Requires(property = "micronaut.starter.feature.mysql.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class MySQL extends MySQLCompatibleFeature {
@@ -33,19 +39,19 @@ public class MySQL extends MySQLCompatibleFeature {
     public static final String NAME = "mysql";
 
     private static final Dependency.Builder DEPENDENCY_R2DBC_MYSQL = Dependency.builder()
-            .groupId("io.asyncer")
-                    .artifactId("r2dbc-mysql")
-                    .runtime();
+        .groupId("io.asyncer")
+        .artifactId("r2dbc-mysql")
+        .runtime();
 
     private static final Dependency.Builder DEPENDENCY_MYSQL_CONNECTOR_JAVA = Dependency.builder()
-            .groupId("com.mysql")
-            .artifactId("mysql-connector-j")
-            .runtime()
-            .template();
+        .groupId("com.mysql")
+        .artifactId("mysql-connector-j")
+        .runtime()
+        .template();
 
     public MySQL(JdbcFeature jdbcFeature,
-                 TestContainers testContainers,
-                 TestResources testResources) {
+        TestContainers testContainers,
+        TestResources testResources) {
         super(jdbcFeature, testContainers, testResources);
     }
 

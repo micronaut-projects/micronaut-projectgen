@@ -18,6 +18,11 @@ package io.micronaut.projectgen.micronaut.features.opentelemetry;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 
+/**
+ * Abstract base class for OpenTelemetry features in Micronaut.
+ * Provides common functionality for configuring OpenTelemetry based on application type
+ * and automatically adding required OpenTelemetry components.
+ */
 public class AbstractOpenTelemetry implements OpenTelemetryFeature {
     private final OpenTelemetry otel;
     private final OpenTelemetryHttp otelHttp;
@@ -25,11 +30,20 @@ public class AbstractOpenTelemetry implements OpenTelemetryFeature {
     private final OpenTelemetryGrpc openTelemetryGrpc;
     private final OpenTelemetryExporterFeature otelExporter;
 
+    /**
+     * Creates a new AbstractOpenTelemetry with the required OpenTelemetry components.
+     *
+     * @param otel the base OpenTelemetry feature
+     * @param otelHttp the OpenTelemetry HTTP feature
+     * @param otelAnnotations the OpenTelemetry annotations feature
+     * @param openTelemetryGrpc the OpenTelemetry gRPC feature
+     * @param otelExporter the OpenTelemetry exporter feature
+     */
     public AbstractOpenTelemetry(OpenTelemetry otel,
-                                 OpenTelemetryHttp otelHttp,
-                                 OpenTelemetryAnnotations otelAnnotations,
-                                 OpenTelemetryGrpc openTelemetryGrpc,
-                                 OpenTelemetryExporterFeature otelExporter) {
+        OpenTelemetryHttp otelHttp,
+        OpenTelemetryAnnotations otelAnnotations,
+        OpenTelemetryGrpc openTelemetryGrpc,
+        OpenTelemetryExporterFeature otelExporter) {
         this.otel = otel;
         this.otelHttp = otelHttp;
         this.otelAnnotations = otelAnnotations;

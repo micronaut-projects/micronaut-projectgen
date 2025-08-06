@@ -39,7 +39,7 @@ public enum ApplicationType implements Named {
     private final String description;
 
     ApplicationType(String title,
-                    String description) {
+        String description) {
         this.title = title;
         this.description = description;
     }
@@ -50,7 +50,7 @@ public enum ApplicationType implements Named {
                 return type;
             }
         }
-        throw new IllegalArgumentException(template +" cannot be matched to an ApplicationType");
+        throw new IllegalArgumentException(template + " cannot be matched to an ApplicationType");
     }
 
     /**

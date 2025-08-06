@@ -27,6 +27,9 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature for OpenSearch integration using REST Client transport.
+ */
 @Requires(property = "micronaut.starter.feature.opensearch.restclient.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class OpenSearchRestClient extends OpenSearchFeature implements OpenRewriteFeature {
@@ -36,9 +39,9 @@ public class OpenSearchRestClient extends OpenSearchFeature implements OpenRewri
     private final JacksonDatabindFeature jacksonDatabindFeature;
 
     public OpenSearchRestClient(
-            TestContainers testContainers,
-            TestResources testResources,
-            JacksonDatabindFeature jacksonDatabindFeature
+        TestContainers testContainers,
+        TestResources testResources,
+        JacksonDatabindFeature jacksonDatabindFeature
     ) {
         super(testContainers, testResources);
         this.jacksonDatabindFeature = jacksonDatabindFeature;

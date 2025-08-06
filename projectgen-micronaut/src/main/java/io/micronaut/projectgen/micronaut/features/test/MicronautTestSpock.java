@@ -26,6 +26,10 @@ import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.projectgen.micronaut.maven.GroovyMavenPlusPlugin;
 import jakarta.inject.Singleton;
 
+/**
+ * Feature that provides Spock testing framework support for Micronaut applications.
+ * This feature adds Spock testing framework dependencies and configuration for Groovy-based testing.
+ */
 @Singleton
 public class MicronautTestSpock implements TestFeature {
     private static final String GROUP_ID_GROOVY = "org.apache.groovy";
@@ -56,6 +60,11 @@ public class MicronautTestSpock implements TestFeature {
 
     private final GroovyMavenPlusPlugin groovyMavenPlusPlugin;
 
+    /**
+     * Creates a new MicronautTestSpock with the required Groovy Maven plugin.
+     *
+     * @param groovyMavenPlusPlugin the Groovy Maven Plus plugin dependency
+     */
     public MicronautTestSpock(GroovyMavenPlusPlugin groovyMavenPlusPlugin) {
         this.groovyMavenPlusPlugin = groovyMavenPlusPlugin;
     }

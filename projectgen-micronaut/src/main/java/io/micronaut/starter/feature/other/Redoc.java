@@ -27,6 +27,11 @@ import jakarta.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Adds Redoc as a static OpenAPI documentation view.
+ *
+ * <p>Contributes static resources and route mappings for Redoc UI.</p>
+ */
 @Requires(property = "micronaut.starter.feature.redoc.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Redoc extends OpenApiView implements ContributingStaticResources, OpenRewriteFeature {

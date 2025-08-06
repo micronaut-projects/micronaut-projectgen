@@ -27,6 +27,9 @@ import jakarta.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Groovy module feature that provides extensions for processing Groovy objects with TOML (Tom's Obvious, Minimal Language).
+ */
 @Requires(property = "micronaut.starter.feature.groovy.toml.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class TomlGroovyModule implements GroovyModuleFeature, OpenRewriteFeature {
@@ -54,8 +57,7 @@ public class TomlGroovyModule implements GroovyModuleFeature, OpenRewriteFeature
         List<String> recipes = new ArrayList<>();
         if (generatorContext.getLanguage() == Language.GROOVY) {
             recipes.add("io.micronaut.starter.feature.groovy-toml");
-        }
-        else if (generatorContext.getTestFramework() == TestFramework.SPOCK) {
+        } else if (generatorContext.getTestFramework() == TestFramework.SPOCK) {
             recipes.add("io.micronaut.starter.feature.groovy-toml-spock");
         }
         return recipes;

@@ -18,13 +18,16 @@ package io.micronaut.starter.feature.cache;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * EHCache caching feature for Micronaut applications.
+ * Adds EHCache support and provides the necessary configuration recipes.
+ */
 @Requires(property = "micronaut.starter.feature.cache.ehcache.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class EHCache implements CacheFeature, OpenRewriteFeature {

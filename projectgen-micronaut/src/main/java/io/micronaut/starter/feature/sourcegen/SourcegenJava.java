@@ -27,6 +27,10 @@ import jakarta.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Feature for Micronaut source code generation supporting Java and Kotlin.
+ * Exposes a language-neutral API for source code generation.
+ */
 @Requires(property = "micronaut.starter.feature.sourcegen.generator.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class SourcegenJava implements OpenRewriteFeature {

@@ -21,6 +21,10 @@ import io.micronaut.core.util.StringUtils;
 import io.micronaut.starter.feature.function.awslambda.AwsLambda;
 import jakarta.inject.Singleton;
 
+/**
+ * AWS Lambda feature for handling S3 event notifications.
+ * Creates a function handler subscribed to S3 notification events.
+ */
 @Requires(property = "micronaut.starter.feature.aws.lambda.s3.event.notification.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class AwsLambdaS3EventNotification extends AwsLambdaEventFunctionFeature implements LambdaTrigger {
@@ -29,7 +33,7 @@ public class AwsLambdaS3EventNotification extends AwsLambdaEventFunctionFeature 
     public AwsLambdaS3EventNotification(AwsLambda awsLambda) {
         super(awsLambda);
     }
-    
+
     @Override
     @NonNull
     public String getName() {

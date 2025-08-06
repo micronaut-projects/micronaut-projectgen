@@ -24,6 +24,9 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that adds support for Server-Side View Rendering using Pebble.
+ */
 @Requires(property = "micronaut.starter.feature.views.pebble.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Pebble implements ViewFeature, MicronautServerDependent, OpenRewriteFeature {

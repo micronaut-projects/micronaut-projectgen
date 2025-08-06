@@ -39,6 +39,9 @@ import io.micronaut.projectgen.core.options.Language;
 import io.micronaut.projectgen.core.rocker.RockerTemplate;
 import jakarta.inject.Singleton;
 
+/**
+ * Adds support for Server-Side View Rendering using JTE.
+ */
 @Requires(property = "micronaut.starter.feature.views.jte.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class JTE implements ViewFeature, MicronautServerDependent, OpenRewriteFeature {
@@ -77,25 +80,25 @@ public class JTE implements ViewFeature, MicronautServerDependent, OpenRewriteFe
 
     private BuildPlugin gradlePlugin(GeneratorContext generatorContext) {
         boolean patchKapt = OptionUtils.hasGradleBuildTool(generatorContext.getOptions())
-                && generatorContext.getLanguage() == Language.KOTLIN
-                && generatorContext.hasFeature(Kapt.class);
+            && generatorContext.getLanguage() == Language.KOTLIN
+            && generatorContext.hasFeature(Kapt.class);
 
         GradlePlugin.Builder builder = GradlePlugin.builder()
-                .id("gg.jte.gradle")
-                .extension(new RockerWritable(gradlePluginJTE.template(patchKapt, JTE_SRC_DIR)))
-                .lookupArtifactId("jte-gradle-plugin");
+            .id("gg.jte.gradle")
+            .extension(new RockerWritable(gradlePluginJTE.template(patchKapt, JTE_SRC_DIR)))
+            .lookupArtifactId("jte-gradle-plugin");
         return builder.build();
     }
 
     private BuildPlugin mavenPlugin(GeneratorContext generatorContext) {
         Coordinate coordinate = generatorContext.resolveCoordinate(MAVEN_PLUGIN_ARTIFACT_ID);
         return MavenPlugin.builder()
-                .artifactId(MAVEN_PLUGIN_ARTIFACT_ID)
-                .extension(new RockerWritable(mvnPluginJTE.template(coordinate.getGroupId(),
-                        coordinate.getArtifactId(),
-                        coordinate.getVersion(),
-                        JTE_SRC_DIR)))
-                .build();
+            .artifactId(MAVEN_PLUGIN_ARTIFACT_ID)
+            .extension(new RockerWritable(mvnPluginJTE.template(coordinate.getGroupId(),
+                coordinate.getArtifactId(),
+                coordinate.getVersion(),
+                JTE_SRC_DIR)))
+            .build();
     }
 
     @Override

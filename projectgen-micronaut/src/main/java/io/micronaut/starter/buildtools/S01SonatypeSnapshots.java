@@ -18,6 +18,9 @@ package io.micronaut.starter.buildtools;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.projectgen.core.buildtools.Repository;
 
+/**
+ * Represents the Sonatype OSS snapshot repository available at s01.
+ */
 public class S01SonatypeSnapshots implements Repository {
     @Override
     @NonNull

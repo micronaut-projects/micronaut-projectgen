@@ -21,7 +21,6 @@ import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.rocker.RockerWritable;
 import io.micronaut.projectgen.core.utils.OptionUtils;
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.BuildProperties;
 import io.micronaut.projectgen.core.buildtools.dependencies.CoordinateResolver;
@@ -31,15 +30,20 @@ import io.micronaut.projectgen.core.buildtools.maven.MavenPlugin;
 import io.micronaut.projectgen.core.feature.LanguageSpecificFeature;
 import io.micronaut.projectgen.micronaut.template.openrewriteGradlePlugin;
 import io.micronaut.projectgen.micronaut.template.openrewriteMavenPlugin;
-import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.options.Language;
 import jakarta.inject.Singleton;
 
 import static io.micronaut.projectgen.core.buildtools.Scope.OPENREWRITE;
 import static io.micronaut.starter.feature.Category.DEV_TOOLS;
-import static io.micronaut.projectgen.core.buildtools.BuildTool.MAVEN;
 import static io.micronaut.projectgen.core.options.Language.JAVA;
 
+/**
+ * Adds OpenRewrite support to the project, including the OpenRewrite plugin
+ * and the Micronaut 3 to 4 migration recipe.
+ *
+ * Supports both Gradle and Maven build tools, adding appropriate build plugins
+ * and dependencies.
+ */
 @Requires(property = "micronaut.starter.feature.openrewrite.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class OpenRewrite implements LanguageSpecificFeature {
@@ -82,30 +86,30 @@ public class OpenRewrite implements LanguageSpecificFeature {
         module.addHelpLink("Rewrite Gradle Plugin", "https://plugins.gradle.org/plugin/org.openrewrite.rewrite");
         module.addHelpLink("Rewrite Micronaut3to4Migration Recipe", "https://docs.openrewrite.org/running-recipes/popular-recipe-guides/migrate-to-micronaut-4-from-micronaut-3");
         module.addBuildPlugin(GradlePlugin.builder()
-                .id("org.openrewrite.rewrite")
-                .lookupArtifactId("plugin")
-                .extension(new RockerWritable(openrewriteGradlePlugin.template()))
-                .build());
+            .id("org.openrewrite.rewrite")
+            .lookupArtifactId("plugin")
+            .extension(new RockerWritable(openrewriteGradlePlugin.template()))
+            .build());
 
         module.addDependency(Dependency.builder()
-                .groupId("org.openrewrite.recipe")
-                .lookupArtifactId("rewrite-micronaut")
-                .scope(OPENREWRITE));
+            .groupId("org.openrewrite.recipe")
+            .lookupArtifactId("rewrite-micronaut")
+            .scope(OPENREWRITE));
     }
 
     private void addMavenPlugin(ModuleContext module) {
         module.addHelpLink("Rewrite Micronaut3to4Migration Recipe", "https://docs.openrewrite.org/running-recipes/popular-recipe-guides/migrate-to-micronaut-4-from-micronaut-3");
         String mavenPluginArtifactId = "rewrite-maven-plugin";
         module.addBuildPlugin(MavenPlugin.builder()
-                .artifactId(mavenPluginArtifactId)
-                .extension(new RockerWritable(openrewriteMavenPlugin.template()))
-                .build());
+            .artifactId(mavenPluginArtifactId)
+            .extension(new RockerWritable(openrewriteMavenPlugin.template()))
+            .build());
         BuildProperties props = module.buildProperties();
         coordinateResolver.resolve(mavenPluginArtifactId)
-                .ifPresent(coordinate -> props.put(
-                        "openrewrite.maven.plugin.version", coordinate.getVersion()));
+            .ifPresent(coordinate -> props.put(
+                "openrewrite.maven.plugin.version", coordinate.getVersion()));
         coordinateResolver.resolve("rewrite-micronaut")
-                .ifPresent(coordinate -> props.put("rewrite-micronaut.version", coordinate.getVersion()));
+            .ifPresent(coordinate -> props.put("rewrite-micronaut.version", coordinate.getVersion()));
     }
 
     @Override

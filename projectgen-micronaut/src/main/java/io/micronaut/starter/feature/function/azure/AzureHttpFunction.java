@@ -39,6 +39,12 @@ import io.micronaut.projectgen.micronaut.template.function.azure.azureFunctionTr
 import io.micronaut.projectgen.micronaut.template.function.azure.azureFunctionTriggerKotlin;
 import jakarta.inject.Singleton;
 
+/**
+ * Feature implementation for Azure HTTP Functions support in Micronaut applications.
+ * <p>
+ * Adds the necessary dependencies for Azure HTTP Function runtime and testing,
+ * and provides templates for generating test classes in Java, Kotlin, Groovy, and KoTest.
+ */
 @Requires(property = "micronaut.starter.feature.azure.function.http.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class AzureHttpFunction extends AbstractAzureFunction implements Feature {
@@ -46,16 +52,16 @@ public class AzureHttpFunction extends AbstractAzureFunction implements Feature 
     public static final String NAME = "azure-function-http";
 
     private static final Dependency MICRONAUT_AZURE_FUNCTION_HTTP = MicronautDependencyUtils
-            .azureDependency()
-            .artifactId("micronaut-azure-function-http")
-            .compile()
-            .build();
+        .azureDependency()
+        .artifactId("micronaut-azure-function-http")
+        .compile()
+        .build();
 
     private static final Dependency MICRONAUT_AZURE_FUNCTION_HTTP_TEST = MicronautDependencyUtils
-            .azureDependency()
-            .artifactId("micronaut-azure-function-http-test")
-            .test()
-            .build();
+        .azureDependency()
+        .artifactId("micronaut-azure-function-http-test")
+        .test()
+        .build();
 
     public AzureHttpFunction(CoordinateResolver coordinateResolver) {
         super(coordinateResolver);
@@ -103,9 +109,9 @@ public class AzureHttpFunction extends AbstractAzureFunction implements Feature 
         if (applicationType == ApplicationType.DEFAULT) {
             String triggerFile = generatorContext.getSourcePath("/{packagePath}/Function");
             module.addTemplate(generatorContext.getOptions().language(), "trigger", triggerFile,
-                    azureFunctionTriggerJava.template(project),
-                    azureFunctionTriggerKotlin.template(project),
-                    azureFunctionTriggerGroovy.template(project));
+                azureFunctionTriggerJava.template(project),
+                azureFunctionTriggerKotlin.template(project),
+                azureFunctionTriggerGroovy.template(project));
         }
 
     }

@@ -18,6 +18,11 @@ package io.micronaut.starter.feature.aws;
 import io.micronaut.starter.feature.function.Cloud;
 import io.micronaut.starter.feature.function.CloudFeature;
 
+/**
+ * Marker interface for features that are specific to Amazon Web Services (AWS) cloud platform.
+ * <p>
+ * Extends {@link CloudFeature} and overrides {@code getCloud()} to return {@link Cloud#AWS},
+ */
 public interface AwsCloudFeature extends CloudFeature {
 
     @Override

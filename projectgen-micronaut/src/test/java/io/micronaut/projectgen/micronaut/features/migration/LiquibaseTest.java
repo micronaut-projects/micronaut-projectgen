@@ -3,9 +3,7 @@ package io.micronaut.projectgen.micronaut.features.migration;
 import io.micronaut.projectgen.core.buildtools.Scope;
 import io.micronaut.projectgen.core.generator.ProjectGenerator;
 import io.micronaut.projectgen.core.io.MapOutputHandler;
-import io.micronaut.projectgen.core.options.GenericOptionsBuilder;
 import io.micronaut.projectgen.core.options.Options;
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.micronaut.OptionsFixture;
 import io.micronaut.projectgen.test.BuildTestVerifier;
 import io.micronaut.projectgen.test.ConfigurationUtils;
@@ -68,8 +66,8 @@ class LiquibaseTest {
         String buildGradle = project.get("build.gradle.kts");
         assertNotNull(buildGradle);
         BuildTestVerifier verifier = BuildTestVerifier.of(buildGradle, options);
-        assertTrue(verifier.hasDependency("io.micronaut.liquibase", "micronaut-liquibase", Scope.COMPILE),buildGradle);
-        assertTrue(verifier.hasDependency("org.slf4j", "jul-to-slf4j", Scope.COMPILE),buildGradle);
+        assertTrue(verifier.hasDependency("io.micronaut.liquibase", "micronaut-liquibase", Scope.COMPILE), buildGradle);
+        assertTrue(verifier.hasDependency("org.slf4j", "jul-to-slf4j", Scope.COMPILE), buildGradle);
     }
 
     @Test
@@ -83,7 +81,7 @@ class LiquibaseTest {
     }
 
     private static Map<String, String> generateProject(ProjectGenerator micronautProjectGenerator,
-                                                       Options options) throws Exception {
+        Options options) throws Exception {
         MapOutputHandler outputHandler = new MapOutputHandler();
         micronautProjectGenerator.generate(options, outputHandler);
         return outputHandler.getProject();

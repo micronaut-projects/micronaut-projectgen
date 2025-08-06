@@ -24,6 +24,9 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that adds support for Micrometer metrics with Datadog as the metrics reporter.
+ */
 @Requires(property = "micronaut.starter.feature.micrometer.datadog.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class DataDog extends MicrometerFeature implements MicrometerRegistryFeature, OpenRewriteFeature {

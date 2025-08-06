@@ -23,6 +23,9 @@ import jakarta.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Feature that adds support for R2DBC connection pooling.
+ */
 @Singleton
 public class R2dbcPool extends R2dbcConfigurationUtils implements OpenRewriteFeature, R2dbcFeature {
     @Override

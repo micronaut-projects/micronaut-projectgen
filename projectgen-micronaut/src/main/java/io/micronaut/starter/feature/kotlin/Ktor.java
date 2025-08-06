@@ -45,6 +45,10 @@ import jakarta.inject.Singleton;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Feature that enables support for building Micronaut applications using Ktor as the HTTP server.
+ * This feature is only applicable for Kotlin language and the default application type.
+ */
 @Requires(property = "micronaut.starter.feature.ktor.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Ktor implements KotlinApplicationFeature, ThirdPartyServerFeature, KotlinSpecificFeature, OpenRewriteFeature {

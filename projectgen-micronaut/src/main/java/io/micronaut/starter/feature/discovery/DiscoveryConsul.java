@@ -26,6 +26,14 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that adds support for service discovery using Consul.
+ * <p>
+ * This class registers both the {@link Consul} configuration and the
+ * {@link DiscoveryClient} feature if they are not already present.
+ * It integrates the Micronaut Discovery Client with Consul,
+ * enabling service registration and discovery within a Consul environment.
+ */
 @Requires(property = "micronaut.starter.feature.discovery.consul.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class DiscoveryConsul implements DiscoveryFeature, OpenRewriteFeature {

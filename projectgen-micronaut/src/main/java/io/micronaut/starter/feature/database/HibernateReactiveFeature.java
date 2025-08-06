@@ -26,6 +26,10 @@ import io.micronaut.starter.feature.testresources.TestResources;
 
 import java.util.Optional;
 
+/**
+ * Base feature class for Micronaut Data Hibernate Reactive support,
+ * providing configuration and dependency management for reactive JPA.
+ */
 public abstract class HibernateReactiveFeature extends EaseTestingFeature implements JpaFeature {
 
     public static final String JPA_DEFAULT_REACTIVE = "jpa.default.reactive";
@@ -46,23 +50,23 @@ public abstract class HibernateReactiveFeature extends EaseTestingFeature implem
 
         if (dbFeature instanceof PostgreSQL) {
             module.addDependency(Dependency.builder()
-                    .lookupArtifactId("client")
-                    .compile());
+                .lookupArtifactId("client")
+                .compile());
         }
         module.configuration().put(JPA_HIBERNATE_PROPERTIES_HBM2DDL,
-                generatorContext.getFeatures().hasFeature(MigrationFeature.class) ? Hbm2ddlAuto.NONE.toString() :
-                        Hbm2ddlAuto.UPDATE.toString());
+            generatorContext.getFeatures().hasFeature(MigrationFeature.class) ? Hbm2ddlAuto.NONE.toString()
+                : Hbm2ddlAuto.UPDATE.toString());
 
         module.configuration().put(JPA_DEFAULT_REACTIVE, true);
         Optional<DbType> optionalDbType = dbFeature.getDbType();
         if (!generatorContext.isFeaturePresent(TestResources.class)) {
             Optional<MigrationFeature> migrationFeature = generatorContext.getFeatures().getFeature(MigrationFeature.class);
             module.configuration().put(JPA_DEFAULT_PROPERTIES_HIBERNATE_CONNECTION_URL,
-                    migrationFeature.map(f -> "${datasources.default.url}").orElse(dbFeature.getJdbcUrl()));
+                migrationFeature.map(f -> "${datasources.default.url}").orElse(dbFeature.getJdbcUrl()));
             module.configuration().put(JPA_DEFAULT_PROPERTIES_HIBERNATE_CONNECTION_USERNAME,
-                    migrationFeature.map(f -> "${datasources.default.username}").orElse(dbFeature.getDefaultUser()));
+                migrationFeature.map(f -> "${datasources.default.username}").orElse(dbFeature.getDefaultUser()));
             module.configuration().put(JPA_DEFAULT_PROPERTIES_HIBERNATE_CONNECTION_PASSWORD,
-                    migrationFeature.map(f -> "${datasources.default.password}").orElse(dbFeature.getDefaultPassword()));
+                migrationFeature.map(f -> "${datasources.default.password}").orElse(dbFeature.getDefaultPassword()));
         } else {
             optionalDbType.ifPresent(type ->
                 module.configuration().put(JPA_HIBERNATE_PROPERTIES_CONNECTION + ".db-type", type.toString())
@@ -76,6 +80,11 @@ public abstract class HibernateReactiveFeature extends EaseTestingFeature implem
         }
     }
 
+    /**
+     * Returns the configuration property key used for the Hibernate reactive connection URL.
+     *
+     * @return the property key for the Hibernate reactive connection URL
+     */
     public String getUrlKey() {
         return JPA_DEFAULT_PROPERTIES_HIBERNATE_CONNECTION_URL;
     }

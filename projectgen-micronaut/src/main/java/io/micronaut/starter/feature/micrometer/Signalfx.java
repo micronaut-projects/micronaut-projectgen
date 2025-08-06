@@ -24,6 +24,9 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Micrometer feature that adds support for SignalFx metrics reporter.
+ */
 @Requires(property = "micronaut.starter.feature.micrometer.signalfx.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Signalfx extends MicrometerFeature implements MicrometerRegistryFeature, OpenRewriteFeature {

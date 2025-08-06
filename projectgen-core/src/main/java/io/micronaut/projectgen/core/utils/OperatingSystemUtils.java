@@ -23,6 +23,9 @@ import static io.micronaut.projectgen.core.options.OperatingSystem.MACOS;
 import static io.micronaut.projectgen.core.options.OperatingSystem.SOLARIS;
 import static io.micronaut.projectgen.core.options.OperatingSystem.WINDOWS;
 
+/**
+ * Utility class about {@link OperatingSystem}.
+ */
 public final class OperatingSystemUtils {
     private OperatingSystemUtils() {
     }

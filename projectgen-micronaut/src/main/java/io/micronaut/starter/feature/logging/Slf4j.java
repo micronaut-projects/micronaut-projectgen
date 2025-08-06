@@ -17,6 +17,9 @@ package io.micronaut.starter.feature.logging;
 
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 
+/**
+ * Utility class for creating SLF4J dependencies.
+ */
 public final class Slf4j {
     private static final String GROUP_ID_SLF4J = "org.slf4j";
 
@@ -25,6 +28,6 @@ public final class Slf4j {
 
     public static Dependency.Builder slf4jDependency() {
         return Dependency.builder()
-                .groupId(Slf4j.GROUP_ID_SLF4J);
+            .groupId(Slf4j.GROUP_ID_SLF4J);
     }
 }

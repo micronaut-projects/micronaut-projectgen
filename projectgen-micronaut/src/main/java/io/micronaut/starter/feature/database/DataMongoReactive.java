@@ -31,8 +31,8 @@ public class DataMongoReactive extends DataMongoFeature implements Transactional
     private static final String ASYNC_MONGODB_ARTIFACT = "mongodb-driver-reactivestreams";
 
     public DataMongoReactive(Data data,
-                             TestContainers testContainers,
-                             TestResources testResources) {
+        TestContainers testContainers,
+        TestResources testResources) {
         super(data, testContainers, testResources);
     }
 

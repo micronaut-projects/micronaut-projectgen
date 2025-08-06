@@ -23,11 +23,17 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that adds support for the Micronaut HTTP client.
+ * This feature is enabled when the property
+ * {@code micronaut.starter.feature.http.client.enabled} is set to true.
+ * Implements both {@link HttpClientFeature} and {@link OpenRewriteFeature}
+ * to provide HTTP client capabilities and related rewrite recipes.
+ */
 @Requires(property = "micronaut.starter.feature.http.client.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class HttpClient implements HttpClientFeature, OpenRewriteFeature {
     public static final String NAME = "http-client";
-
 
     @Override
     public String getName() {

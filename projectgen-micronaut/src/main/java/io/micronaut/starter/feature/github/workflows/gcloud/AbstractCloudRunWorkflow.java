@@ -59,9 +59,9 @@ public abstract class AbstractCloudRunWorkflow extends AbstractDockerRegistryWor
     @Override
     public List<Secret> getSecrets() {
         return Arrays.asList(
-                new Secret(GCLOUD_PROJECT_ID, "Project id."),
-                new Secret(GCLOUD_SA_KEY, "Service account key file. See more on [Creating and managing service accounts](https://cloud.google.com/iam/docs/creating-managing-service-accounts#iam-service-accounts-create-gcloud) and [Deployment permissions for CloudRun](https://cloud.google.com/run/docs/reference/iam/roles#additional-configuration)"),
-                new Secret(GCLOUD_IMAGE_REPOSITORY, "(Optional) Docker image repository in GCR. For image `[GCLOUD_REGION]/[GCLOUD_PROJECT_ID]/foo/bar:0.1`, the `foo` is an _image repository_.")
+            new Secret(GCLOUD_PROJECT_ID, "Project id."),
+            new Secret(GCLOUD_SA_KEY, "Service account key file. See more on [Creating and managing service accounts](https://cloud.google.com/iam/docs/creating-managing-service-accounts#iam-service-accounts-create-gcloud) and [Deployment permissions for CloudRun](https://cloud.google.com/run/docs/reference/iam/roles#additional-configuration)"),
+            new Secret(GCLOUD_IMAGE_REPOSITORY, "(Optional) Docker image repository in GCR. For image `[GCLOUD_REGION]/[GCLOUD_PROJECT_ID]/foo/bar:0.1`, the `foo` is an _image repository_.")
         );
     }
 
@@ -79,16 +79,16 @@ public abstract class AbstractCloudRunWorkflow extends AbstractDockerRegistryWor
         String workflowFilePath = ".github/workflows/" + getWorkflowFileName(generatorContext);
 
         module.addTemplate("gcloudCloudRunWorkflow",
-                new RockerTemplate(workflowFilePath,
-                        gcloudCloudRunWorkflow.template(generatorContext.getProject(), generatorContext.getBuildTool(),
-                                generatorContext.getJdkVersion(), isGraal)
-                )
+            new RockerTemplate(workflowFilePath,
+                gcloudCloudRunWorkflow.template(generatorContext.getProject(), generatorContext.getBuildTool(),
+                    generatorContext.getJdkVersion(), isGraal)
+            )
         );
 
         module.addTemplate("exampleController", WorkflowsUtils.createExampleController(
-                generatorContext.getProject(), generatorContext.getLanguage()));
+            generatorContext.getProject(), generatorContext.getLanguage()));
 
         module.addHelpTemplate(new RockerWritable(gcloudCloudRunWorkflowReadme.template(
-                this, generatorContext.getProject(), workflowFilePath)));
+            this, generatorContext.getProject(), workflowFilePath)));
     }
 }

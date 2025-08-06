@@ -17,14 +17,10 @@ package io.micronaut.starter.feature.database;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
-import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
-import io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils;
 import io.micronaut.starter.feature.Category;
-import io.micronaut.projectgen.core.feature.Feature;
-import io.micronaut.projectgen.core.feature.config.ApplicationConfiguration;
 import io.micronaut.starter.feature.micrometer.MicrometerFeature;
 import io.micronaut.starter.feature.testcontainers.ContributingTestContainerDependency;
 import io.micronaut.starter.feature.testresources.TestResources;
@@ -33,8 +29,10 @@ import jakarta.inject.Singleton;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
+/**
+ * Feature that adds support for Cassandra persistence in Micronaut applications.
+ */
 @Requires(property = "micronaut.starter.feature.cassandra.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Cassandra implements OpenRewriteFeature, ContributingTestContainerDependency {
@@ -77,7 +75,7 @@ public class Cassandra implements OpenRewriteFeature, ContributingTestContainerD
         } else {
             recipes.add(CASSANDRA_RECIPE_CONFIG);
         }
-            return recipes;
+        return recipes;
     }
 
     @Override

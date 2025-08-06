@@ -27,6 +27,12 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Adds support for reactive programming using Project Reactor.
+ *
+ * <p>When an HTTP client feature is present, it automatically
+ * adds the Reactor-based HTTP client implementation.</p>
+ */
 @Requires(property = "micronaut.starter.feature.reactor.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Reactor implements ReactiveFeature, OpenRewriteFeature {

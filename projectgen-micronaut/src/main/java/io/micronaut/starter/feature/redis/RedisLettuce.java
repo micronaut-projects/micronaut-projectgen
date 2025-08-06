@@ -25,6 +25,11 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature for configuring the Lettuce Redis driver.
+ *
+ * <p>Provides support for using Lettuce as the Redis client within the application.</p>
+ */
 @Requires(property = "micronaut.starter.feature.redis.lettuce.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class RedisLettuce implements OpenRewriteFeature {
@@ -54,4 +59,3 @@ public class RedisLettuce implements OpenRewriteFeature {
         return Category.DATABASE;
     }
 }
-

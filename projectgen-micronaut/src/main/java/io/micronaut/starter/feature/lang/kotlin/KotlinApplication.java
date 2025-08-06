@@ -42,6 +42,12 @@ import io.micronaut.projectgen.core.rocker.RockerTemplate;
 
 import jakarta.inject.Singleton;
 
+/**
+ * Kotlin application feature implementation.
+ * <p>
+ * Provides support for generating a Kotlin application, including the main application file
+ * and corresponding test files, depending on the selected application type and features.
+ */
 @Requires(property = "micronaut.starter.feature.kotlin.application.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class KotlinApplication implements KotlinApplicationFeature {
@@ -74,24 +80,44 @@ public class KotlinApplication implements KotlinApplicationFeature {
         }
     }
 
+    /**
+     * Determines whether an application file should be generated based on the application type
+     * and the presence of the {@link FunctionFeature}.
+     *
+     * @param generatorContext The context for project generation.
+     * @return true if an application file should be generated; false otherwise.
+     */
     protected boolean shouldGenerateApplicationFile(GeneratorContext generatorContext) {
         ApplicationType applicationType = ApplicationType.of(generatorContext.getOptions().template());
         return applicationType == ApplicationType.DEFAULT
-                || !generatorContext.getFeatures().hasFeature(FunctionFeature.class);
+            || !generatorContext.getFeatures().hasFeature(FunctionFeature.class);
     }
 
+    /**
+     * Adds the application template to the module.
+     *
+     * @param generatorContext The context for project generation.
+     * @param module The module to which the application template is added.
+     */
     protected void addApplication(GeneratorContext generatorContext, ModuleContext module) {
         module.addTemplate("application", new RockerTemplate(getPath(), application(generatorContext, module)));
     }
 
+    /**
+     * Builds the application {@link RockerModel} used to render the application source file.
+     *
+     * @param generatorContext The context for project generation.
+     * @param module The module in which the application is added.
+     * @return The Rocker model for the application template.
+     */
     protected RockerModel application(GeneratorContext generatorContext, ModuleContext module) {
         String defaultEnvironment = getDefaultEnvironment(module);
         boolean eagerInitSingleton = generatorContext.getFeatures().isFeaturePresent(RequireEagerSingletonInitializationFeature.class);
         return application.template(
-                generatorContext.getProject(),
-                generatorContext.getFeatures(),
-                new KotlinApplicationRenderingContext(defaultEnvironment, eagerInitSingleton),
-                generatorContext.hasFeature(Slf4jJulBridge.class)
+            generatorContext.getProject(),
+            generatorContext.getFeatures(),
+            new KotlinApplicationRenderingContext(defaultEnvironment, eagerInitSingleton),
+            generatorContext.hasFeature(Slf4jJulBridge.class)
         );
     }
 
@@ -99,26 +125,38 @@ public class KotlinApplication implements KotlinApplicationFeature {
         return moduleContext.hasConfigurationByEnvironment(Environment.DEVELOPMENT) ? Environment.DEVELOPMENT : null;
     }
 
+    /**
+     * Adds the application test template to the module.
+     *
+     * @param generatorContext The context for project generation.
+     * @param module The module to which the test template is added.
+     */
     protected void addApplicationTest(GeneratorContext generatorContext, ModuleContext module) {
         String testSourcePath = generatorContext.getTestSourcePath("/{packagePath}/{className}");
         module.addTemplate("applicationTest",
-                new RockerTemplate(testSourcePath, applicationTest(generatorContext))
+            new RockerTemplate(testSourcePath, applicationTest(generatorContext))
         );
     }
 
+    /**
+     * Builds the application test {@link RockerModel} based on the selected test framework and language.
+     *
+     * @param generatorContext The context for project generation.
+     * @return The Rocker model for the application test template.
+     */
     protected RockerModel applicationTest(GeneratorContext generatorContext) {
         TestFramework testFramework = generatorContext.getTestFramework();
         Project project = generatorContext.getProject();
         boolean transactional = !generatorContext.getFeatures().hasFeature(TransactionalNotSupported.class);
         TestRockerModelProvider provider = new DefaultTestRockerModelProvider(spock.template(project, transactional),
-                kotlinJunit.template(project, transactional),
-                kotlinJunit.template(project, transactional),
-                kotlinJunit.template(project, transactional),
-                koTest.template(project, transactional));
+            kotlinJunit.template(project, transactional),
+            kotlinJunit.template(project, transactional),
+            kotlinJunit.template(project, transactional),
+            koTest.template(project, transactional));
         return provider.findModel(generatorContext.getLanguage(), testFramework);
     }
 
-    protected String getPath() {
+    protected final String getPath() {
         return "src/main/kotlin/{packagePath}/Application.kt";
     }
 }

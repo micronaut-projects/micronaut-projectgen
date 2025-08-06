@@ -28,6 +28,11 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Configures the Micronaut Maven Compiler Plugin.
+ * This feature customizes the Maven compiler plugin with Micronaut-specific
+ * annotation processing arguments and sets default packaging for the project.
+ */
 @Singleton
 public class MicronautMavenCompilerPlugin implements MavenSpecificFeature, BuildFeature {
     @Override

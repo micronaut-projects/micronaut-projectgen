@@ -24,7 +24,6 @@ import io.micronaut.projectgen.core.feature.config.Configuration;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.generator.ModuleContext;
 import jakarta.inject.Singleton;
-import java.util.Map;
 
 /**
  * Feature to set the application name.
@@ -52,7 +51,7 @@ public class AppName implements Feature {
     public void apply(GeneratorContext generatorContext) {
         ModuleContext module = generatorContext.getRootModule();
         Configuration config = generatorContext.isFeaturePresent(DistributedConfigFeature.class)
-             ? module.bootstrapConfiguration()
+            ? module.bootstrapConfiguration()
             : module.configuration();
         config.put("micronaut.application.name", generatorContext.getProject().getPropertyName());
     }

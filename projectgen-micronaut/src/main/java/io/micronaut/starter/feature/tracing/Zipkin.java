@@ -29,6 +29,9 @@ import jakarta.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Adds support for distributed tracing with Zipkin.
+ */
 @Requires(property = "micronaut.starter.feature.tracing.zipkin.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Zipkin implements TracingFeature, MicronautServerDependent, OpenRewriteFeature {

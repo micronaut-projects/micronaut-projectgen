@@ -19,11 +19,15 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that provides integration with Amazon Simple Email Service (SES) for sending transactional emails.
+ * This feature is conditionally loaded based on the {@code micronaut.starter.feature.email.amazon.ses.enabled} property.
+ * It extends {@link EmailFeature} and configures the SES-specific module and recipes.
+ */
 @Requires(property = "micronaut.starter.feature.email.amazon.ses.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class AmazonSesEmailFeature extends EmailFeature {
@@ -53,7 +57,7 @@ public class AmazonSesEmailFeature extends EmailFeature {
     }
 
     @Override
-    public List<String> getRecipes(GeneratorContext generatorContext){
+    public List<String> getRecipes(GeneratorContext generatorContext) {
         return List.of("io.micronaut.starter.feature.amazon-ses-email");
     }
 }

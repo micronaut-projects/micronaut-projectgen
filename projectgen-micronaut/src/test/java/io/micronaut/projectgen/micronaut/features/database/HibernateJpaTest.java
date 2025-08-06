@@ -26,6 +26,7 @@ class HibernateJpaTest {
         assertNotNull(buildGradle);
         assertEquals("update", applicationProperties.getProperty("jpa.default.properties.hibernate.hbm2ddl.auto"));
     }
+
     @Test
     void hibernateJpaWithMigrationFeaturesConfiguration(PreviewGenerator previewGenerator) throws Exception {
         Options options = OptionsFixture.defaultGradle().features(List.of("hibernate-jpa", "flyway")).build();

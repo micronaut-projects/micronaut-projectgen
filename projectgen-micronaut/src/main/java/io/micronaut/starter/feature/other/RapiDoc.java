@@ -27,6 +27,13 @@ import jakarta.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Provides the RapiDoc view integration for OpenAPI documentation.
+ * <p>
+ * Extends {@link OpenApiView} to add static resources and URL mappings
+ * specific to the RapiDoc UI.
+ * </p>
+ */
 @Requires(property = "micronaut.starter.feature.rapidoc.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class RapiDoc extends OpenApiView implements ContributingStaticResources, OpenRewriteFeature {

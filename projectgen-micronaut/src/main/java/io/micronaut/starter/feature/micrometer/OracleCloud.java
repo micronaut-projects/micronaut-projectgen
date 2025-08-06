@@ -25,6 +25,10 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Micrometer feature that adds support for Micrometer metrics
+ * with the Oracle Cloud reporter.
+ */
 @Requires(property = "micronaut.starter.feature.micrometer.oracle.cloud.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class OracleCloud extends MicrometerFeature implements OracleCloudFeature, MicrometerRegistryFeature, OpenRewriteFeature {

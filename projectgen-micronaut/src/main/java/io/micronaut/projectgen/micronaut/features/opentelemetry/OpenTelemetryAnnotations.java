@@ -23,6 +23,10 @@ import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils;
 import jakarta.inject.Singleton;
 
+/**
+ * Feature that provides OpenTelemetry annotations support for Micronaut applications.
+ * This feature adds the necessary annotation processor for OpenTelemetry tracing annotations.
+ */
 @Requires(property = "micronaut.starter.feature.tracing.opentelemetry.annotations.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class OpenTelemetryAnnotations implements OpenTelemetryFeature {
@@ -57,8 +61,8 @@ public class OpenTelemetryAnnotations implements OpenTelemetryFeature {
     public void apply(GeneratorContext generatorContext) {
         ModuleContext module = generatorContext.getRootModule();
         module.addDependency(MicronautDependencyUtils.annotationProcessor(generatorContext.getBuildTool(),
-                MicronautDependencyUtils.GROUP_ID_MICRONAUT_TRACING,
-                MICRONAUT_TRACING_OPENTELEMETRY_ANNOTATION_ARTIFACTID,
-                MICRONAUT_TRACING_VERSION));
+            MicronautDependencyUtils.GROUP_ID_MICRONAUT_TRACING,
+            MICRONAUT_TRACING_OPENTELEMETRY_ANNOTATION_ARTIFACTID,
+            MICRONAUT_TRACING_VERSION));
     }
 }

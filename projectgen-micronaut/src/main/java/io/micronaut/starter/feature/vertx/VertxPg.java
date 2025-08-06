@@ -18,13 +18,15 @@ package io.micronaut.starter.feature.vertx;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.ModuleContext;
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.Feature;
 import jakarta.inject.Singleton;
 
+/**
+ * Adds support for the Vertx Reactive PostgreSQL Client.
+ */
 @Requires(property = "micronaut.starter.feature.vertx.pg.client.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class VertxPg implements Feature {
@@ -54,9 +56,9 @@ public class VertxPg implements Feature {
         module.configuration().put("vertx.pg.client.database.password", "password");
         module.configuration().put("vertx.pg.client.database.maxSize", 5);
         module.addDependency(Dependency.builder()
-                .groupId("io.micronaut.sql")
-                .artifactId("micronaut-vertx-pg-client")
-                .compile());
+            .groupId("io.micronaut.sql")
+            .artifactId("micronaut-vertx-pg-client")
+            .compile());
     }
 
     @Override

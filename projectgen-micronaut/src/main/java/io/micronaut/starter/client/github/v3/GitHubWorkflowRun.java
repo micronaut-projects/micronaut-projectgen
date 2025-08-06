@@ -34,21 +34,30 @@ public class GitHubWorkflowRun {
 
     @JsonCreator
     public GitHubWorkflowRun(@JsonProperty("id") Long id,
-                             @JsonProperty("status") String status,
-                             @JsonProperty("conclusion") String conclusion) {
+        @JsonProperty("status") String status,
+        @JsonProperty("conclusion") String conclusion) {
         this.id = id;
         this.status = status;
         this.conclusion = conclusion;
     }
 
+    /**
+     * @return ID of the workflow run.
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     * @return The current status of the workflow run.
+     */
     public String getStatus() {
         return status;
     }
 
+    /**
+     * @return The conclusion of the workflow run.
+     */
     public String getConclusion() {
         return conclusion;
     }

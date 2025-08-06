@@ -17,6 +17,9 @@ package io.micronaut.starter.feature.security;
 
 import io.micronaut.core.order.Ordered;
 
+/**
+ * Enumeration of supported security authentication modes with defined ordering.
+ */
 public enum SecurityAuthenticationMode implements Ordered {
     IDTOKEN("idtoken", 1),
     COOKIE("cookie", 2),
@@ -27,7 +30,7 @@ public enum SecurityAuthenticationMode implements Ordered {
     private final int order;
 
     SecurityAuthenticationMode(String value,
-                               int order) {
+        int order) {
         this.value = value;
         this.order = order;
     }

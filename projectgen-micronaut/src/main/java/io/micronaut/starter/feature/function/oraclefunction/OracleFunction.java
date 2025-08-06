@@ -43,27 +43,32 @@ import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.rocker.RockerTemplate;
 import jakarta.inject.Singleton;
 
+/**
+ * Feature implementation for Oracle Cloud Functions.
+ * Supports writing functions deployable to Oracle Cloud Function service.
+ * Manages dependencies, build commands, and feature selection for Oracle functions.
+ */
 @Requires(property = "micronaut.starter.feature.oracle.function.http.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 @Primary
 public class OracleFunction extends AbstractFunctionFeature implements OracleCloudFeature {
     public static final String GROUP_ID_COM_FNPROJECT_FN = "com.fnproject.fn";
     public static final Dependency COM_FNPROJECT_RUNTIME = Dependency.builder()
-            .groupId(GROUP_ID_COM_FNPROJECT_FN)
-            .artifactId("runtime")
-            .runtime()
-            .build();
+        .groupId(GROUP_ID_COM_FNPROJECT_FN)
+        .artifactId("runtime")
+        .runtime()
+        .build();
     private static final Dependency MICRONAUT_OCI_FUNCTION_HTTP = MicronautDependencyUtils
-            .ociDependency()
-            .artifactId("micronaut-oraclecloud-function-http")
-            .compile()
-            .build();
+        .ociDependency()
+        .artifactId("micronaut-oraclecloud-function-http")
+        .compile()
+        .build();
 
     private static final Dependency MICRONAUT_OCI_FUNCTION_HTTP_TEST = MicronautDependencyUtils
-            .ociDependency()
-            .artifactId("micronaut-oraclecloud-function-http-test")
-            .test()
-            .build();
+        .ociDependency()
+        .artifactId("micronaut-oraclecloud-function-http-test")
+        .test()
+        .build();
     private final SimpleLogging simpleLogging;
 
     public OracleFunction(SimpleLogging simpleLogging) {
@@ -177,6 +182,12 @@ public class OracleFunction extends AbstractFunctionFeature implements OracleClo
         return "oracle_function";
     }
 
+    /**
+     * Adds necessary dependencies for the function project when Maven is the selected build tool.
+     *
+     * @param options The project generation options.
+     * @param module The module context to which dependencies will be added.
+     */
     protected void addDependencies(Options options, ModuleContext module) {
         if (OptionUtils.hasMavenBuildTool(options)) {
             module.addDependency(COM_FNPROJECT_RUNTIME);
@@ -185,12 +196,18 @@ public class OracleFunction extends AbstractFunctionFeature implements OracleClo
         }
     }
 
+    /**
+     * Adds the {@code func.yml} template to the module for Project configuration.
+     *
+     * @param module The module context to which the template will be added.
+     * @param project The current project configuration.
+     */
     protected void addFuncYamlTemplate(ModuleContext module, Project project) {
         module.addTemplate(
-                "func.yml", new RockerTemplate(
-                        "func.yml",
-                        projectFnFunc.template(project
-                        ))
+            "func.yml", new RockerTemplate(
+                "func.yml",
+                projectFnFunc.template(project
+                ))
         );
     }
 }

@@ -24,6 +24,12 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Implements a Langchain4j embedded store using ElasticSearch.
+ *
+ * Integrates ElasticSearch as a backend for Langchain4j and provides
+ * OpenRewrite recipes to automate setup.
+ */
 @Requires(property = "micronaut.starter.feature.langchain4j.store.elasticsearch.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class ElasticSearchLangchain4jEmbeddedStore implements Langchain4jEmbeddedStore, OpenRewriteFeature {
@@ -32,7 +38,7 @@ public class ElasticSearchLangchain4jEmbeddedStore implements Langchain4jEmbedde
 
     @Override
     public String getTitle() {
-        return "Elastic Search Langchain4j"+ Langchain4jEmbeddedStore.super.getTitle();
+        return "Elastic Search Langchain4j" + Langchain4jEmbeddedStore.super.getTitle();
     }
 
     @Override

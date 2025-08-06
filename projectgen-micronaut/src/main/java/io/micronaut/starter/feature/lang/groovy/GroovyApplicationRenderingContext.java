@@ -20,6 +20,10 @@ import io.micronaut.core.annotation.NonNull;
 import io.micronaut.projectgen.micronaut.template.lang.groovy.contextConfigurer;
 import io.micronaut.starter.feature.lang.ApplicationRenderingContext;
 
+/**
+ * Groovy-specific implementation of {@link ApplicationRenderingContext} that generates
+ * the Rocker output for configuring the application context in Groovy.
+ */
 public class GroovyApplicationRenderingContext extends ApplicationRenderingContext {
 
     public GroovyApplicationRenderingContext(String defaultEnvironment, boolean eagerSingletons) {

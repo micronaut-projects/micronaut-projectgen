@@ -24,6 +24,9 @@ import io.micronaut.projectgen.core.generator.Project;
 import io.micronaut.starter.feature.function.HandlerClassFeature;
 import jakarta.inject.Singleton;
 
+/**
+ * Provides the AWS Lambda handler class for Micronaut applications of type FUNCTION.
+ */
 @Requires(property = "micronaut.starter.feature.aws.lambda.handler.function.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class FunctionAwsLambdaHandlerProvider implements HandlerClassFeature {

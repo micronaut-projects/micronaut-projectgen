@@ -27,6 +27,13 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Implements a Langchain4j embedded store using Oracle as the backend.
+ *
+ * Integrates Oracle support and ensures the Hikari JDBC connection pool
+ * feature is added if not already present.
+ * Provides OpenRewrite recipes.
+ */
 @Requires(property = "micronaut.starter.feature.langchain4j.store.oracle.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class OracleLangchain4jEmbeddedStore implements Langchain4jEmbeddedStore, OpenRewriteFeature {

@@ -25,6 +25,9 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Adds support for server-side view rendering using Soy (Closure Templates).
+ */
 @Requires(property = "micronaut.starter.feature.views.soy.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Soy implements ViewFeature, MicronautServerDependent, OpenRewriteFeature {

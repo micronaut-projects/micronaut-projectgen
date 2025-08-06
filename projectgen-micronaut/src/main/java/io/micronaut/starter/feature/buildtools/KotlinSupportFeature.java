@@ -80,8 +80,8 @@ public interface KotlinSupportFeature extends OneOfFeature {
     }
 
     static boolean shouldApply(GeneratorContext generatorContext) {
-        return OptionUtils.hasGradleBuildTool(generatorContext.getOptions()) &&
-                KotlinSupportFeature.shouldApply(generatorContext.getFeatures().language(), generatorContext.getFeatures().testFramework());
+        return OptionUtils.hasGradleBuildTool(generatorContext.getOptions())
+            && KotlinSupportFeature.shouldApply(generatorContext.getFeatures().language(), generatorContext.getFeatures().testFramework());
     }
 
     static boolean shouldApply(LanguageFeature languageFeature, TestFeature testFeature) {

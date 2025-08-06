@@ -32,6 +32,10 @@ import io.micronaut.projectgen.micronaut.template.buildtools.maven.extensions;
 import io.micronaut.projectgen.core.rocker.RockerTemplate;
 import jakarta.inject.Singleton;
 
+/**
+ * Feature to add Gradle Enterprise plugin support, enabling integration
+ * with Gradle Enterprise and scans.gradle.com.
+ */
 @Requires(property = "micronaut.starter.feature.gradle.enterprise.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class GradleEnterprise implements Feature, GradleEnterpriseConfiguration {
@@ -74,20 +78,39 @@ public class GradleEnterprise implements Feature, GradleEnterpriseConfiguration 
         }
     }
 
+    /**
+     * Creates a {@link GradlePlugin} instance configured with the Gradle Enterprise plugin.
+     *
+     * @param configuration The Gradle Enterprise configuration to apply.
+     * @return A {@link GradlePlugin} configured with the Gradle Enterprise plugin.
+     */
     protected GradlePlugin gradlePlugin(GradleEnterpriseConfiguration configuration) {
         return GradlePlugin.builder()
-                .gradleFile(GradleFile.SETTINGS)
-                .id(GRADLE_ENTERPRISE_PLUGIN_ID)
-                .lookupArtifactId(GRADLE_ENTERPRISE_ARTIFACT_ID)
-                .settingsExtension(new RockerWritable(gradleEnterprise.template(configuration)))
-                .build();
+            .gradleFile(GradleFile.SETTINGS)
+            .id(GRADLE_ENTERPRISE_PLUGIN_ID)
+            .lookupArtifactId(GRADLE_ENTERPRISE_ARTIFACT_ID)
+            .settingsExtension(new RockerWritable(gradleEnterprise.template(configuration)))
+            .build();
     }
 
+    /**
+     * Applies the necessary Maven templates to enable Gradle Enterprise support.
+     *
+     * @param generatorContext The generator context containing the project state.
+     * @param server The Gradle Enterprise configuration to use for the templates.
+     */
     protected void applyMaven(GeneratorContext generatorContext, GradleEnterpriseConfiguration server) {
         addMavenTemplate(generatorContext, EXTENSIONS_XML, extensionsRockerModel(generatorContext));
         addMavenTemplate(generatorContext, GRADLE_ENTERPRISE_XML, io.micronaut.projectgen.micronaut.template.buildtools.maven.gradleEnterprise.template(server));
     }
 
+    /**
+     * Adds a Maven template to the root module using the given name and {@link RockerModel}.
+     *
+     * @param generatorContext The generator context containing the project state.
+     * @param name The name of the template file.
+     * @param rockerModel The rocker model used to generate the template content.
+     */
     protected void addMavenTemplate(GeneratorContext generatorContext, String name, RockerModel rockerModel) {
         String templateName = name.contains(DOT) ? name.substring(0, name.indexOf(DOT)) : name;
         String path = String.join(SLASH, MAVEN_FOLDER, name);
@@ -97,8 +120,8 @@ public class GradleEnterprise implements Feature, GradleEnterpriseConfiguration 
 
     private static RockerModel extensionsRockerModel(GeneratorContext generatorContext) {
         return extensions.template(
-                generatorContext.resolveCoordinate(ARTIFACT_ID_GRADLE_ENTERPRISE_MAVEN_EXTENSION).getVersion(),
-                generatorContext.resolveCoordinate(ARTIFACT_ID_COMMON_CUSTOM_USER_DATA_MAVEN_EXTENSION).getVersion());
+            generatorContext.resolveCoordinate(ARTIFACT_ID_GRADLE_ENTERPRISE_MAVEN_EXTENSION).getVersion(),
+            generatorContext.resolveCoordinate(ARTIFACT_ID_COMMON_CUSTOM_USER_DATA_MAVEN_EXTENSION).getVersion());
     }
 
     @Override

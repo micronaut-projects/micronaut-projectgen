@@ -33,18 +33,21 @@ import io.micronaut.starter.feature.server.Netty;
 import io.micronaut.projectgen.micronaut.features.test.AssertJ;
 import jakarta.inject.Singleton;
 
+/**
+ * Camunda Platform 7 feature for embedding the Camunda Workflow Engine in Micronaut applications.
+ */
 @Requires(property = "micronaut.starter.feature.camunda.platform7.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Platform7 implements CamundaCommunityFeature {
     public static final String NAME = "camunda-platform7";
 
     private static final Dependency.Builder DEPENDENCY_PLATFORM7 = Dependency.builder()
-            .lookupArtifactId("micronaut-camunda-bpm-feature")
-            .compile();
+        .lookupArtifactId("micronaut-camunda-bpm-feature")
+        .compile();
 
     private static final Dependency.Builder DEPENDENCY_BPM_ASSERT = Dependency.builder()
-            .lookupArtifactId("camunda-bpm-assert")
-            .test();
+        .lookupArtifactId("camunda-bpm-assert")
+        .test();
 
     private final DatabaseDriverFeature defaultDbFeature;
     private final Jetty jetty;

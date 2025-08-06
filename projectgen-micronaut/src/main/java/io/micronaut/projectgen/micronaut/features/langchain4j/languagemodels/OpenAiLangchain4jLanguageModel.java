@@ -24,6 +24,10 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that provides integration with OpenAI's Langchain4j language model in Micronaut.
+ * Adds the necessary configuration and recipes for OpenAI language model support.
+ */
 @Requires(property = "micronaut.starter.feature.langchain4j.openai.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class OpenAiLangchain4jLanguageModel implements Langchain4jLanguageModel, OpenRewriteFeature {

@@ -19,6 +19,10 @@ import io.micronaut.core.annotation.NonNull;
 import io.micronaut.starter.feature.MicronautCommunityFeature;
 import io.micronaut.starter.options.MicronautVersion;
 
+/**
+ * Community feature interface for Camunda BPM integration with Micronaut.
+ * Provides default contributor information and specifies the Micronaut version compatibility.
+ */
 public interface CamundaCommunityFeature extends MicronautCommunityFeature {
 
     @Override

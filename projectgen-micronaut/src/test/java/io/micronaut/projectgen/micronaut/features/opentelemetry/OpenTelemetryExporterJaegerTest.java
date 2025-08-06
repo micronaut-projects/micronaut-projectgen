@@ -1,12 +1,9 @@
 package io.micronaut.projectgen.micronaut.features.opentelemetry;
 
-import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.buildtools.Scope;
 import io.micronaut.projectgen.core.generator.ProjectGenerator;
 import io.micronaut.projectgen.core.io.MapOutputHandler;
-import io.micronaut.projectgen.core.options.GenericOptionsBuilder;
 import io.micronaut.projectgen.core.options.Options;
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.micronaut.OptionsFixture;
 import io.micronaut.projectgen.test.BuildTestVerifier;
 import io.micronaut.projectgen.test.ConfigurationUtils;
@@ -37,7 +34,7 @@ class OpenTelemetryExporterJaegerTest {
         String buildGradle = project.get("build.gradle.kts");
         assertNotNull(buildGradle);
         BuildTestVerifier verifier = BuildTestVerifier.of(buildGradle, options);
-        assertTrue(verifier.hasDependency("io.opentelemetry", "opentelemetry-exporter-otlp", Scope.COMPILE),buildGradle);
+        assertTrue(verifier.hasDependency("io.opentelemetry", "opentelemetry-exporter-otlp", Scope.COMPILE), buildGradle);
     }
 
     @Test
@@ -51,7 +48,7 @@ class OpenTelemetryExporterJaegerTest {
     }
 
     private static Map<String, String> generateProject(ProjectGenerator micronautProjectGenerator,
-                                                       Options options) throws Exception {
+        Options options) throws Exception {
         MapOutputHandler outputHandler = new MapOutputHandler();
         micronautProjectGenerator.generate(options, outputHandler);
         return outputHandler.getProject();

@@ -24,6 +24,12 @@ import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import jakarta.inject.Singleton;
 
+/**
+ * Adds the GMavenPlus plugin to Maven projects.
+ *
+ * This feature integrates Groovy support via the GMavenPlus plugin
+ * and includes a link to its official documentation.
+ */
 @Requires(property = "micronaut.starter.feature.groovy.maven.plus.plugin.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class GroovyMavenPlusPlugin implements MavenSpecificFeature {
@@ -51,9 +57,9 @@ public class GroovyMavenPlusPlugin implements MavenSpecificFeature {
         ModuleContext module = generatorContext.getRootModule();
         if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())) {
             module.addBuildPlugin(MavenPlugin.builder()
-                    .groupId(GROUP_ID_GMAVEN)
-                    .artifactId(ARTIFACT_ID_GMAVEN)
-                    .build());
+                .groupId(GROUP_ID_GMAVEN)
+                .artifactId(ARTIFACT_ID_GMAVEN)
+                .build());
         }
     }
 

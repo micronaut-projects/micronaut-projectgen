@@ -19,7 +19,10 @@ import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.starter.feature.database.TestContainers;
 
-public abstract class EaseTestingFeature implements Feature  {
+/**
+ * Abstract base class for testing features integrating TestResources and TestContainers.
+ */
+public abstract class EaseTestingFeature implements Feature {
     private final TestResources testResources;
     private final TestContainers testContainers;
 
@@ -29,7 +32,7 @@ public abstract class EaseTestingFeature implements Feature  {
     }
 
     protected EaseTestingFeature(TestContainers testContainers,
-                                 TestResources testResources) {
+        TestResources testResources) {
         this.testContainers = testContainers;
         this.testResources = testResources;
     }

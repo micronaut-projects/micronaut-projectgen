@@ -36,10 +36,16 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Test feature for Micronaut HTTP client dependencies that provides
+ * OpenRewrite recipes conditionally based on the project setup and features.
+ * This feature is not visible to users.
+ */
 @Requires(property = "micronaut.starter.feature.http.client.test.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class HttpClientTest implements OpenRewriteFeature {
     public static final String ARTIFACT_ID_MICRONAUT_HTTP_CLIENT = "micronaut-http-client";
+    private static final String ARTIFACT_ID_MICRONAUT_HTTP_CLIENT_JDK = "micronaut-http-client-jdk";
 
     @Override
     public String getName() {
@@ -74,12 +80,10 @@ public class HttpClientTest implements OpenRewriteFeature {
         return recipes;
     }
 
-    private static final String ARTIFACT_ID_MICRONAUT_HTTP_CLIENT_JDK = "micronaut-http-client-jdk";
-
     private boolean hasHttpClientFeatureDependencyInScope(@NonNull GeneratorContext generatorContext, @NonNull Scope scope) {
         ModuleContext module = generatorContext.getRootModule();
-        return module.hasDependencyInScope(MicronautDependencyUtils.GROUP_ID_MICRONAUT, ARTIFACT_ID_MICRONAUT_HTTP_CLIENT, scope) ||
-                module.hasDependencyInScope(MicronautDependencyUtils.GROUP_ID_MICRONAUT, ARTIFACT_ID_MICRONAUT_HTTP_CLIENT_JDK, scope);
+        return module.hasDependencyInScope(MicronautDependencyUtils.GROUP_ID_MICRONAUT, ARTIFACT_ID_MICRONAUT_HTTP_CLIENT, scope)
+            || module.hasDependencyInScope(MicronautDependencyUtils.GROUP_ID_MICRONAUT, ARTIFACT_ID_MICRONAUT_HTTP_CLIENT_JDK, scope);
     }
 
     @Override

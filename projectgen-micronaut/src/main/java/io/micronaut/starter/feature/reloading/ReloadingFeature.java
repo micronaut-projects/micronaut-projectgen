@@ -15,10 +15,15 @@
  */
 package io.micronaut.starter.feature.reloading;
 
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.OneOfFeature;
 
+/**
+ * Marker interface for features that provide support for
+ * class reloading during development.
+ *
+ * <p>Belongs to the developer tools category.</p>
+ */
 public interface ReloadingFeature extends OneOfFeature {
 
     @Override

@@ -19,12 +19,16 @@ import io.micronaut.core.annotation.Nullable;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 
+/**
+ * Abstract base feature for OAuth2 security, managing the inclusion of
+ * SecurityOAuth2 and optionally SecurityJWT features.
+ */
 public abstract class SecurityOAuth2Feature implements Feature {
     private final SecurityOAuth2 securityOAuth2;
     private final SecurityJWT securityJWT;
 
     public SecurityOAuth2Feature(SecurityOAuth2 securityOAuth2,
-                                 @Nullable SecurityJWT securityJWT) {
+        @Nullable SecurityJWT securityJWT) {
         this.securityOAuth2 = securityOAuth2;
         this.securityJWT = securityJWT;
     }

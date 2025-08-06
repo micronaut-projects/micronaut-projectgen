@@ -19,11 +19,8 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
-import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.starter.feature.Category;
-import io.micronaut.projectgen.core.feature.Feature;
 
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.projectgen.micronaut.features.httpclient.HttpClient;
@@ -32,6 +29,12 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that adds reactive support using RxJava 2.
+ *
+ * <p>Automatically adds RxJava 2 based HTTP server and client features
+ * if Netty server or HTTP client are selected.</p>
+ */
 @Requires(property = "micronaut.starter.feature.rxjava2.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class RxJava2 implements OpenRewriteFeature {

@@ -27,6 +27,9 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 
+/**
+ * Utility class for retrieving Micronaut and Java versioning information used during project generation.
+ */
 public class VersionInfo {
     private static final Logger LOG = LoggerFactory.getLogger(VersionInfo.class);
 
@@ -103,7 +106,7 @@ public class VersionInfo {
     public static Map<String, String> getDependencyVersions() {
         Map<String, String> map = new LinkedHashMap<>();
         VERSIONS.entrySet().stream().sorted(Comparator.comparing(o -> o.getKey().toString()))
-                .forEach(entry -> map.put(entry.getKey().toString(), entry.getValue().toString()));
+            .forEach(entry -> map.put(entry.getKey().toString(), entry.getValue().toString()));
         return Collections.unmodifiableMap(map);
     }
 
@@ -163,7 +166,7 @@ public class VersionInfo {
         int dotPos = version.indexOf('.');
         int dashPos = version.indexOf('-');
         return JdkVersion.valueOf(Integer.parseInt(version.substring(0,
-                dotPos > -1 ? dotPos : dashPos > -1 ? dashPos : version.length())));
+            dotPos > -1 ? dotPos : dashPos > -1 ? dashPos : version.length())));
     }
 
     public static String toJdkVersion(int javaVersion) {

@@ -38,30 +38,34 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 
+/**
+ * Feature that enables support for the Groovy programming language in a Micronaut application.
+ * Configures necessary dependencies and plugins based on the selected build tool and application type.
+ */
 @Requires(property = "micronaut.starter.feature.groovy.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Groovy implements LanguageFeature {
     public static final String GROUP_ID_GROOVY = "org.apache.groovy";
     protected static final Dependency DEPENDENCY_MICRONAUT_GROOVY_RUNTIME = MicronautDependencyUtils.groovyDependency()
-            .artifactId("micronaut-runtime-groovy")
-            .compile()
-            .build();
+        .artifactId("micronaut-runtime-groovy")
+        .compile()
+        .build();
     protected static final Dependency DEPENDENCY_MICRONAUT_INJECT_GROOVY = MicronautDependencyUtils.coreDependency()
-            .artifactId("micronaut-inject-groovy")
-            .developmentOnly()
-            .build();
+        .artifactId("micronaut-inject-groovy")
+        .developmentOnly()
+        .build();
     protected static final Dependency DEPENDENCY_GROOVY = new Dependency.Builder()
-            .groupId(GROUP_ID_GROOVY)
-            .artifactId("groovy")
-            .versionProperty("groovy.version")
-            .compile()
-            .build();
+        .groupId(GROUP_ID_GROOVY)
+        .artifactId("groovy")
+        .versionProperty("groovy.version")
+        .compile()
+        .build();
     protected final List<GroovyApplicationFeature> applicationFeatures;
 
     protected final GroovyMavenPlusPlugin groovyMavenPlusPlugin;
 
     public Groovy(List<GroovyApplicationFeature> applicationFeatures,
-                  GroovyMavenPlusPlugin groovyMavenPlusPlugin) {
+        GroovyMavenPlusPlugin groovyMavenPlusPlugin) {
         this.applicationFeatures = applicationFeatures;
         this.groovyMavenPlusPlugin = groovyMavenPlusPlugin;
     }
@@ -79,14 +83,24 @@ public class Groovy implements LanguageFeature {
         processSelectedFeatured(featureContext, feature -> true);
     }
 
+    /**
+     * Processes and adds a selected application feature to the given feature context based on the provided filter.
+     * <p>
+     * If no {@link ApplicationFeature} is present in the feature context, it attempts to find the first
+     * feature from the application features list that matches the given filter and supports the current application type,
+     * then adds it to the feature context.
+     *
+     * @param featureContext the feature context to process and potentially modify
+     * @param filter a predicate to filter which features to consider for addition
+     */
     protected void processSelectedFeatured(FeatureContext featureContext, Predicate<Feature> filter) {
         if (!featureContext.isPresent(ApplicationFeature.class)) {
             ApplicationType type = ApplicationType.of(featureContext.getOptions().template());
             applicationFeatures.stream()
-                    .filter(filter)
-                    .filter(f -> f.supports(GenericOptionsBuilder.builder().template(type.toString()).build()))
-                    .findFirst()
-                    .ifPresent(featureContext::addFeature);
+                .filter(filter)
+                .filter(f -> f.supports(GenericOptionsBuilder.builder().template(type.toString()).build()))
+                .findFirst()
+                .ifPresent(featureContext::addFeature);
         }
     }
 

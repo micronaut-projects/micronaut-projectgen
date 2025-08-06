@@ -30,6 +30,11 @@ import jakarta.inject.Singleton;
 import java.util.Collections;
 import java.util.Map;
 
+/**
+ * Feature that enables support for Micronaut Data JPA using Hibernate.
+ * <p>
+ * Applies required dependencies, configuration, and integrates with JDBC and data features.
+ */
 @Requires(property = "micronaut.starter.feature.data.jpa.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class DataJpa implements JpaFeature, DataFeature {
@@ -71,20 +76,20 @@ public class DataJpa implements JpaFeature, DataFeature {
         ModuleContext module = generatorContext.getRootModule();
         module.addDependency(DataFeature.dataProcessorDependency(generatorContext.getBuildTool()));
         module.addDependency(Dependency.builder()
-                .groupId("io.micronaut.data")
-                .artifactId("micronaut-data-hibernate-jpa")
-                .compile());
+            .groupId("io.micronaut.data")
+            .artifactId("micronaut-data-hibernate-jpa")
+            .compile());
         DatabaseDriverFeature dbFeature = generatorContext.getRequiredFeature(DatabaseDriverFeature.class);
         ApplicationConfiguration configuration = module.configuration();
         configuration.addNested(getDatasourceConfig(generatorContext, dbFeature));
         configuration.addNested(JPA_HIBERNATE_PROPERTIES_HBM2DDL,
-                generatorContext.getFeatures().hasFeature(MigrationFeature.class) ? Hbm2ddlAuto.NONE.toString() :
-                        Hbm2ddlAuto.UPDATE.toString());
+            generatorContext.getFeatures().hasFeature(MigrationFeature.class) ? Hbm2ddlAuto.NONE.toString()
+                : Hbm2ddlAuto.UPDATE.toString());
 
         Configuration testConfig = module.testConfiguration();
         testConfig.addNested(JPA_HIBERNATE_PROPERTIES_HBM2DDL,
-                generatorContext.getFeatures().hasFeature(MigrationFeature.class) ? Hbm2ddlAuto.NONE.toString() :
-                        Hbm2ddlAuto.CREATE_DROP.toString());
+            generatorContext.getFeatures().hasFeature(MigrationFeature.class) ? Hbm2ddlAuto.NONE.toString()
+                : Hbm2ddlAuto.CREATE_DROP.toString());
     }
 
     @Override

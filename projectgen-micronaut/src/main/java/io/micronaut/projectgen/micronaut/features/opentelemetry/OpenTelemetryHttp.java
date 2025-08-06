@@ -27,14 +27,19 @@ import io.micronaut.starter.feature.server.MicronautServerDependent;
 import io.micronaut.starter.feature.tracing.TracingFeature;
 import jakarta.inject.Singleton;
 
+/**
+ * Feature that provides OpenTelemetry HTTP integration for Micronaut applications.
+ * This feature adds the necessary dependencies for OpenTelemetry tracing in HTTP applications,
+ * including automatic span creation for HTTP requests and responses.
+ */
 @Requires(property = "micronaut.starter.feature.tracing.opentelemetry.http.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class OpenTelemetryHttp implements TracingFeature, MicronautServerDependent {
 
     private static final Dependency MICRONAUT_OPEN_TELEMETRY_HTTP = MicronautDependencyUtils.tracingDependency()
-            .artifactId("micronaut-tracing-opentelemetry-http")
-            .compile()
-            .build();
+        .artifactId("micronaut-tracing-opentelemetry-http")
+        .compile()
+        .build();
 
     @Override
     public boolean isVisible() {

@@ -26,6 +26,10 @@ import io.micronaut.projectgen.core.rocker.RockerTemplate;
 import io.micronaut.projectgen.core.template.Template;
 import jakarta.inject.Singleton;
 
+/**
+ * CI workflow feature for Google Cloud Build.
+ * Adds a Google Cloud Build configuration file for building a Micronaut application.
+ */
 @Requires(property = "micronaut.starter.feature.google.cloud.workflow.ci.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class GoogleCloudCiWorkflowFeature extends CIWorkflowFeature {
@@ -64,9 +68,9 @@ public class GoogleCloudCiWorkflowFeature extends CIWorkflowFeature {
 
     private Template workflowRockerTemplate(GeneratorContext generatorContext) {
         return new RockerTemplate(WORKFLOW_FILENAME, cloudBuild.template(
-                generatorContext.getProject().getName(),
-                generatorContext.getJdkVersion(),
-                generatorContext.getBuildTool())
+            generatorContext.getProject().getName(),
+            generatorContext.getJdkVersion(),
+            generatorContext.getOptions().getBuildTool())
         );
     }
 

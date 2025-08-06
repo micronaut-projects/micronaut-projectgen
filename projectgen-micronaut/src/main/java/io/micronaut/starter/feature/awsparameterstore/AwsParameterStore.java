@@ -27,6 +27,10 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that adds support for distributed configuration using
+ * AWS Systems Manager Parameter Store in Micronaut applications.
+ */
 @Requires(property = "micronaut.starter.feature.aws.parameter.store.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class AwsParameterStore implements DistributedConfigFeature, OpenRewriteFeature {

@@ -15,6 +15,9 @@
  */
 package io.micronaut.starter.feature.database;
 
+/**
+ * Enumeration of Hibernate hbm2ddlAuto configuration options.
+ */
 public enum Hbm2ddlAuto {
     NONE("none"),
     DROP("drop"),

@@ -24,6 +24,10 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that provides integration with Mistral AI's Langchain4j language model in Micronaut.
+ * Adds the necessary configuration and recipes for Mistral AI language model support.
+ */
 @Requires(property = "micronaut.starter.feature.langchain4j.mistralai.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class MistralAiLangchain4jLanguageModel implements Langchain4jLanguageModel, OpenRewriteFeature {

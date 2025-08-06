@@ -17,7 +17,6 @@ package io.micronaut.starter.feature.reactive;
 
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.projectgen.core.generator.ModuleContext;
-import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.starter.feature.Category;

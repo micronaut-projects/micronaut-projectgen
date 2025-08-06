@@ -26,6 +26,10 @@ import java.util.List;
 
 import static io.micronaut.starter.feature.Category.LOGGING;
 
+/**
+ * Feature that provides integration with Azure Monitor Logs
+ * for logging support in Micronaut applications.
+ */
 @Requires(property = "micronaut.starter.feature.azure.logging.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class AzureLogging implements AzureCloudFeature, OpenRewriteFeature {

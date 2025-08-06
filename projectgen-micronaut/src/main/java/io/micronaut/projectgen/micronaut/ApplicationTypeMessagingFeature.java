@@ -15,9 +15,7 @@
  */
 package io.micronaut.projectgen.micronaut;
 
-import io.micronaut.projectgen.core.buildtools.gradle.Gradle;
 import io.micronaut.projectgen.core.feature.Feature;
-import io.micronaut.projectgen.core.feature.config.Properties;
 import io.micronaut.projectgen.core.feature.gitignore.GitIgnore;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.features.cli.MicronautCli;
@@ -28,23 +26,50 @@ import jakarta.inject.Singleton;
 
 import java.util.Set;
 
+/**
+ * Feature definition for Micronaut applications of type MESSAGING.
+ * Adds required features for messaging application types.
+ */
 @Singleton
 public class ApplicationTypeMessagingFeature extends ApplicationTypeFeature {
 
-    public ApplicationTypeMessagingFeature(MicronautCli micronautCli,
-                                           MicronautTestJunit5 micronautTestJunit5,
-                                           MicronautTestSpock micronautTestSpock,
-                                           Logback logback,
-                                           GitIgnore gitIgnore) {
+    /**
+     * Constructs the ApplicationTypeMessagingFeature.
+     *
+     * @param micronautCli        The Micronaut CLI feature
+     * @param micronautTestJunit5 The JUnit 5 test feature
+     * @param micronautTestSpock  The Spock test feature
+     * @param logback             The Logback logging feature
+     * @param gitIgnore           The .gitignore feature
+     */
+    public ApplicationTypeMessagingFeature(
+        MicronautCli micronautCli,
+        MicronautTestJunit5 micronautTestJunit5,
+        MicronautTestSpock micronautTestSpock,
+        Logback logback,
+        GitIgnore gitIgnore
+    ) {
         super(micronautCli, micronautTestJunit5, micronautTestSpock, logback, gitIgnore);
     }
 
+    /**
+     * Determines if this feature should be applied for the selected options.
+     *
+     * @param options          The selected options
+     * @param selectedFeatures The set of selected features
+     * @return true if applicable
+     */
     @Override
     public boolean shouldApply(Options options, Set<Feature> selectedFeatures) {
         ApplicationType applicationType = ApplicationType.of(options.template());
         return applicationType == ApplicationType.MESSAGING;
     }
 
+    /**
+     * Returns the feature name.
+     *
+     * @return the feature name string
+     */
     @Override
     public String getName() {
         return "application-type-messaging";

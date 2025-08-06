@@ -27,6 +27,10 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that adds the Micronaut Micrometer core dependency.
+ * Also ensures R2DBC pool is added if R2DBC is selected.
+ */
 @Requires(property = "micronaut.starter.feature.micrometer.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Core implements OpenRewriteFeature {

@@ -26,6 +26,12 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that adds support for exposing Micronaut management endpoints over JMX (Java Management Extensions).
+ * <p>
+ * Available only for applications of type {@code DEFAULT}.
+ */
+
 @Requires(property = "micronaut.starter.feature.jmx.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class Jmx implements OpenRewriteFeature {

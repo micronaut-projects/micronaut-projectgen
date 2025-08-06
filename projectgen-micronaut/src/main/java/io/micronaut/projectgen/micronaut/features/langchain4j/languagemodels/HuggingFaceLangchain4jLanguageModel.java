@@ -24,11 +24,14 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * Feature that provides integration with Hugging Face's Langchain4j language model in Micronaut.
+ * Adds the necessary configuration and recipes for Hugging Face language model support.
+ */
 @Requires(property = "micronaut.starter.feature.langchain4j.hugging.face.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class HuggingFaceLangchain4jLanguageModel implements Langchain4jLanguageModel, OpenRewriteFeature {
     private static final String NAME = "langchain4j-hugging-face";
-
 
     @Override
     public String getTitle() {

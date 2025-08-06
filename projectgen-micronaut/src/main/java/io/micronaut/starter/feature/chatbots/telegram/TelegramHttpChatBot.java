@@ -23,8 +23,6 @@ import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
-import io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils;
 import io.micronaut.projectgen.micronaut.template.chatbots.telegram.controllerGroovyJunit;
 import io.micronaut.projectgen.micronaut.template.chatbots.telegram.controllerGroovySpock;
 import io.micronaut.projectgen.micronaut.template.chatbots.telegram.controllerJavaJunit;
@@ -66,16 +64,16 @@ public class TelegramHttpChatBot extends ChatBotsTelegram implements OpenRewrite
         if (generatorContext.getTestFramework() == TestFramework.JUNIT) {
             module.addTemplate(
                 generatorContext.getOptions().language(),
-                    "http-client-command-handler-junit-test",
-                    generatorContext.getTestSourcePath("/{packagePath}/TelegramController"),
-                    controllerJavaJunit.template(generatorContext.getProject()),
-                    controllerKotlinJunit.template(generatorContext.getProject()),
-                    controllerGroovyJunit.template(generatorContext.getProject())
+                "http-client-command-handler-junit-test",
+                generatorContext.getTestSourcePath("/{packagePath}/TelegramController"),
+                controllerJavaJunit.template(generatorContext.getProject()),
+                controllerKotlinJunit.template(generatorContext.getProject()),
+                controllerGroovyJunit.template(generatorContext.getProject())
             );
         } else if (generatorContext.getTestFramework() == TestFramework.SPOCK) {
             module.addTemplate(
-                    "http-client-command-handler-spock-test",
-                    new RockerTemplate(generatorContext.getTestSourcePath("/{packagePath}/TelegramController"), controllerGroovySpock.template(generatorContext.getProject()))
+                "http-client-command-handler-spock-test",
+                new RockerTemplate(generatorContext.getTestSourcePath("/{packagePath}/TelegramController"), controllerGroovySpock.template(generatorContext.getProject()))
             );
         }
     }

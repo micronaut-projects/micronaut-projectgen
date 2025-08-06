@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Coherence as a Distributed Configuration
+ * Coherence as a Distributed Configuration.
  *
  * @author Pavol Gressa
  * @since 2.4
@@ -71,12 +71,12 @@ public class CoherenceGrpcClient implements OpenRewriteFeature {
         List<String> recipes = new ArrayList<>();
         recipes.add("io.micronaut.starter.feature.coherence-grpc-client");
         recipes.add("io.micronaut.starter.feature.coherence-java-client");
-        if(generatorContext.isFeaturePresent(DistributedConfigFeature.class)) {
+        if (generatorContext.isFeaturePresent(DistributedConfigFeature.class)) {
             recipes.add("io.micronaut.starter.feature.coherence-grpc-client.conf-bootstrap");
         } else {
             recipes.add("io.micronaut.starter.feature.coherence-grpc-client.conf-application");
         }
-       return recipes;
+        return recipes;
     }
 
     @Override

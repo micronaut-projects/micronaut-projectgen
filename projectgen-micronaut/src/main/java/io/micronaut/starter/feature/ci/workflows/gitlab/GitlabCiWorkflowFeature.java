@@ -27,6 +27,10 @@ import io.micronaut.projectgen.core.rocker.RockerTemplate;
 import io.micronaut.projectgen.core.template.Template;
 import jakarta.inject.Singleton;
 
+/**
+ * CI workflow feature for GitLab CI.
+ * Adds a GitLab CI workflow to build a Micronaut application.
+ */
 @Requires(property = "micronaut.starter.feature.gitlab.workflow.ci.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class GitlabCiWorkflowFeature extends CIWorkflowFeature {
@@ -60,11 +64,11 @@ public class GitlabCiWorkflowFeature extends CIWorkflowFeature {
 
     private Template workflowRockerTemplate(GeneratorContext generatorContext) {
         return new RockerTemplate(WORKFLOW_FILE_NAME,
-                gitlabci.template(
-                        generatorContext.getProject().getName(),
-                        generatorContext.getBuildTool(),
-                        generatorContext.getJdkVersion(),
-                        generatorContext.getFeatures().hasFeature(GraalVM.class))
+            gitlabci.template(
+                generatorContext.getProject().getName(),
+                generatorContext.getOptions().getBuildTool(),
+                generatorContext.getJdkVersion(),
+                generatorContext.getFeatures().hasFeature(GraalVM.class))
         );
     }
 
