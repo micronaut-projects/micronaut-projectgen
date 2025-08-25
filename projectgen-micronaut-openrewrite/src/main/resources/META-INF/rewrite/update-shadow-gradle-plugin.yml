@@ -1,7 +1,7 @@
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.micronaut.starter.update.shadow.gradle.plugin.version
-displayName: Update a Gradle plugin by id example
+displayName: Update Shadow Gradle plugin version
 recipeList:
   - org.openrewrite.gradle.plugins.UpgradePluginVersion:
       pluginIdPattern: com.gradleup.shadow
