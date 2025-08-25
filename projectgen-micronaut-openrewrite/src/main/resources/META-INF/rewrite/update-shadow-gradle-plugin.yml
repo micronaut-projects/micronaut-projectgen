@@ -5,5 +5,5 @@ displayName: Update Shadow Gradle plugin version
 recipeList:
   - org.openrewrite.gradle.plugins.UpgradePluginVersion:
       pluginIdPattern: com.gradleup.shadow
-      newVersion: 8.3.7
-#ToDo: update to latest version when it compatible.
+      newVersion: latest.release
+
