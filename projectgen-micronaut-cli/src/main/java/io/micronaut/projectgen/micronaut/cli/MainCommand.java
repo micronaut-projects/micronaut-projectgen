@@ -8,7 +8,8 @@ import picocli.CommandLine.Command;
     mixinStandardHelpOptions = true,
     subcommands = {
         CreateCommand.class,
-        AddFeatureCommand.class
+        AddFeatureCommand.class,
+        UpdateCommand.class
     }
 )
 public class MainCommand implements Runnable {

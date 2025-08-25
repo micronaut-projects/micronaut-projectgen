@@ -1,0 +1,8 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.AddRewriteMicronautDependency
+recipeList:
+  - org.openrewrite.gradle.AddDependency:
+      groupId: org.openrewrite.recipe
+      artifactId: rewrite-micronaut
+      version: 2.26.0
+      configuration: rewrite

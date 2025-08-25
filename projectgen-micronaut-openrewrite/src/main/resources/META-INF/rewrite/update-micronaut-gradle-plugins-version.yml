@@ -1,0 +1,40 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.update.micronaut.gradle.plugin.version
+displayName: Update Micronaut Gradle Plugins to 4.x latest
+description: |
+  This recipe will Update Micronaut Gradle Plugins to 4.x latest.
+recipeList:
+  - org.openrewrite.gradle.plugins.UpgradePluginVersion:
+      pluginIdPattern: io.micronaut.aot
+      newVersion: 4.x
+  - org.openrewrite.gradle.plugins.UpgradePluginVersion:
+      pluginIdPattern: io.micronaut.application
+      newVersion: 4.x
+  - org.openrewrite.gradle.plugins.UpgradePluginVersion:
+      pluginIdPattern: io.micronaut.docker
+      newVersion: 4.x
+  - org.openrewrite.gradle.plugins.UpgradePluginVersion:
+      pluginIdPattern: io.micronaut.graalvm
+      newVersion: 4.x
+  - org.openrewrite.gradle.plugins.UpgradePluginVersion:
+      pluginIdPattern: io.micronaut.library
+      newVersion: 4.x
+  - org.openrewrite.gradle.plugins.UpgradePluginVersion:
+      pluginIdPattern: io.micronaut.minimal.application
+      newVersion: 4.x
+  - org.openrewrite.gradle.plugins.UpgradePluginVersion:
+      pluginIdPattern: io.micronaut.minimal.library
+      newVersion: 4.x
+  - org.openrewrite.gradle.plugins.UpgradePluginVersion:
+      pluginIdPattern: io.micronaut.openapi
+      newVersion: 4.x
+  - org.openrewrite.gradle.plugins.UpgradePluginVersion:
+      pluginIdPattern: io.micronaut.test-resources
+      newVersion: 4.x
+  - org.openrewrite.gradle.plugins.UpgradePluginVersion:
+      pluginIdPattern: io.micronaut.test-resources-consumer
+      newVersion: 4.x
+  - org.openrewrite.gradle.plugins.UpgradePluginVersion:
+      pluginIdPattern: io.micronaut.jsonschema
+      newVersion: 4.x
