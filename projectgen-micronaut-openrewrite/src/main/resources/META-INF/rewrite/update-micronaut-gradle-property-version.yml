@@ -1,0 +1,7 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.update.gradle.micronaut.version
+displayName: Update Gradle Micronaut Version Property to latest 4.x
+recipeList:
+  - org.openrewrite.java.micronaut.UpgradeMicronautGradlePropertiesVersion:
+      newVersion: 4.x
