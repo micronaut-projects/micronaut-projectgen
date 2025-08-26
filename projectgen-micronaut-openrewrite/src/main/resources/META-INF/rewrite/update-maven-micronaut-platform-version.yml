@@ -1,0 +1,10 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.micronaut.starter.update.maven.micronaut.platform.version
+displayName: Update to Micronaut 4.x platform BOM
+description: This recipe will update a Gradle or Maven build to reference the Micronaut 4 platform BOM.
+recipeList:
+  - org.openrewrite.maven.ChangeParentPom:
+      oldGroupId: io.micronaut.platform
+      oldArtifactId: micronaut-parent
+      newVersion: 4.x
