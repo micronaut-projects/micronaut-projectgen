@@ -36,6 +36,12 @@ public class OpenRewriteGradlePluginFeature implements DefaultFeature {
                 .version("0.0.6-SNAPSHOT")
             .scope(Scope.OPENREWRITE)
             .build());
+        module.addDependency(Dependency.builder()
+            .groupId("org.openrewrite.recipe")
+            .artifactId("rewrite-micronaut")
+            .version("2.26.0")
+            .scope(Scope.OPENREWRITE)
+            .build());
     }
 
     @Override

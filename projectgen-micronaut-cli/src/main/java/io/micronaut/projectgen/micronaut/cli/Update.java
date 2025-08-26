@@ -13,7 +13,6 @@ import java.util.List;
 public class Update implements OpenRewriteFeature {
 
     public static final List<String> RECIPES = List.of(
-        "io.micronaut.starter.AddRewriteMicronautDependency",
         "io.micronaut.starter.update.gradle.micronaut.version",
         "io.micronaut.starter.update.micronaut.gradle.plugin.version",
         "io.micronaut.starter.update.shadow.gradle.plugin.version"
