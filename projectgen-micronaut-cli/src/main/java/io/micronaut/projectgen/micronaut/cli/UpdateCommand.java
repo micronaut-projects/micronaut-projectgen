@@ -43,7 +43,7 @@ public class UpdateCommand implements Runnable {
     @Override
     public void run() {
         //TODO Given a list of features, get the recipes
-        List<String> recipes = Update.RECIPES;
+        List<String> recipes = List.of("io.micronaut.starter.update");
         OpenRewriteConfiguration configuration = OpenRewriteConfiguration.builder()
             .activeRecipes(recipes)
             .exportDatatables(true)
