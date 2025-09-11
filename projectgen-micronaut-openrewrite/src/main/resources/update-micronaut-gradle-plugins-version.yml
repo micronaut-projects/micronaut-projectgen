@@ -6,9 +6,6 @@ description: |
   This recipe will Update Micronaut Gradle Plugins to 4.x latest.
 recipeList:
   - org.openrewrite.gradle.plugins.UpgradePluginVersion:
-      pluginIdPattern: io.micronaut.graalvm
-      newVersion: 4.x
-  - org.openrewrite.gradle.plugins.UpgradePluginVersion:
       pluginIdPattern: io.micronaut.library
       newVersion: 4.x
   - org.openrewrite.gradle.plugins.UpgradePluginVersion:
