@@ -9,9 +9,6 @@ recipeList:
       pluginIdPattern: io.micronaut.application
       newVersion: 4.x
   - org.openrewrite.gradle.plugins.UpgradePluginVersion:
-      pluginIdPattern: io.micronaut.docker
-      newVersion: 4.x
-  - org.openrewrite.gradle.plugins.UpgradePluginVersion:
       pluginIdPattern: io.micronaut.graalvm
       newVersion: 4.x
   - org.openrewrite.gradle.plugins.UpgradePluginVersion:
