@@ -137,7 +137,7 @@
         <h1>Micronaut projectgen</h1>
         <p></p>
         <p>API to generate JVM projects</p>
-        <p><strong>Version:</strong> 0.0.8 </p>
+        <p><strong>Version:</strong> 0.0.9 </p>
     </div>
     
 <h1 id="introduction"><a class="anchor" href="#introduction"></a>1 Introduction</h1>
@@ -284,15 +284,17 @@
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 1. Configuration Properties for <a href="../api/io/micronaut/projectgen/http/server/conf/DownloadZipControllerConfiguration.html">DownloadZipControllerConfiguration</a></caption>
 <colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
 </colgroup>
 <thead>
 <tr>
 <th class="tableblock halign-left valign-top">Property</th>
 <th class="tableblock halign-left valign-top">Type</th>
 <th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Default value</th>
 </tr>
 </thead>
 <tbody>
@@ -300,11 +302,13 @@
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>projectgen.controllers.download-zip.enabled</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Whether the controller is enabled. Default value: true.</p></td>
+<td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>projectgen.controllers.download-zip.path</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Controller path. Default value: /api/v1/download/zip</p></td>
+<td class="tableblock halign-left valign-top"></td>
 </tr>
 </tbody>
 </table>
@@ -325,15 +329,17 @@
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 1. Configuration Properties for <a href="../api/io/micronaut/projectgen/http/server/conf/FeaturesControllerConfiguration.html">FeaturesControllerConfiguration</a></caption>
 <colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
 </colgroup>
 <thead>
 <tr>
 <th class="tableblock halign-left valign-top">Property</th>
 <th class="tableblock halign-left valign-top">Type</th>
 <th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Default value</th>
 </tr>
 </thead>
 <tbody>
@@ -341,11 +347,13 @@
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>projectgen.controllers.features.enabled</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Whether the controller is enabled. Default value: true.</p></td>
+<td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>projectgen.controllers.features.path</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Controller path. Default value: /api/v1/features</p></td>
+<td class="tableblock halign-left valign-top"></td>
 </tr>
 </tbody>
 </table>
@@ -388,15 +396,17 @@ with a <code>application/x-www-form-urlencoded</code> content type.</p>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 1. Configuration Properties for <a href="../api/io/micronaut/projectgen/http/server/conf/DiffControllerConfiguration.html">DiffControllerConfiguration</a></caption>
 <colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
 </colgroup>
 <thead>
 <tr>
 <th class="tableblock halign-left valign-top">Property</th>
 <th class="tableblock halign-left valign-top">Type</th>
 <th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Default value</th>
 </tr>
 </thead>
 <tbody>
@@ -404,11 +414,13 @@ with a <code>application/x-www-form-urlencoded</code> content type.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>project.controllers.diff.enabled</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Whether the controller is enabled. Default value: true.</p></td>
+<td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>project.controllers.diff.path</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Controller path. Default value: /api/v1/diff</p></td>
+<td class="tableblock halign-left valign-top"></td>
 </tr>
 </tbody>
 </table>
@@ -416,15 +428,17 @@ with a <code>application/x-www-form-urlencoded</code> content type.</p>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 2. Configuration Properties for <a href="../api/io/micronaut/projectgen/http/server/conf/DownloadDiffControllerConfiguration.html">DownloadDiffControllerConfiguration</a></caption>
 <colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
 </colgroup>
 <thead>
 <tr>
 <th class="tableblock halign-left valign-top">Property</th>
 <th class="tableblock halign-left valign-top">Type</th>
 <th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Default value</th>
 </tr>
 </thead>
 <tbody>
@@ -432,11 +446,13 @@ with a <code>application/x-www-form-urlencoded</code> content type.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>projectgen.controllers.download-diff.enabled</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Whether the controller is enabled. Default value: true.</p></td>
+<td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>projectgen.controllers.download-diff.path</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Controller path. Default value: /api/v1/download/diff</p></td>
+<td class="tableblock halign-left valign-top"></td>
 </tr>
 </tbody>
 </table>
@@ -1414,7 +1430,7 @@ class ProjectGenTest {
         assertTrue(project.containsKey("gradle/wrapper/gradle-wrapper.jar"));
         assertTrue(project.containsKey("gradle/wrapper/gradle-wrapper.properties"));
         String gradleWrapperProperties = project.get("gradle/wrapper/gradle-wrapper.properties");
-        assertTrue(gradleWrapperProperties.contains("8.14.2"));
+        assertTrue(gradleWrapperProperties.contains("8.14.3"));
 
         options = OptionsFactory.create(List.of("hello-world-test"));
         project = previewGenerator.generate(options);
