@@ -32,6 +32,7 @@ public final class LanguageUtils {
     @NonNull
     public LanguageDefaults languageDefaultsByLanguage(@NonNull Language language) {
         return switch (language) {
+            case PYTHON -> null;
             case JAVA -> new LanguageDefaults(TestFramework.JUNIT, BuildTool.GRADLE, GradleDsl.KOTLIN);
             case GROOVY -> new LanguageDefaults(TestFramework.SPOCK, BuildTool.GRADLE, GradleDsl.GROOVY);
             case KOTLIN -> new LanguageDefaults(TestFramework.KOTEST, BuildTool.GRADLE, GradleDsl.KOTLIN);
