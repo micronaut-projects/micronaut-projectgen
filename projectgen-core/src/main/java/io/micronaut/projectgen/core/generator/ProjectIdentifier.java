@@ -23,7 +23,7 @@ public class ProjectIdentifier {
     private final String name;
 
     public ProjectIdentifier(String packageName, String name) {
-        packageName = packageName.replaceAll("\\.*$", "");
+        packageName = packageName != null ? packageName.replaceAll("\\.*$", "") : "";
         this.packageName = packageName;
         this.name = name;
     }

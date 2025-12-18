@@ -27,7 +27,7 @@ public class ApplicationConfiguration extends Configuration {
     private static final String TEST = "test";
 
     public ApplicationConfiguration(@NonNull String sourceSet, @NonNull String environment) {
-        super(sourceSet, ConfigurationPhase.APPLICATION + "-" + environment, ConfigurationPhase.APPLICATION + "-config-" + environment);
+        super(Configuration.sourceSetPath(sourceSet), ConfigurationPhase.APPLICATION + "-" + environment, ConfigurationPhase.APPLICATION + "-config-" + environment);
     }
 
     public ApplicationConfiguration(@NonNull String environment) {
@@ -35,7 +35,7 @@ public class ApplicationConfiguration extends Configuration {
     }
 
     public ApplicationConfiguration() {
-        super(MAIN, ConfigurationPhase.APPLICATION.toString(), ConfigurationPhase.APPLICATION + "-config");
+        super(Configuration.sourceSetPath(MAIN), ConfigurationPhase.APPLICATION.toString(), ConfigurationPhase.APPLICATION + "-config");
     }
 
     public static ApplicationConfiguration testConfig() {

@@ -45,15 +45,24 @@ public class Configuration extends LinkedHashMap<String, Object> {
     /**
      * A configuration rooted at path, with the given map of configurations.
      *
-     * @param sourceSet where the configuration is rooted, e.g. main, test
+     * @param path configuration path
      * @param fileName Filename
      * @param templateKey Template Key
      */
-    public Configuration(@NonNull String sourceSet, @NonNull String fileName, @NonNull String templateKey) {
+    public Configuration(@NonNull String path, @NonNull String fileName, @NonNull String templateKey) {
         super();
-        this.path = "src/" + sourceSet + "/resources/";
+        this.path = path;
         this.fileName = fileName;
         this.templateKey = templateKey;
+    }
+
+    /**
+     * configuration path for source set.
+     *
+     * @param sourceSet where the configuration is rooted, e.g. main, test
+     */
+    public static String sourceSetPath(@NonNull String sourceSet) {
+        return "src/" + sourceSet + "/resources/";
     }
 
     @Override

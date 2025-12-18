@@ -28,6 +28,7 @@ import java.util.Set;
  * JVM Programming Language.
  */
 public enum Language {
+    PYTHON("py"),
     JAVA("java"),
     GROOVY("groovy"),
     KOTLIN("kt");

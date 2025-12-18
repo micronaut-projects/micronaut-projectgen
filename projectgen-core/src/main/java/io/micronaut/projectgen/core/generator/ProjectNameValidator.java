@@ -15,6 +15,7 @@
  */
 package io.micronaut.projectgen.core.generator;
 
+import io.micronaut.core.util.StringUtils;
 import jakarta.inject.Singleton;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -33,10 +34,11 @@ public class ProjectNameValidator {
      * @throws IllegalArgumentException if the project name is not valid
      */
     public void validate(Project project) {
-        Matcher matcher = packageName.matcher(project.getPackageName());
-        if (!matcher.find()) {
-            throw new IllegalArgumentException("Invalid package name: %s".formatted(project.getPackageName()));
+        if (StringUtils.isNotEmpty(project.getPackageName())) {
+            Matcher matcher = packageName.matcher(project.getPackageName());
+            if (!matcher.find()) {
+                throw new IllegalArgumentException("Invalid package name: %s".formatted(project.getPackageName()));
+            }
         }
     }
-
 }
