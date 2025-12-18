@@ -34,10 +34,9 @@ import jakarta.inject.Singleton;
 import java.util.List;
 
 /**
- * Test Compatibility Kit for the Form & Fieldset Generator.
+ * Test Compatibility Kit for the Form and Fieldset Generator.
  * Adds Thymeleaf test suite templates for Java projects.
  */
-
 @Requires(property = "micronaut.starter.feature.views.fieldset.tck.enabled", value = StringUtils.TRUE, defaultValue = StringUtils.TRUE)
 @Singleton
 public class ViewsFieldsetTck implements OpenRewriteFeature {
