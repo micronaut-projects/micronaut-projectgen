@@ -11,6 +11,7 @@ dependencies {
     testRuntimeOnly(mnTest.junit.jupiter.engine)
     testImplementation(mnTest.junit.jupiter.params)
     testImplementation(project(":micronaut-projectgen-test"))
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 tasks.test {
     useJUnitPlatform()

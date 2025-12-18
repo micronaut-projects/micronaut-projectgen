@@ -23,3 +23,6 @@ tasks {
         sources.from(layout.buildDirectory.dir("generated/sources/annotationProcessor/java/main"))
     }
 }
+dependencies {
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+}
