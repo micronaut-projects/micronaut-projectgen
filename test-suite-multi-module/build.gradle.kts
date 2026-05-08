@@ -1,6 +1,6 @@
 plugins {
     `java-library`
-    id("nu.studer.rocker") version "3.2"
+    id("nu.studer.rocker") version "3.3.1"
 }
 dependencies {
     annotationProcessor(mn.micronaut.inject.java)

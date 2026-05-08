@@ -1,6 +1,6 @@
 plugins {
     id("io.micronaut.build.internal.projectgen-module")
-    id("nu.studer.rocker") version "3.2"
+    id("nu.studer.rocker") version "3.3.1"
 }
 dependencies {
     api(project(":micronaut-projectgen-core"))
