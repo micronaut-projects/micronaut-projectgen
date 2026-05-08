@@ -23,8 +23,8 @@ application {
     mainClass = "io.micronaut.projectgen.demo.Application"
 }
 java {
-    sourceCompatibility = JavaVersion.toVersion("17")
-    targetCompatibility = JavaVersion.toVersion("17")
+    sourceCompatibility = JavaVersion.toVersion("25")
+    targetCompatibility = JavaVersion.toVersion("25")
 }
 micronaut {
     version(libs.versions.micronaut.platform.get())

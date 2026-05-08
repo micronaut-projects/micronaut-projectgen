@@ -31,7 +31,6 @@ jobs:
             25
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@50e97c2cd7a37755bbfafc9c5b7cafaece252f6e # v6
-            21
             25
       - name: Set the current release version
         id: release_version

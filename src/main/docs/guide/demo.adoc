@@ -46,8 +46,8 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter:5.10.2")
 }
 java {
-    sourceCompatibility = JavaVersion.VERSION_21
-    targetCompatibility = JavaVersion.VERSION_21
+    sourceCompatibility = JavaVersion.VERSION_25
+    targetCompatibility = JavaVersion.VERSION_25
 }
 tasks.test {
     useJUnitPlatform()
@@ -70,8 +70,8 @@ and a `pom.xml` with the following content:
   <artifactId>demo-project</artifactId>
   <version>1.0.0</version>
   <properties>
-    <maven.compiler.source>21</maven.compiler.source>
-    <maven.compiler.target>21</maven.compiler.target>
+    <maven.compiler.source>25</maven.compiler.source>
+    <maven.compiler.target>25</maven.compiler.target>
   </properties>
   <dependencies>
     <dependency>

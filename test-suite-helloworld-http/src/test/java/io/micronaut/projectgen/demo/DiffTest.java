@@ -89,8 +89,8 @@ class DiffTest {
             +    testImplementation("org.junit.jupiter:junit-jupiter:5.10.2")
             +}
              java {
-                 sourceCompatibility = JavaVersion.VERSION_21
-                 targetCompatibility = JavaVersion.VERSION_21
+                 sourceCompatibility = JavaVersion.VERSION_25
+                 targetCompatibility = JavaVersion.VERSION_25
             """;
         assertTrue(diff.contains(expected));
     }
