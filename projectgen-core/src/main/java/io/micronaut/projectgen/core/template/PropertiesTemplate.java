@@ -20,7 +20,14 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
-import java.util.*;
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.HashSet;
+import java.util.HexFormat;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
 
 import static io.micronaut.projectgen.core.feature.config.Configuration.BLANK_LINE_PREFIX;
 import static io.micronaut.projectgen.core.feature.config.Configuration.COMMENT_PREFIX;

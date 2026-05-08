@@ -17,13 +17,25 @@ package io.micronaut.projectgen.core.generator;
 
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
-import io.micronaut.projectgen.core.buildtools.dependencies.*;
+import io.micronaut.projectgen.core.buildtools.dependencies.Coordinate;
+import io.micronaut.projectgen.core.buildtools.dependencies.CoordinateResolver;
+import io.micronaut.projectgen.core.buildtools.dependencies.LookupFailedException;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.feature.Features;
 import io.micronaut.projectgen.core.openrewrite.RecipeFetcher;
-import io.micronaut.projectgen.core.options.*;
+import io.micronaut.projectgen.core.options.JdkVersion;
+import io.micronaut.projectgen.core.options.Language;
+import io.micronaut.projectgen.core.options.Options;
+import io.micronaut.projectgen.core.options.TestFramework;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
 
 /**
  * A context object used when generating projects.

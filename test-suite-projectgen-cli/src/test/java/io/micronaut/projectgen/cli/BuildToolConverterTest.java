@@ -4,7 +4,8 @@ import io.micronaut.projectgen.core.buildtools.BuildTool;
 import org.junit.jupiter.api.Test;
 import picocli.CommandLine;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class BuildToolConverterTest {
 

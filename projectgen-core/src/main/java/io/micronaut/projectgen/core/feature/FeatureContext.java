@@ -17,7 +17,10 @@ package io.micronaut.projectgen.core.feature;
 
 import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.io.ConsoleOutput;
-import io.micronaut.projectgen.core.options.*;
+import io.micronaut.projectgen.core.options.JdkVersion;
+import io.micronaut.projectgen.core.options.Language;
+import io.micronaut.projectgen.core.options.Options;
+import io.micronaut.projectgen.core.options.TestFramework;
 
 import java.util.ArrayList;
 import java.util.Collections;

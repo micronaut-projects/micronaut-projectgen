@@ -22,7 +22,11 @@ import io.micronaut.projectgen.core.buildtools.Scope;
 import io.micronaut.projectgen.core.buildtools.Source;
 import io.micronaut.projectgen.core.options.Language;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Predicate;
 
 import static io.micronaut.projectgen.core.buildtools.Phase.COMPILATION;

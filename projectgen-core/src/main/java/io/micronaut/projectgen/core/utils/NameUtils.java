@@ -20,7 +20,12 @@ import io.micronaut.projectgen.core.generator.Project;
 import io.micronaut.projectgen.core.generator.ProjectIdentifier;
 import io.micronaut.projectgen.core.options.Options;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 

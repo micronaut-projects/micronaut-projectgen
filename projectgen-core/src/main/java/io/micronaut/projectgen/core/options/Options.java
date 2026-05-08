@@ -22,7 +22,7 @@ import io.micronaut.projectgen.core.buildtools.gradle.GradleDsl;
 import io.micronaut.projectgen.core.buildtools.maven.Packaging;
 import io.micronaut.projectgen.core.validation.JavaPackageName;
 
-import java.util.*;
+import java.util.List;
 
 /**
  * Project creation options.

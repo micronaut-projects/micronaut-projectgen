@@ -16,7 +16,11 @@
 package io.micronaut.starter.feature.database.r2dbc;
 
 import io.micronaut.projectgen.core.generator.GeneratorContext;
-import io.micronaut.starter.feature.database.*;
+import io.micronaut.starter.feature.database.MariaDB;
+import io.micronaut.starter.feature.database.MySQL;
+import io.micronaut.starter.feature.database.Oracle;
+import io.micronaut.starter.feature.database.PostgreSQL;
+import io.micronaut.starter.feature.database.SQLServer;
 
 import java.util.List;
 

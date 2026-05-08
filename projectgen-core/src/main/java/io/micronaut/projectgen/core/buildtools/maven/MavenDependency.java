@@ -23,7 +23,8 @@ import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.buildtools.dependencies.DependencyContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.DependencyCoordinate;
 import io.micronaut.projectgen.core.options.Language;
-import java.util.*;
+import java.util.Comparator;
+import java.util.List;
 
 /**
  *

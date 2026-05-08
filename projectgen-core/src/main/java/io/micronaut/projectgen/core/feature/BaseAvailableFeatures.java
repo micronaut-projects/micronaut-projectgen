@@ -21,7 +21,11 @@ import io.micronaut.core.order.Ordered;
 import io.micronaut.projectgen.core.options.Options;
 import jakarta.inject.Singleton;
 
-import java.util.*;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;

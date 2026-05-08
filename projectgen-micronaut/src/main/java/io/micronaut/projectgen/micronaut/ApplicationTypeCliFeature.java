@@ -16,7 +16,11 @@
 package io.micronaut.projectgen.micronaut;
 
 import io.micronaut.core.annotation.Nullable;
-import io.micronaut.projectgen.core.feature.*;
+import io.micronaut.projectgen.core.feature.Feature;
+import io.micronaut.projectgen.core.feature.FeatureContext;
+import io.micronaut.projectgen.core.feature.GroovyApplicationFeature;
+import io.micronaut.projectgen.core.feature.JavaApplicationFeature;
+import io.micronaut.projectgen.core.feature.KotlinApplicationFeature;
 import io.micronaut.projectgen.core.feature.gitignore.GitIgnore;
 import io.micronaut.projectgen.core.options.GenericOptionsBuilder;
 import io.micronaut.projectgen.core.options.Language;

@@ -3,7 +3,8 @@ package io.micronaut.projectgen.demo;
 import io.micronaut.projectgen.core.options.GenericOptionsBuilder;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.openrewrite.ProjectGenPropertiesScanningRecipe;
-import org.openrewrite.*;
+import org.openrewrite.ExecutionContext;
+import org.openrewrite.SourceFile;
 import org.openrewrite.text.PlainText;
 
 import java.nio.file.Path;

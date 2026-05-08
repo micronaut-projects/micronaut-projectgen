@@ -17,7 +17,7 @@ package io.micronaut.projectgen.core.buildtools.maven;
 
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.order.OrderUtil;
-import io.micronaut.projectgen.core.buildtools.*;
+import io.micronaut.projectgen.core.buildtools.BuildProperties;
 import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.options.Options;
 import jakarta.inject.Singleton;

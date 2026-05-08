@@ -20,7 +20,11 @@ import io.micronaut.projectgen.openrewrite.OpenRewriteConfiguration;
 import io.micronaut.projectgen.openrewrite.OpenRewriteRecipesRunner;
 import jakarta.inject.Named;
 import jakarta.inject.Singleton;
-import org.apache.maven.shared.invoker.*;
+import org.apache.maven.shared.invoker.DefaultInvocationRequest;
+import org.apache.maven.shared.invoker.DefaultInvoker;
+import org.apache.maven.shared.invoker.InvocationRequest;
+import org.apache.maven.shared.invoker.Invoker;
+import org.apache.maven.shared.invoker.MavenInvocationException;
 
 import java.io.File;
 import java.util.ArrayList;

@@ -19,7 +19,9 @@ import io.micronaut.core.annotation.Internal;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.*;
+import java.util.Collection;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 @Internal
 class TreeBuilder {

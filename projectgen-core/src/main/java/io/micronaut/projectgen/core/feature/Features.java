@@ -20,7 +20,11 @@ import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.options.JdkVersion;
 import io.micronaut.projectgen.core.options.Options;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**

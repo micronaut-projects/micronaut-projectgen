@@ -15,7 +15,12 @@ import multimodule.myService;
 import multimodule.myServiceTest;
 import multimodule.serviceProperties;
 
-import static io.micronaut.projectgen.test.mavenmultimodule.SpringBootDependencies.*;
+import static io.micronaut.projectgen.test.mavenmultimodule.SpringBootDependencies.GROUP_ID_ORG_SPRINGFRAMEWORK_BOOT;
+import static io.micronaut.projectgen.test.mavenmultimodule.SpringBootDependencies.JAVA_GRADLE_PLUGIN;
+import static io.micronaut.projectgen.test.mavenmultimodule.SpringBootDependencies.SPRING_BOOT;
+import static io.micronaut.projectgen.test.mavenmultimodule.SpringBootDependencies.SPRING_BOOT_PARENT_POM;
+import static io.micronaut.projectgen.test.mavenmultimodule.SpringBootDependencies.SPRING_BOOT_STARTER_TEST;
+import static io.micronaut.projectgen.test.mavenmultimodule.SpringBootDependencies.SPRING_BOOT_VERSION;
 
 @Singleton
 class LibraryModule implements Feature {

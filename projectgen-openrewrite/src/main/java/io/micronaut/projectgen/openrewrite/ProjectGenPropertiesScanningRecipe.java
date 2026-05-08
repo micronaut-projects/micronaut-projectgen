@@ -37,7 +37,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-import static io.micronaut.projectgen.openrewrite.PropertiesUtils.*;
+import static io.micronaut.projectgen.openrewrite.PropertiesUtils.parseValue;
 
 /**
  * abstract class for a scanning recipe which reads a `projectgen.properties` file and populates {@link GenericOptionsBuilder}.

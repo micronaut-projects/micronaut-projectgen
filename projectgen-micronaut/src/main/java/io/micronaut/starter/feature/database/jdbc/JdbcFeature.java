@@ -20,7 +20,13 @@ import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.projectgen.core.feature.FeaturePhase;
 import io.micronaut.projectgen.core.feature.OneOfFeature;
-import io.micronaut.starter.feature.database.*;
+import io.micronaut.starter.feature.database.DatabaseDriverConfigurationFeature;
+import io.micronaut.starter.feature.database.DatabaseDriverFeature;
+import io.micronaut.starter.feature.database.MariaDB;
+import io.micronaut.starter.feature.database.MySQL;
+import io.micronaut.starter.feature.database.Oracle;
+import io.micronaut.starter.feature.database.PostgreSQL;
+import io.micronaut.starter.feature.database.SQLServer;
 
 import java.util.List;
 

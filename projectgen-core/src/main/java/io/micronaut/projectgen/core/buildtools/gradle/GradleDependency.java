@@ -28,7 +28,11 @@ import io.micronaut.projectgen.core.buildtools.dependencies.DependencyCoordinate
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.options.Options;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 import static io.micronaut.core.util.CollectionUtils.isNotEmpty;
 
 /**

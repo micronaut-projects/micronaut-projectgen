@@ -17,7 +17,11 @@ package io.micronaut.projectgen.core.generator;
 
 import io.micronaut.core.annotation.Nullable;
 import io.micronaut.projectgen.core.buildtools.dependencies.CoordinateResolver;
-import io.micronaut.projectgen.core.feature.*;
+import io.micronaut.projectgen.core.feature.AvailableFeatures;
+import io.micronaut.projectgen.core.feature.DefaultFeature;
+import io.micronaut.projectgen.core.feature.Feature;
+import io.micronaut.projectgen.core.feature.FeatureContext;
+import io.micronaut.projectgen.core.feature.FeatureValidator;
 import io.micronaut.projectgen.core.io.ConsoleOutput;
 import io.micronaut.projectgen.core.openrewrite.RecipeFetcher;
 import io.micronaut.projectgen.core.options.Options;

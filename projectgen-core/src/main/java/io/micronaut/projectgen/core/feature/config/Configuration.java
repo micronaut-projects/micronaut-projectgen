@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Collections;
 
-import static io.micronaut.projectgen.core.utils.StringUtils.*;
+import static io.micronaut.projectgen.core.utils.StringUtils.randomString;
 
 /**
  * Models application environment configuration to specify where the configuration is rooted for the given configuration values (key/value pairs).
