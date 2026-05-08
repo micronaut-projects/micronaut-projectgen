@@ -27,7 +27,7 @@ class DefaultOptionsBuilderTest {
             "gradleDsl", "GROOVY",
             "testFramework", "SPOCK",
             "lang", Language.GROOVY,
-            "java", "17");
+            "java", "25");
         Options options = builder.createOptions(form);
 
         assertEquals("geb-demo", options.name());
@@ -36,7 +36,7 @@ class DefaultOptionsBuilderTest {
         assertEquals("geb-demo", options.artifact());
         assertEquals("1.0.0", options.version());
         assertEquals(options.buildTools(), List.of(BuildTool.GRADLE));
-        assertEquals(JdkVersion.JDK_17, options.java());
+        assertEquals(JdkVersion.JDK_25, options.java());
         assertEquals(GradleDsl.GROOVY, options.gradleDsl());
         assertEquals(Language.GROOVY, options.language());
         assertEquals(TestFramework.SPOCK, options.testFramework());

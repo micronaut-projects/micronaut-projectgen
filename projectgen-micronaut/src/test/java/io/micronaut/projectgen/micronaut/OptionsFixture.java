@@ -47,7 +47,7 @@ public final class OptionsFixture {
             .configurationFormat(ConfigurationFormat.PROPERTIES)
             .language(Language.JAVA)
             .testFramework(TestFramework.JUNIT)
-            .java(JdkVersion.JDK_21)
+            .java(JdkVersion.JDK_25)
             .template(ApplicationType.DEFAULT.toString());
     }
 

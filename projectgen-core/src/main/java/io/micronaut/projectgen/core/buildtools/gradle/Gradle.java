@@ -52,9 +52,8 @@ public class Gradle implements BuildFeature, DefaultFeature {
     private static final String GRADLEW_PATH = "gradlew";
     private static final String GRADLEW_BAT_PATH = "gradlew.bat";
     private static final String WRAPPER_JAR_PATH = GRADLE + SLASH + WRAPPER + SLASH + GRADLE_WRAPPER_JAR;
-    private static final String GRADLE_8_11_1 = "8.11.1";
-    private static final String GRADLE_8_14_2 = "8.14.2";
-    private static final String GRADLE_VERSION = GRADLE_8_14_2;
+    private static final String GRADLE_9_5_0 = "9.5.0";
+    private static final String GRADLE_VERSION = GRADLE_9_5_0;
     private static final String WRAPPER_JAR = GRADLE + SLASH + GRADLE_VERSION + SLASH + WRAPPER_JAR_PATH;
     private static final String WRAPPER_PROPS_PATH = GRADLE + SLASH + WRAPPER + SLASH + GRADLE_WRAPPER_PROPERTIES;
     private static final String WRAPPER_PROPS = GRADLE + SLASH  + GRADLE_VERSION + SLASH + WRAPPER_PROPS_PATH;

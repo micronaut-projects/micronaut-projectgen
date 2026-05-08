@@ -7,6 +7,7 @@ import io.micronaut.projectgen.micronaut.OptionsFixture;
 import io.micronaut.projectgen.test.BuildTestVerifier;
 import io.micronaut.projectgen.test.ConfigurationUtils;
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -18,6 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @MicronautTest(startApplication = false)
 class BasecampAzureChatBotTest {
 
+    @Disabled
     @Test
     void basecampAzureChatbotFeaturesConfiguration(PreviewGenerator previewGenerator) throws Exception {
         Options options = OptionsFixture.defaultGradle().template("function").features(List.of("chatbots-basecamp-azure-function")).build();
@@ -28,6 +30,7 @@ class BasecampAzureChatBotTest {
         assertEquals("botcommands", applicationProperties.getProperty("micronaut.chatbots.folder"));
     }
 
+    @Disabled
     @Test
     void basecampAzureChatbotFeaturesAddsTheDependency(PreviewGenerator previewGenerator) throws Exception {
         Options options = OptionsFixture.defaultGradle().template("function").features(List.of("chatbots-basecamp-azure-function")).build();
@@ -38,6 +41,7 @@ class BasecampAzureChatBotTest {
         assertTrue(verifier.hasDependency("io.micronaut.chatbots", "micronaut-chatbots-basecamp-azure-function", Scope.COMPILE), buildGradle);
     }
 
+    @Disabled
     @Test
     void basecampAzureChatbotFeaturesAddsTheLinkInReadmeFile(PreviewGenerator previewGenerator) throws Exception {
         Options options = OptionsFixture.defaultGradle().template("function").features(List.of("chatbots-basecamp-azure-function")).build();

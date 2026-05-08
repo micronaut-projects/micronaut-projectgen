@@ -48,7 +48,7 @@ public class GraalVMFeatureValidator implements FeatureValidator {
                 throw new IllegalArgumentException("GraalVM is not supported in " + StringUtils.capitalize(options.language().getName()) + " applications");
             }
 
-            if (options.java().majorVersion() > JdkVersion.JDK_21.majorVersion()) {
+            if (options.java().majorVersion() > JdkVersion.JDK_25.majorVersion()) {
                 throw new IllegalArgumentException("GraalVM with native image only supports up to JDK 21");
             }
 

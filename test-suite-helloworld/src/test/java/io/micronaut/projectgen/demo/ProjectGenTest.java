@@ -34,8 +34,8 @@ class ProjectGenTest {
         assertFalse(project.containsKey("src/test/java/com/example/HelloWorldTest.java"));
         String pom = project.get("pom.xml");
         BuildTestVerifier verifier = new MavenBuildTestVerifier(pom, options.language());
-        assertEquals("21", verifier.getProperty("maven.compiler.source"));
-        assertEquals("21", verifier.getProperty("maven.compiler.target"));
+        assertEquals("25", verifier.getProperty("maven.compiler.source"));
+        assertEquals("25", verifier.getProperty("maven.compiler.target"));
         assertTrue(verifier.hasBuildPlugin("org.apache.maven.plugins", "maven-jar-plugin"));
         String buildGradleKts = project.get("build.gradle.kts");
         verifier = new GradleBuildTestVerifier(buildGradleKts, BuildTool.GRADLE, options.language(), options.testFramework());
@@ -52,7 +52,7 @@ class ProjectGenTest {
         assertTrue(project.containsKey("gradle/wrapper/gradle-wrapper.jar"));
         assertTrue(project.containsKey("gradle/wrapper/gradle-wrapper.properties"));
         String gradleWrapperProperties = project.get("gradle/wrapper/gradle-wrapper.properties");
-        assertTrue(gradleWrapperProperties.contains("8.14.3"));
+        assertTrue(gradleWrapperProperties.contains("9.5.0"));
 
         options = OptionsFactory.create(List.of("hello-world-test"));
         project = previewGenerator.generate(options);
@@ -65,7 +65,7 @@ class ProjectGenTest {
         String props = project.get("projectgen.properties");
         assertEquals("""
             artifact=demo-project
-            java=JDK_21
+            java=JDK_25
             buildTools[0]=maven
             buildTools[1]=gradle
             gradleDsl=KOTLIN

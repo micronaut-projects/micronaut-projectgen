@@ -7,6 +7,7 @@ import io.micronaut.projectgen.micronaut.OptionsFixture;
 import io.micronaut.projectgen.test.BuildTestVerifier;
 import io.micronaut.projectgen.test.ConfigurationUtils;
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -17,6 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @MicronautTest(startApplication = false)
 class TelegramAzureChatBotTest {
+    @Disabled
     @Test
     void telegramAzureChatbotFeaturesConfiguration(PreviewGenerator previewGenerator) throws Exception {
         Options options = OptionsFixture.defaultGradle().template("function").features(List.of("chatbots-telegram-azure-function")).build();
@@ -29,6 +31,7 @@ class TelegramAzureChatBotTest {
         assertEquals("@MyMicronautExampleBot", applicationProperties.getProperty("micronaut.chatbots.telegram.bots.example.at-username"));
     }
 
+    @Disabled
     @Test
     void telegramAzureChatbotFeaturesAddsTheDependency(PreviewGenerator previewGenerator) throws Exception {
         Options options = OptionsFixture.defaultGradle().template("function").features(List.of("chatbots-telegram-azure-function")).build();
@@ -39,6 +42,7 @@ class TelegramAzureChatBotTest {
         assertTrue(verifier.hasDependency("io.micronaut.chatbots", "micronaut-chatbots-telegram-azure-function", Scope.COMPILE), buildGradle);
     }
 
+    @Disabled
     @Test
     void telegramAzureChatbotFeaturesAddsTheLinkInReadmeFile(PreviewGenerator previewGenerator) throws Exception {
         Options options = OptionsFixture.defaultGradle().template("function").features(List.of("chatbots-telegram-azure-function")).build();

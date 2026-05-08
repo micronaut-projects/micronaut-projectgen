@@ -39,7 +39,7 @@ class DiffTest {
         form.put("features", "hello-world-test");
         form.put("build", List.of(BuildTool.GRADLE));
         form.put("gradleDsl", GradleDsl.KOTLIN);
-        form.put("java", JdkVersion.JDK_21);
+        form.put("java", JdkVersion.JDK_25);
 
         HttpRequest<?> request = HttpRequest.POST("/api/v1/diff", form)
             .accept(MediaType.TEXT_PLAIN)
@@ -92,6 +92,6 @@ class DiffTest {
                  sourceCompatibility = JavaVersion.VERSION_25
                  targetCompatibility = JavaVersion.VERSION_25
             """;
-        assertTrue(diff.contains(expected));
+        assertTrue(diff.contains(expected), diff);
     }
 }

@@ -22,7 +22,7 @@ public final class OptionsFactory {
                 .features(features)
                 .buildTools(List.of(BuildTool.MAVEN, BuildTool.GRADLE))
                 .gradleDsl(GradleDsl.KOTLIN)
-                .java(JdkVersion.JDK_21)
+                .java(JdkVersion.JDK_25)
                 .build();
     }
 }
