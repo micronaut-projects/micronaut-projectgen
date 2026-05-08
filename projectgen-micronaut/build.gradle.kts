@@ -9,7 +9,7 @@ dependencies {
     implementation(mnSourcegen.micronaut.sourcegen.annotations)
     implementation(libs.snakeyaml)
     implementation(libs.typesafeconfig)
-    implementation("io.micronaut.testresources:micronaut-test-resources-build-tools:2.7.3")
+    implementation("io.micronaut.testresources:micronaut-test-resources-build-tools:2.10.1")
     implementation(mn.micronaut.http.client)
     testAnnotationProcessor(mn.micronaut.inject.java)
     testImplementation(mnTest.micronaut.test.junit5)
