@@ -15,7 +15,7 @@
     <script>hljs.initHighlightingOnLoad();</script>
     <link rel="stylesheet" href="../css/multi-language-sample.css"/>
     <script src="../js/docs.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.13/clipboard.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js"></script>
     <script type="text/javascript">
         function addJsClass(el) {
             var classes = document.body.className.split(" ");
@@ -23,7 +23,9 @@
             document.body.className = classes.join(" ");
         }
     </script>
-
+    <style type="text/css">
+        .lang-java { display: block }; .lang-python { display: block }; .lang-kotlin { display: block }; .lang-groovy { display: block }; 
+    </style>
 </head>
 
 <body class="body" id="docs" onload="addJsClass();" onhashchange="highlightMenu()">
@@ -137,13 +139,13 @@
         <h1>Micronaut projectgen</h1>
         <p></p>
         <p>API to generate JVM projects</p>
-        <p><strong>Version:</strong> 0.0.10-SNAPSHOT </p>
+        <p><strong>Version:</strong> 1.0.0-SNAPSHOT </p>
     </div>
     
 <h1 id="introduction"><a class="anchor" href="#introduction"></a>1 Introduction</h1>
 
 <div class='contribute-btn'>
-    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-projectgen/edit/0.0.x/src/main/docs/guide/introduction.adoc"'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-projectgen/edit/1.0.x/src/main/docs/guide/introduction.adoc"'>
         <i class='fa fa-pencil-square-o'></i> Improve this doc
     </button>
 </div>
@@ -156,7 +158,7 @@
 <h1 id="releaseHistory"><a class="anchor" href="#releaseHistory"></a>2 Release History</h1>
 
 <div class='contribute-btn'>
-    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-projectgen/edit/0.0.x/src/main/docs/guide/releaseHistory.adoc"'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-projectgen/edit/1.0.x/src/main/docs/guide/releaseHistory.adoc"'>
         <i class='fa fa-pencil-square-o'></i> Improve this doc
     </button>
 </div>
@@ -172,7 +174,7 @@
 <h1 id="modules"><a class="anchor" href="#modules"></a>3 Modules</h1>
 
 <div class='contribute-btn'>
-    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-projectgen/edit/0.0.x/src/main/docs/guide/modules.adoc"'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-projectgen/edit/1.0.x/src/main/docs/guide/modules.adoc"'>
         <i class='fa fa-pencil-square-o'></i> Improve this doc
     </button>
 </div>
@@ -183,7 +185,7 @@
 <h2 id="coreModule"><a class="anchor" href="#coreModule"></a>3.1 Core Module</h2>
 
 <div class='contribute-btn'>
-    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-projectgen/edit/0.0.x/src/main/docs/guide/modules/coreModule.adoc"'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-projectgen/edit/1.0.x/src/main/docs/guide/modules/coreModule.adoc"'>
         <i class='fa fa-pencil-square-o'></i> Improve this doc
     </button>
 </div>
@@ -206,13 +208,14 @@
     &lt;artifactId&gt;micronaut-projectgen-core&lt;/artifactId&gt;
 &lt;/dependency&gt;</code></pre>
 </div>
-</div></p>
+</div>
+</p>
 </div>
 
 <h2 id="testModule"><a class="anchor" href="#testModule"></a>3.2 Test Module</h2>
 
 <div class='contribute-btn'>
-    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-projectgen/edit/0.0.x/src/main/docs/guide/modules/testModule.adoc"'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-projectgen/edit/1.0.x/src/main/docs/guide/modules/testModule.adoc"'>
         <i class='fa fa-pencil-square-o'></i> Improve this doc
     </button>
 </div>
@@ -236,13 +239,14 @@
     &lt;scope&gt;test&lt;/scope&gt;
 &lt;/dependency&gt;</code></pre>
 </div>
-</div></p>
+</div>
+</p>
 </div>
 
 <h2 id="httpServer"><a class="anchor" href="#httpServer"></a>3.3 HTTP Server Module</h2>
 
 <div class='contribute-btn'>
-    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-projectgen/edit/0.0.x/src/main/docs/guide/modules/httpServer.adoc"'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-projectgen/edit/1.0.x/src/main/docs/guide/modules/httpServer.adoc"'>
         <i class='fa fa-pencil-square-o'></i> Improve this doc
     </button>
 </div>
@@ -265,13 +269,14 @@
     &lt;artifactId&gt;micronaut-projectgen-http-server&lt;/artifactId&gt;
 &lt;/dependency&gt;</code></pre>
 </div>
-</div></p>
+</div>
+</p>
 </div>
 
 <h2 id="downloadZip"><a class="anchor" href="#downloadZip"></a>3.3.1 Download ZIP</h2>
 
 <div class='contribute-btn'>
-    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-projectgen/edit/0.0.x/src/main/docs/guide/modules/httpServer/downloadZip.adoc"'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-projectgen/edit/1.0.x/src/main/docs/guide/modules/httpServer/downloadZip.adoc"'>
         <i class='fa fa-pencil-square-o'></i> Improve this doc
     </button>
 </div>
@@ -316,7 +321,7 @@
 <h2 id="featuresHttpServer"><a class="anchor" href="#featuresHttpServer"></a>3.3.2 Features</h2>
 
 <div class='contribute-btn'>
-    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-projectgen/edit/0.0.x/src/main/docs/guide/modules/httpServer/featuresHttpServer.adoc"'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-projectgen/edit/1.0.x/src/main/docs/guide/modules/httpServer/featuresHttpServer.adoc"'>
         <i class='fa fa-pencil-square-o'></i> Improve this doc
     </button>
 </div>
@@ -361,7 +366,7 @@
 <h2 id="diff"><a class="anchor" href="#diff"></a>3.3.3 Diff</h2>
 
 <div class='contribute-btn'>
-    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-projectgen/edit/0.0.x/src/main/docs/guide/modules/httpServer/diff.adoc"'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-projectgen/edit/1.0.x/src/main/docs/guide/modules/httpServer/diff.adoc"'>
         <i class='fa fa-pencil-square-o'></i> Improve this doc
     </button>
 </div>
@@ -385,7 +390,8 @@
     &lt;version&gt;4.15&lt;/version&gt;
 &lt;/dependency&gt;</code></pre>
 </div>
-</div></p>
+</div>
+</p>
 </div>
 <div class="paragraph">
 <p>Once you have a bean of type <a href="../api/io/micronaut/projectgen/core/diff/FeatureDiffer.html">FeatureDiffer</a> and
@@ -460,7 +466,7 @@ with a <code>application/x-www-form-urlencoded</code> content type.</p>
 <h1 id="features"><a class="anchor" href="#features"></a>4 Features</h1>
 
 <div class='contribute-btn'>
-    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-projectgen/edit/0.0.x/src/main/docs/guide/features.adoc"'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-projectgen/edit/1.0.x/src/main/docs/guide/features.adoc"'>
         <i class='fa fa-pencil-square-o'></i> Improve this doc
     </button>
 </div>
@@ -476,7 +482,7 @@ with a <code>application/x-www-form-urlencoded</code> content type.</p>
 <h1 id="demo"><a class="anchor" href="#demo"></a>5 Demo</h1>
 
 <div class='contribute-btn'>
-    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-projectgen/edit/0.0.x/src/main/docs/guide/demo.adoc"'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-projectgen/edit/1.0.x/src/main/docs/guide/demo.adoc"'>
         <i class='fa fa-pencil-square-o'></i> Improve this doc
     </button>
 </div>
@@ -533,8 +539,8 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter:5.10.2")
 }
 java {
-    sourceCompatibility = JavaVersion.VERSION_21
-    targetCompatibility = JavaVersion.VERSION_21
+    sourceCompatibility = JavaVersion.VERSION_25
+    targetCompatibility = JavaVersion.VERSION_25
 }
 tasks.test {
     useJUnitPlatform()
@@ -558,8 +564,8 @@ application {
   &lt;artifactId&gt;demo-project&lt;/artifactId&gt;
   &lt;version&gt;1.0.0&lt;/version&gt;
   &lt;properties&gt;
-    &lt;maven.compiler.source&gt;21&lt;/maven.compiler.source&gt;
-    &lt;maven.compiler.target&gt;21&lt;/maven.compiler.target&gt;
+    &lt;maven.compiler.source&gt;25&lt;/maven.compiler.source&gt;
+    &lt;maven.compiler.target&gt;25&lt;/maven.compiler.target&gt;
   &lt;/properties&gt;
   &lt;dependencies&gt;
     &lt;dependency&gt;
@@ -597,7 +603,7 @@ application {
 <h2 id="defineOptions"><a class="anchor" href="#defineOptions"></a>5.1 Options</h2>
 
 <div class='contribute-btn'>
-    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-projectgen/edit/0.0.x/src/main/docs/guide/demo/defineOptions.adoc"'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-projectgen/edit/1.0.x/src/main/docs/guide/demo/defineOptions.adoc"'>
         <i class='fa fa-pencil-square-o'></i> Improve this doc
     </button>
 </div>
@@ -635,7 +641,7 @@ public final class OptionsFactory {
                 .features(features)
                 .buildTools(List.of(BuildTool.MAVEN, BuildTool.GRADLE))
                 .gradleDsl(GradleDsl.KOTLIN)
-                .java(JdkVersion.JDK_21)
+                .java(JdkVersion.JDK_25)
                 .build();
     }
 }</code></pre>
@@ -645,7 +651,7 @@ public final class OptionsFactory {
 <h2 id="addDependency"><a class="anchor" href="#addDependency"></a>5.2 Add Dependency</h2>
 
 <div class='contribute-btn'>
-    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-projectgen/edit/0.0.x/src/main/docs/guide/demo/addDependency.adoc"'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-projectgen/edit/1.0.x/src/main/docs/guide/demo/addDependency.adoc"'>
         <i class='fa fa-pencil-square-o'></i> Improve this doc
     </button>
 </div>
@@ -717,7 +723,7 @@ class JunitJupiter implements Feature {
 <h2 id="addBuildProperties"><a class="anchor" href="#addBuildProperties"></a>5.3 Add Build Properties</h2>
 
 <div class='contribute-btn'>
-    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-projectgen/edit/0.0.x/src/main/docs/guide/demo/addBuildProperties.adoc"'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-projectgen/edit/1.0.x/src/main/docs/guide/demo/addBuildProperties.adoc"'>
         <i class='fa fa-pencil-square-o'></i> Improve this doc
     </button>
 </div>
@@ -769,7 +775,7 @@ class MavenCompilerProperties implements Feature {
 <h2 id="addGradlePlugins"><a class="anchor" href="#addGradlePlugins"></a>5.4 Add Gradle Plugins</h2>
 
 <div class='contribute-btn'>
-    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-projectgen/edit/0.0.x/src/main/docs/guide/demo/addGradlePlugins.adoc"'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-projectgen/edit/1.0.x/src/main/docs/guide/demo/addGradlePlugins.adoc"'>
         <i class='fa fa-pencil-square-o'></i> Improve this doc
     </button>
 </div>
@@ -872,7 +878,7 @@ class GradleApplicationPluginFeature implements Feature {
 <h2 id="addMavenPlugin"><a class="anchor" href="#addMavenPlugin"></a>5.5 Add Maven Plugins</h2>
 
 <div class='contribute-btn'>
-    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-projectgen/edit/0.0.x/src/main/docs/guide/demo/addMavenPlugin.adoc"'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-projectgen/edit/1.0.x/src/main/docs/guide/demo/addMavenPlugin.adoc"'>
         <i class='fa fa-pencil-square-o'></i> Improve this doc
     </button>
 </div>
@@ -973,7 +979,7 @@ class MavenSurefirePlugin implements Feature {
 <h2 id="addCode"><a class="anchor" href="#addCode"></a>5.6 Add Code</h2>
 
 <div class='contribute-btn'>
-    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-projectgen/edit/0.0.x/src/main/docs/guide/demo/addCode.adoc"'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-projectgen/edit/1.0.x/src/main/docs/guide/demo/addCode.adoc"'>
         <i class='fa fa-pencil-square-o'></i> Improve this doc
     </button>
 </div>
@@ -1036,7 +1042,7 @@ class SampleCode implements Feature {
 <h2 id="root"><a class="anchor" href="#root"></a>5.7 Default Feature</h2>
 
 <div class='contribute-btn'>
-    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-projectgen/edit/0.0.x/src/main/docs/guide/demo/root.adoc"'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-projectgen/edit/1.0.x/src/main/docs/guide/demo/root.adoc"'>
         <i class='fa fa-pencil-square-o'></i> Improve this doc
     </button>
 </div>
@@ -1148,7 +1154,7 @@ class Root implements DefaultFeature {
 <h2 id="cli"><a class="anchor" href="#cli"></a>5.8 Project Generation in a Command Line Application</h2>
 
 <div class='contribute-btn'>
-    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-projectgen/edit/0.0.x/src/main/docs/guide/demo/cli.adoc"'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-projectgen/edit/1.0.x/src/main/docs/guide/demo/cli.adoc"'>
         <i class='fa fa-pencil-square-o'></i> Improve this doc
     </button>
 </div>
@@ -1229,7 +1235,7 @@ public class CreateCommand implements Runnable {
 <h2 id="httpServerDemo"><a class="anchor" href="#httpServerDemo"></a>5.9 Project Generation in a HTTP Server</h2>
 
 <div class='contribute-btn'>
-    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-projectgen/edit/0.0.x/src/main/docs/guide/demo/httpServerDemo.adoc"'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-projectgen/edit/1.0.x/src/main/docs/guide/demo/httpServerDemo.adoc"'>
         <i class='fa fa-pencil-square-o'></i> Improve this doc
     </button>
 </div>
@@ -1365,7 +1371,7 @@ class FeaturesTest {
 <h2 id="test"><a class="anchor" href="#test"></a>5.10 Test Project Generation</h2>
 
 <div class='contribute-btn'>
-    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-projectgen/edit/0.0.x/src/main/docs/guide/demo/test.adoc"'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-projectgen/edit/1.0.x/src/main/docs/guide/demo/test.adoc"'>
         <i class='fa fa-pencil-square-o'></i> Improve this doc
     </button>
 </div>
@@ -1412,8 +1418,8 @@ class ProjectGenTest {
         assertFalse(project.containsKey("src/test/java/com/example/HelloWorldTest.java"));
         String pom = project.get("pom.xml");
         BuildTestVerifier verifier = new MavenBuildTestVerifier(pom, options.language());
-        assertEquals("21", verifier.getProperty("maven.compiler.source"));
-        assertEquals("21", verifier.getProperty("maven.compiler.target"));
+        assertEquals("25", verifier.getProperty("maven.compiler.source"));
+        assertEquals("25", verifier.getProperty("maven.compiler.target"));
         assertTrue(verifier.hasBuildPlugin("org.apache.maven.plugins", "maven-jar-plugin"));
         String buildGradleKts = project.get("build.gradle.kts");
         verifier = new GradleBuildTestVerifier(buildGradleKts, BuildTool.GRADLE, options.language(), options.testFramework());
@@ -1430,7 +1436,7 @@ class ProjectGenTest {
         assertTrue(project.containsKey("gradle/wrapper/gradle-wrapper.jar"));
         assertTrue(project.containsKey("gradle/wrapper/gradle-wrapper.properties"));
         String gradleWrapperProperties = project.get("gradle/wrapper/gradle-wrapper.properties");
-        assertTrue(gradleWrapperProperties.contains("8.14.3"));
+        assertTrue(gradleWrapperProperties.contains("9.5.0"));
 
         options = OptionsFactory.create(List.of("hello-world-test"));
         project = previewGenerator.generate(options);
@@ -1443,7 +1449,7 @@ class ProjectGenTest {
         String props = project.get("projectgen.properties");
         assertEquals("""
             artifact=demo-project
-            java=JDK_21
+            java=JDK_25
             buildTools[0]=maven
             buildTools[1]=gradle
             gradleDsl=KOTLIN
@@ -1460,7 +1466,7 @@ class ProjectGenTest {
 <h1 id="repository"><a class="anchor" href="#repository"></a>6 Repository</h1>
 
 <div class='contribute-btn'>
-    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-projectgen/edit/0.0.x/src/main/docs/guide/repository.adoc"'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-projectgen/edit/1.0.x/src/main/docs/guide/repository.adoc"'>
         <i class='fa fa-pencil-square-o'></i> Improve this doc
     </button>
 </div>
