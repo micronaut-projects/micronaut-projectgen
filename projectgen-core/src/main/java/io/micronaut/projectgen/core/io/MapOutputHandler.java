@@ -16,6 +16,8 @@
 package io.micronaut.projectgen.core.io;
 
 import io.micronaut.projectgen.core.template.Template;
+import org.jspecify.annotations.Nullable;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -50,7 +52,7 @@ public class MapOutputHandler implements OutputHandler {
     }
 
     @Override
-    public String getOutputLocation() {
+    public @Nullable String getOutputLocation() {
         return null;
     }
 

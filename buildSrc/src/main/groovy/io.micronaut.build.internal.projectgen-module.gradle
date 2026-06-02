@@ -1,3 +1,5 @@
+import org.gradle.api.plugins.quality.Checkstyle
+
 plugins {
     id 'io.micronaut.build.internal.projectgen-base'
     id "io.micronaut.build.internal.module"
@@ -21,6 +23,19 @@ micronautBuild {
 tasks {
     prepareJavadocAggregation {
         sources.from(layout.buildDirectory.dir("generated/sources/annotationProcessor/java/main"))
+    }
+}
+tasks.withType(JavaCompile).configureEach {
+    options.extensions.configure("errorprone") { errorProneOptions ->
+        errorProneOptions.excludedPaths.set(".*/(src/generated/rocker|build/generated[-/]sources)/.*")
+    }
+}
+tasks.withType(Checkstyle).configureEach {
+    source = source.filter { file ->
+        def path = file.absolutePath
+        !path.contains("${File.separator}src${File.separator}generated${File.separator}rocker${File.separator}") &&
+            !path.contains("${File.separator}build${File.separator}generated${File.separator}") &&
+            !path.contains("${File.separator}build${File.separator}generated-sources${File.separator}")
     }
 }
 dependencies {

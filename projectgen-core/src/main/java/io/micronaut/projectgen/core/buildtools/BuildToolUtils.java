@@ -15,8 +15,8 @@
  */
 package io.micronaut.projectgen.core.buildtools;
 
-import io.micronaut.core.annotation.NonNull;
-import io.micronaut.core.annotation.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import io.micronaut.projectgen.core.buildtools.gradle.GradleDsl;
 
 /**
@@ -37,8 +37,7 @@ public final class BuildToolUtils {
      * @param dsl Gradle DSL
      * @return settings file name. e.g. settings.gradle
      */
-    @NonNull
-    public static String settingsFileName(@NonNull BuildTool buildTool, @Nullable GradleDsl dsl) {
+    public static @NonNull String settingsFileName(@NonNull BuildTool buildTool, @Nullable GradleDsl dsl) {
         return settingsFileNameWithoutExtension(buildTool) + fileExtension(buildTool, dsl);
     }
 
@@ -48,14 +47,12 @@ public final class BuildToolUtils {
      * @param dsl Gradle DSL
      * @return build file name. e.g. pom.xml or build.gradle
      */
-    @NonNull
-    public static String buildFileName(@NonNull BuildTool buildTool,
+    public static @NonNull String buildFileName(@NonNull BuildTool buildTool,
                                        @Nullable GradleDsl dsl) {
         return buildFileNameWithoutExtension(buildTool) + fileExtension(buildTool, dsl);
     }
 
-    @NonNull
-    private static String fileExtension(@NonNull BuildTool buildTool,
+    private static @NonNull String fileExtension(@NonNull BuildTool buildTool,
                                           @Nullable GradleDsl dsl) {
         return switch (buildTool) {
             case GRADLE -> {
@@ -76,16 +73,14 @@ public final class BuildToolUtils {
         };
     }
 
-    @NonNull
-    private static String buildFileNameWithoutExtension(@NonNull BuildTool buildTool) {
+    private static @NonNull String buildFileNameWithoutExtension(@NonNull BuildTool buildTool) {
         return switch (buildTool) {
             case GRADLE -> "build";
             case MAVEN -> "pom";
         };
     }
 
-    @NonNull
-    private static String settingsFileNameWithoutExtension(@NonNull BuildTool buildTool) {
+    private static @NonNull String settingsFileNameWithoutExtension(@NonNull BuildTool buildTool) {
         return switch (buildTool) {
             case GRADLE -> "settings";
             case MAVEN ->  throw new IllegalStateException("no settings file for maven builds");

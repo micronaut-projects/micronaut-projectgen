@@ -33,3 +33,7 @@ spotless {
         targetExclude("src/**/*.rocker.raw")
     }
 }
+
+micronautNullAway {
+    disableOnProjectNameContains.add("projectgen-micronaut")
+}

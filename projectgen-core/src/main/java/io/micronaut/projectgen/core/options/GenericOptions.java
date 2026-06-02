@@ -15,8 +15,8 @@
  */
 package io.micronaut.projectgen.core.options;
 
-import io.micronaut.core.annotation.NonNull;
-import io.micronaut.core.annotation.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import io.micronaut.core.util.CollectionUtils;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
@@ -63,20 +63,22 @@ public record GenericOptions(@NonNull String name,
                              @Nullable TestFramework testFramework) implements Options {
     @Override
     public Options withoutFeatures() {
-        return GenericOptionsBuilder.builder()
-            .name(this.name())
-            .configurationFormat(this.configurationFormat())
-            .operatingSystem(this.operatingSystem())
-            .template(this.template())
-            .buildTools(this.buildTools())
-            .gradleDsl(this.gradleDsl())
-            .group(this.group())
-            .artifact(this.artifact())
-            .java(this.java())
-            .packageName(this.packageName())
-            .packaging(this.packaging())
-            .testFramework(this.testFramework())
-            .build();
+        return new GenericOptions(
+            this.name(),
+            this.version(),
+            this.operatingSystem(),
+            this.template(),
+            this.language(),
+            this.buildTools(),
+            this.configurationFormat(),
+            this.gradleDsl(),
+            this.group(),
+            this.artifact(),
+            this.java(),
+            this.packageName(),
+            this.packaging(),
+            Collections.emptyList(),
+            this.testFramework());
     }
 
     @Override
@@ -90,7 +92,7 @@ public record GenericOptions(@NonNull String name,
     @Override
     public String group() {
         if (StringUtils.isEmpty(this.group)) {
-            return packageName();
+            return StringUtils.isEmpty(packageName()) ? "example" : packageName();
         }
         return this.group;
     }

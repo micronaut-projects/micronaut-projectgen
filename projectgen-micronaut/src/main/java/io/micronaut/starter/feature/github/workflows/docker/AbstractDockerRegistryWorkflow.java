@@ -52,6 +52,7 @@ public abstract class AbstractDockerRegistryWorkflow extends GitHubWorkflowFeatu
      *
      * @param generatorContext The context for project generation.
      */
+    @Override
     public void apply(GeneratorContext generatorContext) {
         ModuleContext module = generatorContext.getRootModule();
         if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())) {

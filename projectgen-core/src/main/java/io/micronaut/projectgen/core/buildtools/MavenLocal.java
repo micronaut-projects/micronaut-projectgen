@@ -15,21 +15,19 @@
  */
 package io.micronaut.projectgen.core.buildtools;
 
-import io.micronaut.core.annotation.NonNull;
+import org.jspecify.annotations.NonNull;
 
 /**
  * Maven Local.
  */
 public class MavenLocal implements Repository {
     @Override
-    @NonNull
-    public String getId() {
+    public @NonNull String getId() {
         return "local";
     }
 
     @Override
-    @NonNull
-    public String getUrl() {
+    public @NonNull String getUrl() {
         return "${user.home}/.m2/repository/";
     }
 }

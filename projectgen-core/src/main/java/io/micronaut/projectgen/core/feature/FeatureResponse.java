@@ -16,6 +16,7 @@
 package io.micronaut.projectgen.core.feature;
 
 import io.micronaut.serde.annotation.Serdeable;
+import org.jspecify.annotations.Nullable;
 
 /**
  *
@@ -27,8 +28,8 @@ import io.micronaut.serde.annotation.Serdeable;
  */
 @Serdeable
 public record FeatureResponse(String name,
-                             String title,
-                             String description,
+                             @Nullable String title,
+                             @Nullable String description,
                              boolean preview,
                              boolean community) {
 }

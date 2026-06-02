@@ -16,7 +16,7 @@
 package io.micronaut.projectgen.core.io;
 
 import io.micronaut.context.annotation.DefaultImplementation;
-import io.micronaut.core.annotation.NonNull;
+import org.jspecify.annotations.NonNull;
 import io.micronaut.projectgen.core.options.Options;
 
 import java.util.Map;
@@ -32,7 +32,6 @@ public interface TreeNodeGenerator {
      * @param project Project
      * @return Tree Node
      */
-    @NonNull
     TreeNode generate(@NonNull Map<String, String> project);
 
     /**
@@ -40,6 +39,5 @@ public interface TreeNodeGenerator {
      * @param options Project Options
      * @return Tree Node
      */
-    @NonNull
     TreeNode generate(@NonNull Options options) throws Exception;
 }

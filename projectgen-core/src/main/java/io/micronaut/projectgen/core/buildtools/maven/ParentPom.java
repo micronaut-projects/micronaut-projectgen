@@ -15,6 +15,7 @@
  */
 package io.micronaut.projectgen.core.buildtools.maven;
 
+import org.jspecify.annotations.Nullable;
 import io.micronaut.projectgen.core.buildtools.dependencies.Coordinate;
 import io.micronaut.sourcegen.annotations.Builder;
 
@@ -26,9 +27,9 @@ import io.micronaut.sourcegen.annotations.Builder;
  * @param relativePath Relative Path
  */
 @Builder
-public record ParentPom(String groupId, String artifactId, String version, String relativePath) {
+public record ParentPom(@Nullable String groupId, String artifactId, @Nullable String version, @Nullable String relativePath) {
 
-    public ParentPom(Coordinate coordinate, String relativePath) {
+    public ParentPom(Coordinate coordinate, @Nullable String relativePath) {
         this(coordinate.getGroupId(), coordinate.getArtifactId(), coordinate.getVersion(), relativePath);
     }
 

@@ -23,6 +23,7 @@ import io.micronaut.projectgen.core.options.Language;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.core.options.TestFramework;
 import io.micronaut.projectgen.core.utils.OptionUtils;
+import org.jspecify.annotations.Nullable;
 
 /**
  * You can get an instance via {@link BuildTestVerifier#of(String, Options)}.
@@ -42,6 +43,7 @@ public interface BuildTestVerifier {
      * @param propertyName property name
      * @return the value associated with the property
      */
+    @Nullable
     default String getProperty(String propertyName) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
@@ -199,10 +201,14 @@ public interface BuildTestVerifier {
     @NonNull
     static BuildTestVerifier of(@NonNull String template, @NonNull Options options) {
         if (OptionUtils.hasGradleBuildTool(options)) {
-            return new GradleBuildTestVerifier(template, options.getBuildTool(), options.language(), options.testFramework());
+            BuildTool buildTool = options.getBuildTool() == null ? BuildTool.GRADLE : options.getBuildTool();
+            Language language = options.language() == null ? Language.JAVA : options.language();
+            TestFramework testFramework = options.testFramework() == null ? TestFramework.DEFAULT_OPTION : options.testFramework();
+            return new GradleBuildTestVerifier(template, buildTool, language, testFramework);
         }
         if (OptionUtils.hasMavenBuildTool(options)) {
-            return new MavenBuildTestVerifier(template, options.language());
+            Language language = options.language() == null ? Language.JAVA : options.language();
+            return new MavenBuildTestVerifier(template, language);
         }
         throw new IllegalArgumentException("Options does not support Gradle or Maven");
     }

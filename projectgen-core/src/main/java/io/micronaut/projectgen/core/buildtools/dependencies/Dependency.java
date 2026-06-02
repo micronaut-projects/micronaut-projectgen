@@ -15,8 +15,8 @@
  */
 package io.micronaut.projectgen.core.buildtools.dependencies;
 
-import io.micronaut.core.annotation.NonNull;
-import io.micronaut.core.annotation.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import io.micronaut.projectgen.core.buildtools.Scope;
 
 import java.util.ArrayList;
@@ -31,7 +31,7 @@ import java.util.Objects;
 public final class Dependency implements Coordinate {
 
     public static final Comparator<Dependency> COMPARATOR = (o1, o2) -> {
-        int comparison = Integer.compare(o1.getScope().getOrder(), o2.getScope().getOrder());
+        int comparison = Integer.compare(scopeOrder(o1), scopeOrder(o2));
         if (comparison != 0) {
             return comparison;
         }
@@ -44,8 +44,7 @@ public final class Dependency implements Coordinate {
     @Nullable
     private final String groupId;
 
-    @NonNull
-    private final String artifactId;
+    private final @NonNull String artifactId;
 
     @Nullable
     private final String version;
@@ -70,11 +69,11 @@ public final class Dependency implements Coordinate {
     private final List<Substitution> substitutions;
 
     @SuppressWarnings("ParameterNumber")
-    private Dependency(Scope scope,
+    private Dependency(@Nullable Scope scope,
                        @Nullable String groupId,
                        String artifactId,
-                       String version,
-                       String versionProperty,
+                       @Nullable String version,
+                       @Nullable String versionProperty,
                        boolean requiresLookup,
                        boolean annotationProcessorPriority,
                        int order,
@@ -96,6 +95,11 @@ public final class Dependency implements Coordinate {
         this.substitutions = substitutions;
         this.project = project;
         this.comment = comment;
+    }
+
+    private static int scopeOrder(Dependency dependency) {
+        Scope scope = dependency.getScope();
+        return scope == null ? Integer.MAX_VALUE : scope.getOrder();
     }
 
     @Override
@@ -121,7 +125,7 @@ public final class Dependency implements Coordinate {
         if (pom != that.pom) {
             return false;
         }
-        if (scope != null ? !scope.equals(that.scope) : that.scope != null) {
+        if (!Objects.equals(scope, that.scope)) {
             return false;
         }
         if (project != null ? !project.equals(that.project) : that.project != null) {
@@ -176,10 +180,12 @@ public final class Dependency implements Coordinate {
         return substitutions;
     }
 
+    @Nullable
     public Scope getScope() {
         return scope;
     }
 
+    @Nullable
     public String getComment() {
         return comment;
     }
@@ -270,19 +276,28 @@ public final class Dependency implements Coordinate {
      */
     public static class Builder {
 
+        @Nullable
         private Scope scope;
+        @Nullable
         private String groupId;
+        @Nullable
         private String artifactId;
+        @Nullable
         private String version;
+        @Nullable
         private String versionProperty;
         private boolean requiresLookup;
         private int order;
         private boolean template;
         private boolean annotationProcessorPriority;
         private boolean pom;
+        @Nullable
         private List<Dependency> exclusions;
+        @Nullable
         private List<Substitution> substitutions;
+        @Nullable
         private String project;
+        @Nullable
         private String comment;
 
         /**
@@ -579,8 +594,7 @@ public final class Dependency implements Coordinate {
          * @return instantiate Dependency
          */
         public Dependency build() {
-            Objects.requireNonNull(artifactId, "The artifact id must be set");
-            return buildInternal();
+            return buildInternal(Objects.requireNonNull(artifactId, "The artifact id must be set"));
         }
 
         /**
@@ -596,12 +610,10 @@ public final class Dependency implements Coordinate {
          * @return Dependency Coordinate
          */
         public DependencyCoordinate buildCoordinate(boolean showVersionProperty) {
-            Objects.requireNonNull(artifactId, "The artifact id must be set");
-
-            return new DependencyCoordinate(buildInternal(), showVersionProperty);
+            return new DependencyCoordinate(buildInternal(Objects.requireNonNull(artifactId, "The artifact id must be set")), showVersionProperty);
         }
 
-        private Dependency buildInternal() {
+        private Dependency buildInternal(String artifactId) {
             return new Dependency(
                 scope,
                 groupId,
@@ -619,7 +631,11 @@ public final class Dependency implements Coordinate {
         }
 
         private Builder copy() {
-            Builder builder = new Builder().scope(scope);
+            Builder builder = new Builder();
+            String artifactId = Objects.requireNonNull(this.artifactId, "The artifact id must be set");
+            if (scope != null) {
+                builder.scope(scope);
+            }
             if (requiresLookup) {
                 builder.lookupArtifactId(artifactId);
             } else {

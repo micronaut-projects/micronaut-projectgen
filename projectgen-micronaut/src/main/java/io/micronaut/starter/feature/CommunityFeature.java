@@ -28,6 +28,7 @@ import io.micronaut.projectgen.core.feature.Feature;
  * @since 1.0
  */
 public interface CommunityFeature extends Feature {
+    @Override
     @NonNull
     default String getName() {
         return getCommunityContributor().toLowerCase() + "-" + getCommunityFeatureName();

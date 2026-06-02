@@ -15,12 +15,14 @@
  */
 package io.micronaut.projectgen.core.feature;
 
+import org.jspecify.annotations.Nullable;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.options.JdkVersion;
 import io.micronaut.projectgen.core.options.Options;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -35,9 +37,13 @@ public class Features extends ArrayList<String> {
     private final Set<Feature> featureList;
     private final List<BuildTool> buildTools;
     private final GeneratorContext context;
+    @Nullable
     private ApplicationFeature applicationFeature;
+    @Nullable
     private LanguageFeature languageFeature;
+    @Nullable
     private TestFeature testFeature;
+    @Nullable
     private final JdkVersion javaVersion;
 
     public Features(GeneratorContext context, Set<Feature> featureList, Options options) {
@@ -56,7 +62,7 @@ public class Features extends ArrayList<String> {
             }
         }
         this.javaVersion = options.java();
-        this.buildTools = options.buildTools();
+        this.buildTools = options.buildTools() == null ? Collections.emptyList() : options.buildTools();
     }
 
     /**
@@ -88,6 +94,7 @@ public class Features extends ArrayList<String> {
      *
      * @return The Application Feature
      */
+    @Nullable
     public ApplicationFeature application() {
         return applicationFeature;
     }
@@ -96,6 +103,7 @@ public class Features extends ArrayList<String> {
      *
      * @return The Language
      */
+    @Nullable
     public LanguageFeature language() {
         return languageFeature;
     }
@@ -104,6 +112,7 @@ public class Features extends ArrayList<String> {
      *
      * @return The Test Feature
      */
+    @Nullable
     public TestFeature testFramework() {
         return testFeature;
     }
@@ -120,6 +129,7 @@ public class Features extends ArrayList<String> {
      *
      * @return The Java version
      */
+    @Nullable
     public JdkVersion javaVersion() {
         return javaVersion;
     }

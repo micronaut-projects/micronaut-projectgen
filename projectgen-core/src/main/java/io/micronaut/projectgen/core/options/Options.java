@@ -15,8 +15,7 @@
  */
 package io.micronaut.projectgen.core.options;
 
-import io.micronaut.core.annotation.NonNull;
-import io.micronaut.core.annotation.Nullable;
+import org.jspecify.annotations.Nullable;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.buildtools.gradle.GradleDsl;
 import io.micronaut.projectgen.core.buildtools.maven.Packaging;
@@ -28,7 +27,6 @@ import java.util.List;
  * Project creation options.
 */
 public interface Options {
-    @NonNull
     String name();
 
     @Nullable
@@ -40,7 +38,6 @@ public interface Options {
     @Nullable
     Language language();
 
-    @Nullable
     List<BuildTool> buildTools();
 
     @Nullable
@@ -68,15 +65,15 @@ public interface Options {
     @Nullable
     Packaging packaging();
 
-    @NonNull
     List<String> features();
 
     @Nullable
     TestFramework testFramework();
 
+    @Nullable
     default BuildTool getBuildTool() {
         List<BuildTool> tools = buildTools();
-        return tools.isEmpty() ? null : tools.get(0);
+        return tools == null || tools.isEmpty() ? null : tools.get(0);
     }
 
     Options withoutFeatures();

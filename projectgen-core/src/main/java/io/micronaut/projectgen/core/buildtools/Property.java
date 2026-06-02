@@ -15,6 +15,7 @@
  */
 package io.micronaut.projectgen.core.buildtools;
 
+import org.jspecify.annotations.Nullable;
 /**
  * Build tool property.
  */
@@ -24,18 +25,21 @@ public interface Property {
      *
      * @return Property key
      */
+    @Nullable
     String getKey();
 
     /**
      *
      * @return Property value
      */
+    @Nullable
     String getValue();
 
     /**
      *
      * @return comment
      */
+    @Nullable
     default String getComment() {
         return null;
     }

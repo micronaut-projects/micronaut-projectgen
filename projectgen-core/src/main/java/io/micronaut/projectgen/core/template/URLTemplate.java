@@ -48,6 +48,7 @@ public class URLTemplate extends DefaultTemplate {
         }
     }
 
+    @Override
     public boolean isExecutable() {
         return executable;
     }

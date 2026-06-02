@@ -16,7 +16,7 @@
 package io.micronaut.projectgen.core.generator;
 
 import io.micronaut.context.annotation.DefaultImplementation;
-import io.micronaut.core.annotation.NonNull;
+import org.jspecify.annotations.NonNull;
 import io.micronaut.projectgen.core.io.ConsoleOutput;
 import io.micronaut.projectgen.core.io.OutputHandler;
 import io.micronaut.projectgen.core.options.Options;
@@ -39,7 +39,5 @@ public interface ProjectGenerator {
         generate(options, outputHandler, ConsoleOutput.NOOP);
     }
 
-    default void generate(@NonNull Options options, @NonNull OutputHandler outputHandler, ConsoleOutput consoleOutput) throws Exception {
-        generate(options, outputHandler, consoleOutput);
-    }
+    void generate(@NonNull Options options, @NonNull OutputHandler outputHandler, ConsoleOutput consoleOutput) throws Exception;
 }

@@ -15,16 +15,18 @@
  */
 package io.micronaut.projectgen.core.buildtools.maven;
 
-import io.micronaut.core.annotation.NonNull;
-import io.micronaut.core.annotation.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import io.micronaut.core.order.OrderUtil;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
+import io.micronaut.projectgen.core.buildtools.Scope;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.buildtools.dependencies.DependencyContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.DependencyCoordinate;
 import io.micronaut.projectgen.core.options.Language;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 
 /**
  *
@@ -53,7 +55,8 @@ public class MavenDependency extends DependencyCoordinate {
         if (isPom()) {
             mavenScope = MavenScope.IMPORT;
         } else {
-            mavenScope = MavenScope.of(dependency.getScope(), language).orElse(null);
+            Scope scope = dependency.getScope();
+            mavenScope = scope == null ? null : MavenScope.of(scope, language).orElse(null);
         }
     }
 
@@ -86,12 +89,11 @@ public class MavenDependency extends DependencyCoordinate {
     @Override
     public int hashCode() {
         int result = super.hashCode();
-        result = 31 * result + mavenScope.hashCode();
+        result = 31 * result + Objects.hashCode(mavenScope);
         return result;
     }
 
-    @NonNull
-    public static List<MavenDependency> listOf(@NonNull DependencyContext dependencyContext, Language language) {
+    public static @NonNull List<MavenDependency> listOf(@NonNull DependencyContext dependencyContext, Language language) {
         return dependencyContext.removeDuplicates(dependencyContext.getDependenciesByBuildTool(BuildTool.MAVEN), language, BuildTool.MAVEN)
             .stream()
             .map(dep -> new MavenDependency(dep, language))

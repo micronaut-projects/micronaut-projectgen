@@ -15,17 +15,13 @@
  */
 package io.micronaut.projectgen.core.buildtools;
 
-import io.micronaut.core.annotation.NonNull;
-
 /**
  * Repository.
  */
 public interface Repository {
 
-    @NonNull
     String getId();
 
-    @NonNull
     String getUrl();
 
     default boolean isSnapshot() {

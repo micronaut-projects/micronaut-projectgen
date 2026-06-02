@@ -15,7 +15,7 @@
  */
 package io.micronaut.projectgen.core.buildtools;
 
-import io.micronaut.core.annotation.NonNull;
+import org.jspecify.annotations.NonNull;
 import io.micronaut.core.order.Ordered;
 
 import java.util.Arrays;
@@ -45,11 +45,9 @@ public class Scope implements Ordered {
 
     public static final Scope TEST_RESOURCES_SERVICE = new Scope(Source.MAIN, Collections.singletonList(Phase.TEST_RESOURCES_SERVICE), 13);
 
-    @NonNull
-    private Source source;
+    private @NonNull Source source;
 
-    @NonNull
-    private List<Phase> phases;
+    private @NonNull List<Phase> phases;
 
     private final Integer order;
 
@@ -70,8 +68,7 @@ public class Scope implements Ordered {
      *
      * @return Source
      */
-    @NonNull
-    public Source getSource() {
+    public @NonNull Source getSource() {
         return source;
     }
 
@@ -87,8 +84,7 @@ public class Scope implements Ordered {
      *
      * @return Phases
      */
-    @NonNull
-    public List<Phase> getPhases() {
+    public @NonNull List<Phase> getPhases() {
         return phases;
     }
 

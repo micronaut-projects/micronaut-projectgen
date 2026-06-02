@@ -19,6 +19,7 @@ import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.Project;
 import io.micronaut.projectgen.core.io.OutputHandler;
 import io.micronaut.projectgen.core.template.Template;
+import org.jspecify.annotations.Nullable;
 import org.apache.commons.compress.archivers.zip.UnixStat;
 import org.apache.commons.compress.archivers.zip.ZipArchiveEntry;
 import org.apache.commons.compress.archivers.zip.ZipArchiveOutputStream;
@@ -36,7 +37,9 @@ import java.nio.file.Paths;
 public class ZipOutputHandler implements OutputHandler {
 
     private final ZipArchiveOutputStream zipOutputStream;
+    @Nullable
     private final File zip;
+    @Nullable
     private final String directory;
 
     public ZipOutputHandler(Project project) throws IOException {
@@ -64,7 +67,7 @@ public class ZipOutputHandler implements OutputHandler {
     }
 
     @Override
-    public String getOutputLocation() {
+    public @Nullable String getOutputLocation() {
         if (zip == null) {
             return null;
         } else {

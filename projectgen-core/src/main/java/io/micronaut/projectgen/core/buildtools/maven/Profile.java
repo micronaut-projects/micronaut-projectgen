@@ -15,8 +15,8 @@
  */
 package io.micronaut.projectgen.core.buildtools.maven;
 
-import io.micronaut.core.annotation.NonNull;
-import io.micronaut.core.annotation.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import io.micronaut.projectgen.core.buildtools.Property;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.rocker.RockerWritable;
@@ -32,8 +32,7 @@ import java.util.Set;
  */
 public class Profile {
 
-    @NonNull
-    private final String id;
+    private final @NonNull String id;
 
     @Nullable
     private final Writable extension;
@@ -58,8 +57,7 @@ public class Profile {
      *
      * @return Profile ID
      */
-    @NonNull
-    public String getId() {
+    public @NonNull String getId() {
         return id;
     }
 
@@ -159,9 +157,13 @@ public class Profile {
      * Builder.
      */
     public static class Builder {
+        @Nullable
         private String id;
+        @Nullable
         private Set<Dependency> dependencies;
+        @Nullable
         private Set<Property> activationProperties;
+        @Nullable
         private Writable extension;
 
         /**
@@ -169,20 +171,17 @@ public class Profile {
          * @param extension Extension
          * @return Builder
          */
-        @NonNull
-        public Builder extension(@NonNull Writable extension) {
+        public @NonNull Builder extension(@NonNull Writable extension) {
             this.extension = extension;
             return this;
         }
-
 
         /**
          *
          * @param dependency Dependency
          * @return Builder
          */
-        @NonNull
-        public Builder dependency(@NonNull Dependency dependency) {
+        public @NonNull Builder dependency(@NonNull Dependency dependency) {
             if (dependencies == null) {
                 dependencies = new HashSet<>();
             }
@@ -195,8 +194,7 @@ public class Profile {
          * @param property property
          * @return Builder
          */
-        @NonNull
-        public Builder activationProperty(@NonNull Property property) {
+        public @NonNull Builder activationProperty(@NonNull Property property) {
             if (activationProperties == null) {
                 activationProperties = new HashSet<>();
             }
@@ -209,8 +207,7 @@ public class Profile {
          * @param id id
          * @return Builder
          */
-        @NonNull
-        public Builder id(@NonNull String id) {
+        public @NonNull Builder id(@NonNull String id) {
             this.id = id;
             return this;
         }
@@ -220,10 +217,11 @@ public class Profile {
          * @return Instantiate a profile
          */
         public Profile build() {
+            String profileId = Objects.requireNonNull(id);
             if (extension == null) {
-                extension = new RockerWritable(profile.template(new Profile(id, activationProperties, dependencies, null)));
+                extension = new RockerWritable(profile.template(new Profile(profileId, activationProperties, dependencies, null)));
             }
-            return new Profile(Objects.requireNonNull(id), activationProperties, dependencies, extension);
+            return new Profile(profileId, activationProperties, dependencies, extension);
         }
     }
 }

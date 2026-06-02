@@ -52,7 +52,7 @@ public class DiscoveryClient implements OpenRewriteFeature {
     }
 
     /**
-     * @deprecated Use {@link DiscoveryClient(HttpClient)} instead.
+     * @deprecated Use {@link #DiscoveryClient(HttpClient)} instead.
      */
     @Deprecated
     public DiscoveryClient() {

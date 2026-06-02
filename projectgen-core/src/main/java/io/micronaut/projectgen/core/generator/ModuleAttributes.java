@@ -15,6 +15,7 @@
  */
 package io.micronaut.projectgen.core.generator;
 
+import org.jspecify.annotations.Nullable;
 import io.micronaut.projectgen.core.buildtools.dependencies.Coordinate;
 import io.micronaut.projectgen.core.buildtools.maven.Packaging;
 import io.micronaut.projectgen.core.buildtools.maven.ParentPom;
@@ -23,16 +24,22 @@ import io.micronaut.projectgen.core.buildtools.maven.ParentPom;
  * Module Attributes.
  */
 public class ModuleAttributes {
+    @Nullable
     private ParentPom parentPom;
+    @Nullable
     private String packaging;
+    @Nullable
     private Coordinate coordinate;
+    @Nullable
     private String name;
+    @Nullable
     private String description;
 
     /**
      *
      * @return Parent POM
      */
+    @Nullable
     public ParentPom getParentPom() {
         return parentPom;
     }
@@ -41,7 +48,7 @@ public class ModuleAttributes {
      *
      * @param parentPom Parent POM
      */
-    public void setParentPom(ParentPom parentPom) {
+    public void setParentPom(@Nullable ParentPom parentPom) {
         this.parentPom = parentPom;
     }
 
@@ -49,6 +56,7 @@ public class ModuleAttributes {
      *
      * @return Coordinate
      */
+    @Nullable
     public Coordinate getCoordinate() {
         return coordinate;
     }
@@ -57,7 +65,7 @@ public class ModuleAttributes {
      *
      * @param coordinate Coordinate
      */
-    public void setCoordinate(Coordinate coordinate) {
+    public void setCoordinate(@Nullable Coordinate coordinate) {
         this.coordinate = coordinate;
     }
 
@@ -65,6 +73,7 @@ public class ModuleAttributes {
      *
      * @return name
      */
+    @Nullable
     public String getName() {
         return name;
     }
@@ -73,7 +82,7 @@ public class ModuleAttributes {
      *
      * @param name name
      */
-    public void setName(String name) {
+    public void setName(@Nullable String name) {
         this.name = name;
     }
 
@@ -81,6 +90,7 @@ public class ModuleAttributes {
      *
      * @return Description
      */
+    @Nullable
     public String getDescription() {
         return description;
     }
@@ -89,7 +99,7 @@ public class ModuleAttributes {
      *
      * @param description Description
      */
-    public void setDescription(String description) {
+    public void setDescription(@Nullable String description) {
         this.description = description;
     }
 
@@ -97,6 +107,7 @@ public class ModuleAttributes {
      *
      * @return Packaging
      */
+    @Nullable
     public String getPackaging() {
         return packaging;
     }
@@ -113,7 +124,7 @@ public class ModuleAttributes {
      *
      * @param packaging packaging
      */
-    public void setPackaging(String packaging) {
+    public void setPackaging(@Nullable String packaging) {
         this.packaging = packaging;
     }
 }

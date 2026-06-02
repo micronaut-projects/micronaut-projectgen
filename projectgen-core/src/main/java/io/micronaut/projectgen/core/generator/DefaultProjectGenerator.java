@@ -15,7 +15,7 @@
  */
 package io.micronaut.projectgen.core.generator;
 
-import io.micronaut.core.annotation.NonNull;
+import org.jspecify.annotations.NonNull;
 import io.micronaut.projectgen.core.feature.AvailableFeatures;
 import io.micronaut.projectgen.core.io.ConsoleOutput;
 import io.micronaut.projectgen.core.io.FileSystemOutputHandler;

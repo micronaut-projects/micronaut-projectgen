@@ -15,7 +15,7 @@
  */
 package io.micronaut.projectgen.core.generator;
 
-import io.micronaut.core.annotation.NonNull;
+import org.jspecify.annotations.NonNull;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.buildtools.dependencies.Coordinate;
 import io.micronaut.projectgen.core.buildtools.dependencies.CoordinateResolver;
@@ -87,15 +87,14 @@ public class GeneratorContext {
      * @return The language
      */
     @NonNull public Language getLanguage() {
-        return options.language();
+        return options.language() == null ? Language.JAVA : options.language();
     }
 
     /**
      *
      * @return Options
      */
-    @NonNull
-    public Options getOptions() {
+    public @NonNull Options getOptions() {
         return options;
     }
 
@@ -103,17 +102,15 @@ public class GeneratorContext {
      * @return The test framework
      */
     @Deprecated(forRemoval = true)
-    @NonNull
-    public BuildTool getBuildTool() {
-        return options.getBuildTool();
+    public @NonNull BuildTool getBuildTool() {
+        return options.getBuildTool() == null ? BuildTool.GRADLE : options.getBuildTool();
     }
 
     /**
      * @return The test framework
      */
-    @NonNull
-    public TestFramework getTestFramework() {
-        return options.testFramework();
+    public @NonNull TestFramework getTestFramework() {
+        return options.testFramework() == null ? TestFramework.DEFAULT_OPTION : options.testFramework();
     }
 
     /**
@@ -134,7 +131,7 @@ public class GeneratorContext {
      * @return The JDK version
      */
     @NonNull public JdkVersion getJdkVersion() {
-        return options.java();
+        return options.java() == null ? JdkVersion.JDK_25 : options.java();
     }
 
     /**

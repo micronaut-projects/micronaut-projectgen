@@ -38,6 +38,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Properties;
 import java.util.function.Function;
@@ -197,7 +198,7 @@ public class DefaultRecipeFetcher implements RecipeFetcher {
         Recipe resolvedRecipe = resolveRecipe(recipe);
         List<FileContents> result = new ArrayList<>();
         if (resolvedRecipe instanceof org.openrewrite.xml.CreateXmlFile createXmlFile) {
-            result.add(new FileContents(createXmlFile.getRelativeFileName(), createXmlFile.getFileContents()));
+            result.add(new FileContents(createXmlFile.getRelativeFileName(), Objects.requireNonNull(createXmlFile.getFileContents())));
         }
         for (Recipe r : resolvedRecipe.getRecipeList()) {
             result.addAll(findAllFilesContents(r));

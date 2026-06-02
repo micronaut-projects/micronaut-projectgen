@@ -24,6 +24,7 @@ import io.micronaut.projectgen.core.buildtools.maven.MavenScope;
 import io.micronaut.projectgen.core.buildtools.maven.ParentPom;
 import io.micronaut.projectgen.core.buildtools.maven.Profile;
 import io.micronaut.projectgen.core.options.Language;
+import org.jspecify.annotations.Nullable;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -37,6 +38,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -44,6 +46,7 @@ import java.util.Optional;
  */
 public class MavenBuildTestVerifier implements BuildTestVerifier {
     public static final Scope MAVEN_DEFAULT_SCOPE = Scope.COMPILE;
+    @Nullable
     private ParentPom parentPom;
     private final List<Profile> profiles = new ArrayList<>();
     private final List<Coordinate> buildPlugins  = new ArrayList<>();
@@ -81,6 +84,7 @@ public class MavenBuildTestVerifier implements BuildTestVerifier {
         }
     }
 
+    @Nullable
     private ParentPom parseParent(Element projectElement) {
         NodeList parentNodes = projectElement.getElementsByTagName("parent");
         if (parentNodes.getLength() == 0) {
@@ -94,7 +98,7 @@ public class MavenBuildTestVerifier implements BuildTestVerifier {
         String version = getElementText(parentElement, "version");
         String relativePath = getElementText(parentElement, "relativePath");
 
-        return new ParentPom(groupId, artifactId, version, relativePath);
+        return new ParentPom(groupId, Objects.requireNonNull(artifactId), version, relativePath);
     }
 
     private List<Coordinate> parseBuildPlugins(Element projectElement) {
@@ -109,7 +113,7 @@ public class MavenBuildTestVerifier implements BuildTestVerifier {
                 String artifactId = getElementText(pluginElement, "artifactId");
                 buildPlugins.add(Dependency.builder()
                     .groupId(groupId)
-                    .artifactId(artifactId)
+                    .artifactId(Objects.requireNonNull(artifactId))
                     .build());
             }
         }
@@ -159,7 +163,7 @@ public class MavenBuildTestVerifier implements BuildTestVerifier {
                             String pathArtifactId = getElementText(path, "artifactId");
                             result.add(Dependency.builder()
                                     .groupId(groupId)
-                                    .artifactId(pathArtifactId)
+                                    .artifactId(Objects.requireNonNull(pathArtifactId))
                                 .build());
                         }
                     }
@@ -182,7 +186,7 @@ public class MavenBuildTestVerifier implements BuildTestVerifier {
                 Element profileElement = (Element) profileNodes.item(i);
                 String id = getElementText(profileElement, "id");
                 result.add(Profile.builder()
-                    .id(id)
+                    .id(Objects.requireNonNull(id))
                     .build());
             }
         }
@@ -202,11 +206,11 @@ public class MavenBuildTestVerifier implements BuildTestVerifier {
                 String artifactId = getElementText(dependencyElement, "artifactId");
                 String version = getElementText(dependencyElement, "version");
                 String scope = getElementText(dependencyElement, "scope");
-                Optional<MavenScope> mavenScope = MavenScope.of(scope);
+                Optional<MavenScope> mavenScope = scope == null ? Optional.empty() : MavenScope.of(scope);
                 Dependency.Builder dependencyBuilder = Dependency.builder();
                 dependencyBuilder
                     .groupId(groupId)
-                    .artifactId(artifactId)
+                    .artifactId(Objects.requireNonNull(artifactId))
                     .version(version);
                 mavenScope.flatMap(MavenScope::toScope).ifPresent(dependencyBuilder::scope);
                 result.add(dependencyBuilder.build());
@@ -216,6 +220,7 @@ public class MavenBuildTestVerifier implements BuildTestVerifier {
     }
 
     // Helper method to get text content of an element
+    @Nullable
     private static String getElementText(Element parentElement, String tagName) {
         NodeList nodeList = parentElement.getElementsByTagName(tagName);
         if (nodeList.getLength() > 0) {
@@ -225,6 +230,7 @@ public class MavenBuildTestVerifier implements BuildTestVerifier {
     }
 
     @Override
+    @Nullable
     public String getProperty(String propertyName) {
         return properties.get(propertyName);
     }
@@ -276,8 +282,14 @@ public class MavenBuildTestVerifier implements BuildTestVerifier {
      */
     public boolean hasDependency(String groupId, String artifactId, MavenScope scope) {
         return dependencies.stream().anyMatch(d ->
-            matchCoordinateGroupIdAndArtifactId(d, groupId, artifactId) &&
-                MavenScope.of(d.getScope(), language).isPresent() && MavenScope.of(d.getScope(), language).get().equals(scope));
+            matchCoordinateGroupIdAndArtifactId(d, groupId, artifactId) && matchesMavenScope(d, scope));
+    }
+
+    private boolean matchesMavenScope(Dependency dependency, MavenScope scope) {
+        Scope dependencyScope = dependency.getScope();
+        return dependencyScope != null && MavenScope.of(dependencyScope, language)
+            .map(scope::equals)
+            .orElse(false);
     }
 
     @Override
@@ -341,7 +353,7 @@ public class MavenBuildTestVerifier implements BuildTestVerifier {
         if (parentPom == null) {
             return false;
         }
-        return parentPom.groupId().equals(groupId) && parentPom.artifactId().equals(artifactId);
+        return Objects.equals(parentPom.groupId(), groupId) && parentPom.artifactId().equals(artifactId);
     }
 
     @Override

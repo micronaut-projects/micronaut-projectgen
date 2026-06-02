@@ -15,8 +15,8 @@
  */
 package io.micronaut.projectgen.core.buildtools;
 
-import io.micronaut.core.annotation.NonNull;
-import io.micronaut.core.annotation.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,8 +66,7 @@ public class Dockerfile {
         return args;
     }
 
-    @NonNull
-    public static Builder builder() {
+    public static @NonNull Builder builder() {
         return new Builder();
     }
 
@@ -76,8 +75,11 @@ public class Dockerfile {
      */
     public static class Builder {
 
+        @Nullable
         private String baseImage;
+        @Nullable
         private String javaVersion;
+        @Nullable
         private List<String> args;
 
         /**
@@ -85,8 +87,7 @@ public class Dockerfile {
          * @param baseImage base image
          * @return builder
          */
-        @NonNull
-        public Builder baseImage(String baseImage) {
+        public @NonNull Builder baseImage(String baseImage) {
             this.baseImage = baseImage;
             return this;
         }
@@ -106,8 +107,7 @@ public class Dockerfile {
          * @param arg arg
          * @return builder
          */
-        @NonNull
-        public Builder arg(String arg) {
+        public @NonNull Builder arg(String arg) {
             if (args == null) {
                 args = new ArrayList<>();
             }
@@ -120,8 +120,7 @@ public class Dockerfile {
          * @param args arguments
          * @return builder
          */
-        @NonNull
-        public Builder args(List<String> args) {
+        public @NonNull Builder args(List<String> args) {
             this.args = args;
             return this;
         }
@@ -130,8 +129,7 @@ public class Dockerfile {
          *
          * @return Dockerfile
          */
-        @NonNull
-        public Dockerfile build() {
+        public @NonNull Dockerfile build() {
             return new Dockerfile(baseImage, javaVersion, args);
         }
     }

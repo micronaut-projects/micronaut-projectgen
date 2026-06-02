@@ -15,7 +15,7 @@
  */
 package io.micronaut.projectgen.core.buildtools.gradle;
 
-import io.micronaut.core.annotation.NonNull;
+import org.jspecify.annotations.NonNull;
 import io.micronaut.projectgen.core.buildtools.MavenCentral;
 import io.micronaut.projectgen.core.buildtools.MavenLocal;
 import io.micronaut.projectgen.core.buildtools.Repository;
@@ -116,8 +116,7 @@ public class GradleRepository implements Writable {
         return "maven { url \"" + getUrl() + "\"" + (isSnapshot ? "\n    mavenContent { snapshotsOnly() }\n" : " ") + "}\n";
     }
 
-    @NonNull
-    public static List<GradleRepository> listOf(GradleDsl gradleDsl, Collection<Repository> repositories) {
+    public static @NonNull List<GradleRepository> listOf(GradleDsl gradleDsl, Collection<Repository> repositories) {
         return repositories.stream()
             .map(it -> {
                 if (it instanceof MavenCentral) {
@@ -136,8 +135,7 @@ public class GradleRepository implements Writable {
      * @param repository Repository
      * @return Gradle Repository
      */
-    @NonNull
-    public static GradleRepository of(GradleDsl gradleDsl, Repository repository) {
+    public static @NonNull GradleRepository of(GradleDsl gradleDsl, Repository repository) {
         return new GradleRepository(gradleDsl, repository.getUrl(), repository.isSnapshot());
     }
 

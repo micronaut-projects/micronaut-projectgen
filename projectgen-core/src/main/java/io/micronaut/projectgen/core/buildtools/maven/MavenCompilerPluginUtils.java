@@ -28,6 +28,7 @@ public final class MavenCompilerPluginUtils {
     private MavenCompilerPluginUtils() {
     }
 
+    @SuppressWarnings("NullAway")
     public static Optional<MavenPlugin> mavenCompilerPlugin(GeneratorContext generatorContext,
                                                             ModuleContext module,
                                                             MavenCompilerPluginConfiguration configuration) {

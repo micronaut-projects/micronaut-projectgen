@@ -15,7 +15,6 @@
  */
 package io.micronaut.projectgen.core.buildtools;
 
-import io.micronaut.core.annotation.NonNull;
 import io.micronaut.projectgen.core.feature.Feature;
 import java.util.List;
 
@@ -24,6 +23,5 @@ import java.util.List;
  */
 public interface RequiresRepository extends Feature {
 
-    @NonNull
     List<Repository> getRepositories();
 }

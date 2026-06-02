@@ -15,7 +15,7 @@
  */
 package io.micronaut.projectgen.core.buildtools.maven;
 
-import io.micronaut.core.annotation.NonNull;
+import org.jspecify.annotations.NonNull;
 import io.micronaut.core.order.Ordered;
 import io.micronaut.projectgen.core.buildtools.Phase;
 import io.micronaut.projectgen.core.buildtools.Scope;
@@ -54,8 +54,7 @@ public enum MavenScope implements Ordered {
         return this.order;
     }
 
-    @NonNull
-    public Optional<Scope> toScope() {
+    public @NonNull Optional<Scope> toScope() {
         switch (this) {
             case COMPILE -> {
                 return Optional.of(Scope.COMPILE);
@@ -72,9 +71,10 @@ public enum MavenScope implements Ordered {
             case SYSTEM, IMPORT -> {
                 return Optional.empty();
             }
-            default -> Optional.empty();
+            default -> {
+                return Optional.empty();
+            }
         }
-        return Optional.empty();
     }
 
     public static Optional<MavenScope> of(String name) {
@@ -83,8 +83,7 @@ public enum MavenScope implements Ordered {
             .findFirst();
     }
 
-    @NonNull
-    public static Optional<MavenScope> of(@NonNull Scope scope, Language language) {
+    public static @NonNull Optional<MavenScope> of(@NonNull Scope scope, Language language) {
         switch (scope.getSource()) {
             case MAIN:
                 if (scope.getPhases().contains(Phase.ANNOTATION_PROCESSING) && Language.GROOVY == language) {

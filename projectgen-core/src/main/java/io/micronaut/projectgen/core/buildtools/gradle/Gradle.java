@@ -16,7 +16,7 @@
 package io.micronaut.projectgen.core.buildtools.gradle;
 
 import io.micronaut.context.annotation.Requires;
-import io.micronaut.core.annotation.NonNull;
+import org.jspecify.annotations.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.buildtools.BuildToolUtils;
@@ -68,8 +68,7 @@ public class Gradle implements BuildFeature, DefaultFeature {
     private static final String GRADLE_PROPERTIES = "gradle.properties";
 
     @Override
-    @NonNull
-    public String getName() {
+    public @NonNull String getName() {
         return NAME;
     }
 

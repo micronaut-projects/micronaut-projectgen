@@ -15,7 +15,7 @@
  */
 package io.micronaut.projectgen.core.buildtools.dependencies;
 
-import io.micronaut.core.annotation.NonNull;
+import org.jspecify.annotations.NonNull;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
 
 import java.util.Collection;
@@ -56,15 +56,13 @@ public class DependencyContextImpl implements DependencyContext {
             .add(resolveDependency(dependency));
     }
 
-    @NonNull
     @Override
-    public Set<Dependency> getDependencies() {
+    public @NonNull Set<Dependency> getDependencies() {
         return dependencies;
     }
 
     @Override
-    @NonNull
-    public Collection<Dependency> getDependenciesByBuildTool(@NonNull BuildTool buildTool) {
+    public @NonNull Collection<Dependency> getDependenciesByBuildTool(@NonNull BuildTool buildTool) {
         Set<Dependency> result = new HashSet<>();
         result.addAll(dependencies);
         Collection<Dependency> dependencyByBuildTools = dependenciesByTool.get(buildTool);

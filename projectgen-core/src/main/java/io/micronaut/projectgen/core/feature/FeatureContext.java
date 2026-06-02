@@ -15,6 +15,7 @@
  */
 package io.micronaut.projectgen.core.feature;
 
+import org.jspecify.annotations.Nullable;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.io.ConsoleOutput;
 import io.micronaut.projectgen.core.options.JdkVersion;
@@ -42,6 +43,7 @@ public class FeatureContext {
     private final Options options;
     private final List<Feature> features = new ArrayList<>();
     private final List<FeaturePredicate> exclusions = new ArrayList<>();
+    @Nullable
     private ListIterator<Feature> iterator;
 
     public FeatureContext(Options options,
@@ -93,6 +95,7 @@ public class FeatureContext {
      *
      * @return Language
      */
+    @Nullable
     public Language getLanguage() {
         return options.language();
     }
@@ -101,6 +104,7 @@ public class FeatureContext {
      *
      * @return Test framework
      */
+    @Nullable
     public TestFramework getTestFramework() {
         return options.testFramework();
     }
@@ -109,6 +113,7 @@ public class FeatureContext {
      *
      * @return Build Tool.
      */
+    @Nullable
     public List<BuildTool> getBuildTools() {
         return options.buildTools();
     }
@@ -117,6 +122,7 @@ public class FeatureContext {
      *
      * @return Jdk Version
      */
+    @Nullable
     public JdkVersion getJavaVersion() {
         return options.java();
     }

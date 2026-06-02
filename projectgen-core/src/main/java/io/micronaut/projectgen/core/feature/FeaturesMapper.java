@@ -15,7 +15,7 @@
  */
 package io.micronaut.projectgen.core.feature;
 
-import io.micronaut.core.annotation.NonNull;
+import org.jspecify.annotations.NonNull;
 import jakarta.inject.Singleton;
 
 /**
@@ -28,11 +28,11 @@ public class FeaturesMapper {
      * @param feature Feature
      * @return A FeatureResponse
      */
-    @NonNull
-    public FeatureResponse toFeatureResponse(@NonNull Feature feature) {
+    public @NonNull FeatureResponse toFeatureResponse(@NonNull Feature feature) {
+        String description = feature.getDescription();
         return new FeatureResponse(feature.getName(),
             feature.getTitle(),
-            feature.getDescription(),
+            description.isEmpty() ? null : description,
             feature.isPreview(),
             feature.isCommunity());
     }

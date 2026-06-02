@@ -15,7 +15,8 @@
  */
 package io.micronaut.projectgen.core.buildtools.gradle;
 
-import io.micronaut.core.annotation.NonNull;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import io.micronaut.core.util.CollectionUtils;
 import io.micronaut.projectgen.core.buildtools.dependencies.Coordinate;
 import io.micronaut.projectgen.core.buildtools.dependencies.DependencyCoordinate;
@@ -49,7 +50,7 @@ import io.micronaut.projectgen.core.template.substitutions;
  * @param repositories Repositories
  */
 @Builder
-public record GradleBuild(Coordinate coordinate,
+public record GradleBuild(@Nullable Coordinate coordinate,
                           GradleDsl dsl,
                           List<GradleDependency> dependencies,
                           List<GradlePlugin> plugins,
@@ -60,8 +61,7 @@ public record GradleBuild(Coordinate coordinate,
      *
      * @return Plugins
      */
-    @NonNull
-    public List<GradlePlugin> getPlugins() {
+    public @NonNull List<GradlePlugin> getPlugins() {
         return plugins.stream().filter(gradlePlugin -> gradlePlugin.getGradleFile() == GradleFile.BUILD).toList();
     }
 
@@ -69,8 +69,7 @@ public record GradleBuild(Coordinate coordinate,
      *
      * @return Settings Imports
      */
-    @NonNull
-    public List<String> getSettingsImports() {
+    public @NonNull List<String> getSettingsImports() {
         return plugins.stream().filter(gradlePlugin -> gradlePlugin.getGradleFile() == GradleFile.SETTINGS).map(GradlePlugin::getSettingsImports).flatMap(Collection::stream).toList();
     }
 
@@ -78,8 +77,7 @@ public record GradleBuild(Coordinate coordinate,
      *
      * @return Settings Plugins
      */
-    @NonNull
-    public List<GradlePlugin> getSettingsPlugins() {
+    public @NonNull List<GradlePlugin> getSettingsPlugins() {
         return plugins.stream().filter(gradlePlugin -> gradlePlugin.getGradleFile() == GradleFile.SETTINGS).collect(Collectors.toList());
     }
 
@@ -87,8 +85,7 @@ public record GradleBuild(Coordinate coordinate,
      *
      * @return substitutions rendered
      */
-    @NonNull
-    public String renderSubstitutions() {
+    public @NonNull String renderSubstitutions() {
         Set<Substitution> uniqueSubstitutions = new HashSet<>();
         dependencies
             .stream()
@@ -104,8 +101,7 @@ public record GradleBuild(Coordinate coordinate,
      *
      * @return extensions rendered
      */
-    @NonNull
-    public String renderExtensions() {
+    public @NonNull String renderExtensions() {
         List<Writable> extensions = plugins.stream()
             .map(GradlePlugin::getExtension)
             .filter(Objects::nonNull)
@@ -117,8 +113,7 @@ public record GradleBuild(Coordinate coordinate,
      *
      * @return settings extensions rendered
      */
-    @NonNull
-    public String renderSettingsExtensions() {
+    public @NonNull String renderSettingsExtensions() {
         return renderWritableExtensions(getSettingsExtensionsStream());
     }
 
@@ -137,8 +132,7 @@ public record GradleBuild(Coordinate coordinate,
      *
      * @return repositories rendered
      */
-    @NonNull
-    public String renderRepositories() {
+    public @NonNull String renderRepositories() {
         String result = WritableUtils.renderWritableList(repositories.stream()
             .map(Writable.class::cast)
             .toList(), 4);
@@ -153,8 +147,7 @@ public record GradleBuild(Coordinate coordinate,
      *
      * @return settings plugins management rendered
      */
-    @NonNull
-    public String renderSettingsPluginsManagement() {
+    public @NonNull String renderSettingsPluginsManagement() {
         List<GradleRepository> repos = getPluginsManagementRepositories();
         if (CollectionUtils.isEmpty(repos)) {
             return "";
@@ -173,8 +166,7 @@ public record GradleBuild(Coordinate coordinate,
      *
      * @return writable extensions rendered
      */
-    @NonNull
-    private String renderWritableExtensions(Stream<Writable> extensions) {
+    private @NonNull String renderWritableExtensions(Stream<Writable> extensions) {
         StringBuilder result = new StringBuilder();
         extensions
             .filter(Objects::nonNull)
@@ -197,8 +189,7 @@ public record GradleBuild(Coordinate coordinate,
      *
      * @return plugins imports
      */
-    @NonNull
-    public Set<String> getPluginsImports() {
+    public @NonNull Set<String> getPluginsImports() {
         Set<String> imports = new HashSet<>();
         for (GradlePlugin p : plugins) {
             Set<String> pluginImports = p.getBuildImports();

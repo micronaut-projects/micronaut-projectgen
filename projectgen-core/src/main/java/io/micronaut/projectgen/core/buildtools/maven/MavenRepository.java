@@ -16,7 +16,7 @@
 package io.micronaut.projectgen.core.buildtools.maven;
 
 import com.fizzed.rocker.RockerModel;
-import io.micronaut.core.annotation.NonNull;
+import org.jspecify.annotations.NonNull;
 import io.micronaut.projectgen.core.buildtools.MavenCentral;
 import io.micronaut.projectgen.core.buildtools.Repository;
 import io.micronaut.projectgen.core.rocker.RockerWritable;
@@ -38,8 +38,7 @@ public class MavenRepository extends RockerWritable {
         this(mavenRepository.template(id, url, snapshot));
     }
 
-    @NonNull
-    public static List<MavenRepository> listOf(Collection<Repository> repositories) {
+    public static @NonNull List<MavenRepository> listOf(Collection<Repository> repositories) {
         return repositories.stream()
             .filter(repo -> !repo.getId().equals(MavenCentral.MAVEN_CENTRAL_ID))
             .map(it -> new MavenRepository(it.getId(), it.getUrl(), it.isSnapshot()))

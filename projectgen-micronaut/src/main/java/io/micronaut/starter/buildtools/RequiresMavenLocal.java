@@ -27,6 +27,7 @@ import java.util.List;
  * Marker interface for a feature which requires {@link MavenLocal} repository.
  */
 public interface RequiresMavenLocal extends RequiresRepository {
+    @Override
     @NonNull
     default List<Repository> getRepositories() {
         return Collections.singletonList(new MavenLocal());

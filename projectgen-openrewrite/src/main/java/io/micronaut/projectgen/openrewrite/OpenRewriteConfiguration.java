@@ -17,6 +17,8 @@ package io.micronaut.projectgen.openrewrite;
 
 import io.micronaut.core.util.CollectionUtils;
 import io.micronaut.projectgen.core.options.OperatingSystem;
+import org.jspecify.annotations.Nullable;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -33,8 +35,8 @@ import java.util.Objects;
  */
 public record OpenRewriteConfiguration(List<String> activeRecipes,
                                        boolean exportDatatables,
-                                       String recipeChangeLogLevel,
-                                       String configLocation,
+                                       @Nullable String recipeChangeLogLevel,
+                                       @Nullable String configLocation,
                                        OperatingSystem operatingSystem) {
     private static final String SYS_PROPERTY_REWRITE_ACTIVE_RECIPES = "rewrite.activeRecipes";
     private static final String SYS_PROPERTY_REWRITE_EXPORT_DATATABLES = "rewrite.exportDatatables";
@@ -63,8 +65,12 @@ public record OpenRewriteConfiguration(List<String> activeRecipes,
             systemProperties.put(SYS_PROPERTY_REWRITE_ACTIVE_RECIPES, String.join(",", activeRecipes));
         }
         systemProperties.put(SYS_PROPERTY_REWRITE_EXPORT_DATATABLES, exportDatatables);
-        systemProperties.put(SYS_PROPERTY_REWRITE_RECIPE_CHANGE_LOG_LEVEL, recipeChangeLogLevel);
-        systemProperties.put(SYS_PROPERTY_REWRITE_CONFIG_LOCATION, configLocation);
+        if (recipeChangeLogLevel != null) {
+            systemProperties.put(SYS_PROPERTY_REWRITE_RECIPE_CHANGE_LOG_LEVEL, recipeChangeLogLevel);
+        }
+        if (configLocation != null) {
+            systemProperties.put(SYS_PROPERTY_REWRITE_CONFIG_LOCATION, configLocation);
+        }
         return systemProperties;
     }
 
@@ -82,8 +88,11 @@ public record OpenRewriteConfiguration(List<String> activeRecipes,
     public static class Builder {
         private final List<String> activeRecipes = new ArrayList<>();
         private boolean exportDatatables;
+        @Nullable
         private String recipeChangeLogLevel;
+        @Nullable
         private String configLocation;
+        @Nullable
         private OperatingSystem operatingSystem;
 
         /**

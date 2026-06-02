@@ -16,7 +16,7 @@
 package io.micronaut.projectgen.core.feature.config;
 
 import io.micronaut.context.annotation.Requires;
-import io.micronaut.core.annotation.NonNull;
+import org.jspecify.annotations.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.feature.ConfigurationFeature;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
@@ -49,8 +49,7 @@ public class Yaml implements ConfigurationFeature {
             .build();
 
     @Override
-    @NonNull
-    public String getName() {
+    public @NonNull String getName() {
         return NAME;
     }
 

@@ -15,7 +15,7 @@
  */
 package io.micronaut.projectgen.core.buildtools;
 
-import io.micronaut.core.annotation.NonNull;
+import org.jspecify.annotations.NonNull;
 import io.micronaut.core.util.StringUtils;
 import java.util.Locale;
 import java.util.Optional;
@@ -43,13 +43,11 @@ public enum BuildTool {
         return getName();
     }
 
-    @NonNull
-    public String getName() {
+    public @NonNull String getName() {
         return name().toLowerCase(Locale.ENGLISH);
     }
 
-    @NonNull
-    public static Optional<BuildTool> of(@NonNull String str) {
+    public static @NonNull Optional<BuildTool> of(@NonNull String str) {
         for (BuildTool bt : values()) {
             if (bt.name().equalsIgnoreCase(str)) {
                 return Optional.of(bt);

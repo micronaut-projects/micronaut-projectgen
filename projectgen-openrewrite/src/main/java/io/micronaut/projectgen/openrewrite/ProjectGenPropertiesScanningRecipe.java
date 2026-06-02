@@ -25,6 +25,7 @@ import io.micronaut.projectgen.core.options.JdkVersion;
 import io.micronaut.projectgen.core.options.Language;
 import io.micronaut.projectgen.core.options.OperatingSystem;
 import io.micronaut.projectgen.core.options.TestFramework;
+import org.jspecify.annotations.Nullable;
 import org.openrewrite.ExecutionContext;
 import org.openrewrite.ScanningRecipe;
 import org.openrewrite.SourceFile;
@@ -44,6 +45,7 @@ import static io.micronaut.projectgen.openrewrite.PropertiesUtils.parseValue;
  */
 @Internal
 public abstract class ProjectGenPropertiesScanningRecipe extends ScanningRecipe<GenericOptionsBuilder> {
+    @Nullable
     protected Path projectDir;
 
     @Override

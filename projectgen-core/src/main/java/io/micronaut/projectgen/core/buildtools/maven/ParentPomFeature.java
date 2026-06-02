@@ -15,14 +15,12 @@
  */
 package io.micronaut.projectgen.core.buildtools.maven;
 
-import io.micronaut.core.annotation.NonNull;
 import io.micronaut.projectgen.core.feature.Feature;
 
 /**
  * A feature which defines a ParentPom.
  */
 public interface ParentPomFeature extends Feature {
-    @NonNull
     ParentPom getParentPom();
 
 }

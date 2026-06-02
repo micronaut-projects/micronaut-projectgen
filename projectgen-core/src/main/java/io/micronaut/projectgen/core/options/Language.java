@@ -15,7 +15,8 @@
  */
 package io.micronaut.projectgen.core.options;
 
-import io.micronaut.core.annotation.NonNull;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.feature.LanguageSpecificFeature;
 
@@ -74,6 +75,7 @@ public enum Language {
         return getTestSrcDir() + path + "." + getExtension();
     }
 
+    @Nullable
     public static Language infer(Set<Feature> features) {
         return features.stream()
                 .filter(LanguageSpecificFeature.class::isInstance)
@@ -97,8 +99,7 @@ public enum Language {
         return getName();
     }
 
-    @NonNull
-    public String getName() {
+    public @NonNull String getName() {
         return name().toLowerCase(Locale.ENGLISH);
     }
 }

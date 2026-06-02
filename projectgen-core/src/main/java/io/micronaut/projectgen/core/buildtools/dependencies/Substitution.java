@@ -15,7 +15,8 @@
  */
 package io.micronaut.projectgen.core.buildtools.dependencies;
 
-import io.micronaut.core.annotation.NonNull;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 
 import java.util.Objects;
 
@@ -24,11 +25,9 @@ import java.util.Objects;
  */
 public class Substitution {
 
-    @NonNull
-    private final Dependency target;
+    private final @NonNull Dependency target;
 
-    @NonNull
-    private final Dependency replacement;
+    private final @NonNull Dependency replacement;
 
     Substitution(@NonNull Dependency target,
                  @NonNull Dependency replacement) {
@@ -40,8 +39,7 @@ public class Substitution {
      *
      * @return Target Dependency
      */
-    @NonNull
-    public Dependency getTarget() {
+    public @NonNull Dependency getTarget() {
         return target;
     }
 
@@ -49,8 +47,7 @@ public class Substitution {
      *
      * @return Replacement
      */
-    @NonNull
-    public Dependency getReplacement() {
+    public @NonNull Dependency getReplacement() {
         return replacement;
     }
 
@@ -58,8 +55,7 @@ public class Substitution {
      *
      * @return The Builder
      */
-    @NonNull
-    public static Builder builder() {
+    public static @NonNull Builder builder() {
         return new Builder();
     }
 
@@ -91,7 +87,9 @@ public class Substitution {
      * Builder.
      */
     public static class Builder {
+        @Nullable
         private Dependency target;
+        @Nullable
         private Dependency replacement;
 
         /**
@@ -99,8 +97,7 @@ public class Substitution {
          * @param target Target
          * @return Builder
          */
-        @NonNull
-        public Builder target(@NonNull Dependency target) {
+        public @NonNull Builder target(@NonNull Dependency target) {
             this.target = target;
             return this;
         }
@@ -110,8 +107,7 @@ public class Substitution {
          * @param replacement Replacement
          * @return Builder
          */
-        @NonNull
-        public Builder replacement(@NonNull Dependency replacement) {
+        public @NonNull Builder replacement(@NonNull Dependency replacement) {
             this.replacement = replacement;
             return this;
         }
@@ -120,8 +116,7 @@ public class Substitution {
          *
          * @return Substitution
          */
-        @NonNull
-        public Substitution build() {
+        public @NonNull Substitution build() {
             return new Substitution(Objects.requireNonNull(target),
                 Objects.requireNonNull(replacement));
         }

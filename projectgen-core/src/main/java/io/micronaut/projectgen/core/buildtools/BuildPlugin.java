@@ -15,8 +15,7 @@
  */
 package io.micronaut.projectgen.core.buildtools;
 
-import io.micronaut.core.annotation.NonNull;
-import io.micronaut.core.annotation.Nullable;
+import org.jspecify.annotations.Nullable;
 import io.micronaut.core.order.Ordered;
 import io.micronaut.projectgen.core.buildtools.dependencies.CoordinateResolver;
 import io.micronaut.projectgen.core.template.Writable;
@@ -26,7 +25,6 @@ import io.micronaut.projectgen.core.template.Writable;
  */
 public interface BuildPlugin extends Ordered {
 
-    @NonNull
     BuildTool getBuildTool();
 
     @Nullable

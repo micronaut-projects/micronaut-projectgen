@@ -15,7 +15,7 @@
  */
 package io.micronaut.projectgen.core.openrewrite;
 
-import io.micronaut.core.annotation.NonNull;
+import org.jspecify.annotations.NonNull;
 import io.micronaut.projectgen.core.buildtools.BuildPlugin;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
@@ -28,29 +28,69 @@ import java.util.Properties;
  * Utility class to interact with OpenRewrite recipes.
  */
 public interface RecipeFetcher {
+    RecipeFetcher NOOP = new RecipeFetcher() {
+        @Override
+        public Optional<String> findFrameworkDocumentationByRecipeName(String recipeName) {
+            return Optional.empty();
+        }
+
+        @Override
+        public Optional<String> findThirdPartyDocumentationByRecipeName(String recipeName) {
+            return Optional.empty();
+        }
+
+        @Override
+        public List<Dependency> findAllByRecipeNameAndBuildTool(@NonNull String recipe, @NonNull BuildTool buildTool) {
+            return List.of();
+        }
+
+        @Override
+        public Optional<Properties> findPropertiesByRecipeName(@NonNull String recipe) {
+            return Optional.empty();
+        }
+
+        @Override
+        public List<FileContents> findAllFilesByRecipeName(@NonNull String recipe) {
+            return List.of();
+        }
+
+        @Override
+        public Optional<Properties> findBootstrapPropertiesByRecipeName(@NonNull String recipeName) {
+            return Optional.empty();
+        }
+
+        @Override
+        public Optional<Properties> findDevPropertiesByRecipeName(@NonNull String recipeName) {
+            return Optional.empty();
+        }
+
+        @Override
+        public List<BuildPlugin> findAllBuildPluginsByRecipeNameAndBuildTool(@NonNull String recipeName, @NonNull BuildTool buildTool) {
+            return List.of();
+        }
+
+        @Override
+        public Optional<Properties> findMavenBuildPropertiesByRecipeName(@NonNull String recipeName) {
+            return Optional.empty();
+        }
+    };
+
     Optional<String> findFrameworkDocumentationByRecipeName(String recipeName);
 
     Optional<String> findThirdPartyDocumentationByRecipeName(String recipeName);
 
-    @NonNull
     List<Dependency> findAllByRecipeNameAndBuildTool(@NonNull String recipe, @NonNull BuildTool buildTool);
 
-    @NonNull
     Optional<Properties> findPropertiesByRecipeName(@NonNull String recipe);
 
-    @NonNull
     List<FileContents> findAllFilesByRecipeName(@NonNull String recipe);
 
-    @NonNull
     Optional<Properties> findBootstrapPropertiesByRecipeName(@NonNull String recipeName);
 
-    @NonNull
     Optional<Properties> findDevPropertiesByRecipeName(@NonNull String recipeName);
 
-    @NonNull
     List<BuildPlugin> findAllBuildPluginsByRecipeNameAndBuildTool(@NonNull String recipeName, @NonNull BuildTool buildTool);
 
-    @NonNull
     Optional<Properties> findMavenBuildPropertiesByRecipeName(@NonNull String recipeName);
 
 }

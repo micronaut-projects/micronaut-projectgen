@@ -15,8 +15,8 @@
  */
 package io.micronaut.projectgen.core.buildtools.maven;
 
-import io.micronaut.core.annotation.NonNull;
-import io.micronaut.core.annotation.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import io.micronaut.projectgen.core.buildtools.Property;
 import io.micronaut.projectgen.core.buildtools.dependencies.Coordinate;
 import io.micronaut.projectgen.core.buildtools.dependencies.DependencyCoordinate;
@@ -47,13 +47,13 @@ import java.util.Objects;
  * @param repositories repositories
  */
 @Builder
-public record MavenBuild(String name,
-                         String description,
-                         Coordinate coordinate,
+public record MavenBuild(@Nullable String name,
+                         @Nullable String description,
+                         @Nullable Coordinate coordinate,
                          @Nullable String packaging,
-                         ParentPom parentPom,
-                         MavenCombineAttribute annotationProcessorCombineAttribute,
-                         MavenCombineAttribute testAnnotationProcessorCombineAttribute,
+                         @Nullable ParentPom parentPom,
+                         @Nullable MavenCombineAttribute annotationProcessorCombineAttribute,
+                         @Nullable MavenCombineAttribute testAnnotationProcessorCombineAttribute,
                          List<DependencyCoordinate> testAnnotationProcessors,
                          List<DependencyCoordinate> annotationProcessors,
                          List<MavenDependency> dependencies,
@@ -66,8 +66,7 @@ public record MavenBuild(String name,
      * @param indentationSpaces Indentation Spaces
      * @return rendered string
      */
-    @NonNull
-    public String renderRepositories(int indentationSpaces) {
+    public @NonNull String renderRepositories(int indentationSpaces) {
         return WritableUtils.renderWritableList(this.repositories.stream()
             .map(Writable.class::cast)
             .toList(), indentationSpaces);
@@ -78,8 +77,7 @@ public record MavenBuild(String name,
      * @param indentationSpaces Indentation Spaces
      * @return rendered string
      */
-    @NonNull
-    public String renderPlugins(int indentationSpaces) {
+    public @NonNull String renderPlugins(int indentationSpaces) {
         List<Writable> writableList = plugins.stream()
             .map(MavenPlugin::getExtension)
             .filter(Objects::nonNull)
@@ -92,8 +90,7 @@ public record MavenBuild(String name,
      * @param indentationSpaces Indentation Spaces
      * @return rendered string
      */
-    @NonNull
-    public String renderProfiles(int indentationSpaces) {
+    public @NonNull String renderProfiles(int indentationSpaces) {
         List<Writable> writableList = profiles.stream()
             .map(Profile::getExtension)
             .filter(Objects::nonNull)
@@ -101,14 +98,12 @@ public record MavenBuild(String name,
         return WritableUtils.renderWritableList(writableList, indentationSpaces);
     }
 
-
     /**
      *
      * @param pom pom
      * @return Dependencies
      */
-    @NonNull
-    public List<MavenDependency> getDependencies(boolean pom) {
+    public @NonNull List<MavenDependency> getDependencies(boolean pom) {
         return dependencies
             .stream()
             .filter(it -> it.isPom() == pom)

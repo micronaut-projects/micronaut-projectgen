@@ -54,7 +54,7 @@ public class DefaultOptionsBuilder implements OptionsBuilder {
     protected  static final String VERSION = "version";
 
     @Override
-    public Options createOptions(Map<String, Object> form) {
+    public Options createOptions(@Nullable Map<String, Object> form) {
         return createOptionsBuilder(form).build();
     }
 
@@ -100,8 +100,8 @@ public class DefaultOptionsBuilder implements OptionsBuilder {
         List<String> result = new ArrayList<>();
         if (resultObj instanceof List<?>) {
             for (Object featureObj : (List<?>) resultObj) {
-                if (featureObj instanceof String feature) {
-                    result.add(feature);
+                if (featureObj != null) {
+                    result.add(featureObj.toString());
                 }
             }
         } else if (resultObj instanceof String feature) {

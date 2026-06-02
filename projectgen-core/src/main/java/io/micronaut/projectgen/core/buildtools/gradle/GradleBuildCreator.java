@@ -16,7 +16,7 @@
 package io.micronaut.projectgen.core.buildtools.gradle;
 
 import com.fizzed.rocker.RockerModel;
-import io.micronaut.core.annotation.NonNull;
+import org.jspecify.annotations.NonNull;
 import io.micronaut.core.order.OrderUtil;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
@@ -42,6 +42,7 @@ public final class GradleBuildCreator {
     private GradleBuildCreator() {
     }
 
+    @SuppressWarnings("NullAway")
     public static RockerTemplate buildFileTemplate(GeneratorContext generatorContext, ModuleContext moduleContext, String module) {
         GradleBuild build = create(generatorContext, moduleContext, generatorContext.getOptions());
         BuildTool buildTool = generatorContext.getOptions().buildTools().stream().filter(bt ->  bt == BuildTool.GRADLE).findFirst().orElseThrow();
@@ -56,15 +57,13 @@ public final class GradleBuildCreator {
             : module + "/" + buildFileName, rockerModel);
     }
 
-    @NonNull
-    public static GradleBuild create(@NonNull GeneratorContext generatorContext,
+    public static @NonNull GradleBuild create(@NonNull GeneratorContext generatorContext,
                                      @NonNull ModuleContext module,
                                      Options options) {
         return create(generatorContext, module, options, DEFAULT_USER_VERSION_CATALOGUE);
     }
 
-    @NonNull
-    public static GradleBuild create(@NonNull GeneratorContext generatorContext,
+    public static @NonNull GradleBuild create(@NonNull GeneratorContext generatorContext,
                               @NonNull ModuleContext module,
                               Options options, boolean useVersionCatalogue) {
         if (!OptionUtils.hasGradleBuildTool(generatorContext.getOptions())) {
@@ -93,8 +92,7 @@ public final class GradleBuildCreator {
      * @param repositories Repositories
      * @return Gradle Repositories
      */
-    @NonNull
-    private static List<GradleRepository> getRepositories(@NonNull Options options,
+    private static @NonNull List<GradleRepository> getRepositories(@NonNull Options options,
                                                      Collection<Repository> repositories) {
         BuildTool buildTool = options.buildTools().stream()
             .filter(bt -> bt == BuildTool.GRADLE).findFirst().orElseThrow();
