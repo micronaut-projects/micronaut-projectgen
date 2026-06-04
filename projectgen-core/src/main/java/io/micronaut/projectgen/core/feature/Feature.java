@@ -16,6 +16,7 @@
 package io.micronaut.projectgen.core.feature;
 
 import io.micronaut.core.annotation.Indexed;
+import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 import io.micronaut.core.naming.Described;
 import io.micronaut.core.naming.Named;
@@ -38,6 +39,7 @@ public interface Feature extends Named, Ordered, Described {
      *
      * @return the name of the feature
      */
+    @NonNull
     @Override
     String getName();
 

@@ -15,6 +15,7 @@
  */
 package io.micronaut.projectgen.core.options;
 
+import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.buildtools.gradle.GradleDsl;
@@ -27,6 +28,7 @@ import java.util.List;
  * Project creation options.
 */
 public interface Options {
+    @NonNull
     String name();
 
     @Nullable
@@ -65,6 +67,7 @@ public interface Options {
     @Nullable
     Packaging packaging();
 
+    @NonNull
     List<String> features();
 
     @Nullable

@@ -15,13 +15,17 @@
  */
 package io.micronaut.projectgen.core.buildtools;
 
+import org.jspecify.annotations.NonNull;
+
 /**
  * Repository.
  */
 public interface Repository {
 
+    @NonNull
     String getId();
 
+    @NonNull
     String getUrl();
 
     default boolean isSnapshot() {

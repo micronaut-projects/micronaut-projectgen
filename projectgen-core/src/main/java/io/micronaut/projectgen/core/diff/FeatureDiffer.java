@@ -28,5 +28,6 @@ public interface FeatureDiffer {
      * @return diff
      * @throws Exception Exception generating diff.
      */
+    @NonNull
     String diff(@NonNull Options options) throws Exception;
 }

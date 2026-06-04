@@ -43,13 +43,15 @@ public interface DependencyContext {
         d.getScope().getPhases().contains(Phase.PUBLIC_API) ||
         d.getScope().getPhases().contains(RUNTIME));
 
+    @NonNull
     Collection<Dependency> getDependencies();
 
+    @NonNull
     Collection<Dependency> getDependenciesByBuildTool(@NonNull BuildTool buildTool);
 
     void addDependency(@NonNull Dependency dependency);
 
-    default void addDependency(Dependency.Builder dependency) {
+    default void addDependency(Dependency.@NonNull Builder dependency) {
         addDependency(dependency.build());
     }
 
@@ -128,7 +130,7 @@ public interface DependencyContext {
 
     void addDependencyOnlyForBuild(@NonNull Dependency dependency, @NonNull BuildTool buildTool);
 
-    default void addDependencyOnlyForBuild(Dependency.Builder dependency, @NonNull BuildTool buildTool) {
+    default void addDependencyOnlyForBuild(Dependency.@NonNull Builder dependency, @NonNull BuildTool buildTool) {
         addDependencyOnlyForBuild(dependency.build(), buildTool);
     }
 }

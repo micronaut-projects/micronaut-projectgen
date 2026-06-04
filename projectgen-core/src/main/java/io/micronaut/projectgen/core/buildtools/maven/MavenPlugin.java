@@ -139,32 +139,32 @@ public class MavenPlugin implements BuildPlugin {
         private Builder() {
         }
 
-        public MavenPlugin.Builder extension(@Nullable String extension) {
+        public MavenPlugin.@NonNull Builder extension(@Nullable String extension) {
             this.extension = extension == null ? null : new StringWritable(extension);
             return this;
         }
 
-        public MavenPlugin.Builder extension(@Nullable Writable extension) {
+        public MavenPlugin.@NonNull Builder extension(@Nullable Writable extension) {
             this.extension = extension;
             return this;
         }
 
-        public MavenPlugin.Builder order(int order) {
+        public MavenPlugin.@NonNull Builder order(int order) {
             this.order = order;
             return this;
         }
 
-        public MavenPlugin.Builder artifactId(String artifactId) {
+        public MavenPlugin.@NonNull Builder artifactId(String artifactId) {
             this.artifactId = artifactId;
             return this;
         }
 
-        public MavenPlugin.Builder groupId(String groupId) {
+        public MavenPlugin.@NonNull Builder groupId(String groupId) {
             this.groupId = groupId;
             return this;
         }
 
-        public MavenPlugin.Builder version(String version) {
+        public MavenPlugin.@NonNull Builder version(String version) {
             this.version = version;
             return this;
         }

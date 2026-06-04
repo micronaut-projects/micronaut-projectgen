@@ -32,5 +32,6 @@ public interface PreviewGenerator {
      * @return Project Preview
      * @throws Exception Exception generating preview
      */
+    @NonNull
     Map<String, String> generate(@NonNull Options options) throws Exception;
 }

@@ -29,5 +29,6 @@ public interface FeatureFetcher {
      * @param options project options
      * @return features
      */
+    @NonNull
     List<FeatureResponse> fetch(@NonNull Options options);
 }

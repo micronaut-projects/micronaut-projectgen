@@ -79,18 +79,25 @@ public interface RecipeFetcher {
 
     Optional<String> findThirdPartyDocumentationByRecipeName(String recipeName);
 
+    @NonNull
     List<Dependency> findAllByRecipeNameAndBuildTool(@NonNull String recipe, @NonNull BuildTool buildTool);
 
+    @NonNull
     Optional<Properties> findPropertiesByRecipeName(@NonNull String recipe);
 
+    @NonNull
     List<FileContents> findAllFilesByRecipeName(@NonNull String recipe);
 
+    @NonNull
     Optional<Properties> findBootstrapPropertiesByRecipeName(@NonNull String recipeName);
 
+    @NonNull
     Optional<Properties> findDevPropertiesByRecipeName(@NonNull String recipeName);
 
+    @NonNull
     List<BuildPlugin> findAllBuildPluginsByRecipeNameAndBuildTool(@NonNull String recipeName, @NonNull BuildTool buildTool);
 
+    @NonNull
     Optional<Properties> findMavenBuildPropertiesByRecipeName(@NonNull String recipeName);
 
 }

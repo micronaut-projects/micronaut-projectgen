@@ -15,11 +15,14 @@
  */
 package io.micronaut.projectgen.core.buildtools.dependencies;
 
+import org.jspecify.annotations.NonNull;
+
 import java.util.Map;
 
 /**
  * Resolves the versions of dependencies from a POM file.
  */
 public interface PomDependencyVersionResolver extends CoordinateResolver {
+    @NonNull
     Map<String, Coordinate> getCoordinates();
 }

@@ -16,6 +16,7 @@
 package io.micronaut.projectgen.core.buildtools.dependencies;
 
 import io.micronaut.core.annotation.Introspected;
+import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 import io.micronaut.core.order.OrderUtil;
 
@@ -47,6 +48,7 @@ public interface Coordinate {
     @Nullable
     String getGroupId();
 
+    @NonNull
     String getArtifactId();
 
     @Nullable

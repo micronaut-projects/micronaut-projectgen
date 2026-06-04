@@ -29,5 +29,6 @@ public interface ZipGenerator {
      * @param options Project Options
      * @return ZIP wrapped in a {@link Writable}.
      */
+    @NonNull
     Writable zip(@NonNull Options options);
 }
