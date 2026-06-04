@@ -1,0 +1,9 @@
+{
+  "resources": {
+    "includes": [
+      {
+        "pattern": "io/micronaut/projectgen/micronaut/template/.*\\$PlainText\\.class$"
+      }
+    ]
+  }
+}

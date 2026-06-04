@@ -1,0 +1,102 @@
+[
+  {
+    "condition": { "typeReachable": "com.fizzed.rocker.runtime.PlainTextUnloadedClassLoader" },
+    "name": "io.micronaut.projectgen.core.template.genericBuildGradle$PlainText",
+    "allDeclaredFields": true
+  },
+  {
+    "condition": { "typeReachable": "com.fizzed.rocker.runtime.PlainTextUnloadedClassLoader" },
+    "name": "io.micronaut.projectgen.core.template.genericPom$PlainText",
+    "allDeclaredFields": true
+  },
+  {
+    "condition": { "typeReachable": "com.fizzed.rocker.runtime.PlainTextUnloadedClassLoader" },
+    "name": "io.micronaut.projectgen.core.template.gitignore$PlainText",
+    "allDeclaredFields": true
+  },
+  {
+    "condition": { "typeReachable": "com.fizzed.rocker.runtime.PlainTextUnloadedClassLoader" },
+    "name": "io.micronaut.projectgen.core.template.gradleProperties$PlainText",
+    "allDeclaredFields": true
+  },
+  {
+    "condition": { "typeReachable": "com.fizzed.rocker.runtime.PlainTextUnloadedClassLoader" },
+    "name": "io.micronaut.projectgen.core.template.licenseApache20$PlainText",
+    "allDeclaredFields": true
+  },
+  {
+    "condition": { "typeReachable": "com.fizzed.rocker.runtime.PlainTextUnloadedClassLoader" },
+    "name": "io.micronaut.projectgen.core.template.markdownLink$PlainText",
+    "allDeclaredFields": true
+  },
+  {
+    "condition": { "typeReachable": "com.fizzed.rocker.runtime.PlainTextUnloadedClassLoader" },
+    "name": "io.micronaut.projectgen.core.template.mavenCompilerPlugin$PlainText",
+    "allDeclaredFields": true
+  },
+  {
+    "condition": { "typeReachable": "com.fizzed.rocker.runtime.PlainTextUnloadedClassLoader" },
+    "name": "io.micronaut.projectgen.core.template.mavenDependency$PlainText",
+    "allDeclaredFields": true
+  },
+  {
+    "condition": { "typeReachable": "com.fizzed.rocker.runtime.PlainTextUnloadedClassLoader" },
+    "name": "io.micronaut.projectgen.core.template.mavenPlugin$PlainText",
+    "allDeclaredFields": true
+  },
+  {
+    "condition": { "typeReachable": "com.fizzed.rocker.runtime.PlainTextUnloadedClassLoader" },
+    "name": "io.micronaut.projectgen.core.template.mavenProperties$PlainText",
+    "allDeclaredFields": true
+  },
+  {
+    "condition": { "typeReachable": "com.fizzed.rocker.runtime.PlainTextUnloadedClassLoader" },
+    "name": "io.micronaut.projectgen.core.template.mavenPublishGradlePlugin$PlainText",
+    "allDeclaredFields": true
+  },
+  {
+    "condition": { "typeReachable": "com.fizzed.rocker.runtime.PlainTextUnloadedClassLoader" },
+    "name": "io.micronaut.projectgen.core.template.mavenRepository$PlainText",
+    "allDeclaredFields": true
+  },
+  {
+    "condition": { "typeReachable": "com.fizzed.rocker.runtime.PlainTextUnloadedClassLoader" },
+    "name": "io.micronaut.projectgen.core.template.parentPom$PlainText",
+    "allDeclaredFields": true
+  },
+  {
+    "condition": { "typeReachable": "com.fizzed.rocker.runtime.PlainTextUnloadedClassLoader" },
+    "name": "io.micronaut.projectgen.core.template.profile$PlainText",
+    "allDeclaredFields": true
+  },
+  {
+    "condition": { "typeReachable": "com.fizzed.rocker.runtime.PlainTextUnloadedClassLoader" },
+    "name": "io.micronaut.projectgen.core.template.settingsGradle$PlainText",
+    "allDeclaredFields": true
+  },
+  {
+    "condition": { "typeReachable": "com.fizzed.rocker.runtime.PlainTextUnloadedClassLoader" },
+    "name": "io.micronaut.projectgen.core.template.settingsPluginManagement$PlainText",
+    "allDeclaredFields": true
+  },
+  {
+    "condition": { "typeReachable": "com.fizzed.rocker.runtime.PlainTextUnloadedClassLoader" },
+    "name": "io.micronaut.projectgen.core.template.signingGradlePlugin$PlainText",
+    "allDeclaredFields": true
+  },
+  {
+    "condition": { "typeReachable": "com.fizzed.rocker.runtime.PlainTextUnloadedClassLoader" },
+    "name": "io.micronaut.projectgen.core.template.spotlessGradlePlugin$PlainText",
+    "allDeclaredFields": true
+  },
+  {
+    "condition": { "typeReachable": "com.fizzed.rocker.runtime.PlainTextUnloadedClassLoader" },
+    "name": "io.micronaut.projectgen.core.template.spotlesslicensejava$PlainText",
+    "allDeclaredFields": true
+  },
+  {
+    "condition": { "typeReachable": "com.fizzed.rocker.runtime.PlainTextUnloadedClassLoader" },
+    "name": "io.micronaut.projectgen.core.template.substitutions$PlainText",
+    "allDeclaredFields": true
+  }
+]
