@@ -38,7 +38,7 @@ public class MavenBuildCreator {
      */
     public @NonNull MavenBuild create(ModuleContext module,
                              Options options) {
-        Language language = options.language() == null ? Language.JAVA : options.language();
+        Language language = options.language();
         List<MavenDependency> dependencies = MavenDependency.listOf(module.dependencyContext(),
             language);
         BuildProperties buildProperties = module.buildProperties();

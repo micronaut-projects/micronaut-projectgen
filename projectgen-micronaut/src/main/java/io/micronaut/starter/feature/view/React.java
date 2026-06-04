@@ -118,7 +118,7 @@ public class React implements ViewFeature, MicronautServerDependent, OpenRewrite
                     module.addBuildPlugin(
                         MavenPlugin.builder()
                             .artifactId(StarterCoordinates.FRONTEND_MAVEN_PLUGIN.getArtifactId())
-                            .extension(new RockerWritable(mvnPluginReact.template(coordinate.getGroupId(), coordinate.getArtifactId(), coordinate.getVersion())))
+                            .extension(new RockerWritable(mvnPluginReact.template(java.util.Objects.requireNonNull(coordinate.getGroupId()), coordinate.getArtifactId(), java.util.Objects.requireNonNull(coordinate.getVersion()))))
                             .build()
                     );
                 }

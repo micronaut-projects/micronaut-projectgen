@@ -15,6 +15,8 @@
  */
 package io.micronaut.starter.feature.github.workflows;
 
+import io.micronaut.core.annotation.Nullable;
+
 /**
  * GitHub secret.
  *
@@ -24,6 +26,7 @@ package io.micronaut.starter.feature.github.workflows;
 public class Secret {
 
     private final String name;
+    @Nullable
     private final String value;
     private final String description;
 
@@ -31,7 +34,7 @@ public class Secret {
         this(name, null, description);
     }
 
-    public Secret(String name, String value, String description) {
+    public Secret(String name, @Nullable String value, String description) {
         this.name = name;
         this.value = value;
         this.description = description;
@@ -60,6 +63,7 @@ public class Secret {
      *
      * @return the secret value
      */
+    @Nullable
     public String getValue() {
         return value;
     }

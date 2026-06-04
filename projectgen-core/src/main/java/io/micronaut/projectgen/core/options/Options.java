@@ -34,10 +34,10 @@ public interface Options {
     @Nullable
     OperatingSystem operatingSystem();
 
-    @Nullable
+    @NonNull
     String template();
 
-    @Nullable
+    @NonNull
     Language language();
 
     List<BuildTool> buildTools();
@@ -51,13 +51,13 @@ public interface Options {
     @Nullable
     String group();
 
-    @Nullable
+    @NonNull
     String artifact();
 
-    @Nullable
+    @NonNull
     JdkVersion java();
 
-    @Nullable
+    @NonNull
     @JavaPackageName
     String packageName();
 
@@ -70,7 +70,7 @@ public interface Options {
     @NonNull
     List<String> features();
 
-    @Nullable
+    @NonNull
     TestFramework testFramework();
 
     @Nullable

@@ -16,6 +16,7 @@
 package io.micronaut.projectgen.micronaut.features.logging;
 
 import io.micronaut.core.annotation.NonNull;
+import io.micronaut.core.annotation.Nullable;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import jakarta.inject.Singleton;
@@ -56,7 +57,7 @@ public class Slf4jJulBridge implements OpenRewriteFeature {
     }
 
     @Override
-    public String getThirdPartyDocumentation(GeneratorContext generatorContext) {
+    public String getThirdPartyDocumentation(@Nullable GeneratorContext generatorContext) {
         return "https://www.slf4j.org/legacy.html#jul-to-slf4jBridge";
     }
 

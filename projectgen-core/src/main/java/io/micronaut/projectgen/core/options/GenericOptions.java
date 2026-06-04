@@ -61,6 +61,27 @@ public record GenericOptions(@NonNull String name,
                              @Nullable Packaging packaging,
                              @Nullable List<String> features,
                              @Nullable TestFramework testFramework) implements Options {
+
+    @Override
+    public String template() {
+        return StringUtils.isEmpty(this.template) ? "DEFAULT" : this.template;
+    }
+
+    @Override
+    public Language language() {
+        return this.language == null ? Language.JAVA : this.language;
+    }
+
+    @Override
+    public JdkVersion java() {
+        return this.java == null ? JdkVersion.JDK_25 : this.java;
+    }
+
+    @Override
+    public TestFramework testFramework() {
+        return this.testFramework == null ? TestFramework.DEFAULT_OPTION : this.testFramework;
+    }
+
     @Override
     public Options withoutFeatures() {
         return new GenericOptions(
@@ -79,6 +100,11 @@ public record GenericOptions(@NonNull String name,
             this.packaging(),
             Collections.emptyList(),
             this.testFramework());
+    }
+
+    @Override
+    public String packageName() {
+        return StringUtils.isEmpty(this.packageName) ? "example" : this.packageName;
     }
 
     @Override

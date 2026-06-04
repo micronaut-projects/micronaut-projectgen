@@ -25,6 +25,7 @@ import io.micronaut.projectgen.core.feature.FeatureContext;
  */
 public abstract class SecurityOAuth2Feature implements Feature {
     private final SecurityOAuth2 securityOAuth2;
+    @Nullable
     private final SecurityJWT securityJWT;
 
     public SecurityOAuth2Feature(SecurityOAuth2 securityOAuth2,

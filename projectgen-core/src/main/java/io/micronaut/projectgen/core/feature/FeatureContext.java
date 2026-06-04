@@ -95,7 +95,6 @@ public class FeatureContext {
      *
      * @return Language
      */
-    @Nullable
     public Language getLanguage() {
         return options.language();
     }
@@ -104,7 +103,6 @@ public class FeatureContext {
      *
      * @return Test framework
      */
-    @Nullable
     public TestFramework getTestFramework() {
         return options.testFramework();
     }
@@ -113,7 +111,6 @@ public class FeatureContext {
      *
      * @return Build Tool.
      */
-    @Nullable
     public List<BuildTool> getBuildTools() {
         return options.buildTools();
     }
@@ -122,7 +119,6 @@ public class FeatureContext {
      *
      * @return Jdk Version
      */
-    @Nullable
     public JdkVersion getJavaVersion() {
         return options.java();
     }

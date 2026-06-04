@@ -324,9 +324,7 @@ public record ModuleContext(CoordinateResolver coordinateResolver,
      * @param testRockerModelProvider testRockerModelProvider
      */
     public void addTemplate(Options options, String name, String path, TestRockerModelProvider testRockerModelProvider) {
-        RockerModel rockerModel = options.language() == null || options.testFramework() == null
-            ? null
-            : testRockerModelProvider.findModel(options.language(), options.testFramework());
+        RockerModel rockerModel = testRockerModelProvider.findModel(options.language(), options.testFramework());
         if (rockerModel != null) {
             addTemplate(name, new RockerTemplate(path, rockerModel));
         }

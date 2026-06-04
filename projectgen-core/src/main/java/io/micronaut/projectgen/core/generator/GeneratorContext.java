@@ -87,7 +87,7 @@ public class GeneratorContext {
      * @return The language
      */
     @NonNull public Language getLanguage() {
-        return options.language() == null ? Language.JAVA : options.language();
+        return options.language();
     }
 
     /**
@@ -110,7 +110,7 @@ public class GeneratorContext {
      * @return The test framework
      */
     public @NonNull TestFramework getTestFramework() {
-        return options.testFramework() == null ? TestFramework.DEFAULT_OPTION : options.testFramework();
+        return options.testFramework();
     }
 
     /**
@@ -131,7 +131,7 @@ public class GeneratorContext {
      * @return The JDK version
      */
     @NonNull public JdkVersion getJdkVersion() {
-        return options.java() == null ? JdkVersion.JDK_25 : options.java();
+        return options.java();
     }
 
     /**

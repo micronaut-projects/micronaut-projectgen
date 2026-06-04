@@ -15,6 +15,7 @@
  */
 package io.micronaut.projectgen.micronaut.features.cli;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -23,12 +24,12 @@ import java.util.List;
  * test framework, source language, selected features, build tool, and the default package name.
  */
 public class MicronautCliConfig {
-    private String applicationType;
-    private String testFramework;
-    private String defaultPackage;
-    private String sourceLanguage;
-    private List<String> features;
-    private String buildTool;
+    private String applicationType = "";
+    private String testFramework = "";
+    private String defaultPackage = "";
+    private String sourceLanguage = "";
+    private List<String> features = Collections.emptyList();
+    private String buildTool = "";
 
     /**
      * Returns the application type.

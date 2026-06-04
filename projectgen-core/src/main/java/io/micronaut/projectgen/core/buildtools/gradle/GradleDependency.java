@@ -74,8 +74,8 @@ public class GradleDependency extends DependencyCoordinate {
                             @Nullable String comment) {
         super(dependency);
         Scope scope = Objects.requireNonNull(dependency.getScope(), "Dependency scope must be set");
-        Language language = options.language() == null ? Language.JAVA : options.language();
-        TestFramework testFramework = options.testFramework() == null ? TestFramework.DEFAULT_OPTION : options.testFramework();
+        Language language = options.language();
+        TestFramework testFramework = options.testFramework();
         gradleConfiguration = GradleConfiguration.of(
             scope,
             language,
@@ -205,7 +205,7 @@ public class GradleDependency extends DependencyCoordinate {
     public static @NonNull List<GradleDependency> listOf(GeneratorContext generatorContext, DependencyContext dependencyContext, Options options, boolean useVersionCatalogue) {
         BuildTool buildTool = options.buildTools().stream()
             .filter(bt -> bt == BuildTool.GRADLE).findFirst().orElseThrow();
-        Language language = options.language() == null ? Language.JAVA : options.language();
+        Language language = options.language();
         return dependencyContext.removeDuplicates(dependencyContext.getDependenciesByBuildTool(BuildTool.GRADLE), language, buildTool)
             .stream()
             .map(dep -> new GradleDependency(dep, options, generatorContext, useVersionCatalogue, dep.getProject(), dep.getComment()))

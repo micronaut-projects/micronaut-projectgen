@@ -53,13 +53,11 @@ public class MicronautParentPomFeature implements ParentPomFeature {
     public void apply(GeneratorContext generatorContext) {
         ModuleContext module = generatorContext.getRootModule();
         if (OptionUtils.hasMavenBuildTool(generatorContext.getOptions())) {
-            if (generatorContext.getOptions().java() != null) {
-                String javaVersion = generatorContext.getOptions().java().asString();
-                module.buildProperties().put(PROPERTY_JDK_VERSION, javaVersion);
-                module.buildProperties().put("release.version", javaVersion);
-            }
+            String javaVersion = generatorContext.getOptions().java().asString();
+            module.buildProperties().put(PROPERTY_JDK_VERSION, javaVersion);
+            module.buildProperties().put("release.version", javaVersion);
             coordinateResolver.resolve(ARTIFACT_ID_MICRONAUT_PARENT).ifPresent(coordinate ->
-                module.buildProperties().put(PROPERTY_MICRONAUT_VERSION, coordinate.getVersion()));
+                module.buildProperties().put(PROPERTY_MICRONAUT_VERSION, java.util.Objects.requireNonNull(coordinate.getVersion())));
             module.moduleAttributes().setParentPom(getParentPom());
         }
     }

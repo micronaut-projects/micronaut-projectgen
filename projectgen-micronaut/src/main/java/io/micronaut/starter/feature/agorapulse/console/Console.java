@@ -124,7 +124,7 @@ public class Console implements AgoraPulseFeature {
     private void addKotlinScriptingDependency(GeneratorContext generatorContext) {
         Coordinate coordinate = generatorContext.resolveCoordinate("kotlin-bom");
         ModuleContext module = generatorContext.getRootModule();
-        module.buildProperties().put("kotlinVersion", coordinate.getVersion());
+        module.buildProperties().put("kotlinVersion", java.util.Objects.requireNonNull(coordinate.getVersion()));
         Dependency.Builder kotlin = Dependency.builder()
             .groupId("org.jetbrains.kotlin")
             .compile()

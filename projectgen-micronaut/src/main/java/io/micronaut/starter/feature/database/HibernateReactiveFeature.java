@@ -24,6 +24,7 @@ import io.micronaut.starter.feature.testresources.DbType;
 import io.micronaut.starter.feature.testresources.EaseTestingFeature;
 import io.micronaut.starter.feature.testresources.TestResources;
 
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -62,7 +63,7 @@ public abstract class HibernateReactiveFeature extends EaseTestingFeature implem
         if (!generatorContext.isFeaturePresent(TestResources.class)) {
             Optional<MigrationFeature> migrationFeature = generatorContext.getFeatures().getFeature(MigrationFeature.class);
             module.configuration().put(JPA_DEFAULT_PROPERTIES_HIBERNATE_CONNECTION_URL,
-                migrationFeature.map(f -> "${datasources.default.url}").orElse(dbFeature.getJdbcUrl()));
+                migrationFeature.map(f -> "${datasources.default.url}").orElseGet(() -> Objects.requireNonNull(dbFeature.getJdbcUrl())));
             module.configuration().put(JPA_DEFAULT_PROPERTIES_HIBERNATE_CONNECTION_USERNAME,
                 migrationFeature.map(f -> "${datasources.default.username}").orElse(dbFeature.getDefaultUser()));
             module.configuration().put(JPA_DEFAULT_PROPERTIES_HIBERNATE_CONNECTION_PASSWORD,

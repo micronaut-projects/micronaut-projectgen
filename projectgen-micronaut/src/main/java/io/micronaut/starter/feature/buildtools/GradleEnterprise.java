@@ -120,8 +120,8 @@ public class GradleEnterprise implements Feature, GradleEnterpriseConfiguration 
 
     private static RockerModel extensionsRockerModel(GeneratorContext generatorContext) {
         return extensions.template(
-            generatorContext.resolveCoordinate(ARTIFACT_ID_GRADLE_ENTERPRISE_MAVEN_EXTENSION).getVersion(),
-            generatorContext.resolveCoordinate(ARTIFACT_ID_COMMON_CUSTOM_USER_DATA_MAVEN_EXTENSION).getVersion());
+            java.util.Objects.requireNonNull(generatorContext.resolveCoordinate(ARTIFACT_ID_GRADLE_ENTERPRISE_MAVEN_EXTENSION).getVersion()),
+            java.util.Objects.requireNonNull(generatorContext.resolveCoordinate(ARTIFACT_ID_COMMON_CUSTOM_USER_DATA_MAVEN_EXTENSION).getVersion()));
     }
 
     @Override

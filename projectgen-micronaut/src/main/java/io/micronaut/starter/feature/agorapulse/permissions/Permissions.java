@@ -18,7 +18,6 @@ package io.micronaut.starter.feature.agorapulse.permissions;
 import com.fizzed.rocker.RockerModel;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
-import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
@@ -89,7 +88,6 @@ public class Permissions implements AgoraPulseFeature {
     }
 
     @Override
-    @Nullable
     public String getDescription() {
         return "Micronaut Permissions is a lightweight library to declare object level permissions in Micronaut";
     }

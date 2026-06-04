@@ -22,7 +22,6 @@ import io.micronaut.projectgen.core.options.JdkVersion;
 import io.micronaut.projectgen.core.options.Options;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -43,7 +42,6 @@ public class Features extends ArrayList<String> {
     private LanguageFeature languageFeature;
     @Nullable
     private TestFeature testFeature;
-    @Nullable
     private final JdkVersion javaVersion;
 
     public Features(GeneratorContext context, Set<Feature> featureList, Options options) {
@@ -62,7 +60,7 @@ public class Features extends ArrayList<String> {
             }
         }
         this.javaVersion = options.java();
-        this.buildTools = options.buildTools() == null ? Collections.emptyList() : options.buildTools();
+        this.buildTools = options.buildTools();
     }
 
     /**
@@ -129,7 +127,6 @@ public class Features extends ArrayList<String> {
      *
      * @return The Java version
      */
-    @Nullable
     public JdkVersion javaVersion() {
         return javaVersion;
     }

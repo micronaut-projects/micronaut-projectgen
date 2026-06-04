@@ -17,6 +17,7 @@ package io.micronaut.starter.feature.aws;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
+import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.micronaut.ApplicationType;
@@ -50,6 +51,7 @@ public class Cdk implements MultiProjectFeature, InfrastructureAsCodeFeature {
     private final DependencyContext dependencyContext;
     //private final RepositoryResolver repositoryResolver;
     private final CoordinateResolver coordinateResolver;
+    @Nullable
     private final Dependency dependencyCdk;
 
     public Cdk(CoordinateResolver coordinateResolver,
