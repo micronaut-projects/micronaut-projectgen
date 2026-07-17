@@ -21,6 +21,7 @@ io.micronaut.projectgen.http.server
 io.micronaut.projectgen.http.server.conf
 io.micronaut.projectgen.http.server.controllers
 io.micronaut.projectgen.http.server.utils
+io.micronaut.projectgen.info
 io.micronaut.projectgen.micronaut
 io.micronaut.projectgen.micronaut.features
 io.micronaut.projectgen.micronaut.features.acme
