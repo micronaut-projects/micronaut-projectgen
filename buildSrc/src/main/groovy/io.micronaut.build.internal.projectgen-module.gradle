@@ -2,12 +2,6 @@ plugins {
     id 'io.micronaut.build.internal.projectgen-base'
     id "io.micronaut.build.internal.module"
 }
-micronautBuild {
-    binaryCompatibility {
-        enabled = false
-    }
-}
-
 tasks {
     prepareJavadocAggregation {
         sources.from(layout.buildDirectory.dir("generated/sources/annotationProcessor/java/main"))
