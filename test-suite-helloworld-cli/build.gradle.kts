@@ -1,6 +1,6 @@
 plugins {
-    id("io.micronaut.application") version "4.6.2"
-    id("com.gradleup.shadow") version "8.3.9"
+    id("io.micronaut.application") version "5.0.2"
+    id("com.gradleup.shadow") version "8.3.11"
 }
 version = "0.1"
 group = "io.micronaut.projectgen.demo"
