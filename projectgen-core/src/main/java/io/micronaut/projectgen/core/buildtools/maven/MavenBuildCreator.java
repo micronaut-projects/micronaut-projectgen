@@ -15,10 +15,11 @@
  */
 package io.micronaut.projectgen.core.buildtools.maven;
 
-import io.micronaut.core.annotation.NonNull;
+import org.jspecify.annotations.NonNull;
 import io.micronaut.core.order.OrderUtil;
 import io.micronaut.projectgen.core.buildtools.BuildProperties;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.options.Language;
 import io.micronaut.projectgen.core.options.Options;
 import jakarta.inject.Singleton;
 
@@ -35,11 +36,11 @@ public class MavenBuildCreator {
      * @param options Options
      * @return Maven Build
      */
-    @NonNull
-    public MavenBuild create(ModuleContext module,
+    public @NonNull MavenBuild create(ModuleContext module,
                              Options options) {
+        Language language = options.language();
         List<MavenDependency> dependencies = MavenDependency.listOf(module.dependencyContext(),
-            options.language());
+            language);
         BuildProperties buildProperties = module.buildProperties();
 
 
@@ -50,22 +51,21 @@ public class MavenBuildCreator {
             .sorted(OrderUtil.COMPARATOR)
             .toList();
 
-        MavenCompilerPluginAnnotationProcessors ann = MavenCompilerPluginAnnotationProcessors.of(module, options.language());
-        return MavenBuildBuilder.builder()
-            .parentPom(module.moduleAttributes().getParentPom())
-            .packaging(module.moduleAttributes().getPackaging())
-            .coordinate(module.moduleAttributes().getCoordinate())
-            .name(module.moduleAttributes().getName())
-            .description(module.moduleAttributes().getDescription())
-            .repositories(MavenRepository.listOf(module.repositories()))
-            .plugins(plugins)
-            .properties(buildProperties.getProperties())
-            .annotationProcessorCombineAttribute(ann.combineAttribute())
-            .testAnnotationProcessorCombineAttribute(ann.testCombineAttribute())
-            .profiles(module.profiles())
-            .dependencies(dependencies)
-            .annotationProcessors(ann.annotationProcessors())
-            .testAnnotationProcessors(ann.testAnnotationProcessors())
-            .build();
+        MavenCompilerPluginAnnotationProcessors ann = MavenCompilerPluginAnnotationProcessors.of(module, language);
+        return new MavenBuild(
+            module.moduleAttributes().getName(),
+            module.moduleAttributes().getDescription(),
+            module.moduleAttributes().getCoordinate(),
+            module.moduleAttributes().getPackaging(),
+            module.moduleAttributes().getParentPom(),
+            ann.combineAttribute(),
+            ann.testCombineAttribute(),
+            ann.testAnnotationProcessors(),
+            ann.annotationProcessors(),
+            dependencies,
+            plugins,
+            buildProperties.getProperties(),
+            module.profiles(),
+            MavenRepository.listOf(module.repositories()));
     }
 }

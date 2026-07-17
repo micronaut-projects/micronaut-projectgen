@@ -46,6 +46,7 @@ import io.micronaut.starter.feature.messaging.SharedTestResourceFeature;
 import io.micronaut.starter.feature.testresources.TestResources;
 import io.micronaut.starter.feature.testresources.TestResourcesAdditionalModulesProvider;
 import io.micronaut.projectgen.core.options.JdkVersion;
+import io.micronaut.projectgen.core.options.TestFramework;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.starter.util.FeaturesUtils;
 import jakarta.inject.Singleton;
@@ -189,8 +190,11 @@ public class MicronautBuildPlugin implements BuildPluginFeature, DefaultFeature 
             .buildTool(generatorContext.getBuildTool())
             .incremental(true)
             .javaVersion(FeaturesUtils.getTargetJdk(generatorContext.getFeatures()))
-            .packageName(generatorContext.getProject().getPackageName())
-            .ignoredAutomaticDependencies(ignoredAutomaticDependencies(generatorContext));
+            .packageName(generatorContext.getProject().getPackageName());
+        Set<String> ignoredDependencies = ignoredAutomaticDependencies(generatorContext);
+        if (ignoredDependencies != null) {
+            builder.ignoredAutomaticDependencies(ignoredDependencies);
+        }
         generatorContext.getFeatures()
             .getFeatures()
             .stream()
@@ -266,14 +270,11 @@ public class MicronautBuildPlugin implements BuildPluginFeature, DefaultFeature 
     }
 
      private Optional<String> resolveTestRuntime(GeneratorContext generatorContext) {
-        if (generatorContext.getFeatures().testFramework() == null) {
-            return Optional.empty();
-        }
-        if (generatorContext.getFeatures().testFramework().isJunit()) {
+        if (generatorContext.getTestFramework() == TestFramework.JUNIT) {
             return Optional.of("junit5");
-        } else if (generatorContext.getFeatures().testFramework().isKotlinTestFramework()) {
+        } else if (generatorContext.getTestFramework().isKotlinTestFramework()) {
             return Optional.of("kotest5");
-        } else if (generatorContext.getFeatures().testFramework().isSpock()) {
+        } else if (generatorContext.getTestFramework() == TestFramework.SPOCK) {
             return Optional.of("spock2");
         }
 

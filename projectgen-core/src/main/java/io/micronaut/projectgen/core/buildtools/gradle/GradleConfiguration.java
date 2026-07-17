@@ -15,8 +15,8 @@
  */
 package io.micronaut.projectgen.core.buildtools.gradle;
 
-import io.micronaut.core.annotation.NonNull;
-import io.micronaut.core.annotation.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import io.micronaut.core.order.Ordered;
 import io.micronaut.projectgen.core.buildtools.Phase;
 import io.micronaut.projectgen.core.buildtools.Scope;
@@ -72,8 +72,7 @@ public enum GradleConfiguration implements Ordered {
         return order;
     }
 
-    @NonNull
-    public static Optional<GradleConfiguration> of(@NonNull Scope scope,
+    public static @NonNull Optional<GradleConfiguration> of(@NonNull Scope scope,
                                                    @NonNull Language language,
                                                    @NonNull TestFramework testFramework,
                                                    @Nullable GeneratorContext generatorContext) {
@@ -153,14 +152,14 @@ public enum GradleConfiguration implements Ordered {
         return Optional.empty();
     }
 
-    private static GradleConfiguration kotlinAnnotationProcessor(GeneratorContext generatorContext) {
+    private static GradleConfiguration kotlinAnnotationProcessor(@Nullable GeneratorContext generatorContext) {
         if (generatorContext == null || generatorContext.isFeaturePresent(KotlinSymbolProcessingFeature.class)) {
             return GradleConfiguration.KSP;
         }
         return GradleConfiguration.KAPT;
     }
 
-    private static GradleConfiguration kotlinTestAnnotationProcessor(GeneratorContext generatorContext) {
+    private static GradleConfiguration kotlinTestAnnotationProcessor(@Nullable GeneratorContext generatorContext) {
         if (generatorContext == null || generatorContext.isFeaturePresent(KotlinSymbolProcessingFeature.class)) {
             return GradleConfiguration.TEST_KSP;
         }

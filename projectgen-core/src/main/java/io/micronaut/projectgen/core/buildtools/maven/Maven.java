@@ -17,7 +17,7 @@ package io.micronaut.projectgen.core.buildtools.maven;
 
 import com.fizzed.rocker.RockerModel;
 import io.micronaut.context.annotation.Requires;
-import io.micronaut.core.annotation.NonNull;
+import org.jspecify.annotations.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.feature.BuildFeature;
 import io.micronaut.projectgen.core.feature.DefaultFeature;
@@ -58,8 +58,7 @@ public class Maven implements BuildFeature, DefaultFeature {
     }
 
     @Override
-    @NonNull
-    public String getName() {
+    public @NonNull String getName() {
         return "maven";
     }
 

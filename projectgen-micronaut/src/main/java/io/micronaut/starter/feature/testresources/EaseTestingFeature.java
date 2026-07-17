@@ -15,6 +15,7 @@
  */
 package io.micronaut.starter.feature.testresources;
 
+import io.micronaut.core.annotation.Nullable;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.starter.feature.database.TestContainers;
@@ -23,7 +24,9 @@ import io.micronaut.starter.feature.database.TestContainers;
  * Abstract base class for testing features integrating TestResources and TestContainers.
  */
 public abstract class EaseTestingFeature implements Feature {
+    @Nullable
     private final TestResources testResources;
+    @Nullable
     private final TestContainers testContainers;
 
     protected EaseTestingFeature() {
@@ -31,8 +34,8 @@ public abstract class EaseTestingFeature implements Feature {
         this.testResources = null;
     }
 
-    protected EaseTestingFeature(TestContainers testContainers,
-        TestResources testResources) {
+    protected EaseTestingFeature(@Nullable TestContainers testContainers,
+        @Nullable TestResources testResources) {
         this.testContainers = testContainers;
         this.testResources = testResources;
     }

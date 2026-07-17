@@ -97,7 +97,7 @@ public class Kotlin implements LanguageFeature, OpenRewriteFeature {
      */
     protected void addKotlinVersionProperty(GeneratorContext generatorContext, ModuleContext module) {
         Coordinate coordinate = generatorContext.resolveCoordinate("kotlin-bom");
-        module.buildProperties().put("kotlinVersion", coordinate.getVersion());
+        module.buildProperties().put("kotlinVersion", java.util.Objects.requireNonNull(coordinate.getVersion()));
     }
 
     @Override

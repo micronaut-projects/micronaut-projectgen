@@ -1,3 +1,5 @@
+import net.ltgt.gradle.errorprone.errorprone
+
 plugins {
     id("io.micronaut.build.internal.projectgen-module")
     id("nu.studer.rocker") version "3.3.1"
@@ -53,3 +55,7 @@ val generateCoordinateUtils = tasks.register<io.micronaut.projectgen.coordinates
 }
 
 sourceSets["main"].java.srcDir(generateCoordinateUtils)
+
+tasks.withType<JavaCompile>().configureEach {
+    options.errorprone.excludedPaths.set(".*/(src/generated/rocker|build/generated[-/]sources)/.*")
+}

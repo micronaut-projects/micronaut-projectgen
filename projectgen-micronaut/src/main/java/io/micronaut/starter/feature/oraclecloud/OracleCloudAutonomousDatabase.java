@@ -17,6 +17,7 @@ package io.micronaut.starter.feature.oraclecloud;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
+import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
@@ -82,16 +83,19 @@ public class OracleCloudAutonomousDatabase extends DatabaseDriverFeature impleme
     }
 
     @Override
+    @Nullable
     public String getJdbcUrl() {
         return null;
     }
 
     @Override
+    @Nullable
     public String getR2dbcUrl() {
         return null;
     }
 
     @Override
+    @Nullable
     public String getDriverClass() {
         return null;
     }

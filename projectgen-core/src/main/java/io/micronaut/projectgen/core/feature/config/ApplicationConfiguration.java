@@ -16,7 +16,7 @@
 package io.micronaut.projectgen.core.feature.config;
 
 import io.micronaut.context.env.Environment;
-import io.micronaut.core.annotation.NonNull;
+import org.jspecify.annotations.NonNull;
 
 /**
  * Application configuration.

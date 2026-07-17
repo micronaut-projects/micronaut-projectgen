@@ -16,6 +16,7 @@
 package io.micronaut.starter.feature.buildtools;
 
 import io.micronaut.core.annotation.NonNull;
+import io.micronaut.core.annotation.Nullable;
 import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.utils.OptionUtils;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
@@ -84,8 +85,8 @@ public interface KotlinSupportFeature extends OneOfFeature {
             && KotlinSupportFeature.shouldApply(generatorContext.getFeatures().language(), generatorContext.getFeatures().testFramework());
     }
 
-    static boolean shouldApply(LanguageFeature languageFeature, TestFeature testFeature) {
-        return languageFeature.isKotlin() || (testFeature != null && testFeature.isKotlinTestFramework());
+    static boolean shouldApply(@Nullable LanguageFeature languageFeature, @Nullable TestFeature testFeature) {
+        return (languageFeature != null && languageFeature.isKotlin()) || (testFeature != null && testFeature.isKotlinTestFramework());
     }
 
     static boolean shouldApply(Language language, TestFramework testFramework) {

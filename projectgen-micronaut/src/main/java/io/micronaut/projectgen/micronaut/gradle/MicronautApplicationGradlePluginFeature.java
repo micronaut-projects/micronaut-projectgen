@@ -61,7 +61,7 @@ public class MicronautApplicationGradlePluginFeature implements BuildPluginFeatu
     public void apply(GeneratorContext generatorContext) {
         Coordinate coordinate = coordinateResolver.resolve(ARTIFACT_ID_MICRONAUT_PARENT).orElseThrow();
         ModuleContext module = generatorContext.getRootModule();
-        module.buildProperties().put(PROPERTY_MICRONAUT_VERSION, coordinate.getVersion());
+        module.buildProperties().put(PROPERTY_MICRONAUT_VERSION, java.util.Objects.requireNonNull(coordinate.getVersion()));
         module.addBuildPlugin(micronautApplicationGradlePlugin(generatorContext));
     }
 

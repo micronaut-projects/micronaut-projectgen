@@ -15,8 +15,8 @@
  */
 package io.micronaut.projectgen.core.buildtools.maven;
 
-import io.micronaut.core.annotation.NonNull;
-import io.micronaut.core.annotation.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import io.micronaut.projectgen.core.buildtools.BuildPlugin;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.buildtools.dependencies.CoordinateResolver;
@@ -28,16 +28,19 @@ import java.util.Objects;
  * Maven Plugin.
  */
 public class MavenPlugin implements BuildPlugin {
+    @Nullable
     private final String groupId;
     private final String artifactId;
+    @Nullable
     private final String version;
+    @Nullable
     private final Writable extension;
     private final int order;
 
-    public MavenPlugin(String groupId,
+    public MavenPlugin(@Nullable String groupId,
                        String artifactId,
-                       String version,
-                       Writable extension, int order) {
+                       @Nullable String version,
+                       @Nullable Writable extension, int order) {
         this.groupId = groupId;
         this.artifactId = artifactId;
         this.version = version;
@@ -80,9 +83,8 @@ public class MavenPlugin implements BuildPlugin {
         return new Builder();
     }
 
-    @NonNull
     @Override
-    public BuildTool getBuildTool() {
+    public @NonNull BuildTool getBuildTool() {
         return BuildTool.MAVEN;
     }
 
@@ -124,63 +126,61 @@ public class MavenPlugin implements BuildPlugin {
      */
     public static final class Builder {
 
+        @Nullable
         private String artifactId;
+        @Nullable
         private String groupId;
+        @Nullable
         private String version;
+        @Nullable
         private Writable extension;
         private int order;
 
         private Builder() {
         }
 
-        @NonNull
-        public MavenPlugin.Builder extension(@Nullable String extension) {
-            this.extension = new StringWritable(extension);
+        public MavenPlugin.@NonNull Builder extension(@Nullable String extension) {
+            this.extension = extension == null ? null : new StringWritable(extension);
             return this;
         }
 
-        @NonNull
-        public MavenPlugin.Builder extension(@Nullable Writable extension) {
+        public MavenPlugin.@NonNull Builder extension(@Nullable Writable extension) {
             this.extension = extension;
             return this;
         }
 
-        @NonNull
-        public MavenPlugin.Builder order(int order) {
+        public MavenPlugin.@NonNull Builder order(int order) {
             this.order = order;
             return this;
         }
 
-        @NonNull
-        public MavenPlugin.Builder artifactId(String artifactId) {
+        public MavenPlugin.@NonNull Builder artifactId(String artifactId) {
             this.artifactId = artifactId;
             return this;
         }
 
-        @NonNull
-        public MavenPlugin.Builder groupId(String groupId) {
+        public MavenPlugin.@NonNull Builder groupId(String groupId) {
             this.groupId = groupId;
             return this;
         }
 
-        public MavenPlugin.Builder version(String version) {
+        public MavenPlugin.@NonNull Builder version(String version) {
             this.version = version;
             return this;
         }
 
-        @NonNull
-        public MavenPlugin build() {
-            Objects.requireNonNull(artifactId, "The artifact id must be set");
+        public @NonNull MavenPlugin build() {
+            String pluginArtifactId = Objects.requireNonNull(artifactId, "The artifact id must be set");
             if (groupId != null && extension == null) {
                 extension = new StringWritable(
 "<plugin>\n" +
     "  <groupId>" + groupId + "</groupId>\n" +
-    "  <artifactId>" + artifactId + "</artifactId>\n" +
+    "  <artifactId>" + pluginArtifactId + "</artifactId>\n" +
     (version != null ? "  <version>" + version + "</version>\n" : "") +
     "</plugin>\n");
             }
-            Objects.requireNonNull(extension, "Maven plugins require an extension or a groupId");
-            return new MavenPlugin(groupId, artifactId, version, extension, order);
+            Writable pluginExtension = Objects.requireNonNull(extension, "Maven plugins require an extension or a groupId");
+            return new MavenPlugin(groupId, pluginArtifactId, version, pluginExtension, order);
         }
     }
 }

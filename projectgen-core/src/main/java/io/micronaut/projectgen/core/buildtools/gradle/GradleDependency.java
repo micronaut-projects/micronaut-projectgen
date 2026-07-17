@@ -15,8 +15,8 @@
  */
 package io.micronaut.projectgen.core.buildtools.gradle;
 
-import io.micronaut.core.annotation.NonNull;
-import io.micronaut.core.annotation.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import io.micronaut.core.order.OrderUtil;
 import io.micronaut.core.util.CollectionUtils;
 import io.micronaut.core.util.StringUtils;
@@ -26,13 +26,17 @@ import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
 import io.micronaut.projectgen.core.buildtools.dependencies.DependencyContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.DependencyCoordinate;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
+import io.micronaut.projectgen.core.options.Language;
 import io.micronaut.projectgen.core.options.Options;
+import io.micronaut.projectgen.core.options.TestFramework;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import io.micronaut.projectgen.core.buildtools.Scope;
+
 import static io.micronaut.core.util.CollectionUtils.isNotEmpty;
 
 /**
@@ -54,11 +58,12 @@ public class GradleDependency extends DependencyCoordinate {
 
     private final Boolean isKotlinDSL;
 
-    @NonNull
-    private final GradleConfiguration gradleConfiguration;
+    private final @NonNull GradleConfiguration gradleConfiguration;
 
     private final boolean useVersionCatalogue;
+    @Nullable
     private final String project;
+    @Nullable
     private final String comment;
 
     public GradleDependency(@NonNull Dependency dependency,
@@ -68,13 +73,16 @@ public class GradleDependency extends DependencyCoordinate {
                             @Nullable String project,
                             @Nullable String comment) {
         super(dependency);
+        Scope scope = Objects.requireNonNull(dependency.getScope(), "Dependency scope must be set");
+        Language language = options.language();
+        TestFramework testFramework = options.testFramework();
         gradleConfiguration = GradleConfiguration.of(
-            dependency.getScope(),
-            options.language(),
-            options.testFramework(),
+            scope,
+            language,
+            testFramework,
             generatorContext
         ).orElseThrow(() ->
-            new IllegalArgumentException("Cannot map the dependency scope: [%s] to a Gradle specific scope".formatted(dependency.getScope())));
+            new IllegalArgumentException("Cannot map the dependency scope: [%s] to a Gradle specific scope".formatted(scope)));
         isKotlinDSL = generatorContext.getOptions().buildTools().stream()
             .anyMatch(bt -> bt == BuildTool.GRADLE && options.gradleDsl() != null && options.gradleDsl() == GradleDsl.KOTLIN);
         this.useVersionCatalogue = useVersionCatalogue;
@@ -86,8 +94,7 @@ public class GradleDependency extends DependencyCoordinate {
      *
      * @return Gradle Configuration
      */
-    @NonNull
-    public GradleConfiguration getConfiguration() {
+    public @NonNull GradleConfiguration getConfiguration() {
         return gradleConfiguration;
     }
 
@@ -118,8 +125,7 @@ public class GradleDependency extends DependencyCoordinate {
      *
      * @return snippet representation
      */
-    @NonNull
-    public String toSnippet() {
+    public @NonNull String toSnippet() {
         String snippet = "";
         if (StringUtils.isNotEmpty(comment)) {
             snippet += "/* " + comment + " */\n    ";
@@ -162,8 +168,7 @@ public class GradleDependency extends DependencyCoordinate {
      *
      * @return Maven Coordinate surrounded by double quotes
      */
-    @NonNull
-    public String mavenCoordinate() {
+    public @NonNull String mavenCoordinate() {
         List<String> parts = new ArrayList<>();
         if (getGroupId() != null) {
             parts.add(getGroupId());
@@ -189,19 +194,19 @@ public class GradleDependency extends DependencyCoordinate {
      *
      * @return version catalogue
      */
-    @NonNull
-    public Optional<String> versionCatalog() {
-        if (!getGroupId().startsWith("io.micronaut")) {
+    public @NonNull Optional<String> versionCatalog() {
+        String groupId = getGroupId();
+        if (groupId == null || !groupId.startsWith("io.micronaut")) {
             return Optional.empty();
         }
         return Optional.of("mn." + getArtifactId().replace("-", "."));
     }
 
-    @NonNull
-    public static List<GradleDependency> listOf(GeneratorContext generatorContext, DependencyContext dependencyContext, Options options, boolean useVersionCatalogue) {
+    public static @NonNull List<GradleDependency> listOf(GeneratorContext generatorContext, DependencyContext dependencyContext, Options options, boolean useVersionCatalogue) {
         BuildTool buildTool = options.buildTools().stream()
             .filter(bt -> bt == BuildTool.GRADLE).findFirst().orElseThrow();
-        return dependencyContext.removeDuplicates(dependencyContext.getDependenciesByBuildTool(BuildTool.GRADLE), options.language(), buildTool)
+        Language language = options.language();
+        return dependencyContext.removeDuplicates(dependencyContext.getDependenciesByBuildTool(BuildTool.GRADLE), language, buildTool)
             .stream()
             .map(dep -> new GradleDependency(dep, options, generatorContext, useVersionCatalogue, dep.getProject(), dep.getComment()))
             .sorted(GradleDependency.COMPARATOR)

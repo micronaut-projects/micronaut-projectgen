@@ -121,7 +121,7 @@ public class KotlinApplication implements KotlinApplicationFeature {
         );
     }
 
-    private static String getDefaultEnvironment(ModuleContext moduleContext) {
+    private static @Nullable String getDefaultEnvironment(ModuleContext moduleContext) {
         return moduleContext.hasConfigurationByEnvironment(Environment.DEVELOPMENT) ? Environment.DEVELOPMENT : null;
     }
 

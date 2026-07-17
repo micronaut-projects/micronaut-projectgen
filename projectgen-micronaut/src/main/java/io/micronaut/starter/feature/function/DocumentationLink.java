@@ -25,10 +25,10 @@ import io.micronaut.core.annotation.NonNull;
 @Introspected
 public class DocumentationLink {
     @NonNull
-    private String title;
+    private String title = "";
 
     @NonNull
-    private String url;
+    private String url = "";
 
     public DocumentationLink() {
     }

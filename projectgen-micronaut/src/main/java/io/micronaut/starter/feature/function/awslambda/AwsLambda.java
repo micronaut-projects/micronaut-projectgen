@@ -24,6 +24,7 @@ import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.options.GenericOptionsBuilder;
 import io.micronaut.projectgen.core.rocker.RockerWritable;
 import io.micronaut.projectgen.core.utils.OptionUtils;
+import io.micronaut.projectgen.core.options.TestFramework;
 import io.micronaut.projectgen.micronaut.ApplicationType;
 import io.micronaut.projectgen.core.generator.Project;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
@@ -255,7 +256,7 @@ public class AwsLambda implements FunctionFeature, DefaultFeature, AwsCloudFeatu
             module.addDependency(DEPENDENCY_MICRONAUT_CRAC);
         }
 
-        if (generatorContext.getFeatures().testFramework().isSpock()
+        if (generatorContext.getTestFramework() == TestFramework.SPOCK
             && OptionUtils.hasGradleBuildTool(generatorContext.getOptions())) {
             // maven has this in parent pom
             module.addDependency(DEPENDENCY_MICRONAUT_FUNCTION_TEST);

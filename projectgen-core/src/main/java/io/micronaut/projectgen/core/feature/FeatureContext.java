@@ -15,6 +15,7 @@
  */
 package io.micronaut.projectgen.core.feature;
 
+import org.jspecify.annotations.Nullable;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.io.ConsoleOutput;
 import io.micronaut.projectgen.core.options.JdkVersion;
@@ -42,6 +43,7 @@ public class FeatureContext {
     private final Options options;
     private final List<Feature> features = new ArrayList<>();
     private final List<FeaturePredicate> exclusions = new ArrayList<>();
+    @Nullable
     private ListIterator<Feature> iterator;
 
     public FeatureContext(Options options,

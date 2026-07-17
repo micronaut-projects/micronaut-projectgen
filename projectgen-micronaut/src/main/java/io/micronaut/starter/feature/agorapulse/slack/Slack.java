@@ -18,7 +18,6 @@ package io.micronaut.starter.feature.agorapulse.slack;
 import com.fizzed.rocker.RockerModel;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.annotation.NonNull;
-import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.options.Options;
@@ -125,7 +124,6 @@ public class Slack implements AgoraPulseFeature {
     }
 
     @Override
-    @Nullable
     public String getDescription() {
         return "Micronaut Slack is idiomatic alternative to Bolt Micronaut library for Slack integration into the Micronaut Framework.";
     }

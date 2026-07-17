@@ -15,6 +15,7 @@
  */
 package io.micronaut.projectgen.core.openrewrite;
 
+import org.jspecify.annotations.Nullable;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.generator.ModuleContext;
@@ -46,8 +47,9 @@ public interface OpenRewriteFeature extends Feature {
         }
     }
 
+    @Nullable
     @Override
-    default String getFrameworkDocumentation(GeneratorContext gc) {
+    default String getFrameworkDocumentation(@Nullable GeneratorContext gc) {
         if (gc == null) {
             return null;
         }
@@ -58,8 +60,9 @@ public interface OpenRewriteFeature extends Feature {
             .orElse(null);
     }
 
+    @Nullable
     @Override
-    default String getThirdPartyDocumentation(GeneratorContext gc) {
+    default String getThirdPartyDocumentation(@Nullable GeneratorContext gc) {
         if (gc == null) {
             return null;
         }

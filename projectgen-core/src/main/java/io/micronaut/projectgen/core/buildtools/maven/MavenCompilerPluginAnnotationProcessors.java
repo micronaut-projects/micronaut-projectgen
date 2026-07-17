@@ -16,6 +16,7 @@
 package io.micronaut.projectgen.core.buildtools.maven;
 
 import io.micronaut.projectgen.core.buildtools.Phase;
+import io.micronaut.projectgen.core.buildtools.Scope;
 import io.micronaut.projectgen.core.buildtools.Source;
 import io.micronaut.projectgen.core.buildtools.dependencies.Coordinate;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
@@ -46,8 +47,9 @@ public record MavenCompilerPluginAnnotationProcessors(
         MavenCombineAttribute testCombineAttribute = combineAttribute;
 
         for (Dependency dependency : module.getDependencies()) {
-            if (dependency.getScope().getPhases().contains(Phase.ANNOTATION_PROCESSING)) {
-                if (dependency.getScope().getSource() == Source.MAIN && language != Language.GROOVY) {
+            Scope scope = dependency.getScope();
+            if (scope != null && scope.getPhases().contains(Phase.ANNOTATION_PROCESSING)) {
+                if (scope.getSource() == Source.MAIN && language != Language.GROOVY) {
                     // Don't add these for Groovy projects: it results in multiple dependencies.
                     // DependencyContext has already resolved Groovy annotation processors as dependencies
                     annotationProcessors.add(new DependencyCoordinate(dependency, true));
@@ -55,7 +57,7 @@ public record MavenCompilerPluginAnnotationProcessors(
                         combineAttribute = MavenCombineAttribute.OVERRIDE;
                     }
                 }
-                if (dependency.getScope().getSource() == Source.TEST) {
+                if (scope.getSource() == Source.TEST) {
                     testAnnotationProcessors.add(new DependencyCoordinate(dependency, true));
                     if (dependency.isAnnotationProcessorPriority()) {
                         testCombineAttribute = MavenCombineAttribute.OVERRIDE;
@@ -76,4 +78,3 @@ public record MavenCompilerPluginAnnotationProcessors(
         return isKotlin ? MavenCombineAttribute.OVERRIDE : MavenCombineAttribute.APPEND;
     }
 }
-

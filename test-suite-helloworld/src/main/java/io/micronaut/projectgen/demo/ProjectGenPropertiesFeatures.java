@@ -4,7 +4,9 @@ import io.micronaut.projectgen.core.feature.DefaultFeature;
 import io.micronaut.projectgen.core.feature.Feature;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.generator.ModuleContext;
+import io.micronaut.projectgen.core.options.Language;
 import io.micronaut.projectgen.core.options.Options;
+import io.micronaut.projectgen.core.options.TestFramework;
 import io.micronaut.projectgen.core.template.PropertiesTemplate;
 import jakarta.inject.Singleton;
 
@@ -49,10 +51,10 @@ class ProjectGenPropertiesFeatures implements DefaultFeature {
         if (options.operatingSystem() != null) {
             props.put("operatingSystem", options.operatingSystem());
         }
-        if (options.template() != null) {
+        if (!"DEFAULT".equals(options.template())) {
             props.put("template", options.template());
         }
-        if (options.language() != null) {
+        if (options.language() != Language.JAVA) {
             props.put("language", options.language());
         }
         if (options.buildTools() != null) {
@@ -82,7 +84,7 @@ class ProjectGenPropertiesFeatures implements DefaultFeature {
         if (options.packaging() != null) {
             props.put("packaging", options.packaging());
         }
-        if (options.testFramework() != null) {
+        if (options.testFramework() != TestFramework.DEFAULT_OPTION) {
             props.put("testFramework", options.testFramework());
         }
         return props;

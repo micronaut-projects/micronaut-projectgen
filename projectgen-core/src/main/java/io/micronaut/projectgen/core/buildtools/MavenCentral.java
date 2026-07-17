@@ -15,7 +15,7 @@
  */
 package io.micronaut.projectgen.core.buildtools;
 
-import io.micronaut.core.annotation.NonNull;
+import org.jspecify.annotations.NonNull;
 
 /**
  * Maven Central.
@@ -26,14 +26,12 @@ public class MavenCentral implements Repository {
     public static final String MAVEN_CENTRAL_ID = "central";
 
     @Override
-    @NonNull
-    public String getId() {
+    public @NonNull String getId() {
         return MAVEN_CENTRAL_ID;
     }
 
     @Override
-    @NonNull
-    public String getUrl() {
+    public @NonNull String getUrl() {
         return URL;
     }
 }

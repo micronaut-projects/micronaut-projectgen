@@ -1,10 +1,11 @@
 [versions]
 
 micronaut = "5.0.0"
-micronaut-platform = "5.0.0-RC1"
+micronaut-platform = "5.0.0"
 rewrite-recipe-bom = "3.22.0"
+rewrite-core = "8.84.0"
 micronaut-serialization = "3.0.0"
-micronaut-views = "6.0.0-RC1"
+micronaut-views = "6.0.0"
 micronaut-sourcegen = "2.0.0"
 micronaut-logging = "2.0.0"
 micronaut-validation = "5.0.0"
@@ -31,7 +32,7 @@ typesafeconfig = { module = "com.typesafe:config", version.ref = "typesafeconfig
 snakeyaml = { module = "org.yaml:snakeyaml", version.ref = "snakeyaml" }
 apache-commons-compress = { module = "org.apache.commons:commons-compress", version.ref = "apache-commons-compress" }
 rewrite-recipe-bom = { module = "org.openrewrite.recipe:rewrite-recipe-bom", version.ref = "rewrite-recipe-bom" }
-rewrite-core = { module = "org.openrewrite:rewrite-core" }
+rewrite-core = { module = "org.openrewrite:rewrite-core", version.ref = "rewrite-core" }
 rewrite-properties = { module = "org.openrewrite:rewrite-properties" }
 rewrite-gradle = { module = "org.openrewrite:rewrite-gradle" }
 rewrite-java-dependencies = { module = "org.openrewrite.recipe:rewrite-java-dependencies" }

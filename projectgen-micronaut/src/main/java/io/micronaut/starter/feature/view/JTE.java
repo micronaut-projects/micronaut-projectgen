@@ -94,9 +94,9 @@ public class JTE implements ViewFeature, MicronautServerDependent, OpenRewriteFe
         Coordinate coordinate = generatorContext.resolveCoordinate(MAVEN_PLUGIN_ARTIFACT_ID);
         return MavenPlugin.builder()
             .artifactId(MAVEN_PLUGIN_ARTIFACT_ID)
-            .extension(new RockerWritable(mvnPluginJTE.template(coordinate.getGroupId(),
+            .extension(new RockerWritable(mvnPluginJTE.template(java.util.Objects.requireNonNull(coordinate.getGroupId()),
                 coordinate.getArtifactId(),
-                coordinate.getVersion(),
+                java.util.Objects.requireNonNull(coordinate.getVersion()),
                 JTE_SRC_DIR)))
             .build();
     }

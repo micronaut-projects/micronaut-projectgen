@@ -15,17 +15,21 @@
  */
 package io.micronaut.projectgen.core.buildtools;
 
+import org.jspecify.annotations.Nullable;
+
 /**
  * Comment.
  */
 public interface Comment extends Property {
 
     @Override
+    @Nullable
     default String getKey() {
         return null;
     }
 
     @Override
+    @Nullable
     default String getValue() {
         return null;
     }

@@ -15,6 +15,8 @@
  */
 package io.micronaut.projectgen.core.template;
 
+import org.jspecify.annotations.Nullable;
+
 /**
  * From jackson-dataformats-text
  */
@@ -121,7 +123,7 @@ class TomlStringOutputUtil {
      * Get the basic string escape sequence for a character, or {@code null} if the character does not need to be
      * escaped.
      */
-    static String getBasicStringEscape(char c) {
+    static @Nullable String getBasicStringEscape(char c) {
         switch (c) {
             case '\b':
                 return "\\b";

@@ -15,7 +15,7 @@
  */
 package io.micronaut.projectgen.core.options;
 
-import io.micronaut.core.annotation.NonNull;
+import org.jspecify.annotations.NonNull;
 
 /**
  * @see <a href="https://github.com/actions/setup-java#supported-distributions">Github Supported Distributions</a>
@@ -43,13 +43,11 @@ public enum JdkDistribution {
         this.description = description;
     }
 
-    @NonNull
-    public String distribution() {
+    public @NonNull String distribution() {
         return distribution;
     }
 
-    @NonNull
-    public String description() {
+    public @NonNull String description() {
         return description;
     }
 }

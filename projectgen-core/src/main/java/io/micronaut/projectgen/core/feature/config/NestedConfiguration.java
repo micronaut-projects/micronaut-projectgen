@@ -15,7 +15,7 @@
  */
 package io.micronaut.projectgen.core.feature.config;
 
-import io.micronaut.core.annotation.NonNull;
+import org.jspecify.annotations.NonNull;
 
 import java.util.Map;
 
@@ -24,11 +24,9 @@ import java.util.Map;
  */
 public class NestedConfiguration {
 
-    @NonNull
-    private final String path;
+    private final @NonNull String path;
 
-    @NonNull
-    private final Map<String, Object> configuration;
+    private final @NonNull Map<String, Object> configuration;
 
     /**
      * Constructor.
@@ -52,8 +50,7 @@ public class NestedConfiguration {
      *
      * @return path
      */
-    @NonNull
-    public String getPath() {
+    public @NonNull String getPath() {
         return path;
     }
 
@@ -61,8 +58,7 @@ public class NestedConfiguration {
      *
      * @return configuration.
      */
-    @NonNull
-    public Map<String, Object> getConfiguration() {
+    public @NonNull Map<String, Object> getConfiguration() {
         return configuration;
     }
 }

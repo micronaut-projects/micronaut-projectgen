@@ -81,6 +81,7 @@ public class Kubernetes implements OpenRewriteFeature {
      *
      * @param featureContext the feature context to process and modify
      */
+    @Override
     public void processSelectedFeatures(FeatureContext featureContext) {
         if (!featureContext.isPresent(Management.class)) {
             featureContext.addFeature(management);

@@ -16,8 +16,8 @@
 package io.micronaut.projectgen.core.feature;
 
 import io.micronaut.core.annotation.Indexed;
-import io.micronaut.core.annotation.NonNull;
-import io.micronaut.core.annotation.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import io.micronaut.core.naming.Described;
 import io.micronaut.core.naming.Named;
 import io.micronaut.core.order.Ordered;
@@ -60,13 +60,14 @@ public interface Feature extends Named, Ordered, Described {
     /**
      * @return The title of the feature
      */
+    @Nullable
     default String getTitle() {
         return null;
     }
 
     @Override
     default String getDescription() {
-        return null;
+        return "";
     }
 
     /**
@@ -77,6 +78,7 @@ public interface Feature extends Named, Ordered, Described {
      *
      * @return The order of the feature
      */
+    @Override
     default int getOrder() {
         return FeaturePhase.DEFAULT.getOrder();
     }

@@ -47,7 +47,7 @@ public class Thymeleaf implements ViewFeature, MicronautServerDependent, OpenRew
 
     /**
      *
-     * @deprecated Use {@link Thymeleaf(ViewsFieldset)} instead.
+     * @deprecated Use {@link #Thymeleaf(ViewsFieldset)} instead.
      */
     @Deprecated(forRemoval = true, since = "4.2.0")
     public Thymeleaf() {

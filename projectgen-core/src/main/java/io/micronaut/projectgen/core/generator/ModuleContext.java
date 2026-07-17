@@ -17,7 +17,8 @@ package io.micronaut.projectgen.core.generator;
 
 import com.fizzed.rocker.RockerModel;
 import io.micronaut.context.env.Environment;
-import io.micronaut.core.annotation.NonNull;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.buildtools.BuildPlugin;
 import io.micronaut.projectgen.core.buildtools.BuildProperties;
@@ -119,10 +120,10 @@ public record ModuleContext(CoordinateResolver coordinateResolver,
     }
 
     public ModuleContext(CoordinateResolver coordinateResolver, RecipeFetcher recipeFetcher) {
-        this(null, coordinateResolver, recipeFetcher);
+        this((String) null, coordinateResolver, recipeFetcher);
     }
 
-    public ModuleContext(String name, CoordinateResolver coordinateResolver, RecipeFetcher recipeFetcher) {
+    public ModuleContext(@Nullable String name, CoordinateResolver coordinateResolver, RecipeFetcher recipeFetcher) {
         this(coordinateResolver,
             recipeFetcher,
             new ModuleAttributes(),
@@ -162,8 +163,7 @@ public record ModuleContext(CoordinateResolver coordinateResolver,
      *
      * @return Build plugins
      */
-    @NonNull
-    public Set<BuildPlugin> getBuildPlugins() {
+    public @NonNull Set<BuildPlugin> getBuildPlugins() {
         return buildPlugins;
     }
 
@@ -178,8 +178,7 @@ public record ModuleContext(CoordinateResolver coordinateResolver,
     /**
      * @return All Configurations
      */
-    @NonNull
-    public Set<Configuration> getConfigurations() {
+    public @NonNull Set<Configuration> getConfigurations() {
         Set<Configuration> allConfigurations = new HashSet<>();
         allConfigurations.add(configuration);
         allConfigurations.addAll(configurationByEnvironment.values());
@@ -199,7 +198,7 @@ public record ModuleContext(CoordinateResolver coordinateResolver,
                                         @NonNull String artifactId,
                                         @NonNull Scope scope) {
         return getDependencies().stream()
-            .anyMatch(dependency -> dependency.getGroupId().equals(groupId) &&
+            .anyMatch(dependency -> java.util.Objects.equals(dependency.getGroupId(), groupId) &&
                 dependency.getArtifactId().equals(artifactId)
                 && dependency.getScope() == scope);
     }
@@ -218,9 +217,9 @@ public record ModuleContext(CoordinateResolver coordinateResolver,
         if (OptionUtils.hasGradleBuildTool(options)) {
             for (Dependency d : recipeFetcher.findAllByRecipeNameAndBuildTool(recipeName, BuildTool.GRADLE)) {
                 if (dependencies.stream().noneMatch(dep ->
-                    dep.getGroupId().equals(d.getGroupId()) &&
+                    java.util.Objects.equals(dep.getGroupId(), d.getGroupId()) &&
                         dep.getArtifactId().equals(d.getArtifactId()) &&
-                        dep.getScope().equals(d.getScope())
+                        java.util.Objects.equals(dep.getScope(), d.getScope())
                 )) {
                     dependencies.add(d);
                 }
@@ -403,17 +402,14 @@ public record ModuleContext(CoordinateResolver coordinateResolver,
         dependencyContext.addDependency(dependency);
     }
 
-    @NonNull
-    public Collection<Dependency> getDependencies() {
+    public @NonNull Collection<Dependency> getDependencies() {
         return dependencyContext.getDependencies();
     }
 
-    @NonNull
-    public Collection<Dependency> getDependenciesByBuildTool(@NonNull BuildTool buildTool) {
+    public @NonNull Collection<Dependency> getDependenciesByBuildTool(@NonNull BuildTool buildTool) {
         return dependencyContext.getDependenciesByBuildTool(buildTool);
     }
 
-    @NonNull
     public void addDependency(Dependency.Builder dependencyBuilder) {
         dependencyContext.addDependency(dependencyBuilder);
     }
@@ -463,7 +459,7 @@ public record ModuleContext(CoordinateResolver coordinateResolver,
     public boolean hasDependency(@NonNull String groupId,
                                  @NonNull String artifactId) {
         return getDependencies().stream()
-            .anyMatch(dependency -> dependency.getGroupId().equals(groupId) &&
+            .anyMatch(dependency -> java.util.Objects.equals(dependency.getGroupId(), groupId) &&
                 dependency.getArtifactId().equals(artifactId));
     }
 
@@ -474,7 +470,7 @@ public record ModuleContext(CoordinateResolver coordinateResolver,
      */
     public long countDependencies(@NonNull String groupId) {
         return getDependencies().stream()
-            .filter(dependency -> dependency.getGroupId().equals(groupId))
+            .filter(dependency -> java.util.Objects.equals(dependency.getGroupId(), groupId))
             .count();
     }
 

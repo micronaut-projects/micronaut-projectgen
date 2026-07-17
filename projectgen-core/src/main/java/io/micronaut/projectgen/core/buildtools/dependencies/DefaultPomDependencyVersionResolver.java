@@ -15,7 +15,7 @@
  */
 package io.micronaut.projectgen.core.buildtools.dependencies;
 
-import io.micronaut.core.annotation.NonNull;
+import org.jspecify.annotations.NonNull;
 import io.micronaut.projectgen.build.dependencies.StarterCoordinates;
 import jakarta.inject.Singleton;
 import java.util.Map;
@@ -32,8 +32,7 @@ public class DefaultPomDependencyVersionResolver implements PomDependencyVersion
     private static final Map<String, Coordinate> COORDINATES = StarterCoordinates.ALL_COORDINATES;
 
     @Override
-    @NonNull
-    public Optional<Coordinate> resolve(@NonNull String artifactId) {
+    public @NonNull Optional<Coordinate> resolve(@NonNull String artifactId) {
         return Optional.ofNullable(COORDINATES.get(artifactId));
     }
 
@@ -41,8 +40,8 @@ public class DefaultPomDependencyVersionResolver implements PomDependencyVersion
      *
      * @return coordinates
      */
-    @NonNull
-    public Map<String, Coordinate> getCoordinates() {
+    @Override
+    public @NonNull Map<String, Coordinate> getCoordinates() {
         return COORDINATES;
     }
 }

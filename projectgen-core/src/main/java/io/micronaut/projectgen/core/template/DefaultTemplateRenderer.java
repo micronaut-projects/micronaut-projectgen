@@ -36,6 +36,7 @@ public class DefaultTemplateRenderer implements TemplateRenderer {
         this.outputHandler = outputHandler;
     }
 
+    @Override
     public RenderResult render(Template template, boolean force) {
         String path = replaceVariables(template.getPath(), replacements);
         if (outputHandler.exists(path) && !force) {

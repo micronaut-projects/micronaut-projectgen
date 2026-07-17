@@ -15,7 +15,6 @@
  */
 package io.micronaut.projectgen.core.generator;
 
-import io.micronaut.core.annotation.Nullable;
 import io.micronaut.projectgen.core.buildtools.dependencies.CoordinateResolver;
 import io.micronaut.projectgen.core.feature.AvailableFeatures;
 import io.micronaut.projectgen.core.feature.DefaultFeature;
@@ -27,6 +26,7 @@ import io.micronaut.projectgen.core.openrewrite.RecipeFetcher;
 import io.micronaut.projectgen.core.options.Options;
 import io.micronaut.projectgen.core.utils.NameUtils;
 import jakarta.inject.Singleton;
+import org.jspecify.annotations.Nullable;
 import java.util.Collections;
 import java.util.IdentityHashMap;
 import java.util.List;
@@ -41,7 +41,6 @@ public class ContextFactory {
     private final FeatureValidator featureValidator;
     private final ProjectNameValidator projectNameValidator;
     private final CoordinateResolver coordinateResolver;
-    @Nullable
     private final RecipeFetcher recipeFetcher;
 
     public ContextFactory(FeatureValidator featureValidator,
@@ -51,7 +50,7 @@ public class ContextFactory {
         this.featureValidator = featureValidator;
         this.coordinateResolver = coordinateResolver;
         this.projectNameValidator = projectNameValidator;
-        this.recipeFetcher = recipeFetcher;
+        this.recipeFetcher = recipeFetcher == null ? RecipeFetcher.NOOP : recipeFetcher;
     }
 
     /**

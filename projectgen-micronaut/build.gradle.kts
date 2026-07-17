@@ -1,3 +1,5 @@
+import net.ltgt.gradle.errorprone.errorprone
+
 plugins {
     id("io.micronaut.build.internal.projectgen-module")
     id("nu.studer.rocker") version "3.3.1"
@@ -32,4 +34,7 @@ spotless {
     java {
         targetExclude("src/**/*.rocker.raw")
     }
+}
+tasks.withType<JavaCompile>().configureEach {
+    options.errorprone.option("NullAway:UnannotatedSubPackages", "io.micronaut.projectgen.micronaut.template")
 }

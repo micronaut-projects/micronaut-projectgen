@@ -134,7 +134,7 @@ public class JavaApplication implements JavaApplicationFeature {
         );
     }
 
-    private static String getDefaultEnvironment(ModuleContext module) {
+    private static @Nullable String getDefaultEnvironment(ModuleContext module) {
         return module.hasConfigurationByEnvironment(Environment.DEVELOPMENT) ? Environment.DEVELOPMENT : null;
     }
 

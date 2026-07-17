@@ -31,8 +31,11 @@ import io.micronaut.core.annotation.Nullable;
 public class GitHubRepository {
     private final String name;
     private final String description;
+    @Nullable
     private final String url;
+    @Nullable
     private final String htmlUrl;
+    @Nullable
     private final String cloneUrl;
 
     public GitHubRepository(String name, String description) {
@@ -70,6 +73,7 @@ public class GitHubRepository {
     /**
      * @return the clone URL of the repository
      */
+    @Nullable
     public String getCloneUrl() {
         return cloneUrl;
     }
@@ -77,6 +81,7 @@ public class GitHubRepository {
     /**
      * @return the URL of the repository
      */
+    @Nullable
     public String getUrl() {
         return url;
     }
@@ -84,6 +89,7 @@ public class GitHubRepository {
     /**
      * @return the HTML URL of the repository
      */
+    @Nullable
     public String getHtmlUrl() {
         return htmlUrl;
     }

@@ -40,5 +40,14 @@ class DefaultOptionsBuilderTest {
         assertEquals(GradleDsl.GROOVY, options.gradleDsl());
         assertEquals(Language.GROOVY, options.language());
         assertEquals(TestFramework.SPOCK, options.testFramework());
+
+        form = Map.of(
+            "name", "enum-list-demo",
+            "build", List.of(BuildTool.GRADLE, BuildTool.MAVEN),
+            "features", List.of("geb-core"));
+        options = builder.createOptions(form);
+
+        assertEquals(List.of(BuildTool.GRADLE, BuildTool.MAVEN), options.buildTools());
+        assertEquals(List.of("geb-core"), options.features());
     }
 }

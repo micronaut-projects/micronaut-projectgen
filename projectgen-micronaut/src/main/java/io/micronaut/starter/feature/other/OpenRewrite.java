@@ -107,9 +107,9 @@ public class OpenRewrite implements LanguageSpecificFeature {
         BuildProperties props = module.buildProperties();
         coordinateResolver.resolve(mavenPluginArtifactId)
             .ifPresent(coordinate -> props.put(
-                "openrewrite.maven.plugin.version", coordinate.getVersion()));
+                "openrewrite.maven.plugin.version", java.util.Objects.requireNonNull(coordinate.getVersion())));
         coordinateResolver.resolve("rewrite-micronaut")
-            .ifPresent(coordinate -> props.put("rewrite-micronaut.version", coordinate.getVersion()));
+            .ifPresent(coordinate -> props.put("rewrite-micronaut.version", java.util.Objects.requireNonNull(coordinate.getVersion())));
     }
 
     @Override

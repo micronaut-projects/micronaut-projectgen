@@ -24,10 +24,11 @@ import io.micronaut.core.annotation.Nullable;
  */
 public abstract class ApplicationRenderingContext {
 
+    @Nullable
     private final String defaultEnvironment;
     private final boolean eagerSingletons;
 
-    protected ApplicationRenderingContext(String defaultEnvironment, boolean eagerSingletons) {
+    protected ApplicationRenderingContext(@Nullable String defaultEnvironment, boolean eagerSingletons) {
         this.defaultEnvironment = defaultEnvironment;
         this.eagerSingletons = eagerSingletons;
     }
@@ -73,6 +74,7 @@ public abstract class ApplicationRenderingContext {
      *
      * @return the default environment string, may be null
      */
+    @Nullable
     public String getDefaultEnvironment() {
         return defaultEnvironment;
     }

@@ -62,8 +62,7 @@ public abstract class ApplicationTypeFeature implements DefaultFeature, Requires
         featureContext.addFeatureIfNotPresent(MicronautCli.class, micronautCli);
         featureContext.addFeatureIfNotPresent(GitIgnore.class, gitIgnore);
         featureContext.addFeatureIfNotPresent(LoggingFeature.class, logback);
-        if (featureContext.getOptions().testFramework() == null
-            || featureContext.getOptions().testFramework() == TestFramework.JUNIT) {
+        if (featureContext.getOptions().testFramework() == TestFramework.JUNIT) {
             featureContext.addFeatureIfNotPresent(MicronautTestJunit5.class, micronautTestJunit5);
         } else if (featureContext.getOptions().testFramework() == TestFramework.SPOCK) {
             featureContext.addFeatureIfNotPresent(MicronautTestSpock.class, micronautTestSpock);

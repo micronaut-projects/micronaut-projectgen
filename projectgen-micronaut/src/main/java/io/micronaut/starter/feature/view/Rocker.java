@@ -67,9 +67,9 @@ public class Rocker implements ViewFeature, MicronautServerDependent, OpenRewrit
         Coordinate coordinate = generatorContext.resolveCoordinate(mavenPluginArtifactId);
         module.addBuildPlugin(MavenPlugin.builder()
             .artifactId(mavenPluginArtifactId)
-            .extension(new RockerWritable(mvnPluginRocker.template(coordinate.getGroupId(),
+            .extension(new RockerWritable(mvnPluginRocker.template(java.util.Objects.requireNonNull(coordinate.getGroupId()),
                 coordinate.getArtifactId(),
-                coordinate.getVersion(),
+                java.util.Objects.requireNonNull(coordinate.getVersion()),
                 rockerSrcDir(module))))
             .build());
     }

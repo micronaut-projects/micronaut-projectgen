@@ -16,7 +16,7 @@
 package io.micronaut.projectgen.core.feature.config;
 
 import io.micronaut.context.annotation.Requires;
-import io.micronaut.core.annotation.NonNull;
+import org.jspecify.annotations.NonNull;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.feature.ConfigurationFeature;
 import io.micronaut.projectgen.core.feature.Feature;
@@ -42,15 +42,13 @@ public class Config4k implements ConfigurationFeature, KotlinSpecificFeature {
 
     private static final String EXTENSION = "conf";
 
-    @NonNull
     @Override
-    public String getName() {
+    public @NonNull String getName() {
         return "config4k";
     }
 
-    @NonNull
     @Override
-    public String getTitle() {
+    public @NonNull String getTitle() {
         return "Config4k - Config for Kotlin";
     }
 
@@ -76,9 +74,8 @@ public class Config4k implements ConfigurationFeature, KotlinSpecificFeature {
         }
     }
 
-    @NonNull
     @Override
-    public String getDescription() {
+    public @NonNull String getDescription() {
         return "Define configuration with config4k, a typesafe configuration format for Kotlin based on HOCON";
     }
 

@@ -15,6 +15,7 @@
  */
 package io.micronaut.projectgen.core.feature;
 
+import org.jspecify.annotations.Nullable;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.options.JdkVersion;
@@ -35,8 +36,11 @@ public class Features extends ArrayList<String> {
     private final Set<Feature> featureList;
     private final List<BuildTool> buildTools;
     private final GeneratorContext context;
+    @Nullable
     private ApplicationFeature applicationFeature;
+    @Nullable
     private LanguageFeature languageFeature;
+    @Nullable
     private TestFeature testFeature;
     private final JdkVersion javaVersion;
 
@@ -88,6 +92,7 @@ public class Features extends ArrayList<String> {
      *
      * @return The Application Feature
      */
+    @Nullable
     public ApplicationFeature application() {
         return applicationFeature;
     }
@@ -96,6 +101,7 @@ public class Features extends ArrayList<String> {
      *
      * @return The Language
      */
+    @Nullable
     public LanguageFeature language() {
         return languageFeature;
     }
@@ -104,6 +110,7 @@ public class Features extends ArrayList<String> {
      *
      * @return The Test Feature
      */
+    @Nullable
     public TestFeature testFramework() {
         return testFeature;
     }

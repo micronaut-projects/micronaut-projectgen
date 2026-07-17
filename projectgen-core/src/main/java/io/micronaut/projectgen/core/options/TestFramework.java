@@ -15,7 +15,7 @@
  */
 package io.micronaut.projectgen.core.options;
 
-import io.micronaut.core.annotation.NonNull;
+import org.jspecify.annotations.NonNull;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -52,8 +52,7 @@ public enum TestFramework {
         return this.name().toLowerCase();
     }
 
-    @NonNull
-    public String getName() {
+    public @NonNull String getName() {
         return name().toLowerCase(Locale.ENGLISH);
     }
 

@@ -15,7 +15,7 @@
  */
 package io.micronaut.projectgen.core.generator;
 
-import io.micronaut.core.annotation.NonNull;
+import org.jspecify.annotations.NonNull;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.buildtools.dependencies.Coordinate;
 import io.micronaut.projectgen.core.buildtools.dependencies.CoordinateResolver;
@@ -94,8 +94,7 @@ public class GeneratorContext {
      *
      * @return Options
      */
-    @NonNull
-    public Options getOptions() {
+    public @NonNull Options getOptions() {
         return options;
     }
 
@@ -103,16 +102,14 @@ public class GeneratorContext {
      * @return The test framework
      */
     @Deprecated(forRemoval = true)
-    @NonNull
-    public BuildTool getBuildTool() {
-        return options.getBuildTool();
+    public @NonNull BuildTool getBuildTool() {
+        return options.getBuildTool() == null ? BuildTool.GRADLE : options.getBuildTool();
     }
 
     /**
      * @return The test framework
      */
-    @NonNull
-    public TestFramework getTestFramework() {
+    public @NonNull TestFramework getTestFramework() {
         return options.testFramework();
     }
 

@@ -17,6 +17,7 @@ package io.micronaut.starter.feature.lang.groovy;
 
 import com.fizzed.rocker.RockerOutput;
 import io.micronaut.core.annotation.NonNull;
+import io.micronaut.core.annotation.Nullable;
 import io.micronaut.projectgen.micronaut.template.lang.groovy.contextConfigurer;
 import io.micronaut.starter.feature.lang.ApplicationRenderingContext;
 
@@ -26,7 +27,7 @@ import io.micronaut.starter.feature.lang.ApplicationRenderingContext;
  */
 public class GroovyApplicationRenderingContext extends ApplicationRenderingContext {
 
-    public GroovyApplicationRenderingContext(String defaultEnvironment, boolean eagerSingletons) {
+    public GroovyApplicationRenderingContext(@Nullable String defaultEnvironment, boolean eagerSingletons) {
         super(defaultEnvironment, eagerSingletons);
     }
 

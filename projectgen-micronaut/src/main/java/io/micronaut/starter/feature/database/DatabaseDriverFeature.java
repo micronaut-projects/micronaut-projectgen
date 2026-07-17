@@ -16,6 +16,7 @@
 package io.micronaut.starter.feature.database;
 
 import io.micronaut.core.annotation.NonNull;
+import io.micronaut.core.annotation.Nullable;
 import io.micronaut.projectgen.core.generator.ModuleContext;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
 import io.micronaut.projectgen.core.buildtools.dependencies.Dependency;
@@ -35,6 +36,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 
 import static io.micronaut.starter.buildtools.dependencies.MicronautDependencyUtils.GROUP_ID_MICRONAUT_TESTRESOURCES;
@@ -49,15 +51,16 @@ import static io.micronaut.starter.buildtools.dependencies.MicronautDependencyUt
  */
 public abstract class DatabaseDriverFeature extends EaseTestingFeature implements OneOfFeature, DatabaseDriverFeatureDependencies, TestResourcesAdditionalModulesProvider {
 
+    @Nullable
     private final JdbcFeature jdbcFeature;
 
     public DatabaseDriverFeature() {
         this(null, null, null);
     }
 
-    public DatabaseDriverFeature(JdbcFeature jdbcFeature,
-        TestContainers testContainers,
-        TestResources testResources) {
+    public DatabaseDriverFeature(@Nullable JdbcFeature jdbcFeature,
+        @Nullable TestContainers testContainers,
+        @Nullable TestResources testResources) {
         super(testContainers, testResources);
         this.jdbcFeature = jdbcFeature;
     }
@@ -70,8 +73,9 @@ public abstract class DatabaseDriverFeature extends EaseTestingFeature implement
     @Override
     public void processSelectedFeatures(FeatureContext featureContext) {
         super.processSelectedFeatures(featureContext);
-        if (shouldAddJdbcFeature(featureContext)) {
-            featureContext.addFeature(jdbcFeature);
+        JdbcFeature feature = jdbcFeature;
+        if (feature != null && shouldAddJdbcFeature(featureContext)) {
+            featureContext.addFeature(feature);
         }
     }
 
@@ -79,7 +83,7 @@ public abstract class DatabaseDriverFeature extends EaseTestingFeature implement
         return !featureContext.isPresent(JdbcFeature.class)
             && !featureContext.isPresent(R2dbcFeature.class)
             && !hasHibernateReactiveWithoutMigration(featureContext)
-            && jdbcFeature != null;
+;
     }
 
     private boolean hasHibernateReactiveWithoutMigration(FeatureContext featureContext) {
@@ -93,10 +97,13 @@ public abstract class DatabaseDriverFeature extends EaseTestingFeature implement
 
     public abstract boolean embedded();
 
+    @Nullable
     public abstract String getJdbcUrl();
 
+    @Nullable
     public abstract String getR2dbcUrl();
 
+    @Nullable
     public abstract String getDriverClass();
 
     public abstract String getDefaultUser();
@@ -163,7 +170,7 @@ public abstract class DatabaseDriverFeature extends EaseTestingFeature implement
             generatorContext.getFeature(DatabaseDriverFeature.class)
                 .flatMap(DatabaseDriverFeatureDependencies::getJavaClientDependency)
                 .map(Dependency.Builder::build)
-                .ifPresent(driver -> dependencies.add(new MavenCoordinate(driver.getGroupId(), driver.getArtifactId(), null)));
+                .ifPresent(driver -> dependencies.add(new MavenCoordinate(Objects.requireNonNull(driver.getGroupId()), driver.getArtifactId(), null)));
         }
         return dependencies;
     }

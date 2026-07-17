@@ -19,6 +19,7 @@ import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.generator.Project;
 import io.micronaut.projectgen.core.generator.ProjectIdentifier;
 import io.micronaut.projectgen.core.options.Options;
+import org.jspecify.annotations.Nullable;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -428,7 +429,7 @@ public final class NameUtils {
      * @param clazz The class to convert
      * @return The script name representation
      */
-    public static String getScriptName(Class<?> clazz) {
+    public static @Nullable String getScriptName(@Nullable Class<?> clazz) {
         return clazz == null ? null : getScriptName(clazz.getName());
     }
 
@@ -439,7 +440,7 @@ public final class NameUtils {
      * @param name The class name to convert.
      * @return The script name representation.
      */
-    public static String getScriptName(String name) {
+    public static @Nullable String getScriptName(@Nullable String name) {
         if (name == null) {
             return null;
         }
@@ -472,7 +473,7 @@ public final class NameUtils {
      * @throws IllegalArgumentException if the given descriptor name is
      *                                  not valid, i.e. if it doesn't end with "GrailsPlugin.groovy".
      */
-    public static String getPluginName(String descriptorName) {
+    public static @Nullable String getPluginName(@Nullable String descriptorName) {
         if (descriptorName == null || descriptorName.length() == 0) {
             return descriptorName;
         }
@@ -613,7 +614,7 @@ public final class NameUtils {
      * @param suffix The suffix to append to the name.
      * @return The property name convention
      */
-    public static String getPropertyNameConvention(Object object, String suffix) {
+    public static @Nullable String getPropertyNameConvention(@Nullable Object object, String suffix) {
         if (object != null) {
             Class<?> type = object.getClass();
             if (type.isArray()) {
@@ -659,7 +660,7 @@ public final class NameUtils {
      * @param getterName The getter name
      * @return The property name equivalent
      */
-    public static String getPropertyForGetter(String getterName) {
+    public static @Nullable String getPropertyForGetter(@Nullable String getterName) {
         return getPropertyForGetter(getterName, boolean.class);
     }
 
@@ -671,7 +672,7 @@ public final class NameUtils {
      * @param returnType The type the method returns
      * @return The property name equivalent
      */
-    public static String getPropertyForGetter(String getterName, Class returnType) {
+    public static @Nullable String getPropertyForGetter(@Nullable String getterName, Class returnType) {
         if (getterName == null || getterName.length() == 0) {
             return null;
         }
@@ -694,7 +695,7 @@ public final class NameUtils {
      * @param suffix The suffix to inspect
      * @return The property name or null
      */
-    static String convertValidPropertyMethodSuffix(String suffix) {
+    static @Nullable String convertValidPropertyMethodSuffix(String suffix) {
         if (suffix.length() == 0) {
             return null;
         }
@@ -821,7 +822,7 @@ public final class NameUtils {
      * @param setterName The setter name, must be null or empty or a valid identifier name
      * @return The property name equivalent
      */
-    public static String getPropertyForSetter(String setterName) {
+    public static @Nullable String getPropertyForSetter(@Nullable String setterName) {
         if (setterName == null || setterName.length() == 0) {
             return null;
         }

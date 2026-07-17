@@ -15,6 +15,8 @@
  */
 package io.micronaut.projectgen.core.template;
 
+import org.jspecify.annotations.Nullable;
+
 public interface RenderResult {
 
     boolean isSuccess();
@@ -23,6 +25,7 @@ public interface RenderResult {
 
     String getPath();
 
+    @Nullable
     Exception getError();
 
     static RenderResult skipped(String path) {
@@ -43,6 +46,7 @@ public interface RenderResult {
             }
 
             @Override
+            @Nullable
             public Exception getError() {
                 return null;
             }
@@ -67,6 +71,7 @@ public interface RenderResult {
             }
 
             @Override
+            @Nullable
             public Exception getError() {
                 return null;
             }

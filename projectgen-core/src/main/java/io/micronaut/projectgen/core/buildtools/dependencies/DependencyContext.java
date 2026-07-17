@@ -15,7 +15,7 @@
  */
 package io.micronaut.projectgen.core.buildtools.dependencies;
 
-import io.micronaut.core.annotation.NonNull;
+import org.jspecify.annotations.NonNull;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
 import io.micronaut.projectgen.core.buildtools.Phase;
 import io.micronaut.projectgen.core.buildtools.Scope;
@@ -27,6 +27,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import static io.micronaut.projectgen.core.buildtools.Phase.COMPILATION;
@@ -37,9 +39,9 @@ import static io.micronaut.projectgen.core.buildtools.Phase.RUNTIME;
  */
 public interface DependencyContext {
 
-    Predicate<Dependency> IS_COMPILE_API_OR_RUNTIME = d -> d.getScope().getPhases().contains(COMPILATION) ||
+    Predicate<Dependency> IS_COMPILE_API_OR_RUNTIME = d -> d.getScope() != null && (d.getScope().getPhases().contains(COMPILATION) ||
         d.getScope().getPhases().contains(Phase.PUBLIC_API) ||
-        d.getScope().getPhases().contains(RUNTIME);
+        d.getScope().getPhases().contains(RUNTIME));
 
     @NonNull
     Collection<Dependency> getDependencies();
@@ -49,17 +51,16 @@ public interface DependencyContext {
 
     void addDependency(@NonNull Dependency dependency);
 
-    default void addDependency(@NonNull Dependency.Builder dependency) {
+    default void addDependency(Dependency.@NonNull Builder dependency) {
         addDependency(dependency.build());
     }
 
-    @NonNull
-    default List<Dependency> removeDuplicates(Collection<Dependency> dependencies, Language language, BuildTool buildTool) {
+    default @NonNull List<Dependency> removeDuplicates(Collection<Dependency> dependencies, Language language, BuildTool buildTool) {
 
         List<Dependency> dependenciesNotInMainOrTestClasspath = dependencies.stream()
             .filter(d -> {
                 if (language == Language.GROOVY && buildTool == BuildTool.MAVEN) {
-                    return !IS_COMPILE_API_OR_RUNTIME.test(d) && !d.getScope().getPhases().contains(Phase.ANNOTATION_PROCESSING);
+                    return !IS_COMPILE_API_OR_RUNTIME.test(d) && (d.getScope() == null || !d.getScope().getPhases().contains(Phase.ANNOTATION_PROCESSING));
                 }
                 return !IS_COMPILE_API_OR_RUNTIME.test(d);
             })
@@ -67,7 +68,7 @@ public interface DependencyContext {
 
         List<Dependency> dependenciesInMainClasspath = dependencies.stream()
             .filter(d -> {
-                if (d.getScope().getSource() != Source.MAIN) {
+                if (d.getScope() == null || d.getScope().getSource() != Source.MAIN) {
                     return false;
                 }
                 if (language == Language.GROOVY && buildTool == BuildTool.MAVEN) {
@@ -80,22 +81,17 @@ public interface DependencyContext {
         List<Dependency> dependenciesInMainClasspathWithoutDuplicates = filterDuplicates(dependenciesInMainClasspath);
 
         List<Dependency> dependenciesInTestClasspath = dependencies.stream()
-            .filter(d -> d.getScope().getSource() == Source.TEST && IS_COMPILE_API_OR_RUNTIME.test(d))
+            .filter(d -> d.getScope() != null && d.getScope().getSource() == Source.TEST && IS_COMPILE_API_OR_RUNTIME.test(d))
             .toList();
 
         List<Dependency> dependenciesInTestClasspathWithoutDuplicates = filterDuplicates(dependenciesInTestClasspath);
 
-        dependenciesInTestClasspathWithoutDuplicates.removeIf(testDep -> {
-            MavenCoordinate test = new MavenCoordinate(testDep.getGroupId(), testDep.getArtifactId(), testDep.getVersion());
-            return dependenciesInMainClasspathWithoutDuplicates.stream()
-                .filter(mainDep ->
-                    (buildTool == BuildTool.MAVEN && mainDep.getScope().getPhases().contains(RUNTIME)) ||
-                        (mainDep.getScope().getPhases().contains(RUNTIME) && mainDep.getScope().getPhases().contains(COMPILATION))
-                ).anyMatch(mainDep -> {
-                    MavenCoordinate main = new MavenCoordinate(mainDep.getGroupId(), mainDep.getArtifactId(), mainDep.getVersion());
-                    return main.equals(test);
-                });
-        });
+        dependenciesInTestClasspathWithoutDuplicates.removeIf(testDep -> dependenciesInMainClasspathWithoutDuplicates.stream()
+            .filter(mainDep -> {
+                Scope scope = Objects.requireNonNull(mainDep.getScope());
+                return (buildTool == BuildTool.MAVEN && scope.getPhases().contains(RUNTIME)) ||
+                    (scope.getPhases().contains(RUNTIME) && scope.getPhases().contains(COMPILATION));
+            }).anyMatch(mainDep -> sameCoordinate(mainDep, testDep)));
         List<Dependency> result = new ArrayList<>(dependenciesNotInMainOrTestClasspath);
         result.addAll(dependenciesInMainClasspathWithoutDuplicates);
         result.addAll(dependenciesInTestClasspathWithoutDuplicates);
@@ -104,27 +100,37 @@ public interface DependencyContext {
 
     private static List<Dependency> filterDuplicates(List<Dependency> dependencies) {
         List<Dependency> dependenciesWithoutDuplicates = new ArrayList<>();
-        Map<MavenCoordinate, Scope> dependenciesWithScope = new HashMap<>();
-        for (Dependency dep : dependencies.stream().sorted(Dependency.COMPARATOR).toList()) {
-            MavenCoordinate coordinate = new MavenCoordinate(dep.getGroupId(), dep.getArtifactId(), dep.getVersion());
-            if (dependenciesWithScope.containsKey(coordinate)) {
-                if (dependenciesWithScope.get(coordinate).getOrder() < dep.getOrder()) {
-                    dependenciesWithScope.remove(coordinate);
-                    dependenciesWithoutDuplicates.removeIf(f -> new MavenCoordinate(f.getGroupId(), f.getArtifactId(), f.getVersion()).equals(coordinate));
-                    dependenciesWithScope.put(coordinate, dep.getScope());
+        Map<Dependency, Scope> dependenciesWithScope = new HashMap<>();
+        for (Dependency dep : dependencies.stream().filter(dep -> dep.getScope() != null).sorted(Dependency.COMPARATOR).toList()) {
+            Optional<Dependency> duplicate = dependenciesWithScope.keySet()
+                .stream()
+                .filter(candidate -> sameCoordinate(candidate, dep))
+                .findFirst();
+            if (duplicate.isPresent()) {
+                Dependency duplicateDependency = duplicate.get();
+                if (Objects.requireNonNull(dependenciesWithScope.get(duplicateDependency)).getOrder() < dep.getOrder()) {
+                    dependenciesWithScope.remove(duplicateDependency);
+                    dependenciesWithoutDuplicates.removeIf(f -> sameCoordinate(f, dep));
+                    dependenciesWithScope.put(dep, Objects.requireNonNull(dep.getScope()));
                     dependenciesWithoutDuplicates.add(dep);
                 }
             } else {
-                dependenciesWithScope.put(coordinate, dep.getScope());
+                dependenciesWithScope.put(dep, Objects.requireNonNull(dep.getScope()));
                 dependenciesWithoutDuplicates.add(dep);
             }
         }
         return dependenciesWithoutDuplicates;
     }
 
+    private static boolean sameCoordinate(Dependency left, Dependency right) {
+        return Objects.equals(left.getGroupId(), right.getGroupId()) &&
+            left.getArtifactId().equals(right.getArtifactId()) &&
+            Objects.equals(left.getVersion(), right.getVersion());
+    }
+
     void addDependencyOnlyForBuild(@NonNull Dependency dependency, @NonNull BuildTool buildTool);
 
-    default void addDependencyOnlyForBuild(@NonNull Dependency.Builder dependency, @NonNull BuildTool buildTool) {
+    default void addDependencyOnlyForBuild(Dependency.@NonNull Builder dependency, @NonNull BuildTool buildTool) {
         addDependencyOnlyForBuild(dependency.build(), buildTool);
     }
 }

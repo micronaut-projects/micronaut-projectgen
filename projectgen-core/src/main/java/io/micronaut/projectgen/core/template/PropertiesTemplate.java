@@ -75,16 +75,19 @@ public class PropertiesTemplate extends DefaultTemplate {
             return Collections.list(keys());
         }
 
+        @Override
         public Enumeration<Object> keys() {
             return Collections.enumeration(keys);
         }
 
+        @Override
         public Object put(Object key, Object value) {
             keys.add(key);
             return super.put(key, value);
         }
 
         // Override Properties `store` method to avoid printing date
+        @Override
         public void store(OutputStream out, String comments)
             throws IOException {
             store0(new BufferedWriter(new OutputStreamWriter(out, StandardCharsets.ISO_8859_1)),

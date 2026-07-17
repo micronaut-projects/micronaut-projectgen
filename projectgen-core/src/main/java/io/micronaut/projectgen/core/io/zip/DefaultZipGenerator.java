@@ -16,8 +16,8 @@
 package io.micronaut.projectgen.core.io.zip;
 
 import io.micronaut.core.annotation.Internal;
-import io.micronaut.core.annotation.NonNull;
-import io.micronaut.core.annotation.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import io.micronaut.core.io.Writable;
 import io.micronaut.projectgen.core.generator.ProjectGenerator;
 import io.micronaut.projectgen.core.options.Options;
@@ -41,8 +41,7 @@ class DefaultZipGenerator implements ZipGenerator {
     }
 
     @Override
-    @NonNull
-    public Writable zip(@NonNull Options options) {
+    public @NonNull Writable zip(@NonNull Options options) {
         return new Writable() {
             @Override
             public void writeTo(OutputStream outputStream,

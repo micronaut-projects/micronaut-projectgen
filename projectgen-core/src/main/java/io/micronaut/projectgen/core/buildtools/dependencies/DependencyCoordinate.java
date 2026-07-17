@@ -16,8 +16,8 @@
 package io.micronaut.projectgen.core.buildtools.dependencies;
 
 import io.micronaut.core.annotation.Introspected;
-import io.micronaut.core.annotation.NonNull;
-import io.micronaut.core.annotation.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import io.micronaut.core.order.Ordered;
 
 import java.util.List;
@@ -128,9 +128,8 @@ public class DependencyCoordinate implements Coordinate, Ordered {
         return groupId;
     }
 
-    @NonNull
     @Override
-    public String getArtifactId() {
+    public @NonNull String getArtifactId() {
         return artifactId;
     }
 

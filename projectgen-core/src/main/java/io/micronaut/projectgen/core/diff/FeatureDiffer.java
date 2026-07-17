@@ -15,7 +15,7 @@
  */
 package io.micronaut.projectgen.core.diff;
 
-import io.micronaut.core.annotation.NonNull;
+import org.jspecify.annotations.NonNull;
 import io.micronaut.projectgen.core.options.Options;
 
 /**

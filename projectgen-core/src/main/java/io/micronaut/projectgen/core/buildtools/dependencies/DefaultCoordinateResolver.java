@@ -16,7 +16,7 @@
 package io.micronaut.projectgen.core.buildtools.dependencies;
 
 import io.micronaut.context.annotation.Primary;
-import io.micronaut.core.annotation.NonNull;
+import org.jspecify.annotations.NonNull;
 import jakarta.inject.Singleton;
 
 import java.util.Arrays;
@@ -44,8 +44,8 @@ public class DefaultCoordinateResolver implements CoordinateResolver {
      * @param artifactId artifact ID
      * @return Coordinate
      */
-    @NonNull
-    public Optional<Coordinate> resolve(@NonNull String artifactId) {
+    @Override
+    public @NonNull Optional<Coordinate> resolve(@NonNull String artifactId) {
         return Arrays.stream(coordinateResolvers)
             .map(resolver -> resolver.resolve(artifactId))
             .filter(Optional::isPresent)

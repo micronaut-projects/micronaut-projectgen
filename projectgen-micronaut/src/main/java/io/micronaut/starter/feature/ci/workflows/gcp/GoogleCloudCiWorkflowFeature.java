@@ -70,7 +70,7 @@ public class GoogleCloudCiWorkflowFeature extends CIWorkflowFeature {
         return new RockerTemplate(WORKFLOW_FILENAME, cloudBuild.template(
             generatorContext.getProject().getName(),
             generatorContext.getJdkVersion(),
-            generatorContext.getOptions().getBuildTool())
+            generatorContext.getBuildTool())
         );
     }
 

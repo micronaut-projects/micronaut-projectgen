@@ -16,6 +16,8 @@
 package io.micronaut.projectgen.core.io;
 
 import io.micronaut.projectgen.core.template.Template;
+import org.jspecify.annotations.Nullable;
+
 import java.io.Closeable;
 import java.io.IOException;
 
@@ -28,6 +30,7 @@ public interface OutputHandler extends Closeable {
 
     void write(String path, Template contents) throws IOException;
 
+    @Nullable
     String getOutputLocation();
 
 }

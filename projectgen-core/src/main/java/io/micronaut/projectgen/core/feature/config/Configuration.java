@@ -15,7 +15,8 @@
  */
 package io.micronaut.projectgen.core.feature.config;
 
-import io.micronaut.core.annotation.NonNull;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import io.micronaut.core.util.CollectionUtils;
 import io.micronaut.core.util.StringUtils;
 
@@ -60,6 +61,7 @@ public class Configuration extends LinkedHashMap<String, Object> {
      * configuration path for source set.
      *
      * @param sourceSet where the configuration is rooted, e.g. main, test
+     * @return configuration path
      */
     public static String sourceSetPath(@NonNull String sourceSet) {
         return "src/" + sourceSet + "/resources/";
@@ -73,6 +75,7 @@ public class Configuration extends LinkedHashMap<String, Object> {
         return false;
     }
 
+    @Nullable
     @Override
     public Object get(Object key) {
         if (key != null && containsKey(key)) {
@@ -136,8 +139,7 @@ public class Configuration extends LinkedHashMap<String, Object> {
      *
      * @return path
      */
-    @NonNull
-    public String getPath() {
+    public @NonNull String getPath() {
         return path;
     }
 
@@ -145,8 +147,7 @@ public class Configuration extends LinkedHashMap<String, Object> {
      *
      * @return filename
      */
-    @NonNull
-    public String getFileName() {
+    public @NonNull String getFileName() {
         return fileName;
     }
 
@@ -155,8 +156,7 @@ public class Configuration extends LinkedHashMap<String, Object> {
      * @param extension extension
      * @return full path
      */
-    @NonNull
-    public String getFullPath(String extension) {
+    public @NonNull String getFullPath(String extension) {
         return path + fileName + "." + extension;
     }
 
@@ -164,8 +164,7 @@ public class Configuration extends LinkedHashMap<String, Object> {
      *
      * @return template key
      */
-    @NonNull
-    public String getTemplateKey() {
+    public @NonNull String getTemplateKey() {
         return templateKey;
     }
 
@@ -210,6 +209,7 @@ public class Configuration extends LinkedHashMap<String, Object> {
         return true;
     }
 
+    @Nullable
     private Object getNested(String key) {
         if (key.indexOf('.') == -1) {
             return null;

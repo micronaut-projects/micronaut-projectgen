@@ -15,7 +15,7 @@
  */
 package io.micronaut.projectgen.core.utils;
 
-import io.micronaut.core.annotation.Nullable;
+import org.jspecify.annotations.Nullable;
 import io.micronaut.projectgen.core.options.OperatingSystem;
 
 import static io.micronaut.projectgen.core.options.OperatingSystem.LINUX;

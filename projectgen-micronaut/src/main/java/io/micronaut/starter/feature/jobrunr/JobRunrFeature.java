@@ -16,7 +16,6 @@
 package io.micronaut.starter.feature.jobrunr;
 
 import io.micronaut.context.annotation.Requires;
-import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.openrewrite.OpenRewriteFeature;
 import io.micronaut.projectgen.core.generator.GeneratorContext;
@@ -60,7 +59,6 @@ public class JobRunrFeature implements MicronautCommunityFeature, OpenRewriteFea
     }
 
     @Override
-    @Nullable
     public String getDescription() {
         return "Micronaut integration for JobRunr background processing in Java";
     }

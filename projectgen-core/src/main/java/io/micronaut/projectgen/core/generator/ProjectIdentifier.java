@@ -15,6 +15,8 @@
  */
 package io.micronaut.projectgen.core.generator;
 
+import org.jspecify.annotations.Nullable;
+
 /**
  * Project Identifier.
  */
@@ -22,7 +24,7 @@ public class ProjectIdentifier {
     private final String packageName;
     private final String name;
 
-    public ProjectIdentifier(String packageName, String name) {
+    public ProjectIdentifier(@Nullable String packageName, String name) {
         packageName = packageName != null ? packageName.replaceAll("\\.*$", "") : "";
         this.packageName = packageName;
         this.name = name;

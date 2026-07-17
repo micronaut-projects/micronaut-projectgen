@@ -114,7 +114,7 @@ public abstract class AbstractAzureFunction extends AbstractFunctionFeature impl
                 .build());
             BuildProperties props = module.buildProperties();
             coordinateResolver.resolve(mavenPluginArtifactId)
-                .ifPresent(coordinate -> props.put("azure.functions.maven.plugin.version", coordinate.getVersion()));
+                .ifPresent(coordinate -> props.put("azure.functions.maven.plugin.version", java.util.Objects.requireNonNull(coordinate.getVersion())));
             props.put("functionAppName", project.getName());
             props.put("functionResourceGroup", "java-functions-group");
             props.put("functionAppRegion", "westus");

@@ -16,6 +16,7 @@
 package io.micronaut.projectgen.micronaut.gradle;
 
 import io.micronaut.core.annotation.NonNull;
+import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.projectgen.core.buildtools.BuildPlugin;
 import io.micronaut.projectgen.core.buildtools.BuildTool;
@@ -58,21 +59,33 @@ public class MicronautApplicationGradlePlugin {
 
         private String id = APPLICATION;
         private GradleDsl dsl = GradleDsl.GROOVY;
+        @Nullable
         private String javaVersion;
+        @Nullable
         private String runtime;
+        @Nullable
         private String testRuntime;
+        @Nullable
         private String lambdaRuntimeMainClass;
+        @Nullable
         private String aotVersion;
+        @Nullable
         private Dockerfile dockerfileNative;
+        @Nullable
         private Dockerfile dockerfile;
+        @Nullable
         private List<String> dockerBuildImages;
+        @Nullable
         private List<String> dockerBuildNativeImages;
+        @Nullable
         private List<String> additionalTestResourceModules;
+        @Nullable
         private Map<String, String> aotKeys;
+        @Nullable
         private Set<String> ignoredAutomaticDependencies;
-        private BuildTool buildTool;
+        private BuildTool buildTool = BuildTool.GRADLE;
         private boolean incremental;
-        private String packageName;
+        private String packageName = "example";
         private boolean sharedTestResources;
 
         public Builder buildTool(BuildTool buildTool) {

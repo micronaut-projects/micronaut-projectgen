@@ -16,6 +16,7 @@
 package io.micronaut.starter.feature.buildtools.maven;
 
 import io.micronaut.core.annotation.NonNull;
+import io.micronaut.core.annotation.Nullable;
 
 import java.util.Objects;
 
@@ -99,7 +100,9 @@ public class Property {
      * Provides a fluent API for setting property name and value.
      */
     public static class Builder {
+        @Nullable
         private String name;
+        @Nullable
         private String value;
 
         /**
