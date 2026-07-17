@@ -24,7 +24,6 @@ import io.micronaut.starter.feature.Category;
 import io.micronaut.projectgen.core.feature.FeatureContext;
 import io.micronaut.projectgen.micronaut.features.httpclient.HttpClientFeature;
 import io.micronaut.projectgen.micronaut.features.httpclient.HttpClient;
-import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 
 import java.util.List;
@@ -46,17 +45,8 @@ public class DiscoveryClient implements OpenRewriteFeature {
 
     private final HttpClient httpClient;
 
-    @Inject
     public DiscoveryClient(HttpClient httpClient) {
         this.httpClient = httpClient;
-    }
-
-    /**
-     * @deprecated Use {@link DiscoveryClient(HttpClient)} instead.
-     */
-    @Deprecated
-    public DiscoveryClient() {
-        this(new HttpClient());
     }
 
     @NonNull
