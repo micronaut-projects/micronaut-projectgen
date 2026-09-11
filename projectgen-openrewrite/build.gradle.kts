@@ -14,6 +14,10 @@ dependencies {
     api(libs.rewrite.java17)
     api(libs.rewrite.yaml)
     api(libs.rewrite.properties)
+    constraints {
+        // rewrite-core pins micrometer-core 1.9.17, which is affected by GHSA-g3pr-3p32-fp23
+        api(libs.micrometer.core)
+    }
     testImplementation(libs.rewrite.test)
     testImplementation(mnTest.junit.jupiter.api)
     testRuntimeOnly(mnTest.junit.jupiter.engine)
