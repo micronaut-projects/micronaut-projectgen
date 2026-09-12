@@ -1,8 +1,9 @@
 [versions]
 
-micronaut = "5.1.6"
+micronaut = "5.2.1"
 micronaut-platform = "5.0.5"
 rewrite-recipe-bom = "3.35.0"
+micrometer = "1.16.7"
 micronaut-serialization = "3.1.0"
 micronaut-views = "6.1.0"
 micronaut-sourcegen = "2.1.0"
@@ -32,6 +33,7 @@ snakeyaml = { module = "org.yaml:snakeyaml", version.ref = "snakeyaml" }
 apache-commons-compress = { module = "org.apache.commons:commons-compress", version.ref = "apache-commons-compress" }
 rewrite-recipe-bom = { module = "org.openrewrite.recipe:rewrite-recipe-bom", version.ref = "rewrite-recipe-bom" }
 rewrite-core = { module = "org.openrewrite:rewrite-core" }
+micrometer-core = { module = "io.micrometer:micrometer-core", version.ref = "micrometer" }
 rewrite-properties = { module = "org.openrewrite:rewrite-properties" }
 rewrite-gradle = { module = "org.openrewrite:rewrite-gradle" }
 rewrite-java-dependencies = { module = "org.openrewrite.recipe:rewrite-java-dependencies" }

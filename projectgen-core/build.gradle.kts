@@ -53,3 +53,13 @@ val generateCoordinateUtils = tasks.register<io.micronaut.projectgen.coordinates
 }
 
 sourceSets["main"].java.srcDir(generateCoordinateUtils)
+
+val generateRockerReachabilityMetadata =
+    tasks.register<io.micronaut.projectgen.nativeimage.RockerReachabilityMetadataGenerator>("generateRockerReachabilityMetadata") {
+        classesDirectory.set(tasks.named<JavaCompile>("compileJava").flatMap { it.destinationDirectory })
+        groupId.set(provider { project.group.toString() })
+        artifactId.set(provider { project.name })
+        outputDirectory.set(layout.buildDirectory.dir("generated-resources/native-image"))
+    }
+
+sourceSets["main"].resources.srcDir(generateRockerReachabilityMetadata)
