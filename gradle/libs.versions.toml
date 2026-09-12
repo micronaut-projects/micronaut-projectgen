@@ -1,6 +1,6 @@
 [versions]
 
-micronaut = "5.2.0"
+micronaut = "5.2.1"
 micronaut-platform = "5.0.5"
 rewrite-recipe-bom = "3.35.0"
 micrometer = "1.16.7"
