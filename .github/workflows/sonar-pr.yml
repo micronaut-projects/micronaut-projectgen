@@ -250,7 +250,7 @@ jobs:
       # and the job's token is `contents: read`. Kept because dropping it makes
       # release resolution flaky against the GitHub API rate limit.
       - name: "🔧 Setup GraalVM CE"
-        uses: graalvm/setup-graalvm@0426e2e191540e8514dff98dc52a5f5146a2a276 # v1
+        uses: graalvm/setup-graalvm@f70bc8032f90a104502824a54bcb94b6f01715bc # v1
         with:
           distribution: 'graalvm'
           java-version: '25'
